@@ -3,42 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Velocity — Modern Landing Page</title>
-
+  <title>Velocity — Cinematic Operations Intelligence</title>
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- CINEMATIC BACKGROUND CANVAS -->
+  <div class="glow-mesh-container">
+    <div class="glow-ball ball-1"></div>
+    <div class="glow-ball ball-2"></div>
+    <div class="glow-ball ball-3"></div>
+  </div>
+  <div class="bg-grid-overlay"></div>
+  <div class="cursor-spotlight" id="cursorSpotlight"></div>
+
   <!-- NAVIGATION -->
-  <nav class="nav">
-    <div class="logo">VELOCITY<span>.</span></div>
+  <nav class="nav" id="mainNav">
+    <div class="logo">VELOCITY<span class="logo-dot">.</span></div>
 
     <div class="nav-links">
-      <a href="#method">Method</a>
-      <a href="#data">Data</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#method" class="nav-link">Method</a>
+      <a href="#data" class="nav-link">Data</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
     </div>
 
-    <a href="#pricing" class="nav-cta">Get started</a>
+    <a href="#pricing" class="nav-cta shimmer-btn">
+      <span>Get started</span>
+    </a>
   </nav>
 
-
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <section class="hero">
-
     <div class="hero-grid">
 
-      <div class="hero-content">
+      <div class="hero-content reveal-on-scroll">
 
-        <div class="eyebrow">
-          <span class="status-dot"></span>
-          OPERATIONS INTELLIGENCE
+        <div class="eyebrow glass-pill">
+          <span class="status-dot pulsing"></span>
+          <span class="eyebrow-text">OPERATIONS INTELLIGENCE</span>
         </div>
 
-        <h1>
+        <h1 class="hero-title">
           Run your business
-          <span>better.</span>
+          <span class="gradient-text">better.</span>
         </h1>
 
         <p class="hero-description">
@@ -47,442 +61,333 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#pricing" class="button-primary">
-            Get started
+          <a href="#pricing" class="button-primary shimmer-btn">
+            <span>Get started</span>
           </a>
 
           <a href="#method" class="button-secondary">
-            See how it works
+            <span>See how it works</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
 
         <div class="proof-list">
-          <span>Trusted by ambitious teams</span>
-          <span>99.9% uptime</span>
-          <span>Real-time intelligence</span>
+          <span class="proof-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Trusted by ambitious teams</span>
+          <span class="proof-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 99.9% uptime</span>
+          <span class="proof-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Real-time intelligence</span>
         </div>
 
       </div>
 
+      <!-- DASHBOARD / COMMAND CENTER MOCKUP -->
+      <div class="mockup tilt-card reveal-on-scroll">
+        <div class="mockup-inner glass-panel">
 
-      <!-- DASHBOARD -->
-      <div class="mockup">
-
-        <div class="dashboard-top">
-          <div>
-            <small>COMMAND CENTER</small>
-            <h3>Business Overview</h3>
-          </div>
-
-          <div class="live">
-            <span class="status-dot"></span>
-            LIVE
-          </div>
-        </div>
-
-
-        <div class="dashboard-cards">
-
-          <div class="dash-card">
-            <small>ACTIVE RISKS</small>
-            <strong class="dash-card-number">00</strong>
-            <span class="negative">↓ 12%</span>
-          </div>
-
-          <div class="dash-card">
-            <small>EFFICIENCY</small>
-            <strong class="dash-card-number">00</strong>
-            <span class="positive">↑ 8%</span>
-          </div>
-
-          <div class="dash-card">
-            <small>PROCESSES</small>
-            <strong class="dash-card-number">00</strong>
-            <span class="positive">↑ 21%</span>
-          </div>
-
-        </div>
-
-
-        <div class="chart">
-
-          <div class="chart-header">
-            <span>Performance</span>
-            <span>Last 7 days</span>
-          </div>
-
-          <div class="bars">
-            <div class="bar" style="height:35%"></div>
-            <div class="bar" style="height:50%"></div>
-            <div class="bar" style="height:42%"></div>
-            <div class="bar" style="height:68%"></div>
-            <div class="bar" style="height:57%"></div>
-            <div class="bar" style="height:88%"></div>
-            <div class="bar" style="height:76%"></div>
-          </div>
-
-        </div>
-
-
-        <div class="risk-section">
-
-          <div class="chart-header">
-            <span>Risk monitoring</span>
-            <span>Live</span>
-          </div>
-
-          <div class="risk-row">
-            <span>Operations</span>
-            <div class="risk-track">
-              <div class="risk-fill" style="width:82%"></div>
+          <div class="dashboard-top">
+            <div>
+              <small class="mono-label">COMMAND CENTER</small>
+              <h3>Business Overview</h3>
             </div>
-            <b>82%</b>
+
+            <div class="live glass-pill">
+              <span class="status-dot pulsing"></span>
+              LIVE
+            </div>
           </div>
 
-          <div class="risk-row">
-            <span>Revenue</span>
-            <div class="risk-track">
-              <div class="risk-fill" style="width:64%"></div>
+          <div class="dashboard-cards">
+
+            <div class="dash-card glass-subcard">
+              <small>ACTIVE RISKS</small>
+              <strong class="dash-card-number counter" data-target="0" data-prefix="" data-suffix="">00</strong>
+              <span class="badge negative">↓ 12%</span>
             </div>
-            <b>64%</b>
+
+            <div class="dash-card glass-subcard">
+              <small>EFFICIENCY</small>
+              <strong class="dash-card-number counter" data-target="94" data-prefix="" data-suffix="%">00</strong>
+              <span class="badge positive">↑ 8%</span>
+            </div>
+
+            <div class="dash-card glass-subcard">
+              <small>PROCESSES</small>
+              <strong class="dash-card-number counter" data-target="142" data-prefix="" data-suffix="">00</strong>
+              <span class="badge positive">↑ 21%</span>
+            </div>
+
           </div>
 
-          <div class="risk-row">
-            <span>Delivery</span>
-            <div class="risk-track">
-              <div class="risk-fill" style="width:91%"></div>
+          <div class="chart glass-subcard">
+            <div class="chart-header">
+              <span>Performance</span>
+              <span class="mono-label">Last 7 days</span>
             </div>
-            <b>91%</b>
+
+            <div class="bars">
+              <div class="bar-wrapper"><div class="bar" style="--bar-h: 35%"></div></div>
+              <div class="bar-wrapper"><div class="bar" style="--bar-h: 50%"></div></div>
+              <div class="bar-wrapper"><div class="bar" style="--bar-h: 42%"></div></div>
+              <div class="bar-wrapper"><div class="bar" style="--bar-h: 68%"></div></div>
+              <div class="bar-wrapper"><div class="bar" style="--bar-h: 57%"></div></div>
+              <div class="bar-wrapper"><div class="bar" style="--bar-h: 88%"></div></div>
+              <div class="bar-wrapper"><div class="bar" style="--bar-h: 76%"></div></div>
+            </div>
+          </div>
+
+          <div class="risk-section glass-subcard">
+            <div class="chart-header">
+              <span>Risk monitoring</span>
+              <span class="mono-label">Live feed</span>
+            </div>
+
+            <div class="risk-row">
+              <span>Operations</span>
+              <div class="risk-track">
+                <div class="risk-fill" style="--risk-w: 82%"></div>
+              </div>
+              <b class="counter" data-target="82" data-suffix="%">0%</b>
+            </div>
+
+            <div class="risk-row">
+              <span>Revenue</span>
+              <div class="risk-track">
+                <div class="risk-fill" style="--risk-w: 64%"></div>
+              </div>
+              <b class="counter" data-target="64" data-suffix="%">0%</b>
+            </div>
+
+            <div class="risk-row">
+              <span>Delivery</span>
+              <div class="risk-track">
+                <div class="risk-fill" style="--risk-w: 91%"></div>
+              </div>
+              <b class="counter" data-target="91" data-suffix="%">0%</b>
+            </div>
           </div>
 
         </div>
-
       </div>
 
     </div>
-
   </section>
 
-
-  <!-- PROBLEM -->
+  <!-- PROBLEM SECTION -->
   <section class="section">
-
-    <div class="section-header">
-      <div class="eyebrow">THE PROBLEM</div>
-
+    <div class="section-header reveal-on-scroll">
+      <div class="eyebrow glass-pill">THE PROBLEM</div>
       <h2>
         Stop reacting.
-        <span>Start operating.</span>
+        <span class="gradient-text">Start operating.</span>
       </h2>
-
       <p>
         Most businesses have plenty of data and very little clarity.
         Velocity turns scattered information into decisions.
       </p>
     </div>
 
-
     <div class="situations-grid">
-
-      <article class="card">
+      <article class="card glass-panel tilt-card reveal-on-scroll">
         <div class="card-number">01</div>
         <h3>Too much noise</h3>
         <p>
-          Important signals disappear inside dashboards,
-          spreadsheets, meetings and endless notifications.
+          Important signals disappear inside dashboards, spreadsheets, meetings and endless notifications.
         </p>
       </article>
 
-      <article class="card">
+      <article class="card glass-panel tilt-card reveal-on-scroll">
         <div class="card-number">02</div>
         <h3>Slow decisions</h3>
         <p>
-          Teams spend hours finding information instead of
-          acting on what actually matters.
+          Teams spend hours finding information instead of acting on what actually matters.
         </p>
       </article>
 
-      <article class="card">
+      <article class="card glass-panel tilt-card reveal-on-scroll">
         <div class="card-number">03</div>
         <h3>Hidden risks</h3>
         <p>
-          Small operational problems become expensive problems
-          because nobody sees them early enough.
+          Small operational problems become expensive problems because nobody sees them early enough.
         </p>
       </article>
-
     </div>
-
   </section>
 
-
-  <!-- METHOD -->
+  <!-- METHOD SECTION -->
   <section class="section dark-section" id="method">
-
-    <div class="section-header">
-      <div class="eyebrow">THE METHOD</div>
-
+    <div class="section-header reveal-on-scroll">
+      <div class="eyebrow glass-pill">THE METHOD</div>
       <h2>
         From information
-        <span>to action.</span>
+        <span class="gradient-text">to action.</span>
       </h2>
     </div>
 
-
     <div class="method-grid">
-
-      <article class="method-card">
-        <span>01</span>
+      <article class="method-card glass-panel tilt-card reveal-on-scroll">
+        <span class="method-num">01</span>
         <h3>Observe</h3>
-        <p>
-          Bring your operational data into one intelligent view.
-        </p>
+        <p>Bring your operational data into one intelligent, unified view.</p>
       </article>
 
-      <article class="method-card">
-        <span>02</span>
+      <article class="method-card glass-panel tilt-card reveal-on-scroll">
+        <span class="method-num">02</span>
         <h3>Understand</h3>
-        <p>
-          Identify patterns, bottlenecks and risks automatically.
-        </p>
+        <p>Identify patterns, operational bottlenecks, and risks automatically.</p>
       </article>
 
-      <article class="method-card">
-        <span>03</span>
+      <article class="method-card glass-panel tilt-card reveal-on-scroll">
+        <span class="method-num">03</span>
         <h3>Act</h3>
-        <p>
-          Turn insights into clear decisions and measurable outcomes.
-        </p>
+        <p>Turn automated insights into actionable decisions and measurable outcomes.</p>
       </article>
-
     </div>
-
   </section>
 
-
-  <!-- DATA -->
+  <!-- DATA SECTION -->
   <section class="section" id="data">
-
     <div class="data-grid">
-
-      <div class="data-content">
-
-        <div class="eyebrow">REAL-TIME DATA</div>
-
+      <div class="data-content reveal-on-scroll">
+        <div class="eyebrow glass-pill">REAL-TIME DATA</div>
         <h2>
           Know what is
-          <span>happening now.</span>
+          <span class="gradient-text">happening now.</span>
         </h2>
-
         <p>
-          Your business changes constantly. Your intelligence layer
-          should change with it.
+          Your business changes constantly. Your intelligence layer should change with it.
         </p>
-
-        <a href="#pricing" class="button-primary">
-          Explore platform
+        <a href="#pricing" class="button-primary shimmer-btn">
+          <span>Explore platform</span>
         </a>
-
       </div>
 
-
-      <div class="data-visual">
-
+      <div class="data-visual glass-panel tilt-card reveal-on-scroll">
         <div class="data-number">
-          <small>EFFICIENCY INDEX</small>
-          <strong>92%</strong>
-          <span>+14.8% this month</span>
+          <small class="mono-label">EFFICIENCY INDEX</small>
+          <strong class="counter" data-target="92" data-suffix="%">0%</strong>
+          <span class="positive-pill">+14.8% this month</span>
         </div>
 
         <div class="big-bars">
-          <div class="big-bar" style="height:25%"></div>
-          <div class="big-bar" style="height:40%"></div>
-          <div class="big-bar" style="height:34%"></div>
-          <div class="big-bar" style="height:62%"></div>
-          <div class="big-bar" style="height:53%"></div>
-          <div class="big-bar" style="height:79%"></div>
-          <div class="big-bar" style="height:68%"></div>
-          <div class="big-bar" style="height:94%"></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 25%"></div></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 40%"></div></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 34%"></div></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 62%"></div></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 53%"></div></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 79%"></div></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 68%"></div></div>
+          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 94%"></div></div>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-  <!-- PROMISES -->
+  <!-- PROMISES SECTION -->
   <section class="section dark-section">
-
-    <div class="section-header">
-      <div class="eyebrow">BUILT DIFFERENTLY</div>
-
+    <div class="section-header reveal-on-scroll">
+      <div class="eyebrow glass-pill">BUILT DIFFERENTLY</div>
       <h2>
         Intelligence without
-        <span>complexity.</span>
+        <span class="gradient-text">complexity.</span>
       </h2>
     </div>
-
 
     <div class="promises-grid">
-
-      <article class="card dark-card">
-        <div class="icon">↗</div>
+      <article class="card dark-card glass-panel tilt-card reveal-on-scroll">
+        <div class="icon-box">↗</div>
         <h3>Always visible</h3>
-        <p>
-          The information you need stays in front of you.
-        </p>
+        <p>The information you need stays front and center at all times.</p>
       </article>
 
-      <article class="card dark-card">
-        <div class="icon">◉</div>
+      <article class="card dark-card glass-panel tilt-card reveal-on-scroll">
+        <div class="icon-box">◉</div>
         <h3>Always current</h3>
-        <p>
-          Your view updates as your business changes.
-        </p>
+        <p>Your view dynamically updates seamlessly as your business scales.</p>
       </article>
 
-      <article class="card dark-card">
-        <div class="icon">+</div>
+      <article class="card dark-card glass-panel tilt-card reveal-on-scroll">
+        <div class="icon-box">+</div>
         <h3>Always actionable</h3>
-        <p>
-          Every signal is connected to a practical next step.
-        </p>
+        <p>Every dynamic signal is mapped to a practical, automated next step.</p>
       </article>
-
     </div>
-
   </section>
 
-
-  <!-- PRICING -->
+  <!-- PRICING SECTION -->
   <section class="section" id="pricing">
-
-    <div class="section-header center">
-      <div class="eyebrow">PRICING</div>
-
+    <div class="section-header center reveal-on-scroll">
+      <div class="eyebrow glass-pill">PRICING</div>
       <h2>
         Start with
-        <span>clarity.</span>
+        <span class="gradient-text">clarity.</span>
       </h2>
     </div>
 
-
     <div class="pricing-grid">
-
-      <article class="pricing-card">
-
-        <small>STARTER</small>
-
+      <article class="pricing-card glass-panel tilt-card reveal-on-scroll">
+        <small class="tier-label">STARTER</small>
         <h3>Foundation</h3>
-
-        <div class="price">
-          $49<span>/mo</span>
-        </div>
-
-        <p>For small teams building their operating system.</p>
-
-        <a href="#" class="pricing-cta">
-          Get started
-        </a>
-
+        <div class="price">$49<span>/mo</span></div>
+        <p>For small teams building their modern operating system.</p>
+        <a href="#" class="pricing-cta shimmer-btn"><span>Get started</span></a>
         <ul>
           <li>Real-time dashboard</li>
           <li>Core analytics</li>
           <li>Risk monitoring</li>
           <li>Email support</li>
         </ul>
-
       </article>
 
-
-      <article class="pricing-card featured">
-
+      <article class="pricing-card featured glass-panel tilt-card reveal-on-scroll">
         <div class="popular">MOST POPULAR</div>
-
-        <small>GROWTH</small>
-
+        <small class="tier-label">GROWTH</small>
         <h3>Command</h3>
-
-        <div class="price">
-          $149<span>/mo</span>
-        </div>
-
-        <p>For teams that need complete operational visibility.</p>
-
-        <a href="#" class="pricing-cta">
-          Start building
-        </a>
-
+        <div class="price">$149<span>/mo</span></div>
+        <p>For high-velocity teams needing total operational visibility.</p>
+        <a href="#" class="pricing-cta shimmer-btn"><span>Start building</span></a>
         <ul>
           <li>Everything in Foundation</li>
           <li>Advanced intelligence</li>
           <li>Automated insights</li>
           <li>Priority support</li>
         </ul>
-
       </article>
 
-
-      <article class="pricing-card">
-
-        <small>ENTERPRISE</small>
-
+      <article class="pricing-card glass-panel tilt-card reveal-on-scroll">
+        <small class="tier-label">ENTERPRISE</small>
         <h3>Control</h3>
-
-        <div class="price">
-          Custom
-        </div>
-
-        <p>For organizations operating at serious scale.</p>
-
-        <a href="#" class="pricing-cta">
-          Contact us
-        </a>
-
+        <div class="price">Custom</div>
+        <p>For enterprise organizations operating at serious global scale.</p>
+        <a href="#" class="pricing-cta shimmer-btn"><span>Contact us</span></a>
         <ul>
           <li>Everything in Command</li>
           <li>Custom integrations</li>
           <li>Advanced security</li>
           <li>Dedicated support</li>
         </ul>
-
       </article>
-
     </div>
-
   </section>
-
 
   <!-- FINAL CTA -->
-  <section class="final-cta">
-
-    <div class="eyebrow">READY WHEN YOU ARE</div>
-
-    <h2>
-      Build a business
-      <span>that moves.</span>
-    </h2>
-
-    <p>
-      Less noise. Better decisions. Faster execution.
-    </p>
-
-    <a href="#pricing" class="button-primary">
-      Get started
-    </a>
-
+  <section class="final-cta reveal-on-scroll">
+    <div class="cta-inner glass-panel">
+      <div class="eyebrow glass-pill">READY WHEN YOU ARE</div>
+      <h2>
+        Build a business
+        <span class="gradient-text">that moves.</span>
+      </h2>
+      <p>Less noise. Better decisions. Faster execution.</p>
+      <a href="#pricing" class="button-primary shimmer-btn">
+        <span>Get started</span>
+      </a>
+    </div>
   </section>
 
-
   <footer>
-    <div>VELOCITY<span>.</span></div>
-    <div>© 2026 Velocity</div>
+    <div class="logo">VELOCITY<span class="logo-dot">.</span></div>
+    <div class="copyright">© 2026 Velocity Systems Inc. All rights reserved.</div>
   </footer>
 
-
   <script src="script.js"></script>
-
 </body>
 </html>
