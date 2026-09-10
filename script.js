@@ -121,7 +121,6 @@ function animateCounter(el) {
     const progress = easeOutExpo(frame / totalFrames);
     const currentVal = Math.round(target * progress);
 
-    // Format with padded zeroes if requested (e.g., 00)
     let formattedVal = currentVal.toString();
     if (target === 0) formattedVal = '00';
     else if (currentVal < 10 && target >= 10 && target < 100) {
