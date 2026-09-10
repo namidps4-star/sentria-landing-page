@@ -87,87 +87,6 @@
     }
 
     /* =========================================================
-       DYNAMIC VISUAL ENHANCEMENTS
-    ========================================================= */
-
-    /* Smooth Dynamic Fade & Elevate Entrance Effect */
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-
-    [data-reveal].is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Pulse Glow for Live Indicator Elements */
-    @keyframes dynamicPulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(214, 255, 63, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 8px rgba(214, 255, 63, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(214, 255, 63, 0);
-      }
-    }
-
-    .eyebrow-dot, .status-dot {
-      animation: dynamicPulse 2s infinite;
-    }
-
-    /* Interactive Elevate Cards */
-    .situation-card,
-    .change-card,
-    .method-card,
-    .data-card,
-    .reliability-card,
-    .promise,
-    .pricing-card {
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
-      will-change: transform, box-shadow;
-    }
-
-    .situation-card:hover,
-    .method-card:hover,
-    .data-card:hover,
-    .reliability-card:hover,
-    .promise:hover {
-      transform: translateY(-6px);
-      border-color: rgba(214, 255, 63, 0.3);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Dynamic Bar Animation for Charts */
-    .bars .bar {
-      transition: height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .risk-fill {
-      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Interactive Dynamic Sector Signals */
-    .sector-signal {
-      transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-    }
-
-    .sector-signal:hover {
-      transform: translateX(4px);
-      border-color: rgba(214, 255, 63, 0.4);
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    /* Glassmorphism Accents */
-    .mockup, .cockpit-visual, .calendar-shell {
-      backdrop-filter: blur(12px);
-    }
-
-    /* =========================================================
        NAV
     ========================================================= */
 
@@ -181,12 +100,6 @@
       background: rgba(11,12,8,.86);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
-      transition: background 0.3s ease, border-color 0.3s ease;
-    }
-
-    .navbar.scrolled {
-      background: rgba(11,12,8,.95);
-      border-bottom: 1px solid var(--border-strong);
     }
 
     .nav-inner {
@@ -218,11 +131,6 @@
       font-family: "IBM Plex Mono", monospace;
       font-weight: 700;
       font-size: 12px;
-      transition: transform 0.3s ease;
-    }
-
-    .logo:hover .logo-mark {
-      transform: rotate(12deg) scale(1.08);
     }
 
     .nav-links {
@@ -235,26 +143,10 @@
 
     .nav-links a {
       transition: color .2s ease;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--lime);
-      transition: width 0.25s ease;
     }
 
     .nav-links a:hover {
       color: var(--cream);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
     }
 
     /* LANGUAGE SWITCH */
@@ -276,12 +168,11 @@
       color: var(--muted);
       padding: 4px 3px;
       cursor: pointer;
-      transition: color .2s ease, transform .2s ease;
+      transition: color .2s ease;
     }
 
     .lang-switch button:hover {
       color: var(--cream);
-      transform: translateY(-1px);
     }
 
     .lang-switch button.active {
@@ -308,13 +199,12 @@
       border-radius: 12px;
       font-size: 12px;
       font-weight: 700;
-      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      transition: transform .2s ease, background .2s ease;
     }
 
     .nav-cta:hover {
       transform: translateY(-2px);
       background: #e1ff67;
-      box-shadow: 0 6px 20px rgba(214, 255, 63, 0.3);
     }
 
     /* =========================================================
@@ -340,7 +230,6 @@
       top: 100px;
       right: -250px;
       pointer-events: none;
-      transition: transform 0.5s ease;
     }
 
     .hero-grid {
@@ -410,7 +299,7 @@
       border-radius: 13px;
       font-size: 13px;
       font-weight: 700;
-      transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
     }
 
     .button-primary {
@@ -421,7 +310,6 @@
     .button-primary:hover {
       transform: translateY(-2px);
       background: #e2ff70;
-      box-shadow: 0 8px 24px rgba(214,255,63,0.35);
     }
 
     .button-secondary {
@@ -433,7 +321,6 @@
     .button-secondary:hover {
       transform: translateY(-2px);
       border-color: rgba(245,243,234,.3);
-      background: rgba(255,255,255,.05);
     }
 
     .proof-list {
@@ -449,11 +336,6 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      transition: color 0.2s ease;
-    }
-
-    .proof-item:hover {
-      color: var(--cream);
     }
 
     .proof-check {
@@ -473,14 +355,6 @@
       box-shadow:
         0 40px 100px rgba(0,0,0,.35),
         0 0 80px rgba(214,255,63,.04);
-      transition: transform 0.2s cubic-bezier(0.1, 1, 0.1, 1), box-shadow 0.3s ease;
-      will-change: transform;
-    }
-
-    .mockup:hover {
-      box-shadow:
-        0 50px 120px rgba(0,0,0,.45),
-        0 0 100px rgba(214,255,63,.08);
     }
 
     .mockup-top {
@@ -524,13 +398,6 @@
       font-size: 10px;
       border-radius: 8px;
       margin-bottom: 5px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .mockup-nav-item:hover:not(.active) {
-      color: var(--cream);
-      background: rgba(255,255,255,0.04);
     }
 
     .mockup-nav-item.active {
@@ -565,7 +432,6 @@
       border: 1px solid rgba(214,255,63,.25);
       padding: 6px 9px;
       border-radius: 7px;
-      background: rgba(214,255,63,0.05);
     }
 
     .status-dot {
@@ -587,12 +453,6 @@
       border-radius: 12px;
       padding: 14px;
       background: rgba(255,255,255,.015);
-      transition: border-color 0.25s ease, background-color 0.25s ease;
-    }
-
-    .dash-card:hover {
-      border-color: var(--border-strong);
-      background: rgba(255,255,255,.03);
     }
 
     .dash-card-label {
@@ -621,7 +481,6 @@
       border-radius: 13px;
       padding: 15px;
       margin-top: 11px;
-      background: rgba(255,255,255,.01);
     }
 
     .dash-panel-head {
@@ -643,11 +502,6 @@
       flex: 1;
       background: rgba(214,255,63,.22);
       border-radius: 4px 4px 0 0;
-      cursor: pointer;
-    }
-
-    .bar:hover {
-      background: rgba(214,255,63,.45);
     }
 
     .bar:nth-child(1) { height: 38%; }
@@ -744,11 +598,6 @@
       gap: 11px;
       color: var(--muted);
       font-size: 11px;
-      transition: color 0.25s ease;
-    }
-
-    .proof-stat:hover {
-      color: var(--cream);
     }
 
     .proof-stat strong {
@@ -773,6 +622,11 @@
       border-radius: 20px;
       min-height: 260px;
       background: rgba(255,255,255,.45);
+      transition: transform .2s ease;
+    }
+
+    .situation-card:hover {
+      transform: translateY(-5px);
     }
 
     .situation-number {
@@ -818,7 +672,6 @@
     .change-card.after {
       background: var(--lime);
       color: var(--ink);
-      box-shadow: 0 16px 40px rgba(214,255,63,0.15);
     }
 
     .change-label {
@@ -885,18 +738,12 @@
       border: 1px solid var(--border-light);
       border-radius: 23px;
       overflow: hidden;
-      background: rgba(255,255,255,0.2);
     }
 
     .comparison-row {
       display: grid;
       grid-template-columns: 1.3fr 1fr 1fr;
       border-bottom: 1px solid var(--border-light);
-      transition: background-color 0.2s ease;
-    }
-
-    .comparison-row:not(:first-child):hover {
-      background: rgba(20,21,15,0.03);
     }
 
     .comparison-row:last-child {
@@ -944,13 +791,6 @@
       display: flex;
       gap: 12px;
       align-items: flex-start;
-      padding: 8px 10px;
-      border-radius: 12px;
-      transition: background-color 0.25s ease;
-    }
-
-    .cockpit-list-item:hover {
-      background: rgba(255,255,255,0.02);
     }
 
     .cockpit-icon {
@@ -963,12 +803,6 @@
       place-items: center;
       flex: 0 0 auto;
       font-size: 11px;
-      transition: transform 0.25s ease, background-color 0.25s ease;
-    }
-
-    .cockpit-list-item:hover .cockpit-icon {
-      transform: scale(1.15);
-      background: rgba(214,255,63,.25);
     }
 
     .cockpit-list-item strong {
@@ -988,7 +822,6 @@
       background: #11130d;
       border-radius: 25px;
       padding: 20px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
     }
 
     .cockpit-chart {
@@ -999,7 +832,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: rgba(255,255,255,0.005);
     }
 
     .risk-row {
@@ -1010,11 +842,6 @@
       padding: 14px 0;
       border-bottom: 1px solid var(--border);
       font-size: 10px;
-      transition: background-color 0.2s ease;
-    }
-
-    .risk-row:hover {
-      background: rgba(255,255,255,0.02);
     }
 
     .risk-row:last-child {
@@ -1066,22 +893,12 @@
       min-height: 520px;
     }
 
-    .pricing-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(20,21,15,0.08);
-    }
-
     .pricing-card.featured {
       background: var(--ink);
       color: var(--cream);
       border-color: var(--ink);
       transform: translateY(-8px);
       box-shadow: 0 25px 70px rgba(20,21,15,.18);
-    }
-
-    .pricing-card.featured:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 35px 85px rgba(20,21,15,.28);
     }
 
     .pricing-badge {
@@ -1096,7 +913,6 @@
       font-size: 8px;
       font-weight: 700;
       text-transform: uppercase;
-      box-shadow: 0 4px 12px rgba(214,255,63,0.3);
     }
 
     .pricing-name {
@@ -1184,23 +1000,17 @@
       font-size: 12px;
       font-weight: 700;
       border: 1px solid var(--border-light);
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      transition: transform .2s ease;
     }
 
     .pricing-cta:hover {
       transform: translateY(-2px);
-      background: rgba(20,21,15,0.05);
     }
 
     .featured .pricing-cta {
       background: var(--lime);
       color: var(--ink);
       border-color: var(--lime);
-    }
-
-    .featured .pricing-cta:hover {
-      background: #e1ff67;
-      box-shadow: 0 8px 20px rgba(214,255,63,0.3);
     }
 
     .pricing-note {
@@ -1229,7 +1039,6 @@
       border-radius: 9px;
       font-size: 11px;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .sector-tab.active,
@@ -1237,7 +1046,6 @@
       background: var(--ink);
       color: var(--cream);
       border-color: var(--ink);
-      transform: translateY(-1px);
     }
 
     .sector-content {
@@ -1250,8 +1058,6 @@
       grid-template-columns: .8fr 1.2fr;
       gap: 50px;
       align-items: center;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
     }
 
     .sector-content h3 {
@@ -1279,7 +1085,6 @@
       border-radius: 12px;
       font-size: 11px;
       color: var(--muted);
-      background: rgba(255,255,255,0.01);
     }
 
     .sector-signal strong {
@@ -1341,7 +1146,6 @@
       padding: 32px;
       border: 1px solid var(--border-light);
       border-radius: 20px;
-      background: rgba(255,255,255,0.3);
     }
 
     .promise strong {
@@ -1370,7 +1174,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: center;
-      box-shadow: 0 20px 60px rgba(214,255,63,0.18);
     }
 
     .security-box h2 {
@@ -1390,11 +1193,6 @@
       border-bottom: 1px solid rgba(20,21,15,.16);
       padding-bottom: 14px;
       font-size: 12px;
-      transition: transform 0.2s ease;
-    }
-
-    .security-item:hover {
-      transform: translateX(4px);
     }
 
     .security-item:last-child {
@@ -1412,11 +1210,6 @@
 
     .faq-item {
       border-bottom: 1px solid var(--border);
-      transition: border-color 0.25s ease;
-    }
-
-    .faq-item:hover {
-      border-color: var(--border-strong);
     }
 
     .faq-question {
@@ -1432,24 +1225,18 @@
       cursor: pointer;
       font-family: "Space Grotesk", sans-serif;
       font-size: 18px;
-      transition: color 0.2s ease;
-    }
-
-    .faq-question:hover {
-      color: var(--lime);
     }
 
     .faq-plus {
       font-family: "IBM Plex Mono", monospace;
       color: var(--lime);
       font-size: 17px;
-      transition: transform 0.3s ease;
     }
 
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height .35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: max-height .3s ease;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.7;
@@ -1507,11 +1294,6 @@
       align-items: flex-start;
       font-size: 12px;
       color: var(--muted-light);
-      transition: transform 0.2s ease;
-    }
-
-    .demo-point:hover {
-      transform: translateX(3px);
     }
 
     .demo-point::before {
@@ -1526,11 +1308,6 @@
       border-radius: 23px;
       overflow: hidden;
       box-shadow: 0 25px 80px rgba(20,21,15,.08);
-      transition: box-shadow 0.3s ease;
-    }
-
-    .calendar-shell:hover {
-      box-shadow: 0 35px 90px rgba(20,21,15,.12);
     }
 
     .calendar-header {
@@ -1555,7 +1332,6 @@
       border-radius: 6px;
       background: rgba(214,255,63,.3);
       color: #4e6500;
-      animation: dynamicPulse 2s infinite;
     }
 
     .calendly-inline-widget {
@@ -1571,7 +1347,6 @@
       padding: 140px 0;
       text-align: center;
       background: var(--bg);
-      position: relative;
     }
 
     .final-cta h2 {
@@ -1633,12 +1408,10 @@
       color: var(--muted);
       font-size: 11px;
       margin-bottom: 10px;
-      transition: color 0.2s ease, transform 0.2s ease;
     }
 
     .footer-column a:hover {
       color: var(--cream);
-      transform: translateX(2px);
     }
 
     .footer-bottom {
@@ -1809,6 +1582,162 @@
         font-size: 10px;
       }
     }
+
+    /* =========================================================
+       QUICK FIT (jump to "who it's for" from the top)
+    ========================================================= */
+
+    .quickfit-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      background: var(--bg-2);
+    }
+
+    .quickfit-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .quickfit-label {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .quickfit-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quickfit-pill {
+      border: 1px solid var(--border-strong);
+      background: rgba(255,255,255,.03);
+      color: var(--cream);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .quickfit-pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--lime);
+    }
+
+    .quickfit-pill.active {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: var(--ink);
+    }
+
+    @media (max-width: 700px) {
+      .quickfit-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    /* =========================================================
+       FIT (who it's for)
+    ========================================================= */
+
+    .fit-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 28px;
+    }
+
+    .fit-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 13px;
+    }
+
+    .fit-card {
+      padding: 30px;
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      background: rgba(255,255,255,.5);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .fit-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .fit-card.is-active {
+      border-color: var(--lime-deep);
+      box-shadow: 0 20px 45px rgba(20,21,15,.1);
+    }
+
+    .fit-card.featured {
+      background: var(--ink);
+      color: var(--cream);
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .fit-card.featured p {
+      color: var(--muted);
+    }
+
+    .fit-card.featured .fit-icon {
+      background: var(--lime);
+      color: var(--ink);
+    }
+
+    .fit-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(214,255,63,.35);
+      color: var(--lime-dim);
+      display: grid;
+      place-items: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .fit-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      letter-spacing: -.04em;
+      margin: 0 0 12px;
+    }
+
+    .fit-card p {
+      color: var(--muted-light);
+      line-height: 1.65;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1000px) {
+      .fit-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .fit-card.featured {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .fit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -1868,7 +1797,7 @@
     <section class="hero">
       <div class="container hero-grid">
 
-        <div data-reveal>
+        <div>
 
           <div class="eyebrow">
             <span class="eyebrow-dot"></span>
@@ -1923,7 +1852,7 @@
 
         <!-- MOCKUP -->
 
-        <div class="mockup" data-reveal>
+        <div class="mockup">
 
           <div class="mockup-top">
             <span class="mockup-dot"></span>
@@ -2070,13 +1999,60 @@
     </div>
 
 
+    <!-- QUICK FIT -->
+
+    <div class="quickfit-strip">
+
+      <div class="container quickfit-inner">
+
+        <span class="quickfit-label">
+          Not sure where you fit in? Pick one:
+        </span>
+
+        <div class="quickfit-pills" id="quickfit-pills">
+
+          <button class="quickfit-pill" data-fit="industry">
+            Industry
+          </button>
+
+          <button class="quickfit-pill" data-fit="healthcare">
+            Healthcare
+          </button>
+
+          <button class="quickfit-pill" data-fit="agriculture">
+            Agriculture
+          </button>
+
+          <button class="quickfit-pill" data-fit="transportation">
+            Transportation
+          </button>
+
+          <button class="quickfit-pill" data-fit="logistics">
+            Logistics
+          </button>
+
+          <button class="quickfit-pill" data-fit="energy">
+            Energy
+          </button>
+
+          <button class="quickfit-pill" data-fit="retail">
+            Retail
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
     <!-- SITUATIONS -->
 
     <section id="situations" class="section-light">
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker">
             01: The problem
@@ -2095,7 +2071,7 @@
 
         <div class="situations-grid">
 
-          <article class="situation-card" data-reveal>
+          <article class="situation-card">
 
             <div class="situation-number">01</div>
 
@@ -2108,7 +2084,7 @@
 
           </article>
 
-          <article class="situation-card" data-reveal>
+          <article class="situation-card">
 
             <div class="situation-number">02</div>
 
@@ -2121,7 +2097,7 @@
 
           </article>
 
-          <article class="situation-card" data-reveal>
+          <article class="situation-card">
 
             <div class="situation-number">03</div>
 
@@ -2147,7 +2123,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker dark-kicker">
             02: The shift
@@ -2161,7 +2137,7 @@
 
         <div class="change-grid">
 
-          <div class="change-card before" data-reveal>
+          <div class="change-card before">
 
             <div class="change-label">
               Before
@@ -2178,7 +2154,7 @@
 
           </div>
 
-          <div class="change-card after" data-reveal>
+          <div class="change-card after">
 
             <div class="change-label">
               With SentrIA
@@ -2208,7 +2184,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker dark-kicker">
             03: The method
@@ -2223,7 +2199,7 @@
 
         <div class="method-grid">
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">01</div>
             <h3>Observe</h3>
             <p>
@@ -2232,7 +2208,7 @@
             </p>
           </div>
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">02</div>
             <h3>Understand</h3>
             <p>
@@ -2241,7 +2217,7 @@
             </p>
           </div>
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">03</div>
             <h3>Prioritize</h3>
             <p>
@@ -2250,7 +2226,7 @@
             </p>
           </div>
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">04</div>
             <h3>Act</h3>
             <p>
@@ -2272,7 +2248,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker">
             04: Why SentrIA
@@ -2285,7 +2261,7 @@
 
         </div>
 
-        <div class="comparison" data-reveal>
+        <div class="comparison">
 
           <div class="comparison-row">
             <div class="comparison-cell comparison-head">
@@ -2372,7 +2348,7 @@
 
       <div class="container cockpit-layout">
 
-        <div data-reveal>
+        <div>
 
           <div class="section-kicker dark-kicker">
             05: The cockpit
@@ -2432,7 +2408,7 @@
 
         </div>
 
-        <div class="cockpit-visual" data-reveal>
+        <div class="cockpit-visual">
 
           <div class="cockpit-chart">
 
@@ -2507,7 +2483,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker">
             06: Pricing
@@ -2528,7 +2504,7 @@
 
         <div class="pricing-grid">
 
-          <article class="pricing-card" data-reveal>
+          <article class="pricing-card">
 
             <div class="pricing-name">
               Pilot
@@ -2559,7 +2535,7 @@
           </article>
 
 
-          <article class="pricing-card featured" data-reveal>
+          <article class="pricing-card featured">
 
             <div class="pricing-badge">
               Recommended
@@ -2595,7 +2571,7 @@
           </article>
 
 
-          <article class="pricing-card" data-reveal>
+          <article class="pricing-card">
 
             <div class="pricing-name">
               Enterprise
@@ -2644,7 +2620,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker dark-kicker">
             07: Implementation
@@ -2658,7 +2634,7 @@
 
         <div class="method-grid">
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">01</div>
             <h3>Connect</h3>
             <p>
@@ -2666,7 +2642,7 @@
             </p>
           </div>
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">02</div>
             <h3>Configure</h3>
             <p>
@@ -2674,7 +2650,7 @@
             </p>
           </div>
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">03</div>
             <h3>Observe</h3>
             <p>
@@ -2682,7 +2658,7 @@
             </p>
           </div>
 
-          <div class="method-card" data-reveal>
+          <div class="method-card">
             <div class="method-number">04</div>
             <h3>Improve</h3>
             <p>
@@ -2703,7 +2679,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker">
             08: Sectors
@@ -2719,7 +2695,7 @@
 
         </div>
 
-        <div class="sector-tabs" data-reveal>
+        <div class="sector-tabs">
 
           <button class="sector-tab active" data-sector="industry">
             Industry
@@ -2747,7 +2723,7 @@
 
         </div>
 
-        <div class="sector-content" data-reveal>
+        <div class="sector-content">
 
           <div>
 
@@ -2793,13 +2769,173 @@
     </section>
 
 
+    <!-- FIT (who it's for) -->
+
+    <section id="fit" class="section-light-alt">
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <div class="section-kicker">
+            Who it's for
+          </div>
+
+          <h2 class="section-title">
+            Where do you fit in?
+          </h2>
+
+        </div>
+
+        <div class="fit-tabs" id="fit-tabs">
+
+          <button class="sector-tab active" data-fit="industry">
+            Industry
+          </button>
+
+          <button class="sector-tab" data-fit="healthcare">
+            Healthcare
+          </button>
+
+          <button class="sector-tab" data-fit="agriculture">
+            Agriculture
+          </button>
+
+          <button class="sector-tab" data-fit="transportation">
+            Transportation
+          </button>
+
+          <button class="sector-tab" data-fit="logistics">
+            Logistics
+          </button>
+
+          <button class="sector-tab" data-fit="energy">
+            Energy
+          </button>
+
+          <button class="sector-tab" data-fit="retail">
+            Retail
+          </button>
+
+        </div>
+
+        <div class="fit-grid" id="fit-grid">
+
+          <article class="fit-card" data-fit="industry">
+
+            <div class="fit-icon">01</div>
+
+            <h3>Industry</h3>
+
+            <p>
+              Factories, manufacturing plants and machine shops.
+              Helps you catch equipment wear and unplanned downtime
+              before a production line stops.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="healthcare">
+
+            <div class="fit-icon">02</div>
+
+            <h3>Healthcare</h3>
+
+            <p>
+              Pharmacies, hospital pharmacies, medical wholesalers
+              and cold chain facilities. Helps you track stock levels,
+              expiry dates and temperature before something runs out
+              or spoils.
+            </p>
+
+          </article>
+
+          <article class="fit-card featured" data-fit="logistics">
+
+            <div class="fit-icon">05</div>
+
+            <h3>Logistics</h3>
+
+            <p>
+              Ports, warehouses, distribution centers and freight
+              forwarders. Helps you spot bottlenecks in queues,
+              equipment and container flow before they cause delays.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="agriculture">
+
+            <div class="fit-icon">03</div>
+
+            <h3>Agriculture</h3>
+
+            <p>
+              Farms, grain cooperatives and cold storage or packing
+              facilities. Helps you watch storage conditions and
+              transport timing before a harvest is lost to delay
+              or spoilage.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="transportation">
+
+            <div class="fit-icon">04</div>
+
+            <h3>Transportation</h3>
+
+            <p>
+              Trucking companies, delivery fleets and vehicle rental
+              operators. Helps you track engine health, fuel and
+              maintenance schedules across the whole fleet.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="energy">
+
+            <div class="fit-icon">06</div>
+
+            <h3>Energy</h3>
+
+            <p>
+              Utility companies, generator fleet operators and
+              industrial energy users. Helps you watch fuel levels,
+              overheating and consumption before an outage happens.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="retail">
+
+            <div class="fit-icon">07</div>
+
+            <h3>Retail</h3>
+
+            <p>
+              Wholesalers, distributors, supermarkets, hypermarkets,
+              retail chains and convenience stores. Helps you catch
+              stock shortages, price or margin issues and slow moving
+              inventory before they hurt sales.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
     <!-- DATA -->
 
     <section class="section-dark">
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker dark-kicker">
             09: Data
@@ -2818,7 +2954,7 @@
 
         <div class="data-grid">
 
-          <div class="data-card" data-reveal>
+          <div class="data-card">
 
             <div class="data-number">
               DATA / 01
@@ -2833,7 +2969,7 @@
 
           </div>
 
-          <div class="data-card" data-reveal>
+          <div class="data-card">
 
             <div class="data-number">
               DATA / 02
@@ -2848,7 +2984,7 @@
 
           </div>
 
-          <div class="data-card" data-reveal>
+          <div class="data-card">
 
             <div class="data-number">
               DATA / 03
@@ -2876,7 +3012,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker dark-kicker">
             10: Reliability
@@ -2890,7 +3026,7 @@
 
         <div class="reliability-grid">
 
-          <div class="reliability-card" data-reveal>
+          <div class="reliability-card">
 
             <div class="data-number">01</div>
 
@@ -2903,7 +3039,7 @@
 
           </div>
 
-          <div class="reliability-card" data-reveal>
+          <div class="reliability-card">
 
             <div class="data-number">02</div>
 
@@ -2916,7 +3052,7 @@
 
           </div>
 
-          <div class="reliability-card" data-reveal>
+          <div class="reliability-card">
 
             <div class="data-number">03</div>
 
@@ -2942,7 +3078,7 @@
 
       <div class="container">
 
-        <div class="section-header" data-reveal>
+        <div class="section-header">
 
           <div class="section-kicker">
             11: Promise
@@ -2957,28 +3093,28 @@
 
         <div class="promises-grid">
 
-          <div class="promise" data-reveal>
+          <div class="promise">
             <strong>See earlier.</strong>
             <span>
               Identify weak signals before they become visible.
             </span>
           </div>
 
-          <div class="promise" data-reveal>
+          <div class="promise">
             <strong>Understand faster.</strong>
             <span>
               Turn a data dashboard into an understandable situation.
             </span>
           </div>
 
-          <div class="promise" data-reveal>
+          <div class="promise">
             <strong>Prioritize better.</strong>
             <span>
               Focus resources on the risks that truly matter.
             </span>
           </div>
 
-          <div class="promise" data-reveal>
+          <div class="promise">
             <strong>Act immediately.</strong>
             <span>
               Turn analysis into the next operational action.
@@ -2998,7 +3134,7 @@
 
       <div class="container">
 
-        <div class="security-box" data-reveal>
+        <div class="security-box">
 
           <h2>
             Your data stays
@@ -3041,7 +3177,6 @@
         <div
           class="section-header"
           style="margin-left:auto;margin-right:auto;text-align:center"
-          data-reveal
         >
 
           <div class="section-kicker dark-kicker">
@@ -3054,7 +3189,7 @@
 
         </div>
 
-        <div class="faq" data-reveal>
+        <div class="faq">
 
           <div class="faq-item">
 
@@ -3164,7 +3299,7 @@
 
       <div class="container demo-layout">
 
-        <div class="demo-copy" data-reveal>
+        <div class="demo-copy">
 
           <div class="section-kicker">
             13: Demo
@@ -3202,7 +3337,7 @@
         </div>
 
 
-        <div class="calendar-shell" data-reveal>
+        <div class="calendar-shell">
 
           <div class="calendar-header">
 
@@ -3232,7 +3367,7 @@
 
     <section class="final-cta">
 
-      <div class="container" data-reveal>
+      <div class="container">
 
         <h2>
           The next problem
@@ -3345,51 +3480,6 @@
   ========================================================= -->
 
   <script>
-
-    /* =========================================================
-       DYNAMIC UI & SCROLL REVEAL OBSERVER
-    ========================================================= */
-
-    document.addEventListener("DOMContentLoaded", () => {
-      
-      // Dynamic Scroll Header Effect
-      const navbar = document.querySelector(".navbar");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 30) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-
-      // Intersection Observer for Reveal animations
-      const observerOptions = {
-        threshold: 0.12,
-        rootMargin: "0px 0px -40px 0px"
-      };
-
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll("[data-reveal]").forEach((el) => {
-        revealObserver.observe(el);
-      });
-
-      // Interactive Mockup Sidebar Switching Effect
-      const mockupNavItems = document.querySelectorAll(".mockup-nav-item");
-      mockupNavItems.forEach((item) => {
-        item.addEventListener("click", () => {
-          mockupNavItems.forEach((i) => i.classList.remove("active"));
-          item.classList.add("active");
-        });
-      });
-    });
 
     /* =========================================================
        TRANSLATIONS
@@ -3585,6 +3675,29 @@
         "Logistics": "Logistique",
         "Energy": "Énergie",
 
+        /* QUICK FIT */
+        "Not sure where you fit in? Pick one:":
+          "Vous ne savez pas où vous vous situez ? Choisissez :",
+
+        /* FIT (who it's for) */
+        "Who it's for": "Pour qui",
+        "Where do you fit in?": "Où vous situez-vous ?",
+        "Factories, manufacturing plants and machine shops. Helps you catch equipment wear and unplanned downtime before a production line stops.":
+          "Usines, sites de production et ateliers d'usinage. Repérez l'usure des équipements et les arrêts imprévus avant qu'une ligne de production ne s'arrête.",
+        "Pharmacies, hospital pharmacies, medical wholesalers and cold chain facilities. Helps you track stock levels, expiry dates and temperature before something runs out or spoils.":
+          "Pharmacies, pharmacies hospitalières, grossistes médicaux et sites de chaîne du froid. Suivez les niveaux de stock, les dates de péremption et la température avant une rupture ou une perte.",
+        "Farms, grain cooperatives and cold storage or packing facilities. Helps you watch storage conditions and transport timing before a harvest is lost to delay or spoilage.":
+          "Exploitations agricoles, coopératives céréalières et sites de stockage ou de conditionnement au froid. Surveillez les conditions de stockage et les délais de transport avant qu'une récolte ne soit perdue.",
+        "Trucking companies, delivery fleets and vehicle rental operators. Helps you track engine health, fuel and maintenance schedules across the whole fleet.":
+          "Entreprises de transport routier, flottes de livraison et loueurs de véhicules. Suivez l'état des moteurs, le carburant et les plannings de maintenance sur toute la flotte.",
+        "Ports, warehouses, distribution centers and freight forwarders. Helps you spot bottlenecks in queues, equipment and container flow before they cause delays.":
+          "Ports, entrepôts, centres de distribution et transitaires. Repérez les blocages dans les files d'attente, les équipements et le flux de conteneurs avant qu'ils ne causent des retards.",
+        "Utility companies, generator fleet operators and industrial energy users. Helps you watch fuel levels, overheating and consumption before an outage happens.":
+          "Fournisseurs d'énergie, exploitants de flottes de générateurs et industriels grands consommateurs d'énergie. Surveillez le carburant, la surchauffe et la consommation avant une panne.",
+        "Retail": "Commerce",
+        "Wholesalers, distributors, supermarkets, hypermarkets, retail chains and convenience stores. Helps you catch stock shortages, price or margin issues and slow moving inventory before they hurt sales.":
+          "Grossistes, distributeurs, supermarchés, hypermarchés, chaînes de magasins et commerces de proximité. Repérez les ruptures de stock, les écarts de prix ou de marge et les produits qui ne tournent pas avant qu'ils ne pèsent sur les ventes.",
+
         /* DATA */
         "09: Data": "09 : Données",
         "Use what you already have.": "Utilisez ce que vous avez déjà.",
@@ -3624,7 +3737,7 @@
         "Focus resources on the risks that truly matter.":
           "Concentrez les ressources sur les risques qui comptent vraiment.",
         "Act immediately.": "Agir immédiatement.",
-        "Turn l'analyse en prochaine action opérationnelle.":
+        "Turn analysis into the next operational action.":
           "Transformez l'analyse en prochaine action opérationnelle.",
 
         /* SECURITY */
@@ -3794,7 +3907,7 @@
         fr: {
           title: "Transport",
           description:
-            "Identifiez les risques de retard, la pression sur la capacité et les anomalies de flux avant qu me se propagent.",
+            "Identifiez les risques de retard, la pression sur la capacité et les anomalies de flux avant qu'ils ne se propagent.",
           signals: [
             ["Retards", "Propagation des risques"],
             ["Capacité", "Pression réseau"],
@@ -4121,6 +4234,82 @@
           tab.dataset.sector
         );
 
+      });
+
+    });
+
+
+    /* =========================================================
+       FIT TABS + QUICK FIT PICKER (who it's for)
+    ========================================================= */
+
+    const fitTabs =
+      document.querySelectorAll("#fit-tabs .sector-tab");
+
+    const quickfitPills =
+      document.querySelectorAll("#quickfit-pills .quickfit-pill");
+
+    const fitCards =
+      document.querySelectorAll(".fit-card");
+
+
+    function activateFit(key, shouldScroll) {
+
+      fitTabs.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item.dataset.fit === key
+        );
+      });
+
+      quickfitPills.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item.dataset.fit === key
+        );
+      });
+
+      fitCards.forEach(card => {
+        card.classList.toggle(
+          "is-active",
+          card.dataset.fit === key
+        );
+      });
+
+      if (shouldScroll) {
+
+        const matchingCard =
+          document.querySelector(
+            `.fit-card[data-fit="${key}"]`
+          );
+
+        if (matchingCard) {
+
+          matchingCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+
+        }
+
+      }
+
+    }
+
+
+    fitTabs.forEach(tab => {
+
+      tab.addEventListener("click", () => {
+        activateFit(tab.dataset.fit, false);
+      });
+
+    });
+
+
+    quickfitPills.forEach(pill => {
+
+      pill.addEventListener("click", () => {
+        activateFit(pill.dataset.fit, true);
       });
 
     });
