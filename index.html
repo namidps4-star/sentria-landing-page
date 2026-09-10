@@ -19,7 +19,1797 @@
   />
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root {
+      --bg: #0b0c08;
+      --bg-2: #10120b;
+      --bg-3: #15170d;
+      --bg-4: #1b1e10;
+
+      --cream: #f5f3ea;
+      --cream-2: #ece7d6;
+      --ink: #14150f;
+
+      --lime: #d6ff3f;
+      --lime-deep: #9fcc1b;
+      --lime-dim: #7c9a2a;
+
+      --coral: #ff5a4e;
+      --amber: #ffb84d;
+
+      --muted: #969989;
+      --muted-light: #65685c;
+
+      --border: rgba(245,243,234,.11);
+      --border-strong: rgba(245,243,234,.17);
+      --border-light: rgba(20,21,15,.13);
+
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--cream);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .display {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       DYNAMIC VISUAL ENHANCEMENTS
+    ========================================================= */
+
+    /* Smooth Dynamic Fade & Elevate Entrance Effect */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pulse Glow for Live Indicator Elements */
+    @keyframes dynamicPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(214, 255, 63, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(214, 255, 63, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(214, 255, 63, 0);
+      }
+    }
+
+    .eyebrow-dot, .status-dot {
+      animation: dynamicPulse 2s infinite;
+    }
+
+    /* Interactive Elevate Cards */
+    .situation-card,
+    .change-card,
+    .method-card,
+    .data-card,
+    .reliability-card,
+    .promise,
+    .pricing-card {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+      will-change: transform, box-shadow;
+    }
+
+    .situation-card:hover,
+    .method-card:hover,
+    .data-card:hover,
+    .reliability-card:hover,
+    .promise:hover {
+      transform: translateY(-6px);
+      border-color: rgba(214, 255, 63, 0.3);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Dynamic Bar Animation for Charts */
+    .bars .bar {
+      transition: height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .risk-fill {
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Interactive Dynamic Sector Signals */
+    .sector-signal {
+      transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .sector-signal:hover {
+      transform: translateX(4px);
+      border-color: rgba(214, 255, 63, 0.4);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Glassmorphism Accents */
+    .mockup, .cockpit-visual, .calendar-shell {
+      backdrop-filter: blur(12px);
+    }
+
+    /* =========================================================
+       NAV
+    ========================================================= */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      z-index: 100;
+      background: rgba(11,12,8,.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(11,12,8,.95);
+      border-bottom: 1px solid var(--border-strong);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: -.04em;
+    }
+
+    .logo-mark {
+      width: 27px;
+      height: 27px;
+      border-radius: 9px;
+      background: var(--lime);
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 700;
+      font-size: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover .logo-mark {
+      transform: rotate(12deg) scale(1.08);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: color .2s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--lime);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cream);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* LANGUAGE SWITCH */
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 4px 3px;
+      cursor: pointer;
+      transition: color .2s ease, transform .2s ease;
+    }
+
+    .lang-switch button:hover {
+      color: var(--cream);
+      transform: translateY(-1px);
+    }
+
+    .lang-switch button.active {
+      color: var(--lime);
+    }
+
+    .lang-switch span {
+      color: var(--muted-light);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--lime);
+      color: var(--ink);
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: #e1ff67;
+      box-shadow: 0 6px 20px rgba(214, 255, 63, 0.3);
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 850px;
+      padding-top: 160px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: rgba(214,255,63,.055);
+      filter: blur(100px);
+      top: 100px;
+      right: -250px;
+      pointer-events: none;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 15px rgba(214,255,63,.7);
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 690px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(50px, 6vw, 82px);
+      line-height: .95;
+      letter-spacing: -.065em;
+      font-weight: 600;
+    }
+
+    .hero h1 span {
+      color: var(--lime);
+    }
+
+    .hero-description {
+      max-width: 580px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .button-primary,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 13px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .button-primary {
+      background: var(--lime);
+      color: var(--ink);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      background: #e2ff70;
+      box-shadow: 0 8px 24px rgba(214,255,63,0.35);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--border-strong);
+      color: var(--cream);
+      background: rgba(255,255,255,.025);
+    }
+
+    .button-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(245,243,234,.3);
+      background: rgba(255,255,255,.05);
+    }
+
+    .proof-list {
+      margin-top: 35px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color 0.2s ease;
+    }
+
+    .proof-item:hover {
+      color: var(--cream);
+    }
+
+    .proof-check {
+      color: var(--lime);
+    }
+
+    /* =========================================================
+       HERO MOCKUP
+    ========================================================= */
+
+    .mockup {
+      position: relative;
+      border: 1px solid var(--border-strong);
+      border-radius: 26px;
+      overflow: hidden;
+      background: #11130d;
+      box-shadow:
+        0 40px 100px rgba(0,0,0,.35),
+        0 0 80px rgba(214,255,63,.04);
+      transition: transform 0.2s cubic-bezier(0.1, 1, 0.1, 1), box-shadow 0.3s ease;
+      will-change: transform;
+    }
+
+    .mockup:hover {
+      box-shadow:
+        0 50px 120px rgba(0,0,0,.45),
+        0 0 100px rgba(214,255,63,.08);
+    }
+
+    .mockup-top {
+      height: 45px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      gap: 7px;
+    }
+
+    .mockup-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3b3e31;
+    }
+
+    .mockup-content {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      min-height: 430px;
+    }
+
+    .mockup-sidebar {
+      border-right: 1px solid var(--border);
+      padding: 20px 13px;
+    }
+
+    .mockup-sidebar-logo {
+      color: var(--lime);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .mockup-nav-item {
+      padding: 9px 10px;
+      color: var(--muted);
+      font-size: 10px;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mockup-nav-item:hover:not(.active) {
+      color: var(--cream);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .mockup-nav-item.active {
+      color: var(--ink);
+      background: var(--lime);
+      font-weight: 700;
+    }
+
+    .mockup-main {
+      padding: 24px;
+    }
+
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .mockup-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      color: var(--lime);
+      border: 1px solid rgba(214,255,63,.25);
+      padding: 6px 9px;
+      border-radius: 7px;
+      background: rgba(214,255,63,0.05);
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--lime);
+      border-radius: 50%;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .dash-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(255,255,255,.015);
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .dash-card:hover {
+      border-color: var(--border-strong);
+      background: rgba(255,255,255,.03);
+    }
+
+    .dash-card-label {
+      color: var(--muted);
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .dash-card-number {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 27px;
+      margin-top: 8px;
+    }
+
+    .dash-card-number.green {
+      color: var(--lime);
+    }
+
+    .dash-card-number.red {
+      color: var(--coral);
+    }
+
+    .dash-panel {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 15px;
+      margin-top: 11px;
+      background: rgba(255,255,255,.01);
+    }
+
+    .dash-panel-head {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 9px;
+      margin-bottom: 15px;
+    }
+
+    .bars {
+      height: 115px;
+      display: flex;
+      align-items: flex-end;
+      gap: 7px;
+    }
+
+    .bar {
+      flex: 1;
+      background: rgba(214,255,63,.22);
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+    }
+
+    .bar:hover {
+      background: rgba(214,255,63,.45);
+    }
+
+    .bar:nth-child(1) { height: 38%; }
+    .bar:nth-child(2) { height: 52%; }
+    .bar:nth-child(3) { height: 43%; }
+    .bar:nth-child(4) { height: 66%; }
+    .bar:nth-child(5) { height: 58%; }
+    .bar:nth-child(6) { height: 78%; }
+    .bar:nth-child(7) { height: 94%; background: var(--lime); }
+
+    /* =========================================================
+       GENERAL SECTIONS
+    ========================================================= */
+
+    section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .section-light {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    .section-light-alt {
+      background: var(--cream-2);
+      color: var(--ink);
+    }
+
+    .section-dark {
+      background: var(--bg-2);
+    }
+
+    .section-header {
+      max-width: 730px;
+      margin-bottom: 60px;
+    }
+
+    .section-kicker {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--lime-deep);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 17px;
+    }
+
+    .dark-kicker {
+      color: var(--lime);
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1;
+      letter-spacing: -.055em;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .section-copy {
+      margin-top: 20px;
+      color: var(--muted-light);
+      max-width: 650px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .dark-copy {
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       PROOF
+    ========================================================= */
+
+    .proof-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 23px 0;
+      background: var(--bg-2);
+    }
+
+    .proof-strip-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .proof-stat {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--muted);
+      font-size: 11px;
+      transition: color 0.25s ease;
+    }
+
+    .proof-stat:hover {
+      color: var(--cream);
+    }
+
+    .proof-stat strong {
+      color: var(--cream);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       SITUATIONS
+    ========================================================= */
+
+    .situations-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 13px;
+    }
+
+    .situation-card {
+      padding: 28px;
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      min-height: 260px;
+      background: rgba(255,255,255,.45);
+    }
+
+    .situation-number {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--muted-light);
+      font-size: 10px;
+    }
+
+    .situation-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 25px;
+      margin: 38px 0 13px;
+      letter-spacing: -.04em;
+    }
+
+    .situation-card p {
+      color: var(--muted-light);
+      line-height: 1.65;
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       CHANGE
+    ========================================================= */
+
+    .change-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .change-card {
+      border-radius: 22px;
+      padding: 35px;
+      min-height: 330px;
+    }
+
+    .change-card.before {
+      border: 1px solid var(--border);
+      background: var(--bg-3);
+    }
+
+    .change-card.after {
+      background: var(--lime);
+      color: var(--ink);
+      box-shadow: 0 16px 40px rgba(214,255,63,0.15);
+    }
+
+    .change-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      opacity: .65;
+    }
+
+    .change-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 34px;
+      letter-spacing: -.05em;
+      margin: 45px 0 15px;
+    }
+
+    .change-card p {
+      line-height: 1.65;
+      font-size: 14px;
+      opacity: .72;
+    }
+
+    /* =========================================================
+       METHOD
+    ========================================================= */
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 13px;
+    }
+
+    .method-card {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,.02);
+    }
+
+    .method-number {
+      color: var(--lime);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+    }
+
+    .method-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      margin: 40px 0 13px;
+      font-size: 21px;
+    }
+
+    .method-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    /* =========================================================
+       COMPARISON
+    ========================================================= */
+
+    .comparison {
+      border: 1px solid var(--border-light);
+      border-radius: 23px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-light);
+      transition: background-color 0.2s ease;
+    }
+
+    .comparison-row:not(:first-child):hover {
+      background: rgba(20,21,15,0.03);
+    }
+
+    .comparison-row:last-child {
+      border-bottom: 0;
+    }
+
+    .comparison-cell {
+      padding: 18px 22px;
+      font-size: 12px;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .comparison-cell:last-child {
+      border-right: 0;
+    }
+
+    .comparison-head {
+      font-weight: 700;
+      background: rgba(20,21,15,.035);
+    }
+
+    .comparison-highlight {
+      color: var(--lime-deep);
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       COCKPIT
+    ========================================================= */
+
+    .cockpit-layout {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .cockpit-list {
+      margin-top: 35px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .cockpit-list-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 8px 10px;
+      border-radius: 12px;
+      transition: background-color 0.25s ease;
+    }
+
+    .cockpit-list-item:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .cockpit-icon {
+      width: 25px;
+      height: 25px;
+      border-radius: 8px;
+      background: rgba(214,255,63,.12);
+      color: var(--lime);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      font-size: 11px;
+      transition: transform 0.25s ease, background-color 0.25s ease;
+    }
+
+    .cockpit-list-item:hover .cockpit-icon {
+      transform: scale(1.15);
+      background: rgba(214,255,63,.25);
+    }
+
+    .cockpit-list-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .cockpit-list-item span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .cockpit-visual {
+      border: 1px solid var(--border-strong);
+      background: #11130d;
+      border-radius: 25px;
+      padding: 20px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    }
+
+    .cockpit-chart {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.005);
+    }
+
+    .risk-row {
+      display: grid;
+      grid-template-columns: 1fr 100px 80px;
+      align-items: center;
+      gap: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 10px;
+      transition: background-color 0.2s ease;
+    }
+
+    .risk-row:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .risk-row:last-child {
+      border-bottom: 0;
+    }
+
+    .risk-bar {
+      height: 6px;
+      border-radius: 10px;
+      background: #25291b;
+      overflow: hidden;
+    }
+
+    .risk-fill {
+      height: 100%;
+      background: var(--lime);
+      border-radius: inherit;
+    }
+
+    .risk-fill.red {
+      background: var(--coral);
+    }
+
+    .risk-value {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* =========================================================
+       PRICING
+    ========================================================= */
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      position: relative;
+      border: 1px solid var(--border-light);
+      border-radius: 23px;
+      padding: 31px;
+      background: rgba(255,255,255,.48);
+      display: flex;
+      flex-direction: column;
+      min-height: 520px;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(20,21,15,0.08);
+    }
+
+    .pricing-card.featured {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 70px rgba(20,21,15,.18);
+    }
+
+    .pricing-card.featured:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 35px 85px rgba(20,21,15,.28);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 6px 9px;
+      border-radius: 7px;
+      background: var(--lime);
+      color: var(--ink);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(214,255,63,0.3);
+    }
+
+    .pricing-name {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: -.04em;
+    }
+
+    .pricing-description {
+      margin-top: 10px;
+      color: var(--muted-light);
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 240px;
+    }
+
+    .featured .pricing-description {
+      color: var(--muted);
+    }
+
+    .pricing-price {
+      margin-top: 35px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 37px;
+      font-weight: 600;
+      letter-spacing: -.05em;
+    }
+
+    .pricing-price small {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--muted-light);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .featured .pricing-price small {
+      color: var(--muted);
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border-light);
+      margin: 28px 0;
+    }
+
+    .featured .pricing-divider {
+      background: var(--border);
+    }
+
+    .pricing-list {
+      display: grid;
+      gap: 13px;
+      flex: 1;
+    }
+
+    .pricing-list li {
+      list-style: none;
+      display: flex;
+      gap: 9px;
+      font-size: 12px;
+      color: var(--muted-light);
+      line-height: 1.45;
+    }
+
+    .featured .pricing-list li {
+      color: var(--muted);
+    }
+
+    .pricing-list li::before {
+      content: "✓";
+      color: var(--lime-deep);
+      font-weight: 700;
+    }
+
+    .pricing-cta {
+      margin-top: 28px;
+      width: 100%;
+      min-height: 46px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border-light);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .pricing-cta:hover {
+      transform: translateY(-2px);
+      background: rgba(20,21,15,0.05);
+    }
+
+    .featured .pricing-cta {
+      background: var(--lime);
+      color: var(--ink);
+      border-color: var(--lime);
+    }
+
+    .featured .pricing-cta:hover {
+      background: #e1ff67;
+      box-shadow: 0 8px 20px rgba(214,255,63,0.3);
+    }
+
+    .pricing-note {
+      text-align: center;
+      color: var(--muted-light);
+      font-size: 11px;
+      margin-top: 28px;
+    }
+
+    /* =========================================================
+       SECTORS
+    ========================================================= */
+
+    .sector-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 35px;
+    }
+
+    .sector-tab {
+      border: 1px solid var(--border-light);
+      background: transparent;
+      color: var(--muted-light);
+      padding: 10px 13px;
+      border-radius: 9px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sector-tab.active,
+    .sector-tab:hover {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .sector-content {
+      border-radius: 22px;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 40px;
+      min-height: 260px;
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 50px;
+      align-items: center;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    .sector-content h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 36px;
+      letter-spacing: -.05em;
+      margin: 0 0 10px;
+    }
+
+    .sector-content p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 13px;
+    }
+
+    .sector-signals {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 10px;
+    }
+
+    .sector-signal {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.01);
+    }
+
+    .sector-signal strong {
+      color: var(--cream);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* =========================================================
+       DATA / RELIABILITY
+    ========================================================= */
+
+    .data-grid,
+    .reliability-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 13px;
+    }
+
+    .data-card,
+    .reliability-card {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: rgba(255,255,255,.018);
+    }
+
+    .data-card h3,
+    .reliability-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      margin: 25px 0 10px;
+    }
+
+    .data-card p,
+    .reliability-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .data-number {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--lime);
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       PROMISES
+    ========================================================= */
+
+    .promises-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .promise {
+      padding: 32px;
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .promise strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .promise span {
+      color: var(--muted-light);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       SECURITY
+    ========================================================= */
+
+    .security-box {
+      background: var(--lime);
+      color: var(--ink);
+      border-radius: 25px;
+      padding: 45px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      box-shadow: 0 20px 60px rgba(214,255,63,0.18);
+    }
+
+    .security-box h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 43px;
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin: 0;
+    }
+
+    .security-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .security-item {
+      border-bottom: 1px solid rgba(20,21,15,.16);
+      padding-bottom: 14px;
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .security-item:hover {
+      transform: translateX(4px);
+    }
+
+    .security-item:last-child {
+      border-bottom: 0;
+    }
+
+    /* =========================================================
+       FAQ
+    ========================================================= */
+
+    .faq {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.25s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-strong);
+    }
+
+    .faq-question {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--cream);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      padding: 24px 0;
+      cursor: pointer;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      transition: color 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--lime);
+    }
+
+    .faq-plus {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--lime);
+      font-size: 17px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .faq-answer-inner {
+      padding-bottom: 23px;
+    }
+
+    /* =========================================================
+       DEMO / CALENDAR
+    ========================================================= */
+
+    .demo-section {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    .demo-layout {
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: 55px;
+      align-items: start;
+    }
+
+    .demo-copy {
+      position: sticky;
+      top: 110px;
+    }
+
+    .demo-copy h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(40px, 5vw, 61px);
+      line-height: .97;
+      letter-spacing: -.06em;
+      margin: 0;
+    }
+
+    .demo-copy p {
+      color: var(--muted-light);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-top: 20px;
+    }
+
+    .demo-points {
+      margin-top: 30px;
+      display: grid;
+      gap: 13px;
+    }
+
+    .demo-point {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 12px;
+      color: var(--muted-light);
+      transition: transform 0.2s ease;
+    }
+
+    .demo-point:hover {
+      transform: translateX(3px);
+    }
+
+    .demo-point::before {
+      content: "→";
+      color: var(--lime-deep);
+      font-weight: 700;
+    }
+
+    .calendar-shell {
+      background: white;
+      border: 1px solid var(--border-light);
+      border-radius: 23px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(20,21,15,.08);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .calendar-shell:hover {
+      box-shadow: 0 35px 90px rgba(20,21,15,.12);
+    }
+
+    .calendar-header {
+      padding: 23px 25px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .calendar-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    .calendar-status {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: rgba(214,255,63,.3);
+      color: #4e6500;
+      animation: dynamicPulse 2s infinite;
+    }
+
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 720px;
+    }
+
+    /* =========================================================
+       FINAL CTA
+    ========================================================= */
+
+    .final-cta {
+      padding: 140px 0;
+      text-align: center;
+      background: var(--bg);
+      position: relative;
+    }
+
+    .final-cta h2 {
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(45px, 7vw, 78px);
+      line-height: .95;
+      letter-spacing: -.065em;
+    }
+
+    .final-cta h2 span {
+      color: var(--lime);
+    }
+
+    .final-cta p {
+      max-width: 540px;
+      margin: 25px auto 32px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 50px 0 35px;
+      background: var(--bg);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 35px;
+    }
+
+    .footer-description {
+      color: var(--muted);
+      max-width: 280px;
+      margin-top: 15px;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .footer-column h4 {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--cream);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 10px;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--cream);
+      transform: translateX(2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      margin-top: 45px;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted-light);
+      font-size: 9px;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1000px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .cockpit-layout,
+      .demo-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-grid {
+        gap: 50px;
+      }
+
+      .mockup {
+        max-width: 760px;
+      }
+
+      .demo-copy {
+        position: static;
+      }
+
+      .method-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+
+      .security-box {
+        grid-template-columns: 1fr;
+      }
+
+      .sector-content {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      section {
+        padding: 85px 0;
+      }
+
+      .hero {
+        padding-top: 130px;
+        padding-bottom: 75px;
+      }
+
+      .hero h1 {
+        font-size: 49px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .dashboard-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .mockup-content {
+        grid-template-columns: 1fr;
+      }
+
+      .mockup-sidebar {
+        display: none;
+      }
+
+      .mockup-main {
+        padding: 15px;
+      }
+
+      .situations-grid,
+      .data-grid,
+      .reliability-grid,
+      .promises-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .change-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison {
+        overflow-x: auto;
+      }
+
+      .comparison-row {
+        min-width: 650px;
+      }
+
+      .security-box {
+        padding: 30px;
+      }
+
+      .security-box h2 {
+        font-size: 36px;
+      }
+
+      .sector-content {
+        padding: 28px;
+      }
+
+      .sector-signals {
+        grid-template-columns: 1fr;
+      }
+
+      .calendar-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav-actions {
+        gap: 7px;
+      }
+
+      .nav-cta {
+        padding: 10px 11px;
+        font-size: 10px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -76,10 +1866,9 @@
   <main>
 
     <section class="hero">
-      <div class="cursor-glow" id="hero-glow"></div>
       <div class="container hero-grid">
 
-        <div class="reveal-up">
+        <div data-reveal>
 
           <div class="eyebrow">
             <span class="eyebrow-dot"></span>
@@ -100,11 +1889,11 @@
 
           <div class="hero-actions">
 
-            <a href="#demo" class="button-primary magnetic">
+            <a href="#demo" class="button-primary">
               Book a demo →
             </a>
 
-            <a href="#methode" class="button-secondary magnetic">
+            <a href="#methode" class="button-secondary">
               See how it works
             </a>
 
@@ -134,7 +1923,7 @@
 
         <!-- MOCKUP -->
 
-        <div class="mockup reveal-up" style="animation-delay: 0.2s;">
+        <div class="mockup" data-reveal>
 
           <div class="mockup-top">
             <span class="mockup-dot"></span>
@@ -194,7 +1983,7 @@
                     Risks detected
                   </div>
 
-                  <div class="dash-card-number red" id="hero-risks">
+                  <div class="dash-card-number red">
                     07
                   </div>
                 </div>
@@ -204,7 +1993,7 @@
                     Priority
                   </div>
 
-                  <div class="dash-card-number green" id="hero-priority">
+                  <div class="dash-card-number green">
                     92%
                   </div>
                 </div>
@@ -281,60 +2070,13 @@
     </div>
 
 
-    <!-- QUICK FIT -->
-
-    <div class="quickfit-strip">
-
-      <div class="container quickfit-inner">
-
-        <span class="quickfit-label">
-          Not sure where you fit in? Pick one:
-        </span>
-
-        <div class="quickfit-pills" id="quickfit-pills">
-
-          <button class="quickfit-pill" data-fit="industry">
-            Industry
-          </button>
-
-          <button class="quickfit-pill" data-fit="healthcare">
-            Healthcare
-          </button>
-
-          <button class="quickfit-pill" data-fit="agriculture">
-            Agriculture
-          </button>
-
-          <button class="quickfit-pill" data-fit="transportation">
-            Transportation
-          </button>
-
-          <button class="quickfit-pill" data-fit="logistics">
-            Logistics
-          </button>
-
-          <button class="quickfit-pill" data-fit="energy">
-            Energy
-          </button>
-
-          <button class="quickfit-pill" data-fit="retail">
-            Retail
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
     <!-- SITUATIONS -->
 
     <section id="situations" class="section-light">
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker">
             01: The problem
@@ -353,7 +2095,7 @@
 
         <div class="situations-grid">
 
-          <article class="situation-card reveal-up">
+          <article class="situation-card" data-reveal>
 
             <div class="situation-number">01</div>
 
@@ -366,7 +2108,7 @@
 
           </article>
 
-          <article class="situation-card reveal-up" style="transition-delay: 0.1s;">
+          <article class="situation-card" data-reveal>
 
             <div class="situation-number">02</div>
 
@@ -379,7 +2121,7 @@
 
           </article>
 
-          <article class="situation-card reveal-up" style="transition-delay: 0.2s;">
+          <article class="situation-card" data-reveal>
 
             <div class="situation-number">03</div>
 
@@ -405,7 +2147,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker dark-kicker">
             02: The shift
@@ -419,7 +2161,7 @@
 
         <div class="change-grid">
 
-          <div class="change-card before reveal-up">
+          <div class="change-card before" data-reveal>
 
             <div class="change-label">
               Before
@@ -436,7 +2178,7 @@
 
           </div>
 
-          <div class="change-card after reveal-up" style="transition-delay: 0.15s;">
+          <div class="change-card after" data-reveal>
 
             <div class="change-label">
               With SentrIA
@@ -466,7 +2208,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker dark-kicker">
             03: The method
@@ -481,7 +2223,7 @@
 
         <div class="method-grid">
 
-          <div class="method-card reveal-up">
+          <div class="method-card" data-reveal>
             <div class="method-number">01</div>
             <h3>Observe</h3>
             <p>
@@ -490,7 +2232,7 @@
             </p>
           </div>
 
-          <div class="method-card reveal-up" style="transition-delay: 0.1s;">
+          <div class="method-card" data-reveal>
             <div class="method-number">02</div>
             <h3>Understand</h3>
             <p>
@@ -499,7 +2241,7 @@
             </p>
           </div>
 
-          <div class="method-card reveal-up" style="transition-delay: 0.2s;">
+          <div class="method-card" data-reveal>
             <div class="method-number">03</div>
             <h3>Prioritize</h3>
             <p>
@@ -508,7 +2250,7 @@
             </p>
           </div>
 
-          <div class="method-card reveal-up" style="transition-delay: 0.3s;">
+          <div class="method-card" data-reveal>
             <div class="method-number">04</div>
             <h3>Act</h3>
             <p>
@@ -530,7 +2272,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker">
             04: Why SentrIA
@@ -543,7 +2285,7 @@
 
         </div>
 
-        <div class="comparison reveal-up">
+        <div class="comparison" data-reveal>
 
           <div class="comparison-row">
             <div class="comparison-cell comparison-head">
@@ -630,7 +2372,7 @@
 
       <div class="container cockpit-layout">
 
-        <div class="reveal-up">
+        <div data-reveal>
 
           <div class="section-kicker dark-kicker">
             05: The cockpit
@@ -690,7 +2432,7 @@
 
         </div>
 
-        <div class="cockpit-visual reveal-up" style="transition-delay: 0.2s;">
+        <div class="cockpit-visual" data-reveal>
 
           <div class="cockpit-chart">
 
@@ -765,7 +2507,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker">
             06: Pricing
@@ -786,7 +2528,7 @@
 
         <div class="pricing-grid">
 
-          <article class="pricing-card reveal-up">
+          <article class="pricing-card" data-reveal>
 
             <div class="pricing-name">
               Pilot
@@ -817,7 +2559,7 @@
           </article>
 
 
-          <article class="pricing-card featured reveal-up" style="transition-delay: 0.15s;">
+          <article class="pricing-card featured" data-reveal>
 
             <div class="pricing-badge">
               Recommended
@@ -853,7 +2595,7 @@
           </article>
 
 
-          <article class="pricing-card reveal-up" style="transition-delay: 0.3s;">
+          <article class="pricing-card" data-reveal>
 
             <div class="pricing-name">
               Enterprise
@@ -887,7 +2629,7 @@
 
         </div>
 
-        <div class="pricing-note reveal-up">
+        <div class="pricing-note">
           Pricing is defined according to scope, data flows, and level of integration.
         </div>
 
@@ -902,7 +2644,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker dark-kicker">
             07: Implementation
@@ -916,7 +2658,7 @@
 
         <div class="method-grid">
 
-          <div class="method-card reveal-up">
+          <div class="method-card" data-reveal>
             <div class="method-number">01</div>
             <h3>Connect</h3>
             <p>
@@ -924,7 +2666,7 @@
             </p>
           </div>
 
-          <div class="method-card reveal-up" style="transition-delay: 0.1s;">
+          <div class="method-card" data-reveal>
             <div class="method-number">02</div>
             <h3>Configure</h3>
             <p>
@@ -932,7 +2674,7 @@
             </p>
           </div>
 
-          <div class="method-card reveal-up" style="transition-delay: 0.2s;">
+          <div class="method-card" data-reveal>
             <div class="method-number">03</div>
             <h3>Observe</h3>
             <p>
@@ -940,7 +2682,7 @@
             </p>
           </div>
 
-          <div class="method-card reveal-up" style="transition-delay: 0.3s;">
+          <div class="method-card" data-reveal>
             <div class="method-number">04</div>
             <h3>Improve</h3>
             <p>
@@ -961,7 +2703,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker">
             08: Sectors
@@ -977,7 +2719,7 @@
 
         </div>
 
-        <div class="sector-tabs reveal-up">
+        <div class="sector-tabs" data-reveal>
 
           <button class="sector-tab active" data-sector="industry">
             Industry
@@ -1005,7 +2747,7 @@
 
         </div>
 
-        <div class="sector-content reveal-up">
+        <div class="sector-content" data-reveal>
 
           <div>
 
@@ -1051,173 +2793,13 @@
     </section>
 
 
-    <!-- FIT (who it's for) -->
-
-    <section id="fit" class="section-light-alt">
-
-      <div class="container">
-
-        <div class="section-header reveal-up">
-
-          <div class="section-kicker">
-            Who it's for
-          </div>
-
-          <h2 class="section-title">
-            Where do you fit in?
-          </h2>
-
-        </div>
-
-        <div class="fit-tabs reveal-up" id="fit-tabs">
-
-          <button class="sector-tab active" data-fit="industry">
-            Industry
-          </button>
-
-          <button class="sector-tab" data-fit="healthcare">
-            Healthcare
-          </button>
-
-          <button class="sector-tab" data-fit="agriculture">
-            Agriculture
-          </button>
-
-          <button class="sector-tab" data-fit="transportation">
-            Transportation
-          </button>
-
-          <button class="sector-tab" data-fit="logistics">
-            Logistics
-          </button>
-
-          <button class="sector-tab" data-fit="energy">
-            Energy
-          </button>
-
-          <button class="sector-tab" data-fit="retail">
-            Retail
-          </button>
-
-        </div>
-
-        <div class="fit-grid reveal-up" id="fit-grid">
-
-          <article class="fit-card" data-fit="industry">
-
-            <div class="fit-icon">01</div>
-
-            <h3>Industry</h3>
-
-            <p>
-              Factories, manufacturing plants and machine shops.
-              Helps you catch equipment wear and unplanned downtime
-              before a production line stops.
-            </p>
-
-          </article>
-
-          <article class="fit-card" data-fit="healthcare">
-
-            <div class="fit-icon">02</div>
-
-            <h3>Healthcare</h3>
-
-            <p>
-              Pharmacies, hospital pharmacies, medical wholesalers
-              and cold chain facilities. Helps you track stock levels,
-              expiry dates and temperature before something runs out
-              or spoils.
-            </p>
-
-          </article>
-
-          <article class="fit-card featured" data-fit="logistics">
-
-            <div class="fit-icon">05</div>
-
-            <h3>Logistics</h3>
-
-            <p>
-              Ports, warehouses, distribution centers and freight
-              forwarders. Helps you spot bottlenecks in queues,
-              equipment and container flow before they cause delays.
-            </p>
-
-          </article>
-
-          <article class="fit-card" data-fit="agriculture">
-
-            <div class="fit-icon">03</div>
-
-            <h3>Agriculture</h3>
-
-            <p>
-              Farms, grain cooperatives and cold storage or packing
-              facilities. Helps you watch storage conditions and
-              transport timing before a harvest is lost to delay
-              or spoilage.
-            </p>
-
-          </article>
-
-          <article class="fit-card" data-fit="transportation">
-
-            <div class="fit-icon">04</div>
-
-            <h3>Transportation</h3>
-
-            <p>
-              Trucking companies, delivery fleets and vehicle rental
-              operators. Helps you track engine health, fuel and
-              maintenance schedules across the whole fleet.
-            </p>
-
-          </article>
-
-          <article class="fit-card" data-fit="energy">
-
-            <div class="fit-icon">06</div>
-
-            <h3>Energy</h3>
-
-            <p>
-              Utility companies, generator fleet operators and
-              industrial energy users. Helps you watch fuel levels,
-              overheating and consumption before an outage happens.
-            </p>
-
-          </article>
-
-          <article class="fit-card" data-fit="retail">
-
-            <div class="fit-icon">07</div>
-
-            <h3>Retail</h3>
-
-            <p>
-              Wholesalers, distributors, supermarkets, hypermarkets,
-              retail chains and convenience stores. Helps you catch
-              stock shortages, price or margin issues and slow moving
-              inventory before they hurt sales.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
     <!-- DATA -->
 
     <section class="section-dark">
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker dark-kicker">
             09: Data
@@ -1236,7 +2818,7 @@
 
         <div class="data-grid">
 
-          <div class="data-card reveal-up">
+          <div class="data-card" data-reveal>
 
             <div class="data-number">
               DATA / 01
@@ -1251,7 +2833,7 @@
 
           </div>
 
-          <div class="data-card reveal-up" style="transition-delay: 0.15s;">
+          <div class="data-card" data-reveal>
 
             <div class="data-number">
               DATA / 02
@@ -1266,7 +2848,7 @@
 
           </div>
 
-          <div class="data-card reveal-up" style="transition-delay: 0.3s;">
+          <div class="data-card" data-reveal>
 
             <div class="data-number">
               DATA / 03
@@ -1294,7 +2876,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker dark-kicker">
             10: Reliability
@@ -1308,7 +2890,7 @@
 
         <div class="reliability-grid">
 
-          <div class="reliability-card reveal-up">
+          <div class="reliability-card" data-reveal>
 
             <div class="data-number">01</div>
 
@@ -1321,7 +2903,7 @@
 
           </div>
 
-          <div class="reliability-card reveal-up" style="transition-delay: 0.15s;">
+          <div class="reliability-card" data-reveal>
 
             <div class="data-number">02</div>
 
@@ -1334,7 +2916,7 @@
 
           </div>
 
-          <div class="reliability-card reveal-up" style="transition-delay: 0.3s;">
+          <div class="reliability-card" data-reveal>
 
             <div class="data-number">03</div>
 
@@ -1360,7 +2942,7 @@
 
       <div class="container">
 
-        <div class="section-header reveal-up">
+        <div class="section-header" data-reveal>
 
           <div class="section-kicker">
             11: Promise
@@ -1375,28 +2957,28 @@
 
         <div class="promises-grid">
 
-          <div class="promise reveal-up">
+          <div class="promise" data-reveal>
             <strong>See earlier.</strong>
             <span>
               Identify weak signals before they become visible.
             </span>
           </div>
 
-          <div class="promise reveal-up" style="transition-delay: 0.1s;">
+          <div class="promise" data-reveal>
             <strong>Understand faster.</strong>
             <span>
               Turn a data dashboard into an understandable situation.
             </span>
           </div>
 
-          <div class="promise reveal-up" style="transition-delay: 0.2s;">
+          <div class="promise" data-reveal>
             <strong>Prioritize better.</strong>
             <span>
               Focus resources on the risks that truly matter.
             </span>
           </div>
 
-          <div class="promise reveal-up" style="transition-delay: 0.3s;">
+          <div class="promise" data-reveal>
             <strong>Act immediately.</strong>
             <span>
               Turn analysis into the next operational action.
@@ -1416,7 +2998,7 @@
 
       <div class="container">
 
-        <div class="security-box reveal-up">
+        <div class="security-box" data-reveal>
 
           <h2>
             Your data stays
@@ -1457,8 +3039,9 @@
       <div class="container">
 
         <div
-          class="section-header reveal-up"
+          class="section-header"
           style="margin-left:auto;margin-right:auto;text-align:center"
+          data-reveal
         >
 
           <div class="section-kicker dark-kicker">
@@ -1471,7 +3054,7 @@
 
         </div>
 
-        <div class="faq reveal-up">
+        <div class="faq" data-reveal>
 
           <div class="faq-item">
 
@@ -1581,7 +3164,7 @@
 
       <div class="container demo-layout">
 
-        <div class="demo-copy reveal-up">
+        <div class="demo-copy" data-reveal>
 
           <div class="section-kicker">
             13: Demo
@@ -1619,7 +3202,7 @@
         </div>
 
 
-        <div class="calendar-shell reveal-up" style="transition-delay: 0.2s;">
+        <div class="calendar-shell" data-reveal>
 
           <div class="calendar-header">
 
@@ -1649,7 +3232,7 @@
 
     <section class="final-cta">
 
-      <div class="container reveal-up">
+      <div class="container" data-reveal>
 
         <h2>
           The next problem
@@ -1662,7 +3245,7 @@
           into faster, smarter decisions.
         </p>
 
-        <a href="#demo" class="button-primary magnetic">
+        <a href="#demo" class="button-primary">
           Book a demo →
         </a>
 
@@ -1756,7 +3339,956 @@
     async>
   </script>
 
-  <script src="script.js"></script>
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+
+  <script>
+
+    /* =========================================================
+       DYNAMIC UI & SCROLL REVEAL OBSERVER
+    ========================================================= */
+
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // Dynamic Scroll Header Effect
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 30) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Intersection Observer for Reveal animations
+      const observerOptions = {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+      };
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll("[data-reveal]").forEach((el) => {
+        revealObserver.observe(el);
+      });
+
+      // Interactive Mockup Sidebar Switching Effect
+      const mockupNavItems = document.querySelectorAll(".mockup-nav-item");
+      mockupNavItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          mockupNavItems.forEach((i) => i.classList.remove("active"));
+          item.classList.add("active");
+        });
+      });
+    });
+
+    /* =========================================================
+       TRANSLATIONS
+    ========================================================= */
+
+    const translations = {
+
+      fr: {
+
+        /* NAV */
+        "Situations": "Situations",
+        "Method": "Méthode",
+        "Pricing": "Tarifs",
+        "Sectors": "Secteurs",
+        "Book a demo →": "Réserver une démo →",
+
+        /* HERO */
+        "Operational intelligence": "Intelligence opérationnelle",
+        "See the bottleneck": "Voyez le blocage",
+        "before": "avant",
+        "it happens.": "qu'il n'arrive.",
+        "SentrIA turns your operational data into clear signals, clear priorities, and concrete decisions. Not tomorrow. Now.":
+          "SentrIA transforme vos données opérationnelles en signaux clairs, priorités claires et décisions concrètes. Pas demain. Maintenant.",
+        "See how it works": "Voir comment ça marche",
+        "Proactive detection": "Détection proactive",
+        "Operational priorities": "Priorités opérationnelles",
+        "AI recommendations": "Recommandations IA",
+
+        /* MOCKUP */
+        "Bottlenecks": "Blocages",
+        "Time": "Temps",
+        "Costs": "Coûts",
+        "Forecasts": "Prévisions",
+        "Operational view": "Vue opérationnelle",
+        "SYSTEM ACTIVE": "SYSTÈME ACTIF",
+        "Risks detected": "Risques détectés",
+        "Priority": "Priorité",
+        "Monitored flows": "Flux surveillés",
+        "Risk trend": "Tendance des risques",
+        "Last 30 days": "30 derniers jours",
+
+        /* PROOF */
+        "Operational data": "Données opérationnelles",
+        "Continuous analysis": "Analyse continue",
+        "Prioritized risks": "Risques priorisés",
+        "Recommended action": "Action recommandée",
+
+        /* PROBLEM */
+        "01: The problem": "01 : Le problème",
+        "Your data already knows what's going wrong.":
+          "Vos données savent déjà ce qui ne va pas.",
+        "The problem isn't a lack of data. It's a lack of operational insight at the right moment.":
+          "Le problème n'est pas le manque de données. C'est le manque de vision opérationnelle au bon moment.",
+        "Too late": "Trop tard",
+        "The team discovers the problem once its impact is already visible on the ground.":
+          "L'équipe découvre le problème une fois que son impact est déjà visible sur le terrain.",
+        "Too many signals": "Trop de signaux",
+        "Alerts, dashboards, emails, and metrics pile up without clearly showing what to address first.":
+          "Alertes, dashboards, emails et indicateurs s'accumulent sans montrer clairement quoi traiter en premier.",
+        "Wrong priority": "Mauvaise priorité",
+        "Teams spend time addressing what is visible instead of what is actually critical.":
+          "Les équipes passent du temps à traiter ce qui est visible plutôt que ce qui est réellement critique.",
+
+        /* CHANGE */
+        "02: The shift": "02 : Le changement",
+        "Move from monitoring to anticipating.":
+          "Passer du suivi à l'anticipation.",
+        "Before": "Avant",
+        "\"What's happening?\"": "\"Que se passe-t-il ?\"",
+        "Teams search for information, cross-reference sources, and reconstruct the situation themselves.":
+          "Les équipes cherchent l'information, croisent les sources et reconstruisent elles-mêmes la situation.",
+        "With SentrIA": "Avec SentrIA",
+        "\"Here's what you need to look at.\"":
+          "\"Voici ce que vous devez regarder.\"",
+        "SentrIA detects weak signals, prioritizes them, and turns the situation into the next action.":
+          "SentrIA détecte les signaux faibles, les priorise et transforme la situation en prochaine action.",
+
+        /* METHOD */
+        "03: The method": "03 : La méthode",
+        "An operational loop, not another dashboard.":
+          "Une boucle opérationnelle, pas un dashboard de plus.",
+        "Observe": "Observer",
+        "SentrIA collects and structures the data that matters across your operations.":
+          "SentrIA collecte et structure les données qui comptent dans vos opérations.",
+        "Understand": "Comprendre",
+        "Signals are analyzed to identify anomalies, trends, and dependencies.":
+          "Les signaux sont analysés pour identifier anomalies, tendances et dépendances.",
+        "Prioritize": "Prioriser",
+        "Risks are ranked by operational impact and urgency.":
+          "Les risques sont classés selon leur impact opérationnel et leur urgence.",
+        "Act": "Agir",
+        "AI proposes a concrete action to help the team decide faster.":
+          "L'IA propose une action concrète pour aider l'équipe à décider plus vite.",
+
+        /* COMPARISON */
+        "04: Why SentrIA": "04 : Pourquoi SentrIA",
+        "Not a dashboard. A decision system.":
+          "Pas un dashboard. Un système de décision.",
+        "Capability": "Capacité",
+        "Traditional dashboard": "Dashboard traditionnel",
+        "View data": "Voir les données",
+        "Detect anomalies": "Détecter les anomalies",
+        "Partially": "Partiellement",
+        "Automatic": "Automatique",
+        "Prioritize risks": "Prioriser les risques",
+        "Recommend an action": "Recommander une action",
+        "Operational AI": "IA opérationnelle",
+        "Anticipate": "Anticiper",
+        "Limited": "Limité",
+
+        /* COCKPIT */
+        "05: The cockpit": "05 : Le cockpit",
+        "A view built for decisions.":
+          "Une vue conçue pour décider.",
+        "The SentrIA cockpit brings together the signals that actually matter to your business.":
+          "Le cockpit SentrIA rassemble les signaux qui comptent réellement pour votre activité.",
+        "Identify the points that are actually slowing down your operations.":
+          "Identifiez les points qui ralentissent réellement vos opérations.",
+        "Focus your teams on the highest-impact situations.":
+          "Concentrez vos équipes sur les situations à plus fort impact.",
+        "Get a clear, actionable next step.":
+          "Obtenez une prochaine étape claire et actionnable.",
+        "Supplier delay": "Retard fournisseur",
+        "Transport capacity": "Capacité transport",
+        "Critical inventory": "Stock critique",
+        "CRITICAL": "CRITIQUE",
+        "HIGH": "ÉLEVÉ",
+        "MEDIUM": "MOYEN",
+        "LOW": "FAIBLE",
+
+        /* PRICING */
+        "06: Pricing": "06 : Tarifs",
+        "Start small. Scale when it works.":
+          "Commencez petit. Passez à l'échelle quand ça fonctionne.",
+        "SentrIA adapts to your level of operational maturity. We prefer to define the right scope rather than sell you an unnecessarily complex plan.":
+          "SentrIA s'adapte à votre niveau de maturité opérationnelle. Nous préférons définir le bon périmètre plutôt que vous vendre une offre inutilement complexe.",
+        "Pilot": "Pilote",
+        "To validate a first operational use case.":
+          "Pour valider un premier cas d'usage opérationnel.",
+        "Custom quote": "Sur devis",
+        "1 operational scope": "1 périmètre opérationnel",
+        "Connection to existing data": "Connexion aux données existantes",
+        "Detection of key signals": "Détection des signaux clés",
+        "Priority recommendations": "Recommandations prioritaires",
+        "Discuss a pilot →": "Discuter d'un pilote →",
+        "Recommended": "Recommandé",
+        "For managing multiple operational flows and priorities every day.":
+          "Pour piloter plusieurs flux et priorités opérationnelles au quotidien.",
+        "Multiple operational flows": "Plusieurs flux opérationnels",
+        "Custom priorities": "Priorités personnalisées",
+        "Predictive analysis": "Analyse prédictive",
+        "Custom business views": "Vues métier personnalisées",
+        "Operational support": "Support opérationnel",
+        "Enterprise": "Enterprise",
+        "For organizations that want to industrialize their operational intelligence.":
+          "Pour les organisations qui veulent industrialiser leur intelligence opérationnelle.",
+        "Tailored": "Sur mesure",
+        "Multi-site deployment": "Déploiement multi-sites",
+        "Advanced integrations": "Intégrations avancées",
+        "Governance and security": "Gouvernance et sécurité",
+        "Custom architecture": "Architecture personnalisée",
+        "Dedicated support": "Support dédié",
+        "Deployment support": "Accompagnement au déploiement",
+        "Talk to the team →": "Parler à l'équipe →",
+        "Pricing is defined according to scope, data flows, and level of integration.":
+          "Les tarifs sont définis selon le périmètre, les flux de données et le niveau d'intégration.",
+
+        /* IMPLEMENTATION */
+        "07: Implementation": "07 : Mise en œuvre",
+        "From your data to a decision.": "De vos données à une décision.",
+        "Connect": "Connecter",
+        "We identify the useful sources and required data flows.":
+          "Nous identifions les sources utiles et les flux de données nécessaires.",
+        "Configure": "Configurer",
+        "SentrIA learns your priorities, thresholds, and constraints.":
+          "SentrIA apprend vos priorités, seuils et contraintes.",
+        "The cockpit turns data into operational signals.":
+          "Le cockpit transforme les données en signaux opérationnels.",
+        "Improve": "Améliorer",
+        "Recommendations evolve with your operations.":
+          "Les recommandations évoluent avec vos opérations.",
+
+        /* SECTORS */
+        "08: Sectors": "08 : Secteurs",
+        "Intelligence adapted to the real world.":
+          "Une intelligence adaptée au terrain.",
+        "The same principles. Different signals for every industry.":
+          "Les mêmes principes. Des signaux différents pour chaque industrie.",
+        "Industry": "Industrie",
+        "Healthcare": "Santé",
+        "Agriculture": "Agriculture",
+        "Transportation": "Transport",
+        "Logistics": "Logistique",
+        "Energy": "Énergie",
+
+        /* DATA */
+        "09: Data": "09 : Données",
+        "Use what you already have.": "Utilisez ce que vous avez déjà.",
+        "SentrIA doesn't need to replace your existing infrastructure to create value.":
+          "SentrIA n'a pas besoin de remplacer votre infrastructure existante pour créer de la valeur.",
+        "Use your production, orders, procurement, and inventory data.":
+          "Utilisez vos données de production, commandes, achats et stocks.",
+        "Turn machine and sensor signals into operational alerts.":
+          "Transformez les signaux machines et capteurs en alertes opérationnelles.",
+        "Connect the systems already present in your technical environment.":
+          "Connectez les systèmes déjà présents dans votre environnement technique.",
+
+        /* RELIABILITY */
+        "10: Reliability": "10 : Fiabilité",
+        "AI that explains its priorities.":
+          "Une IA qui explique ses priorités.",
+        "Context": "Contexte",
+        "Every recommendation is linked to the operational signals that triggered it.":
+          "Chaque recommandation est reliée aux signaux opérationnels qui l'ont déclenchée.",
+        "The goal isn't to generate more alerts, but to reduce noise.":
+          "L'objectif n'est pas de générer plus d'alertes, mais de réduire le bruit.",
+        "Action": "Action",
+        "A recommendation must be understandable and actionable.":
+          "Une recommandation doit être compréhensible et actionnable.",
+
+        /* PROMISE */
+        "11: Promise": "11 : Promesse",
+        "Less noise. More decisions.":
+          "Moins de bruit. Plus de décisions.",
+        "See earlier.": "Voir plus tôt.",
+        "Identify weak signals before they become visible.":
+          "Identifiez les signaux faibles avant qu'ils ne deviennent visibles.",
+        "Understand faster.": "Comprendre plus vite.",
+        "Turn a data dashboard into an understandable situation.":
+          "Transformez un dashboard de données en situation compréhensible.",
+        "Prioritize better.": "Mieux prioriser.",
+        "Focus resources on the risks that truly matter.":
+          "Concentrez les ressources sur les risques qui comptent vraiment.",
+        "Act immediately.": "Agir immédiatement.",
+        "Turn l'analyse en prochaine action opérationnelle.":
+          "Transformez l'analyse en prochaine action opérationnelle.",
+
+        /* SECURITY */
+        "Your data stays under your control.":
+          "Vos données restent sous votre contrôle.",
+        "Architecture designed for professional environments.":
+          "Architecture conçue pour les environnements professionnels.",
+        "Access and data controls.":
+          "Contrôles d'accès et des données.",
+        "Progressive integration with your infrastructure.":
+          "Intégration progressive avec votre infrastructure.",
+        "Deployment adapted to your operational constraints.":
+          "Déploiement adapté à vos contraintes opérationnelles.",
+
+        /* FAQ */
+        "12: FAQ": "12 : FAQ",
+        "The questions we get asked.": "Les questions que l'on nous pose.",
+        "Does SentrIA replace our existing tools?":
+          "SentrIA remplace-t-il nos outils existants ?",
+        "No. SentrIA is designed to use your existing data and add a layer of operational intelligence on top.":
+          "Non. SentrIA est conçu pour utiliser vos données existantes et ajouter une couche d'intelligence opérationnelle par-dessus.",
+        "Do we need to change our infrastructure?":
+          "Devons-nous changer notre infrastructure ?",
+        "Not necessarily. Deployment starts with the data sources that are most useful for your use case.":
+          "Pas nécessairement. Le déploiement commence avec les sources de données les plus utiles pour votre cas d'usage.",
+        "Who is SentrIA for?": "À qui s'adresse SentrIA ?",
+        "Teams that manage complex operations and need to make fast decisions from multiple data sources.":
+          "Aux équipes qui pilotent des opérations complexes et doivent prendre rapidement des décisions à partir de plusieurs sources de données.",
+        "How much does SentrIA cost?":
+          "Combien coûte SentrIA ?",
+        "Pricing depends on scope, the data to connect, the number of flows, and the level of support required. We define the scope during the first demo.":
+          "Le prix dépend du périmètre, des données à connecter, du nombre de flux et du niveau d'accompagnement nécessaire. Nous définissons le périmètre lors de la première démo.",
+        "Can we start with a single use case?":
+          "Peut-on commencer avec un seul cas d'usage ?",
+        "Yes. That's actually our recommended approach: start with a measurable operational problem, then expand.":
+          "Oui. C'est même notre approche recommandée : commencer par un problème opérationnel mesurable, puis étendre.",
+
+        /* DEMO */
+        "13: Demo": "13 : Démo",
+        "Let's see where SentrIA can save you time.":
+          "Voyons où SentrIA peut vous faire gagner du temps.",
+        "Book a 30-minute conversation with the SentrIA team. We start from your real operations, not a generic presentation.":
+          "Réservez une conversation de 30 minutes avec l'équipe SentrIA. Nous partons de vos opérations réelles, pas d'une présentation générique.",
+        "Understand your current operations":
+          "Comprendre vos opérations actuelles",
+        "Identify a first use case":
+          "Identifier un premier cas d'usage",
+        "See the SentrIA cockpit":
+          "Voir le cockpit SentrIA",
+        "Define the next steps":
+          "Définir les prochaines étapes",
+        "SentrIA Demo: 30 min": "Démo SentrIA : 30 min",
+        "LIVE AVAILABILITY": "DISPONIBILITÉS EN DIRECT",
+
+        /* FINAL CTA */
+        "The next problem may already be in your data.":
+          "Le prochain problème est peut-être déjà dans vos données.",
+        "See how SentrIA can turn your operations into faster, smarter decisions.":
+          "Découvrez comment SentrIA peut transformer vos opérations en décisions plus rapides et plus intelligentes.",
+
+        /* FOOTER */
+        "Operational intelligence to see bottlenecks before they happen.":
+          "L'intelligence opérationnelle pour voir les blocages avant qu'ils n'arrivent.",
+        "Product": "Produit",
+        "Resources": "Ressources",
+        "Talk to the team": "Parler à l'équipe",
+        "Book a call": "Réserver un appel",
+        "Operational intelligence.": "Intelligence opérationnelle."
+      }
+
+    };
+
+
+    /* =========================================================
+       SECTOR DATA — BOTH LANGUAGES
+    ========================================================= */
+
+    const sectorData = {
+
+      industry: {
+        en: {
+          title: "Industry",
+          description:
+            "Anticipate production deviations, downtime, and capacity constraints before they impact the flow.",
+          signals: [
+            ["Production", "Deviation detection"],
+            ["Maintenance", "Downtime risks"],
+            ["Capacity", "Future pressure"],
+            ["Quality", "Detected anomalies"]
+          ]
+        },
+        fr: {
+          title: "Industrie",
+          description:
+            "Anticipez les écarts de production, les arrêts et les contraintes de capacité avant qu'ils n'impactent le flux.",
+          signals: [
+            ["Production", "Détection des écarts"],
+            ["Maintenance", "Risques d'arrêt"],
+            ["Capacité", "Pression future"],
+            ["Qualité", "Anomalies détectées"]
+          ]
+        }
+      },
+
+      health: {
+        en: {
+          title: "Healthcare",
+          description:
+            "Help teams anticipate capacity constraints, critical resources, and high-risk situations.",
+          signals: [
+            ["Capacity", "Resource pressure"],
+            ["Flow", "Waiting times"],
+            ["Resources", "Critical availability"],
+            ["Priorities", "High-risk situations"]
+          ]
+        },
+        fr: {
+          title: "Santé",
+          description:
+            "Aidez les équipes à anticiper les contraintes de capacité, les ressources critiques et les situations à risque élevé.",
+          signals: [
+            ["Capacité", "Pression sur les ressources"],
+            ["Flux", "Temps d'attente"],
+            ["Ressources", "Disponibilité critique"],
+            ["Priorités", "Situations à risque"]
+          ]
+        }
+      },
+
+      agriculture: {
+        en: {
+          title: "Agriculture",
+          description:
+            "Combine field signals to anticipate constraints related to resources, conditions, and operations.",
+          signals: [
+            ["Resources", "Availability"],
+            ["Production", "Expected evolution"],
+            ["Conditions", "External signals"],
+            ["Logistics", "Flow constraints"]
+          ]
+        },
+        fr: {
+          title: "Agriculture",
+          description:
+            "Croisez les signaux du terrain pour anticiper les contraintes liées aux ressources, aux conditions et aux opérations.",
+          signals: [
+            ["Ressources", "Disponibilité"],
+            ["Production", "Évolution attendue"],
+            ["Conditions", "Signaux externes"],
+            ["Logistique", "Contraintes de flux"]
+          ]
+        }
+      },
+
+      transportation: {
+        en: {
+          title: "Transportation",
+          description:
+            "Identify delay risks, capacity pressure, and flow anomalies before they spread.",
+          signals: [
+            ["Delays", "Risk propagation"],
+            ["Capacity", "Network pressure"],
+            ["Vehicles", "Availability"],
+            ["Routes", "Anomalies"]
+          ]
+        },
+        fr: {
+          title: "Transport",
+          description:
+            "Identifiez les risques de retard, la pression sur la capacité et les anomalies de flux avant qu me se propagent.",
+          signals: [
+            ["Retards", "Propagation des risques"],
+            ["Capacité", "Pression réseau"],
+            ["Véhicules", "Disponibilité"],
+            ["Itinéraires", "Anomalies"]
+          ]
+        }
+      },
+
+      logistics: {
+        en: {
+          title: "Logistics",
+          description:
+            "See bottlenecks, waiting times, costs, and future risks in one place.",
+          signals: [
+            ["Bottlenecks", "Critical points"],
+            ["Waiting", "Operational time"],
+            ["Costs", "Detected deviations"],
+            ["Forecasts", "Future risks"]
+          ]
+        },
+        fr: {
+          title: "Logistique",
+          description:
+            "Visualisez les blocages, temps d'attente, coûts et risques futurs au même endroit.",
+          signals: [
+            ["Blocages", "Points critiques"],
+            ["Attente", "Temps opérationnel"],
+            ["Coûts", "Écarts détectés"],
+            ["Prévisions", "Risques futurs"]
+          ]
+        }
+      },
+
+      energy: {
+        en: {
+          title: "Energy",
+          description:
+            "Anticipate pressure, consumption anomalies, and risks that can affect your operations.",
+          signals: [
+            ["Consumption", "Deviations"],
+            ["Network", "Pressure"],
+            ["Maintenance", "Risks"],
+            ["Forecasts", "Expected evolution"]
+          ]
+        },
+        fr: {
+          title: "Énergie",
+          description:
+            "Anticipez la pression, les anomalies de consommation et les risques susceptibles d'affecter vos opérations.",
+          signals: [
+            ["Consommation", "Écarts"],
+            ["Réseau", "Pression"],
+            ["Maintenance", "Risques"],
+            ["Prévisions", "Évolution attendue"]
+          ]
+        }
+      }
+
+    };
+
+
+    /* =========================================================
+       LANGUAGE SYSTEM
+    ========================================================= */
+
+    let currentLanguage =
+      localStorage.getItem("sentria-language") ||
+      (
+        navigator.language &&
+        navigator.language.toLowerCase().startsWith("fr")
+          ? "fr"
+          : "en"
+      );
+
+
+    /*
+      Normalize text so line breaks and indentation
+      don't affect translation matching.
+    */
+
+    function normalizeText(text) {
+      return text
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+
+    /*
+      Build a reverse translation table.
+      This allows EN → FR and FR → EN without
+      modifying your HTML structure.
+    */
+
+    function getTranslationMap(language) {
+
+      if (language === "en") {
+        const map = {};
+
+        Object.entries(translations.fr).forEach(
+          ([english, french]) => {
+            map[french] = english;
+          }
+        );
+
+        return map;
+      }
+
+      return translations.fr;
+    }
+
+
+    function translatePage(language) {
+
+      const map = getTranslationMap(language);
+
+      /*
+        Translate all text nodes while preserving
+        HTML tags such as <span>.
+      */
+
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT
+      );
+
+      const nodes = [];
+
+      while (walker.nextNode()) {
+        nodes.push(walker.currentNode);
+      }
+
+      nodes.forEach(node => {
+
+        const normalized = normalizeText(node.nodeValue);
+
+        if (!normalized) return;
+
+        if (map[normalized]) {
+
+          const original = node.nodeValue;
+
+          const leading =
+            original.match(/^\s*/)?.[0] || "";
+
+          const trailing =
+            original.match(/\s*$/)?.[0] || "";
+
+          node.nodeValue =
+            leading +
+            map[normalized] +
+            trailing;
+        }
+
+      });
+
+
+      /*
+        Update page metadata.
+      */
+
+      if (language === "fr") {
+
+        document.documentElement.lang = "fr";
+
+        document.title =
+          "SentrIA : Voyez le blocage avant qu'il n'arrive";
+
+        document
+          .querySelector('meta[name="description"]')
+          .setAttribute(
+            "content",
+            "SentrIA transforme vos données opérationnelles en signaux clairs, priorités claires et décisions concrètes avant que les blocages ne deviennent des incidents."
+          );
+
+      } else {
+
+        document.documentElement.lang = "en";
+
+        document.title =
+          "SentrIA: See the bottleneck before it happens";
+
+        document
+          .querySelector('meta[name="description"]')
+          .setAttribute(
+            "content",
+            "SentrIA turns your operational data into clear signals, clear priorities, and concrete decisions before bottlenecks become incidents."
+          );
+      }
+
+
+      /*
+        Update language buttons.
+      */
+
+      document
+        .querySelectorAll(".lang-switch button")
+        .forEach(button => {
+
+          const active =
+            button.dataset.lang === language;
+
+          button.classList.toggle(
+            "active",
+            active
+          );
+
+          button.setAttribute(
+            "aria-pressed",
+            active ? "true" : "false"
+          );
+
+        });
+
+
+      /*
+        Save language.
+      */
+
+      localStorage.setItem(
+        "sentria-language",
+        language
+      );
+
+
+      /*
+        Re-render the currently selected sector
+        in the new language.
+      */
+
+      renderSector(
+        document.querySelector(
+          ".sector-tab.active"
+        )?.dataset.sector || "industry",
+        false
+      );
+    }
+
+
+    document
+      .querySelectorAll(".lang-switch button")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          const language =
+            button.dataset.lang;
+
+          if (
+            language === currentLanguage
+          ) {
+            return;
+          }
+
+          currentLanguage = language;
+
+          translatePage(language);
+
+        });
+
+      });
+
+
+    /* =========================================================
+       SECTOR TABS
+    ========================================================= */
+
+    const sectorTabs =
+      document.querySelectorAll(".sector-tab");
+
+    const sectorTitle =
+      document.getElementById("sector-title");
+
+    const sectorDescription =
+      document.getElementById("sector-description");
+
+    const sectorSignals =
+      document.getElementById("sector-signals");
+
+
+    function renderSector(
+      key,
+      updateLanguage = true
+    ) {
+
+      const data =
+        sectorData[key]?.[
+          currentLanguage
+        ];
+
+      if (!data) return;
+
+      sectorTitle.textContent =
+        data.title;
+
+      sectorDescription.textContent =
+        data.description;
+
+      sectorSignals.innerHTML =
+        data.signals
+          .map(
+            ([title, description]) => `
+              <div class="sector-signal">
+                <strong>${title}</strong>
+                ${description}
+              </div>
+            `
+          )
+          .join("");
+    }
+
+
+    sectorTabs.forEach(tab => {
+
+      tab.addEventListener("click", () => {
+
+        sectorTabs.forEach(item =>
+          item.classList.remove("active")
+        );
+
+        tab.classList.add("active");
+
+        renderSector(
+          tab.dataset.sector
+        );
+
+      });
+
+    });
+
+
+    /* =========================================================
+       FAQ
+    ========================================================= */
+
+    function initializeFAQ() {
+
+      const faqQuestions =
+        document.querySelectorAll(".faq-question");
+
+      faqQuestions.forEach(question => {
+
+        question.addEventListener("click", () => {
+
+          const answer =
+            question.nextElementSibling;
+
+          const plus =
+            question.querySelector(".faq-plus");
+
+          const isOpen =
+            answer.style.maxHeight;
+
+
+          document
+            .querySelectorAll(".faq-answer")
+            .forEach(item => {
+              item.style.maxHeight = null;
+            });
+
+
+          document
+            .querySelectorAll(".faq-plus")
+            .forEach(item => {
+              item.textContent = "+";
+            });
+
+
+          if (!isOpen) {
+
+            answer.style.maxHeight =
+              answer.scrollHeight + "px";
+
+            plus.textContent = "−";
+
+          }
+
+        });
+
+      });
+
+    }
+
+    initializeFAQ();
+
+
+    /* =========================================================
+       SMOOTH ANCHOR SCROLLING
+    ========================================================= */
+
+    document
+      .querySelectorAll('a[href^="#"]')
+      .forEach(link => {
+
+        link.addEventListener("click", event => {
+
+          const targetId =
+            link.getAttribute("href");
+
+          if (targetId === "#") return;
+
+          const target =
+            document.querySelector(targetId);
+
+          if (!target) return;
+
+          event.preventDefault();
+
+          const navHeight = 72;
+
+          const targetPosition =
+            target.getBoundingClientRect().top +
+            window.scrollY -
+            navHeight;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth"
+          });
+
+        });
+
+      });
+
+
+    /* =========================================================
+       HERO MOUSE MOVEMENT
+    ========================================================= */
+
+    const hero =
+      document.querySelector(".hero");
+
+    const mockup =
+      document.querySelector(".mockup");
+
+
+    if (hero && mockup) {
+
+      hero.addEventListener(
+        "mousemove",
+        event => {
+
+          const rect =
+            hero.getBoundingClientRect();
+
+          const x =
+            (event.clientX - rect.left) /
+              rect.width -
+            .5;
+
+          const y =
+            (event.clientY - rect.top) /
+              rect.height -
+            .5;
+
+          mockup.style.transform =
+            `perspective(1200px)
+             rotateY(${x * 2.2}deg)
+             rotateX(${y * -1.5}deg)`;
+
+        }
+      );
+
+
+      hero.addEventListener(
+        "mouseleave",
+        () => {
+
+          mockup.style.transform =
+            "perspective(1200px) rotateY(0deg) rotateX(0deg)";
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       INITIAL LANGUAGE
+    ========================================================= */
+
+    /*
+      Start in English because this HTML is the English
+      master version. If the visitor previously selected
+      French, switch immediately to French.
+    */
+
+    if (currentLanguage === "fr") {
+      translatePage("fr");
+    } else {
+      renderSector("industry");
+    }
+
+  </script>
 
 </body>
 </html>
