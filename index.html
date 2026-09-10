@@ -1582,6 +1582,162 @@
         font-size: 10px;
       }
     }
+
+    /* =========================================================
+       QUICK FIT (jump to "who it's for" from the top)
+    ========================================================= */
+
+    .quickfit-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      background: var(--bg-2);
+    }
+
+    .quickfit-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .quickfit-label {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .quickfit-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quickfit-pill {
+      border: 1px solid var(--border-strong);
+      background: rgba(255,255,255,.03);
+      color: var(--cream);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .quickfit-pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--lime);
+    }
+
+    .quickfit-pill.active {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: var(--ink);
+    }
+
+    @media (max-width: 700px) {
+      .quickfit-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    /* =========================================================
+       FIT (who it's for)
+    ========================================================= */
+
+    .fit-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 28px;
+    }
+
+    .fit-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 13px;
+    }
+
+    .fit-card {
+      padding: 30px;
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      background: rgba(255,255,255,.5);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .fit-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .fit-card.is-active {
+      border-color: var(--lime-deep);
+      box-shadow: 0 20px 45px rgba(20,21,15,.1);
+    }
+
+    .fit-card.featured {
+      background: var(--ink);
+      color: var(--cream);
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .fit-card.featured p {
+      color: var(--muted);
+    }
+
+    .fit-card.featured .fit-icon {
+      background: var(--lime);
+      color: var(--ink);
+    }
+
+    .fit-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(214,255,63,.35);
+      color: var(--lime-dim);
+      display: grid;
+      place-items: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .fit-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      letter-spacing: -.04em;
+      margin: 0 0 12px;
+    }
+
+    .fit-card p {
+      color: var(--muted-light);
+      line-height: 1.65;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1000px) {
+      .fit-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .fit-card.featured {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .fit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -1836,6 +1992,53 @@
         <div class="proof-stat">
           <strong>04</strong>
           Recommended action
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- QUICK FIT -->
+
+    <div class="quickfit-strip">
+
+      <div class="container quickfit-inner">
+
+        <span class="quickfit-label">
+          Not sure where you fit in? Pick one:
+        </span>
+
+        <div class="quickfit-pills" id="quickfit-pills">
+
+          <button class="quickfit-pill" data-fit="industry">
+            Industry
+          </button>
+
+          <button class="quickfit-pill" data-fit="healthcare">
+            Healthcare
+          </button>
+
+          <button class="quickfit-pill" data-fit="agriculture">
+            Agriculture
+          </button>
+
+          <button class="quickfit-pill" data-fit="transportation">
+            Transportation
+          </button>
+
+          <button class="quickfit-pill" data-fit="logistics">
+            Logistics
+          </button>
+
+          <button class="quickfit-pill" data-fit="energy">
+            Energy
+          </button>
+
+          <button class="quickfit-pill" data-fit="retail">
+            Retail
+          </button>
+
         </div>
 
       </div>
@@ -2558,6 +2761,166 @@
             </div>
 
           </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FIT (who it's for) -->
+
+    <section id="fit" class="section-light-alt">
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <div class="section-kicker">
+            Who it's for
+          </div>
+
+          <h2 class="section-title">
+            Where do you fit in?
+          </h2>
+
+        </div>
+
+        <div class="fit-tabs" id="fit-tabs">
+
+          <button class="sector-tab active" data-fit="industry">
+            Industry
+          </button>
+
+          <button class="sector-tab" data-fit="healthcare">
+            Healthcare
+          </button>
+
+          <button class="sector-tab" data-fit="agriculture">
+            Agriculture
+          </button>
+
+          <button class="sector-tab" data-fit="transportation">
+            Transportation
+          </button>
+
+          <button class="sector-tab" data-fit="logistics">
+            Logistics
+          </button>
+
+          <button class="sector-tab" data-fit="energy">
+            Energy
+          </button>
+
+          <button class="sector-tab" data-fit="retail">
+            Retail
+          </button>
+
+        </div>
+
+        <div class="fit-grid" id="fit-grid">
+
+          <article class="fit-card" data-fit="industry">
+
+            <div class="fit-icon">01</div>
+
+            <h3>Industry</h3>
+
+            <p>
+              Factories, manufacturing plants and machine shops.
+              Helps you catch equipment wear and unplanned downtime
+              before a production line stops.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="healthcare">
+
+            <div class="fit-icon">02</div>
+
+            <h3>Healthcare</h3>
+
+            <p>
+              Pharmacies, hospital pharmacies, medical wholesalers
+              and cold chain facilities. Helps you track stock levels,
+              expiry dates and temperature before something runs out
+              or spoils.
+            </p>
+
+          </article>
+
+          <article class="fit-card featured" data-fit="logistics">
+
+            <div class="fit-icon">05</div>
+
+            <h3>Logistics</h3>
+
+            <p>
+              Ports, warehouses, distribution centers and freight
+              forwarders. Helps you spot bottlenecks in queues,
+              equipment and container flow before they cause delays.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="agriculture">
+
+            <div class="fit-icon">03</div>
+
+            <h3>Agriculture</h3>
+
+            <p>
+              Farms, grain cooperatives and cold storage or packing
+              facilities. Helps you watch storage conditions and
+              transport timing before a harvest is lost to delay
+              or spoilage.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="transportation">
+
+            <div class="fit-icon">04</div>
+
+            <h3>Transportation</h3>
+
+            <p>
+              Trucking companies, delivery fleets and vehicle rental
+              operators. Helps you track engine health, fuel and
+              maintenance schedules across the whole fleet.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="energy">
+
+            <div class="fit-icon">06</div>
+
+            <h3>Energy</h3>
+
+            <p>
+              Utility companies, generator fleet operators and
+              industrial energy users. Helps you watch fuel levels,
+              overheating and consumption before an outage happens.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="retail">
+
+            <div class="fit-icon">07</div>
+
+            <h3>Retail</h3>
+
+            <p>
+              Wholesalers, distributors, supermarkets, hypermarkets,
+              retail chains and convenience stores. Helps you catch
+              stock shortages, price or margin issues and slow moving
+              inventory before they hurt sales.
+            </p>
+
+          </article>
 
         </div>
 
@@ -3312,6 +3675,29 @@
         "Logistics": "Logistique",
         "Energy": "Énergie",
 
+        /* QUICK FIT */
+        "Not sure where you fit in? Pick one:":
+          "Vous ne savez pas où vous vous situez ? Choisissez :",
+
+        /* FIT (who it's for) */
+        "Who it's for": "Pour qui",
+        "Where do you fit in?": "Où vous situez-vous ?",
+        "Factories, manufacturing plants and machine shops. Helps you catch equipment wear and unplanned downtime before a production line stops.":
+          "Usines, sites de production et ateliers d'usinage. Repérez l'usure des équipements et les arrêts imprévus avant qu'une ligne de production ne s'arrête.",
+        "Pharmacies, hospital pharmacies, medical wholesalers and cold chain facilities. Helps you track stock levels, expiry dates and temperature before something runs out or spoils.":
+          "Pharmacies, pharmacies hospitalières, grossistes médicaux et sites de chaîne du froid. Suivez les niveaux de stock, les dates de péremption et la température avant une rupture ou une perte.",
+        "Farms, grain cooperatives and cold storage or packing facilities. Helps you watch storage conditions and transport timing before a harvest is lost to delay or spoilage.":
+          "Exploitations agricoles, coopératives céréalières et sites de stockage ou de conditionnement au froid. Surveillez les conditions de stockage et les délais de transport avant qu'une récolte ne soit perdue.",
+        "Trucking companies, delivery fleets and vehicle rental operators. Helps you track engine health, fuel and maintenance schedules across the whole fleet.":
+          "Entreprises de transport routier, flottes de livraison et loueurs de véhicules. Suivez l'état des moteurs, le carburant et les plannings de maintenance sur toute la flotte.",
+        "Ports, warehouses, distribution centers and freight forwarders. Helps you spot bottlenecks in queues, equipment and container flow before they cause delays.":
+          "Ports, entrepôts, centres de distribution et transitaires. Repérez les blocages dans les files d'attente, les équipements et le flux de conteneurs avant qu'ils ne causent des retards.",
+        "Utility companies, generator fleet operators and industrial energy users. Helps you watch fuel levels, overheating and consumption before an outage happens.":
+          "Fournisseurs d'énergie, exploitants de flottes de générateurs et industriels grands consommateurs d'énergie. Surveillez le carburant, la surchauffe et la consommation avant une panne.",
+        "Retail": "Commerce",
+        "Wholesalers, distributors, supermarkets, hypermarkets, retail chains and convenience stores. Helps you catch stock shortages, price or margin issues and slow moving inventory before they hurt sales.":
+          "Grossistes, distributeurs, supermarchés, hypermarchés, chaînes de magasins et commerces de proximité. Repérez les ruptures de stock, les écarts de prix ou de marge et les produits qui ne tournent pas avant qu'ils ne pèsent sur les ventes.",
+
         /* DATA */
         "09: Data": "09 : Données",
         "Use what you already have.": "Utilisez ce que vous avez déjà.",
@@ -3848,6 +4234,82 @@
           tab.dataset.sector
         );
 
+      });
+
+    });
+
+
+    /* =========================================================
+       FIT TABS + QUICK FIT PICKER (who it's for)
+    ========================================================= */
+
+    const fitTabs =
+      document.querySelectorAll("#fit-tabs .sector-tab");
+
+    const quickfitPills =
+      document.querySelectorAll("#quickfit-pills .quickfit-pill");
+
+    const fitCards =
+      document.querySelectorAll(".fit-card");
+
+
+    function activateFit(key, shouldScroll) {
+
+      fitTabs.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item.dataset.fit === key
+        );
+      });
+
+      quickfitPills.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item.dataset.fit === key
+        );
+      });
+
+      fitCards.forEach(card => {
+        card.classList.toggle(
+          "is-active",
+          card.dataset.fit === key
+        );
+      });
+
+      if (shouldScroll) {
+
+        const matchingCard =
+          document.querySelector(
+            `.fit-card[data-fit="${key}"]`
+          );
+
+        if (matchingCard) {
+
+          matchingCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+
+        }
+
+      }
+
+    }
+
+
+    fitTabs.forEach(tab => {
+
+      tab.addEventListener("click", () => {
+        activateFit(tab.dataset.fit, false);
+      });
+
+    });
+
+
+    quickfitPills.forEach(pill => {
+
+      pill.addEventListener("click", () => {
+        activateFit(pill.dataset.fit, true);
       });
 
     });
