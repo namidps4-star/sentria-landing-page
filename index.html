@@ -1,393 +1,1762 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sentria — Modern Operations Intelligence</title>
-  
-  <!-- Typography -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SentrIA: See the bottleneck before it happens</title>
+  <meta
+    name="description"
+    content="SentrIA turns your operational data into clear signals, clear priorities, and concrete decisions before bottlenecks become incidents."
+  />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
-  <!-- BACKGROUND GLOW MESH & GRID -->
-  <div class="glow-mesh-container">
-    <div class="glow-ball ball-1"></div>
-    <div class="glow-ball ball-2"></div>
-    <div class="glow-ball ball-3"></div>
-  </div>
-  <div class="bg-grid-overlay"></div>
-  <div class="cursor-spotlight" id="cursorSpotlight"></div>
+  <!-- =========================================================
+       NAVBAR
+  ========================================================= -->
 
-  <!-- NAVIGATION -->
-  <nav class="nav" id="mainNav">
-    <div class="logo">SENTRIA<span class="logo-dot">.</span></div>
+  <nav class="navbar">
+    <div class="container nav-inner">
 
-    <div class="nav-links">
-      <a href="#method" class="nav-link">Method</a>
-      <a href="#data" class="nav-link">Data</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#" class="logo">
+        <span class="logo-mark">S</span>
+        SentrIA
+      </a>
+
+      <div class="nav-links">
+        <a href="#situations">Situations</a>
+        <a href="#methode">Method</a>
+        <a href="#cockpit">Cockpit</a>
+        <a href="#tarifs">Pricing</a>
+        <a href="#secteurs">Sectors</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+
+        <div class="lang-switch" aria-label="Language">
+          <button type="button" data-lang="en" class="active" aria-pressed="true">
+            EN
+          </button>
+
+          <span>/</span>
+
+          <button type="button" data-lang="fr" aria-pressed="false">
+            FR
+          </button>
+        </div>
+
+        <a href="#demo" class="nav-cta">
+          Book a demo →
+        </a>
+
+      </div>
+
     </div>
-
-    <a href="#pricing" class="nav-cta shimmer-btn">
-      <span>Get started</span>
-    </a>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-grid">
 
-      <div class="hero-content reveal-on-scroll">
+  <!-- =========================================================
+       HERO
+  ========================================================= -->
 
-        <div class="eyebrow glass-pill">
-          <span class="status-dot pulsing"></span>
-          <span class="eyebrow-text">OPERATIONS INTELLIGENCE</span>
+  <main>
+
+    <section class="hero">
+      <div class="cursor-glow" id="hero-glow"></div>
+      <div class="container hero-grid">
+
+        <div class="reveal-up">
+
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Operational intelligence
+          </div>
+
+          <h1>
+            See the bottleneck
+            <span>before</span>
+            it happens.
+          </h1>
+
+          <p class="hero-description">
+            SentrIA turns your operational data into clear signals,
+            clear priorities, and concrete decisions.
+            Not tomorrow. Now.
+          </p>
+
+          <div class="hero-actions">
+
+            <a href="#demo" class="button-primary magnetic">
+              Book a demo →
+            </a>
+
+            <a href="#methode" class="button-secondary magnetic">
+              See how it works
+            </a>
+
+          </div>
+
+          <div class="proof-list">
+
+            <div class="proof-item">
+              <span class="proof-check">✓</span>
+              Proactive detection
+            </div>
+
+            <div class="proof-item">
+              <span class="proof-check">✓</span>
+              Operational priorities
+            </div>
+
+            <div class="proof-item">
+              <span class="proof-check">✓</span>
+              AI recommendations
+            </div>
+
+          </div>
+
         </div>
 
-        <h1 class="hero-title">
-          Run your business
-          <span class="gradient-text">better.</span>
-        </h1>
 
-        <p class="hero-description">
-          One intelligent operating layer for your entire organization.
-          See what's happening, understand why, and act before problems grow.
-        </p>
+        <!-- MOCKUP -->
 
-        <div class="hero-actions">
-          <a href="#pricing" class="button-primary shimmer-btn">
-            <span>Get started</span>
-          </a>
+        <div class="mockup reveal-up" style="animation-delay: 0.2s;">
 
-          <a href="#method" class="button-secondary">
-            <span>See how it works</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          <div class="mockup-top">
+            <span class="mockup-dot"></span>
+            <span class="mockup-dot"></span>
+            <span class="mockup-dot"></span>
+          </div>
+
+          <div class="mockup-content">
+
+            <aside class="mockup-sidebar">
+
+              <div class="mockup-sidebar-logo">
+                SentrIA
+              </div>
+
+              <div class="mockup-nav-item active">
+                Cockpit
+              </div>
+
+              <div class="mockup-nav-item">
+                Bottlenecks
+              </div>
+
+              <div class="mockup-nav-item">
+                Time
+              </div>
+
+              <div class="mockup-nav-item">
+                Costs
+              </div>
+
+              <div class="mockup-nav-item">
+                Forecasts
+              </div>
+
+            </aside>
+
+            <div class="mockup-main">
+
+              <div class="mockup-header">
+
+                <div class="mockup-title">
+                  Operational view
+                </div>
+
+                <div class="status">
+                  <span class="status-dot"></span>
+                  SYSTEM ACTIVE
+                </div>
+
+              </div>
+
+              <div class="dashboard-cards">
+
+                <div class="dash-card">
+                  <div class="dash-card-label">
+                    Risks detected
+                  </div>
+
+                  <div class="dash-card-number red" id="hero-risks">
+                    07
+                  </div>
+                </div>
+
+                <div class="dash-card">
+                  <div class="dash-card-label">
+                    Priority
+                  </div>
+
+                  <div class="dash-card-number green" id="hero-priority">
+                    92%
+                  </div>
+                </div>
+
+                <div class="dash-card">
+                  <div class="dash-card-label">
+                    Monitored flows
+                  </div>
+
+                  <div class="dash-card-number">
+                    148
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="dash-panel">
+
+                <div class="dash-panel-head">
+                  <span>Risk trend</span>
+                  <span>Last 30 days</span>
+                </div>
+
+                <div class="bars">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
-        <div class="proof-list">
-          <span class="proof-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Trusted by ambitious teams</span>
-          <span class="proof-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 99.9% uptime</span>
-          <span class="proof-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Real-time intelligence</span>
+      </div>
+    </section>
+
+
+    <!-- PROOF -->
+
+    <div class="proof-strip">
+
+      <div class="container proof-strip-inner">
+
+        <div class="proof-stat">
+          <strong>01</strong>
+          Operational data
+        </div>
+
+        <div class="proof-stat">
+          <strong>02</strong>
+          Continuous analysis
+        </div>
+
+        <div class="proof-stat">
+          <strong>03</strong>
+          Prioritized risks
+        </div>
+
+        <div class="proof-stat">
+          <strong>04</strong>
+          Recommended action
         </div>
 
       </div>
 
-      <!-- MOCKUP / COMMAND CENTER -->
-      <div class="mockup tilt-card reveal-on-scroll">
-        <div class="mockup-inner glass-panel">
+    </div>
 
-          <div class="dashboard-top">
+
+    <!-- QUICK FIT -->
+
+    <div class="quickfit-strip">
+
+      <div class="container quickfit-inner">
+
+        <span class="quickfit-label">
+          Not sure where you fit in? Pick one:
+        </span>
+
+        <div class="quickfit-pills" id="quickfit-pills">
+
+          <button class="quickfit-pill" data-fit="industry">
+            Industry
+          </button>
+
+          <button class="quickfit-pill" data-fit="healthcare">
+            Healthcare
+          </button>
+
+          <button class="quickfit-pill" data-fit="agriculture">
+            Agriculture
+          </button>
+
+          <button class="quickfit-pill" data-fit="transportation">
+            Transportation
+          </button>
+
+          <button class="quickfit-pill" data-fit="logistics">
+            Logistics
+          </button>
+
+          <button class="quickfit-pill" data-fit="energy">
+            Energy
+          </button>
+
+          <button class="quickfit-pill" data-fit="retail">
+            Retail
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SITUATIONS -->
+
+    <section id="situations" class="section-light">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker">
+            01: The problem
+          </div>
+
+          <h2 class="section-title">
+            Your data already knows what's going wrong.
+          </h2>
+
+          <p class="section-copy">
+            The problem isn't a lack of data.
+            It's a lack of operational insight at the right moment.
+          </p>
+
+        </div>
+
+        <div class="situations-grid">
+
+          <article class="situation-card reveal-up">
+
+            <div class="situation-number">01</div>
+
+            <h3>Too late</h3>
+
+            <p>
+              The team discovers the problem once its impact
+              is already visible on the ground.
+            </p>
+
+          </article>
+
+          <article class="situation-card reveal-up" style="transition-delay: 0.1s;">
+
+            <div class="situation-number">02</div>
+
+            <h3>Too many signals</h3>
+
+            <p>
+              Alerts, dashboards, emails, and metrics pile up
+              without clearly showing what to address first.
+            </p>
+
+          </article>
+
+          <article class="situation-card reveal-up" style="transition-delay: 0.2s;">
+
+            <div class="situation-number">03</div>
+
+            <h3>Wrong priority</h3>
+
+            <p>
+              Teams spend time addressing what is visible
+              instead of what is actually critical.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CHANGE -->
+
+    <section class="section-dark">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker dark-kicker">
+            02: The shift
+          </div>
+
+          <h2 class="section-title">
+            Move from monitoring to anticipating.
+          </h2>
+
+        </div>
+
+        <div class="change-grid">
+
+          <div class="change-card before reveal-up">
+
+            <div class="change-label">
+              Before
+            </div>
+
+            <h3>
+              "What's happening?"
+            </h3>
+
+            <p>
+              Teams search for information, cross-reference sources,
+              and reconstruct the situation themselves.
+            </p>
+
+          </div>
+
+          <div class="change-card after reveal-up" style="transition-delay: 0.15s;">
+
+            <div class="change-label">
+              With SentrIA
+            </div>
+
+            <h3>
+              "Here's what you need to look at."
+            </h3>
+
+            <p>
+              SentrIA detects weak signals, prioritizes them,
+              and turns the situation into the next action.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- METHOD -->
+
+    <section id="methode" class="section-dark">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker dark-kicker">
+            03: The method
+          </div>
+
+          <h2 class="section-title">
+            An operational loop,
+            not another dashboard.
+          </h2>
+
+        </div>
+
+        <div class="method-grid">
+
+          <div class="method-card reveal-up">
+            <div class="method-number">01</div>
+            <h3>Observe</h3>
+            <p>
+              SentrIA collects and structures the data that matters
+              across your operations.
+            </p>
+          </div>
+
+          <div class="method-card reveal-up" style="transition-delay: 0.1s;">
+            <div class="method-number">02</div>
+            <h3>Understand</h3>
+            <p>
+              Signals are analyzed to identify anomalies,
+              trends, and dependencies.
+            </p>
+          </div>
+
+          <div class="method-card reveal-up" style="transition-delay: 0.2s;">
+            <div class="method-number">03</div>
+            <h3>Prioritize</h3>
+            <p>
+              Risks are ranked by operational impact
+              and urgency.
+            </p>
+          </div>
+
+          <div class="method-card reveal-up" style="transition-delay: 0.3s;">
+            <div class="method-number">04</div>
+            <h3>Act</h3>
+            <p>
+              AI proposes a concrete action to help
+              the team decide faster.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- COMPARISON -->
+
+    <section class="section-light">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker">
+            04: Why SentrIA
+          </div>
+
+          <h2 class="section-title">
+            Not a dashboard.
+            A decision system.
+          </h2>
+
+        </div>
+
+        <div class="comparison reveal-up">
+
+          <div class="comparison-row">
+            <div class="comparison-cell comparison-head">
+              Capability
+            </div>
+
+            <div class="comparison-cell comparison-head">
+              Traditional dashboard
+            </div>
+
+            <div class="comparison-cell comparison-head">
+              SentrIA
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              View data
+            </div>
+
+            <div class="comparison-cell">✓</div>
+
+            <div class="comparison-cell comparison-highlight">✓</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              Detect anomalies
+            </div>
+
+            <div class="comparison-cell">
+              Partially
+            </div>
+
+            <div class="comparison-cell comparison-highlight">
+              Automatic
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              Prioritize risks
+            </div>
+
+            <div class="comparison-cell">—</div>
+
+            <div class="comparison-cell comparison-highlight">✓</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              Recommend an action
+            </div>
+
+            <div class="comparison-cell">—</div>
+
+            <div class="comparison-cell comparison-highlight">
+              Operational AI
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comparison-cell">
+              Anticipate
+            </div>
+
+            <div class="comparison-cell">
+              Limited
+            </div>
+
+            <div class="comparison-cell comparison-highlight">✓</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- COCKPIT -->
+
+    <section id="cockpit" class="section-dark">
+
+      <div class="container cockpit-layout">
+
+        <div class="reveal-up">
+
+          <div class="section-kicker dark-kicker">
+            05: The cockpit
+          </div>
+
+          <h2 class="section-title">
+            A view built for decisions.
+          </h2>
+
+          <p class="section-copy dark-copy">
+            The SentrIA cockpit brings together the signals
+            that actually matter to your business.
+          </p>
+
+          <div class="cockpit-list">
+
+            <div class="cockpit-list-item">
+
+              <div class="cockpit-icon">!</div>
+
+              <div>
+                <strong>Bottlenecks</strong>
+                <span>
+                  Identify the points that are actually slowing down your operations.
+                </span>
+              </div>
+
+            </div>
+
+            <div class="cockpit-list-item">
+
+              <div class="cockpit-icon">↗</div>
+
+              <div>
+                <strong>Priorities</strong>
+                <span>
+                  Focus your teams on the highest-impact situations.
+                </span>
+              </div>
+
+            </div>
+
+            <div class="cockpit-list-item">
+
+              <div class="cockpit-icon">AI</div>
+
+              <div>
+                <strong>Recommendations</strong>
+                <span>
+                  Get a clear, actionable next step.
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="cockpit-visual reveal-up" style="transition-delay: 0.2s;">
+
+          <div class="cockpit-chart">
+
+            <div class="mockup-header">
+
+              <div class="mockup-title">
+                Operational priorities
+              </div>
+
+              <div class="status">
+                LIVE
+              </div>
+
+            </div>
+
             <div>
-              <small class="mono-label">COMMAND CENTER</small>
-              <h3>Business Overview</h3>
-            </div>
 
-            <div class="live glass-pill">
-              <span class="status-dot pulsing"></span>
-              LIVE
-            </div>
-          </div>
+              <div class="risk-row">
+                <span>Supplier delay</span>
 
-          <div class="dashboard-cards">
+                <div class="risk-bar">
+                  <div class="risk-fill red" style="width:92%"></div>
+                </div>
 
-            <div class="dash-card glass-subcard">
-              <small>ACTIVE RISKS</small>
-              <strong class="dash-card-number counter" data-target="0" data-prefix="" data-suffix="">00</strong>
-              <span class="badge negative">↓ 12%</span>
-            </div>
-
-            <div class="dash-card glass-subcard">
-              <small>EFFICIENCY</small>
-              <strong class="dash-card-number counter" data-target="94" data-prefix="" data-suffix="%">00</strong>
-              <span class="badge positive">↑ 8%</span>
-            </div>
-
-            <div class="dash-card glass-subcard">
-              <small>PROCESSES</small>
-              <strong class="dash-card-number counter" data-target="142" data-prefix="" data-suffix="">00</strong>
-              <span class="badge positive">↑ 21%</span>
-            </div>
-
-          </div>
-
-          <div class="chart glass-subcard">
-            <div class="chart-header">
-              <span>Performance</span>
-              <span class="mono-label">Last 7 days</span>
-            </div>
-
-            <div class="bars">
-              <div class="bar-wrapper"><div class="bar" style="--bar-h: 35%"></div></div>
-              <div class="bar-wrapper"><div class="bar" style="--bar-h: 50%"></div></div>
-              <div class="bar-wrapper"><div class="bar" style="--bar-h: 42%"></div></div>
-              <div class="bar-wrapper"><div class="bar" style="--bar-h: 68%"></div></div>
-              <div class="bar-wrapper"><div class="bar" style="--bar-h: 57%"></div></div>
-              <div class="bar-wrapper"><div class="bar" style="--bar-h: 88%"></div></div>
-              <div class="bar-wrapper"><div class="bar" style="--bar-h: 76%"></div></div>
-            </div>
-          </div>
-
-          <div class="risk-section glass-subcard">
-            <div class="chart-header">
-              <span>Risk monitoring</span>
-              <span class="mono-label">Live feed</span>
-            </div>
-
-            <div class="risk-row">
-              <span>Operations</span>
-              <div class="risk-track">
-                <div class="risk-fill" style="--risk-w: 82%"></div>
+                <span class="risk-value">CRITICAL</span>
               </div>
-              <b class="counter" data-target="82" data-suffix="%">0%</b>
+
+              <div class="risk-row">
+                <span>Transport capacity</span>
+
+                <div class="risk-bar">
+                  <div class="risk-fill" style="width:76%"></div>
+                </div>
+
+                <span class="risk-value">HIGH</span>
+              </div>
+
+              <div class="risk-row">
+                <span>Critical inventory</span>
+
+                <div class="risk-bar">
+                  <div class="risk-fill" style="width:61%"></div>
+                </div>
+
+                <span class="risk-value">MEDIUM</span>
+              </div>
+
+              <div class="risk-row">
+                <span>Maintenance</span>
+
+                <div class="risk-bar">
+                  <div class="risk-fill" style="width:43%"></div>
+                </div>
+
+                <span class="risk-value">LOW</span>
+              </div>
+
             </div>
 
-            <div class="risk-row">
-              <span>Revenue</span>
-              <div class="risk-track">
-                <div class="risk-fill" style="--risk-w: 64%"></div>
-              </div>
-              <b class="counter" data-target="64" data-suffix="%">0%</b>
-            </div>
-
-            <div class="risk-row">
-              <span>Delivery</span>
-              <div class="risk-track">
-                <div class="risk-fill" style="--risk-w: 91%"></div>
-              </div>
-              <b class="counter" data-target="91" data-suffix="%">0%</b>
-            </div>
           </div>
 
         </div>
+
       </div>
 
-    </div>
-  </section>
+    </section>
 
-  <!-- PROBLEM SECTION -->
-  <section class="section">
-    <div class="section-header reveal-on-scroll">
-      <div class="eyebrow glass-pill">THE PROBLEM</div>
-      <h2>
-        Stop reacting.
-        <span class="gradient-text">Start operating.</span>
-      </h2>
-      <p>
-        Most businesses have plenty of data and very little clarity.
-        Sentria turns scattered information into decisions.
-      </p>
-    </div>
 
-    <div class="situations-grid">
-      <article class="card glass-panel tilt-card reveal-on-scroll">
-        <div class="card-number">01</div>
-        <h3>Too much noise</h3>
-        <p>
-          Important signals disappear inside dashboards, spreadsheets, meetings and endless notifications.
-        </p>
-      </article>
+    <!-- PRICING -->
 
-      <article class="card glass-panel tilt-card reveal-on-scroll">
-        <div class="card-number">02</div>
-        <h3>Slow decisions</h3>
-        <p>
-          Teams spend hours finding information instead of acting on what actually matters.
-        </p>
-      </article>
+    <section id="tarifs" class="section-light-alt">
 
-      <article class="card glass-panel tilt-card reveal-on-scroll">
-        <div class="card-number">03</div>
-        <h3>Hidden risks</h3>
-        <p>
-          Small operational problems become expensive problems because nobody sees them early enough.
-        </p>
-      </article>
-    </div>
-  </section>
+      <div class="container">
 
-  <!-- METHOD SECTION -->
-  <section class="section dark-section" id="method">
-    <div class="section-header reveal-on-scroll">
-      <div class="eyebrow glass-pill">THE METHOD</div>
-      <h2>
-        From information
-        <span class="gradient-text">to action.</span>
-      </h2>
-    </div>
+        <div class="section-header reveal-up">
 
-    <div class="method-grid">
-      <article class="method-card glass-panel tilt-card reveal-on-scroll">
-        <span class="method-num">01</span>
-        <h3>Observe</h3>
-        <p>Bring your operational data into one intelligent, unified view.</p>
-      </article>
+          <div class="section-kicker">
+            06: Pricing
+          </div>
 
-      <article class="method-card glass-panel tilt-card reveal-on-scroll">
-        <span class="method-num">02</span>
-        <h3>Understand</h3>
-        <p>Identify patterns, operational bottlenecks, and risks automatically.</p>
-      </article>
+          <h2 class="section-title">
+            Start small.
+            Scale when it works.
+          </h2>
 
-      <article class="method-card glass-panel tilt-card reveal-on-scroll">
-        <span class="method-num">03</span>
-        <h3>Act</h3>
-        <p>Turn automated insights into actionable decisions and measurable outcomes.</p>
-      </article>
-    </div>
-  </section>
+          <p class="section-copy">
+            SentrIA adapts to your level of operational maturity.
+            We prefer to define the right scope rather than sell you
+            an unnecessarily complex plan.
+          </p>
 
-  <!-- DATA SECTION -->
-  <section class="section" id="data">
-    <div class="data-grid">
-      <div class="data-content reveal-on-scroll">
-        <div class="eyebrow glass-pill">REAL-TIME DATA</div>
+        </div>
+
+        <div class="pricing-grid">
+
+          <article class="pricing-card reveal-up">
+
+            <div class="pricing-name">
+              Pilot
+            </div>
+
+            <p class="pricing-description">
+              To validate a first operational use case.
+            </p>
+
+            <div class="pricing-price">
+              Custom quote
+            </div>
+
+            <div class="pricing-divider"></div>
+
+            <ul class="pricing-list">
+              <li>1 operational scope</li>
+              <li>Connection to existing data</li>
+              <li>Detection of key signals</li>
+              <li>SentrIA cockpit</li>
+              <li>Priority recommendations</li>
+            </ul>
+
+            <a href="#demo" class="pricing-cta">
+              Discuss a pilot →
+            </a>
+
+          </article>
+
+
+          <article class="pricing-card featured reveal-up" style="transition-delay: 0.15s;">
+
+            <div class="pricing-badge">
+              Recommended
+            </div>
+
+            <div class="pricing-name">
+              Operations
+            </div>
+
+            <p class="pricing-description">
+              For managing multiple operational flows and priorities every day.
+            </p>
+
+            <div class="pricing-price">
+              Custom quote
+            </div>
+
+            <div class="pricing-divider"></div>
+
+            <ul class="pricing-list">
+              <li>Multiple operational flows</li>
+              <li>Custom priorities</li>
+              <li>Predictive analysis</li>
+              <li>AI recommendations</li>
+              <li>Custom business views</li>
+              <li>Operational support</li>
+            </ul>
+
+            <a href="#demo" class="pricing-cta">
+              Book a demo →
+            </a>
+
+          </article>
+
+
+          <article class="pricing-card reveal-up" style="transition-delay: 0.3s;">
+
+            <div class="pricing-name">
+              Enterprise
+            </div>
+
+            <p class="pricing-description">
+              For organizations that want to industrialize
+              their operational intelligence.
+            </p>
+
+            <div class="pricing-price">
+              Tailored
+            </div>
+
+            <div class="pricing-divider"></div>
+
+            <ul class="pricing-list">
+              <li>Multi-site deployment</li>
+              <li>Advanced integrations</li>
+              <li>Governance and security</li>
+              <li>Custom architecture</li>
+              <li>Dedicated support</li>
+              <li>Deployment support</li>
+            </ul>
+
+            <a href="#demo" class="pricing-cta">
+              Talk to the team →
+            </a>
+
+          </article>
+
+        </div>
+
+        <div class="pricing-note reveal-up">
+          Pricing is defined according to scope, data flows, and level of integration.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- IMPLEMENTATION -->
+
+    <section class="section-dark">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker dark-kicker">
+            07: Implementation
+          </div>
+
+          <h2 class="section-title">
+            From your data to a decision.
+          </h2>
+
+        </div>
+
+        <div class="method-grid">
+
+          <div class="method-card reveal-up">
+            <div class="method-number">01</div>
+            <h3>Connect</h3>
+            <p>
+              We identify the useful sources and required data flows.
+            </p>
+          </div>
+
+          <div class="method-card reveal-up" style="transition-delay: 0.1s;">
+            <div class="method-number">02</div>
+            <h3>Configure</h3>
+            <p>
+              SentrIA learns your priorities, thresholds, and constraints.
+            </p>
+          </div>
+
+          <div class="method-card reveal-up" style="transition-delay: 0.2s;">
+            <div class="method-number">03</div>
+            <h3>Observe</h3>
+            <p>
+              The cockpit turns data into operational signals.
+            </p>
+          </div>
+
+          <div class="method-card reveal-up" style="transition-delay: 0.3s;">
+            <div class="method-number">04</div>
+            <h3>Improve</h3>
+            <p>
+              Recommendations evolve with your operations.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SECTORS -->
+
+    <section id="secteurs" class="section-light">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker">
+            08: Sectors
+          </div>
+
+          <h2 class="section-title">
+            Intelligence adapted to the real world.
+          </h2>
+
+          <p class="section-copy">
+            The same principles. Different signals for every industry.
+          </p>
+
+        </div>
+
+        <div class="sector-tabs reveal-up">
+
+          <button class="sector-tab active" data-sector="industry">
+            Industry
+          </button>
+
+          <button class="sector-tab" data-sector="health">
+            Healthcare
+          </button>
+
+          <button class="sector-tab" data-sector="agriculture">
+            Agriculture
+          </button>
+
+          <button class="sector-tab" data-sector="transportation">
+            Transportation
+          </button>
+
+          <button class="sector-tab" data-sector="logistics">
+            Logistics
+          </button>
+
+          <button class="sector-tab" data-sector="energy">
+            Energy
+          </button>
+
+        </div>
+
+        <div class="sector-content reveal-up">
+
+          <div>
+
+            <h3 id="sector-title">
+              Industry
+            </h3>
+
+            <p id="sector-description">
+              Anticipate production deviations, downtime, and capacity
+              constraints before they impact the flow.
+            </p>
+
+          </div>
+
+          <div class="sector-signals" id="sector-signals">
+
+            <div class="sector-signal">
+              <strong>Production</strong>
+              Deviation detection
+            </div>
+
+            <div class="sector-signal">
+              <strong>Maintenance</strong>
+              Downtime risks
+            </div>
+
+            <div class="sector-signal">
+              <strong>Capacity</strong>
+              Future pressure
+            </div>
+
+            <div class="sector-signal">
+              <strong>Quality</strong>
+              Detected anomalies
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FIT (who it's for) -->
+
+    <section id="fit" class="section-light-alt">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker">
+            Who it's for
+          </div>
+
+          <h2 class="section-title">
+            Where do you fit in?
+          </h2>
+
+        </div>
+
+        <div class="fit-tabs reveal-up" id="fit-tabs">
+
+          <button class="sector-tab active" data-fit="industry">
+            Industry
+          </button>
+
+          <button class="sector-tab" data-fit="healthcare">
+            Healthcare
+          </button>
+
+          <button class="sector-tab" data-fit="agriculture">
+            Agriculture
+          </button>
+
+          <button class="sector-tab" data-fit="transportation">
+            Transportation
+          </button>
+
+          <button class="sector-tab" data-fit="logistics">
+            Logistics
+          </button>
+
+          <button class="sector-tab" data-fit="energy">
+            Energy
+          </button>
+
+          <button class="sector-tab" data-fit="retail">
+            Retail
+          </button>
+
+        </div>
+
+        <div class="fit-grid reveal-up" id="fit-grid">
+
+          <article class="fit-card" data-fit="industry">
+
+            <div class="fit-icon">01</div>
+
+            <h3>Industry</h3>
+
+            <p>
+              Factories, manufacturing plants and machine shops.
+              Helps you catch equipment wear and unplanned downtime
+              before a production line stops.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="healthcare">
+
+            <div class="fit-icon">02</div>
+
+            <h3>Healthcare</h3>
+
+            <p>
+              Pharmacies, hospital pharmacies, medical wholesalers
+              and cold chain facilities. Helps you track stock levels,
+              expiry dates and temperature before something runs out
+              or spoils.
+            </p>
+
+          </article>
+
+          <article class="fit-card featured" data-fit="logistics">
+
+            <div class="fit-icon">05</div>
+
+            <h3>Logistics</h3>
+
+            <p>
+              Ports, warehouses, distribution centers and freight
+              forwarders. Helps you spot bottlenecks in queues,
+              equipment and container flow before they cause delays.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="agriculture">
+
+            <div class="fit-icon">03</div>
+
+            <h3>Agriculture</h3>
+
+            <p>
+              Farms, grain cooperatives and cold storage or packing
+              facilities. Helps you watch storage conditions and
+              transport timing before a harvest is lost to delay
+              or spoilage.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="transportation">
+
+            <div class="fit-icon">04</div>
+
+            <h3>Transportation</h3>
+
+            <p>
+              Trucking companies, delivery fleets and vehicle rental
+              operators. Helps you track engine health, fuel and
+              maintenance schedules across the whole fleet.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="energy">
+
+            <div class="fit-icon">06</div>
+
+            <h3>Energy</h3>
+
+            <p>
+              Utility companies, generator fleet operators and
+              industrial energy users. Helps you watch fuel levels,
+              overheating and consumption before an outage happens.
+            </p>
+
+          </article>
+
+          <article class="fit-card" data-fit="retail">
+
+            <div class="fit-icon">07</div>
+
+            <h3>Retail</h3>
+
+            <p>
+              Wholesalers, distributors, supermarkets, hypermarkets,
+              retail chains and convenience stores. Helps you catch
+              stock shortages, price or margin issues and slow moving
+              inventory before they hurt sales.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATA -->
+
+    <section class="section-dark">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker dark-kicker">
+            09: Data
+          </div>
+
+          <h2 class="section-title">
+            Use what you already have.
+          </h2>
+
+          <p class="section-copy dark-copy">
+            SentrIA doesn't need to replace your existing infrastructure
+            to create value.
+          </p>
+
+        </div>
+
+        <div class="data-grid">
+
+          <div class="data-card reveal-up">
+
+            <div class="data-number">
+              DATA / 01
+            </div>
+
+            <h3>ERP</h3>
+
+            <p>
+              Use your production, orders, procurement,
+              and inventory data.
+            </p>
+
+          </div>
+
+          <div class="data-card reveal-up" style="transition-delay: 0.15s;">
+
+            <div class="data-number">
+              DATA / 02
+            </div>
+
+            <h3>IoT</h3>
+
+            <p>
+              Turn machine and sensor signals
+              into operational alerts.
+            </p>
+
+          </div>
+
+          <div class="data-card reveal-up" style="transition-delay: 0.3s;">
+
+            <div class="data-number">
+              DATA / 03
+            </div>
+
+            <h3>APIs</h3>
+
+            <p>
+              Connect the systems already present in your
+              technical environment.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RELIABILITY -->
+
+    <section class="section-dark">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker dark-kicker">
+            10: Reliability
+          </div>
+
+          <h2 class="section-title">
+            AI that explains its priorities.
+          </h2>
+
+        </div>
+
+        <div class="reliability-grid">
+
+          <div class="reliability-card reveal-up">
+
+            <div class="data-number">01</div>
+
+            <h3>Context</h3>
+
+            <p>
+              Every recommendation is linked to the operational
+              signals that triggered it.
+            </p>
+
+          </div>
+
+          <div class="reliability-card reveal-up" style="transition-delay: 0.15s;">
+
+            <div class="data-number">02</div>
+
+            <h3>Priority</h3>
+
+            <p>
+              The goal isn't to generate more alerts,
+              but to reduce noise.
+            </p>
+
+          </div>
+
+          <div class="reliability-card reveal-up" style="transition-delay: 0.3s;">
+
+            <div class="data-number">03</div>
+
+            <h3>Action</h3>
+
+            <p>
+              A recommendation must be understandable
+              and actionable.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROMISES -->
+
+    <section class="section-light">
+
+      <div class="container">
+
+        <div class="section-header reveal-up">
+
+          <div class="section-kicker">
+            11: Promise
+          </div>
+
+          <h2 class="section-title">
+            Less noise.
+            More decisions.
+          </h2>
+
+        </div>
+
+        <div class="promises-grid">
+
+          <div class="promise reveal-up">
+            <strong>See earlier.</strong>
+            <span>
+              Identify weak signals before they become visible.
+            </span>
+          </div>
+
+          <div class="promise reveal-up" style="transition-delay: 0.1s;">
+            <strong>Understand faster.</strong>
+            <span>
+              Turn a data dashboard into an understandable situation.
+            </span>
+          </div>
+
+          <div class="promise reveal-up" style="transition-delay: 0.2s;">
+            <strong>Prioritize better.</strong>
+            <span>
+              Focus resources on the risks that truly matter.
+            </span>
+          </div>
+
+          <div class="promise reveal-up" style="transition-delay: 0.3s;">
+            <strong>Act immediately.</strong>
+            <span>
+              Turn analysis into the next operational action.
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SECURITY -->
+
+    <section class="section-light">
+
+      <div class="container">
+
+        <div class="security-box reveal-up">
+
+          <h2>
+            Your data stays
+            under your control.
+          </h2>
+
+          <div class="security-list">
+
+            <div class="security-item">
+              Architecture designed for professional environments.
+            </div>
+
+            <div class="security-item">
+              Access and data controls.
+            </div>
+
+            <div class="security-item">
+              Progressive integration with your infrastructure.
+            </div>
+
+            <div class="security-item">
+              Deployment adapted to your operational constraints.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+
+    <section id="faq" class="section-dark">
+
+      <div class="container">
+
+        <div
+          class="section-header reveal-up"
+          style="margin-left:auto;margin-right:auto;text-align:center"
+        >
+
+          <div class="section-kicker dark-kicker">
+            12: FAQ
+          </div>
+
+          <h2 class="section-title">
+            The questions we get asked.
+          </h2>
+
+        </div>
+
+        <div class="faq reveal-up">
+
+          <div class="faq-item">
+
+            <button class="faq-question">
+              Does SentrIA replace our existing tools?
+              <span class="faq-plus">+</span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+                No. SentrIA is designed to use your existing data
+                and add a layer of operational intelligence on top.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button class="faq-question">
+              Do we need to change our infrastructure?
+              <span class="faq-plus">+</span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+                Not necessarily. Deployment starts with the data sources
+                that are most useful for your use case.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button class="faq-question">
+              Who is SentrIA for?
+              <span class="faq-plus">+</span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+                Teams that manage complex operations and need to make
+                fast decisions from multiple data sources.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button class="faq-question">
+              How much does SentrIA cost?
+              <span class="faq-plus">+</span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+                Pricing depends on scope, the data to connect,
+                the number of flows, and the level of support required.
+                We define the scope during the first demo.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button class="faq-question">
+              Can we start with a single use case?
+              <span class="faq-plus">+</span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+                Yes. That's actually our recommended approach:
+                start with a measurable operational problem, then expand.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DEMO -->
+
+    <section id="demo" class="demo-section">
+
+      <div class="container demo-layout">
+
+        <div class="demo-copy reveal-up">
+
+          <div class="section-kicker">
+            13: Demo
+          </div>
+
+          <h2>
+            Let's see where SentrIA can save you time.
+          </h2>
+
+          <p>
+            Book a 30-minute conversation with the SentrIA team.
+            We start from your real operations, not a generic presentation.
+          </p>
+
+          <div class="demo-points">
+
+            <div class="demo-point">
+              Understand your current operations
+            </div>
+
+            <div class="demo-point">
+              Identify a first use case
+            </div>
+
+            <div class="demo-point">
+              See the SentrIA cockpit
+            </div>
+
+            <div class="demo-point">
+              Define the next steps
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="calendar-shell reveal-up" style="transition-delay: 0.2s;">
+
+          <div class="calendar-header">
+
+            <div class="calendar-title">
+              SentrIA Demo: 30 min
+            </div>
+
+            <div class="calendar-status">
+              LIVE AVAILABILITY
+            </div>
+
+          </div>
+
+          <div
+            class="calendly-inline-widget"
+            data-url="https://calendly.com/hello-sentria/30min"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL CTA -->
+
+    <section class="final-cta">
+
+      <div class="container reveal-up">
+
         <h2>
-          Know what is
-          <span class="gradient-text">happening now.</span>
+          The next problem
+          may already be
+          <span>in your data.</span>
         </h2>
+
         <p>
-          Your business changes constantly. Your intelligence layer should change with it.
+          See how SentrIA can turn your operations
+          into faster, smarter decisions.
         </p>
-        <a href="#pricing" class="button-primary shimmer-btn">
-          <span>Explore platform</span>
+
+        <a href="#demo" class="button-primary magnetic">
+          Book a demo →
         </a>
+
       </div>
 
-      <div class="data-visual glass-panel tilt-card reveal-on-scroll">
-        <div class="data-number">
-          <small class="mono-label">EFFICIENCY INDEX</small>
-          <strong class="counter" data-target="92" data-suffix="%">0%</strong>
-          <span class="positive-pill">+14.8% this month</span>
-        </div>
+    </section>
 
-        <div class="big-bars">
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 25%"></div></div>
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 40%"></div></div>
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 34%"></div></div>
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 62%"></div></div>
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 53%"></div></div>
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 79%"></div></div>
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 68%"></div></div>
-          <div class="big-bar-wrapper"><div class="big-bar" style="--bar-h: 94%"></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- PROMISES SECTION -->
-  <section class="section dark-section">
-    <div class="section-header reveal-on-scroll">
-      <div class="eyebrow glass-pill">BUILT DIFFERENTLY</div>
-      <h2>
-        Intelligence without
-        <span class="gradient-text">complexity.</span>
-      </h2>
-    </div>
 
-    <div class="promises-grid">
-      <article class="card dark-card glass-panel tilt-card reveal-on-scroll">
-        <div class="icon-box">↗</div>
-        <h3>Always visible</h3>
-        <p>The information you need stays front and center at all times.</p>
-      </article>
-
-      <article class="card dark-card glass-panel tilt-card reveal-on-scroll">
-        <div class="icon-box">◉</div>
-        <h3>Always current</h3>
-        <p>Your view dynamically updates seamlessly as your business scales.</p>
-      </article>
-
-      <article class="card dark-card glass-panel tilt-card reveal-on-scroll">
-        <div class="icon-box">+</div>
-        <h3>Always actionable</h3>
-        <p>Every dynamic signal is mapped to a practical, automated next step.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- PRICING SECTION -->
-  <section class="section" id="pricing">
-    <div class="section-header center reveal-on-scroll">
-      <div class="eyebrow glass-pill">PRICING</div>
-      <h2>
-        Start with
-        <span class="gradient-text">clarity.</span>
-      </h2>
-    </div>
-
-    <div class="pricing-grid">
-      <article class="pricing-card glass-panel tilt-card reveal-on-scroll">
-        <small class="tier-label">STARTER</small>
-        <h3>Foundation</h3>
-        <div class="price">$49<span>/mo</span></div>
-        <p>For small teams building their modern operating system.</p>
-        <a href="#" class="pricing-cta shimmer-btn"><span>Get started</span></a>
-        <ul>
-          <li>Real-time dashboard</li>
-          <li>Core analytics</li>
-          <li>Risk monitoring</li>
-          <li>Email support</li>
-        </ul>
-      </article>
-
-      <article class="pricing-card featured glass-panel tilt-card reveal-on-scroll">
-        <div class="popular">MOST POPULAR</div>
-        <small class="tier-label">GROWTH</small>
-        <h3>Command</h3>
-        <div class="price">$149<span>/mo</span></div>
-        <p>For high-velocity teams needing total operational visibility.</p>
-        <a href="#" class="pricing-cta shimmer-btn"><span>Start building</span></a>
-        <ul>
-          <li>Everything in Foundation</li>
-          <li>Advanced intelligence</li>
-          <li>Automated insights</li>
-          <li>Priority support</li>
-        </ul>
-      </article>
-
-      <article class="pricing-card glass-panel tilt-card reveal-on-scroll">
-        <small class="tier-label">ENTERPRISE</small>
-        <h3>Control</h3>
-        <div class="price">Custom</div>
-        <p>For enterprise organizations operating at serious global scale.</p>
-        <a href="#" class="pricing-cta shimmer-btn"><span>Contact us</span></a>
-        <ul>
-          <li>Everything in Command</li>
-          <li>Custom integrations</li>
-          <li>Advanced security</li>
-          <li>Dedicated support</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="final-cta reveal-on-scroll">
-    <div class="cta-inner glass-panel">
-      <div class="eyebrow glass-pill">READY WHEN YOU ARE</div>
-      <h2>
-        Build a business
-        <span class="gradient-text">that moves.</span>
-      </h2>
-      <p>Less noise. Better decisions. Faster execution.</p>
-      <a href="#pricing" class="button-primary shimmer-btn">
-        <span>Get started</span>
-      </a>
-    </div>
-  </section>
+  <!-- FOOTER -->
 
   <footer>
-    <div class="logo">SENTRIA<span class="logo-dot">.</span></div>
-    <div class="copyright">© 2026 Sentria Systems Inc. All rights reserved.</div>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+
+          <a href="#" class="logo">
+            <span class="logo-mark">S</span>
+            SentrIA
+          </a>
+
+          <p class="footer-description">
+            Operational intelligence to see bottlenecks
+            before they happen.
+          </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>Product</h4>
+
+          <a href="#cockpit">Cockpit</a>
+          <a href="#methode">Method</a>
+          <a href="#tarifs">Pricing</a>
+          <a href="#secteurs">Sectors</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>Resources</h4>
+
+          <a href="#faq">FAQ</a>
+          <a href="#demo">Demo</a>
+          <a href="#demo">Contact</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>SentrIA</h4>
+
+          <a href="#demo">Talk to the team</a>
+          <a href="#tarifs">Pricing</a>
+          <a href="#demo">Book a call</a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 SentrIA
+        </span>
+
+        <span>
+          Operational intelligence.
+        </span>
+
+      </div>
+
+    </div>
+
   </footer>
 
+
+  <!-- CALENDLY -->
+
+  <script
+    src="https://assets.calendly.com/assets/external/widget.js"
+    async>
+  </script>
+
   <script src="script.js"></script>
+
 </body>
 </html>
