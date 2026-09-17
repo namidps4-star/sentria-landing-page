@@ -10,6 +10,27 @@
     content="SentrIA shows the evidence, confidence, impact, and recommended action for every operational risk. So your team decides faster and the outcome feeds back."
   />
 
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0c08'/%3E%3Cpath d='M20.4 11.2c-.9-1-2.3-1.6-4-1.6-2.7 0-4.6 1.4-4.6 3.5 0 1.9 1.4 2.9 3.9 3.4l1.3.3c1.5.3 2.1.8 2.1 1.6 0 1-1 1.7-2.5 1.7-1.5 0-2.6-.6-3.4-1.7l-2.1 1.6c1.1 1.6 3 2.5 5.4 2.5 3 0 5-1.5 5-3.9 0-2-1.3-3.1-4-3.7l-1.3-.3c-1.4-.3-2-.7-2-1.5 0-.9.9-1.5 2.2-1.5 1.2 0 2.1.4 2.8 1.3z' fill='%23d6ff3f'/%3E%3C/svg%3E"
+  />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SentrIA: The operational decision layer" />
+  <meta
+    property="og:description"
+    content="Evidence, confidence, impact and recommended action for every operational risk. Your team decides faster and the outcome feeds back."
+  />
+  <meta property="og:image" content="https://picsum.photos/seed/sentria-og/1200/630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SentrIA: The operational decision layer" />
+  <meta
+    name="twitter:description"
+    content="Evidence, confidence, impact and recommended action for every operational risk."
+  />
+  <meta name="twitter:image" content="https://picsum.photos/seed/sentria-og/1200/630" />
+  <meta name="theme-color" content="#0b0c08" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -1737,10 +1758,207 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* =========================================================
+       REDESIGN PASS: motion, interaction states, polish
+
+       The audit found the palette and surfaces already strong:
+       tinted off-black rather than pure #000, one accent, grain
+       already in place, Space Grotesk for display against Inter
+       for body. So none of that is touched.
+
+       What was missing was life and feedback. Across 4569 lines
+       there were zero keyframes, zero scroll reveals, zero
+       :active states and zero focus rings. Every one of the 18
+       sections mounted at once, which is what made a well-built
+       page feel inert.
+
+       Everything below animates transform and opacity only, so
+       it stays on the GPU and never triggers layout.
+    ========================================================= */
+
+    /* --- keyboard focus. Accessibility requirement, and it was
+       absent entirely. Uses the lime accent so it reads as part
+       of the design rather than a browser default. --- */
+    :focus-visible {
+      outline: 2px solid var(--lime);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      z-index: 200;
+      transform: translate(-50%, -120%);
+      padding: 12px 20px;
+      border-radius: 0 0 12px 12px;
+      background: var(--lime);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform .22s cubic-bezier(.2,.7,.3,1);
+    }
+
+    .skip-link:focus-visible {
+      transform: translate(-50%, 0);
+      outline-offset: -3px;
+    }
+
+    /* --- pressed feedback. A button that does not move under the
+       finger reads as a picture of a button. --- */
+    .button-primary,
+    .button-secondary {
+      transition:
+        transform .18s cubic-bezier(.2,.7,.3,1),
+        background-color .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+      will-change: transform;
+    }
+
+    .button-primary:hover,
+    .button-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary:active,
+    .button-secondary:active {
+      transform: translateY(0) scale(.985);
+      transition-duration: .08s;
+    }
+
+    /* Shadow carries the background hue instead of generic black. */
+    .button-primary:hover {
+      box-shadow: 0 10px 30px -10px rgba(214,255,63,.45);
+    }
+
+    /* --- scroll reveal. Staggered rather than all at once, and
+       short: 520ms with a 40ms step keeps it premium rather than
+       sluggish. --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity .52s cubic-bezier(.2,.7,.3,1),
+        transform .52s cubic-bezier(.2,.7,.3,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* --- cards lift and their border catches the light under the
+       cursor. The gradient follows the pointer via two custom
+       properties set in JS. --- */
+    .lift {
+      position: relative;
+      transition:
+        transform .28s cubic-bezier(.2,.7,.3,1),
+        border-color .28s ease;
+    }
+
+    .lift:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+    }
+
+    .spotlight::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(
+        220px circle at var(--mx, 50%) var(--my, 0%),
+        rgba(214,255,63,.45),
+        transparent 65%
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+
+    .spotlight:hover::before {
+      opacity: 1;
+    }
+
+    /* --- data-heavy product, so figures get tabular figures and
+       stop shifting width as they change. --- */
+    .data-number,
+    .dash-card-number,
+    .status,
+    .comparison-cell {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- stop single words stranding on their own last line. --- */
+    .section-title,
+    h1, h2, h3 {
+      text-wrap: balance;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    /* --- the live status dot was static; a slow pulse tells the
+       reader the feed is actually live. --- */
+    @keyframes sentria-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .55; transform: scale(.82); }
+    }
+
+    .status-dot {
+      animation: sentria-pulse 2.4s ease-in-out infinite;
+    }
+
+    /* --- Respect the OS setting. Once motion exists, this is not
+       optional: vestibular disorders are a real accessibility
+       concern, and the page must still be fully readable. --- */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .status-dot {
+        animation: none;
+      }
+
+      .button-primary:hover,
+      .button-secondary:hover,
+      .lift:hover {
+        transform: none;
+      }
+
+      .spotlight::before {
+        display: none;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+
+  <span id="top"></span>
+
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- =========================================================
        NAVBAR
@@ -1749,7 +1967,7 @@
   <nav class="navbar">
     <div class="container nav-inner">
 
-      <a href="#" class="logo">
+      <a href="#top" class="logo" aria-label="SentrIA, back to top">
         <span class="logo-mark">S</span>
         SentrIA
       </a>
@@ -1791,7 +2009,7 @@
        HERO
   ========================================================= -->
 
-  <main>
+  <main id="main">
 
     <section class="hero">
       <div class="container hero-grid">
@@ -3479,7 +3697,7 @@
 
         <div>
 
-          <a href="#" class="logo">
+          <a href="#top" class="logo" aria-label="SentrIA, back to top">
             <span class="logo-mark">S</span>
             SentrIA
           </a>
@@ -3511,6 +3729,8 @@
           <a href="#faq">FAQ</a>
           <a href="#demo">Demo</a>
           <a href="#demo">Contact</a>
+          <a href="mailto:privacy@sentria.io">Privacy</a>
+          <a href="mailto:legal@sentria.io">Terms</a>
 
         </div>
 
@@ -4564,6 +4784,125 @@
       renderSector("industry");
     }
 
+  </script>
+
+
+  <script>
+    /* =========================================================
+       REDESIGN PASS: reveal on scroll, spotlight borders
+
+       Appended as its own block so the existing hero parallax
+       and language switcher above are untouched.
+
+       Classes are applied from JS rather than written into the
+       4569 lines of markup by hand: it keeps the diff small and
+       means a section added later is picked up automatically.
+    ========================================================= */
+    (function () {
+      var reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      /* ---- which elements get which treatment ---- */
+      var REVEAL = [
+        ".section-title",
+        ".dark-kicker",
+        ".dark-copy",
+        ".data-card",
+        ".change-card",
+        ".cockpit-list-item",
+        ".dash-card",
+        ".comparison-row",
+        ".demo-point",
+        ".footer-column"
+      ].join(",");
+
+      var LIFT = [
+        ".data-card",
+        ".change-card",
+        ".dash-card",
+        ".dash-panel"
+      ].join(",");
+
+      /* ---- lift + spotlight on cards ---- */
+      var cards = document.querySelectorAll(LIFT);
+
+      Array.prototype.forEach.call(cards, function (card) {
+        card.classList.add("lift");
+
+        if (reduced) return;
+
+        card.classList.add("spotlight");
+
+        card.addEventListener("pointermove", function (event) {
+          var rect = card.getBoundingClientRect();
+
+          card.style.setProperty(
+            "--mx",
+            ((event.clientX - rect.left) / rect.width) * 100 + "%"
+          );
+          card.style.setProperty(
+            "--my",
+            ((event.clientY - rect.top) / rect.height) * 100 + "%"
+          );
+        });
+      });
+
+      /* ---- scroll reveal, staggered per section ----
+         Without IntersectionObserver support, or with reduced
+         motion, nothing is hidden in the first place, so the page
+         simply renders as it always did. */
+      if (reduced || !("IntersectionObserver" in window)) return;
+
+      var targets = document.querySelectorAll(REVEAL);
+
+      Array.prototype.forEach.call(targets, function (el) {
+        el.classList.add("reveal");
+      });
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          /* Sort by document position so a row of cards cascades
+             left to right rather than in observer callback order,
+             which is not guaranteed. */
+          entries
+            .filter(function (entry) {
+              return entry.isIntersecting;
+            })
+            .sort(function (a, b) {
+              return (
+                a.target.compareDocumentPosition(b.target) &
+                Node.DOCUMENT_POSITION_FOLLOWING
+                  ? -1
+                  : 1
+              );
+            })
+            .forEach(function (entry, index) {
+              var el = entry.target;
+
+              /* Cap the stagger so a long list never leaves the
+                 reader waiting on the last item. */
+              var delay = Math.min(index, 6) * 40;
+
+              window.setTimeout(function () {
+                el.classList.add("is-visible");
+              }, delay);
+
+              observer.unobserve(el);
+            });
+        },
+        {
+          /* Fire slightly before the element reaches the fold so
+             it is already settling by the time it is read. */
+          rootMargin: "0px 0px -12% 0px",
+          threshold: 0.12
+        }
+      );
+
+      Array.prototype.forEach.call(targets, function (el) {
+        observer.observe(el);
+      });
+    })();
   </script>
 
 </body>
