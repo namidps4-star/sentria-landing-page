@@ -234,10 +234,8 @@ html:not([lang="fr"]) .fr {
   gap: clamp(14px, 2.2vw, 34px);
   padding: 8px 8px 8px 20px;
   border-radius: 999px;
-  background: rgba(11, 12, 8, 0.6);
+  background: rgba(11, 12, 8, 0.8);
   border: 1px solid rgba(245, 243, 234, 0.14);
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
   color: var(--cream);
   transition: background 0.3s, box-shadow 0.3s;
 }
@@ -247,6 +245,8 @@ html.op-run:not(.op-done) .bar {
   background: rgba(11, 12, 8, 0.92);
 }
 .hd[data-scrolled] .bar {
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
   background: rgba(11, 12, 8, 0.86);
   box-shadow: 0 14px 50px rgba(0, 0, 0, 0.35);
 }
@@ -512,8 +512,20 @@ html.op-run .op {
   position: relative;
   overflow: hidden;
   color: var(--cream);
+  background: var(--ink);
+}
+/* the glow is its own static layer, so the moving letters never repaint it */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: radial-gradient(60% 55% at 78% 70%, rgba(124, 154, 42, 0.2), transparent 70%),
-    radial-gradient(40% 40% at 12% 0%, rgba(214, 255, 63, 0.07), transparent 70%), var(--ink);
+    radial-gradient(40% 40% at 12% 0%, rgba(214, 255, 63, 0.07), transparent 70%);
+  transform: translateZ(0);
+  pointer-events: none;
+}
+.hero > * {
+  position: relative;
 }
 .hero-stage {
   position: relative;
@@ -607,7 +619,6 @@ html.op-run .op {
 }
 .wvl {
   display: inline-block;
-  will-change: transform;
 }
 .hero-lead {
   grid-column: 2;
@@ -2415,8 +2426,9 @@ html.op-run .op {
   white-space: nowrap;
   font-family: var(--f-display), sans-serif;
   font-weight: 500;
-  font-size: calc(100cqw / 14.3);
-  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-size: calc(100cqw / 18.4);
+  letter-spacing: -0.02em;
   line-height: 1;
   padding-bottom: 0.34em;
   border-bottom: 1px solid rgba(245, 243, 234, 0.2);

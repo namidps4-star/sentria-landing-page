@@ -106,14 +106,20 @@ export function HeroFx() {
         if (l.clone) l.clone.style.transform = tf
       }
       if (fine && clone) {
-        // Rest on the middle line until the pointer arrives, then follow it.
-        const idle = { x: stageW * (0.36 + Math.sin(t * 0.45) * 0.07), y: (letters[Math.floor(letters.length / 2)]?.cy ?? 300) }
-        const target = ptr.in ? ptr : idle
-        pos.x += (target.x - pos.x) * 0.16
-        pos.y += (target.y - pos.y) * 0.16
-        lens.style.transform = `translate3d(${pos.x - R}px,${pos.y - R}px,0)`
-        world.style.transform = `translate3d(${R - pos.x * S}px,${R - pos.y * S}px,0) scale(${S})`
-        lens.dataset.on = "1"
+        // The lens exists only while the pointer is over the hero: nothing runs for it otherwise.
+        if (ptr.in) {
+          if (!lens.dataset.on) {
+            pos.x = ptr.x
+            pos.y = ptr.y
+          }
+          pos.x += (ptr.x - pos.x) * 0.2
+          pos.y += (ptr.y - pos.y) * 0.2
+          lens.style.transform = `translate3d(${pos.x - R}px,${pos.y - R}px,0)`
+          world.style.transform = `translate3d(${R - pos.x * S}px,${R - pos.y * S}px,0) scale(${S})`
+          lens.dataset.on = "1"
+        } else if (lens.dataset.on) {
+          delete lens.dataset.on
+        }
       }
     }
 
