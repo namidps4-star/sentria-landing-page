@@ -1,0 +1,6 @@
+# Which dependencies may run install scripts.
+# sharp: downloads its native image library, which next/image uses to resize.
+# unrs-resolver: ships prebuilt binaries, no script needed.
+allowBuilds:
+  sharp: true
+  unrs-resolver: false

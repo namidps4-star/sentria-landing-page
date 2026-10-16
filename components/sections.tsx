@@ -1,0 +1,711 @@
+import Image from "next/image"
+import type { ReactNode } from "react"
+import { C } from "@/content/en"
+import { T, B } from "./t"
+import { Arrow, Check, Eyebrow, iv } from "./ui"
+import dashEn from "@/assets/dash/dashboard-en.webp"
+import dashFr from "@/assets/dash/dashboard-fr.webp"
+
+type Tone = "cream" | "sand" | "dark" | "olive" | "lime" | "deep"
+
+function Sec({ id, tone, className = "", children }: { id?: string; tone: Tone; className?: string; children: ReactNode }) {
+  return (
+    <section id={id} className={`sc sc-${tone} ${className}`}>
+      <div className="wrap">{children}</div>
+    </section>
+  )
+}
+
+function H2({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <h2 className={`h2 ${className}`} data-rv="rise">
+      {children}
+    </h2>
+  )
+}
+
+/* ------------------------------------------------------------------ proof */
+
+export function Proof() {
+  const group = (hidden: boolean) => (
+    <ul className="marq-group" aria-hidden={hidden || undefined}>
+      {Array.from({ length: 3 }).flatMap((_, k) =>
+        C.proof.map((p) => (
+          <li key={`${k}-${p.n}`}>
+            <b>{p.n}</b>
+            <span>
+              <T s={p.t} />
+            </span>
+            <i aria-hidden="true" />
+          </li>
+        )),
+      )}
+    </ul>
+  )
+  return (
+    <div className="proof">
+      <div className="marq">
+        <div className="marq-track">
+          {group(false)}
+          {group(true)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ---------------------------------------------------------------- product */
+
+const BARS = [38, 52, 43, 66, 58, 78, 100]
+
+export function Product() {
+  const m = C.hero.mock
+  return (
+    <section id="product" className="sc sc-cream product">
+      <div className="wrap product-grid">
+        <div className="product-copy">
+          <div className="mock" data-tilt="" data-rv="rise">
+            <aside className="mock-side">
+              <div className="mock-brand">{m.brand}</div>
+              <ul>
+                {m.menu.map((x, i) => (
+                  <li key={x} className={i === 0 ? "on" : ""}>
+                    <T s={x} />
+                  </li>
+                ))}
+              </ul>
+            </aside>
+            <div className="mock-main">
+              <div className="mock-head">
+                <h2 className="mock-title">
+                  <T s={m.title} />
+                </h2>
+                <span className="status">
+                  <i aria-hidden="true" />
+                  <T s={m.status} />
+                </span>
+              </div>
+              <div className="mock-stats">
+                <div className="stat stat-risk">
+                  <span>
+                    <T s={m.stats[0].label} />
+                  </span>
+                  <b data-count="7" data-pad="2">
+                    {m.stats[0].value}
+                  </b>
+                </div>
+                <div className="stat stat-ok">
+                  <span>
+                    <T s={m.stats[1].label} />
+                  </span>
+                  <b data-count="92" data-suffix="%">
+                    {m.stats[1].value}
+                  </b>
+                </div>
+                <div className="stat">
+                  <span>
+                    <T s={m.stats[2].label} />
+                  </span>
+                  <b data-count="148">{m.stats[2].value}</b>
+                </div>
+              </div>
+              <div className="mock-chart">
+                <div className="mock-chart-h">
+                  <span>
+                    <T s={m.chart} />
+                  </span>
+                  <span>
+                    <T s={m.range} />
+                  </span>
+                </div>
+                <div className="bars">
+                  {BARS.map((h, i) => (
+                    <div key={i} className="bar-c" style={iv(i)}>
+                      <div className="bar-f" style={{ height: `${h}%` }} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="product-shot" data-prog="enter">
+          <div className="shot-frame" data-par="0.05">
+            <Image className="en" src={dashEn} alt="" sizes="(min-width: 1000px) 62vw, 100vw" quality={82} />
+            <Image className="fr" src={dashFr} alt="" sizes="(min-width: 1000px) 62vw, 100vw" quality={82} />
+          </div>
+          <p className="sr-only">
+            <B
+              en="The SentrIA dashboard: alert counts by status and type, the seven day trend and the ranked list of alerts."
+              fr="Le tableau de bord SentrIA : nombre d'alertes par statut et par type, tendance sur sept jours et liste classée des alertes."
+            />
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------- situations */
+
+export function Situations() {
+  const s = C.situations
+  return (
+    <Sec id="situations" tone="cream">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <p className="lead" data-rv="rise" style={iv(1)}>
+        <T s={s.lead} />
+      </p>
+      <div className="grid3">
+        {s.items.map((it, i) => (
+          <article key={it.n} className="card card-light" data-tilt="" data-rv="rise" style={iv(i + 2)}>
+            <span className="num">{it.n}</span>
+            <h3>
+              <T s={it.h} />
+            </h3>
+            <p>
+              <T s={it.p} />
+            </p>
+          </article>
+        ))}
+      </div>
+    </Sec>
+  )
+}
+
+/* ------------------------------------------------------------------ shift */
+
+export function Shift() {
+  const s = C.shift
+  return (
+    <Sec tone="dark" className="shift">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <div className="shift-grid">
+        <article className="shift-card before" data-rv="left">
+          <span className="kicker">
+            <T s={s.before.k} />
+          </span>
+          <h3>
+            <T s={s.before.q} />
+          </h3>
+          <p>
+            <T s={s.before.p} />
+          </p>
+        </article>
+        <div className="shift-arrow" aria-hidden="true" data-rv="scale">
+          <Arrow />
+        </div>
+        <article className="shift-card after" data-rv="right" data-spot="">
+          <span className="kicker">
+            <T s={s.after.k} />
+          </span>
+          <h3>
+            <T s={s.after.q} />
+          </h3>
+          <p>
+            <T s={s.after.p} />
+          </p>
+        </article>
+      </div>
+    </Sec>
+  )
+}
+
+/* ----------------------------------------------------------------- method */
+
+export function Method() {
+  const s = C.method
+  return (
+    <Sec id="methode" tone="olive" className="method">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <div className="steps" data-prog="through">
+        <div className="steps-line" aria-hidden="true">
+          <i />
+        </div>
+        {s.steps.map((st, i) => (
+          <article key={st.n} className="step" data-step="" data-rv="rise" style={iv(i)}>
+            <span className="num">{st.n}</span>
+            <h3>
+              <T s={st.h} />
+            </h3>
+            <p>
+              <T s={st.p} />
+            </p>
+          </article>
+        ))}
+      </div>
+    </Sec>
+  )
+}
+
+/* -------------------------------------------------------------------- why */
+
+export function Why() {
+  const s = C.why
+  const cell = (v: string) => {
+    if (v === "✓")
+      return (
+        <>
+          <Check />
+          <span className="sr-only">
+            <B en="Yes" fr="Oui" />
+          </span>
+        </>
+      )
+    if (v === "—")
+      return (
+        <>
+          <span aria-hidden="true">—</span>
+          <span className="sr-only">
+            <B en="No" fr="Non" />
+          </span>
+        </>
+      )
+    return <T s={v} />
+  }
+  return (
+    <Sec tone="cream" className="why">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <div className="table" role="table" data-rv="rise">
+        <div className="trow thead" role="row">
+          <div role="columnheader">
+            <T s={s.cols[0]} />
+          </div>
+          <div role="columnheader">
+            <T s={s.cols[1]} />
+          </div>
+          <div role="columnheader" className="col-us">
+            <T s={s.cols[2]} />
+          </div>
+        </div>
+        {s.rows.map((r, i) => (
+          <div className="trow" role="row" key={r[0]} style={iv(i)}>
+            <div role="rowheader" className="c-name">
+              <T s={r[0]} />
+            </div>
+            <div role="cell" className="c-old">
+              {cell(r[1])}
+            </div>
+            <div role="cell" className="col-us c-us">
+              {cell(r[2])}
+            </div>
+          </div>
+        ))}
+      </div>
+    </Sec>
+  )
+}
+
+/* ---------------------------------------------------------------- cockpit */
+
+function confidence(a: string) {
+  const m = /(\d+)%/.exec(a)
+  return m ? parseInt(m[1], 10) : 70
+}
+
+export function Cockpit() {
+  const s = C.cockpit
+  return (
+    <Sec id="cockpit" tone="dark" className="cockpit">
+      <div className="cockpit-grid">
+        <div>
+          <Eyebrow>
+            <T s={s.eyebrow} />
+          </Eyebrow>
+          <H2>
+            <T s={s.title} />
+          </H2>
+          <p className="lead" data-rv="rise" style={iv(1)}>
+            <T s={s.lead} />
+          </p>
+          <ul className="feat">
+            {s.features.map((f, i) => (
+              <li key={f.h} data-rv="left" style={iv(i + 2)}>
+                <span className="feat-ic" aria-hidden="true">
+                  {f.icon}
+                </span>
+                <div>
+                  <strong>
+                    <T s={f.h} />
+                  </strong>
+                  <span>
+                    <T s={f.p} />
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="queue" data-tilt="" data-rv="right">
+          <div className="queue-h">
+            <span>
+              <T s={s.panel} />
+            </span>
+            <span className="live">
+              <i aria-hidden="true" />
+              <T s={s.live} />
+            </span>
+          </div>
+          <ol>
+            {s.queue.map((q, i) => (
+              <li key={q.t} style={iv(i)}>
+                <div className="q-row">
+                  <span className="q-t">
+                    <T s={q.t} />
+                  </span>
+                  <span className="q-a">
+                    <T s={q.a} />
+                  </span>
+                </div>
+                <div className="q-bar" aria-hidden="true">
+                  <i style={{ ["--w" as string]: `${confidence(q.a)}%` } as React.CSSProperties} />
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </Sec>
+  )
+}
+
+/* ---------------------------------------------------------------- pricing */
+
+export function Pricing() {
+  const s = C.pricing
+  return (
+    <Sec id="tarifs" tone="sand" className="pricing">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <p className="lead" data-rv="rise" style={iv(1)}>
+        <T s={s.lead} />
+      </p>
+      <div className="plans">
+        {s.plans.map((p, i) => {
+          const featured = "badge" in p
+          return (
+            <article key={p.name} className={`plan${featured ? " featured" : ""}`} data-tilt="" data-rv="rise" style={iv(i + 2)}>
+              {"badge" in p ? (
+                <span className="badge">
+                  <T s={p.badge} />
+                </span>
+              ) : null}
+              <h3>
+                <T s={p.name} />
+              </h3>
+              <p className="plan-p">
+                <T s={p.p} />
+              </p>
+              <div className="price">
+                <T s={p.price} />
+              </div>
+              <ul>
+                {p.items.map((it) => (
+                  <li key={it}>
+                    <Check />
+                    <T s={it} />
+                  </li>
+                ))}
+              </ul>
+              <a className={`btn ${featured ? "btn-ink" : "btn-line"}`} href="#demo" data-mag="">
+                <T s={p.cta} />
+              </a>
+            </article>
+          )
+        })}
+      </div>
+      <p className="note" data-rv="fade">
+        <T s={s.note} />
+      </p>
+    </Sec>
+  )
+}
+
+/* ------------------------------------------------------------------- flow */
+
+export function Flow() {
+  const s = C.flow
+  return (
+    <Sec tone="deep" className="flow">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <ol className="flow-steps" data-prog="through">
+        <span className="flow-line" aria-hidden="true">
+          <i />
+        </span>
+        {s.steps.map((st, i) => (
+          <li key={st.n} className="flow-step" data-step="" data-rv="rise" style={iv(i)}>
+            <span className="num">{st.n}</span>
+            <h3>
+              <T s={st.h} />
+            </h3>
+            <p>
+              <T s={st.p} />
+            </p>
+          </li>
+        ))}
+      </ol>
+    </Sec>
+  )
+}
+
+/* ------------------------------------------------------------------- data */
+
+export function DataSec() {
+  const s = C.data
+  return (
+    <Sec tone="dark" className="datasec">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <p className="lead" data-rv="rise" style={iv(1)}>
+        <T s={s.lead} />
+      </p>
+      <div className="grid3">
+        {s.items.map((it, i) => (
+          <article key={it.k} className="card card-dark" data-tilt="" data-rv="rise" style={iv(i + 2)}>
+            <span className="tagline">
+              <T s={it.k} />
+            </span>
+            <h3 className="mono-h">
+              <T s={it.h} />
+            </h3>
+            <p>
+              <T s={it.p} />
+            </p>
+            <span className="pulse-line" aria-hidden="true" />
+          </article>
+        ))}
+      </div>
+    </Sec>
+  )
+}
+
+/* -------------------------------------------------------------- reasoning */
+
+export function Reasoning() {
+  const s = C.reasoning
+  return (
+    <Sec tone="cream" className="reasoning">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <div className="grid3">
+        {s.items.map((it, i) => (
+          <article key={it.n} className="card card-light card-open" data-tilt="" data-rv="rise" style={iv(i)}>
+            <span className="num">{it.n}</span>
+            <h3>
+              <T s={it.h} />
+            </h3>
+            <p>
+              <T s={it.p} />
+            </p>
+          </article>
+        ))}
+      </div>
+    </Sec>
+  )
+}
+
+/* ---------------------------------------------------------------- promise */
+
+export function Promise_() {
+  const s = C.promise
+  return (
+    <Sec tone="lime" className="promise">
+      <Eyebrow>
+        <T s={s.eyebrow} />
+      </Eyebrow>
+      <H2>
+        <T s={s.title} />
+      </H2>
+      <ul className="promise-list">
+        {s.items.map((it, i) => (
+          <li key={it.h} data-rv="rise" style={iv(i)}>
+            <strong>
+              <T s={it.h} />
+            </strong>
+            <span>
+              <T s={it.p} />
+            </span>
+            <Arrow />
+          </li>
+        ))}
+      </ul>
+    </Sec>
+  )
+}
+
+/* ------------------------------------------------------------------ trust */
+
+export function Trust() {
+  const s = C.trust
+  return (
+    <Sec tone="olive" className="trust">
+      <div className="trust-grid">
+        <H2>
+          <T s={s.title} />
+        </H2>
+        <ul>
+          {s.lines.map((l, i) => (
+            <li key={l} data-rv="right" style={iv(i)}>
+              <span className="lock" aria-hidden="true">
+                <Check />
+              </span>
+              <T s={l} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Sec>
+  )
+}
+
+/* ------------------------------------------------------------------ final */
+
+export function Final() {
+  const s = C.final
+  return (
+    <section className="sc sc-ink final">
+      <div className="wrap">
+        <h2 className="final-h" data-rv="rise">
+          <span>
+            <T s={s.a} />
+          </span>{" "}
+          <em>
+            <T s={s.b} />
+          </em>
+        </h2>
+        <p className="lead" data-rv="rise" style={iv(1)}>
+          <T s={s.lead} />
+        </p>
+        <a className="btn btn-lime btn-xl" href="#demo" data-mag="" data-rv="scale" style={iv(2)}>
+          <T s={s.cta} />
+        </a>
+      </div>
+    </section>
+  )
+}
+
+/* ----------------------------------------------------------------- footer */
+
+export function Footer() {
+  const f = C.footer
+  const link = (href: string, s: string) => (
+    <li>
+      <a href={href}>
+        <T s={s} />
+      </a>
+    </li>
+  )
+  return (
+    <footer className="foot">
+      <div className="wrap foot-mailrow">
+        <a className="foot-mail" href="mailto:hello.sentria@gmail.com" data-mag="">
+          <span>hello.sentria@gmail.com</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      </div>
+      <div className="wrap foot-top">
+        <div className="foot-l">
+          <a className="foot-brand" href="#top">
+            {f.brand}
+          </a>
+          <p>
+            <T s={f.tag} />
+          </p>
+        </div>
+        <div className="foot-r">
+          <div className="foot-cols">
+            <div>
+              <h4>
+                <T s={f.product} />
+              </h4>
+              <ul>
+                {link("#cockpit", "Decision queue")}
+                {link("#methode", "Method")}
+                {link("#tarifs", "Pricing")}
+                {link("#secteurs", "Sectors")}
+              </ul>
+            </div>
+            <div>
+              <h4>
+                <T s={f.resources} />
+              </h4>
+              <ul>
+                {link("#faq", "FAQ")}
+                {link("#demo", "Demo")}
+                {link("#demo", "Contact")}
+                {link("mailto:privacy@sentria.io", "Privacy")}
+                {link("mailto:legal@sentria.io", "Terms")}
+              </ul>
+            </div>
+            <div>
+              <h4>{f.brand}</h4>
+              <ul>
+                {link("#demo", "Talk to the team")}
+                {link("#tarifs", "Pricing")}
+                {link("#demo", "Book a call")}
+              </ul>
+            </div>
+          </div>
+          <div className="foot-copy">
+            <span>
+              <T s={f.copy} />
+            </span>
+            <span>
+              <T s={f.line} />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="foot-band" aria-hidden="true">
+        <div className="mega" data-rv="rise">
+          {[..."SentrIA"].map((c, i) => (
+            <span key={i} style={iv(i)}>
+              {c}
+            </span>
+          ))}
+        </div>
+      </div>
+    </footer>
+  )
+}

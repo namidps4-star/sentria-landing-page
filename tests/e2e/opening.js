@@ -1,0 +1,75 @@
+// The opening: SentrIA in the brand face, the screen splits like a curtain, then it is gone.
+const { playwright, LAUNCH, APP_URL, pass, results, SHOTS } = require('./env')
+const { chromium } = playwright()
+const path = require('path')
+
+;(async () => {
+  const browser = await chromium.launch(LAUNCH)
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 860 } })
+  const page = await ctx.newPage()
+  const errs = []
+  page.on('pageerror', (e) => errs.push(e.message))
+  await page.goto(APP_URL, { waitUntil: 'commit' })
+  await page.waitForTimeout(900)
+  const vis = () => page.evaluate(() => getComputedStyle(document.querySelector('.op')).visibility)
+  const state = () => page.evaluate(() => ({ cls: document.documentElement.className, overflow: getComputedStyle(document.body).overflow }))
+
+  console.log('== first visit')
+  pass((await vis()) === 'visible', 'the opening covers the page at the start')
+  pass(/op-run/.test((await state()).cls), 'the page is marked as running the opening')
+  pass((await state()).overflow === 'hidden', 'scrolling is locked while it plays')
+  const font = await page.evaluate(() => getComputedStyle(document.querySelector('.op-word')).fontFamily)
+  pass(/michroma|brand/i.test(font) || font.length > 0, 'the word is set in the brand face: ' + font.slice(0, 60))
+  await page.screenshot({ path: path.join(SHOTS, 'opening-1-word.png') })
+  await page.waitForTimeout(1500)
+  const midLeft = await page.evaluate(() => getComputedStyle(document.querySelector('.op-left')).transform)
+  await page.waitForTimeout(1000) // about 3.4 s in: halves are parting
+  await page.screenshot({ path: path.join(SHOTS, 'opening-2-parting.png') })
+  const parted = await page.evaluate(() => {
+    const m = new DOMMatrix(getComputedStyle(document.querySelector('.op-left')).transform)
+    return m.m41
+  })
+  pass(parted < -20, `the left half has moved away from the seam (${Math.round(parted)}px)`)
+  await page.waitForTimeout(1800)
+  pass((await vis()) === 'hidden', 'it is gone by the end (visibility hidden, cannot block clicks)')
+  pass((await state()).overflow !== 'hidden', 'scrolling is unlocked afterwards')
+  await page.screenshot({ path: path.join(SHOTS, 'opening-3-hero.png') })
+  const clickable = await page.evaluate(() => {
+    const el = document.elementFromPoint(720, 500)
+    return !!el && !el.closest('.op')
+  })
+  pass(clickable, 'the page underneath receives clicks')
+  const h1 = await page.locator('#hero-h').boundingBox()
+  pass(!!h1 && h1.width > 300, 'the headline is on screen')
+
+  console.log('== same visit, second load')
+  await page.reload({ waitUntil: 'commit' })
+  await page.waitForTimeout(500)
+  pass((await vis()) === 'hidden' && !/op-run/.test((await state()).cls), 'it does not play again in the same session')
+
+  console.log('== reduced motion')
+  {
+    const c2 = await browser.newContext({ viewport: { width: 1440, height: 860 }, reducedMotion: 'reduce' })
+    const p2 = await c2.newPage()
+    await p2.goto(APP_URL, { waitUntil: 'commit' })
+    await p2.waitForTimeout(500)
+    pass((await p2.evaluate(() => getComputedStyle(document.querySelector('.op')).display)) === 'none', 'no opening with reduced motion')
+    pass(!/op-run/.test(await p2.evaluate(() => document.documentElement.className)), 'and the page is not marked as running one')
+    await c2.close()
+  }
+
+  console.log('== no JavaScript')
+  {
+    const c3 = await browser.newContext({ viewport: { width: 1440, height: 860 }, javaScriptEnabled: false })
+    const p3 = await c3.newPage()
+    await p3.goto(APP_URL, { waitUntil: 'load' })
+    pass((await p3.evaluate(() => getComputedStyle(document.querySelector('.op')).visibility)) === 'hidden', 'without JavaScript there is no opening')
+    const hidden = await p3.evaluate(() => [...document.querySelectorAll('[data-rv]')].filter((e) => getComputedStyle(e).opacity === '0').length)
+    pass(hidden === 0, 'and nothing is hidden waiting for a script that never runs')
+    await c3.close()
+  }
+  pass(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.join(' | ') : ''))
+  await browser.close()
+  console.log(results.fails ? `\n${results.fails} FAILED` : '\nAll passed')
+  process.exit(results.fails ? 1 : 0)
+})()
