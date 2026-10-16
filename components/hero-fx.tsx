@@ -35,6 +35,7 @@ export function HeroFx() {
     let ptr = { x: 0, y: 0, in: false }
     const pos = { x: 0, y: 0 }
     let lastMeasure = 0
+    let waveStart = 0
 
     const build = () => {
       world.innerHTML = ""
@@ -89,6 +90,8 @@ export function HeroFx() {
       const rootEl = document.documentElement
       if (rootEl.classList.contains("op-run") && !rootEl.classList.contains("op-done")) return
       if (now - lastMeasure > 700) measure()
+      if (!waveStart) waveStart = now
+      const ramp = Math.min(1, (now - waveStart) / 1400) // ease the wave in, so it does not pop on
       const t = now / 1000
       for (const l of letters) {
         let amp = 9
@@ -98,7 +101,7 @@ export function HeroFx() {
           amp += 15 * Math.exp(-(dx * dx + dy * dy) / (2 * 150 * 150))
         }
         const p = l.phase + t * 1.3
-        const tf = `translate3d(0,${(Math.sin(p) * amp).toFixed(2)}px,0) rotate(${(Math.cos(p) * 1.7).toFixed(2)}deg)`
+        const tf = `translate3d(0,${(Math.sin(p) * amp * ramp).toFixed(2)}px,0) rotate(${(Math.cos(p) * 1.7 * ramp).toFixed(2)}deg)`
         l.el.style.transform = tf
         if (l.clone) l.clone.style.transform = tf
       }
