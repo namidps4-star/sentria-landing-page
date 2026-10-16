@@ -27,7 +27,7 @@ export function Motion() {
     if (root.classList.contains("op-run")) {
       // The opening is paused (.op-wait) until the page is ready; its clock starts when that class goes.
       const start = () => {
-        doneTimer = window.setTimeout(() => root.classList.add("op-done"), 2200)
+        doneTimer = window.setTimeout(() => root.classList.add("op-done"), 1500)
       }
       if (root.classList.contains("op-wait")) {
         waitObserver = new MutationObserver(() => {

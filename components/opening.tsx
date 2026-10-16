@@ -9,7 +9,7 @@ function Letters() {
   return (
     <div className="op-word">
       {[...WORD].map((c, i) => (
-        <span key={i} className="op-l" style={{ animationDelay: `${0.1 + i * 0.07}s` }}>
+        <span key={i} className="op-l" style={{ animationDelay: `${0.05 + i * 0.05}s` }}>
           {c}
         </span>
       ))}
