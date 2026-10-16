@@ -23,8 +23,23 @@ export function Motion() {
 
     // End of the opening: unlock scrolling.
     let doneTimer = 0
+    let waitObserver: MutationObserver | null = null
     if (root.classList.contains("op-run")) {
-      doneTimer = window.setTimeout(() => root.classList.add("op-done"), 3950)
+      // The opening is paused (.op-wait) until the page is ready; its clock starts when that class goes.
+      const start = () => {
+        doneTimer = window.setTimeout(() => root.classList.add("op-done"), 3950)
+      }
+      if (root.classList.contains("op-wait")) {
+        waitObserver = new MutationObserver(() => {
+          if (!root.classList.contains("op-wait")) {
+            waitObserver?.disconnect()
+            start()
+          }
+        })
+        waitObserver.observe(root, { attributes: true, attributeFilter: ["class"] })
+      } else {
+        start()
+      }
     } else {
       root.classList.add("op-done")
     }
@@ -179,6 +194,7 @@ export function Motion() {
 
     return () => {
       window.clearTimeout(doneTimer)
+      waitObserver?.disconnect()
       cleanups.forEach((f) => f())
     }
   }, [])

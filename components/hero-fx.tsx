@@ -85,6 +85,9 @@ export function HeroFx() {
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick)
       if (!visible || document.hidden) return
+      // keep the main thread free while the opening plays
+      const rootEl = document.documentElement
+      if (rootEl.classList.contains("op-run") && !rootEl.classList.contains("op-done")) return
       if (now - lastMeasure > 700) measure()
       const t = now / 1000
       for (const l of letters) {

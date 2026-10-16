@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect } from "react"
 import { T } from "./t"
 
 const WORD = "SentrIA"
@@ -21,6 +24,24 @@ function Letters() {
  * Only shown when <html> has .op-run (set before paint by the head script).
  */
 export function Opening() {
+  useEffect(() => {
+    const root = document.documentElement
+    if (!root.classList.contains("op-wait")) return
+    // Play only when the page can keep up: fonts ready, page loaded, two frames painted.
+    // (The head script lifts the pause after 2.6 s whatever happens.)
+    let cancelled = false
+    const loaded = document.readyState === "complete" ? Promise.resolve() : new Promise<void>((r) => window.addEventListener("load", () => r(), { once: true }))
+    Promise.all([document.fonts ? document.fonts.ready : Promise.resolve(), loaded]).then(() => {
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          if (!cancelled) root.classList.remove("op-wait")
+        })
+      )
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
   return (
     <div className="op" aria-hidden="true">
       <div className="op-bg">

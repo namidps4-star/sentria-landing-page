@@ -28,6 +28,12 @@
 html.op-run {
   --t0: 3.05s;
 }
+/* The opening and the hero entrance wait (paused) until the page is ready, then start together. */
+html.op-wait *,
+html.op-wait *::before,
+html.op-wait *::after {
+  animation-play-state: paused !important;
+}
 
 *,
 *::before,
@@ -2474,7 +2480,7 @@ html.op-run .op {
 .mega {
   position: absolute;
   left: -0.015em;
-  top: -0.02em;
+  top: -0.075em;
   display: flex;
   font-family: var(--f-display), sans-serif;
   font-weight: 700;
