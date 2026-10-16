@@ -1487,8 +1487,8 @@ html.op-run .op {
 }
 .feat-ic {
   flex: none;
-  width: 46px;
-  height: 46px;
+  width: 56px;
+  height: 56px;
   border-radius: 14px;
   display: grid;
   place-items: center;
@@ -1496,6 +1496,13 @@ html.op-run .op {
   color: var(--lime);
   font-weight: 700;
   transition: background 0.3s, color 0.3s, transform 0.4s var(--ease);
+}
+.feat-ic i {
+  width: 36px;
+  height: 36px;
+  background: currentColor;
+  -webkit-mask: var(--ic) center / contain no-repeat;
+  mask: var(--ic) center / contain no-repeat;
 }
 .feat li:hover .feat-ic {
   background: var(--lime);
@@ -2342,50 +2349,79 @@ html.op-run .op {
 
 /* ----------------------------------------------------------------- footer */
 .foot {
-  background: var(--cream);
-  color: var(--paper);
-}
-.foot-mailrow {
-  padding-top: clamp(64px, 8vw, 116px);
+  background: var(--ink-2);
+  color: var(--cream);
 }
 .foot-top {
   display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
   gap: clamp(28px, 5vw, 80px);
-  padding-block: clamp(36px, 4vw, 56px) 56px;
+  padding-block: clamp(56px, 7vw, 104px) clamp(44px, 5vw, 72px);
+}
+.foot-hook {
+  max-width: 18ch;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.foot-sched {
+  display: inline-block;
+  margin-top: 26px;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  transition: color 0.2s, transform 0.3s var(--ease);
+}
+.foot-sched:hover {
+  color: var(--lime);
+  transform: translateX(6px);
 }
 .foot-brand {
+  display: block;
+  margin-top: clamp(40px, 6vw, 88px);
   font-family: var(--f-brand), sans-serif;
-  font-size: 22px;
+  font-size: 20px;
+  color: var(--lime);
 }
-.foot-l p {
-  margin-top: 18px;
-  max-width: 28ch;
-  font-size: 15px;
-  opacity: 0.75;
+.foot-tag {
+  margin-top: 14px;
+  max-width: 30ch;
+  font-size: 14px;
+  opacity: 0.6;
+}
+/* the address sits on one line: the size follows the width of its own column */
+.foot-r {
+  container-type: inline-size;
 }
 .foot-mail {
   --tx: 0px;
   --ty: 0px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 18px;
+  gap: 0.1em;
+  white-space: nowrap;
   font-family: var(--f-display), sans-serif;
-  font-weight: 700;
-  font-size: min(5.15vw, 92px);
-  letter-spacing: -0.035em;
+  font-weight: 500;
+  font-size: calc(100cqw / 14.3);
+  letter-spacing: -0.03em;
   line-height: 1;
-  padding-bottom: 28px;
-  border-bottom: 1.5px solid rgba(20, 21, 15, 0.25);
+  padding-bottom: 0.34em;
+  border-bottom: 1px solid rgba(245, 243, 234, 0.2);
   transform: translate3d(var(--tx), var(--ty), 0);
   transition: transform 0.4s var(--ease), color 0.3s;
-  overflow-wrap: anywhere;
+}
+.foot-mail:hover {
+  color: var(--lime);
 }
 .foot-mail svg {
   flex: none;
-  width: 0.8em;
-  height: 0.8em;
+  width: 0.62em;
+  height: 0.62em;
+  margin-top: -0.05em;
   transition: transform 0.5s var(--ease);
 }
 .foot-mail:hover svg {
@@ -2395,19 +2431,22 @@ html.op-run .op {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
+  margin-top: clamp(48px, 6vw, 96px);
 }
 .foot h4 {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  opacity: 0.55;
+  opacity: 0.5;
   margin-bottom: 16px;
 }
 .foot li a {
   display: inline-block;
   padding: 4px 0;
-  font-size: 15px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   transition: transform 0.3s var(--ease), color 0.2s;
 }
 .foot li a:hover {
@@ -2420,24 +2459,26 @@ html.op-run .op {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: clamp(32px, 4vw, 56px);
-  font-size: 13px;
-  opacity: 0.6;
+  margin-top: clamp(48px, 6vw, 88px);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.45;
 }
 .foot-band {
   position: relative;
-  height: clamp(190px, 23vw, 360px);
+  height: clamp(190px, 20.5vw, 400px);
   overflow: hidden;
   background: var(--lime);
 }
 .mega {
   position: absolute;
-  left: 0.02em;
-  top: -0.05em;
+  left: -0.015em;
+  top: -0.02em;
   display: flex;
   font-family: var(--f-display), sans-serif;
   font-weight: 700;
-  font-size: 23.4vw;
+  font-size: 29.4vw;
   line-height: 0.88;
   letter-spacing: -0.05em;
   color: var(--paper);
@@ -2496,7 +2537,7 @@ html.op-run .op {
     row-gap: 56px;
   }
   .foot-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-width: 860px) {
@@ -2611,9 +2652,6 @@ html.op-run .op {
   }
   .foot-cols {
     grid-template-columns: 1fr 1fr;
-  }
-  .foot-mail {
-    font-size: 6.4vw;
   }
   .faq-a p {
     padding-right: 0;

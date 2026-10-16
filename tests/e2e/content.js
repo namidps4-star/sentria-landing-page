@@ -77,7 +77,8 @@ async function newText(browser, lang) {
   console.log(`legacy text nodes: ${legacy.en.length} (EN), ${legacy.fr.length} (FR)`)
   pass(legacy.en.length === legacy.fr.length && legacy.en.length > 250, 'the old page was read in both languages with the same number of nodes')
 
-  const SKIP = new Set(['SentrIA']) // the brand name sits in many places; it is checked separately below
+  // 'AI' was the text icon of the Recommendations item; the founder replaced it with the recommendations artwork
+  const SKIP = new Set(['SentrIA', 'AI']) // the brand name sits in many places; it is checked separately below
   for (const lang of ['en', 'fr']) {
     console.log(`== ${lang.toUpperCase()}`)
     const blob = await newText(browser, lang)

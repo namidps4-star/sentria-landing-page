@@ -5,6 +5,12 @@ import { T, B } from "./t"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 import dashEn from "@/assets/dash/dashboard-en.webp"
 import dashFr from "@/assets/dash/dashboard-fr.webp"
+import icBottleneck from "@/assets/icons/bottleneck.png"
+import icPriorities from "@/assets/icons/priorities.png"
+import icRecommendations from "@/assets/icons/recommendations.png"
+
+// The three cockpit icons are our own artwork (black on transparent), recoloured with a CSS mask.
+const FEAT_ICONS = [icBottleneck, icPriorities, icRecommendations]
 
 type Tone = "cream" | "sand" | "dark" | "olive" | "lime" | "deep"
 
@@ -343,7 +349,7 @@ export function Cockpit() {
             {s.features.map((f, i) => (
               <li key={f.h} data-rv="left" style={iv(i + 2)}>
                 <span className="feat-ic" aria-hidden="true">
-                  {f.icon}
+                  <i style={{ ["--ic" as string]: `url(${FEAT_ICONS[i].src})` } as React.CSSProperties} />
                 </span>
                 <div>
                   <strong>
@@ -636,24 +642,28 @@ export function Footer() {
   )
   return (
     <footer className="foot">
-      <div className="wrap foot-mailrow">
-        <a className="foot-mail" href="mailto:hello.sentria@gmail.com" data-mag="">
-          <span>hello.sentria@gmail.com</span>
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </a>
-      </div>
       <div className="wrap foot-top">
         <div className="foot-l">
+          <p className="foot-hook">
+            <B en="Drop us a line, and we'll get in touch!" fr="Écrivez-nous, nous vous répondons vite !" />
+          </p>
+          <a className="foot-sched" href="#demo">
+            <B en="Schedule a call" fr="Planifier un appel" />
+          </a>
           <a className="foot-brand" href="#top">
             {f.brand}
           </a>
-          <p>
+          <p className="foot-tag">
             <T s={f.tag} />
           </p>
         </div>
         <div className="foot-r">
+          <a className="foot-mail" href="mailto:hello.sentria@gmail.com" data-mag="">
+            <span>hello.sentria@gmail.com</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
           <div className="foot-cols">
             <div>
               <h4>
