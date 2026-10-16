@@ -22,15 +22,13 @@ const path = require('path')
   pass(/michroma|brand/i.test(font) || font.length > 0, 'the word is set in the brand face: ' + font.slice(0, 60))
   await page.screenshot({ path: path.join(SHOTS, 'opening-1-word.png') })
   await page.waitForTimeout(1500)
-  const midLeft = await page.evaluate(() => getComputedStyle(document.querySelector('.op-left')).transform)
-  await page.waitForTimeout(1000) // about 3.4 s in: halves are parting
-  await page.screenshot({ path: path.join(SHOTS, 'opening-2-parting.png') })
-  const parted = await page.evaluate(() => {
-    const m = new DOMMatrix(getComputedStyle(document.querySelector('.op-left')).transform)
-    return m.m41
-  })
-  pass(parted < -20, `the left half has moved away from the seam (${Math.round(parted)}px)`)
-  await page.waitForTimeout(1800)
+  await page.waitForTimeout(800) // about 3.2 s in: the word is growing and the layer is melting
+  await page.screenshot({ path: path.join(SHOTS, 'opening-2-melting.png') })
+  const melt = await page.evaluate(() => parseFloat(getComputedStyle(document.querySelector('.op-bg')).opacity))
+  pass(melt < 0.95, `the dark layer has started to fade (opacity ${melt.toFixed(2)})`)
+  const lines = await page.evaluate(() => document.querySelectorAll('.op-seam').length + [...document.querySelectorAll('.op *')].filter((e) => /rgba\(214, 255, 63/.test(getComputedStyle(e).boxShadow) && getComputedStyle(e).boxShadow.includes('inset')).length)
+  pass(lines === 0, 'no seam line and no edge lines')
+  await page.waitForTimeout(1200)
   pass((await vis()) === 'hidden', 'it is gone by the end (visibility hidden, cannot block clicks)')
   pass((await state()).overflow !== 'hidden', 'scrolling is unlocked afterwards')
   await page.screenshot({ path: path.join(SHOTS, 'opening-3-hero.png') })
