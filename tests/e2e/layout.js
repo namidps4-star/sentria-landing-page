@@ -43,7 +43,7 @@ const WIDTHS = [1920, 1440, 1280, 1024, 768, 480, 375]
         const out = []
         document.querySelectorAll('body *').forEach((e) => {
           const cs = getComputedStyle(e)
-          if (cs.display === 'none' || cs.position === 'fixed' || e.closest('.sr-only')) return
+          if (cs.display === 'none' || cs.position === 'fixed' || e.closest('.sr-only, .op') || cs.visibility === 'hidden') return
           for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return
           const r = e.getBoundingClientRect()
           if (r.width > 0 && r.right > vw + 2) out.push(e.tagName + '.' + (e.className || '') + '<' + e.parentElement.className + '<' + e.parentElement.parentElement.className)
