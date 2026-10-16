@@ -78,12 +78,12 @@ export function SectorFilm() {
             {SECTORS.map((sec, i) => {
               const tag = TAGLINES[sec.key]
               return (
-                <div key={sec.key} className="beat" data-active={i === active ? "1" : undefined} aria-hidden={i === active ? undefined : true}>
-                  <div className="beat-bg">
-                    <Image src={sec.main} alt="" fill sizes="160px" quality={60} />
-                  </div>
+                <div key={sec.key} className="beat" data-ins={sec.inset.length ? "1" : undefined} data-portrait={sec.main.height > sec.main.width ? "1" : undefined} data-active={i === active ? "1" : undefined} aria-hidden={i === active ? undefined : true}>
                   <div className="fg-wrap">
-                    <div className="fg-box" style={{ ["--nw" as string]: `${sec.main.width}px` } as React.CSSProperties}>
+                    <div
+                      className="fg-box"
+                      style={{ ["--nw" as string]: `${sec.main.width}px`, ["--ar" as string]: `${sec.main.width / sec.main.height}` } as React.CSSProperties}
+                    >
                       <Image src={sec.main} alt="" fill sizes="(min-width: 1000px) 760px, 100vw" quality={82} />
                     </div>
                   </div>

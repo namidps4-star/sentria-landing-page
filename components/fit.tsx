@@ -3,6 +3,8 @@
 import { useSyncExternalStore } from "react"
 import { C } from "@/content/en"
 import { T } from "./t"
+import { TAGLINES } from "@/content/taglines"
+import { B } from "./t"
 import { Eyebrow, iv } from "./ui"
 
 export const FIT_KEYS = ["industry", "healthcare", "agriculture", "transportation", "logistics", "energy", "retail"] as const
@@ -99,6 +101,9 @@ export function FitSection() {
                 <h3>
                   <T s={c.h} />
                 </h3>
+                <p className="fit-hook">
+                  <B en={TAGLINES[key].en} fr={TAGLINES[key].fr} />
+                </p>
                 <p>
                   <T s={c.p} />
                 </p>

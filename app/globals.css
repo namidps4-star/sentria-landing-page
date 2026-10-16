@@ -1750,7 +1750,7 @@ html.op-run .hero-stage {
   aspect-ratio: 4 / 3.7;
   border-radius: 36px;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--ink-2);
   isolation: isolate;
 }
 .beat {
@@ -1769,46 +1769,45 @@ html.op-run .hero-stage {
   transition-delay: 0s;
   z-index: 2;
 }
-.beat-bg {
-  position: absolute;
-  inset: -8%;
-  filter: blur(34px) brightness(0.55) saturate(1.25);
-}
-.beat-bg img,
 .fg-box img,
 .beat-in img {
   object-fit: cover;
 }
+/* The whole photo, never cropped, never enlarged, no blurred filler: the frame has the photo's own shape. */
 .fg-wrap {
   position: absolute;
-  inset: 0;
+  inset: 22px 22px 150px;
   display: flex;
   justify-content: center;
   align-items: center;
+  container-type: size;
 }
 .fg-box {
   position: relative;
-  height: 100%;
-  width: min(100%, var(--nw));
+  aspect-ratio: var(--ar);
+  width: min(100%, var(--nw), calc(100cqh * var(--ar)));
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
 }
-.fg-box img {
-  object-fit: contain;
+.beat[data-ins] .fg-wrap {
+  inset: 22px 22px 196px;
 }
-.beat[data-active] .fg-box {
-  animation: drift 8s ease-out forwards;
+.beat[data-ins] .beat-cap {
+  padding-right: calc(2 * clamp(92px, 11vw, 150px) + 12px + clamp(20px, 2.4vw, 34px) + 22px);
 }
-@keyframes drift {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.03);
-  }
+.beat[data-ins] .beat-line {
+  font-size: clamp(22px, 2.3vw, 34px);
+}
+.beat[data-portrait] .fg-wrap {
+  inset: 22px auto 22px 22px;
+  width: 46%;
+  justify-content: flex-start;
 }
 .beat-ins {
   position: absolute;
-  top: 22px;
   right: 22px;
+  bottom: 24px;
   display: flex;
   gap: 12px;
   z-index: 3;
@@ -1834,8 +1833,15 @@ html.op-run .hero-stage {
   right: 0;
   bottom: 0;
   z-index: 3;
-  padding: 120px clamp(20px, 2.4vw, 34px) clamp(20px, 2.4vw, 30px);
-  background: linear-gradient(transparent, rgba(11, 12, 8, 0.9));
+  padding: 0 clamp(20px, 2.4vw, 34px) clamp(20px, 2.4vw, 30px);
+}
+.beat[data-portrait] .beat-cap {
+  left: 50%;
+  top: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 clamp(20px, 2.4vw, 34px) clamp(20px, 2.4vw, 30px) 0;
 }
 .beat-n {
   display: block;
@@ -1993,9 +1999,32 @@ html.op-run .hero-stage {
 /* -------------------------------------------------------------------- fit */
 .fit-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 16px;
   margin-top: 36px;
+}
+/* seven cards: a row of four, then a row of three that is wider, so no slot is left empty */
+.fit-card {
+  grid-column: span 3;
+}
+.fit-card:nth-child(n + 5) {
+  grid-column: span 4;
+}
+@media (max-width: 1100px) {
+  .fit-card,
+  .fit-card:nth-child(n + 5) {
+    grid-column: span 6;
+  }
+  .fit-card:last-child {
+    grid-column: span 12;
+  }
+}
+@media (max-width: 640px) {
+  .fit-card,
+  .fit-card:nth-child(n + 5),
+  .fit-card:last-child {
+    grid-column: span 12;
+  }
 }
 .fit-card {
   position: relative;
@@ -2008,6 +2037,18 @@ html.op-run .hero-stage {
 }
 .fit-card > * {
   position: relative;
+}
+.fit-hook {
+  margin: 0 0 12px;
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #53690f;
+}
+.fit-card[data-active] .fit-hook {
+  color: var(--ink);
 }
 .fit-card[data-active] {
   background: var(--lime);
@@ -2579,8 +2620,11 @@ html.op-run .hero-stage {
     border-radius: 26px;
   }
   .beat-ins {
-    top: 14px;
     right: 14px;
+    bottom: 16px;
+  }
+  .fg-wrap {
+    inset: 14px 14px 150px;
   }
   .foot-cols {
     grid-template-columns: 1fr 1fr;

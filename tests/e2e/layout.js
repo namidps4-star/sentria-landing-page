@@ -82,9 +82,8 @@ const WIDTHS = [1920, 1440, 1280, 1024, 768, 480, 375]
         sources.forEach((box) => {
           const img = box.querySelector('img')
           const nw = parseFloat(getComputedStyle(box).getPropertyValue('--nw'))
-          const nh = nw * (img.naturalHeight / img.naturalWidth)
           const b = { width: box.offsetWidth, height: box.offsetHeight }
-          const fit = box.classList.contains('fg-box') ? Math.min(b.width / nw, b.height / nh) : b.width / nw
+          const fit = b.width / nw // the frame keeps the photo's own shape, so width decides
           out.push({ scale: fit, nw })
         })
         return out
