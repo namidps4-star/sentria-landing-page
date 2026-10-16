@@ -41,6 +41,7 @@ html.op-wait *::after {
   box-sizing: border-box;
 }
 html {
+  scrollbar-gutter: stable; /* unlocking scroll after the opening must not re-flow the page */
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
   -webkit-text-size-adjust: 100%;

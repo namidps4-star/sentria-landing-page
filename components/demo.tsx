@@ -1,12 +1,45 @@
 "use client"
 
-import Script from "next/script"
+import { useEffect, useRef } from "react"
 import { C } from "@/content/en"
 import { T } from "./t"
 import { Check, Eyebrow, iv } from "./ui"
 
+const CALENDLY_SRC = "https://assets.calendly.com/assets/external/widget.js"
+
 export function Demo() {
   const s = C.demo
+  const cal = useRef<HTMLDivElement>(null)
+
+  // Calendly is heavy (its own app and iframe). It loads only when the booking box is about to
+  // come into view, so it never competes with the opening or the hero.
+  useEffect(() => {
+    const el = cal.current
+    if (!el) return
+    const load = () => {
+      if (document.querySelector(`script[src="${CALENDLY_SRC}"]`)) return
+      const sc = document.createElement("script")
+      sc.src = CALENDLY_SRC
+      sc.async = true
+      document.body.appendChild(sc)
+    }
+    if (!("IntersectionObserver" in window)) {
+      load()
+      return
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          load()
+          io.disconnect()
+        }
+      },
+      { rootMargin: "900px 0px" },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <section id="demo" className="sc sc-sand demo">
       <div className="wrap demo-grid">
@@ -32,7 +65,7 @@ export function Demo() {
           </ul>
         </div>
 
-        <div className="cal" data-rv="right">
+        <div className="cal" data-rv="right" ref={cal}>
           <div className="cal-h">
             <b>
               <T s={s.widget} />
@@ -50,7 +83,6 @@ export function Demo() {
           </div>
         </div>
       </div>
-      <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
     </section>
   )
 }
