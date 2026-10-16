@@ -9,7 +9,7 @@ function Letters() {
   return (
     <div className="op-word">
       {[...WORD].map((c, i) => (
-        <span key={i} className="op-l" style={{ animationDelay: `${0.25 + i * 0.12}s` }}>
+        <span key={i} className="op-l" style={{ animationDelay: `${0.1 + i * 0.07}s` }}>
           {c}
         </span>
       ))}
@@ -27,11 +27,10 @@ export function Opening() {
   useEffect(() => {
     const root = document.documentElement
     if (!root.classList.contains("op-wait")) return
-    // Play only when the page can keep up: fonts ready, page loaded, two frames painted.
-    // (The head script lifts the pause after 2.6 s whatever happens.)
+    // Play as soon as the fonts are ready and two frames are painted (never wait for images).
+    // The head script lifts the pause after 0.9 s whatever happens.
     let cancelled = false
-    const loaded = document.readyState === "complete" ? Promise.resolve() : new Promise<void>((r) => window.addEventListener("load", () => r(), { once: true }))
-    Promise.all([document.fonts ? document.fonts.ready : Promise.resolve(), loaded]).then(() => {
+    Promise.resolve(document.fonts ? document.fonts.ready : undefined).then(() => {
       requestAnimationFrame(() =>
         requestAnimationFrame(() => {
           if (!cancelled) root.classList.remove("op-wait")

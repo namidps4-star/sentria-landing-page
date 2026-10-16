@@ -26,7 +26,7 @@
   --t0: 0.15s;
 }
 html.op-run {
-  --t0: 3.4s;
+  --t0: 1.85s;
 }
 /* The opening and the hero entrance wait (paused) until the page is ready, then start together. */
 html.op-wait *,
@@ -422,7 +422,7 @@ html.op-run:not(.op-done) .bar {
 html.op-run .op {
   visibility: visible;
   pointer-events: auto;
-  animation: op-end 0s linear 3.95s forwards;
+  animation: op-end 0s linear 2.2s forwards;
 }
 @keyframes op-end {
   to {
@@ -434,7 +434,7 @@ html.op-run .op {
   position: absolute;
   inset: 0;
   background: var(--ink);
-  animation: op-melt 1.1s var(--ease-io) 2.7s forwards;
+  animation: op-melt 0.8s var(--ease-io) 1.4s forwards;
 }
 @keyframes op-melt {
   to {
@@ -458,7 +458,7 @@ html.op-run .op {
   letter-spacing: 0.03em;
   padding-left: 0.03em;
   will-change: transform, opacity;
-  animation: op-grow 1.1s var(--ease-io) 2.7s forwards;
+  animation: op-grow 0.8s var(--ease-io) 1.4s forwards;
 }
 @keyframes op-grow {
   to {
@@ -470,7 +470,7 @@ html.op-run .op {
   display: inline-block;
   opacity: 0;
   transform: translateY(45%);
-  animation: op-letter 1.05s var(--ease) forwards;
+  animation: op-letter 0.7s var(--ease) forwards;
 }
 @keyframes op-letter {
   to {
@@ -489,7 +489,7 @@ html.op-run .op {
   text-transform: uppercase;
   color: var(--lime-dim);
   opacity: 0;
-  animation: op-sub 1.2s ease 1.2s forwards;
+  animation: op-sub 1.1s ease 0.4s forwards;
   z-index: 2;
 }
 @keyframes op-sub {
@@ -2496,15 +2496,13 @@ html.op-run .op {
   transition: transform 0.8s var(--ease);
   pointer-events: auto;
 }
-.js .mega:not([data-in]) span {
-  transform: translateY(70%);
-}
 .mega[data-in] span {
   animation: mega-in 1.2s var(--ease) calc(var(--i, 0) * 80ms) backwards;
 }
 @keyframes mega-in {
   from {
-    transform: translateY(70%);
+    transform: translateY(35%);
+    opacity: 0;
   }
 }
 .mega span:hover {
@@ -2688,9 +2686,6 @@ html.op-run .op {
   }
   .js .queue:not([data-in]) .q-bar i,
   .js .mock:not([data-in]) .bar-f {
-    transform: none;
-  }
-  .js .mega:not([data-in]) span {
     transform: none;
   }
   .steps-line i,
