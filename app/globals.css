@@ -26,7 +26,7 @@
   --t0: 0.15s;
 }
 html.op-run {
-  --t0: 1.05s;
+  --t0: 0.75s;
 }
 /* The opening and the hero entrance wait (paused) until the page is ready, then start together. */
 html.op-wait *,
@@ -252,7 +252,7 @@ html.op-run:not(.op-done) .bar {
   box-shadow: 0 14px 50px rgba(0, 0, 0, 0.35);
 }
 .js .bar {
-  animation: bar-in 0.9s var(--ease) calc(var(--t0) + 0.1s) backwards;
+  animation: bar-in 0.7s var(--ease) calc(var(--t0) + 0.05s) backwards;
 }
 @keyframes bar-in {
   from {
@@ -630,10 +630,10 @@ html.op-run .op {
   color: rgba(245, 243, 234, 0.92);
 }
 .js [data-h] {
-  animation: h-in 1s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
+  animation: h-in 0.7s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
 }
 .js .hl {
-  animation: line-in 1.15s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
+  animation: line-in 0.8s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
 }
 @keyframes h-in {
   from {
@@ -656,7 +656,7 @@ html.op-run .op {
   animation: bob 2s ease-in-out infinite;
 }
 .js .hero-down {
-  animation: h-in 1s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards, bob 2s ease-in-out calc(var(--t0) + 1.2s) infinite;
+  animation: h-in 0.7s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards, bob 2s ease-in-out calc(var(--t0) + 1.2s) infinite;
 }
 @keyframes bob {
   50% {

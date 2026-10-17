@@ -5,7 +5,7 @@ import { T, B } from "./t"
 import { Check } from "./ui"
 import { HeroFx } from "./hero-fx"
 
-const d = (n: number) => ({ ["--d" as string]: `${n * 0.12}s` }) as CSSProperties
+const d = (n: number) => ({ ["--d" as string]: `${n * 0.06}s` }) as CSSProperties
 
 function letters(text: string) {
   return [...text].map((c, i) => (
