@@ -689,6 +689,10 @@ html.op-run .op {
   transform-origin: 0 0;
   will-change: transform;
 }
+.lens-clone .hl,
+.lens-clone [data-h] {
+  animation: none !important; /* the copy is made after the entrance, so it must not replay it */
+}
 .lens-clone {
   position: absolute;
   margin: 0;
