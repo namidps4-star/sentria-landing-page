@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     description: "Evidence, confidence, impact and recommended action for every operational risk.",
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.png",
+    icon: "/icon.svg?v=2",
+    apple: "/apple-icon.png?v=2",
   },
 }
 
