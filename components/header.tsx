@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { C } from "@/content/en"
 import { T } from "./t"
-import { Beacon } from "./ui"
+import { Mark } from "./ui"
 import { setLang, useLang, useText } from "./lang"
 
 const HREFS = ["#situations", "#methode", "#cockpit", "#tarifs", "#secteurs", "#faq"]
@@ -54,7 +54,7 @@ export function Header() {
       <nav className="bar" aria-label={txt("Main", "Principal")}>
         <a className="logo" href="#top" aria-label={txt("SentrIA, back to top", "SentrIA, retour en haut")} onClick={() => setOpen(false)}>
           <span className="logo-mark">
-            <Beacon />
+            <Mark />
           </span>
           <span className="logo-word">SentrIA</span>
         </a>
