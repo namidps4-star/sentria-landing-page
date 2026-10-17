@@ -21,18 +21,16 @@ export function Check({ className = "" }: { className?: string }) {
   )
 }
 
-export function Beacon() {
+/** The SentrIA mark: a lime dome (the alert) over a white bowl (the intelligence). For dark backgrounds. */
+export function Mark() {
   return (
-    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="beacon">
-      <g stroke="currentColor" strokeWidth="4.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 4.2V11" />
-        <path d="M9.6 9.6l4.9 4.9" />
-        <path d="M38.4 9.6l-4.9 4.9" />
-        <path d="M9 31a15 15 0 0 1 30 0" />
-        <path d="M17 31a7 7 0 0 1 14 0" />
-        <path d="M24 12.6V33" />
+    <svg viewBox="0 0 100 100" aria-hidden="true" className="mark">
+      <g strokeWidth="10" strokeLinejoin="round">
+        <path d="M14 42.5a23 23 0 0 1 46 0z" fill="var(--lime)" stroke="var(--lime)" />
+        <path d="M40 57.5a23 23 0 0 0 46 0z" fill="#fff" stroke="#fff" />
       </g>
-      <rect x="5" y="35" width="38" height="8.4" rx="4.2" fill="currentColor" />
+      <rect x="9" y="40" width="10" height="17.5" rx="5" fill="var(--lime)" />
+      <rect x="81" y="42.5" width="10" height="17.5" rx="5" fill="#fff" />
     </svg>
   )
 }

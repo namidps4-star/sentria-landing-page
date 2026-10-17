@@ -269,17 +269,14 @@ html.op-run:not(.op-done) .bar {
   letter-spacing: -0.01em;
 }
 .logo-mark {
-  width: 28px;
-  height: 28px;
-  border-radius: 9px;
-  background: var(--lime);
-  color: var(--ink);
+  width: 34px;
+  height: 34px;
   display: grid;
   place-items: center;
 }
-.beacon {
-  width: 19px;
-  height: 19px;
+.mark {
+  width: 34px;
+  height: 34px;
 }
 .nav-links {
   display: flex;
