@@ -61,7 +61,7 @@ export function SectorFilm() {
   const s = C.sectors
 
   return (
-    <section id="secteurs" className="sc sc-dark sectors">
+    <section id="secteurs" className="sc sc-cream sectors">
       <div className="wrap">
         <Eyebrow>
           <T s={s.eyebrow} />
@@ -74,7 +74,7 @@ export function SectorFilm() {
         </p>
 
         <div className="film" ref={root} data-view={inView ? "1" : undefined} data-still={reduced ? "1" : undefined} data-rv="rise" style={iv(2)}>
-          <div className="film-stage">
+          <div className="film-stage squircle">
             {SECTORS.map((sec, i) => {
               const tag = TAGLINES[sec.key]
               return (
@@ -116,7 +116,7 @@ export function SectorFilm() {
           <div className="film-side">
             <div className="film-tabs" role="group" aria-label={s.title}>
               {SECTORS.map((sec, i) => (
-                <button key={sec.key} type="button" className="ftab" aria-pressed={i === active} onClick={() => setActive(i)}>
+                <button key={sec.key} type="button" className="ftab squircle" aria-pressed={i === active} onClick={() => setActive(i)}>
                   <span className="ftab-n">{pad(i + 1)}</span>
                   <span className="ftab-t">
                     <T s={sec.title} />
@@ -128,7 +128,7 @@ export function SectorFilm() {
               ))}
             </div>
 
-            <div className="film-info" aria-live="polite">
+            <div className="film-info squircle" aria-live="polite">
               {SECTORS.map((sec, i) => {
                 const d = sec.data ? SECTOR_DATA[sec.data] : null
                 return (

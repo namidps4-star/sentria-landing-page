@@ -1763,10 +1763,11 @@ html.op-run .op {
   top: 104px;
   width: 100%;
   aspect-ratio: 4 / 3.7;
-  border-radius: 36px;
+  border-radius: 56px;
   overflow: hidden;
   background: var(--ink-2);
   isolation: isolate;
+  box-shadow: 0 0 0 6px var(--sand), 0 30px 80px rgba(20, 21, 15, 0.25);
 }
 .beat {
   position: absolute;
@@ -1889,49 +1890,71 @@ html.op-run .op {
 .beat[data-active] .beat-cap > *:nth-child(2) {
   transition-delay: 0.7s;
 }
+.squircle {
+  corner-shape: squircle; /* big surfaces only; small controls stay plain round */
+}
 .film-side {
   display: flex;
   flex-direction: column;
-  gap: clamp(22px, 2.6vw, 36px);
+  gap: 14px;
   min-width: 0;
 }
 .film-tabs {
   display: grid;
+  gap: 8px;
 }
 .ftab {
+  position: relative;
+  overflow: hidden;
   display: grid;
-  grid-template-columns: 38px 1fr;
+  grid-template-columns: 44px 1fr;
   align-items: center;
-  padding: 13px 0 0;
+  padding: 12px 18px 12px 12px;
   text-align: left;
-  color: rgba(245, 243, 234, 0.55);
-  transition: color 0.3s, transform 0.4s var(--ease);
+  border-radius: 26px;
+  background: #fff;
+  border: 1px solid rgba(20, 21, 15, 0.1);
+  color: var(--paper);
+  transition: background 0.3s, color 0.3s, transform 0.4s var(--ease), border-color 0.3s;
 }
 .ftab:hover {
-  color: var(--cream);
   transform: translateX(6px);
+  border-color: rgba(20, 21, 15, 0.3);
 }
 .ftab[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
   color: var(--lime);
 }
 .ftab-n {
-  font-size: 12px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  opacity: 0.7;
+  letter-spacing: 0.06em;
+  background: var(--sand);
+  color: var(--paper);
+}
+.ftab[aria-pressed="true"] .ftab-n {
+  background: var(--lime);
+  color: var(--ink);
 }
 .ftab-t {
   font-family: var(--f-display), sans-serif;
   font-weight: 700;
-  font-size: clamp(18px, 1.7vw, 24px);
+  font-size: clamp(17px, 1.5vw, 21px);
   letter-spacing: -0.02em;
 }
 .ftab-bar {
-  grid-column: 1 / -1;
-  position: relative;
-  height: 2px;
-  margin-top: 13px;
-  background: rgba(245, 243, 234, 0.12);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: transparent;
   overflow: hidden;
 }
 .ftab-bar i {
@@ -1940,6 +1963,9 @@ html.op-run .op {
   background: var(--lime);
   transform-origin: 0 50%;
   transform: scaleX(0);
+}
+.ftab:not([aria-pressed="true"]) .ftab-bar i {
+  opacity: 0;
 }
 .ftab[aria-pressed="true"] .ftab-bar i {
   animation: ftab 7s linear forwards;
@@ -1960,6 +1986,10 @@ html.op-run .op {
 }
 .film-info {
   display: grid;
+  padding: clamp(20px, 2vw, 28px);
+  border-radius: 40px;
+  background: #fff;
+  border: 1px solid rgba(20, 21, 15, 0.1);
 }
 .info {
   grid-area: 1 / 1;
@@ -1980,35 +2010,77 @@ html.op-run .op {
   letter-spacing: -0.02em;
 }
 .info p {
-  margin-top: 12px;
+  margin-top: 10px;
   opacity: 0.8;
   line-height: 1.6;
 }
+/* the four signals use the same cards as the app dashboard: lime, white, black, grey */
 .signals {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 .signals li {
-  border: 1px solid rgba(245, 243, 234, 0.14);
-  border-radius: 16px;
-  padding: 12px 14px;
-  transition: border-color 0.3s, background 0.3s;
+  border-radius: 24px;
+  padding: 14px 16px 16px;
+  background: #fff;
+  border: 1px solid rgba(20, 21, 15, 0.12);
+  color: var(--paper);
+  corner-shape: squircle;
+  transition: transform 0.4s var(--ease);
+}
+.signals li:nth-child(1) {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--ink);
+}
+.signals li:nth-child(3) {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+.signals li:nth-child(4) {
+  background: var(--sand);
+  border-color: transparent;
 }
 .signals li:hover {
-  border-color: var(--lime-dim);
-  background: rgba(214, 255, 63, 0.06);
+  transform: translateY(-4px);
 }
+/* the signal's name is a pastel tag, as in the app */
 .signals li > strong {
-  display: block;
-  font-size: 14px;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #e9f7b8;
+  color: #36460a;
+}
+.signals li:nth-child(1) > strong {
+  background: rgba(11, 12, 8, 0.12);
+  color: var(--ink);
+}
+.signals li:nth-child(2) > strong {
+  background: #dfe9ff;
+  color: #1f3a7a;
+}
+.signals li:nth-child(3) > strong {
+  background: rgba(214, 255, 63, 0.18);
+  color: var(--lime);
+}
+.signals li:nth-child(4) > strong {
+  background: #ffe3ef;
+  color: #7a1f4d;
 }
 .signals li > span {
   display: block;
-  font-size: 12.5px;
-  color: var(--muted);
-  margin-top: 2px;
+  margin-top: 10px;
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: 15.5px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 /* -------------------------------------------------------------------- fit */
