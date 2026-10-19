@@ -2376,8 +2376,10 @@ html.op-run .op {
 }
 .foot-top {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
-  gap: clamp(28px, 5vw, 80px);
+  max-width: none; /* full width, like the reference: the address uses the whole right side */
+  padding-inline: clamp(20px, 2.7vw, 54px);
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(28px, 4vw, 60px);
   padding-block: clamp(56px, 7vw, 104px) clamp(44px, 5vw, 72px);
 }
 .foot-hook {
@@ -2429,7 +2431,7 @@ html.op-run .op {
   font-family: var(--f-display), sans-serif;
   font-weight: 500;
   text-transform: uppercase;
-  font-size: calc(100cqw / 18.4);
+  font-size: calc(100cqw / 17.8);
   letter-spacing: -0.02em;
   line-height: 1;
   padding-bottom: 0.34em;
