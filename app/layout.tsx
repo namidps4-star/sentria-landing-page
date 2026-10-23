@@ -26,12 +26,38 @@ const michroma = localFont({
 
 const TITLE = "SentrIA: The operational decision layer"
 
+const SITE = "https://sentriahq.dev"
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE}/#org`,
+      name: "SentrIA",
+      url: SITE,
+      logo: `${SITE}/icon.svg`,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#site`,
+      url: SITE,
+      name: "SentrIA",
+      publisher: { "@id": `${SITE}/#org` },
+    },
+  ],
+}
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE),
+  alternates: { canonical: "/" },
   title: TITLE,
   description:
     "SentrIA shows the evidence, confidence, impact, and recommended action for every operational risk. So your team decides faster and the outcome feeds back.",
   openGraph: {
     type: "website",
+    url: SITE,
+    siteName: "SentrIA",
     title: TITLE,
     description:
       "Evidence, confidence, impact and recommended action for every operational risk. Your team decides faster and the outcome feeds back.",
@@ -66,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${syne.variable} ${poppins.variable} ${michroma.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       </head>
       <body>{children}</body>
     </html>
