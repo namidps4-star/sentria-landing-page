@@ -282,3 +282,43 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------------------------------------------------- lime touches */
+.rv-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 1px rgba(20, 21, 15, 0.12);
+}
+.rv-word[aria-pressed="true"],
+.rv-fit-item[aria-pressed="true"] {
+  background-image: linear-gradient(transparent 64%, var(--lime) 64%, var(--lime) 92%, transparent 92%);
+}
+.rv-fit-item[aria-pressed="true"]::after {
+  content: none;
+}
+.rv-fit-cta {
+  background: var(--lime);
+  color: var(--ink);
+}
+.rv-loop svg {
+  padding: 5px;
+  box-sizing: content-box;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--ink);
+  margin-left: -10px;
+}
+.rv-col[aria-pressed="true"]::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: -21px 0 17px;
+  border-radius: 4px;
+  background: var(--lime);
+}
