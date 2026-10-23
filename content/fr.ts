@@ -201,7 +201,7 @@ export const FR: Record<string, string> = {
  "SentrIA Demo: 30 min": "Démo SentrIA : 30 min",
  "LIVE AVAILABILITY": "DISPONIBILITÉS EN DIRECT",
  "The next decision may already be in your data.": "La prochaine décision est peut-être déjà dans vos données.",
- "See how SentrIA turns one operational problem into a decision you can defend, and a result you can measure.": "Découvrez comment SentrIA transforme un problème opérationnel en décision défendable, et en résultat mesurable.",
+ "See how SentrIA turns one problem into a decision you can defend, and a result you can measure.": "Découvrez comment SentrIA transforme un problème en décision défendable, et en résultat mesurable.",
  "The operational decision layer: evidence, confidence, impact and outcome, for every risk.": "La couche de décision opérationnelle : preuve, confiance, impact et résultat, pour chaque risque.",
  "Product": "Produit",
  "Resources": "Ressources",

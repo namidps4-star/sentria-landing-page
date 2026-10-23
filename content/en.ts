@@ -488,7 +488,7 @@ export const C = {
  "final": {
   "a": "The next decision may already be",
   "b": "in your data.",
-  "lead": "See how SentrIA turns one operational problem into a decision you can defend, and a result you can measure.",
+  "lead": "See how SentrIA turns one problem into a decision you can defend, and a result you can measure.",
   "cta": "Book a demo →"
  },
  "footer": {

@@ -58,11 +58,11 @@ const path = require('path')
 
     // the closing block
     const fin = page.locator('.rv-final')
-    pass(await fin.locator('.rv-ul').count() === 1, 'closing: the underlined words')
-    pass((await fin.locator('.rv-dash-img:visible').count()) === 1, 'closing: the real dashboard image, in one language')
-    const dh = await fin.locator('.rv-dash-img:visible').evaluate((e) => Math.round(e.getBoundingClientRect().height))
-    pass(dh > 150, 'the dashboard image has a height ' + dh)
-    pass(await fin.locator('a[href="#demo"]:visible').count() >= 1, 'closing: the demo button')
+    pass((await fin.locator('.rv-grey:visible').count()) === 1, 'closing: the grey words')
+    pass(await fin.locator('a[href="#demo"]:visible').count() === 1, 'closing: the demo button')
+    const lead = await fin.locator('.rv-final-lead').innerText()
+    pass(lead.length > 40 && !/operational|opérationnel/i.test(lead), 'closing: the lead has no "operational" ' + lead.slice(0, 40))
+    pass(await fin.locator('img').count() === 0, 'closing: type only, no picture')
 
     // layout
     await page.evaluate(() => window.scrollTo(400, window.scrollY))

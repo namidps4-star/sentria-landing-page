@@ -597,42 +597,25 @@ export function Trust() {
 
 /* ------------------------------------------------------------------ final */
 
-/** The real dashboard image, in both languages. */
-function Dash() {
-  const one = (src: typeof dashEn) => (
-    <Image src={src} alt="" sizes="(min-width: 1024px) 560px, 90vw" className="rv-dash-img" />
-  )
-  return (
-    <>
-      <span className="en">{one(dashEn)}</span>
-      <span className="fr" lang="fr">
-        {one(dashFr)}
-      </span>
-    </>
-  )
-}
-
 export function Final() {
   const s = C.final
   return (
     <section className="rv-final">
+      <div className="rv-final-glow" aria-hidden="true" />
       <div className="wrap rv-final-in">
-        <div className="rv-final-copy">
-          <h2 className="rv-final-h" data-rv="rise">
-            <T s={s.a} />{" "}
-            <span className="rv-ul">
-              <T s={s.b} />
-            </span>
-          </h2>
-          <p className="rv-final-lead" data-rv="rise" style={iv(1)}>
-            <T s={s.lead} />
-          </p>
+        <h2 className="rv-final-h" data-rv="rise">
+          <T s={s.a} />{" "}
+          <span className="rv-grey">
+            <T s={s.b} />
+          </span>
+        </h2>
+        <div className="rv-final-foot">
           <a className="btn btn-lime btn-xl" href="#demo" data-mag="" data-rv="scale" style={iv(2)}>
             <T s={s.cta} />
           </a>
-        </div>
-        <div className="rv-final-proof" data-rv="rise" style={iv(2)} aria-hidden="true">
-          <Dash />
+          <p className="rv-final-lead" data-rv="rise" style={iv(1)}>
+            <T s={s.lead} />
+          </p>
         </div>
       </div>
     </section>
