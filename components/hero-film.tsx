@@ -59,7 +59,7 @@ export function HeroFilm() {
       <div className="hero-film" data-still={reduced ? "1" : undefined} data-ready={ready ? "1" : undefined} aria-hidden="true">
         {SECTORS.map((x, i) => (
           <div key={x.key} className="hf-slide" data-active={i === active ? "1" : undefined}>
-            <Image src={x.photo} alt="" fill priority={i === 0} sizes="100vw" quality={72} className="hf-img" />
+            <Image src={x.photo} alt="" fill priority={i === 0} sizes="100vw" quality={90} className="hf-img" />
           </div>
         ))}
         <div className="hf-scrim" />
