@@ -450,33 +450,31 @@ html.op-run .op {
 }
 .op-word {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--f-brand), sans-serif;
-  font-size: clamp(30px, 10.5vw, 190px);
+  left: var(--pad);
+  right: var(--pad);
+  top: 30%;
+  font-family: var(--f-open), var(--f-display), sans-serif;
+  font-weight: 600;
+  font-size: clamp(36px, 19vw, 250px);
   line-height: 1;
-  color: var(--lime);
+  color: #fff;
   white-space: nowrap;
-  letter-spacing: 0.03em;
-  padding-left: 0.03em;
-  will-change: transform, opacity;
-  animation: op-grow 0.6s var(--ease-io) 0.85s forwards;
+  letter-spacing: 0.02em;
+  will-change: opacity;
+  animation: op-fade 0.5s var(--ease-io) 0.85s forwards;
 }
-@keyframes op-grow {
+.op-ia {
+  color: var(--lime);
+}
+@keyframes op-fade {
   to {
-    transform: scale(1.7);
     opacity: 0;
   }
 }
 .op-l {
   display: inline-block;
   opacity: 0;
-  transform: translateY(45%);
+  transform: translateY(40%);
   animation: op-letter 0.5s var(--ease) forwards;
 }
 @keyframes op-letter {
@@ -485,32 +483,53 @@ html.op-run .op {
     transform: none;
   }
 }
-.op-sub {
+.op-tag {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 12vh;
-  text-align: center;
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--lime-dim);
+  left: var(--pad);
+  right: var(--pad);
+  bottom: calc(12vh + 22px);
+  font-size: clamp(13px, 1.1vw, 15px);
+  color: rgba(245, 245, 247, 0.62);
   opacity: 0;
-  animation: op-sub 0.8s ease 0.15s forwards;
-  z-index: 2;
+  animation: op-tag 0.9s ease 0.3s forwards;
 }
-@keyframes op-sub {
+@keyframes op-tag {
   0% {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   30%,
-  70% {
+  75% {
     opacity: 1;
     transform: none;
   }
   100% {
     opacity: 0;
+  }
+}
+.op-bar {
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  bottom: 12vh;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  animation: op-fade 0.5s var(--ease-io) 0.85s forwards;
+}
+.op-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--lime);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  animation: op-line 0.85s var(--ease-io) 0.1s forwards;
+}
+@keyframes op-line {
+  to {
+    transform: scaleX(1);
   }
 }
 

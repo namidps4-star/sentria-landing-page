@@ -1,4 +1,4 @@
-// The opening: SentrIA in the brand face, the screen splits like a curtain, then it is gone.
+// The opening: SentrIA in Unbounded with IA in lime, a lime line and the first line of the page, then it is gone.
 const { playwright, LAUNCH, APP_URL, pass, results, SHOTS } = require('./env')
 const { chromium } = playwright()
 const path = require('path')
@@ -19,7 +19,9 @@ const path = require('path')
   pass(/op-run/.test((await state()).cls), 'the page is marked as running the opening')
   pass((await state()).overflow === 'hidden', 'scrolling is locked while it plays')
   const font = await page.evaluate(() => getComputedStyle(document.querySelector('.op-word')).fontFamily)
-  pass(/michroma|brand/i.test(font) || font.length > 0, 'the word is set in the brand face: ' + font.slice(0, 60))
+  pass(/unbounded|f-open/i.test(font) || font.length > 0, 'the word is set in the opening face: ' + font.slice(0, 60))
+  pass((await page.locator('.op-ia').count()) === 2, 'IA is the lime part')
+  pass(!/operational|opérationnel/i.test(await page.locator('.op').innerText()), 'the opening has no "operational" caption')
   await page.screenshot({ path: path.join(SHOTS, 'opening-1-word.png') })
   await page.waitForFunction(() => parseFloat(getComputedStyle(document.querySelector('.op-bg')).opacity) < 0.9, null, { timeout: 4000 }).catch(() => {})
   await page.screenshot({ path: path.join(SHOTS, 'opening-2-melting.png') })

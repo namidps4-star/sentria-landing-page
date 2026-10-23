@@ -1,0 +1,4 @@
+Unbounded
+Copyright 2022 The Unbounded Project Authors (https://github.com/googlefonts/unbounded)
+Licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org).
+The Latin subset is served as downloaded from Google Fonts.

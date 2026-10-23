@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { C } from "@/content/en"
 import { T } from "./t"
 
 const WORD = "SentrIA"
@@ -9,7 +10,7 @@ function Letters() {
   return (
     <div className="op-word">
       {[...WORD].map((c, i) => (
-        <span key={i} className="op-l" style={{ animationDelay: `${0.05 + i * 0.05}s` }}>
+        <span key={i} className={`op-l${i >= 5 ? " op-ia" : ""}`} style={{ animationDelay: `${0.05 + i * 0.05}s` }}>
           {c}
         </span>
       ))}
@@ -18,8 +19,9 @@ function Letters() {
 }
 
 /**
- * The opening: SentrIA in the brand face rises letter by letter, then the word
- * grows through the screen and the dark layer melts away. No lines, no seam.
+ * The opening: SentrIA in Unbounded rises letter by letter ("IA" in lime), a
+ * thin lime line draws under it with the first line of the page, then the dark
+ * layer melts away. No glow, no seam.
  * Pure CSS, so it ends itself (visibility: hidden) even if no script runs.
  * Only shown when <html> has .op-run (set before paint by the head script).
  */
@@ -45,9 +47,12 @@ export function Opening() {
     <div className="op" aria-hidden="true">
       <div className="op-bg">
         <Letters />
-      </div>
-      <div className="op-sub">
-        <T s="Operational decision layer" />
+        <p className="op-tag">
+          <T s={C.hero.l1} /> <T s={C.hero.l2} /> <T s={C.hero.l3} />
+        </p>
+        <div className="op-bar">
+          <i />
+        </div>
       </div>
     </div>
   )
