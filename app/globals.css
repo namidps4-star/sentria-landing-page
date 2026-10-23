@@ -312,6 +312,14 @@ html.op-run:not(.op-done) .bar {
   align-items: center;
   gap: 14px;
 }
+.nav-signin {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 4px;
+}
+.nav-signin:hover {
+  opacity: 0.7;
+}
 .lang-switch {
   display: flex;
   align-items: center;
@@ -400,7 +408,8 @@ html.op-run:not(.op-done) .bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px 16px;
+  flex-wrap: wrap;
 }
 @keyframes rise-in {
   from {
@@ -2633,6 +2642,7 @@ html.op-run .op {
     margin-left: -22%;
   }
   .nav-cta,
+  .nav-signin,
   .nav-actions .lang-switch {
     display: none;
   }

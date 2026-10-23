@@ -6,6 +6,7 @@ import { T } from "./t"
 import { Mark } from "./ui"
 import { setLang, useLang, useText } from "./lang"
 
+const APP_URL = "https://app.sentriahq.dev"
 const HREFS = ["#situations", "#methode", "#cockpit", "#tarifs", "#secteurs", "#faq"]
 
 function LangSwitch() {
@@ -69,6 +70,9 @@ export function Header() {
 
         <div className="nav-actions">
           <LangSwitch />
+          <a className="nav-signin" href={APP_URL}>
+            {txt("Sign in", "Connexion")}
+          </a>
           <a className="btn btn-lime nav-cta" href="#demo" data-mag="">
             <T s="Book a demo →" />
           </a>
@@ -98,6 +102,9 @@ export function Header() {
         </ul>
         <div className="menu-foot">
           <LangSwitch />
+          <a className="btn btn-line" href={APP_URL}>
+            {txt("Sign in", "Connexion")}
+          </a>
           <a className="btn btn-lime" href="#demo" onClick={() => setOpen(false)}>
             <T s="Book a demo →" />
           </a>
