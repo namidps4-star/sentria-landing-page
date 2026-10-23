@@ -6,6 +6,8 @@ const { chromium } = playwright()
 // French strings the new page deliberately improves (the old page left them in English).
 // The numbered eyebrows were dropped in the revamp (the sections are not a sequence).
 const DROPPED = new Set([
+  // the line above the hero headline was removed
+  'Operational decision layer', 'Couche de décision opérationnelle',
   // the shift and the queue: numbered eyebrows dropped, LIVE badge dropped, queue rows split into action and percentage
   '02: The shift', '02 : Le changement', '05: The decision queue', '05 : La file de décisions', 'LIVE', 'EN DIRECT',
   'Reorder, 94%', 'Review, 81%', 'Inspect, 88%', 'Watch, 72%', 'Réapprovisionner, 94%', 'Examiner, 81%', 'Inspecter, 88%', 'Surveiller, 72%',

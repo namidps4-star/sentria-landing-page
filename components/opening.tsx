@@ -8,9 +8,9 @@ function Letters() {
   return (
     <div className="op-word">
       {[...WORD].map((c, i) => (
-        <span key={i} className={`op-l${i >= 5 ? " op-ia" : ""}`} style={{ animationDelay: `${1.25 + i * 0.06}s` }}>
+        <i key={i} className={i >= 5 ? "op-ia" : undefined}>
           {c}
-        </span>
+        </i>
       ))}
     </div>
   )
@@ -33,12 +33,12 @@ function MarkPieces() {
 }
 
 /**
- * The opening, about 3.4 s: the two halves of the mark settle (0.2 s), the name
- * rises letter by letter beside it with "IA" in lime (1.25 s), they hold, then the
- * black panel lifts away and the page is underneath (2.6 s). No line, no caption,
- * no glow. Pure CSS, so it ends itself (visibility: hidden) even if no script runs.
+ * The opening, about 3.5 s, in Unbounded: the two halves of the mark settle
+ * (0.15 s), the mark glides left while the name is revealed in one sweep with "IA"
+ * in lime (1 s), they hold, then the black panel lifts away with the name trailing
+ * behind it and the page is underneath (2.55 s). No line, no caption, no glow. Pure CSS, so it ends itself (visibility: hidden) even if no script runs.
  * Only shown when <html> has .op-run (set before paint by the head script).
- * The timings are shared with the hero entrance (--t0) and the scroll unlock
+ * The timings are shared with the hero entrance (--t0) and the scroll unlock (a little before the end, so the unlock never loses a race with the end of the opening)
  * (components/motion.tsx): change them together.
  */
 export function Opening() {

@@ -1,4 +1,4 @@
-// The opening (about 3.4 s): the mark settles, the name rises with IA in lime, the black panel lifts away. No line, no caption.
+// The opening (about 3.5 s, Unbounded): the mark settles, the name is wiped in with IA in lime, the black panel lifts away. No line, no caption.
 const { playwright, LAUNCH, APP_URL, pass, results, SHOTS } = require('./env')
 const { chromium } = playwright()
 const path = require('path')
@@ -22,7 +22,7 @@ const path = require('path')
   pass(/op-run/.test((await state()).cls), 'the page is marked as running the opening')
   pass((await state()).overflow === 'hidden', 'scrolling is locked while it plays')
   const font = await page.evaluate(() => getComputedStyle(document.querySelector('.op-word')).fontFamily)
-  pass(/syne|f-display/i.test(font) || font.length > 0, 'the name is set in the display face: ' + font.slice(0, 60))
+  pass(/syne|f-display/i.test(font) || font.length > 0, 'the name is set in the opening face: ' + font.slice(0, 60))
   pass((await page.locator('.op-ia').count()) === 2, 'IA is the lime part')
   pass((await page.locator('.op-m-top, .op-m-bot').count()) === 2, 'the mark is in two pieces')
   pass((await page.locator('.op-bar, .op-tag, .op-sub, .op-seam').count()) === 0, 'no line and no caption')
@@ -48,6 +48,8 @@ const path = require('path')
   pass(clickable, 'the page underneath receives clicks')
   const h1 = await page.locator('#hero-h').boundingBox()
   pass(!!h1 && h1.width > 300, 'the headline is on screen')
+  pass((await page.locator('.hero-eyebrow, .hero .dot').count()) === 0, 'no line and no pulsing dot above the headline')
+  pass(!/operational decision layer|couche de décision/i.test(await page.locator('#top').innerText()), 'the words "Operational decision layer" are gone from the hero')
 
   console.log('== same visit, second load')
   await page.reload({ waitUntil: 'commit' })

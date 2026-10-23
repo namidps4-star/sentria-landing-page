@@ -37,10 +37,6 @@ export function Hero() {
       <div className="hero-stage" id="hero-stage">
         <div className="wrap hero-in">
           <div className="hero-top">
-            <p className="hero-eyebrow" data-h="" style={d(0)}>
-              <span className="dot" aria-hidden="true" />
-              <T s={h.eyebrow} />
-            </p>
             <ul className="hero-checks">
               {h.checks.map((c, i) => (
                 <li key={c} data-h="" style={d(i + 1)}>
