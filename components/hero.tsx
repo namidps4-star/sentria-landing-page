@@ -4,6 +4,7 @@ import { FR } from "@/content/fr"
 import { T, B } from "./t"
 import { Check } from "./ui"
 import { HeroFx } from "./hero-fx"
+import { HeroFilm } from "./hero-film"
 
 const d = (n: number) => ({ ["--d" as string]: `${n * 0.06}s` }) as CSSProperties
 
@@ -35,6 +36,7 @@ export function Hero() {
   return (
     <section id="top" className="hero" aria-labelledby="hero-h">
       <div className="hero-stage" id="hero-stage">
+        <HeroFilm />
         <div className="wrap hero-in">
           <div className="hero-top">
             <ul className="hero-checks">
@@ -76,12 +78,12 @@ export function Hero() {
             <T s={h.cta1} />
           </span>
         </a>
-        <a className="strip-b" href="#secteurs">
+        <a className="strip-b" href="#fit">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
           </svg>
           <span className="sr-only">
-            <B en="Watch the sector film" fr="Voir le film des secteurs" />
+            <B en="See the sectors" fr="Voir les secteurs" />
           </span>
         </a>
         <a className="strip-c" href="#methode">

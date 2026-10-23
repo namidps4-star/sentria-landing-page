@@ -6,7 +6,6 @@ import { T } from "@/components/t"
 import { QuickFit, FitSection } from "@/components/fit"
 import { Faq } from "@/components/faq"
 import { Demo } from "@/components/demo"
-import { SectorFilm } from "@/components/sector-film"
 import {
   Proof,
   Product,
@@ -45,7 +44,6 @@ export default function Page() {
         <Cockpit />
         <Pricing />
         <Flow />
-        <SectorFilm />
         <FitSection />
         <DataSec />
         <Reasoning />

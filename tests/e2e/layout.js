@@ -61,40 +61,26 @@ const WIDTHS = [1920, 1440, 1280, 1024, 768, 480, 375]
     }
   }
 
-  console.log('== photos are never drawn bigger than their own pixels')
+  console.log('== hero film photos')
   {
+    // The hero film is a full-width background under a dark layer, so its photos are enlarged on purpose
+    // (the old rule "never above x1.00" belonged to the sector block, which is gone). This guards against a tiny file.
     const ctx = await browser.newContext({ viewport: { width: 1920, height: 1000 }, deviceScaleFactor: 1 })
     await ctx.addInitScript(() => sessionStorage.setItem('sentria-opened', '1'))
     const page = await ctx.newPage()
     await page.goto(APP_URL, { waitUntil: 'load' })
-    await page.locator('.film').scrollIntoViewIfNeeded()
     await page.waitForTimeout(800)
-    const n = await page.locator('.ftab').count()
-    let worst = 0
-    let checked = 0
-    for (let i = 0; i < n; i++) {
-      await page.locator('.ftab').nth(i).click()
-      await page.waitForTimeout(500)
-      const r = await page.evaluate(() => {
-        const beat = document.querySelector('.beat[data-active="1"]')
-        const out = []
-        const sources = [beat.querySelector('.fg-box'), ...beat.querySelectorAll('.beat-in')]
-        sources.forEach((box) => {
-          const img = box.querySelector('img')
-          const nw = parseFloat(getComputedStyle(box).getPropertyValue('--nw'))
-          const b = { width: box.offsetWidth, height: box.offsetHeight }
-          const fit = b.width / nw // the frame keeps the photo's own shape, so width decides
-          out.push({ scale: fit, nw })
-        })
-        return out
-      })
-      r.forEach((x) => {
-        checked++
-        worst = Math.max(worst, x.scale)
-      })
-    }
-    pass(checked >= 10, `checked ${checked} photos across the seven sectors`)
-    pass(worst <= 1.0001, `largest enlargement is x${worst.toFixed(2)} (never above x1.00)`)
+    const r = await page.evaluate(() =>
+      [...document.querySelectorAll('.hf-img')].map((img) => {
+        const box = img.parentElement.getBoundingClientRect()
+        return Math.max(box.width / img.naturalWidth, box.height / img.naturalHeight)
+      }),
+    )
+    pass(r.length === 7, 'seven hero photos')
+    pass(r.every((x) => x > 0 && isFinite(x)), 'every photo has loaded')
+    const worst = Math.max(...r)
+    pass(worst <= 3.5, `largest enlargement is x${worst.toFixed(2)} (a guard at x3.5)`)
+    console.log('   enlargements at 1920 px: ' + r.map((x) => x.toFixed(2)).join(', '))
     await ctx.close()
   }
 

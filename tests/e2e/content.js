@@ -6,6 +6,8 @@ const { chromium } = playwright()
 // French strings the new page deliberately improves (the old page left them in English).
 // The numbered eyebrows were dropped in the revamp (the sections are not a sequence).
 const DROPPED = new Set([
+  // the contact address changed to hello@sentria.dev
+  'hello.sentria@gmail.com',
   // the line above the hero headline was removed
   'Operational decision layer', 'Couche de décision opérationnelle',
   // the shift and the queue: numbered eyebrows dropped, LIVE badge dropped, queue rows split into action and percentage

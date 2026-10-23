@@ -1,17 +1,11 @@
 "use client"
 
-import Image from "next/image"
 import { useSyncExternalStore } from "react"
-import industry from "@/assets/sectors/industry.webp"
-import health from "@/assets/sectors/health-2.webp"
-import agriculture from "@/assets/sectors/agriculture.webp"
-import transportation from "@/assets/sectors/transportation.webp"
-import logistics from "@/assets/sectors/logistics.webp"
-import energy from "@/assets/sectors/energy.jpg"
-import retail from "@/assets/sectors/retail.webp"
 import { C } from "@/content/en"
 import { T } from "./t"
 import { TAGLINES } from "@/content/taglines"
+import { SECTOR_DATA } from "@/content/sectors"
+import { SECTORS } from "./sectors"
 import { B } from "./t"
 import { iv } from "./ui"
 
@@ -73,8 +67,6 @@ export function QuickFit() {
   )
 }
 
-const PHOTOS = { industry, healthcare: health, agriculture, transportation, logistics, energy, retail }
-
 export function FitSection() {
   const active = useFit()
   const s = C.fit
@@ -87,7 +79,10 @@ export function FitSection() {
         <h2 className="rv-h" data-rv="rise">
           <T s={s.title} />
         </h2>
-        <div className="rv-fit" data-rv="rise" style={iv(1)}>
+        <p className="rv-lead" data-rv="rise" style={iv(1)}>
+          <T s={C.sectors.lead} />
+        </p>
+        <div className="rv-fit" data-rv="rise" style={iv(2)}>
           <div className="rv-fit-list">
             <div role="group" aria-label={s.title}>
               {s.tabs.map((t, i) => (
@@ -112,25 +107,42 @@ export function FitSection() {
               ))}
             </div>
           </div>
-          <div className="rv-fit-photo">
-            {FIT_KEYS.map((k) => (
-              <Image
-                key={k}
-                src={PHOTOS[k]}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 600px, 92vw"
-                data-on={active === k ? "1" : undefined}
-                className="rv-fit-img"
-              />
-            ))}
-            <div className="rv-fit-shade" aria-hidden="true" />
-            <p className="rv-fit-chip">
-              <B en={TAGLINES[active].en} fr={TAGLINES[active].fr} />
-            </p>
-            <a className="rv-fit-cta" href="#demo">
-              <T s={C.hero.cta1} />
-            </a>
+
+          {/* In place of a photo: the sector's own signals, set out as a board. */}
+          <div className="rv-board-wrap">
+            {SECTORS.map((sec) => {
+              const d = sec.data ? SECTOR_DATA[sec.data] : null
+              const tag = TAGLINES[sec.key]
+              const on = active === sec.key
+              return (
+                <div key={sec.key} className="rv-board" data-on={on ? "1" : undefined} aria-hidden={on ? undefined : true}>
+                  <p className="rv-b-name">
+                    <T s={sec.title} />
+                  </p>
+                  <p className="rv-b-tag">
+                    <B en={tag.en} fr={tag.fr} />
+                  </p>
+                  <p className="rv-b-desc">{d ? <B en={d.en.description} fr={d.fr.description} /> : <T s={s.cards[6].p} />}</p>
+                  {d ? (
+                    <ul className="rv-b-sig">
+                      {d.en.signals.map((sg, k) => (
+                        <li key={sg[0]} style={{ ["--k" as string]: k } as React.CSSProperties}>
+                          <strong>
+                            <B en={sg[0]} fr={d.fr.signals[k][0]} />
+                          </strong>
+                          <span>
+                            <B en={sg[1]} fr={d.fr.signals[k][1]} />
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  <a className="rv-fit-cta" href="#demo">
+                    <T s={C.hero.cta1} />
+                  </a>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

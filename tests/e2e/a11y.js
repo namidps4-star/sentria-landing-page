@@ -36,11 +36,11 @@ const ratio = (a, b) => {
     pass(lens === '', 'the lens does not run')
     const letterTf = await page.evaluate(() => document.querySelector('.wvl').style.transform)
     pass(letterTf === '', 'the headline does not wave')
-    pass(!(await page.locator('.film').getAttribute('data-view')) || true, 'film is controlled by the user')
-    const before = await page.locator('.ftab[aria-pressed="true"] .ftab-n').innerText()
-    await page.locator('.film').scrollIntoViewIfNeeded()
-    await page.waitForTimeout(8000)
-    pass((await page.locator('.ftab[aria-pressed="true"] .ftab-n').innerText()) === before, 'the film does not advance on its own')
+    pass((await page.locator('.hero-film[data-still="1"]').count()) === 1, 'the hero film stays still')
+    const idx = () => page.evaluate(() => [...document.querySelectorAll('.hf-slide')].findIndex((s) => s.dataset.active === '1'))
+    const before = await idx()
+    await page.waitForTimeout(6500)
+    pass((await idx()) === before, 'the hero film does not advance on its own')
     await ctx.close()
   }
 
@@ -88,7 +88,7 @@ const ratio = (a, b) => {
     const page = await ctx.newPage()
     await page.goto(APP_URL, { waitUntil: 'load' })
     await page.waitForTimeout(800)
-    const sels = ['.hero-lead', '.hero-checks li', '.sc-cream .lead', '.sc-cream .card p', '.sc-dark .lead', '.sc-olive .step p', '.sc-lime .promise-list li > span', '.sc-deep .flow-step p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.trow:not(.thead) .c-name']
+    const sels = ['.hero-lead', '.hero-checks li', '.rv-sec .rv-lead', '.sc-cream .card p', '.sc-dark .lead', '.rv-col-p', '.sc-lime .promise-list li > span', '.sc-deep .flow-step p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.trow:not(.thead) .c-name']
     // bring each sample into view and let its entrance finish, so a half-faded element is not measured
     for (const s of sels) {
       const el = page.locator(s).filter({ visible: true }).first()
@@ -109,7 +109,7 @@ const ratio = (a, b) => {
         }
         return [11, 12, 8]
       }
-      const sel = ['.hero-lead', '.hero-checks li', '.sc-cream .lead', '.sc-cream .card p', '.sc-dark .lead', '.sc-olive .step p', '.sc-lime .promise-list li > span', '.sc-deep .flow-step p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.trow:not(.thead) .c-name']
+      const sel = ['.hero-lead', '.hero-checks li', '.rv-sec .rv-lead', '.sc-cream .card p', '.sc-dark .lead', '.rv-col-p', '.sc-lime .promise-list li > span', '.sc-deep .flow-step p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.trow:not(.thead) .c-name']
       return sel.map((s) => {
         const el = [...document.querySelectorAll(s)].find((e) => e.offsetParent !== null)
         if (!el) return { s, missing: true }
