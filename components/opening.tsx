@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect } from "react"
-import { C } from "@/content/en"
-import { T } from "./t"
 
 const WORD = "SentrIA"
 
@@ -10,7 +8,7 @@ function Letters() {
   return (
     <div className="op-word">
       {[...WORD].map((c, i) => (
-        <span key={i} className={`op-l${i >= 5 ? " op-ia" : ""}`} style={{ animationDelay: `${0.05 + i * 0.05}s` }}>
+        <span key={i} className={`op-l${i >= 5 ? " op-ia" : ""}`} style={{ animationDelay: `${1.25 + i * 0.06}s` }}>
           {c}
         </span>
       ))}
@@ -18,12 +16,30 @@ function Letters() {
   )
 }
 
+/** The mark in two pieces, so the lime dome and the white bowl can settle into place on their own. */
+function MarkPieces() {
+  return (
+    <svg viewBox="0 0 100 100" aria-hidden="true" className="op-mark">
+      <g className="op-m-top">
+        <path d="M14 42.5a23 23 0 0 1 46 0z" fill="var(--lime)" stroke="var(--lime)" strokeWidth="10" strokeLinejoin="round" />
+        <rect x="9" y="40" width="10" height="17.5" rx="5" fill="var(--lime)" />
+      </g>
+      <g className="op-m-bot">
+        <path d="M40 57.5a23 23 0 0 0 46 0z" fill="#fff" stroke="#fff" strokeWidth="10" strokeLinejoin="round" />
+        <rect x="81" y="42.5" width="10" height="17.5" rx="5" fill="#fff" />
+      </g>
+    </svg>
+  )
+}
+
 /**
- * The opening: SentrIA in Unbounded rises letter by letter ("IA" in lime), a
- * thin lime line draws under it with the first line of the page, then the dark
- * layer melts away. No glow, no seam.
- * Pure CSS, so it ends itself (visibility: hidden) even if no script runs.
+ * The opening, about 3.4 s: the two halves of the mark settle (0.2 s), the name
+ * rises letter by letter beside it with "IA" in lime (1.25 s), they hold, then the
+ * black panel lifts away and the page is underneath (2.6 s). No line, no caption,
+ * no glow. Pure CSS, so it ends itself (visibility: hidden) even if no script runs.
  * Only shown when <html> has .op-run (set before paint by the head script).
+ * The timings are shared with the hero entrance (--t0) and the scroll unlock
+ * (components/motion.tsx): change them together.
  */
 export function Opening() {
   useEffect(() => {
@@ -46,12 +62,9 @@ export function Opening() {
   return (
     <div className="op" aria-hidden="true">
       <div className="op-bg">
-        <Letters />
-        <p className="op-tag">
-          <T s={C.hero.l1} /> <T s={C.hero.l2} /> <T s={C.hero.l3} />
-        </p>
-        <div className="op-bar">
-          <i />
+        <div className="op-lock">
+          <MarkPieces />
+          <Letters />
         </div>
       </div>
     </div>

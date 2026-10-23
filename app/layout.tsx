@@ -25,12 +25,6 @@ const michroma = localFont({
   display: "swap",
 })
 
-const unbounded = localFont({
-  src: [{ path: "./fonts/unbounded-600.woff2", weight: "600", style: "normal" }],
-  variable: "--f-open",
-  display: "swap",
-})
-
 const TITLE = "SentrIA: The operational decision layer"
 
 const SITE = "https://sentriahq.dev"
@@ -96,7 +90,7 @@ const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var l=localS
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${syne.variable} ${poppins.variable} ${michroma.variable} ${unbounded.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${syne.variable} ${poppins.variable} ${michroma.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
