@@ -6,6 +6,9 @@ const { chromium } = playwright()
 // French strings the new page deliberately improves (the old page left them in English).
 // The numbered eyebrows were dropped in the revamp (the sections are not a sequence).
 const DROPPED = new Set([
+  // the small made-up product card was replaced by the dashboard tour
+  'Outcomes', 'What needs my attention now', 'SYSTEM ACTIVE', 'Open decisions', 'Signals tracked', 'Decision outcomes', 'Last 30 days',
+  'Résultats', 'Ce qui requiert mon attention maintenant', 'SYSTÈME ACTIF', 'Décisions ouvertes', 'Signaux suivis', 'Résultats des décisions', '30 derniers jours',
   // the contact address changed to hello@sentria.dev
   'hello.sentria@gmail.com',
   // the line above the hero headline was removed

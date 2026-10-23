@@ -1,12 +1,9 @@
-import Image from "next/image"
 import type { ReactNode } from "react"
 import { C } from "@/content/en"
 import { FR } from "@/content/fr"
 import { T, B } from "./t"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
-import dashEn from "@/assets/dash/dashboard-en.webp"
-import dashFr from "@/assets/dash/dashboard-fr.webp"
 
 type Tone = "cream" | "sand" | "dark" | "olive" | "lime" | "deep"
 
@@ -49,99 +46,6 @@ export function Proof() {
         </div>
       </div>
     </div>
-  )
-}
-
-/* ---------------------------------------------------------------- product */
-
-const BARS = [38, 52, 43, 66, 58, 78, 100]
-
-export function Product() {
-  const m = C.hero.mock
-  return (
-    <section id="product" className="sc sc-cream product">
-      <div className="wrap product-grid">
-        <div className="product-copy">
-          <div className="mock" data-tilt="" data-rv="rise">
-            <aside className="mock-side">
-              <div className="mock-brand">{m.brand}</div>
-              <ul>
-                {m.menu.map((x, i) => (
-                  <li key={x} className={i === 0 ? "on" : ""}>
-                    <T s={x} />
-                  </li>
-                ))}
-              </ul>
-            </aside>
-            <div className="mock-main">
-              <div className="mock-head">
-                <h2 className="mock-title">
-                  <T s={m.title} />
-                </h2>
-                <span className="status">
-                  <i aria-hidden="true" />
-                  <T s={m.status} />
-                </span>
-              </div>
-              <div className="mock-stats">
-                <div className="stat stat-risk">
-                  <span>
-                    <T s={m.stats[0].label} />
-                  </span>
-                  <b data-count="7" data-pad="2">
-                    {m.stats[0].value}
-                  </b>
-                </div>
-                <div className="stat stat-ok">
-                  <span>
-                    <T s={m.stats[1].label} />
-                  </span>
-                  <b data-count="92" data-suffix="%">
-                    {m.stats[1].value}
-                  </b>
-                </div>
-                <div className="stat">
-                  <span>
-                    <T s={m.stats[2].label} />
-                  </span>
-                  <b data-count="148">{m.stats[2].value}</b>
-                </div>
-              </div>
-              <div className="mock-chart">
-                <div className="mock-chart-h">
-                  <span>
-                    <T s={m.chart} />
-                  </span>
-                  <span>
-                    <T s={m.range} />
-                  </span>
-                </div>
-                <div className="bars">
-                  {BARS.map((h, i) => (
-                    <div key={i} className="bar-c" style={iv(i)}>
-                      <div className="bar-f" style={{ height: `${h}%` }} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="product-shot" data-prog="enter">
-          <div className="shot-frame" data-par="0.05">
-            <Image className="en" src={dashEn} alt="" sizes="(min-width: 1000px) 62vw, 100vw" quality={82} />
-            <Image className="fr" src={dashFr} alt="" sizes="(min-width: 1000px) 62vw, 100vw" quality={82} />
-          </div>
-          <p className="sr-only">
-            <B
-              en="The SentrIA dashboard: alert counts by status and type, the seven day trend and the ranked list of alerts."
-              fr="Le tableau de bord SentrIA : nombre d'alertes par statut et par type, tendance sur sept jours et liste classée des alertes."
-            />
-          </p>
-        </div>
-      </div>
-    </section>
   )
 }
 

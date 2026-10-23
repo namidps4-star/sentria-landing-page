@@ -1,3 +1,4 @@
+import { ProductTour } from "@/components/product-tour"
 import { Opening } from "@/components/opening"
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
@@ -8,7 +9,6 @@ import { Faq } from "@/components/faq"
 import { Demo } from "@/components/demo"
 import {
   Proof,
-  Product,
   Situations,
   Shift,
   Method,
@@ -35,7 +35,7 @@ export default function Page() {
       <main id="main">
         <Hero />
         <Proof />
-        <Product />
+        <ProductTour />
         <QuickFit />
         <Situations />
         <Shift />
