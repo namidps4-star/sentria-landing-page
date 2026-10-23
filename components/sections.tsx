@@ -626,8 +626,8 @@ export function Footer() {
           </p>
         </div>
         <div className="foot-r">
-          <a className="foot-mail" href="mailto:hello@sentria.dev" data-mag="">
-            <span>hello@sentria.dev</span>
+          <a className="foot-mail" href="mailto:hello@sentriahq.dev" data-mag="">
+            <span>hello@sentriahq.dev</span>
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -652,8 +652,8 @@ export function Footer() {
                 {link("#faq", "FAQ")}
                 {link("#demo", "Demo")}
                 {link("#demo", "Contact")}
-                {link("mailto:privacy@sentria.io", "Privacy")}
-                {link("mailto:legal@sentria.io", "Terms")}
+                {link("/privacy", "Privacy")}
+                {link("/terms", "Terms")}
               </ul>
             </div>
             <div>
