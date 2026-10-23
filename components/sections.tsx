@@ -1,17 +1,12 @@
 import Image from "next/image"
 import type { ReactNode } from "react"
 import { C } from "@/content/en"
+import { FR } from "@/content/fr"
 import { T, B } from "./t"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 import dashEn from "@/assets/dash/dashboard-en.webp"
 import dashFr from "@/assets/dash/dashboard-fr.webp"
-import icBottleneck from "@/assets/icons/bottleneck.png"
-import icPriorities from "@/assets/icons/priorities.png"
-import icRecommendations from "@/assets/icons/recommendations.png"
-
-// The three cockpit icons are our own artwork (black on transparent), recoloured with a CSS mask.
-const FEAT_ICONS = [icBottleneck, icPriorities, icRecommendations]
 
 type Tone = "cream" | "sand" | "dark" | "olive" | "lime" | "deep"
 
@@ -184,41 +179,46 @@ export function Situations() {
 export function Shift() {
   const s = C.shift
   return (
-    <Sec tone="dark" className="shift">
-      <Eyebrow>
-        <T s={s.eyebrow} />
-      </Eyebrow>
-      <H2>
-        <T s={s.title} />
-      </H2>
-      <div className="shift-grid">
-        <article className="shift-card before" data-rv="left">
-          <span className="kicker">
-            <T s={s.before.k} />
+    <section className="rv-sec rv-dark rv-shift">
+      <div className="wrap">
+        <p className="rv-kicker" data-rv="fade">
+          <B en="The shift" fr="Le changement" />
+        </p>
+        <h2 className="rv-h" data-rv="rise">
+          <span className="en">
+            Move from monitoring to <em>deciding.</em>
           </span>
-          <h3>
-            <T s={s.before.q} />
-          </h3>
-          <p>
-            <T s={s.before.p} />
-          </p>
-        </article>
-        <div className="shift-arrow" aria-hidden="true" data-rv="scale">
-          <Arrow />
+          <span className="fr" lang="fr">
+            Passez du suivi à la <em>décision.</em>
+          </span>
+        </h2>
+        <div className="rv-split" data-rv="rise" style={iv(1)}>
+          <div className="rv-side">
+            <span className="rv-tag">
+              <T s={s.before.k} />
+            </span>
+            <h3 className="rv-q">
+              <T s={s.before.q} />
+            </h3>
+            <p>
+              <T s={s.before.p} />
+            </p>
+          </div>
+          <div className="rv-vline" aria-hidden="true" />
+          <div className="rv-side rv-side-us">
+            <span className="rv-pill">
+              <T s={s.after.k} />
+            </span>
+            <h3 className="rv-q">
+              <T s={s.after.q} />
+            </h3>
+            <p>
+              <T s={s.after.p} />
+            </p>
+          </div>
         </div>
-        <article className="shift-card after" data-rv="right" data-spot="">
-          <span className="kicker">
-            <T s={s.after.k} />
-          </span>
-          <h3>
-            <T s={s.after.q} />
-          </h3>
-          <p>
-            <T s={s.after.p} />
-          </p>
-        </article>
       </div>
-    </Sec>
+    </section>
   )
 }
 
@@ -317,75 +317,54 @@ export function Why() {
 
 /* ---------------------------------------------------------------- cockpit */
 
-function confidence(a: string) {
-  const m = /(\d+)%/.exec(a)
-  return m ? parseInt(m[1], 10) : 70
-}
-
 export function Cockpit() {
   const s = C.cockpit
   return (
-    <Sec id="cockpit" tone="dark" className="cockpit">
-      <div className="cockpit-grid">
-        <div>
-          <Eyebrow>
-            <T s={s.eyebrow} />
-          </Eyebrow>
-          <H2>
-            <T s={s.title} />
-          </H2>
-          <p className="lead" data-rv="rise" style={iv(1)}>
-            <T s={s.lead} />
-          </p>
-          <ul className="feat">
-            {s.features.map((f, i) => (
-              <li key={f.h} data-rv="left" style={iv(i + 2)}>
-                <span className="feat-ic" aria-hidden="true">
-                  <i style={{ ["--ic" as string]: `url(${FEAT_ICONS[i].src})` } as React.CSSProperties} />
+    <section id="cockpit" className="rv-sec rv-dark rv-queue">
+      <div className="wrap">
+        <p className="rv-kicker" data-rv="fade">
+          <B en="The decision queue" fr="La file de décisions" />
+        </p>
+        <h2 className="rv-h" data-rv="rise">
+          <T s={s.title} />
+        </h2>
+        <p className="rv-lead" data-rv="rise" style={iv(1)}>
+          <T s={s.lead} />
+        </p>
+        <ol className="rv-rows" data-rv="rise" style={iv(2)}>
+          {s.queue.map((q) => {
+            const [en, pct] = q.a.split(", ")
+            const fr = (FR[q.a] ?? q.a).split(", ")[0]
+            return (
+              <li key={q.t} className="rv-row">
+                <span className="rv-r-t">
+                  <T s={q.t} />
                 </span>
-                <div>
-                  <strong>
-                    <T s={f.h} />
-                  </strong>
-                  <span>
-                    <T s={f.p} />
-                  </span>
-                </div>
+                <span className="rv-r-a">
+                  <B en={en} fr={fr} />
+                </span>
+                <span className="rv-r-n">{pct}</span>
               </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="queue" data-tilt="" data-rv="right">
-          <div className="queue-h">
-            <span>
-              <T s={s.panel} />
-            </span>
-            <span className="live">
-              <i aria-hidden="true" />
-              <T s={s.live} />
-            </span>
-          </div>
-          <ol>
-            {s.queue.map((q, i) => (
-              <li key={q.t} style={iv(i)}>
-                <div className="q-row">
-                  <span className="q-t">
-                    <T s={q.t} />
-                  </span>
-                  <span className="q-a">
-                    <T s={q.a} />
-                  </span>
-                </div>
-                <div className="q-bar" aria-hidden="true">
-                  <i style={{ ["--w" as string]: `${confidence(q.a)}%` } as React.CSSProperties} />
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
+            )
+          })}
+        </ol>
+        <ul className="rv-feats">
+          {s.features.map((f) => (
+            <li key={f.h}>
+              <strong>
+                <T s={f.h} />
+              </strong>
+              <span>
+                <T s={f.p} />
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="rv-ex">
+          <B en="Example queue." fr="Exemple de file." />
+        </p>
       </div>
-    </Sec>
+    </section>
   )
 }
 

@@ -40,6 +40,19 @@ const path = require('path')
     pass(/Observe|Observer/.test(await met.locator('.rv-word:visible').first().innerText()), 'the first is Observe')
     pass(await met.locator('.rv-loop:visible').count() === 1, 'the loop note shows')
 
+    // the shift
+    const sh = page.locator('.rv-shift')
+    pass((await sh.locator('.rv-h em:visible').count()) === 1, 'shift: the lime word')
+    pass((await sh.locator('.rv-side').count()) === 2 && (await sh.locator('.rv-pill:visible').count()) === 1, 'shift: two sides, one pill')
+    // the decision queue
+    const qu = page.locator('#cockpit')
+    pass((await qu.locator('.rv-row').count()) === 4, 'queue: four ranked rows')
+    const pcts = await qu.locator('.rv-r-n').allInnerTexts()
+    pass(pcts.join(',') === '94%,81%,88%,72%', 'queue: the percentages ' + pcts.join(','))
+    pass((await qu.locator('.rv-feats li').count()) === 3, 'queue: three short texts')
+    pass((await qu.locator('.live, .queue, img').count()) === 0, 'queue: no LIVE badge, no old card, no picture')
+    pass((await qu.locator('.rv-ex:visible').count()) === 1, 'queue: marked as an example')
+
     // where do you fit in
     const fit = page.locator('#fit')
     const items = fit.locator('.rv-fit-item')
@@ -67,7 +80,7 @@ const path = require('path')
     // layout
     await page.evaluate(() => window.scrollTo(400, window.scrollY))
     pass(await page.evaluate(() => window.scrollX) === 0, 'the page cannot be scrolled sideways')
-    for (const [id, name] of [['#situations', 'problem'], ['#methode', 'method'], ['#fit', 'fit'], ['.rv-final', 'final']]) {
+    for (const [id, name] of [['#situations', 'problem'], ['.rv-shift', 'shift'], ['#cockpit', 'queue'], ['#methode', 'method'], ['#fit', 'fit'], ['.rv-final', 'final']]) {
       const el = page.locator(id).first()
       await el.scrollIntoViewIfNeeded()
       await page.waitForTimeout(500)
