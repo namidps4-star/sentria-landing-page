@@ -70,7 +70,7 @@ const { chromium } = playwright()
     await ctx.close()
   }
 
-  console.log('== quick fit and fit cards')
+  console.log('== quick fit and fit list')
   {
     const { page, ctx } = await open()
     const pills = page.locator('.pill')
@@ -78,11 +78,11 @@ const { chromium } = playwright()
     await pills.nth(6).click()
     await page.waitForTimeout(900)
     pass((await pills.nth(6).getAttribute('aria-pressed')) === 'true', 'pressing Retail marks it')
-    pass((await page.locator('.fit-card[data-fit-card="retail"][data-active="1"]').count()) === 1, 'the Retail card is the active one')
-    pass((await page.locator('.fit-card[data-active="1"]').count()) === 1, 'exactly one card is active')
-    await page.locator('.tab').nth(1).click()
-    pass((await page.locator('.fit-card[data-fit-card="healthcare"][data-active="1"]').count()) === 1, 'the section tabs switch the card too')
-    pass((await page.locator('.fit-card').count()) === 7, 'all seven cards stay in the page')
+    pass((await page.locator('.rv-fit-item[data-fit-card="retail"][aria-pressed="true"]').count()) === 1, 'the Retail sector is the chosen one')
+    pass((await page.locator('.rv-fit-item[aria-pressed="true"]').count()) === 1, 'exactly one sector is chosen')
+    await page.locator('.rv-fit-item').nth(1).click()
+    pass((await page.locator('.rv-fit-item[data-fit-card="healthcare"][aria-pressed="true"]').count()) === 1, 'the list switches the sector too')
+    pass((await page.locator('.rv-fit-item').count()) === 7, 'all seven sectors stay in the page')
     await ctx.close()
   }
 

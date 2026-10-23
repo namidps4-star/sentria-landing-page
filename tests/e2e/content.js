@@ -4,6 +4,8 @@ const { playwright, LAUNCH, APP_URL, LEGACY, pass, results } = require('./env')
 const { chromium } = playwright()
 
 // French strings the new page deliberately improves (the old page left them in English).
+// The numbered eyebrows were dropped in the revamp (the sections are not a sequence).
+const DROPPED = new Set(['01: The problem', '03: The method', '01 : Le problème', '03 : La méthode'])
 const IMPROVED_IN_FR = new Set([
   'Bottlenecks', 'Priorities', 'Recommendations', 'LIVE', 'DATA / 01', 'DATA / 02', 'DATA / 03',
   'The next decision may already be', 'in your data.', 'APIs',
@@ -85,7 +87,7 @@ async function newText(browser, lang) {
     const missing = []
     const list = lang === 'en' ? legacy.en : legacy.fr
     list.forEach((t, i) => {
-      if (!hasWords(t) || SKIP.has(t)) return
+      if (!hasWords(t) || SKIP.has(t) || DROPPED.has(t)) return
       if (lang === 'fr' && IMPROVED_IN_FR.has(legacy.en[i])) return
       if (!blob.includes(t)) missing.push(t)
     })

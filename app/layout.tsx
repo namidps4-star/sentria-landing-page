@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
+import "./revamp.css"
 
 const syne = localFont({
   src: [{ path: "./fonts/syne-700.woff2", weight: "700", style: "normal" }],

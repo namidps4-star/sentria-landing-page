@@ -2,6 +2,7 @@ import Image from "next/image"
 import type { ReactNode } from "react"
 import { C } from "@/content/en"
 import { T, B } from "./t"
+import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 import dashEn from "@/assets/dash/dashboard-en.webp"
 import dashFr from "@/assets/dash/dashboard-fr.webp"
@@ -158,30 +159,23 @@ export function Product() {
 export function Situations() {
   const s = C.situations
   return (
-    <Sec id="situations" tone="cream">
-      <Eyebrow>
-        <T s={s.eyebrow} />
-      </Eyebrow>
-      <H2>
-        <T s={s.title} />
-      </H2>
-      <p className="lead" data-rv="rise" style={iv(1)}>
-        <T s={s.lead} />
-      </p>
-      <div className="grid3">
-        {s.items.map((it, i) => (
-          <article key={it.n} className="card card-light" data-tilt="" data-rv="rise" style={iv(i + 2)}>
-            <span className="num">{it.n}</span>
-            <h3>
-              <T s={it.h} />
-            </h3>
-            <p>
-              <T s={it.p} />
-            </p>
-          </article>
-        ))}
+    <section id="situations" className="rv-sec">
+      <div className="wrap">
+        <p className="rv-kicker" data-rv="fade">
+          <B en="The problem" fr="Le problème" />
+        </p>
+        <h2 className="rv-h" data-rv="rise">
+          <T s={s.title} />
+        </h2>
+        <p className="rv-lead" data-rv="rise" style={iv(1)}>
+          <T s={s.lead} />
+        </p>
+        <WordPicker
+          label={s.title}
+          items={s.items.map((it) => ({ h: <T key="h" s={it.h} />, p: <T key="p" s={it.p} /> }))}
+        />
       </div>
-    </Sec>
+    </section>
   )
 }
 
@@ -233,30 +227,28 @@ export function Shift() {
 export function Method() {
   const s = C.method
   return (
-    <Sec id="methode" tone="olive" className="method">
-      <Eyebrow>
-        <T s={s.eyebrow} />
-      </Eyebrow>
-      <H2>
-        <T s={s.title} />
-      </H2>
-      <div className="steps" data-prog="through">
-        <div className="steps-line" aria-hidden="true">
-          <i />
-        </div>
-        {s.steps.map((st, i) => (
-          <article key={st.n} className="step" data-step="" data-rv="rise" style={iv(i)}>
-            <span className="num">{st.n}</span>
-            <h3>
-              <T s={st.h} />
-            </h3>
-            <p>
-              <T s={st.p} />
+    <section id="methode" className="rv-sec">
+      <div className="wrap">
+        <p className="rv-kicker" data-rv="fade">
+          <B en="The method" fr="La méthode" />
+        </p>
+        <h2 className="rv-h" data-rv="rise">
+          <T s={s.title} />
+        </h2>
+        <WordPicker
+          label={s.title}
+          items={s.steps.map((st) => ({ h: <T key="h" s={st.h} />, p: <T key="p" s={st.p} /> }))}
+          foot={
+            <p className="rv-loop">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5" />
+              </svg>
+              <B en="The outcome feeds back into Observe" fr="Le résultat alimente à nouveau Observer" />
             </p>
-          </article>
-        ))}
+          }
+        />
       </div>
-    </Sec>
+    </section>
   )
 }
 
@@ -605,25 +597,43 @@ export function Trust() {
 
 /* ------------------------------------------------------------------ final */
 
+/** The real dashboard image, in both languages. */
+function Dash() {
+  const one = (src: typeof dashEn) => (
+    <Image src={src} alt="" sizes="(min-width: 1024px) 560px, 90vw" className="rv-dash-img" />
+  )
+  return (
+    <>
+      <span className="en">{one(dashEn)}</span>
+      <span className="fr" lang="fr">
+        {one(dashFr)}
+      </span>
+    </>
+  )
+}
+
 export function Final() {
   const s = C.final
   return (
-    <section className="sc sc-ink final">
-      <div className="wrap">
-        <h2 className="final-h" data-rv="rise">
-          <span>
-            <T s={s.a} />
-          </span>{" "}
-          <em>
-            <T s={s.b} />
-          </em>
-        </h2>
-        <p className="lead" data-rv="rise" style={iv(1)}>
-          <T s={s.lead} />
-        </p>
-        <a className="btn btn-lime btn-xl" href="#demo" data-mag="" data-rv="scale" style={iv(2)}>
-          <T s={s.cta} />
-        </a>
+    <section className="rv-final">
+      <div className="wrap rv-final-in">
+        <div className="rv-final-copy">
+          <h2 className="rv-final-h" data-rv="rise">
+            <T s={s.a} />{" "}
+            <span className="rv-ul">
+              <T s={s.b} />
+            </span>
+          </h2>
+          <p className="rv-final-lead" data-rv="rise" style={iv(1)}>
+            <T s={s.lead} />
+          </p>
+          <a className="btn btn-lime btn-xl" href="#demo" data-mag="" data-rv="scale" style={iv(2)}>
+            <T s={s.cta} />
+          </a>
+        </div>
+        <div className="rv-final-proof" data-rv="rise" style={iv(2)} aria-hidden="true">
+          <Dash />
+        </div>
       </div>
     </section>
   )

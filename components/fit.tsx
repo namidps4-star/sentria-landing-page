@@ -1,11 +1,19 @@
 "use client"
 
+import Image from "next/image"
 import { useSyncExternalStore } from "react"
+import industry from "@/assets/sectors/industry.webp"
+import health from "@/assets/sectors/health-2.webp"
+import agriculture from "@/assets/sectors/agriculture.webp"
+import transportation from "@/assets/sectors/transportation.webp"
+import logistics from "@/assets/sectors/logistics.webp"
+import energy from "@/assets/sectors/energy.jpg"
+import retail from "@/assets/sectors/retail.webp"
 import { C } from "@/content/en"
 import { T } from "./t"
 import { TAGLINES } from "@/content/taglines"
 import { B } from "./t"
-import { Eyebrow, iv } from "./ui"
+import { iv } from "./ui"
 
 export const FIT_KEYS = ["industry", "healthcare", "agriculture", "transportation", "logistics", "energy", "retail"] as const
 export type FitKey = (typeof FIT_KEYS)[number]
@@ -65,51 +73,65 @@ export function QuickFit() {
   )
 }
 
+const PHOTOS = { industry, healthcare: health, agriculture, transportation, logistics, energy, retail }
+
 export function FitSection() {
   const active = useFit()
   const s = C.fit
   return (
-    <section id="fit" className="sc sc-sand fit">
+    <section id="fit" className="rv-sec fit">
       <div className="wrap">
-        <Eyebrow>
+        <p className="rv-kicker" data-rv="fade">
           <T s={s.eyebrow} />
-        </Eyebrow>
-        <h2 className="h2" data-rv="rise">
+        </p>
+        <h2 className="rv-h" data-rv="rise">
           <T s={s.title} />
         </h2>
-        <div className="tabs" role="group" aria-label={s.title} data-rv="rise" style={iv(1)}>
-          {s.tabs.map((t, i) => (
-            <button key={t} type="button" className="tab" aria-pressed={active === FIT_KEYS[i]} onClick={() => setFit(FIT_KEYS[i])}>
-              <T s={t} />
-            </button>
-          ))}
-        </div>
-        <div className="fit-grid">
-          {s.cards.map((c, i) => {
-            const key = CARD_KEYS[i]
-            return (
-              <article
-                key={c.n}
-                className="fit-card"
-                data-fit-card={key}
-                data-active={active === key ? "1" : undefined}
-                data-tilt=""
-                data-rv="rise"
-                style={iv(i)}
-              >
-                <span className="num">{c.n}</span>
-                <h3>
-                  <T s={c.h} />
-                </h3>
-                <p className="fit-hook">
-                  <B en={TAGLINES[key].en} fr={TAGLINES[key].fr} />
+        <div className="rv-fit" data-rv="rise" style={iv(1)}>
+          <div className="rv-fit-list">
+            <div role="group" aria-label={s.title}>
+              {s.tabs.map((t, i) => (
+                <button
+                  key={t}
+                  type="button"
+                  className="rv-fit-item"
+                  data-fit-card={FIT_KEYS[i]}
+                  aria-pressed={active === FIT_KEYS[i]}
+                  onClick={() => setFit(FIT_KEYS[i])}
+                  onMouseEnter={() => setFit(FIT_KEYS[i])}
+                >
+                  <T s={t} />
+                </button>
+              ))}
+            </div>
+            <div className="rv-fit-ps">
+              {CARD_KEYS.map((k, i) => (
+                <p key={k} className="rv-fit-p" data-on={active === k ? "1" : undefined} aria-hidden={active === k ? undefined : true}>
+                  <T s={s.cards[i].p} />
                 </p>
-                <p>
-                  <T s={c.p} />
-                </p>
-              </article>
-            )
-          })}
+              ))}
+            </div>
+          </div>
+          <div className="rv-fit-photo">
+            {FIT_KEYS.map((k) => (
+              <Image
+                key={k}
+                src={PHOTOS[k]}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 600px, 92vw"
+                data-on={active === k ? "1" : undefined}
+                className="rv-fit-img"
+              />
+            ))}
+            <div className="rv-fit-shade" aria-hidden="true" />
+            <p className="rv-fit-chip">
+              <B en={TAGLINES[active].en} fr={TAGLINES[active].fr} />
+            </p>
+            <a className="rv-fit-cta" href="#demo">
+              <T s={C.hero.cta1} />
+            </a>
+          </div>
         </div>
       </div>
     </section>
