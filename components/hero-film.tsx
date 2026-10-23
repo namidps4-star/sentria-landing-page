@@ -73,9 +73,6 @@ export function HeroFilm() {
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
       >
-        <p className="hf-k">
-          <T s={s.title} />
-        </p>
         <p className="hf-s" aria-live="off">
           <T s={sec.title} />
         </p>

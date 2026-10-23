@@ -678,6 +678,10 @@ html.op-run .op {
   transform-origin: 0 0;
   will-change: transform;
 }
+#hero-h[data-lens] {
+  -webkit-mask-image: radial-gradient(circle at var(--lx) var(--ly), transparent calc(var(--lr) - 1px), #000 var(--lr));
+  mask-image: radial-gradient(circle at var(--lx) var(--ly), transparent calc(var(--lr) - 1px), #000 var(--lr));
+}
 .lens-clone .hl,
 .lens-clone [data-h] {
   animation: none !important; /* the copy is made after the entrance, so it must not replay it */

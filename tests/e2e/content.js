@@ -6,6 +6,8 @@ const { chromium } = playwright()
 // French strings the new page deliberately improves (the old page left them in English).
 // The numbered eyebrows were dropped in the revamp (the sections are not a sequence).
 const DROPPED = new Set([
+  // the hero film no longer carries the sectors title
+  'Where SentrIA applies next.', "Où SentrIA s'applique ensuite.",
   // the small made-up product card was replaced by the dashboard tour
   'Outcomes', 'What needs my attention now', 'SYSTEM ACTIVE', 'Open decisions', 'Signals tracked', 'Decision outcomes', 'Last 30 days',
   'Résultats', 'Ce qui requiert mon attention maintenant', 'SYSTÈME ACTIF', 'Décisions ouvertes', 'Signaux suivis', 'Résultats des décisions', '30 derniers jours',

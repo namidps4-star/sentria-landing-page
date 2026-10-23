@@ -41,6 +41,8 @@ export function HeroFx() {
     const root = document.documentElement
     const S = 1.38
     let R = 105
+    let hox = 0
+    let hoy = 0
     let raf = 0
     let ptr = { x: 0, y: 0, in: false }
     const pos = { x: 0, y: 0 }
@@ -87,6 +89,8 @@ export function HeroFx() {
       lens.style.setProperty("--R", `${R}px`)
       if (!clone) return
       const hr = h1.getBoundingClientRect()
+      hox = hr.left - sr.left
+      hoy = hr.top - sr.top
       clone.style.left = `${hr.left - sr.left}px`
       clone.style.top = `${hr.top - sr.top}px`
       clone.style.width = `${hr.width}px`
@@ -105,10 +109,16 @@ export function HeroFx() {
         pos.y += (ptr.y - pos.y) * 0.2
         lens.style.transform = `translate3d(${pos.x - R}px,${pos.y - R}px,0)`
         world.style.transform = `translate3d(${R - pos.x * S}px,${R - pos.y * S}px,0) scale(${S})`
+        // the lens is clear glass, so the real headline is cut out under it: no doubled letters
+        h1.style.setProperty("--lx", `${pos.x - hox}px`)
+        h1.style.setProperty("--ly", `${pos.y - hoy}px`)
+        h1.style.setProperty("--lr", `${R}px`)
+        h1.dataset.lens = "1"
         lens.dataset.on = "1"
         raf = requestAnimationFrame(lensTick)
       } else if (lens.dataset.on) {
         delete lens.dataset.on
+        delete h1.dataset.lens
       }
     }
 
