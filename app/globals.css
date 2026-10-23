@@ -2732,3 +2732,44 @@ html.op-run .op {
 .cal-fallback {
   margin: 40px 28px;
 }
+
+/* Legal pages: privacy and terms */
+.legal {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 760px;
+  padding-block: 120px 80px;
+}
+.legal h1 {
+  font-size: clamp(36px, 6vw, 56px);
+  margin: 12px 0 6px;
+}
+.legal-date {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 40px;
+}
+.legal-draft {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+.legal-sec {
+  margin-top: 32px;
+}
+.legal-sec h2 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+.legal-sec p {
+  margin: 0;
+  line-height: 1.65;
+}
+.legal-back {
+  margin-top: 48px;
+}
