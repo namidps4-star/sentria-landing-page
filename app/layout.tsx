@@ -89,10 +89,10 @@ export const viewport: Viewport = {
 /**
  * Runs before first paint: picks the language, marks that JavaScript is on
  * (so reveal animations may hide things), and decides whether the opening
- * plays. The opening plays once per browser session and never with reduced
+ * plays. The opening plays once per browser session, only on the home page, and never with reduced
  * motion.
  */
-const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var l=localStorage.getItem('sentria-language');if(l!=='fr'&&l!=='en'){l=((navigator.language||'').toLowerCase().indexOf('fr')===0)?'fr':'en'}d.lang=l;d.classList.add('js');var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=sessionStorage.getItem('sentria-opened');if(!rm&&!seen){d.classList.add('op-run','op-wait');sessionStorage.setItem('sentria-opened','1');setTimeout(function(){d.classList.remove('op-wait')},900)}}catch(e){d.classList.add('js')}})();`
+const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var l=localStorage.getItem('sentria-language');if(l!=='fr'&&l!=='en'){l=((navigator.language||'').toLowerCase().indexOf('fr')===0)?'fr':'en'}d.lang=l;d.classList.add('js');var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=sessionStorage.getItem('sentria-opened');if(!rm&&!seen&&location.pathname==='/'){d.classList.add('op-run','op-wait');sessionStorage.setItem('sentria-opened','1');setTimeout(function(){d.classList.remove('op-wait')},900)}}catch(e){d.classList.add('js')}})();`
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

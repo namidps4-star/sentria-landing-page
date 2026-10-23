@@ -556,8 +556,8 @@ export function Footer() {
                 {link("#faq", "FAQ")}
                 {link("#demo", "Demo")}
                 {link("#demo", "Contact")}
-                {link("mailto:privacy@sentria.io", "Privacy")}
-                {link("mailto:legal@sentria.io", "Terms")}
+                {link("/privacy", "Privacy")}
+                {link("/terms", "Terms")}
               </ul>
             </div>
             <div>

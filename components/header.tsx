@@ -9,7 +9,7 @@ import { setLang, useLang, useText } from "./lang"
 const APP_URL = "https://app.sentriahq.dev"
 const HREFS = ["#situations", "#methode", "#cockpit", "#tarifs", "#fit", "#faq"]
 
-function LangSwitch() {
+export function LangSwitch() {
   const lang = useLang()
   return (
     <div className="lang-switch" role="group" aria-label="Language">
