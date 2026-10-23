@@ -74,7 +74,7 @@ export const C = {
   ]
  },
  "situations": {
-  "eyebrow": "01: The problem",
+  "eyebrow": "The problem",
   "title": "Your data already knows. It just doesn't explain itself.",
   "lead": "The problem isn't a lack of data. It's that nothing connects a signal to a decision you can defend.",
   "items": [
@@ -96,7 +96,7 @@ export const C = {
   ]
  },
  "shift": {
-  "eyebrow": "02: The shift",
+  "eyebrow": "The shift",
   "title": "Move from monitoring to deciding.",
   "before": {
    "k": "Before",
@@ -110,7 +110,7 @@ export const C = {
   }
  },
  "method": {
-  "eyebrow": "03: The method",
+  "eyebrow": "The method",
   "title": "An operational loop, not another dashboard.",
   "steps": [
    {
@@ -136,7 +136,7 @@ export const C = {
   ]
  },
  "why": {
-  "eyebrow": "04: Why SentrIA",
+  "eyebrow": "Why SentrIA",
   "title": "Not a dashboard. A decision layer.",
   "cols": [
    "Capability",
@@ -192,7 +192,7 @@ export const C = {
   ]
  },
  "cockpit": {
-  "eyebrow": "05: The decision queue",
+  "eyebrow": "The decision queue",
   "title": "What needs your attention now.",
   "lead": "Not another wall of KPIs. A ranked queue of decisions, each with its evidence, confidence, impact and recommended action.",
   "features": [
@@ -234,7 +234,7 @@ export const C = {
   ]
  },
  "pricing": {
-  "eyebrow": "06: Pricing",
+  "eyebrow": "Pricing",
   "title": "One problem. One pilot. One measurable result.",
   "lead": "We begin with a single, measurable operational problem, like expiry loss or stockout in a pharmacy, prove the ROI in a pilot, then extend to other flows. You don't buy a platform. You buy a first result.",
   "plans": [
@@ -284,7 +284,7 @@ export const C = {
   "note": "Pricing is defined by the scope of the pilot, the data to connect, and the level of integration."
  },
  "flow": {
-  "eyebrow": "07: Implementation",
+  "eyebrow": "Implementation",
   "title": "From your data to a defended decision.",
   "steps": [
    {
@@ -310,7 +310,7 @@ export const C = {
   ]
  },
  "sectors": {
-  "eyebrow": "08: Sectors",
+  "eyebrow": "Sectors",
   "title": "Where SentrIA applies next.",
   "lead": "We start with one problem in one sector. The same decision layer then extends to other flows.",
   "tabs": [
@@ -373,7 +373,7 @@ export const C = {
   ]
  },
  "data": {
-  "eyebrow": "09: Data",
+  "eyebrow": "Data",
   "title": "Use what you already have.",
   "lead": "SentrIA doesn't replace your infrastructure. It sits on top and turns what you already have into decisions you can defend.",
   "items": [
@@ -395,7 +395,7 @@ export const C = {
   ]
  },
  "reasoning": {
-  "eyebrow": "10: Reliability",
+  "eyebrow": "Reliability",
   "title": "Every risk comes with its reasoning.",
   "items": [
    {
@@ -416,7 +416,7 @@ export const C = {
   ]
  },
  "promise": {
-  "eyebrow": "11: Promise",
+  "eyebrow": "Promise",
   "title": "Less noise. Better decisions. Measured outcomes.",
   "items": [
    {
@@ -447,7 +447,7 @@ export const C = {
   ]
  },
  "faq": {
-  "eyebrow": "12: FAQ",
+  "eyebrow": "FAQ",
   "title": "The questions we get asked.",
   "items": [
    {
@@ -473,7 +473,7 @@ export const C = {
   ]
  },
  "demo": {
-  "eyebrow": "13: Demo",
+  "eyebrow": "Demo",
   "title": "Let's see where SentrIA can save you time, and defend the decision.",
   "lead": "Book a 30-minute conversation. We start from one real operational problem in your business, not a generic presentation.",
   "points": [

@@ -15,6 +15,8 @@ const DROPPED = new Set([
   'See how SentrIA turns one operational problem into a decision you can defend, and a result you can measure.',
   'Découvrez comment SentrIA transforme un problème opérationnel en décision défendable, et en résultat mesurable.','01: The problem', '03: The method', '01 : Le problème', '03 : La méthode'])
 const IMPROVED_IN_FR = new Set([
+  // the old French page left this eyebrow in English; the new one says "Démo"
+  'Demo',
   'Bottlenecks', 'Priorities', 'Recommendations', 'LIVE', 'DATA / 01', 'DATA / 02', 'DATA / 03',
   'The next decision may already be', 'in your data.', 'APIs',
 ])
@@ -95,7 +97,8 @@ async function newText(browser, lang) {
     const missing = []
     const list = lang === 'en' ? legacy.en : legacy.fr
     list.forEach((t, i) => {
-      if (!hasWords(t) || SKIP.has(t) || DROPPED.has(t)) return
+      // numbered eyebrows ("05: The decision queue") were removed on purpose
+      if (!hasWords(t) || SKIP.has(t) || DROPPED.has(t) || /^\d\d ?: /.test(t)) return
       if (lang === 'fr' && IMPROVED_IN_FR.has(legacy.en[i])) return
       if (!blob.includes(t)) missing.push(t)
     })

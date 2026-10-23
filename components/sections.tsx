@@ -31,17 +31,14 @@ function H2({ children, className = "" }: { children: ReactNode; className?: str
 export function Proof() {
   const group = (hidden: boolean) => (
     <ul className="marq-group" aria-hidden={hidden || undefined}>
-      {Array.from({ length: 3 }).flatMap((_, k) =>
-        C.proof.map((p) => (
-          <li key={`${k}-${p.n}`}>
-            <b>{p.n}</b>
+      {C.proof.map((p) => (
+          <li key={p.n}>
             <span>
               <T s={p.t} />
             </span>
             <i aria-hidden="true" />
           </li>
-        )),
-      )}
+      ))}
     </ul>
   )
   return (
@@ -49,7 +46,6 @@ export function Proof() {
       <div className="marq">
         <div className="marq-track">
           {group(false)}
-          {group(true)}
         </div>
       </div>
     </div>
