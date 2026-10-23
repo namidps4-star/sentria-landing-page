@@ -551,7 +551,7 @@ html.op-run .op {
 }
 .hero-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-start;
   gap: 24px;
 }
