@@ -3,7 +3,7 @@
  * says the service "complies" with any law. The pages show that in a banner.
  * Keep this file in step with the app copy. */
 
-export const LEGAL_CONTACT = "hello@sentria.dev"
+export const LEGAL_CONTACT = "hello@sentriahq.dev"
 
 export const LEGAL_VERSION = "2026-10-18"
 

@@ -11,7 +11,7 @@ const DROPPED = new Set([
   // the small made-up product card was replaced by the dashboard tour
   'Outcomes', 'What needs my attention now', 'SYSTEM ACTIVE', 'Open decisions', 'Signals tracked', 'Decision outcomes', 'Last 30 days',
   'Résultats', 'Ce qui requiert mon attention maintenant', 'SYSTÈME ACTIF', 'Décisions ouvertes', 'Signaux suivis', 'Résultats des décisions', '30 derniers jours',
-  // the contact address changed to hello@sentria.dev
+  // the contact address changed to hello@sentriahq.dev
   'hello.sentria@gmail.com',
   // the line above the hero headline was removed
   'Operational decision layer', 'Couche de décision opérationnelle',

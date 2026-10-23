@@ -18,7 +18,7 @@ const { playwright, LAUNCH, APP_URL, pass, results, IGNORED_ERRORS, SHOTS } = re
       pass(await p.locator('.lg-draft').isVisible(), `${tag} /${doc}: draft banner shows`)
       pass(await p.evaluate(() => document.body.style.overflow !== 'hidden' && !document.documentElement.classList.contains('op-run')), `${tag} /${doc}: no opening layer, page scrolls`)
       pass(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${tag} /${doc}: no sideways scroll`)
-      pass((await p.locator('a[href="mailto:hello@sentria.dev"]').count()) === 1, `${tag} /${doc}: contact is hello@sentria.dev`)
+      pass((await p.locator('a[href="mailto:hello@sentriahq.dev"]').count()) === 1, `${tag} /${doc}: contact is hello@sentriahq.dev`)
       await p.screenshot({ path: `${SHOTS}/legal-${doc}-${tag}.png` })
     }
     await p.goto(`${APP_URL}/privacy`)
