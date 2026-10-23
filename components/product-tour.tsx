@@ -3,16 +3,16 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { B } from "./t"
-import dashEn from "@/assets/dash/dashboard-en.webp"
-import dashFr from "@/assets/dash/dashboard-fr.webp"
+import dashEn from "@/assets/dash/dash-crop-en.webp"
+import dashFr from "@/assets/dash/dash-crop-fr.webp"
 
 /** Parts of the dashboard picture, in % of the picture. Step 0 has no part: the whole screen. */
 const STEPS: ({ l: number; t: number; w: number; h: number; en: string; fr: string } | null)[] = [
   null,
-  { l: 26.5, t: 22, w: 61, h: 16.7, en: "Ranked by value at risk", fr: "Classées par valeur à risque" },
-  { l: 26.5, t: 47.8, w: 14.7, h: 13, en: "Critical stockouts first", fr: "Les ruptures critiques d'abord" },
-  { l: 26.5, t: 62.5, w: 40, h: 26, en: "Seven days, so you see it coming", fr: "Sept jours, pour voir venir" },
-  { l: 67.6, t: 62.5, w: 20, h: 26, en: "Where the risk comes from", fr: "D'où vient le risque" },
+  { l: 25.0, t: 14.0, w: 70.9, h: 19.4, en: "Ranked by value at risk", fr: "Classées par valeur à risque" },
+  { l: 25.0, t: 44.0, w: 17.1, h: 15.1, en: "Critical stockouts first", fr: "Les ruptures critiques d'abord" },
+  { l: 25.0, t: 61.0, w: 46.5, h: 30.2, en: "Seven days, so you see it coming", fr: "Sept jours, pour voir venir" },
+  { l: 72.8, t: 61.0, w: 23.3, h: 30.2, en: "Where the risk comes from", fr: "D'où vient le risque" },
 ]
 const CAPS = [
   { en: "Scroll to open the dashboard.", fr: "Faites défiler pour ouvrir le tableau de bord." },

@@ -663,7 +663,9 @@ html.op-run .op {
   z-index: 4;
   opacity: 0;
   transition: opacity 0.5s;
-  background: var(--ink);
+  background: transparent; /* clear glass: the film shows through all round */
+  backdrop-filter: brightness(1.1) saturate(1.2);
+  -webkit-backdrop-filter: brightness(1.1) saturate(1.2);
   will-change: transform;
 }
 .lens[data-on] {
