@@ -828,6 +828,20 @@ html.op-run .op {
   flex-wrap: wrap;
   flex: none;
 }
+/* the strip keeps moving: the list runs across once and starts again (the copy makes the loop seamless) */
+.marq-track {
+  animation: marq 28s linear infinite;
+}
+@keyframes marq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marq-track {
+    animation: none;
+  }
+}
 .marq-group li {
   display: flex;
   align-items: center;

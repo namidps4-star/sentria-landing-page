@@ -43,6 +43,7 @@ export function Proof() {
       <div className="marq">
         <div className="marq-track">
           {group(false)}
+          {group(true)}
         </div>
       </div>
     </div>
