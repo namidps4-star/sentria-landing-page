@@ -582,6 +582,36 @@ html.op-run .op {
   width: 14px;
   height: 14px;
 }
+/* the three proof lines keep moving: each tick lights up in turn, row after row */
+.hero-checks .ck {
+  animation: hc-tick 6s var(--ease) infinite;
+}
+.hero-checks li:nth-child(2) .ck {
+  animation-delay: 0.9s;
+}
+.hero-checks li:nth-child(3) .ck {
+  animation-delay: 1.8s;
+}
+@keyframes hc-tick {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: none;
+  }
+  8% {
+    transform: scale(1.45);
+    filter: drop-shadow(0 0 6px rgba(214, 255, 63, 0.9));
+  }
+  20% {
+    transform: scale(1);
+    filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-checks .ck {
+    animation: none;
+  }
+}
 .hero-copy {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(250px, 27%);
