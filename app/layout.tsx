@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
 import "./revamp.css"
+import { DocumentLanguage } from "@/components/document-language"
+import { SEO } from "@/content/seo"
 
 const syne = localFont({
   src: [{ path: "./fonts/syne-700.woff2", weight: "700", style: "normal" }],
@@ -58,9 +60,8 @@ const JSON_LD = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   alternates: { canonical: "/" },
-  title: TITLE,
-  description:
-    "SentrIA shows the evidence, confidence, impact, and recommended action for every operational risk. So your team decides faster and the outcome feeds back.",
+  title: SEO.en.title,
+  description: SEO.en.description,
   openGraph: {
     type: "website",
     url: SITE,
@@ -101,7 +102,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <DocumentLanguage />
+        {children}
+      </body>
     </html>
   )
 }
