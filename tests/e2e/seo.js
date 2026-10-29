@@ -14,6 +14,14 @@ const grab = (html, re) => (html.match(re) || [])[1]
   pass(/<link rel="canonical" href="https:\/\/sentriahq\.dev\/?"/.test(html), 'canonical points at https://sentriahq.dev')
   pass(/<meta name="robots" content="index, follow"/.test(html) || !/noindex/.test(html), 'the home page is not noindex')
 
+  console.log('== icons (the logo Google shows beside a result)')
+  const ico = await fetch(`${APP_URL}/favicon.ico`)
+  pass(ico.status === 200 && /icon/.test(ico.headers.get('content-type') || ''), '/favicon.ico is served')
+  const png = await fetch(`${APP_URL}/icon.png`)
+  const bytes = Buffer.from(await png.arrayBuffer())
+  pass(png.status === 200 && bytes.readUInt32BE(16) === 192 && bytes.readUInt32BE(20) === 192, '/icon.png is a 192 by 192 PNG')
+  pass(/<link rel="icon" href="\/icon\.png"[^>]*sizes="192x192"/.test(html) && /<link rel="icon" href="\/favicon\.ico/.test(html), 'the page links the .ico and the 192 px PNG')
+
   console.log('== browser')
   const b = await playwright().chromium.launch(LAUNCH)
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } })
