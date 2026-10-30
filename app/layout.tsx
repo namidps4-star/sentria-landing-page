@@ -43,7 +43,7 @@ const JSON_LD = {
       "@id": `${SITE}/#org`,
       name: "SentrIA",
       url: SITE,
-      logo: `${SITE}/icon.svg`,
+      logo: `${SITE}/icon.png`,
     },
     {
       "@type": "WebSite",
@@ -75,8 +75,11 @@ export const metadata: Metadata = {
     description: "Evidence, confidence, impact and recommended action for every operational risk.",
   },
   icons: {
-    icon: "/icon.svg?v=2",
-    apple: "/apple-icon.png?v=2",
+    icon: [
+      { url: "/icon.png?v=3", type: "image/png", sizes: "192x192" },
+      { url: "/icon.svg?v=3", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.png?v=3",
   },
 }
 
