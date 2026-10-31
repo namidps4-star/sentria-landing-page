@@ -25,7 +25,6 @@ export function Check({ className = "" }: { className?: string }) {
 export function Mark() {
   return (
     <svg viewBox="0 0 100 100" aria-hidden="true" className="mark">
-      <rect width="100" height="100" rx="22" fill="#141414" />
       <g strokeWidth="10" strokeLinejoin="round">
         <path d="M14 42.5a23 23 0 0 1 46 0z" fill="var(--lime)" stroke="var(--lime)" />
         <path d="M40 57.5a23 23 0 0 0 46 0z" fill="#fff" stroke="#fff" />
