@@ -505,6 +505,7 @@ export const C = {
   "Decision queue",
   "Pricing",
   "Sectors",
-  "FAQ"
+  "FAQ",
+  "Articles"
  ]
 } as const

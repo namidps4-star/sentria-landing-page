@@ -7,7 +7,7 @@ import { Mark } from "./ui"
 import { setLang, useLang, useText } from "./lang"
 
 const APP_URL = "https://app.sentriahq.dev"
-const HREFS = ["#situations", "#methode", "#cockpit", "#tarifs", "#fit", "#faq"]
+const HREFS = ["#situations", "#methode", "#cockpit", "#tarifs", "#fit", "#faq", "/articles"]
 
 export function LangSwitch() {
   const lang = useLang()
