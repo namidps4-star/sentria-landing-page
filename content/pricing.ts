@@ -16,7 +16,7 @@ export const PRICES: Record<string, [number, number]> = {
   BRL: [129, 399],
 }
 
-export const FALLBACK_CURRENCY = "EUR"
+export const FALLBACK_CURRENCY = "USD"
 
 // Country code (ISO 3166-1, as sent by Vercel in x-vercel-ip-country) to the
 // currency the app uses for that country (COUNTRIES in the app's lib/locale.ts).
@@ -36,7 +36,7 @@ const COUNTRY_CURRENCY: Record<string, string> = {
   FR: "EUR",
 }
 
-/** The currency to show for a visitor's country, or EUR when the country has no price. */
+/** The currency to show for a visitor's country, or USD when the country has no price. */
 export function currencyForCountry(country: string | null | undefined): string {
   const code = (country ?? "").toUpperCase()
   return COUNTRY_CURRENCY[code] ?? FALLBACK_CURRENCY
