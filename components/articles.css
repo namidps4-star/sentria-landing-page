@@ -1,0 +1,48 @@
+/* Articles page (option A): photo hero with the latest articles, sector and
+   department sliders, then the grid. Colours are the landing page's tokens. */
+.art { background: #f5f3ea; color: #0b0c08; min-height: 100vh; padding-bottom: 72px; }
+.art-hero { position: relative; margin: 16px 24px 0; height: 780px; border-radius: 32px; overflow: hidden; text-align: center; color: #f5f3ea; }
+.art-hero > img { object-fit: cover; }
+.art-hero::after { content: ""; position: absolute; inset: 0; background: rgba(11, 12, 8, 0.45); }
+.art-hero-copy { position: relative; z-index: 1; padding: 96px 32px 0; }
+.art-pill { display: inline-block; background: #d6ff3f; color: #0b0c08; font: 500 12px/1 var(--f-body), system-ui, sans-serif; border-radius: 999px; padding: 7px 12px; }
+.art-hero h1 { font: 700 72px/1.02 var(--f-display), sans-serif; letter-spacing: -0.025em; margin: 18px auto 14px; max-width: 18ch; }
+.art-lede { font-size: 19px; color: rgba(245, 243, 234, 0.85); margin: 0 auto 26px; }
+.art-cta { display: inline-flex; border-radius: 999px; padding: 13px 22px; font: 600 14px var(--f-body), system-ui, sans-serif; background: #d6ff3f; color: #0b0c08; }
+.art-strip { position: absolute; z-index: 1; left: 48px; right: 48px; bottom: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; text-align: left; }
+.art-tile { background: #f5f3ea; color: #0b0c08; border-radius: 22px; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+.art-tile-img { position: relative; height: 110px; border-radius: 14px; overflow: hidden; }
+.art-tile-img img { object-fit: cover; }
+.art-tile-meta { font-size: 11px; opacity: 0.7; padding: 0 6px; }
+.art-tile-title { font: 700 17px/1.2 var(--f-display), sans-serif; padding: 0 6px 6px; }
+.art-filters { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 64px auto 40px; }
+.art-seg { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px; background: #ece7d6; border-radius: 999px; padding: 4px; }
+.art-seg.sub { background: #f0ece0; padding: 3px; }
+.art-seg button { border: 0; background: transparent; border-radius: 999px; padding: 10px 18px; font: 600 14px var(--f-body), system-ui, sans-serif; color: #3a3c33; cursor: pointer; white-space: nowrap; }
+.art-seg.sub button { padding: 7px 14px; font-size: 13px; font-weight: 500; }
+.art-seg button[aria-pressed="true"] { background: #0b0c08; color: #d6ff3f; }
+.art-seg.sub button[aria-pressed="true"] { background: #d6ff3f; color: #0b0c08; font-weight: 600; }
+.art-seg button:focus-visible { outline: 2px solid #0b0c08; outline-offset: 2px; }
+.art-count { font-size: 13px; color: #5a5d50; }
+.art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+.art-card { background: #ece7d6; border-radius: 24px; padding: 12px; display: flex; flex-direction: column; }
+.art-card-img { position: relative; height: 200px; border-radius: 16px; overflow: hidden; }
+.art-card-img img { object-fit: cover; }
+.art-card-tag { position: absolute; left: 12px; top: 12px; z-index: 1; background: #d6ff3f; color: #0b0c08; font: 500 12px/1 var(--f-body), system-ui, sans-serif; border-radius: 999px; padding: 7px 11px; }
+.art-card-body { padding: 16px 6px 10px; }
+.art-card-body h2 { font: 700 21px/1.2 var(--f-display), sans-serif; letter-spacing: -0.01em; margin: 0 0 8px; }
+.art-card-body p { margin: 0; font-size: 13px; color: #5a5d50; }
+.art-empty { text-align: center; color: #5a5d50; grid-column: 1 / -1; }
+@media (max-width: 900px) {
+  .art-hero { height: auto; min-height: 640px; }
+  .art-hero h1 { font-size: 46px; }
+  .art-hero-copy { padding-top: 72px; }
+  .art-strip { position: relative; left: auto; right: auto; bottom: auto; margin: 36px 16px 0; grid-template-columns: 1fr; }
+  .art-grid { grid-template-columns: 1fr 1fr; padding: 0 16px; }
+}
+@media (max-width: 560px) {
+  .art-hero { margin: 8px 12px 0; border-radius: 24px; }
+  .art-hero h1 { font-size: 38px; }
+  .art-filters { margin: 40px 16px 28px; }
+  .art-grid { grid-template-columns: 1fr; }
+}
