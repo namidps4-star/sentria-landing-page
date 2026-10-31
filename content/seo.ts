@@ -20,5 +20,8 @@ export const SEO = {
   },
 } as const
 
+/* The English, French and default home pages point at each other. */
+export const HREFLANG = { en: "/en", fr: "/fr", "x-default": "/" }
+
 export const TITLE_LIMIT = 60
 export const DESCRIPTION_LIMIT = 160

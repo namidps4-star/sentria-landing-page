@@ -12,7 +12,7 @@ import { useLang } from "./lang"
  *  after hydration, so the change is re-applied whenever the head changes. */
 export function DocumentLanguage() {
   const lang = useLang()
-  const home = usePathname() === "/"
+  const home = ["/", "/en", "/fr"].includes(usePathname())
 
   useEffect(() => {
     if (!home) return

@@ -24,6 +24,8 @@ export function setLang(l: Lang) {
   } catch {
     /* private mode: the choice just does not persist */
   }
+  /* On the home page the address follows the language: /en or /fr. */
+  if (["/", "/en", "/fr"].includes(location.pathname)) history.replaceState(null, "", `/${l}`)
   listeners.forEach((f) => f())
 }
 
