@@ -106,7 +106,6 @@ export const FR: Record<string, string> = {
  "Multiple operational flows": "Plusieurs flux opérationnels",
  "Custom priorities": "Priorités personnalisées",
  "Predictive analysis": "Analyse prédictive",
- "AI recommendations": "Recommandations IA",
  "Custom business views": "Vues métier personnalisées",
  "Operational support": "Support opérationnel",
  "Enterprise": "Enterprise",

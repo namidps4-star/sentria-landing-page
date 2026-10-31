@@ -260,7 +260,6 @@ export const C = {
      "Multiple operational flows",
      "Custom priorities",
      "Predictive analysis",
-     "AI recommendations",
      "Custom business views",
      "Operational support"
     ],
