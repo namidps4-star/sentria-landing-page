@@ -7,7 +7,7 @@ import { Mark } from "./ui"
 import { setLang, useLang, useText } from "./lang"
 
 const APP_URL = "https://app.sentriahq.dev"
-const HREFS = ["#situations", "#methode", "#cockpit", "#tarifs", "#fit", "#faq", "/articles"]
+const HREFS = ["/#situations", "/#methode", "/#cockpit", "/#tarifs", "/#fit", "/#faq", "/articles"]
 
 export function LangSwitch() {
   const lang = useLang()
@@ -53,7 +53,7 @@ export function Header() {
   return (
     <header className="hd" data-scrolled={scrolled ? "1" : undefined}>
       <nav className="bar" aria-label={txt("Main", "Principal")}>
-        <a className="logo" href="#top" aria-label={txt("SentrIA, back to top", "SentrIA, retour en haut")} onClick={() => setOpen(false)}>
+        <a className="logo" href="/#top" aria-label={txt("SentrIA, back to top", "SentrIA, retour en haut")} onClick={() => setOpen(false)}>
           <span className="logo-mark">
             <Mark />
           </span>
@@ -73,7 +73,7 @@ export function Header() {
           <a className="nav-signin" href={APP_URL}>
             {txt("Sign in", "Connexion")}
           </a>
-          <a className="btn btn-lime nav-cta" href="#demo" data-mag="">
+          <a className="btn btn-lime nav-cta" href="/#demo" data-mag="">
             <T s="Book a demo →" />
           </a>
           <button
@@ -105,7 +105,7 @@ export function Header() {
           <a className="btn btn-line" href={APP_URL}>
             {txt("Sign in", "Connexion")}
           </a>
-          <a className="btn btn-lime" href="#demo" onClick={() => setOpen(false)}>
+          <a className="btn btn-lime" href="/#demo" onClick={() => setOpen(false)}>
             <T s="Book a demo →" />
           </a>
         </div>
