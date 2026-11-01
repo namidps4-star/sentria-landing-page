@@ -18,6 +18,7 @@ export function ArticlesPage() {
   const [dept, setDept] = useState("all")
 
   const latest = ARTICLES.slice(0, 3)
+  const pageDesc = (id: string | undefined, lang: "en" | "fr") => (id ? ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === lang)?.description : undefined)
   const pageSlug = (id: string) => ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.slug ?? ""
   const shown = ARTICLES.filter(
     (a) => (sector === "all" || a.sector === sector) && (dept === "all" || a.dept === dept)
@@ -32,7 +33,7 @@ export function ArticlesPage() {
   return (
     <main className="art" id="main">
       <section className="art-hero" aria-labelledby="ar-title">
-        <Image src="/articles/hero.jpg" alt="" fill priority sizes="(max-width: 1280px) 100vw, 1280px" />
+        <Image src={latest[0]?.image ?? "/articles/hero.jpg"} alt="" fill priority sizes="(max-width: 1280px) 100vw, 1280px" />
         <div className="art-hero-copy">
           <span className="art-pill">
             <B en="Articles" fr="Articles" />
@@ -45,31 +46,18 @@ export function ArticlesPage() {
             )}
           </h1>
           <p className="art-lede">
-            <B en="Short, practical reads from the SentrIA team." fr="Des lectures courtes et concrètes, par l'équipe SentrIA." />
+            <B en={pageDesc(latest[0]?.id, "en") ?? "Short, practical reads from the SentrIA team."} fr={pageDesc(latest[0]?.id, "fr") ?? "Des lectures courtes et concrètes, par l'équipe SentrIA."} />
           </p>
-          <a className="art-cta" href="#articles-list">
-            <B en="Read the latest" fr="Lire les derniers" />
-          </a>
-        </div>
-        {latest.length >= 1 && (
-        <div className="art-strip" style={{ gridTemplateColumns: `repeat(${Math.min(latest.length, 3)}, minmax(0, 1fr))` }}>
-          {latest.map((a) => (
-            <Link href={`/articles/${pageSlug(a.id)}`} className="art-tile-link" key={a.id}>
-            <article className="art-tile">
-              <div className="art-tile-img">
-                <Image src={a.image} alt="" fill sizes="(max-width: 900px) 100vw, 360px" />
-              </div>
-              <div className="art-tile-meta">
-                <B en={`${a.minutes} min read · ${a.tag.en}`} fr={`${a.minutes} min · ${a.tag.fr}`} />
-              </div>
-              <h2 className="art-tile-title">
-                <B en={a.title.en} fr={a.title.fr} />
-              </h2>
-            </article>
+          {latest[0] ? (
+            <Link className="art-cta" href={`/articles/${pageSlug(latest[0].id)}`}>
+              <B en="Read the article" fr="Lire l'article" />
             </Link>
-          ))}
+          ) : (
+            <a className="art-cta" href="#articles-list">
+              <B en="Read the latest" fr="Lire les derniers" />
+            </a>
+          )}
         </div>
-        )}
       </section>
 
       <div className="art-filters" id="articles-list">
