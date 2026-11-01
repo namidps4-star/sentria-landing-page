@@ -18,7 +18,7 @@ export function ArticleCard(props: {
   return (
     <Link href={href} className="art-card">
       <div className="art-card-img">
-        <Image src={image} alt="" fill sizes="(max-width: 900px) 100vw, 330px" />
+        <Image src={image} alt={title.en} fill sizes="(max-width: 900px) 100vw, 330px" />
       </div>
       <div className="art-card-meta">
         <span className="art-card-tag">

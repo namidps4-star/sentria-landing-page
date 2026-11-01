@@ -79,3 +79,5 @@
 .art-page-image { position: relative; height: 300px; border-radius: 20px; overflow: hidden; margin: 0 0 30px; }
 .art-page-image img { object-fit: cover; }
 .art-card-meta .art-card-tag { position: static; z-index: auto; }
+/* Lime accent: a lime highlight under each section heading of an article. */
+.art-page-panel h2 { background-image: linear-gradient(#d6ff3f, #d6ff3f); background-repeat: no-repeat; background-size: 100% 0.28em; background-position: 0 86%; }

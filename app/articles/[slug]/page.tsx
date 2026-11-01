@@ -86,7 +86,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </p>
           <h1>{page.title}</h1>
           <div className="art-page-image">
-            <Image src={page.image} alt="" fill priority sizes="(max-width: 900px) 100vw, 680px" />
+            <Image src={page.image} alt={page.title} fill priority sizes="(max-width: 900px) 100vw, 680px" />
           </div>
           <p className="art-page-intro">{page.intro}</p>
           {page.sections.map((s) => (
