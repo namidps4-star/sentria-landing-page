@@ -279,7 +279,7 @@ html.op-run:not(.op-done) .bar {
 }
 .logo-word {
   display: block;
-  height: 15px;
+  height: 13px;
   width: auto;
   color: var(--cream);
   animation: logo-word-in 0.6s var(--ease) 0.3s backwards;
