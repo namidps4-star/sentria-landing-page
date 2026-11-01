@@ -38,7 +38,11 @@ export function ArticlesPage() {
             <B en="Articles" fr="Articles" />
           </span>
           <h1 id="ar-title">
-            <B en="Field notes on stock, cold chains and fleets." fr="Notes de terrain sur les stocks, la chaîne du froid et les flottes." />
+            {latest[0] ? (
+              <B en={latest[0].title.en} fr={latest[0].title.fr} />
+            ) : (
+              <B en="Field notes on stock, cold chains and fleets." fr="Notes de terrain sur les stocks, la chaîne du froid et les flottes." />
+            )}
           </h1>
           <p className="art-lede">
             <B en="Short, practical reads from the SentrIA team." fr="Des lectures courtes et concrètes, par l'équipe SentrIA." />
