@@ -47,10 +47,11 @@ export function ArticlesPage() {
             <B en="Read the latest" fr="Lire les derniers" />
           </a>
         </div>
-        {latest.length >= 3 && (
-        <div className="art-strip">
+        {latest.length >= 1 && (
+        <div className="art-strip" style={{ gridTemplateColumns: `repeat(${Math.min(latest.length, 3)}, minmax(0, 1fr))` }}>
           {latest.map((a) => (
-            <article className="art-tile" key={a.id}>
+            <Link href={`/articles/${pageSlug(a.id)}`} className="art-tile-link" key={a.id}>
+            <article className="art-tile">
               <div className="art-tile-img">
                 <Image src={a.image} alt="" fill sizes="(max-width: 900px) 100vw, 360px" />
               </div>
@@ -61,6 +62,7 @@ export function ArticlesPage() {
                 <B en={a.title.en} fr={a.title.fr} />
               </h2>
             </article>
+            </Link>
           ))}
         </div>
         )}
