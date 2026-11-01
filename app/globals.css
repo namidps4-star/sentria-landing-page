@@ -537,6 +537,12 @@ html.op-run .op {
   display: inline-block;
   animation: op-track 1.1s var(--ease-io) 1s backwards;
 }
+.op-word .op-g {
+  display: block;
+  height: 1em;
+  width: auto;
+  overflow: visible;
+}
 .op-ia {
   color: var(--lime);
 }
@@ -550,10 +556,10 @@ html.op-run .op {
 }
 @keyframes op-track {
   from {
-    letter-spacing: 0.14em;
+    margin-right: 0.14em;
   }
   to {
-    letter-spacing: -0.01em;
+    margin-right: 0;
   }
 }
 
