@@ -46,3 +46,16 @@
   .art-filters { margin: 40px 16px 28px; }
   .art-grid { grid-template-columns: 1fr; }
 }
+
+/* Article page: one article, its own URL. */
+.art-page { background: #f5f3ea; color: #0b0c08; padding: 120px 24px 80px; }
+.art-page article { max-width: 680px; margin: 0 auto; }
+.art-page-meta { font-size: 13px; color: #5a5d50; margin: 0 0 14px; }
+.art-page h1 { font: 700 46px/1.05 var(--f-display), sans-serif; letter-spacing: -0.02em; margin: 0 0 22px; }
+.art-page-intro { font-size: 19px; line-height: 1.55; color: #2a2c25; margin: 0 0 36px; }
+.art-page h2 { font: 700 26px/1.15 var(--f-display), sans-serif; margin: 40px 0 12px; }
+.art-page p { font-size: 17px; line-height: 1.7; margin: 0 0 16px; }
+.art-faq { margin: 0 0 22px; }
+.art-faq h3 { font: 700 19px/1.25 var(--f-display), sans-serif; margin: 0 0 6px; }
+.art-page-closing { margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(11, 12, 8, 0.14); }
+.art-page-closing a { color: #0b0c08; font-weight: 600; }

@@ -1,10 +1,11 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 
 import { B } from "@/components/t"
-import { ARTICLES, DEPARTMENTS, SECTORS, type Article } from "@/content/articles"
+import { ARTICLE_PAGES, ARTICLES, DEPARTMENTS, SECTORS, type Article } from "@/content/articles"
 
 import "./articles.css"
 
@@ -17,6 +18,7 @@ export function ArticlesPage() {
   const [dept, setDept] = useState("all")
 
   const latest = ARTICLES.slice(0, 3)
+  const pageSlug = (id: string) => ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.slug ?? ""
   const shown = ARTICLES.filter(
     (a) => (sector === "all" || a.sector === sector) && (dept === "all" || a.dept === dept)
   )
@@ -45,6 +47,7 @@ export function ArticlesPage() {
             <B en="Read the latest" fr="Lire les derniers" />
           </a>
         </div>
+        {latest.length >= 3 && (
         <div className="art-strip">
           {latest.map((a) => (
             <article className="art-tile" key={a.id}>
@@ -60,6 +63,7 @@ export function ArticlesPage() {
             </article>
           ))}
         </div>
+        )}
       </section>
 
       <div className="art-filters" id="articles-list">
@@ -91,7 +95,8 @@ export function ArticlesPage() {
           </p>
         )}
         {shown.map((a: Article) => (
-          <article className="art-card" key={a.id}>
+          <Link href={`/articles/${pageSlug(a.id)}`} className="art-card-link" key={a.id}>
+          <article className="art-card">
             <div className="art-card-img">
               <Image src={a.image} alt="" fill sizes="(max-width: 900px) 50vw, 360px" />
               <span className="art-card-tag">
@@ -107,6 +112,7 @@ export function ArticlesPage() {
               </p>
             </div>
           </article>
+          </Link>
         ))}
       </div>
     </main>
