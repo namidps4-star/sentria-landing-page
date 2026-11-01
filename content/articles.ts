@@ -138,28 +138,6 @@ export const ARTICLE_PAGES: ArticlePage[] = [
           "Pick the ten products that sell most, calculate their days of stock, and check the delivery time for each. You will usually find two or three that need action today.",
         ],
       },
-
-      {
-        heading: "Ce qu'il faut vérifier chaque semaine",
-        paragraphs: [
-          "Une fois par semaine, regardez les produits qui sortent le plus. Pour chacun, vérifiez trois choses : les jours de stock restants, le délai de livraison de chaque grossiste, et si la moyenne des ventes tient toujours. Un produit qui se vendait 5 par jour en hiver peut en vendre 9 pendant une période de grippe.",
-          "Notez la liste sur papier ou dans votre logiciel de gestion. L'outil compte moins que l'habitude : quelqu'un regarde la liste chaque semaine et agit sur ce qu'elle montre.",
-        ],
-      },
-      {
-        heading: "Les erreurs fréquentes",
-        paragraphs: [
-          "Utiliser une vieille moyenne. Les ventes changent selon la saison, un nouveau prescripteur dans le quartier, ou la fermeture d'une officine voisine. Recalculez la moyenne au moins une fois par mois.",
-          "Oublier le jour de livraison. Un grossiste qui livre seulement trois jours par semaine peut transformer une livraison de deux jours en attente de quatre jours si vous commandez le mauvais jour.",
-          "Compter des boîtes au lieu de unités. Vérifiez que l'unité comptée est celle que vous vendez, sinon le calcul est faux d'un facteur facile à manquer.",
-        ],
-      },
-      {
-        heading: "Par où commencer cette semaine",
-        paragraphs: [
-          "Prenez les dix produits qui se vendent le plus, calculez leurs jours de stock, et vérifiez le délai de livraison de chacun. Vous trouverez généralement deux ou trois produits qui demandent une action aujourd'hui.",
-        ],
-      },
     ],
     faq: [
       {
