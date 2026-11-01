@@ -200,6 +200,13 @@ export const ARTICLE_PAGES: ArticlePage[] = [
           "Il ne prédit pas l'avenir et ne connaît pas le stock des grossistes. Il travaille à partir des chiffres que vous importez.",
         ],
       },
+      {
+        heading: "Ce qu'il faut vérifier chaque semaine",
+        paragraphs: [
+          "Une fois par semaine, regardez les produits qui sortent le plus. Pour chacun, vérifiez trois choses : les jours de stock restants, le délai de livraison de chaque grossiste, et si la moyenne des ventes tient toujours. Un produit qui se vendait 5 par jour en hiver peut en vendre 9 pendant une période de grippe.",
+          "Notez la liste sur papier ou dans votre logiciel de gestion. L'outil compte moins que l'habitude : quelqu'un regarde la liste chaque semaine et agit sur ce qu'elle montre.",
+        ],
+      },
     ],
     faq: [
       {
