@@ -81,3 +81,16 @@
 .art-card-meta .art-card-tag { position: static; z-index: auto; }
 /* Lime accent: a lime highlight under each section heading of an article. */
 .art-page-panel h2 { background-image: linear-gradient(#d6ff3f, #d6ff3f); background-repeat: no-repeat; background-size: 100% 0.28em; background-position: 0 86%; }
+
+/* Article page, split layout: title and summary left, photo right, body below. */
+.art-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; padding: 40px 40px 0; align-items: center; }
+.art-split-tag { display: inline-block; border: 1px solid #0b0c08; border-radius: 999px; padding: 5px 12px; font-size: 12px; }
+.art-split h1 { font: 700 52px/1.05 var(--f-display), sans-serif; letter-spacing: -0.02em; margin: 16px 0 14px; }
+.art-dash { width: 80px; height: 3px; background: #d6ff3f; border-radius: 2px; margin: 0 0 18px; }
+.art-split-lede { font-size: 17px; line-height: 1.55; margin: 0 0 22px; }
+.art-split-box { background: #d6ff3f; border-radius: 20px; padding: 20px 22px; font-size: 15px; margin: 0; }
+.art-split-img { position: relative; height: 420px; border-radius: 24px; overflow: hidden; }
+.art-split-img img { object-fit: cover; }
+.art-body { max-width: 640px; margin: 50px auto 60px; padding: 0 20px; }
+.art-body h2 { border-left: 6px solid #d6ff3f; padding-left: 14px; }
+@media (max-width: 900px) { .art-split { grid-template-columns: 1fr; padding: 24px 20px 0; } .art-split h1 { font-size: 38px; } .art-split-img { height: 260px; } }

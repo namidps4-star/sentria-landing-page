@@ -79,16 +79,24 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     <>
       <Header />
       <main id="main" className="art-page" lang={page.lang}>
-        <div className="art-page-panel">
-        <article>
-          <p className="art-page-meta">
-            {page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`} · {page.dateLabel}
-          </p>
-          <h1>{page.title}</h1>
-          <div className="art-page-image">
-            <Image src={page.image} alt={page.title} fill priority sizes="(max-width: 900px) 100vw, 680px" />
+        <div className="art-split">
+          <div className="art-split-copy">
+            <span className="art-split-tag">
+              {page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`} · {page.dateLabel}
+            </span>
+            <h1>{page.title}</h1>
+            <div className="art-dash" aria-hidden="true" />
+            <p className="art-split-lede">{page.intro}</p>
+            <p className="art-split-box">
+              <b>{page.lang === "fr" ? "En bref : " : "In short: "}</b>
+              {page.description}
+            </p>
           </div>
-          <p className="art-page-intro">{page.intro}</p>
+          <div className="art-split-img">
+            <Image src={page.image} alt={page.title} fill priority sizes="(max-width: 900px) 100vw, 560px" />
+          </div>
+        </div>
+        <article className="art-body">
           {page.sections.map((s) => (
             <section key={s.heading}>
               <h2>{s.heading}</h2>
@@ -108,10 +116,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </section>
           <p className="art-page-closing">
             {page.closing}{" "}
-            <a href={page.lang === "fr" ? "/#tarifs" : "/#tarifs"}>{page.lang === "fr" ? "Tarifs" : "Pricing"}</a>
+            <a href="/#tarifs">{page.lang === "fr" ? "Tarifs" : "Pricing"}</a>
           </p>
         </article>
-        </div>
         {nextCards.length > 0 && (
           <section className="art-next">
             <div className="art-next-head">
