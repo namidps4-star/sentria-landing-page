@@ -522,13 +522,13 @@ html.op-run .op {
 @keyframes op-top {
   from {
     opacity: 0;
-    transform: translate(-14px, -12px);
+    transform: translateY(70vh);
   }
 }
 @keyframes op-bot {
   from {
     opacity: 0;
-    transform: translate(14px, 12px);
+    transform: translateY(-70vh);
   }
 }
 /* the name is revealed in one sweep, and its letters tighten as they land */
