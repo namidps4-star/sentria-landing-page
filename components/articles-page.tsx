@@ -2,6 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
+
+import { ArticleCard } from "@/components/article-card"
 import { useState } from "react"
 
 import { B } from "@/components/t"
@@ -19,6 +21,8 @@ export function ArticlesPage() {
 
   const latest = ARTICLES.slice(0, 3)
   const pageDesc = (id: string | undefined, lang: "en" | "fr") => (id ? ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === lang)?.description : undefined)
+  const pageDate = (id: string) => ({ en: ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.dateLabel ?? "", fr: ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "fr")?.dateLabel ?? "" })
+  const pageDescBi = (id: string) => ({ en: pageDesc(id, "en") ?? "", fr: pageDesc(id, "fr") ?? "" })
   const pageSlug = (id: string) => ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.slug ?? ""
   const shown = ARTICLES.filter(
     (a) => (sector === "all" || a.sector === sector) && (dept === "all" || a.dept === dept)
@@ -89,24 +93,16 @@ export function ArticlesPage() {
           </p>
         )}
         {shown.map((a: Article) => (
-          <Link href={`/articles/${pageSlug(a.id)}`} className="art-card-link" key={a.id}>
-          <article className="art-card">
-            <div className="art-card-img">
-              <Image src={a.image} alt="" fill sizes="(max-width: 900px) 50vw, 360px" />
-              <span className="art-card-tag">
-                <B en={a.tag.en} fr={a.tag.fr} />
-              </span>
-            </div>
-            <div className="art-card-body">
-              <h2>
-                <B en={a.title.en} fr={a.title.fr} />
-              </h2>
-              <p>
-                <B en={`${a.minutes} min read`} fr={`${a.minutes} min de lecture`} />
-              </p>
-            </div>
-          </article>
-          </Link>
+          <ArticleCard
+            key={a.id}
+            href={`/articles/${pageSlug(a.id)}`}
+            image={a.image}
+            tag={a.tag}
+            minutes={a.minutes}
+            date={pageDate(a.id)}
+            title={a.title}
+            description={pageDescBi(a.id)}
+          />
         ))}
       </div>
     </main>

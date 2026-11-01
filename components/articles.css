@@ -59,3 +59,23 @@
 .art-faq h3 { font: 700 19px/1.25 var(--f-display), sans-serif; margin: 0 0 6px; }
 .art-page-closing { margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(11, 12, 8, 0.14); }
 .art-page-closing a { color: #0b0c08; font-weight: 600; }
+
+/* Article cards (outlined), used in the listing and in the next-article row. */
+.art-card { display: flex; flex-direction: column; border: 1px solid #0b0c08; border-radius: 22px; padding: 12px; background: #f5f3ea; color: #0b0c08; text-decoration: none; }
+.art-card-img { position: relative; height: 200px; border-radius: 16px; overflow: hidden; }
+.art-card-img img { object-fit: cover; }
+.art-card-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 12px 4px 0; font-size: 12px; color: #5a5d50; }
+.art-card-tag { display: inline-flex; align-items: center; gap: 6px; border: 1px solid #0b0c08; border-radius: 999px; padding: 3px 10px 3px 8px; background: #d6ff3f; color: #0b0c08; font-size: 12px; }
+.art-card-tag i { width: 6px; height: 6px; border-radius: 50%; background: #0b0c08; display: inline-block; }
+.art-card-title { font: 700 19px/1.25 var(--f-display), sans-serif; margin: 12px 4px 6px; letter-spacing: -0.01em; }
+.art-card-desc { margin: 0 4px 6px; font-size: 13px; color: #2a2c25; }
+.art-page-panel { max-width: 1000px; margin: 0 auto; background: #ece7d6; border-radius: 26px; padding: 48px 40px 56px; }
+.art-page-panel article { max-width: 680px; margin: 0 auto; }
+.art-next { max-width: 1000px; margin: 64px auto 0; }
+.art-next-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.art-next-head h2 { font: 700 30px/1.1 var(--f-display), sans-serif; margin: 0; letter-spacing: -0.01em; }
+.art-next-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 900px) { .art-next-row { grid-template-columns: 1fr; } .art-page-panel { margin: 0 12px; padding: 36px 20px; } }
+.art-page-image { position: relative; height: 300px; border-radius: 20px; overflow: hidden; margin: 0 0 30px; }
+.art-page-image img { object-fit: cover; }
+.art-card-meta .art-card-tag { position: static; z-index: auto; }

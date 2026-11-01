@@ -62,6 +62,7 @@ export type ArticlePage = {
   title: string
   description: string
   date: string
+  dateLabel: string
   minutes: number
   intro: string
   sections: { heading: string; paragraphs: string[] }[]
@@ -78,6 +79,7 @@ export const ARTICLE_PAGES: ArticlePage[] = [
     title: "How to avoid pharmacy stock-outs",
     description: "Count the days of stock left for each product, order before the delivery time runs out, and keep a second wholesaler ready.",
     date: "2026-11-01",
+    dateLabel: "Nov 1, 2026",
     minutes: 5,
     intro:
       "A stock-out happens when a product no longer covers sales until the next delivery. The customer leaves without the medicine, and the sale is lost. Most stock-outs are not surprises: the stock was falling for days. The hard part is seeing it in time.",
@@ -139,6 +141,7 @@ export const ARTICLE_PAGES: ArticlePage[] = [
     title: "Comment éviter les ruptures de stock en pharmacie",
     description: "Calculez les jours de stock restants pour chaque produit, commandez avant que le délai de livraison ne dépasse le stock, et gardez un second grossiste.",
     date: "2026-11-01",
+    dateLabel: "1 nov. 2026",
     minutes: 5,
     intro:
       "Une rupture de stock arrive quand un produit ne couvre plus les ventes jusqu'à la prochaine livraison. Le client repart sans son médicament, et la vente est perdue. La plupart des ruptures ne sont pas des surprises : le stock baissait depuis plusieurs jours. Le plus difficile est de le voir à temps.",
