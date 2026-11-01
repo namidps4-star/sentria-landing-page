@@ -274,6 +274,34 @@ html.op-run:not(.op-done) .bar {
   display: grid;
   place-items: center;
 }
+.logo-mark {
+  animation: logo-mark-in 0.6s var(--ease) backwards;
+}
+.logo-word {
+  display: block;
+  height: 26px;
+  width: auto;
+  color: var(--cream);
+  animation: logo-word-in 0.6s var(--ease) 0.3s backwards;
+}
+@keyframes logo-mark-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes logo-word-in {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark,
+  .logo-word {
+    animation: none;
+  }
+}
 .mark {
   width: 34px;
   height: 34px;
