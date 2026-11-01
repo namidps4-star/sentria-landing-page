@@ -279,7 +279,7 @@ html.op-run:not(.op-done) .bar {
 }
 .logo-word {
   display: block;
-  height: 17px;
+  height: 15px;
   width: auto;
   color: var(--cream);
   animation: logo-word-in 0.6s var(--ease) 0.3s backwards;
@@ -298,7 +298,7 @@ html.op-run:not(.op-done) .bar {
 }
 @media (max-width: 600px) {
   .logo-word {
-    height: 15px;
+    height: 13px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
