@@ -4,12 +4,15 @@ import { notFound } from "next/navigation"
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/sections"
-import { ARTICLE_PAGES, ARTICLES, type ArticlePage } from "@/content/articles"
+import { ARTICLE_PAGES, ARTICLE_UPDATES, ARTICLES, type ArticlePage } from "@/content/articles"
 import { ArticleCard } from "@/components/article-card"
 
 import "@/components/articles.css"
 
 const BASE = "https://sentriahq.dev"
+
+/* Pages are rebuilt at most once an hour, so a dated text change shows up on its day. */
+export const revalidate = 3600
 
 export function generateStaticParams() {
   return ARTICLE_PAGES.map((a) => ({ slug: a.slug }))
@@ -51,6 +54,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const { slug } = await params
   const page = findPage(slug)
   if (!page) notFound()
+
+  const update = ARTICLE_UPDATES.find((u) => u.slug === page.slug && Date.now() >= Date.parse(u.from))
+  const intro = update?.intro ?? page.intro
+  const sources = update?.sources ?? []
 
   // The other articles in this language, for the "next article" row.
   const nextCards = ARTICLE_PAGES.filter((a) => a.lang === page.lang && a.slug !== page.slug).map((a) => {
@@ -111,7 +118,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
         <div className="blog-layout">
           <article className="blog-body">
-            <p className="blog-intro">{page.intro}</p>
+            <p className="blog-intro">{intro}</p>
             {page.sections.map((s) => (
               <section key={s.heading}>
                 <h2>{s.heading}</h2>
@@ -130,6 +137,20 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               ))}
             </section>
             <p className="blog-closing">{page.closing}</p>
+            {sources.length > 0 && (
+              <section className="blog-sources">
+                <h2>Sources</h2>
+                <ol>
+                  {sources.map((src) => (
+                    <li key={src.url}>
+                      <a href={src.url} rel="noopener" target="_blank">
+                        {src.label}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
           </article>
 
           <aside className="blog-aside" aria-label={page.lang === "fr" ? "Actions sur l'article" : "Article actions"}>

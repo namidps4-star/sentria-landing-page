@@ -129,3 +129,10 @@
   .blog-layout { grid-template-columns: 1fr; gap: 40px; }
   .blog-aside { position: static; }
 }
+
+/* Sources list at the end of an article. */
+.blog-sources { margin-top: 36px; font-size: 14px; }
+.blog-sources h2 { font: 700 18px var(--f-display), sans-serif; margin: 0 0 10px; }
+.blog-sources ol { padding-left: 20px; margin: 0; }
+.blog-sources li { margin: 0 0 8px; line-height: 1.5; }
+.blog-sources a { color: #0b0c08; text-decoration: underline; text-underline-offset: 3px; }

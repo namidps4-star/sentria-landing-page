@@ -240,3 +240,38 @@ export const ARTICLE_PAGES: ArticlePage[] = [
     image: "/articles/pharm.jpg",
   },
 ]
+
+/* Text changes that go live on a set date, without a new deploy. Until `from`
+   (UTC) the page keeps the text above. */
+export type ArticleUpdate = {
+  slug: string
+  from: string
+  intro: string
+  sources: { label: string; url: string }[]
+}
+
+export const ARTICLE_UPDATES: ArticleUpdate[] = [
+  {
+    slug: "pharmacy-stock-outs",
+    from: "2026-11-09T00:00:00Z",
+    intro:
+      "A stock-out happens when a product no longer covers sales until the next delivery. The customer leaves without the medicine, and the sale is lost. In a study of 145 Zambian clinics, up to 30% ran out of a malaria medicine while the national warehouse still had stock. The ordering rules did not account for delivery delays.",
+    sources: [
+      { label: "Leung et al., PLOS ONE, 2016: inventory management and stock-outs in Zambian clinics", url: "https://pubmed.ncbi.nlm.nih.gov/27227412/" },
+      { label: "Community Pharmacy England, Pressures Survey 2025: medicines supply (England)", url: "https://cpe.org.uk/wp-content/uploads/2025/06/MP-Briefing-2025-Medicines-Supply-Report-Summary.pdf" },
+      { label: "Health Action International, SRH commodities in Marsabit County, 2022–2025 (Kenya)", url: "https://haiweb.org/publication/srh-commodities-in-marsabit-county-2022-2025/" },
+    ],
+  },
+  {
+    slug: "ruptures-de-stock-en-pharmacie",
+    from: "2026-11-09T00:00:00Z",
+    intro:
+      "Une rupture de stock arrive quand un produit ne couvre plus les ventes jusqu'à la prochaine livraison. Le client repart sans son médicament, et la vente est perdue. Dans une étude de 145 cliniques en Zambie, jusqu'à 30 % ont manqué d'un médicament contre le paludisme alors que l'entrepôt national en avait en stock. Les règles de commande ne tenaient pas compte des retards de livraison.",
+    sources: [
+      { label: "Leung et al., PLOS ONE, 2016 : gestion des stocks et ruptures dans les cliniques zambiennes (en anglais)", url: "https://pubmed.ncbi.nlm.nih.gov/27227412/" },
+      { label: "Community Pharmacy England, Pressures Survey 2025 : approvisionnement en médicaments (Angleterre, en anglais)", url: "https://cpe.org.uk/wp-content/uploads/2025/06/MP-Briefing-2025-Medicines-Supply-Report-Summary.pdf" },
+      { label: "Health Action International, SRH commodities in Marsabit County, 2022–2025 (Kenya, en anglais)", url: "https://haiweb.org/publication/srh-commodities-in-marsabit-county-2022-2025/" },
+    ],
+  },
+]
+
