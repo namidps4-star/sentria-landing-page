@@ -10,7 +10,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: LANGS.en, changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
     { url: LANGS.fr, changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
     { url: "https://sentriahq.dev/articles", changeFrequency: "weekly", priority: 0.6 },
-    ...ARTICLE_PAGES.map((a) => ({ url: `https://sentriahq.dev/articles/${a.slug}`, changeFrequency: "monthly" as const, priority: 0.6, lastModified: a.date })),
+    ...ARTICLE_PAGES.map((a) => ({
+      url: `https://sentriahq.dev/articles/${a.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+      lastModified: a.date,
+      alternates: {
+        languages: Object.fromEntries(
+          ARTICLE_PAGES.filter((x) => x.pairId === a.pairId).map((x) => [x.lang, `https://sentriahq.dev/articles/${x.slug}`])
+        ),
+      },
+    })),
     { url: "https://sentriahq.dev/privacy", changeFrequency: "yearly", priority: 0.3 },
     { url: "https://sentriahq.dev/terms", changeFrequency: "yearly", priority: 0.3 },
   ]

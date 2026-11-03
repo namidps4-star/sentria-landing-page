@@ -33,7 +33,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${page.title} | SentrIA`,
     description: page.description,
     alternates: { canonical: `/articles/${page.slug}`, languages: pairOf(page) },
-    openGraph: { title: page.title, description: page.description, type: "article", locale: page.lang === "fr" ? "fr_FR" : "en_US" },
+    openGraph: {
+      title: page.title,
+      description: page.description,
+      type: "article",
+      url: `https://sentriahq.dev/articles/${page.slug}`,
+      siteName: "SentrIA",
+      locale: page.lang === "fr" ? "fr_FR" : "en_US",
+      images: [{ url: page.image, alt: page.title }],
+    },
+    twitter: { card: "summary_large_image", title: page.title, description: page.description, images: [page.image] },
     robots: { index: true, follow: true },
   }
 }
@@ -82,7 +91,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div className="art-split">
           <div className="art-split-copy">
             <span className="art-split-tag">
-              {page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`} · {page.dateLabel}
+              {page.lang === "fr" ? "Par l'équipe SentrIA" : "By the SentrIA team"} · {page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`} · {page.dateLabel}
             </span>
             <h1>{page.title}</h1>
             <div className="art-dash" aria-hidden="true" />
@@ -116,6 +125,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </section>
           <p className="art-page-closing">
             {page.closing}{" "}
+            <a href={`/${page.lang}#demo`}>{page.lang === "fr" ? "Réserver une démo" : "Book a demo"}</a>
+            {" · "}
+            <a href={`/${page.lang}#situations`}>{page.lang === "fr" ? "Situations santé" : "Health situations"}</a>
+            {" · "}
             <a href="/#tarifs">{page.lang === "fr" ? "Tarifs" : "Pricing"}</a>
           </p>
         </article>

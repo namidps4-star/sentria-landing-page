@@ -44,7 +44,7 @@ export const ARTICLES: Article[] = [
     id: "pharmacy-stock-outs",
     sector: "health",
     dept: "pharmacy",
-    tag: { en: "Pharmacy", fr: "Pharmacie" },
+    tag: { en: "Health · Pharmacy", fr: "Santé · Pharmacie" },
     title: {
       en: "How to avoid pharmacy stock-outs",
       fr: "Comment éviter les ruptures de stock en pharmacie",
@@ -112,7 +112,7 @@ export const ARTICLE_PAGES: ArticlePage[] = [
       {
         heading: "What SentrIA does today",
         paragraphs: [
-          "SentrIA works out the days of stock left from the stock and the last 30 days of sales. When a delivery would arrive after the stock runs out, it says so and proposes the next wholesaler, with the gap in days.",
+          "SentrIA works out the days of stock left from the stock and the last 30 days of sales. SentrIA compares each supplier's promised delivery time with the time it really takes, and warns you when your stock would run out before the delivery arrives.",
           "It does not predict the future, and it does not know what a wholesaler has in stock. It works from the figures you import.",
         ],
       },
@@ -196,7 +196,7 @@ export const ARTICLE_PAGES: ArticlePage[] = [
       {
         heading: "Ce que fait SentrIA aujourd'hui",
         paragraphs: [
-          "SentrIA calcule les jours de stock restants à partir du stock et des ventes des 30 derniers jours. Quand une livraison arriverait après la rupture, il le signale et propose le grossiste suivant, avec l'écart en jours.",
+          "SentrIA calcule les jours de stock restants à partir du stock et des ventes des 30 derniers jours. SentrIA compare le délai promis par chaque fournisseur au délai qu'il tient vraiment, et vous prévient quand le stock s'épuiserait avant l'arrivée de la livraison.",
           "Il ne prédit pas l'avenir et ne connaît pas le stock des grossistes. Il travaille à partir des chiffres que vous importez.",
         ],
       },
@@ -212,7 +212,7 @@ export const ARTICLE_PAGES: ArticlePage[] = [
         paragraphs: [
           "Utiliser une vieille moyenne. Les ventes changent selon la saison, un nouveau prescripteur dans le quartier, ou la fermeture d'une officine voisine. Recalculez la moyenne au moins une fois par mois.",
           "Oublier le jour de livraison. Un grossiste qui livre seulement trois jours par semaine peut transformer une livraison de deux jours en attente de quatre jours si vous commandez le mauvais jour.",
-          "Compter des boîtes au lieu de unités. Vérifiez que l'unité comptée est celle que vous vendez, sinon le calcul est faux d'un facteur facile à manquer.",
+          "Compter des boîtes au lieu d'unités. Vérifiez que l'unité comptée est celle que vous vendez, sinon le calcul est faux d'un facteur facile à manquer.",
         ],
       },
       {

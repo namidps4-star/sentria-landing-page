@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArticleCard } from "@/components/article-card"
 import { useState } from "react"
 
+import { useLang } from "@/components/lang"
 import { B } from "@/components/t"
 import { ARTICLE_PAGES, ARTICLES, DEPARTMENTS, SECTORS, type Article } from "@/content/articles"
 
@@ -18,12 +19,17 @@ type SectorKey = (typeof SECTORS)[number]["key"]
 export function ArticlesPage() {
   const [sector, setSector] = useState<SectorKey>("all")
   const [dept, setDept] = useState("all")
+  const lang = useLang()
 
   const latest = ARTICLES.slice(0, 3)
   const pageDesc = (id: string | undefined, lang: "en" | "fr") => (id ? ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === lang)?.description : undefined)
   const pageDate = (id: string) => ({ en: ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.dateLabel ?? "", fr: ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "fr")?.dateLabel ?? "" })
   const pageDescBi = (id: string) => ({ en: pageDesc(id, "en") ?? "", fr: pageDesc(id, "fr") ?? "" })
-  const pageSlug = (id: string) => ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.slug ?? ""
+  // The link goes to the article in the visitor's language, English as the fallback.
+  const pageSlug = (id: string) =>
+    ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === lang)?.slug ??
+    ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.slug ??
+    ""
   const shown = ARTICLES.filter(
     (a) => (sector === "all" || a.sector === sector) && (dept === "all" || a.dept === dept)
   )
@@ -82,7 +88,10 @@ export function ArticlesPage() {
           </div>
         )}
         <span className="art-count">
-          <B en={`${shown.length} articles`} fr={`${shown.length} articles`} />
+          <B
+            en={`${shown.length} article${shown.length === 1 ? "" : "s"}`}
+            fr={`${shown.length} article${shown.length === 1 ? "" : "s"}`}
+          />
         </span>
       </div>
 
