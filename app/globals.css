@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Chillax";
+  src: url("/fonts/Chillax-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
 /* ==========================================================================
    SentrIA landing page
    Palette comes from the previous page: near-black olive, cream, sand and the
@@ -482,34 +489,26 @@ html.op-run .op {
     transform: translateY(-100%);
   }
 }
-/* the mark and the name, centred as one lock-up; the em is the size of the name */
 .op-lock {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.28em;
-  font-family: var(--f-open), var(--f-display), sans-serif;
-  font-weight: 600;
-  font-size: clamp(30px, 9.4vw, 150px);
-  line-height: 1;
-  /* the mark starts alone in the middle and glides left as the name is revealed; the name trails the panel as it lifts */
-  animation: op-shift 1s var(--ease-io) 1s backwards, op-trail 1s var(--ease-io) 2.55s forwards;
-}
-@keyframes op-shift {
-  from {
-    transform: translateX(2.55em);
-  }
+  --wm: min(58vw, 150vh);
+  gap: calc(var(--wm) * 0.07);
+  animation: op-trail 1s var(--ease-io) 2.55s forwards;
 }
 @keyframes op-trail {
   to {
     transform: translateY(14vh);
   }
 }
+
+/* the dome mark, in two pieces: the lime dome rises from below, the white bowl drops from above */
 .op-mark {
-  width: 1.18em;
-  height: 1.18em;
+  width: calc(var(--wm, min(58vw, 150vh)) * 0.152);
+  height: calc(var(--wm, min(58vw, 150vh)) * 0.152);
   flex: none;
   overflow: visible;
 }
@@ -531,40 +530,62 @@ html.op-run .op {
     transform: translateY(-70vh);
   }
 }
-/* the name is revealed in one sweep, and its letters tighten as they land */
-.op-word {
-  white-space: nowrap;
-  color: #fff;
-  animation: op-wipe 1s var(--ease-io) 1s backwards;
-}
-.op-word i {
-  font-style: normal;
-  display: inline-block;
-  animation: op-track 1.1s var(--ease-io) 1s backwards;
-}
-.op-word .op-g {
+
+/* the wordmark, cropped to its ink: 800 x 140 */
+.sw {
+  width: var(--wm, min(58vw, 150vh));
+  height: auto;
   display: block;
-  height: 1em;
-  width: auto;
   overflow: visible;
 }
-.op-ia {
-  color: var(--lime);
+.sw-l {
+  animation: sw-rise 0.9s var(--ease) both;
+  animation-delay: calc(0.2s + var(--i) * 0.09s);
 }
-@keyframes op-wipe {
+.sw-shard {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: sw-grow 0.7s var(--ease-io) both;
+  animation-delay: calc(1s + var(--k) * 0.12s);
+}
+.sw-mark {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: sw-fade 0.6s var(--ease) 1.5s both;
+}
+@keyframes sw-rise {
   from {
-    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    transform: translateY(120px);
   }
   to {
-    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: none;
   }
 }
-@keyframes op-track {
+@keyframes sw-grow {
   from {
-    margin-right: 0.14em;
+    transform: scaleY(0);
   }
   to {
-    margin-right: 0;
+    transform: scaleY(1);
+  }
+}
+@keyframes sw-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sw-l,
+  .sw-shard,
+  .sw-mark {
+    animation: none;
   }
 }
 
