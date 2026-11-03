@@ -8,4 +8,8 @@ Whenever the user asks for a better UI, a better look, or better front-end desig
 - Always screenshot the current state first, then build the improved version and screenshot it too. Show both, before and after.
 - Check the result at phone width (390 px) and desktop width, and confirm no horizontal overflow.
 - Use only fonts we are allowed to use. No Google Fonts.
-- Before starting UI work, check the available skills for front-end design ones (for example "Impeccable" taste, "UI Pro Max", or other front-end design skills). Invoke every one that fits the task with the Skill tool, and use it. Do not skip this step.
+- Before starting UI work, load these skills with the Skill tool and use them when they fit the task:
+  - `impeccable` (taste, critique, audit, polish, layout, typography, motion). Source: `.claude/skills/impeccable/`, Apache 2.0.
+  - `ui-ux-pro-max` (styles, palettes, font pairings, UX rules). Source: `.claude/skills/ui-ux-pro-max/`, MIT.
+  - Any other front-end design skill listed in the session.
+  Do not skip this step.
