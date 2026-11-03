@@ -1,10 +1,11 @@
+import { Fragment } from "react"
 import type { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/sections"
-import { ARTICLE_PAGES, ARTICLE_UPDATES, ARTICLES, type ArticlePage } from "@/content/articles"
+import { ARTICLE_PAGES, ARTICLE_UPDATES, ARTICLES, isLive, type ArticlePage } from "@/content/articles"
 import { ArticleCard } from "@/components/article-card"
 
 import "@/components/articles.css"
@@ -15,11 +16,11 @@ const BASE = "https://sentriahq.dev"
 export const revalidate = 3600
 
 export function generateStaticParams() {
-  return ARTICLE_PAGES.map((a) => ({ slug: a.slug }))
+  return ARTICLE_PAGES.filter(isLive).map((a) => ({ slug: a.slug }))
 }
 
 function findPage(slug: string): ArticlePage | undefined {
-  return ARTICLE_PAGES.find((a) => a.slug === slug)
+  return ARTICLE_PAGES.find((a) => a.slug === slug && isLive(a))
 }
 
 function pairOf(page: ArticlePage): Partial<Record<"en" | "fr", string>> {
@@ -57,10 +58,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   const update = ARTICLE_UPDATES.find((u) => u.slug === page.slug && Date.now() >= Date.parse(u.from))
   const intro = update?.intro ?? page.intro
-  const sources = update?.sources ?? []
+  const sources = update?.sources ?? page.sources ?? []
 
   // The other articles in this language, for the "next article" row.
-  const nextCards = ARTICLE_PAGES.filter((a) => a.lang === page.lang && a.slug !== page.slug).map((a) => {
+  const nextCards = ARTICLE_PAGES.filter((a) => a.lang === page.lang && a.slug !== page.slug && isLive(a)).map((a) => {
     const listing = ARTICLES.find((x) => x.id === a.pairId)
     const frPage = ARTICLE_PAGES.find((x) => x.pairId === a.pairId && x.lang === "fr")
     return {
@@ -119,13 +120,25 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div className="blog-layout">
           <article className="blog-body">
             <p className="blog-intro">{intro}</p>
-            {page.sections.map((s) => (
-              <section key={s.heading}>
-                <h2>{s.heading}</h2>
-                {s.paragraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </section>
+            {page.sections.map((s, si) => (
+              <Fragment key={s.heading}>
+                <section>
+                  <h2>{s.heading}</h2>
+                  {s.paragraphs.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </section>
+                {si === 1 && page.figures && page.figures.length > 0 && (
+                  <figure className="blog-figures">
+                    {page.figures.map((f) => (
+                      <div key={f.src} className="blog-figure">
+                        <Image src={f.src} alt={f.alt} width={1600} height={1067} sizes="(max-width: 960px) 100vw, 330px" />
+                        <figcaption>{f.caption}</figcaption>
+                      </div>
+                    ))}
+                  </figure>
+                )}
+              </Fragment>
             ))}
             <section>
               <h2>{page.lang === "fr" ? "Questions fréquentes" : "Questions people ask"}</h2>

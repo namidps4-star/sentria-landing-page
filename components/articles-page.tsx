@@ -8,7 +8,7 @@ import { useState } from "react"
 
 import { useLang } from "@/components/lang"
 import { B } from "@/components/t"
-import { ARTICLE_PAGES, ARTICLES, DEPARTMENTS, SECTORS, type Article } from "@/content/articles"
+import { ARTICLE_PAGES, ARTICLES, DEPARTMENTS, SECTORS, isLive, type Article } from "@/content/articles"
 
 import "./articles.css"
 
@@ -21,7 +21,8 @@ export function ArticlesPage() {
   const [dept, setDept] = useState("all")
   const lang = useLang()
 
-  const latest = ARTICLES.slice(0, 3)
+  const live = ARTICLES.filter(isLive)
+  const latest = live.slice(0, 3)
   const pageDesc = (id: string | undefined, lang: "en" | "fr") => (id ? ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === lang)?.description : undefined)
   const pageDate = (id: string) => ({ en: ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.dateLabel ?? "", fr: ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "fr")?.dateLabel ?? "" })
   const pageDescBi = (id: string) => ({ en: pageDesc(id, "en") ?? "", fr: pageDesc(id, "fr") ?? "" })
@@ -30,7 +31,7 @@ export function ArticlesPage() {
     ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === lang)?.slug ??
     ARTICLE_PAGES.find((p) => p.pairId === id && p.lang === "en")?.slug ??
     ""
-  const shown = ARTICLES.filter(
+  const shown = live.filter(
     (a) => (sector === "all" || a.sector === sector) && (dept === "all" || a.dept === dept)
   )
   const departments = sector === "all" ? [] : DEPARTMENTS[sector]
