@@ -499,7 +499,7 @@ html.op-run .op {
 }
 @keyframes op-shift {
   from {
-    transform: translateX(2.55em);
+    transform: translateX(1.75em);
   }
 }
 @keyframes op-trail {
@@ -531,16 +531,22 @@ html.op-run .op {
     transform: translateY(-70vh);
   }
 }
-/* the name is revealed in one sweep, and its letters tighten as they land */
+/* each letter slams into its own rotated, overlapping position (Restcal / Dirtyline collage) */
 .op-word {
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
   color: #fff;
-  animation: op-wipe 1s var(--ease-io) 1s backwards;
 }
 .op-word i {
   font-style: normal;
-  display: inline-block;
-  animation: op-track 1.1s var(--ease-io) 1s backwards;
+  display: block;
+  flex: none;
+  position: relative;
+  z-index: var(--z, 1);
+  margin-left: var(--ml, 0px);
+  transform: rotate(var(--rot, 0deg)) translateY(var(--dy, 0px)) scale(var(--sc, 1));
+  transform-origin: 50% 70%;
+  animation: op-slam 0.5s cubic-bezier(0.22, 1.4, 0.36, 1) calc(1.1s + var(--d, 0) * 0.07s) backwards;
 }
 .op-word .op-g {
   display: block;
@@ -551,20 +557,10 @@ html.op-run .op {
 .op-ia {
   color: var(--lime);
 }
-@keyframes op-wipe {
+@keyframes op-slam {
   from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-@keyframes op-track {
-  from {
-    margin-right: 0.14em;
-  }
-  to {
-    margin-right: 0;
+    opacity: 0;
+    transform: rotate(calc(var(--rot, 0deg) + 35deg)) translateY(calc(var(--dy, 0px) - 1.5em)) scale(calc(var(--sc, 1) * 1.5));
   }
 }
 
