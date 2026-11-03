@@ -13,3 +13,4 @@ Whenever the user asks for a better UI, a better look, or better front-end desig
   - `ui-ux-pro-max` (styles, palettes, font pairings, UX rules). Source: `.claude/skills/ui-ux-pro-max/`, MIT.
   - Any other front-end design skill listed in the session.
   Do not skip this step.
+- For scroll-driven or "fly through the world" landing pages (scroll-scrubbed video, 3D world, diorama hero, scroll cinematic), always load the `scroll-world` skill first. Its generation runs cost money (Monid, Higgsfield), so state the cost and get a go-ahead before rendering.
