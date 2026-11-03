@@ -87,51 +87,81 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <Header />
-      <main id="main" className="art-page" lang={page.lang}>
-        <div className="art-split">
-          <div className="art-split-copy">
-            <span className="art-split-tag">
-              {page.lang === "fr" ? "Par l'équipe SentrIA" : "By the SentrIA team"} · {page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`} · {page.dateLabel}
-            </span>
-            <h1>{page.title}</h1>
-            <div className="art-dash" aria-hidden="true" />
-            <p className="art-split-lede">{page.intro}</p>
-            <p className="art-split-box">
-              <b>{page.lang === "fr" ? "En bref : " : "In short: "}</b>
-              {page.description}
-            </p>
+      <main id="main" className="blog" lang={page.lang}>
+        <header className="blog-head">
+          <span className="blog-tag">{ARTICLES.find((x) => x.id === page.pairId)?.tag[page.lang]}</span>
+          <h1>{page.title}</h1>
+          <div className="blog-meta">
+            <span>{page.lang === "fr" ? "Par l'équipe SentrIA" : "By the SentrIA team"}</span>
+            <span>{page.dateLabel}</span>
+            <span>{page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`}</span>
           </div>
-          <div className="art-split-img">
-            <Image src={page.image} alt={page.title} fill priority sizes="(max-width: 900px) 100vw, 560px" />
-          </div>
+          <p className="blog-lede">{page.description}</p>
+        </header>
+
+        <div className="blog-hero">
+          <Image src={page.image} alt={page.title} fill priority sizes="(max-width: 1100px) 100vw, 1100px" />
         </div>
-        <article className="art-body">
-          {page.sections.map((s) => (
-            <section key={s.heading}>
-              <h2>{s.heading}</h2>
-              {s.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
+
+        <div className="blog-layout">
+          <article className="blog-body">
+            <p className="blog-intro">{page.intro}</p>
+            {page.sections.map((s) => (
+              <section key={s.heading}>
+                <h2>{s.heading}</h2>
+                {s.paragraphs.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </section>
+            ))}
+            <section>
+              <h2>{page.lang === "fr" ? "Questions fréquentes" : "Questions people ask"}</h2>
+              {page.faq.map((f) => (
+                <div key={f.q} className="blog-faq">
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </div>
               ))}
             </section>
-          ))}
-          <section>
-            <h2>{page.lang === "fr" ? "Questions fréquentes" : "Questions people ask"}</h2>
-            {page.faq.map((f) => (
-              <div key={f.q} className="art-faq">
-                <h3>{f.q}</h3>
-                <p>{f.a}</p>
+            <p className="blog-closing">{page.closing}</p>
+          </article>
+
+          <aside className="blog-aside" aria-label={page.lang === "fr" ? "Actions sur l'article" : "Article actions"}>
+            <div className="blog-cta">
+              <p className="blog-cta-title">
+                {page.lang === "fr" ? "Voyez le calcul sur vos propres chiffres" : "See the calculation on your own figures"}
+              </p>
+              <a className="blog-cta-btn" href={`/${page.lang}#demo`}>
+                {page.lang === "fr" ? "Réserver une démo" : "Book a demo"} <span aria-hidden="true">→</span>
+              </a>
+              <a className="blog-cta-link" href={`/${page.lang}#situations`}>
+                {page.lang === "fr" ? "Voir les situations santé" : "See the health situations"}
+              </a>
+              <a className="blog-cta-link" href="/#tarifs">
+                {page.lang === "fr" ? "Tarifs" : "Pricing"}
+              </a>
+            </div>
+            <div className="blog-share">
+              <p className="blog-share-title">{page.lang === "fr" ? "Partager cet article" : "Share this article"}</p>
+              <div className="blog-share-links">
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(`${BASE}/articles/${page.slug}`)}&text=${encodeURIComponent(page.title)}`}
+                  rel="noopener"
+                  target="_blank"
+                >
+                  X
+                </a>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${BASE}/articles/${page.slug}`)}`}
+                  rel="noopener"
+                  target="_blank"
+                >
+                  LinkedIn
+                </a>
               </div>
-            ))}
-          </section>
-          <p className="art-page-closing">
-            {page.closing}{" "}
-            <a href={`/${page.lang}#demo`}>{page.lang === "fr" ? "Réserver une démo" : "Book a demo"}</a>
-            {" · "}
-            <a href={`/${page.lang}#situations`}>{page.lang === "fr" ? "Situations santé" : "Health situations"}</a>
-            {" · "}
-            <a href="/#tarifs">{page.lang === "fr" ? "Tarifs" : "Pricing"}</a>
-          </p>
-        </article>
+            </div>
+          </aside>
+        </div>
         {nextCards.length > 0 && (
           <section className="art-next">
             <div className="art-next-head">
