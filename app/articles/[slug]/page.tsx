@@ -92,7 +92,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <span className="blog-tag">{ARTICLES.find((x) => x.id === page.pairId)?.tag[page.lang]}</span>
           <h1>{page.title}</h1>
           <div className="blog-meta">
-            <span>{page.lang === "fr" ? "Par l'équipe SentrIA" : "By the SentrIA team"}</span>
+            <span>
+              {page.lang === "fr" ? "Par " : "By "}
+              <a href="https://www.linkedin.com/in/benwetcheme/" rel="noopener" target="_blank">
+                Ben Wetchem
+              </a>
+              {page.lang === "fr" ? ", fondateur de SentrIA" : ", Founder of SentrIA"}
+            </span>
             <span>{page.dateLabel}</span>
             <span>{page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`}</span>
           </div>
