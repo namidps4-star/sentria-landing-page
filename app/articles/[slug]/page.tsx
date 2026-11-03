@@ -95,7 +95,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <span>
               {page.lang === "fr" ? "Par " : "By "}
               <a href="https://www.linkedin.com/in/benwetcheme/" rel="noopener" target="_blank">
-                Ben Wetchem
+                Ben Wetcheme
               </a>
               {page.lang === "fr" ? ", fondateur de SentrIA" : ", Founder of SentrIA"}
             </span>
