@@ -7,7 +7,7 @@ export function SentriaWordmark() {
         <mask id="sw-cut-I" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="900"><rect width="1200" height="900" fill="#fff" /><rect x="717.17" y="526.5" width="34" height="900" fill="#000" /></mask>
       </defs>
       <g fill="var(--cream)" style={{ fontFamily: "Chillax, system-ui, sans-serif", fontWeight: 500 }}>
-        <text className="sw-l" style={{ "--i": 0 } as React.CSSProperties} x="195.64" y="594" fontSize="208.91">S</text>
+        <text className="sw-l" style={{ "--i": 0 } as React.CSSProperties} x="195.64" y="594" fontSize="208.91" stroke="var(--ink)" strokeWidth={4} strokeLinejoin="round">S</text>
         <text className="sw-l" style={{ "--i": 1 } as React.CSSProperties} x="315.77" y="594" fontSize="208.91">e</text>
         <text className="sw-l" style={{ "--i": 2 } as React.CSSProperties} x="423.36" y="594" fontSize="208.91" mask="url(#sw-cut-n)">n</text>
         <text className="sw-l" style={{ "--i": 3 } as React.CSSProperties} x="549.75" y="594" fontSize="208.91">t</text>
