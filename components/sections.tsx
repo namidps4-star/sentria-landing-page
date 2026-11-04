@@ -3,6 +3,7 @@ import { C } from "@/content/en"
 import { FR } from "@/content/fr"
 import { T, B } from "./t"
 import { ConnectStack } from "./connect-stack"
+import { FootReveal } from "./foot-reveal"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 
@@ -575,6 +576,7 @@ export function Footer() {
           ))}
         </div>
       </div>
+      <FootReveal />
     </footer>
   )
 }

@@ -8,23 +8,24 @@ import { HeroFilm } from "./hero-film"
 
 const d = (n: number) => ({ ["--d" as string]: `${n * 0.06}s` }) as CSSProperties
 
-function letters(text: string) {
+/* Each letter carries its position in the typing sequence (--c) and a small irregular lag (--j), so the headline types itself. */
+function letters(text: string, start: number) {
   return [...text].map((c, i) => (
-    <span key={i} className="wvl">
+    <span key={i} className="wvl" style={{ ["--c" as string]: start + i, ["--j" as string]: ((start + i) * 7) % 5 } as CSSProperties}>
       {c === " " ? " " : c}
     </span>
   ))
 }
 
-/** One headline line, split into letters (for the wave), in both languages. */
-function Line({ s, tone, n }: { s: string; tone?: "lime"; n: number }) {
+/** One headline line, split into letters (for the typing, then the wave), in both languages. */
+function Line({ s, tone, n, en0, fr0 }: { s: string; tone?: "lime"; n: number; en0: number; fr0: number }) {
   const f = FR[s]
   return (
     <span className={`hl${tone ? ` ${tone}` : ""}`} style={d(n)} aria-hidden="true">
-      <span className="en">{letters(s)}</span>
+      <span className="en">{letters(s, en0)}</span>
       {f && f !== s ? (
         <span className="fr" lang="fr">
-          {letters(f)}
+          {letters(f, fr0)}
         </span>
       ) : null}
     </span>
@@ -33,6 +34,13 @@ function Line({ s, tone, n }: { s: string; tone?: "lime"; n: number }) {
 
 export function Hero() {
   const h = C.hero
+  // Start index of each line in the typing sequence, per language (a short pause between lines).
+  const len = (s: string, fr: boolean) => [...(fr ? FR[s] ?? s : s)].length
+  const GAP = 4
+  const en1 = len(h.l1, false) + GAP
+  const en2 = en1 + len(h.l2, false) + GAP
+  const fr1 = len(h.l1, true) + GAP
+  const fr2 = fr1 + len(h.l2, true) + GAP
   return (
     <section id="top" className="hero" aria-labelledby="hero-h">
       <div className="hero-stage" id="hero-stage">
@@ -54,9 +62,9 @@ export function Hero() {
               <span className="sr-only">
                 <T s={h.l1} /> <T s={h.l2} /> <T s={h.l3} />
               </span>
-              <Line s={h.l1} n={0} />
-              <Line s={h.l2} tone="lime" n={1} />
-              <Line s={h.l3} n={2} />
+              <Line s={h.l1} n={0} en0={0} fr0={0} />
+              <Line s={h.l2} tone="lime" n={1} en0={en1} fr0={fr1} />
+              <Line s={h.l3} n={2} en0={en2} fr0={fr2} />
             </h1>
             <p className="hero-lead" data-h="" style={d(5)}>
               <T s={h.lead} />
