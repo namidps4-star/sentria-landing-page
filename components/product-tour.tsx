@@ -35,6 +35,7 @@ export function ProductTour() {
   const [scrollStep, setScrollStep] = useState(0)
   const [hover, setHover] = useState(0)
   const [pick, setPick] = useState<{ n: number } | null>(null)
+  const [ready, setReady] = useState(false)
   const tilt = useRef({ x: 0, y: 0 })
   const rise = useRef(1)
   const lit = useRef(0)
@@ -65,6 +66,11 @@ export function ProductTour() {
       rise.current = 1 - Math.pow(1 - g, 3)
       paint()
       lit.current = g
+      if (g > 0.97) setReady(true)
+      // progress through the current part (0 to 1), so the rail's bar fills as you scroll
+      const edges = [0.12, 0.3, 0.5, 0.72, 1]
+      const k = p < 0.3 ? 0 : p < 0.5 ? 1 : p < 0.72 ? 2 : 3
+      el.style.setProperty("--sp", clamp((p - edges[k]) / (edges[k + 1] - edges[k])).toFixed(3))
       setScrollStep(p < 0.12 ? 0 : p < 0.3 ? 1 : p < 0.5 ? 2 : p < 0.72 ? 3 : 4)
     }
     const on = () => {
@@ -98,6 +104,9 @@ export function ProductTour() {
     const x = (e.clientX - b.left) / b.width
     const y = (e.clientY - b.top) / b.height
     tilt.current = { x: (x - 0.5) * 9, y: -(y - 0.5) * 7 }
+    w.style.setProperty("--mx", `${x * 100}%`)
+    w.style.setProperty("--my", `${y * 100}%`)
+    w.dataset.glow = "1"
     paint()
     if (lit.current < 0.2) return
     const q = s.getBoundingClientRect()
@@ -111,6 +120,7 @@ export function ProductTour() {
   }
   const leave = () => {
     tilt.current = { x: 0, y: 0 }
+    if (win.current) delete win.current.dataset.glow
     paint()
     setHover(0)
   }
@@ -145,19 +155,22 @@ export function ProductTour() {
             <div className="pt-shot" ref={shot}>
               <Image className="en" src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
               <Image className="fr" src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
+              <div className="pt-light" aria-hidden="true" />
               {part && (
                 <div
                   className="pt-spot"
                   aria-hidden="true"
                   style={{ left: `${part.l}%`, top: `${part.t}%`, width: `${part.w}%`, height: `${part.h}%` }}
-                />
+                >
+                  <span key={step} className="pt-scan" />
+                </div>
               )}
             </div>
           </div>
         </div>
-        <ol className="pt-rail" aria-label="Dashboard parts">
+        <ol className="pt-rail" aria-label="Dashboard parts" data-ready={ready ? "1" : undefined} data-manual={hover > 0 || pick ? "1" : undefined}>
           {STEPS.slice(1).map((p, i) => (
-            <li key={i}>
+            <li key={i} style={{ ["--k" as string]: i } as React.CSSProperties}>
               <button
                 type="button"
                 data-on={step === i + 1 ? "1" : undefined}

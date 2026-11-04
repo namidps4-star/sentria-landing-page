@@ -1019,3 +1019,97 @@
     padding: 20px;
   }
 }
+
+
+/* ----------------------------------------------------- dashboard section: motion */
+/* a soft white reflection follows the pointer across the window: glass, never a tint */
+.pt-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(460px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.34), transparent 62%);
+  transition: opacity 0.4s var(--ease);
+}
+.pt-win[data-glow] .pt-light {
+  opacity: 1;
+}
+.pt-spot {
+  overflow: visible;
+}
+.pt-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.pt-scan::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 42%;
+  top: -50%;
+  background: linear-gradient(180deg, transparent, rgba(214, 255, 63, 0.38), transparent);
+  border-bottom: 1px solid rgba(214, 255, 63, 0.9);
+  animation: pt-scan 1.1s var(--ease) 0.15s both;
+}
+@keyframes pt-scan {
+  to {
+    top: 110%;
+    opacity: 0;
+  }
+}
+/* the active bar fills with your scroll through that part (full when you hover or click) */
+.pt-rail button[data-on]::after {
+  transform: scaleX(var(--sp, 1));
+  transition: transform 0.15s linear;
+}
+.pt-rail[data-manual] button[data-on]::after {
+  transform: none;
+  transition: transform 0.6s var(--ease);
+}
+.pt-cap > span {
+  filter: blur(6px);
+  transition: opacity 0.4s var(--ease), filter 0.5s var(--ease);
+}
+.pt-cap > span[data-on] {
+  filter: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .pt-rail li {
+    opacity: 0;
+    transform: translateX(26px);
+    transition: opacity 0.7s var(--ease) calc(var(--k, 0) * 110ms + 100ms), transform 0.9s var(--ease) calc(var(--k, 0) * 110ms + 100ms);
+  }
+  .js .pt-rail[data-ready] li {
+    opacity: 1;
+    transform: none;
+  }
+  .pt-rail button b {
+    display: inline-block;
+    transition: color 0.3s, transform 0.5s var(--ease);
+  }
+  .pt-rail button[data-on] b {
+    transform: translateX(3px) scale(1.12);
+  }
+  .pt-rail button:not([data-on]):hover strong {
+    transform: translateX(4px);
+  }
+  .pt-rail strong {
+    transition: transform 0.45s var(--ease);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pt-scan,
+  .pt-light {
+    display: none;
+  }
+  .pt-cap > span {
+    filter: none;
+  }
+}
