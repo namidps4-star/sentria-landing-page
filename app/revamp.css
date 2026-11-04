@@ -1495,7 +1495,11 @@
   .tc-blob {
     animation: none;
   }
-  @media (max-width: 860px) {
+  .tc-line {
+    animation: none;
+  }
+}
+@media (max-width: 860px) {
   .sc.trust {
     min-height: 0;
   }
