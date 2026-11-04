@@ -1217,7 +1217,7 @@
 .fl-blob {
   position: absolute;
   inset: 0;
-  filter: url(#fl-goo) drop-shadow(0 30px 40px rgba(11, 12, 8, 0.07));
+  filter: url(#fl-goo);
   animation: fl-breathe 7s ease-in-out infinite;
 }
 @keyframes fl-breathe {
@@ -1231,7 +1231,7 @@
   border-radius: 50%;
 }
 .fl-b {
-  background: #e6e6e1;
+  background: #e2e2dd;
   width: calc(var(--d) + 28px);
   height: calc(var(--d) + 28px);
 }
@@ -1254,6 +1254,13 @@
 }
 .fl-c4 {
   background: #d6ff3f;
+}
+.fl-b0 {
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: calc(var(--d) * 1.75);
+  height: calc(var(--d) * 1.75);
 }
 .fl-c1,
 .fl-b1 {

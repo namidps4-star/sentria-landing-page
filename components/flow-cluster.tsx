@@ -60,8 +60,8 @@ export function FlowCluster({ steps, head }: { steps: readonly Step[]; head: Rea
     >
       <svg width="0" height="0" className="fl-defs" aria-hidden="true" focusable="false">
         <filter id="fl-goo" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="13" />
-          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -13" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -11" />
         </filter>
       </svg>
       <div className="fl-left">
@@ -92,6 +92,7 @@ export function FlowCluster({ steps, head }: { steps: readonly Step[]; head: Rea
       </div>
       <div className="fl-cl" role="group" aria-label="Implementation steps">
         <div className="fl-blob" aria-hidden="true">
+          <i className="fl-b fl-b0" />
           {steps.map((s, i) => (
             <i key={s.n} className={`fl-b fl-b${i + 1}`} />
           ))}
