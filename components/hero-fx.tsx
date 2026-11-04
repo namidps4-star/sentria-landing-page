@@ -62,6 +62,17 @@ export function HeroFx() {
         return a
       })
 
+    // The wave starts only after the headline has finished typing itself.
+    let token = 0
+    const startAfterTyping = () => {
+      const mine = ++token
+      const typing = h1.getAnimations({ subtree: true }).filter((a) => ((a as CSSAnimation).animationName ?? "").startsWith("wvl-"))
+      if (!typing.length) return startWaves()
+      Promise.allSettled(typing.map((a) => a.finished)).then(() => {
+        if (mine === token) startWaves()
+      })
+    }
+
     const startWaves = () => {
       waves.forEach((a) => a.cancel())
       letters = letterList(h1)
@@ -146,13 +157,13 @@ export function HeroFx() {
     document.addEventListener("visibilitychange", onVis)
 
     // The headline text changes with the language: rebuild the wave then.
-    const mo = new MutationObserver(() => startWaves())
+    const mo = new MutationObserver(() => startAfterTyping())
     mo.observe(root, { attributes: true, attributeFilter: ["lang"] })
 
     // Start only once the opening is over, so nothing competes with it.
     let waitObserver: MutationObserver | null = null
     const begin = () => {
-      startWaves()
+      startAfterTyping()
       measure()
     }
     if (root.classList.contains("op-run") && !root.classList.contains("op-done")) {
