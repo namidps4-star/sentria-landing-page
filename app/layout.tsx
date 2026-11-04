@@ -35,6 +35,12 @@ const unbounded = localFont({
   display: "swap",
 })
 
+const absans = localFont({
+  src: [{ path: "./fonts/absans-400.woff2", weight: "400", style: "normal" }],
+  variable: "--f-hero",
+  display: "swap",
+})
+
 const TITLE = "SentrIA: The operational decision layer"
 
 const SITE = "https://sentriahq.dev"
@@ -106,7 +112,7 @@ const HEAD_SCRIPT = `(function(){var d=document.documentElement;var ARTICLE_LANG
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${syne.variable} ${poppins.variable} ${michroma.variable} ${unbounded.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${syne.variable} ${poppins.variable} ${michroma.variable} ${unbounded.variable} ${absans.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
