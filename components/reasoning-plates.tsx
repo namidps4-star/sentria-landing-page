@@ -45,7 +45,15 @@ export function ReasoningPlates({ items }: { items: readonly Item[] }) {
   }, [vis, hold, still, items.length])
 
   return (
-    <div ref={root} className={`rp${seen ? " in" : ""}`} onPointerLeave={() => setHold(false)}>
+    <div ref={root} className={`rp${seen ? " in" : ""}`} onPointerLeave={() => setHold(false)}
+      onPointerMove={(e) => {
+        if (e.pointerType !== "mouse") return
+        const t = (e.target as HTMLElement).closest<HTMLElement>(".rp-p")
+        if (!t) return
+        const r = t.getBoundingClientRect()
+        t.style.setProperty("--mx", `${e.clientX - r.left}px`)
+        t.style.setProperty("--my", `${e.clientY - r.top}px`)
+      }}>
       {items.map((it, i) => (
         <button
           key={it.n}
