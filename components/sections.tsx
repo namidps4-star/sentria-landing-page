@@ -5,6 +5,7 @@ import { T, B } from "./t"
 import { ConnectStack } from "./connect-stack"
 import { FootReveal } from "./foot-reveal"
 import { FlowCircles } from "./flow-circles"
+import { ReasoningPlates } from "./reasoning-plates"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 
@@ -370,26 +371,14 @@ export function DataSec() {
 export function Reasoning() {
   const s = C.reasoning
   return (
-    <Sec tone="cream" className="reasoning">
+    <Sec tone="deep" className="reasoning">
       <Eyebrow>
         <T s={s.eyebrow} />
       </Eyebrow>
       <H2>
         <T s={s.title} />
       </H2>
-      <div className="grid3">
-        {s.items.map((it, i) => (
-          <article key={it.n} className="card card-light card-open" data-tilt="" data-rv="rise" style={iv(i)}>
-            <span className="num">{it.n}</span>
-            <h3>
-              <T s={it.h} />
-            </h3>
-            <p>
-              <T s={it.p} />
-            </p>
-          </article>
-        ))}
-      </div>
+      <ReasoningPlates items={s.items} />
     </Sec>
   )
 }
