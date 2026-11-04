@@ -332,19 +332,50 @@
   bottom: 17%;
   width: 52%;
   height: 9%;
-  background: radial-gradient(closest-side, rgba(214, 255, 63, 0.4), transparent);
+  background: radial-gradient(closest-side, rgba(214, 255, 63, calc(0.14 + var(--open, 1) * 0.28)), transparent);
   filter: blur(12px);
   animation: cs-glow 7s ease-in-out infinite;
   animation-play-state: paused;
 }
-.cs-api .cs-img {
-  animation: cs-float 7s ease-in-out infinite;
+.cs-gw {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 88%;
+  aspect-ratio: 540 / 750;
+  transform: translate(-50%, -50%);
+}
+.cs-gw-l {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  animation: cs-breathe 6.5s ease-in-out infinite;
   animation-play-state: paused;
-  transform: scale(1.38);
+  transition: transform 0.4s var(--cs-ease);
+}
+.cs-gw-l.lid {
+  --k: -1.6%;
+  transform: translateY(calc((1 - var(--lid, 1)) * 14.7%));
+}
+.cs-gw-l.board {
+  --k: 0%;
+  animation: none;
+}
+.cs-gw-l.base {
+  --k: 1.6%;
+  transform: translateY(calc((1 - var(--base, 1)) * -13.4%));
 }
 .cs-panel.vis .cs-glow,
-.cs-panel.vis.cs-api .cs-img {
+.cs-panel.vis .cs-gw-l {
   animation-play-state: running;
+}
+@keyframes cs-breathe {
+  50% {
+    translate: 0 var(--k, 0%);
+  }
 }
 @keyframes cs-float {
   50% {
@@ -714,9 +745,6 @@
   }
   .js .cs-panel:not(.in) .cs-erp-bg {
     transform: scale(1.06);
-  }
-  .js .cs-panel:not(.in).cs-api .cs-img {
-    transform: scale(1.5);
   }
   .cs-panel.in .cs-sheen {
     animation: cs-sheen 1.7s var(--cs-ease) 0.55s 1 both;

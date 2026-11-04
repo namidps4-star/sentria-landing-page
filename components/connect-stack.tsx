@@ -128,7 +128,14 @@ function Panel({
       const r = el.getBoundingClientRect()
       const vh = window.innerHeight
       const p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2)
-      el.style.setProperty("--py", (Math.max(-1, Math.min(1, p)) * -16).toFixed(1))
+      const pc = Math.max(-1, Math.min(1, p))
+      el.style.setProperty("--py", (pc * -16).toFixed(1))
+      // The API gateway opens as the panel travels up the screen: lid first, then the base.
+      const open = Math.max(0, Math.min(1, (0.55 - pc) / 0.6))
+      const ease = (x: number) => x * x * (3 - 2 * x)
+      el.style.setProperty("--open", open.toFixed(3))
+      el.style.setProperty("--lid", ease(Math.max(0, Math.min(1, (open - 0.3) / 0.7))).toFixed(3))
+      el.style.setProperty("--base", ease(Math.max(0, Math.min(1, open / 0.7))).toFixed(3))
     }
     const on = () => {
       if (!raf) raf = requestAnimationFrame(tick)
@@ -478,8 +485,13 @@ export function ConnectStack() {
         ]}
       >
         <span className="cs-glow" aria-hidden="true" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="cs-img" src="/connect/gateway.webp" width={1000} height={1250} loading="lazy" decoding="async" alt="" />
+        <div className="cs-gw" role="img" aria-label="Wireframe of a gateway device opening: lid, circuit board and base">
+          {/* eslint-disable @next/next/no-img-element */}
+          <img className="cs-gw-l base" src="/connect/gw-base.webp" width={540} height={750} loading="lazy" decoding="async" alt="" />
+          <img className="cs-gw-l board" src="/connect/gw-board.webp" width={540} height={750} loading="lazy" decoding="async" alt="" />
+          <img className="cs-gw-l lid" src="/connect/gw-lid.webp" width={540} height={750} loading="lazy" decoding="async" alt="" />
+          {/* eslint-enable @next/next/no-img-element */}
+        </div>
       </Panel>
     </div>
   )
