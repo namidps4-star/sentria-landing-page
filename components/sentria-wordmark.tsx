@@ -15,8 +15,8 @@ export function SentriaWordmark() {
         <text className="sw-l" style={{ "--i": 5 } as React.CSSProperties} x="700.17" y="594" fontSize="208.91" mask="url(#sw-cut-I)">I</text>
         <text className="sw-l" style={{ "--i": 6 } as React.CSSProperties} x="753.44" y="594" fontSize="208.91">A</text>
       </g>
-        <polygon className="sw-shard" style={{ "--k": 0 } as React.CSSProperties} points="435.36,594 465.36,594 480.36,553 450.36,553" fill="var(--lime)" stroke="var(--ink)" strokeWidth={6} strokeLinejoin="miter" />
-        <polygon className="sw-shard" style={{ "--k": 1 } as React.CSSProperties} points="719.17,594 749.17,594 764.17,533 734.17,533" fill="var(--lime)" stroke="var(--ink)" strokeWidth={6} strokeLinejoin="miter" />
+        <polygon className="sw-shard" style={{ "--k": 0 } as React.CSSProperties} points="440.36,594 460.36,594 475.36,553 455.36,553" fill="var(--lime)" stroke="var(--ink)" strokeWidth={6} strokeLinejoin="miter" />
+        <polygon className="sw-shard" style={{ "--k": 1 } as React.CSSProperties} points="724.17,594 744.17,594 759.17,533 739.17,533" fill="var(--lime)" stroke="var(--ink)" strokeWidth={6} strokeLinejoin="miter" />
         <g className="sw-mark">
           <circle cx="945.75" cy="490.05" r="36.18" fill="none" stroke="var(--cream)" strokeWidth="8.04" />
           <text x="945.75" y="492.46" textAnchor="middle" dominantBaseline="central" fontWeight="600" fontSize="44.22" fill="var(--cream)" style={{ fontFamily: "Chillax, system-ui, sans-serif" }}>R</text>

@@ -495,7 +495,7 @@ html.op-run .op {
   display: flex;
   align-items: center;
   justify-content: center;
-  --wm: min(46vw, 120vh);
+  --wm: min(40vw, 104vh);
   gap: calc(var(--wm) * 0.07);
   animation: op-trail 1s var(--ease-io) 2.55s forwards;
 }
