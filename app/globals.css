@@ -515,8 +515,8 @@ html.op-run .op {
 
 /* the dome mark, in two pieces: the lime dome rises from below, the white bowl drops from above */
 .op-mark {
-  width: calc(var(--wm, min(58vw, 150vh)) * 0.152);
-  height: calc(var(--wm, min(58vw, 150vh)) * 0.152);
+  width: calc(var(--wm, min(58vw, 150vh)) * 0.18);
+  height: calc(var(--wm, min(58vw, 150vh)) * 0.18);
   flex: none;
   overflow: visible;
 }
