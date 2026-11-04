@@ -1282,10 +1282,10 @@
 }
 .rp {
   --rp-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --rp-gap: 6px;
+  --rp-gap: 32px;
   --rp-y: 62%; /* where the arrow sits on the edge */
-  --rp-aw: 30px; /* how far the arrow sticks out */
-  --rp-ah: 36px; /* half its height */
+  --rp-aw: 22px; /* how far the arrow sticks out */
+  --rp-ah: 34px; /* half its height */
   --rp-ring: 12px; /* black margin around it inside the next plate */
   display: flex;
   gap: var(--rp-gap);
@@ -1316,41 +1316,16 @@
   background: var(--c);
   z-index: 0;
 }
-.rp-p2 .rp-bg,
-.rp-p3 .rp-bg {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%,
-    0.0px calc(var(--rp-y) + 48.0px),
-    1.2px calc(var(--rp-y) + 39.4px),
-    3.2px calc(var(--rp-y) + 32.0px),
-    6.2px calc(var(--rp-y) + 25.9px),
-    9.9px calc(var(--rp-y) + 20.7px),
-    14.4px calc(var(--rp-y) + 16.3px),
-    19.5px calc(var(--rp-y) + 12.5px),
-    25.3px calc(var(--rp-y) + 9.1px),
-    31.7px calc(var(--rp-y) + 6.1px),
-    38.6px calc(var(--rp-y) + 3.1px),
-    46.0px calc(var(--rp-y) + 0.0px),
-    38.6px calc(var(--rp-y) - 3.1px),
-    31.7px calc(var(--rp-y) - 6.1px),
-    25.3px calc(var(--rp-y) - 9.1px),
-    19.5px calc(var(--rp-y) - 12.5px),
-    14.4px calc(var(--rp-y) - 16.3px),
-    9.9px calc(var(--rp-y) - 20.7px),
-    6.2px calc(var(--rp-y) - 25.9px),
-    3.2px calc(var(--rp-y) - 32.0px),
-    1.2px calc(var(--rp-y) - 39.4px),
-    0.0px calc(var(--rp-y) - 48.0px));
-}
 .rp-bump {
   position: absolute;
   z-index: 1;
   top: calc(var(--rp-y) - var(--rp-ah));
-  right: calc((var(--rp-aw) + 10px) * -1); /* floats 10px clear of its own plate */
+  right: calc((var(--rp-aw) + 5px) * -1); /* floats in the gap, 5px clear of both tiles */
   width: var(--rp-aw);
   height: calc(var(--rp-ah) * 2);
   background: var(--c);
   clip-path: polygon(0.0% 0.0%, 2.5% 9.0%, 7.0% 16.6%, 13.4% 23.1%, 21.5% 28.5%, 31.2% 33.1%, 42.5% 37.0%, 55.1% 40.5%, 69.0% 43.7%, 84.0% 46.8%, 100.0% 50.0%, 84.0% 53.2%, 69.0% 56.3%, 55.1% 59.5%, 42.5% 63.0%, 31.2% 66.9%, 21.5% 71.5%, 13.4% 76.9%, 7.0% 83.4%, 2.5% 91.0%, 0.0% 100.0%);
-  transform: translateX(-3px);
+  transform: translateX(-2px);
   transition: transform 0.8s var(--rp-ease);
 }
 .rp-p1 {
@@ -1439,6 +1414,7 @@
 }
 @media (max-width: 860px) {
   .rp {
+    --rp-gap: 8px;
     flex-direction: column;
     height: auto;
   }
