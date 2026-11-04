@@ -127,6 +127,19 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                   {s.paragraphs.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
+                  {s.links && (
+                    <p className="blog-links">
+                      {s.links.intro}{" "}
+                      {s.links.items.map((l, i) => (
+                        <Fragment key={l.url}>
+                          {i > 0 && " · "}
+                          <a href={l.url} rel="noopener nofollow" target="_blank">
+                            {l.label}
+                          </a>
+                        </Fragment>
+                      ))}
+                    </p>
+                  )}
                 </section>
                 {si === 1 && page.figures && page.figures.length > 0 && (
                   <figure className="blog-figures">

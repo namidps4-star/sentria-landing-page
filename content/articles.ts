@@ -84,7 +84,7 @@ export type ArticlePage = {
   dateLabel: string
   minutes: number
   intro: string
-  sections: { heading: string; paragraphs: string[] }[]
+  sections: { heading: string; paragraphs: string[]; links?: { intro: string; items: { label: string; url: string }[] } }[]
   faq: { q: string; a: string }[]
   closing: string
   image: string
@@ -146,6 +146,13 @@ export const ARTICLE_PAGES: ArticlePage[] = [
           "RFID tags let a reader pick up many packs at once, without scanning each one. That could make a count quicker and more frequent. It also has a cost. Each medicine has to be tagged, and that work falls to pharmacy staff. A hospital association describes this labour as a real consideration for adoption, and most time-saving figures published so far come from the vendors themselves.",
           "Questions to ask before you buy RFID: How many packs do I hold, and how long would tagging them take? Who tags new stock as it arrives, and at what time of day? Does the tag work on the packs I stock, since metal and liquids can interfere with some tags? Does my country's labelling rule still need a printed price on the pack? Who keeps the system running when it fails?",
         ],
+        links: {
+          intro: "What a handheld reader looks like (photos on iStock):",
+          items: [
+            { label: "a barcode scanner in use", url: "https://www.istockphoto.com/photo/workers-holding-bar-code-scanner-on-blurred-storage-warehouse-computer-work-tools-gm1386613655-444799291" },
+            { label: "a 3D image of a handheld UHF RFID reader", url: "https://www.istockphoto.com/photo/3d-handheld-uhf-rfid-scanner-or-rfid-gun-scanner-gm1476513924-505635176" },
+          ],
+        },
       },
       {
         heading: "What we are not claiming yet",
@@ -222,6 +229,13 @@ export const ARTICLE_PAGES: ArticlePage[] = [
           "Les étiquettes RFID permettent à un lecteur de capter plusieurs boîtes à la fois, sans scanner chacune. Cela peut rendre un comptage plus rapide et plus fréquent. Mais cela a un coût : chaque médicament doit être étiqueté, et ce travail revient au personnel de la pharmacie. Une association hospitalière américaine décrit ce travail comme un vrai frein à l'adoption, et la plupart des chiffres de gain de temps publiés viennent des fournisseurs eux-mêmes.",
           "Questions à poser avant d'acheter du RFID : Combien de boîtes ai-je en stock, et combien de temps faudrait-il pour toutes les étiqueter ? Qui étiquette les nouveaux arrivages, et à quel moment de la journée ? L'étiquette fonctionne-t-elle sur les boîtes que je vends, sachant que le métal et les liquides peuvent perturber certaines étiquettes ? La réglementation de mon pays exige-t-elle encore un prix imprimé sur la boîte ? Qui fait fonctionner le système quand il tombe en panne ?",
         ],
+        links: {
+          intro: "À quoi ressemble un lecteur portable (photos sur iStock) :",
+          items: [
+            { label: "un lecteur de codes-barres en usage", url: "https://www.istockphoto.com/photo/workers-holding-bar-code-scanner-on-blurred-storage-warehouse-computer-work-tools-gm1386613655-444799291" },
+            { label: "une image 3D d'un lecteur RFID UHF portable", url: "https://www.istockphoto.com/photo/3d-handheld-uhf-rfid-scanner-or-rfid-gun-scanner-gm1476513924-505635176" },
+          ],
+        },
       },
       {
         heading: "Ce que nous ne prétendons pas encore",
