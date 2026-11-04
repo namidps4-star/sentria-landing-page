@@ -1158,16 +1158,6 @@
     transform: translateY(10px);
   }
 }
-.fl-no {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: #6f716a;
-}
-.fl-no i {
-  font-style: normal;
-  opacity: 0.6;
-}
 .fl-pan h3 {
   font-family: var(--f-display);
   font-size: clamp(26px, 3vw, 42px);
@@ -1179,34 +1169,6 @@
   font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.55;
   color: #55574f;
-}
-.fl-tabs {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: clamp(18px, 3vh, 32px);
-}
-.fl-tabs button {
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-  padding: 8px 14px;
-  border-radius: 99px;
-  background: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid rgba(11, 12, 8, 0.08);
-  transition: background 0.4s var(--fl-ease), color 0.4s var(--fl-ease);
-}
-.fl-tabs b {
-  font-size: 11px;
-  opacity: 0.55;
-}
-.fl-tabs button[data-on] {
-  background: #0b0c08;
-  color: #fff;
 }
 .fl-cl {
   position: relative;
@@ -1365,8 +1327,7 @@
     stroke-dashoffset: 1;
   }
 }
-.fl-c:focus-visible,
-.fl-tabs button:focus-visible {
+.fl-c:focus-visible {
   outline: 2px solid #0b0c08;
   outline-offset: 4px;
 }

@@ -67,9 +67,6 @@ export function FlowCluster({ steps, head }: { steps: readonly Step[]; head: Rea
       <div className="fl-left">
         {head}
         <div className="fl-pan" key={step} aria-live="polite">
-          <span className="fl-no">
-            {cur.n} <i>/ 0{steps.length}</i>
-          </span>
           <h3>
             <T s={cur.h} />
           </h3>
@@ -77,18 +74,6 @@ export function FlowCluster({ steps, head }: { steps: readonly Step[]; head: Rea
             <T s={cur.p} />
           </p>
         </div>
-        <ol className="fl-tabs">
-          {steps.map((s, i) => (
-            <li key={s.n}>
-              <button type="button" data-on={step === i ? "1" : undefined} onClick={() => pick(i)} onPointerEnter={(e) => e.pointerType === "mouse" && pick(i)}>
-                <b>{s.n}</b>
-                <span>
-                  <T s={s.h} />
-                </span>
-              </button>
-            </li>
-          ))}
-        </ol>
       </div>
       <div className="fl-cl" role="group" aria-label="Implementation steps">
         <div className="fl-blob" aria-hidden="true">
