@@ -6,6 +6,7 @@ import { ConnectStack } from "./connect-stack"
 import { FootReveal } from "./foot-reveal"
 import { FlowCircles } from "./flow-circles"
 import { ReasoningPlates } from "./reasoning-plates"
+import { TrustCluster } from "./trust-cluster"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 
@@ -418,21 +419,14 @@ export function Trust() {
   const s = C.trust
   return (
     <Sec tone="olive" className="trust">
-      <div className="trust-grid">
-        <H2>
-          <T s={s.title} />
-        </H2>
-        <ul>
-          {s.lines.map((l, i) => (
-            <li key={l} data-rv="right" style={iv(i)}>
-              <span className="lock" aria-hidden="true">
-                <Check />
-              </span>
-              <T s={l} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <TrustCluster
+        steps={s.lines.map((l, i) => ({ n: String(i + 1), h: l }))}
+        head={
+          <H2>
+            <T s={s.title} />
+          </H2>
+        }
+      />
     </Sec>
   )
 }

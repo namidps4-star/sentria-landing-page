@@ -2177,44 +2177,6 @@ html.op-run .op {
 }
 
 /* ------------------------------------------------------------------ trust */
-.trust-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-  gap: clamp(28px, 5vw, 80px);
-  align-items: center;
-}
-.trust ul {
-  display: grid;
-  gap: 14px;
-}
-.trust li {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 20px 22px;
-  border-radius: 22px;
-  background: rgba(245, 243, 234, 0.05);
-  border: 1px solid rgba(245, 243, 234, 0.1);
-  transition: transform 0.4s var(--ease), border-color 0.3s;
-}
-.trust li:hover {
-  transform: translateX(8px);
-  border-color: var(--lime-dim);
-}
-.lock {
-  flex: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--lime);
-  color: var(--ink);
-}
-.lock .ck {
-  width: 18px;
-  height: 18px;
-}
 
 /* -------------------------------------------------------------------- faq */
 .faq-grid {
@@ -2562,7 +2524,6 @@ html.op-run .op {
     grid-template-columns: 1fr;
   }
   .cockpit-grid,
-  .trust-grid,
   .faq-grid,
   .demo-grid {
     grid-template-columns: minmax(0, 1fr);
