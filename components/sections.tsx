@@ -4,6 +4,7 @@ import { FR } from "@/content/fr"
 import { T, B } from "./t"
 import { ConnectStack } from "./connect-stack"
 import { FootReveal } from "./foot-reveal"
+import { FlowCircles } from "./flow-circles"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 
@@ -339,22 +340,7 @@ export function Flow() {
       <H2>
         <T s={s.title} />
       </H2>
-      <ol className="flow-steps" data-prog="through">
-        <span className="flow-line" aria-hidden="true">
-          <i />
-        </span>
-        {s.steps.map((st, i) => (
-          <li key={st.n} className="flow-step" data-step="" data-rv="rise" style={iv(i)}>
-            <span className="num">{st.n}</span>
-            <h3>
-              <T s={st.h} />
-            </h3>
-            <p>
-              <T s={st.p} />
-            </p>
-          </li>
-        ))}
-      </ol>
+      <FlowCircles steps={s.steps} />
     </Sec>
   )
 }
