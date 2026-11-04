@@ -4,6 +4,25 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 import { T } from "./t"
 
 type Item = { n: string; h: string }
+const ICONS = [
+  // architecture: stacked layers
+  <path key="a" d="M16 5 4 11l12 6 12-6-12-6ZM4 16l12 6 12-6M4 21l12 6 12-6" />,
+  // access and data controls: padlock
+  <g key="b">
+    <rect x="6" y="14" width="20" height="14" rx="3" />
+    <path d="M10 14V10a6 6 0 0 1 12 0v4M16 20v3" />
+  </g>,
+  // progressive integration: two linked rings
+  <g key="c">
+    <circle cx="11" cy="16" r="6" />
+    <circle cx="21" cy="16" r="6" />
+  </g>,
+  // deployment: box with an arrow
+  <g key="d">
+    <path d="M5 12v13a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V12M3 7h26v5H3zM16 15v8M12.5 18.5 16 15l3.5 3.5" />
+  </g>,
+]
+
 
 /**
  * The four trust lines as a cluster of circles inside one soft blob, each line written in its
@@ -64,6 +83,9 @@ export function TrustCluster({ steps, head }: { steps: readonly Item[]; head: Re
       </svg>
       <div className="tc-left">
         {head}
+        <p className="tc-line" key={step} aria-live="polite">
+          <T s={steps[step].h} />
+        </p>
       </div>
       <div className="tc-cl" role="group" aria-label="Data control">
         <div className="tc-blob" aria-hidden="true">
@@ -88,9 +110,9 @@ export function TrustCluster({ steps, head }: { steps: readonly Item[]; head: Re
             <svg className="tc-ring" viewBox="0 0 100 100" aria-hidden="true">
               <circle cx="50" cy="50" r="48.5" pathLength="1" />
             </svg>
-            <p>
-              <T s={s.h} />
-            </p>
+            <svg className="tc-ic" viewBox="0 0 32 32" aria-hidden="true">
+              {ICONS[i % ICONS.length]}
+            </svg>
           </button>
         ))}
       </div>
