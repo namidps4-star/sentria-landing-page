@@ -1585,15 +1585,16 @@
     transition-delay: 0.42s;
   }
   .rp-p[data-on] .rp-bump {
+    transform-origin: 0 50%;
     animation: rp-nudge 2.8s var(--rp-ease) 0.9s infinite;
   }
   @keyframes rp-nudge {
     0%,
     100% {
-      transform: translateX(0);
+      transform: scaleX(1);
     }
     45% {
-      transform: translateX(5px);
+      transform: scaleX(1.1);
     }
   }
   .rp-bg {
