@@ -6,7 +6,7 @@ export function SentriaWordmark() {
         <mask id="sw-cut-n" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="900"><rect width="1200" height="900" fill="#fff" /><rect x="433.36" y="546.5" width="34" height="900" fill="#000" /></mask>
         <mask id="sw-cut-I" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="900"><rect width="1200" height="900" fill="#fff" /><rect x="717.17" y="526.5" width="34" height="900" fill="#000" /></mask>
       </defs>
-      <g fill="var(--cream)" style={{ fontFamily: "Chillax, system-ui, sans-serif", fontWeight: 600 }}>
+      <g fill="var(--cream)" style={{ fontFamily: "Chillax, system-ui, sans-serif", fontWeight: 500 }}>
         <text className="sw-l" style={{ "--i": 0 } as React.CSSProperties} x="195.64" y="594" fontSize="208.91">S</text>
         <text className="sw-l" style={{ "--i": 1 } as React.CSSProperties} x="315.77" y="594" fontSize="208.91">e</text>
         <text className="sw-l" style={{ "--i": 2 } as React.CSSProperties} x="423.36" y="594" fontSize="208.91" mask="url(#sw-cut-n)">n</text>
@@ -19,7 +19,7 @@ export function SentriaWordmark() {
         <polygon className="sw-shard" style={{ "--k": 1 } as React.CSSProperties} points="724.17,594 744.17,594 759.17,533 739.17,533" fill="var(--lime)" stroke="var(--ink)" strokeWidth={6} strokeLinejoin="miter" />
         <g className="sw-mark">
           <circle cx="945.75" cy="490.05" r="36.18" fill="none" stroke="var(--cream)" strokeWidth="8.04" />
-          <text x="945.75" y="492.46" textAnchor="middle" dominantBaseline="central" fontWeight="600" fontSize="44.22" fill="var(--cream)" style={{ fontFamily: "Chillax, system-ui, sans-serif" }}>R</text>
+          <text x="945.75" y="492.46" textAnchor="middle" dominantBaseline="central" fontWeight="500" fontSize="44.22" fill="var(--cream)" style={{ fontFamily: "Chillax, system-ui, sans-serif" }}>R</text>
         </g>
     </svg>
   )

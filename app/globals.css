@@ -5,6 +5,14 @@
   font-style: normal;
   font-display: block;
 }
+/* Chillax Medium: the opening wordmark, a step lighter than Semibold */
+@font-face {
+  font-family: "Chillax";
+  src: url("/fonts/Chillax-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
 /* ==========================================================================
    SentrIA landing page
    Palette comes from the previous page: near-black olive, cream, sand and the
