@@ -67,6 +67,9 @@ export function ReasoningPlates({ items }: { items: readonly Item[] }) {
           <i className="rp-bg" aria-hidden="true" />
           {i < items.length - 1 ? <i className="rp-bump" aria-hidden="true" /> : null}
           <b>{it.n}</b>
+          <span className="rp-tag" aria-hidden="true">
+            <T s={it.h} />
+          </span>
           <span className="rp-in">
             <h3>
               <T s={it.h} />
