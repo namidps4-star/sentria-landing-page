@@ -503,7 +503,7 @@ html.op-run .op {
   display: flex;
   align-items: center;
   justify-content: center;
-  --wm: min(73vw, 190vh);
+  --wm: min(70vw, 182vh);
   gap: calc(var(--wm) * 0.07);
   animation: op-trail 1s var(--ease-io) 2.55s forwards;
 }
@@ -515,8 +515,8 @@ html.op-run .op {
 
 /* the dome mark, in two pieces: the lime dome rises from below, the white bowl drops from above */
 .op-mark {
-  width: calc(var(--wm, min(58vw, 150vh)) * 0.18);
-  height: calc(var(--wm, min(58vw, 150vh)) * 0.18);
+  width: calc(var(--wm, min(58vw, 150vh)) * 0.21);
+  height: calc(var(--wm, min(58vw, 150vh)) * 0.21);
   flex: none;
   overflow: visible;
 }
