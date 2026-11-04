@@ -714,79 +714,141 @@
   width: 100%;
   height: auto;
 }
-.pt-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  mix-blend-mode: soft-light;
-  opacity: 0;
-  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), #d6ff3f 0%, transparent 60%);
-  transition: opacity 0.3s var(--ease);
-}
-.pt-win[data-glow] .pt-glow {
-  opacity: 1;
-}
 .pt-spot {
   position: absolute;
   border-radius: 14px;
   pointer-events: none;
-  box-shadow: 0 0 0 2400px rgba(29, 29, 31, 0.34), 0 0 0 3px #d6ff3f, 0 0 40px 4px rgba(214, 255, 63, 0.55);
+  border: 2px solid #d6ff3f;
+  background: rgba(214, 255, 63, 0.06);
+  /* an outline and a glow, never a dark veil: the rest of the dashboard stays as bright as it is */
+  box-shadow: 0 0 0 1px rgba(11, 12, 8, 0.85), 0 18px 40px -10px rgba(11, 12, 8, 0.35), 0 0 30px 2px rgba(214, 255, 63, 0.55);
   transition: left 0.6s var(--ease), top 0.6s var(--ease), width 0.6s var(--ease), height 0.6s var(--ease);
 }
-.pt-tip {
-  position: absolute;
-  z-index: 2;
-  padding: 9px 15px;
-  border-radius: 99px;
-  background: #0b0c08;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
-  pointer-events: none;
-  animation: pt-tip 0.45s var(--ease) both;
+/* the tour rail: the four parts, listed beside the dashboard */
+.pt-body {
+  width: min(1180px, 96vw);
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 48px);
+  align-items: center;
+  margin-top: 6px;
 }
-.pt-tip b {
-  color: #d6ff3f;
+.pt-body .pt-wrap {
+  width: min(100%, calc((100svh - 300px) * 1.43));
+  margin-top: 0;
+  justify-self: center;
 }
-@keyframes pt-tip {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.96);
-  }
-}
-.pt-dots {
-  display: flex;
+.pt-rail {
+  list-style: none;
+  display: grid;
   gap: 4px;
-  margin-top: 18px;
+  text-align: left;
 }
-.pt-dot {
+.pt-rail button {
   position: relative;
-  width: 28px;
-  height: 28px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 20px;
+  border-radius: 18px;
+  text-align: left;
+  overflow: hidden;
+  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
-.pt-dot::after {
+.pt-rail b {
+  font-family: var(--f-display), sans-serif;
+  font-size: 15px;
+  color: #a8a9a0;
+  padding-top: 2px;
+  transition: color 0.3s;
+}
+.pt-rail strong {
+  display: block;
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.2;
+  color: #1d1d1f;
+}
+.pt-rail small {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--rv-mut);
+  transition: max-height 0.5s var(--ease), opacity 0.4s var(--ease), margin 0.4s var(--ease);
+}
+.pt-rail button::after {
   content: "";
   position: absolute;
-  inset: 10px 8px;
-  border-radius: 9px;
-  background: #d2d2d7;
-  transition: all 0.3s var(--ease);
-}
-.pt-dot[aria-pressed="true"]::after {
-  inset: 10px 1px;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  height: 3px;
   background: #0b0c08;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.6s var(--ease);
 }
-.pt-dot:focus-visible {
+.pt-rail button[data-on] {
+  background: #fff;
+  box-shadow: 0 14px 34px -14px rgba(11, 12, 8, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+.pt-rail button[data-on] b {
+  color: #0b0c08;
+}
+.pt-rail button[data-on] small {
+  max-height: 80px;
+  opacity: 1;
+  margin-top: 6px;
+}
+.pt-rail button[data-on]::after {
+  transform: none;
+}
+.pt-rail button:not([data-on]):hover {
+  background: rgba(11, 12, 8, 0.04);
+}
+.pt-rail button:focus-visible {
   outline: 2px solid #0b0c08;
   outline-offset: 2px;
-  border-radius: 8px;
+}
+@media (min-width: 960px) {
+  .pt-cap > span:not(:first-child) {
+    display: none; /* the rail carries the sentence for each part */
+  }
+}
+@media (max-width: 959px) {
+  .pt-body {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: min(880px, 94vw);
+  }
+  .pt-body .pt-wrap {
+    width: min(100%, calc((100svh - 410px) * 1.43));
+  }
+  .pt-rail {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 8px;
+  }
+  .pt-rail button {
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 12px;
+  }
+  .pt-rail strong {
+    font-size: 13px;
+  }
+  .pt-rail small {
+    display: none;
+  }
+  .pt-cap > span:not(:first-child) {
+    display: block;
+  }
 }
 @media (max-width: 640px) {
-  .pt-tip {
-    font-size: 12px;
-    padding: 7px 12px;
-  }
   .pt-cap {
     height: 62px;
   }
@@ -800,9 +862,6 @@
     position: static;
     height: auto;
     padding-top: 0;
-  }
-  .pt-tip {
-    animation: none;
   }
 }
 

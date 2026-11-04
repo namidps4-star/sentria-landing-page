@@ -98,9 +98,6 @@ export function ProductTour() {
     const x = (e.clientX - b.left) / b.width
     const y = (e.clientY - b.top) / b.height
     tilt.current = { x: (x - 0.5) * 9, y: -(y - 0.5) * 7 }
-    w.style.setProperty("--mx", `${x * 100}%`)
-    w.style.setProperty("--my", `${y * 100}%`)
-    w.dataset.glow = "1"
     paint()
     if (lit.current < 0.2) return
     const q = s.getBoundingClientRect()
@@ -114,12 +111,10 @@ export function ProductTour() {
   }
   const leave = () => {
     tilt.current = { x: 0, y: 0 }
-    if (win.current) delete win.current.dataset.glow
     paint()
     setHover(0)
   }
 
-  const right = part ? part.l + part.w / 2 > 60 : false
   return (
     <section id="product" ref={root} className="rv-sec pt">
       <div className="pt-stage">
@@ -139,6 +134,7 @@ export function ProductTour() {
             </span>
           ))}
         </div>
+        <div className="pt-body">
         <div className="pt-wrap">
           <div className="pt-win" ref={win} onPointerMove={move} onPointerLeave={leave}>
             <div className="pt-bar" aria-hidden="true">
@@ -149,7 +145,6 @@ export function ProductTour() {
             <div className="pt-shot" ref={shot}>
               <Image className="en" src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
               <Image className="fr" src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
-              <div className="pt-glow" aria-hidden="true" />
               {part && (
                 <div
                   className="pt-spot"
@@ -157,34 +152,33 @@ export function ProductTour() {
                   style={{ left: `${part.l}%`, top: `${part.t}%`, width: `${part.w}%`, height: `${part.h}%` }}
                 />
               )}
-              {part && (
-                <div
-                  key={step}
-                  className="pt-tip"
-                  aria-hidden="true"
-                  style={
-                    right
-                      ? { right: `${100 - part.l - part.w}%`, top: `${part.t < 30 ? part.t + part.h + 2 : part.t - 7}%` }
-                      : { left: `${part.l + 1}%`, top: `${part.t < 30 ? part.t + part.h + 2 : part.t - 7}%` }
-                  }
-                >
-                  <b>{step}</b> <B en={part.en} fr={part.fr} />
-                </div>
-              )}
             </div>
           </div>
         </div>
-        <div className="pt-dots" role="group" aria-label="Dashboard parts">
-          {STEPS.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              className="pt-dot"
-              aria-pressed={step === i}
-              aria-label={i === 0 ? "Whole dashboard" : `Part ${i}`}
-              onClick={() => setPick({ n: i })}
-            />
+        <ol className="pt-rail" aria-label="Dashboard parts">
+          {STEPS.slice(1).map((p, i) => (
+            <li key={i}>
+              <button
+                type="button"
+                data-on={step === i + 1 ? "1" : undefined}
+                aria-pressed={step === i + 1}
+                onClick={() => setPick({ n: i + 1 })}
+                onPointerEnter={(e) => e.pointerType === "mouse" && setHover(i + 1)}
+                onPointerLeave={(e) => e.pointerType === "mouse" && setHover(0)}
+              >
+                <b>{String(i + 1).padStart(2, "0")}</b>
+                <span>
+                  <strong>
+                    <B en={p!.en} fr={p!.fr} />
+                  </strong>
+                  <small>
+                    <B en={CAPS[i + 1].en} fr={CAPS[i + 1].fr} />
+                  </small>
+                </span>
+              </button>
+            </li>
           ))}
+        </ol>
         </div>
         <p className="sr-only">
           <B
