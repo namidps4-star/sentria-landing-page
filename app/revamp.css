@@ -1268,8 +1268,6 @@
 
 /* ------------------------------------------- trust: circle cluster */
 .sc.trust {
-  background: #f6f6f2;
-  color: #0b0c08;
   min-height: 100svh;
   display: flex;
   align-items: center;
@@ -1278,13 +1276,13 @@
   width: 100%;
 }
 .sc.trust .eyebrow {
-  color: #6f716a;
+  color: #c9cac2;
 }
 .sc.trust .eyebrow::before {
-  background: #a8d11f;
+  background: #d6ff3f;
 }
 .sc.trust .h2 {
-  color: #0b0c08;
+  color: #f4f4f0;
   max-width: 13ch;
 }
 .tc {
@@ -1327,7 +1325,7 @@
   border-radius: 50%;
 }
 .tc-b {
-  background: #e2e2dd;
+  background: color-mix(in srgb, var(--ink-4) 80%, #fff);
   width: calc(var(--d) + 28px);
   height: calc(var(--d) + 28px);
 }
@@ -1455,7 +1453,7 @@
 }
 .tc-ring circle {
   fill: none;
-  stroke: #0b0c08;
+  stroke: #d6ff3f;
   stroke-width: 1.2;
   stroke-linecap: round;
   stroke-dasharray: 1;
@@ -1474,7 +1472,7 @@
   }
 }
 .tc-c:focus-visible {
-  outline: 2px solid #0b0c08;
+  outline: 2px solid #d6ff3f;
   outline-offset: 4px;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -1903,7 +1901,7 @@
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    border: 1.5px solid #0b0c08;
+    border: 1.5px solid #d6ff3f;
     opacity: 0;
     pointer-events: none;
   }
