@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 import { C } from "@/content/en"
 import { FR } from "@/content/fr"
 import { T, B } from "./t"
+import { ConnectStack } from "./connect-stack"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 
@@ -372,22 +373,7 @@ export function DataSec() {
       <p className="lead" data-rv="rise" style={iv(1)}>
         <T s={s.lead} />
       </p>
-      <div className="grid3">
-        {s.items.map((it, i) => (
-          <article key={it.k} className="card card-dark" data-tilt="" data-rv="rise" style={iv(i + 2)}>
-            <span className="tagline">
-              <T s={it.k} />
-            </span>
-            <h3 className="mono-h">
-              <T s={it.h} />
-            </h3>
-            <p>
-              <T s={it.p} />
-            </p>
-            <span className="pulse-line" aria-hidden="true" />
-          </article>
-        ))}
-      </div>
+      <ConnectStack />
     </Sec>
   )
 }
