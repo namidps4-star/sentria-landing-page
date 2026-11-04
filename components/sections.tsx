@@ -4,7 +4,7 @@ import { FR } from "@/content/fr"
 import { T, B } from "./t"
 import { ConnectStack } from "./connect-stack"
 import { FootReveal } from "./foot-reveal"
-import { FlowCircles } from "./flow-circles"
+import { FlowCluster } from "./flow-cluster"
 import { ReasoningPlates } from "./reasoning-plates"
 import { WordPicker } from "./rv"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
@@ -335,13 +335,19 @@ export function Flow() {
   const s = C.flow
   return (
     <Sec tone="deep" className="flow">
-      <Eyebrow>
-        <T s={s.eyebrow} />
-      </Eyebrow>
-      <H2>
-        <T s={s.title} />
-      </H2>
-      <FlowCircles steps={s.steps} />
+      <FlowCluster
+        steps={s.steps}
+        head={
+          <>
+            <Eyebrow>
+              <T s={s.eyebrow} />
+            </Eyebrow>
+            <H2>
+              <T s={s.title} />
+            </H2>
+          </>
+        }
+      />
     </Sec>
   )
 }

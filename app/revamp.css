@@ -1115,154 +1115,284 @@
 }
 
 
-/* ------------------------------------------- implementation: overlapping circles */
+/* ------------------------------------------- implementation: circle cluster */
 .sc.flow {
-  background: #121313;
-  color: #f4f4f0;
+  background: #f6f6f2;
+  color: #0b0c08;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+.sc.flow > .wrap {
+  width: 100%;
 }
 .sc.flow .eyebrow {
-  color: #c9cac2;
+  color: #6f716a;
 }
 .sc.flow .eyebrow::before {
-  background: #d6ff3f;
+  background: #a8d11f;
 }
 .sc.flow .h2 {
-  color: #f4f4f0;
+  color: #0b0c08;
+  max-width: 13ch;
 }
-.fc {
-  --fc-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  margin-top: clamp(32px, 5vw, 64px);
-  overflow-x: clip; /* the last circle may bleed off the right edge, like the palette it follows */
+.fl {
+  --fl-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --d: min(23vh, 17vw);
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: clamp(20px, 4vw, 64px);
 }
-.fc-row {
-  position: relative;
-  height: clamp(240px, 31vw, 430px);
-}
-.fc-c {
-  --bgc: #1f2528;
-  --fg: #6b777d;
+.fl-defs {
   position: absolute;
+}
+.fl-pan {
+  margin-top: clamp(18px, 3vh, 36px);
+  max-width: 42ch;
+  animation: fl-in 0.7s var(--fl-ease) both;
+}
+@keyframes fl-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.fl-no {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #6f716a;
+}
+.fl-no i {
+  font-style: normal;
+  opacity: 0.6;
+}
+.fl-pan h3 {
+  font-family: var(--f-display);
+  font-size: clamp(26px, 3vw, 42px);
+  letter-spacing: -0.03em;
+  margin-top: 8px;
+}
+.fl-pan p {
+  margin-top: 10px;
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.55;
+  color: #55574f;
+}
+.fl-tabs {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: clamp(18px, 3vh, 32px);
+}
+.fl-tabs button {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(11, 12, 8, 0.08);
+  transition: background 0.4s var(--fl-ease), color 0.4s var(--fl-ease);
+}
+.fl-tabs b {
+  font-size: 11px;
+  opacity: 0.55;
+}
+.fl-tabs button[data-on] {
+  background: #0b0c08;
+  color: #fff;
+}
+.fl-cl {
+  position: relative;
+  justify-self: center;
+  width: calc(var(--d) * 2.2);
+  height: calc(var(--d) * 3.05);
+}
+.fl-blob {
+  position: absolute;
+  inset: 0;
+  filter: url(#fl-goo) drop-shadow(0 30px 40px rgba(11, 12, 8, 0.07));
+  animation: fl-breathe 7s ease-in-out infinite;
+}
+@keyframes fl-breathe {
+  50% {
+    transform: scale(1.025);
+  }
+}
+.fl-b,
+.fl-c {
+  position: absolute;
+  border-radius: 50%;
+}
+.fl-b {
+  background: #e6e6e1;
+  width: calc(var(--d) + 28px);
+  height: calc(var(--d) + 28px);
+}
+.fl-c {
+  width: var(--d);
+  height: var(--d);
+  background: #fff;
+  color: #0b0c08;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: calc(var(--d) * 0.06);
+  padding: 8%;
+  cursor: pointer;
+  border: 0;
+  box-shadow: 0 1px 0 rgba(11, 12, 8, 0.04), 0 18px 36px -22px rgba(11, 12, 8, 0.28);
+  transition: background 0.6s var(--fl-ease), color 0.6s var(--fl-ease), transform 0.8s var(--fl-ease);
+}
+.fl-c4 {
+  background: #d6ff3f;
+}
+.fl-c1,
+.fl-b1 {
+  left: 50%;
+  translate: -50% 0;
+}
+.fl-c1 {
   top: 0;
-  left: calc(var(--i) * 23.5%);
-  width: clamp(180px, 29vw, 400px);
+}
+.fl-b1 {
+  top: -14px;
+}
+.fl-c2,
+.fl-b2 {
+  top: 50%;
+  translate: 0 -50%;
+}
+.fl-c2 {
+  left: 0;
+}
+.fl-b2 {
+  left: -14px;
+}
+.fl-c3,
+.fl-b3 {
+  top: 50%;
+  translate: 0 -50%;
+}
+.fl-c3 {
+  right: 0;
+}
+.fl-b3 {
+  right: -14px;
+}
+.fl-c4,
+.fl-b4 {
+  left: 50%;
+  translate: -50% 0;
+}
+.fl-c4 {
+  bottom: 0;
+}
+.fl-b4 {
+  bottom: -14px;
+}
+.fl-c[data-on] {
+  background: #0b0c08;
+  color: #fff;
+  transform: scale(1.06);
+}
+.fl-c h4 {
+  font-family: var(--f-display);
+  font-size: calc(var(--d) * 0.15);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-weight: 700;
+}
+.fl-dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: calc(var(--d) * 0.06);
+  font-weight: 500;
+  opacity: 0.85;
+}
+.fl-dt em {
+  width: calc(var(--d) * 0.034);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--bgc);
-  color: var(--fg);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.8s var(--fc-ease), box-shadow 0.6s var(--fc-ease);
+  background: #a8d11f;
+  display: block;
 }
-.fc-c1 {
-  --i: 0;
-  z-index: 1;
+.fl-c[data-on] .fl-dt em {
+  background: #d6ff3f;
 }
-.fc-c2 {
-  --i: 1;
-  --bgc: #d6ff3f;
-  --fg: #0b0c08;
-  z-index: 2;
-}
-.fc-c3 {
-  --i: 2;
-  --bgc: #f4f4f0;
-  --fg: #0b0c08;
-  z-index: 3;
-}
-.fc-c4 {
-  --i: 3;
-  --bgc: #a8d11f;
-  --fg: #0b0c08;
-  z-index: 4;
-}
-.fc-c b {
+.fl-ring {
   position: absolute;
-  left: 7%;
-  top: 50%;
-  transform: translateY(-38%);
-  font-family: var(--f-display), sans-serif;
-  font-weight: 700;
-  font-size: clamp(70px, 11vw, 150px);
-  letter-spacing: -0.04em;
-  line-height: 0.8;
+  inset: -7px;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+  overflow: visible;
 }
-.fc-c[data-on] {
-  z-index: 9;
-  transform: translateY(-14px) scale(1.04);
-  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+.fl-ring circle {
+  fill: none;
+  stroke: #0b0c08;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
 }
-.fc-c:not([data-on]):hover {
-  transform: translateY(-6px);
+.fl-c[data-on] .fl-ring circle {
+  stroke-dashoffset: 0;
+  animation: fl-ring 4.2s linear both;
 }
-.fc-c:focus-visible {
-  outline: 2px solid #d6ff3f;
+.fl.hold .fl-c[data-on] .fl-ring circle {
+  animation: none;
+}
+@keyframes fl-ring {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+.fl-c:focus-visible,
+.fl-tabs button:focus-visible {
+  outline: 2px solid #0b0c08;
   outline-offset: 4px;
 }
-.fc-cols {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(12px, 2vw, 28px);
-  margin-top: clamp(28px, 4vw, 48px);
-}
-.fc-cols li {
-  padding-top: 18px;
-  border-top: 1px solid rgba(244, 244, 240, 0.2);
-  opacity: 0.5;
-  transition: opacity 0.4s var(--fc-ease), border-color 0.4s;
-}
-.fc-cols li[data-on] {
-  opacity: 1;
-  border-color: #d6ff3f;
-}
-.fc-cols h3 {
-  font-family: var(--f-display), sans-serif;
-  font-size: clamp(16px, 1.6vw, 22px);
-  margin-bottom: 8px;
-  color: #f4f4f0;
-}
-.fc-cols p {
-  font-size: clamp(12.5px, 1.05vw, 14.5px);
-  line-height: 1.55;
-  color: #c9cac2;
-}
 @media (prefers-reduced-motion: no-preference) {
-  .js .fc:not(.in) .fc-c {
+  .js .fl:not(.in) .fl-c {
     opacity: 0;
-    transform: translateX(70px) scale(0.9);
+    transform: scale(0.55);
   }
-  .js .fc .fc-c {
-    transition: transform 0.8s var(--fc-ease), box-shadow 0.6s var(--fc-ease), opacity 0.7s var(--fc-ease);
+  .fl-c {
+    transition: background 0.6s var(--fl-ease), color 0.6s var(--fl-ease), transform 0.9s cubic-bezier(0.34, 1.4, 0.5, 1),
+      opacity 0.6s var(--fl-ease);
+    transition-delay: 0s, 0s, calc(var(--i) * 0.12s), calc(var(--i) * 0.12s);
   }
-  .js .fc.in .fc-c1 {
-    transition-delay: 0.05s;
-  }
-  .js .fc.in .fc-c2 {
-    transition-delay: 0.2s;
-  }
-  .js .fc.in .fc-c3 {
-    transition-delay: 0.35s;
-  }
-  .js .fc.in .fc-c4 {
-    transition-delay: 0.5s;
-  }
-  .js .fc .fc-c[data-on],
-  .js .fc .fc-c:hover {
+  .fl-c[data-on] {
     transition-delay: 0s;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .fl-blob {
+    animation: none;
+  }
+  .fl-pan {
+    animation: none;
+  }
+}
 @media (max-width: 860px) {
-  .fc-row {
-    height: clamp(150px, 40vw, 260px);
+  .sc.flow {
+    min-height: 0;
   }
-  .fc-c {
-    width: clamp(110px, 38vw, 220px);
-  }
-  .fc-c b {
-    font-size: clamp(46px, 14vw, 90px);
-  }
-  .fc-cols {
-    grid-template-columns: 1fr 1fr;
+  .fl {
+    grid-template-columns: 1fr;
+    --d: min(36vw, 24vh);
+    gap: 32px;
   }
 }
 
