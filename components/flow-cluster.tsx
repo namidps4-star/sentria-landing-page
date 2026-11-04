@@ -98,10 +98,6 @@ export function FlowCluster({ steps, head }: { steps: readonly Step[]; head: Rea
             <svg className="fl-ring" viewBox="0 0 100 100" aria-hidden="true">
               <circle cx="50" cy="50" r="48.5" pathLength="1" />
             </svg>
-            <span className="fl-dt">
-              <em />
-              {s.n}
-            </span>
             <h4>
               <T s={s.h} />
             </h4>

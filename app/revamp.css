@@ -1275,28 +1275,10 @@
 }
 .fl-c h4 {
   font-family: var(--f-display);
-  font-size: calc(var(--d) * 0.15);
+  font-size: calc(var(--d) * 0.17);
   letter-spacing: -0.02em;
   line-height: 1.05;
   font-weight: 700;
-}
-.fl-dt {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: calc(var(--d) * 0.06);
-  font-weight: 500;
-  opacity: 0.85;
-}
-.fl-dt em {
-  width: calc(var(--d) * 0.034);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #a8d11f;
-  display: block;
-}
-.fl-c[data-on] .fl-dt em {
-  background: #d6ff3f;
 }
 .fl-ring {
   position: absolute;
