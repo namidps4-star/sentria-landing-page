@@ -155,6 +155,12 @@ export const ARTICLE_PAGES: ArticlePage[] = [
         },
       },
       {
+        heading: "How a count feeds SentrIA",
+        paragraphs: [
+          "Counting stock is only half the job. A count tells you what is on the shelf today, but it does not tell you how long that stock will last or when to reorder. That is where SentrIA fits. Start with the count. Walk the shelves and count each product, using a handheld reader if you have one, or a paper list if you do not. Then write the counted quantity for each product into a simple file and import it into SentrIA. Once the file is in, SentrIA takes the sales of the last 30 days for each product and works out how many days of stock are left. It then compares that number with the real delivery time of each supplier, not the time the supplier promised. If a product would run out before the next delivery arrives, SentrIA warns you, so you have time to order before the shelf is empty. The reader makes the count faster and more regular, but it does not change the arithmetic. SentrIA turns the count into a decision about what to order next. Keep one check in place. When the counted quantity is far below what the system expects, look for the cause before you reorder: a delivery that was not booked, a return, or a loss. Correct the system with the date and the reason, so the next figure is right.",
+        ],
+      },
+      {
         heading: "What we are not claiming yet",
         paragraphs: [
           "We do not know how much time RFID saves in a small pharmacy. We are testing it, and we will publish what we find when the test ends.",
@@ -236,6 +242,12 @@ export const ARTICLE_PAGES: ArticlePage[] = [
             { label: "une image 3D d'un lecteur RFID UHF portable", url: "https://www.istockphoto.com/photo/3d-handheld-uhf-rfid-scanner-or-rfid-gun-scanner-gm1476513924-505635176" },
           ],
         },
+      },
+      {
+        heading: "Comment un comptage alimente SentrIA",
+        paragraphs: [
+          "Compter le stock ne suffit pas. Un comptage dit ce qu'il y a sur l'étagère aujourd'hui, mais il ne dit pas combien de temps ce stock va durer, ni quand recommander. C'est là que SentrIA intervient. Commencez par le comptage : parcourez les rayons et comptez chaque produit, avec un lecteur portable si vous en avez un, ou avec une liste papier sinon. Puis notez la quantité comptée pour chaque produit dans un fichier simple, et importez-le dans SentrIA. Une fois le fichier importé, SentrIA prend les ventes des 30 derniers jours pour chaque produit et calcule combien de jours de stock restent. Il compare ensuite ce nombre au délai de livraison réel de chaque fournisseur, et non au délai promis. Si un produit doit s'épuiser avant l'arrivée de la prochaine livraison, SentrIA vous prévient, pour que vous ayez le temps de commander avant que l'étagère soit vide. Le lecteur rend le comptage plus rapide et plus régulier, mais il ne change pas le calcul. SentrIA transforme le comptage en décision sur ce qu'il faut commander. Gardez une vérification en place. Quand la quantité comptée est très inférieure à ce que le système attend, cherchez la cause avant de commander : une livraison non enregistrée, un retour ou une perte. Corrigez ensuite le système avec la date et la raison, pour que le chiffre suivant soit juste.",
+        ],
       },
       {
         heading: "Ce que nous ne prétendons pas encore",
