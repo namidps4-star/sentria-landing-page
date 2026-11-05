@@ -8,6 +8,7 @@ import { Footer } from "@/components/sections"
 import { ARTICLE_PAGES, ARTICLE_UPDATES, ARTICLES, isLive, type ArticlePage } from "@/content/articles"
 import { ArticleCard } from "@/components/article-card"
 import { ARTICLE_MARKS } from "@/content/article-marks"
+import { ArticleFx } from "@/components/article-fx"
 
 import "@/components/articles.css"
 
@@ -117,6 +118,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <Header />
+      <ArticleFx />
       <main id="main" className="blog" lang={page.lang}>
         <div className="blog-top">
         <header className="blog-head">
