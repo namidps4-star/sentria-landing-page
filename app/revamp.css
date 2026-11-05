@@ -2164,10 +2164,12 @@
 
 /* booking section: a little more air around the heading */
 #demo .h2 {
-  line-height: 1.12;
-  letter-spacing: -0.015em;
+  font-size: clamp(30px, 3.7vw, 56px);
+  line-height: 1.18;
+  letter-spacing: 0.012em;
+  word-spacing: 0.14em;
   margin-top: 26px;
-  max-width: 14ch;
+  max-width: 16ch;
 }
 #demo .lead {
   margin-top: 34px;
