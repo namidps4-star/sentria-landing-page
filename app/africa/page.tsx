@@ -4,7 +4,7 @@ import { AfricaHero } from "@/components/africa-hero"
 export const metadata: Metadata = {
   title: "Pharmacy stock and days of stock for West African pharmacies | SentrIA",
   description: "SentrIA works out the days of stock left in your pharmacy from your counts and sales, and warns you before a delivery is late.",
-  alternates: { canonical: "/africa" },
+  alternates: { canonical: "/africa", languages: { en: "/africa", fr: "/afrique" } },
   openGraph: {
     type: "website",
     url: "https://sentriahq.dev/africa",
