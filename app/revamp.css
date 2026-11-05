@@ -1948,8 +1948,24 @@
   width: calc(var(--R) * 2);
   height: calc(var(--R) * 2);
   margin-top: calc(var(--R) * -1);
-  border-radius: 50%;
-  border: 1.5px solid #d2d2ce;
+  overflow: visible;
+  pointer-events: none;
+}
+.dd-base,
+.dd-run {
+  fill: none;
+}
+.dd-base {
+  stroke: #d2d2ce;
+  stroke-width: 0.5;
+}
+.dd-run {
+  stroke: #0b0c08;
+  stroke-width: 0.7;
+  stroke-linecap: round;
+  stroke-dasharray: 0.0833 1;
+  stroke-dashoffset: 0.0833;
+  opacity: 0;
 }
 .dd-wheel {
   position: absolute;
@@ -1996,6 +2012,7 @@
   font-size: clamp(52px, 5.2vw, 68px);
   letter-spacing: -0.04em;
   color: #d3d3cf;
+  opacity: calc(var(--vis, 1) * (1 - var(--dist, 0) * 0.2));
   transform-origin: 0 50%;
   transition: opacity 0.9s ease, color 0.6s ease;
 }
@@ -2078,4 +2095,69 @@
 /* the booking hero is white, like the reference */
 #demo.sc-sand {
   background: #f2f2f0;
+}
+
+/* demo dial: premium motion (all of it off under reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .dd .dd-run {
+    opacity: 1;
+    animation: dd-run 4.2s linear both;
+  }
+  .dd.hold .dd-run {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+  @keyframes dd-run {
+    from {
+      stroke-dashoffset: 0.0833;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .dd .dd-it[data-on] .dd-dot::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1.5px solid #0b0c08;
+    animation: dd-ping 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) 0.8s infinite;
+  }
+  @keyframes dd-ping {
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(4.2);
+    }
+  }
+  .dd .dd-now strong {
+    animation: dd-num 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  @keyframes dd-num {
+    from {
+      opacity: 0;
+      transform: translateY(26px) scale(0.92);
+      filter: blur(8px);
+    }
+  }
+  .dd .dd-now p {
+    animation: dd-num 1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+  }
+  .js .dd:not(.in) .dd-wheel {
+    transform: rotate(calc(var(--rot) - 70deg));
+  }
+  .js .dd:not(.in) .dd-it b,
+  .js .dd:not(.in) .dd-now {
+    opacity: 0;
+  }
+  .dd.in .dd-it b {
+    transition: opacity 1.2s ease 0.4s, color 0.6s ease;
+  }
+  .dd.in .dd-wheel {
+    transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+  }
 }
