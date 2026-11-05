@@ -7,6 +7,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/sections"
 import { ARTICLE_PAGES, ARTICLE_UPDATES, ARTICLES, isLive, type ArticlePage } from "@/content/articles"
 import { ArticleCard } from "@/components/article-card"
+import { ARTICLE_MARKS } from "@/content/article-marks"
 
 import "@/components/articles.css"
 
@@ -17,6 +18,27 @@ export const revalidate = 3600
 
 export function generateStaticParams() {
   return ARTICLE_PAGES.filter(isLive).map((a) => ({ slug: a.slug }))
+}
+
+/** The opening paragraph, with its marked phrases wrapped in hand-drawn highlights (four brush shapes in turn). */
+function Lead({ text, marks }: { text: string; marks: string[] }) {
+  const found = marks.filter((m) => text.includes(m)).sort((a, b) => text.indexOf(a) - text.indexOf(b))
+  if (found.length === 0) return <>{text}</>
+  const parts: React.ReactNode[] = []
+  let rest = text
+  found.forEach((m, i) => {
+    const at = rest.indexOf(m)
+    if (at < 0) return
+    parts.push(rest.slice(0, at))
+    parts.push(
+      <mark key={m} className={`bmk bmk${(i % 4) + 1}`}>
+        {m}
+      </mark>,
+    )
+    rest = rest.slice(at + m.length)
+  })
+  parts.push(rest)
+  return <>{parts.map((p, i) => (typeof p === "string" ? <Fragment key={i}>{p}</Fragment> : p))}</>
 }
 
 function findPage(slug: string): ArticlePage | undefined {
@@ -96,6 +118,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     <>
       <Header />
       <main id="main" className="blog" lang={page.lang}>
+        <div className="blog-top">
         <header className="blog-head">
           <span className="blog-tag">{ARTICLES.find((x) => x.id === page.pairId)?.tag[page.lang]}</span>
           <h1>{page.title}</h1>
@@ -112,6 +135,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </div>
           <p className="blog-lede">{page.description}</p>
         </header>
+        <p className="blog-lead">
+          <Lead text={intro} marks={ARTICLE_MARKS[page.slug] ?? []} />
+        </p>
+        </div>
 
         <div className="blog-hero">
           <Image src={page.image} alt={page.title} fill priority sizes="(max-width: 1100px) 100vw, 1100px" />
@@ -119,7 +146,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
         <div className="blog-layout">
           <article className="blog-body">
-            <p className="blog-intro">{intro}</p>
             {page.sections.map((s, si) => (
               <Fragment key={s.heading}>
                 <section>
