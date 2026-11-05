@@ -152,3 +152,18 @@ mark.bmk3 { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 .blog-figure img { width: 100%; height: auto; border-radius: 18px; display: block; }
 .blog-figure figcaption { font-size: 13px; color: #5a5d50; margin-top: 8px; line-height: 1.4; }
 @media (max-width: 960px) { .blog-figures { grid-template-columns: 1fr; } }
+
+/* Next article: sits in the same centred column as the article, and a single card is laid out wide
+   (photo left, text right) instead of hanging in one third of an empty row. */
+.art-next { max-width: 800px; margin: 72px auto 0; padding-top: 40px; border-top: 1px solid rgba(11, 12, 8, 0.14); }
+.art-next-head h2 { font: 700 24px/1.15 var(--f-display), sans-serif; }
+.art-next-row:has(> :only-child) { grid-template-columns: 1fr; }
+.art-next-row > .art-card:only-child { display: grid; grid-template-columns: 300px 1fr; grid-template-rows: auto auto 1fr; column-gap: 28px; padding: 14px; background: #fff; border-radius: 26px; align-items: start; }
+.art-next-row > .art-card:only-child .art-card-img { grid-row: 1 / span 4; height: 100%; min-height: 230px; }
+.art-next-row > .art-card:only-child .art-card-meta { margin: 8px 0 0; }
+.art-next-row > .art-card:only-child .art-card-title { font-size: 24px; margin: 12px 0 8px; }
+.art-next-row > .art-card:only-child .art-card-desc { margin: 0; font-size: 14px; line-height: 1.6; }
+@media (max-width: 900px) {
+  .art-next-row > .art-card:only-child { grid-template-columns: 1fr; }
+  .art-next-row > .art-card:only-child .art-card-img { grid-row: auto; height: 200px; min-height: 0; }
+}
