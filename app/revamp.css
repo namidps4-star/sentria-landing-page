@@ -2161,3 +2161,18 @@
     transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
   }
 }
+
+/* booking section: a little more air around the heading */
+#demo .h2 {
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin-top: 26px;
+  max-width: 14ch;
+}
+#demo .lead {
+  margin-top: 34px;
+  line-height: 1.7;
+}
+#demo .dd {
+  margin-top: clamp(56px, 8vh, 88px);
+}
