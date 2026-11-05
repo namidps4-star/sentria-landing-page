@@ -74,7 +74,8 @@ export function QuickFit() {
 
   // the track wipes in the first time it is on screen
   useEffect(() => {
-    const el = track.current
+    // watch the strip around the track, not the track: the track is clipped away until it is revealed
+    const el = track.current?.closest<HTMLElement>(".quickfit")
     if (!el) return
     if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       queueMicrotask(() => setSeen(true))
@@ -87,7 +88,7 @@ export function QuickFit() {
           io.disconnect()
         }
       },
-      { threshold: 0.6 },
+      { threshold: 0.5 },
     )
     io.observe(el)
     return () => io.disconnect()
