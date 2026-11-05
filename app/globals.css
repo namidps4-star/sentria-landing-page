@@ -2327,7 +2327,14 @@ html.op-run .op {
 }
 .calendly-inline-widget {
   min-width: 320px;
-  height: 700px;
+  /* Calendly pins its cookie banner to the bottom of the browser window, so the box must be at least
+     as tall as the window or the banner falls outside it and its buttons cannot be clicked */
+  height: max(1040px, 100vh);
+}
+@media (max-width: 860px) {
+  .calendly-inline-widget {
+    height: max(1180px, 100vh);
+  }
 }
 
 /* ------------------------------------------------------------------ final */
@@ -2697,4 +2704,9 @@ html.op-run .op {
 
 .cal-fallback {
   margin: 40px 28px;
+}
+/* once Calendly's frame is in, the fallback link must go: it was pushing the frame 126px down, so the
+   box clipped the bottom of the widget and its cookie buttons */
+.calendly-inline-widget:has(iframe) .cal-fallback {
+  display: none;
 }
