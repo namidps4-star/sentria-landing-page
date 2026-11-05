@@ -1,11 +1,80 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { C } from "@/content/en"
 import { T } from "./t"
-import { Check, Eyebrow, iv } from "./ui"
+import { Eyebrow, iv } from "./ui"
 
 const CALENDLY_SRC = "https://assets.calendly.com/assets/external/widget.js"
+
+const SPREAD = 26 // degrees between steps on the dial
+
+/**
+ * The four demo points as a dial: a curved track with the numerals tilted along it. The active
+ * step sits at the middle, upright and large with its sentence beside it; the track turns to bring
+ * the next one in. It advances on its own while on screen; hover, focus or a click picks a step.
+ * Reduced motion: no autoplay and no turning animation.
+ */
+function DemoDial({ points }: { points: readonly string[] }) {
+  const root = useRef<HTMLDivElement>(null)
+  const [step, setStep] = useState(0)
+  const [vis, setVis] = useState(false)
+  const [hold, setHold] = useState(false)
+  const [still, setStill] = useState(false)
+
+  useEffect(() => {
+    const el = root.current
+    if (!el) return
+    const rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    queueMicrotask(() => setStill(rm))
+    if (rm || !("IntersectionObserver" in window)) return
+    const io = new IntersectionObserver(([e]) => setVis(e.isIntersecting), { threshold: 0.4 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!vis || hold || still) return
+    const t = window.setInterval(() => setStep((s) => (s + 1) % points.length), 4200)
+    return () => window.clearInterval(t)
+  }, [vis, hold, still, points.length])
+
+  const pick = (i: number) => {
+    setStep(i)
+    setHold(true)
+  }
+
+  return (
+    <div ref={root} className="dd" onPointerLeave={() => setHold(false)} style={{ "--rot": `${-step * SPREAD}deg` } as React.CSSProperties}>
+      <span className="dd-track" aria-hidden="true" />
+      <div className="dd-wheel" role="group" aria-label="Demo agenda">
+        {points.map((p, i) => (
+          <button
+            key={p}
+            type="button"
+            className="dd-it"
+            data-on={step === i ? "1" : undefined}
+            style={{ "--a": `${i * SPREAD}deg` } as React.CSSProperties}
+            aria-pressed={step === i}
+            aria-label={`0${i + 1} ${p}`}
+            onPointerEnter={(e) => e.pointerType === "mouse" && pick(i)}
+            onClick={() => pick(i)}
+            onFocus={() => setStep(i)}
+          >
+            <i className="dd-dot" />
+            <b>0{i + 1}</b>
+          </button>
+        ))}
+      </div>
+      <div className="dd-now" key={step} aria-live="polite">
+        <strong>0{step + 1}</strong>
+        <p>
+          <T s={points[step]} />
+        </p>
+      </div>
+    </div>
+  )
+}
 
 export function Demo() {
   const s = C.demo
@@ -53,16 +122,7 @@ export function Demo() {
           <p className="lead" data-rv="rise" style={iv(1)}>
             <T s={s.lead} />
           </p>
-          <ul className="points">
-            {s.points.map((p, i) => (
-              <li key={p} data-rv="left" style={iv(i + 2)}>
-                <span className="tick" aria-hidden="true">
-                  <Check />
-                </span>
-                <T s={p} />
-              </li>
-            ))}
-          </ul>
+          <DemoDial points={s.points} />
         </div>
 
         <div className="cal" data-rv="right" ref={cal}>
