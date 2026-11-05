@@ -7,7 +7,7 @@ import { Eyebrow, iv } from "./ui"
 
 const CALENDLY_SRC = "https://assets.calendly.com/assets/external/widget.js"
 
-const SPREAD = 26 // degrees between steps on the dial
+const SPREAD = 34 // degrees between steps on the dial
 
 /**
  * The four demo points as a dial: a curved track with the numerals tilted along it. The active
@@ -46,7 +46,6 @@ function DemoDial({ points }: { points: readonly string[] }) {
 
   return (
     <div ref={root} className="dd" onPointerLeave={() => setHold(false)} style={{ "--rot": `${-step * SPREAD}deg` } as React.CSSProperties}>
-      <span className="dd-track" aria-hidden="true" />
       <div className="dd-wheel" role="group" aria-label="Demo agenda">
         {points.map((p, i) => (
           <button

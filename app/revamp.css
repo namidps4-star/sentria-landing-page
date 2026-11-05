@@ -1932,23 +1932,14 @@
 
 /* ------------------------------------------------------------ demo: dial */
 .dd {
-  --R: 128px;
+  --R: 132px;
   position: relative;
-  height: 370px;
+  height: 400px;
   margin-top: clamp(16px, 2vh, 28px);
   max-width: 560px;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   --dd-ease: cubic-bezier(0.16, 1, 0.3, 1);
-}
-.dd-track {
-  position: absolute;
-  left: calc(var(--R) * -0.2);
-  top: 50%;
-  width: calc(var(--R) * 2);
-  height: calc(var(--R) * 2);
-  margin-top: calc(var(--R) * -1);
-  border-radius: 50%;
-  border: 1.5px solid rgba(11, 12, 8, 0.16);
 }
 .dd-wheel {
   position: absolute;
@@ -1981,19 +1972,19 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(11, 12, 8, 0.28);
+  background: transparent;
   transition: background 0.5s var(--dd-ease), transform 0.6s var(--dd-ease);
 }
 .dd-it b {
   position: absolute;
-  left: calc(var(--R) + 22px);
+  left: calc(var(--R) + 26px);
   top: 0;
   translate: 0 -50%;
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: clamp(34px, 3.4vw, 46px);
+  font-size: clamp(52px, 5.2vw, 68px);
   letter-spacing: -0.04em;
-  color: rgba(11, 12, 8, 0.16);
+  color: rgba(11, 12, 8, 0.15);
   transform-origin: 0 50%;
   transition: opacity 0.5s var(--dd-ease), color 0.5s;
 }
@@ -2057,18 +2048,18 @@
 }
 @media (max-width: 860px) {
   .dd {
-    --R: 100px;
-    height: 340px;
+    --R: 92px;
+    height: 380px;
     max-width: none;
   }
-  .dd-track {
-    left: calc(var(--R) * -0.5);
-  }
   .dd-wheel {
-    left: calc(var(--R) * 0.5);
+    left: calc(var(--R) * 0.75);
   }
   .dd-now {
-    left: calc(var(--R) * 1.5 + 28px);
+    left: calc(var(--R) * 1.75 + 26px);
+  }
+  .dd-it b {
+    font-size: 42px;
   }
   .dd-now strong {
     font-size: 56px;
