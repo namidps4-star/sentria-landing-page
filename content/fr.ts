@@ -4,6 +4,7 @@ export const FR: Record<string, string> = {
  "Method": "Méthode",
  "Decision queue": "File de décisions",
  "Pricing": "Tarifs",
+ "West Africa": "Afrique de l'Ouest",
  "Sectors": "Secteurs",
  "Book a demo →": "Réserver une démo →",
  "Operational decision layer": "Couche de décision opérationnelle",

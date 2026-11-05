@@ -503,6 +503,7 @@ export function Footer() {
                 {link("#methode", "Method")}
                 {link("#tarifs", "Pricing")}
                 {link("#fit", "Sectors")}
+                {link("/africa", "West Africa")}
               </ul>
             </div>
             <div>
