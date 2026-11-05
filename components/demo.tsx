@@ -46,6 +46,7 @@ function DemoDial({ points }: { points: readonly string[] }) {
 
   return (
     <div ref={root} className="dd" onPointerLeave={() => setHold(false)} style={{ "--rot": `${-step * SPREAD}deg` } as React.CSSProperties}>
+      <span className="dd-track" aria-hidden="true" />
       <div className="dd-wheel" role="group" aria-label="Demo agenda">
         {points.map((p, i) => (
           <button
