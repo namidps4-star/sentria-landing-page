@@ -1932,10 +1932,10 @@
 
 /* ------------------------------------------------------------ demo: dial */
 .dd {
-  --R: 132px;
+  --R: 230px;
   position: relative;
-  height: 400px;
-  margin-top: clamp(16px, 2vh, 28px);
+  height: 580px;
+  margin-top: clamp(40px, 6vh, 64px);
   max-width: 560px;
   overflow-x: clip;
   overflow-y: visible;
@@ -1943,17 +1943,17 @@
 }
 .dd-track {
   position: absolute;
-  left: calc(var(--R) * -0.2);
+  left: calc(var(--R) * -1);
   top: 50%;
   width: calc(var(--R) * 2);
   height: calc(var(--R) * 2);
   margin-top: calc(var(--R) * -1);
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 1.5px solid #d2d2ce;
 }
 .dd-wheel {
   position: absolute;
-  left: calc(var(--R) * 0.8);
+  left: 0;
   top: 50%;
   width: 0;
   height: 0;
@@ -1982,7 +1982,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #fff;
+  background: #c6c6c2;
   transition: background 0.5s var(--dd-ease), transform 0.6s var(--dd-ease);
 }
 .dd-it b {
@@ -1994,12 +1994,12 @@
   font-weight: 700;
   font-size: clamp(52px, 5.2vw, 68px);
   letter-spacing: -0.04em;
-  color: rgba(11, 12, 8, 0.15);
+  color: #d3d3cf;
   transform-origin: 0 50%;
   transition: opacity 0.5s var(--dd-ease), color 0.5s;
 }
 .dd-it:hover b {
-  color: rgba(11, 12, 8, 0.36);
+  color: #b7b7b2;
 }
 .dd-it[data-on] .dd-dot {
   background: #0b0c08;
@@ -2018,7 +2018,7 @@
 }
 .dd-now {
   position: absolute;
-  left: calc(var(--R) * 1.8 + 30px);
+  left: calc(var(--R) + 34px);
   right: 0;
   top: 50%;
   translate: 0 -50%;
@@ -2058,23 +2058,19 @@
 }
 @media (max-width: 860px) {
   .dd {
-    --R: 92px;
-    height: 380px;
+    --R: 150px;
+    height: 360px;
     max-width: none;
   }
-  .dd-track {
-    left: calc(var(--R) * -0.25);
-  }
-  .dd-wheel {
-    left: calc(var(--R) * 0.75);
-  }
-  .dd-now {
-    left: calc(var(--R) * 1.75 + 26px);
-  }
   .dd-it b {
-    font-size: 42px;
+    font-size: 44px;
   }
   .dd-now strong {
     font-size: 56px;
   }
+}
+
+/* the booking hero is white, like the reference */
+#demo.sc-sand {
+  background: #f2f2f0;
 }
