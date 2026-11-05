@@ -20,7 +20,7 @@ export function generateStaticParams() {
   return ARTICLE_PAGES.filter(isLive).map((a) => ({ slug: a.slug }))
 }
 
-/** The opening paragraph, with its marked phrases wrapped in hand-drawn highlights (four brush shapes in turn). */
+/** The opening paragraph, with its marked phrases wrapped in hand-drawn highlights (lime brush, black pen circle, blush brush in turn). */
 function Lead({ text, marks }: { text: string; marks: string[] }) {
   const found = marks.filter((m) => text.includes(m)).sort((a, b) => text.indexOf(a) - text.indexOf(b))
   if (found.length === 0) return <>{text}</>
@@ -31,7 +31,7 @@ function Lead({ text, marks }: { text: string; marks: string[] }) {
     if (at < 0) return
     parts.push(rest.slice(0, at))
     parts.push(
-      <mark key={m} className={`bmk bmk${(i % 4) + 1}`}>
+      <mark key={m} className={`bmk bmk${(i % 3) + 1}`}>
         {m}
       </mark>,
     )
