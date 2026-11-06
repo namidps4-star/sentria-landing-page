@@ -5,13 +5,13 @@ import { useState } from "react"
 import { useLang } from "@/components/lang"
 import { B } from "@/components/t"
 import { Check, iv } from "@/components/ui"
-import { DEFAULT_CURRENCY, SITE_CURRENCIES, SITE_PRICES, formatPrice, type SiteCurrency } from "@/content/prices"
+import { DEFAULT_CURRENCY, SITE_CURRENCIES, SITE_PRICES, formatPrice, perSite, type SiteCurrency } from "@/content/prices"
 
 type Plan = {
   id: "decouverte" | "pro" | "business" | "entreprise"
   name: string
   blurb: { en: string; fr: string }
-  items: { en: string; fr: string }[]
+  items: { en: string; fr: string; soon?: boolean }[]
   cta: { en: string; fr: string }
   featured?: boolean
 }
@@ -48,6 +48,8 @@ const PLANS: Plan[] = [
     blurb: { en: "For several linked sites.", fr: "Pour plusieurs sites reliés." },
     items: [
       { en: "3 sites, 10 users", fr: "3 sites, 10 utilisateurs" },
+      { en: "Intelligence: learned supplier lead times", fr: "Intelligence : délais fournisseurs appris" },
+      { en: "Intelligence: seasonal advice", fr: "Intelligence : conseils saisonniers", soon: true },
       { en: "Linked departments", fr: "Départements reliés" },
       { en: "2 years of history", fr: "2 ans d'historique" },
       { en: "SMS alerts", fr: "Alertes par SMS" },
@@ -68,6 +70,14 @@ const PLANS: Plan[] = [
     cta: { en: "Talk to us", fr: "Parlez-nous" },
   },
 ]
+
+function Soon() {
+  return (
+    <svg className="ck" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ opacity: 0.6 }}>
+      <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="2" strokeDasharray="3 3" />
+    </svg>
+  )
+}
 
 export function PricingGrid() {
   const lang = useLang()
@@ -94,6 +104,12 @@ export function PricingGrid() {
               <h3>{p.name}</h3>
               <p className="plan-p">
                 <B en={p.blurb.en} fr={p.blurb.fr} />
+                {p.id === "business" && amount !== null ? (
+                  <>
+                    {" "}
+                    <B en={`About ${formatPrice(perSite(amount), currency, "en")} per site.`} fr={`Environ ${formatPrice(perSite(amount), currency, "fr")} par site.`} />
+                  </>
+                ) : null}
               </p>
               <div className="price">
                 {amount !== null ? (
@@ -133,9 +149,14 @@ export function PricingGrid() {
               <ul>
                 {p.items.map((it) => (
                   <li key={it.en}>
-                    <Check />
+                    {it.soon ? <Soon /> : <Check />}
                     <span>
                       <B en={it.en} fr={it.fr} />
+                      {it.soon ? (
+                        <span className="soon-tag">
+                          <B en="Soon" fr="Bientôt" />
+                        </span>
+                      ) : null}
                     </span>
                   </li>
                 ))}
@@ -146,6 +167,56 @@ export function PricingGrid() {
             </article>
           )
         })}
+      </div>
+      <div className="intel-row" data-rv="rise">
+        <section className="intel">
+          <h3>
+            SentrIA Intelligence{" "}
+            <span>
+              <B en="Business and Entreprise" fr="Business et Entreprise" />
+            </span>
+          </h3>
+          <p className="intel-lead">
+            <B en="Your own history, turned into better orders." fr="Votre propre historique, transformé en meilleures commandes." />
+          </p>
+          <ul>
+            <li>
+              <Check />
+              <span>
+                <B en="Supplier lead times learned from your history" fr="Délais fournisseurs appris sur votre historique" />
+              </span>
+            </li>
+            <li>
+              <Soon />
+              <span>
+                <B
+                  en="Seasonal stock advice, such as malaria in the rainy season and flu in the harmattan"
+                  fr="Conseils de stock saisonniers, comme le paludisme en saison des pluies et la grippe à l'harmattan"
+                />
+                <span className="soon-tag">
+                  <B en="Soon" fr="Bientôt" />
+                </span>
+              </span>
+            </li>
+          </ul>
+          <p className="intel-note">
+            <B
+              en="Seasonal advice starts from your region's calendar, then from your own history after 3 months of data. It is stock advice, never medical advice."
+              fr="Les conseils saisonniers partent du calendrier de votre région, puis de votre propre historique après 3 mois de données. Ce sont des conseils de stock, jamais des conseils médicaux."
+            />
+          </p>
+        </section>
+        <section className="lock">
+          <h3>
+            <B en="Join now, keep today's price" fr="Rejoignez-nous maintenant, gardez le prix d'aujourd'hui" />
+          </h3>
+          <p>
+            <B
+              en="Customers who join now keep their price for 24 months. What we add to your plan comes at no extra cost."
+              fr="Les clients qui nous rejoignent maintenant gardent leur prix pendant 24 mois. Ce que nous ajoutons à votre offre ne coûte rien de plus."
+            />
+          </p>
+        </section>
       </div>
     </>
   )

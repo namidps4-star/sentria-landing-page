@@ -2,12 +2,12 @@
    (lib/plans.ts PRICES in the app). Set per market, not converted. Annual billing is 10 months
    for 12. The list is checked against the app's by tests/e2e/pricing.js. */
 export const SITE_PRICES = {
-  EUR: [39, 99],
-  USD: [39, 99],
-  XOF: [25_000, 65_000],
-  KES: [4_200, 11_000],
-  NGN: [33_000, 87_000],
-  GHS: [420, 1_100],
+  EUR: [49, 99],
+  USD: [49, 99],
+  XOF: [32_000, 65_000],
+  KES: [5_400, 11_000],
+  NGN: [42_000, 87_000],
+  GHS: [540, 1_100],
 } as const
 
 export type SiteCurrency = keyof typeof SITE_PRICES
@@ -20,4 +20,11 @@ export function formatPrice(amount: number, currency: SiteCurrency, lang: "en" |
     currency,
     maximumFractionDigits: 0,
   }).format(amount)
+}
+
+/** What a Business site costs when its price is shared by three sites, rounded so it reads as a round figure. */
+export function perSite(amount: number) {
+  const each = amount / 3
+  const step = each >= 1000 ? 100 : each >= 100 ? 10 : 1
+  return Math.round(each / step) * step
 }
