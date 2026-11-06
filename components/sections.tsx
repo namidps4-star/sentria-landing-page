@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import { C } from "@/content/en"
 import { FR } from "@/content/fr"
-import { T, B } from "./t"
+import { T, B, LangPick } from "./t"
 import { ConnectStack } from "./connect-stack"
 import { FootReveal } from "./foot-reveal"
 import { FlowCircles } from "./flow-circles"
@@ -91,12 +91,18 @@ export function Shift() {
           <B en="The shift" fr="Le changement" />
         </p>
         <h2 className="rv-h" data-rv="rise">
-          <span className="en">
-            Move from monitoring to <em>deciding.</em>
-          </span>
-          <span className="fr" lang="fr">
-            Passez du suivi à la <em>décision.</em>
-          </span>
+          <LangPick
+            en={
+              <>
+                Move from monitoring to <em>deciding.</em>
+              </>
+            }
+            fr={
+              <>
+                Passez du suivi à la <em>décision.</em>
+              </>
+            }
+          />
         </h2>
         <div className="rv-split" data-rv="rise" style={iv(1)}>
           <div className="rv-side">

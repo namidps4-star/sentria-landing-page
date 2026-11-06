@@ -1,7 +1,7 @@
 import Link from "next/link"
 import type { ReactNode } from "react"
 import { LEGAL_COMPANY, LEGAL_CONTACT, LEGAL_DOCS, LEGAL_TITLES, LEGAL_VERSION, type LegalDocId } from "@/content/legal"
-import { B } from "./t"
+import { B, LangPick } from "./t"
 import { Mark } from "./ui"
 import { LangSwitch } from "./header"
 import { LegalToc } from "./legal-toc"
@@ -86,10 +86,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
             <B en="Legal" fr="Légal" />
           </p>
           <h1 className="rv-h lg-h">
-            <span className="en">{title[1]}</span>
-            <span className="fr" lang="fr">
-              {title[0]}
-            </span>
+            <LangPick en={title[1]} fr={title[0]} />
           </h1>
           <p className="lg-ver">
             {LEGAL_COMPANY} · <B en="Version of" fr="Version du" /> {LEGAL_VERSION}
@@ -97,10 +94,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
           <div className="lg-tabs" role="tablist">
             {(["privacy", "terms"] as const).map((id) => (
               <a key={id} href={`/${id}`} role="tab" aria-selected={doc === id}>
-                <span className="en">{LEGAL_TITLES[id][1]}</span>
-                <span className="fr" lang="fr">
-                  {LEGAL_TITLES[id][0]}
-                </span>
+                <LangPick en={LEGAL_TITLES[id][1]} fr={LEGAL_TITLES[id][0]} />
               </a>
             ))}
           </div>
@@ -122,12 +116,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
                     </h2>
                     {s.body.map((p) => (
                       <div key={p[1]} className="lg-p">
-                        <div className="en">
-                          <Para text={p[1]} />
-                        </div>
-                        <div className="fr" lang="fr">
-                          <Para text={p[0]} />
-                        </div>
+                        <LangPick en={<Para text={p[1]} />} fr={<Para text={p[0]} />} />
                       </div>
                     ))}
                   </div>

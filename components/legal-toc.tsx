@@ -1,5 +1,6 @@
 "use client"
 
+import { LangPick } from "./t"
 import { useEffect, useState } from "react"
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -31,10 +32,7 @@ export function LegalToc({ entries }: { entries: { en: string; fr: string }[] })
           <span className="lg-n" aria-hidden="true">
             {pad(i + 1)}
           </span>
-          <span className="en">{e.en}</span>
-          <span className="fr" lang="fr">
-            {e.fr}
-          </span>
+          <LangPick en={e.en} fr={e.fr} />
         </a>
       ))}
     </nav>
