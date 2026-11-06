@@ -66,7 +66,8 @@ async function newText(browser, lang) {
     localStorage.setItem('sentria-language', l)
   }, lang)
   const page = await ctx.newPage()
-  await page.goto(APP_URL, { waitUntil: 'load' })
+  // Each language has its own address now: /en and /fr.
+  await page.goto(`${APP_URL}/${lang}`, { waitUntil: 'load' })
   await page.waitForTimeout(1200)
   const blob = await page.evaluate(() => {
     const vis = (el) => {
