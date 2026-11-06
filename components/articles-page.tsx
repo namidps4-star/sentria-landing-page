@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { ArticleCard } from "@/components/article-card"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { useLang } from "@/components/lang"
 import { B } from "@/components/t"
@@ -20,6 +20,11 @@ export function ArticlesPage() {
   const [sector, setSector] = useState<SectorKey>("all")
   const [dept, setDept] = useState("all")
   const lang = useLang()
+
+  // A link ending in #health opens the page with the health filter on.
+  useEffect(() => {
+    if (window.location.hash === "#health") setSector("health") // eslint-disable-line react-hooks/set-state-in-effect
+  }, [])
 
   const live = ARTICLES.filter(isLive)
   const latest = live.slice(0, 3)

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Fragment } from "react"
 import type { Metadata } from "next"
 import Image from "next/image"
@@ -74,6 +75,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
+function updatedLabel(iso: string, lang: "en" | "fr") {
+  const d = new Date(iso)
+  return lang === "fr"
+    ? `Mis à jour le ${d.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}`
+    : `Updated ${d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}`
+}
+
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const page = findPage(slug)
@@ -108,7 +116,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     description: page.description,
     inLanguage: page.lang,
     datePublished: page.date,
-    dateModified: page.date,
+    dateModified: update ? update.from : page.date,
     image: `${BASE}${page.image}`,
     author: { "@type": "Organization", name: "SentrIA", url: BASE },
     publisher: { "@type": "Organization", name: "SentrIA", url: BASE },
@@ -133,6 +141,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               {page.lang === "fr" ? ", fondateur de SentrIA" : ", Founder of SentrIA"}
             </span>
             <span>{page.dateLabel}</span>
+            {update && <span>{updatedLabel(update.from, page.lang)}</span>}
             <span>{page.lang === "fr" ? `${page.minutes} min de lecture` : `${page.minutes} min read`}</span>
           </div>
           <p className="blog-lede">{page.description}</p>
@@ -191,11 +200,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               ))}
             </section>
             <p className="blog-closing">{page.closing}</p>
-            {page.regional && (
-              <p className="blog-links">
-                <a href={page.regional.href}>{page.regional.label}</a>
-              </p>
-            )}
+            <p className="blog-links">
+              <Link href="/articles#health">
+                {page.lang === "fr" ? "Plus d'articles santé : pharmacie et chaîne du froid" : "More health articles: pharmacy and cold chain"}
+              </Link>
+              {page.regional && <a href={page.regional.href}>{page.regional.label}</a>}
+            </p>
             {sources.length > 0 && (
               <section className="blog-sources">
                 <h2>Sources</h2>

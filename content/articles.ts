@@ -51,7 +51,7 @@ export const ARTICLES: Article[] = [
     publishAt: "2026-11-04T06:00:00Z",
     sector: "health",
     dept: "pharmacy",
-    tag: { en: "Health · Pharmacy", fr: "Santé · Pharmacie" },
+    tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
     title: {
       en: "How to count pharmacy stock faster, and where RFID fits",
       fr: "Compter le stock d'une pharmacie plus vite, et la place du RFID",
@@ -63,7 +63,7 @@ export const ARTICLES: Article[] = [
     id: "pharmacy-stock-outs",
     sector: "health",
     dept: "pharmacy",
-    tag: { en: "Health · Pharmacy", fr: "Santé · Pharmacie" },
+    tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
     title: {
       en: "How to avoid pharmacy stock-outs",
       fr: "Comment éviter les ruptures de stock en pharmacie",
