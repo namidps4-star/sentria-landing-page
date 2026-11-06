@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Home from "../page"
+import HomePage from "@/components/home-page"
 import { HREFLANG, SEO } from "@/content/seo"
 
 export const metadata: Metadata = {
@@ -19,5 +19,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <Home />
+  return <HomePage />
 }

@@ -15,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://sentriahq.dev/africa", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://sentriahq.dev/afrique", changeFrequency: "monthly", priority: 0.8, alternates: { languages: { en: "https://sentriahq.dev/africa", fr: "https://sentriahq.dev/afrique" } } },
     { url: "https://sentriahq.dev/articles", changeFrequency: "weekly", priority: 0.6 },
+    { url: "https://sentriahq.dev/fr/articles", changeFrequency: "weekly", priority: 0.6 },
+    { url: "https://sentriahq.dev/fr/privacy", changeFrequency: "yearly", priority: 0.3 },
+    { url: "https://sentriahq.dev/fr/terms", changeFrequency: "yearly", priority: 0.3 },
     ...ARTICLE_PAGES.filter(isLive).map((a) => ({
       url: `https://sentriahq.dev/articles/${a.slug}`,
       changeFrequency: "monthly" as const,

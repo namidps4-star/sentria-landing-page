@@ -24,7 +24,7 @@ import {
   Footer,
 } from "@/components/sections"
 
-export default function Page() {
+export default function HomePage() {
   return (
     <>
       <Opening />

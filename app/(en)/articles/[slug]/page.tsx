@@ -19,7 +19,7 @@ const BASE = "https://sentriahq.dev"
 export const revalidate = 3600
 
 export function generateStaticParams() {
-  return ARTICLE_PAGES.filter(isLive).map((a) => ({ slug: a.slug }))
+  return ARTICLE_PAGES.filter(isLive).filter((a) => a.lang === "en").map((a) => ({ slug: a.slug }))
 }
 
 /** The opening paragraph, with its marked phrases wrapped in hand-drawn highlights (lime brush, black pen circle, blush brush in turn). */
