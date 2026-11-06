@@ -73,6 +73,7 @@ export const metadataEn: Metadata = {
   openGraph: {
     type: "website",
     url: SITE,
+    images: ["/opengraph-image.png"],
     siteName: "SentrIA",
     title: TITLE,
     description:
@@ -80,6 +81,7 @@ export const metadataEn: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/twitter-image.png"],
     title: TITLE,
     description: "Evidence, confidence, impact and recommended action for every operational risk.",
   },
@@ -101,6 +103,7 @@ export const metadataFr: Metadata = {
   openGraph: {
     type: "website",
     url: `${SITE}/fr`,
+    images: ["/opengraph-image.png"],
     locale: "fr_FR",
     siteName: "SentrIA",
     title: TITLE,
@@ -109,6 +112,7 @@ export const metadataFr: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/twitter-image.png"],
     title: TITLE,
     description: "Evidence, confidence, impact and recommended action for every operational risk.",
   },
