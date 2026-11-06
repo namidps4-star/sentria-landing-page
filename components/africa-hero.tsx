@@ -17,7 +17,7 @@ type Copy = {
 export const AFRICA_EN: Copy = {
   h1: ["Pharmacy stock,", "days left", "and order in time."],
   lead: "Count your shelves. SentrIA works out how many days of stock you have left and warns you before a delivery is late.",
-  start: "Starting in Benin, with more West African markets to follow.",
+  start: "Starting in West Africa.",
   cta: "Book a demo →",
   cta2: "Read how a count works",
   cta2Href: "/articles/how-to-count-pharmacy-stock",
@@ -32,7 +32,7 @@ export const AFRICA_EN: Copy = {
 export const AFRIQUE_FR: Copy = {
   h1: ["Stock de pharmacie,", "jours restants", "et commande à temps."],
   lead: "Comptez vos rayons. SentrIA calcule le nombre de jours de stock restants et vous prévient avant qu'une livraison soit en retard.",
-  start: "Démarrage au Bénin, avec d'autres marchés d'Afrique de l'Ouest à suivre.",
+  start: "Démarrage en Afrique de l'Ouest.",
   cta: "Demander une démo →",
   cta2: "Voir comment fonctionne un comptage",
   cta2Href: "/articles/compter-le-stock-en-pharmacie",
