@@ -56,7 +56,7 @@ const digits = (t) => Number(String(t).replace(/[^\d]/g, ''))
     await ctx.close()
   }
   console.log('== currency from the visitor region')
-  for (const [zone, want] of [['Europe/Paris', 49], ['Africa/Dakar', 32000], ['Africa/Abidjan', 32000], ['Africa/Lagos', 42000], ['Africa/Accra', 540], ['Africa/Nairobi', 5400], ['America/New_York', 49]]) {
+  for (const [zone, want, wantChip] of [['Europe/Paris', 49, 'EUR'], ['Europe/London', 49, 'EUR'], ['Africa/Dakar', 32000, 'FCFA'], ['Africa/Abidjan', 32000, 'FCFA'], ['Africa/Lagos', 42000, 'NGN'], ['Africa/Accra', 540, 'GHS'], ['Africa/Nairobi', 5400, 'KES'], ['America/New_York', 49, 'USD'], ['Asia/Tokyo', 49, 'USD'], ['Africa/Kampala', 49, 'USD']]) {
     const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, timezoneId: zone })
     const p = await ctx.newPage()
     await p.goto(`${APP_URL}/en`, { waitUntil: 'networkidle' })
@@ -64,7 +64,7 @@ const digits = (t) => Number(String(t).replace(/[^\d]/g, ''))
     await p.waitForTimeout(800)
     const pro = digits(await p.locator('#tarifs [data-plan="pro"] .price-amount').first().innerText())
     const chip = await p.locator('#tarifs .price-cur button[aria-pressed="true"]').innerText()
-    pass(pro === want, `${zone}: Pro shows ${pro} (chip ${chip})`)
+    pass(pro === want && chip === wantChip, `${zone}: Pro shows ${pro} (chip ${chip})`)
     await ctx.close()
   }
   console.log('== the Intelligence mark')

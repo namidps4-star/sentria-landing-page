@@ -12,7 +12,8 @@ export const SITE_PRICES = {
 
 export type SiteCurrency = keyof typeof SITE_PRICES
 export const SITE_CURRENCIES = Object.keys(SITE_PRICES) as SiteCurrency[]
-export const DEFAULT_CURRENCY: SiteCurrency = "EUR"
+/** Before the browser has said where the visitor is: dollars, the same for everyone outside Europe and Africa. */
+export const DEFAULT_CURRENCY: SiteCurrency = "USD"
 
 export function formatPrice(amount: number, currency: SiteCurrency, lang: "en" | "fr") {
   return new Intl.NumberFormat(lang === "fr" ? "fr-FR" : "en-US", {
@@ -30,8 +31,8 @@ export function perSite(amount: number) {
 }
 
 /** The currency to show first, from the visitor's time zone (no tracking, nothing leaves the browser).
- *  West and Central Africa show FCFA, Nigeria naira, Ghana cedi, Kenya shillings, the Americas dollars,
- *  and everywhere else euros. The chips let the visitor change it. */
+ *  Europe shows euros, West and Central Africa FCFA, Nigeria naira, Ghana cedi, Kenya shillings,
+ *  and everywhere else dollars. The chips let the visitor change it. */
 export function currencyForTimeZone(zone: string | undefined): SiteCurrency {
   if (!zone) return DEFAULT_CURRENCY
   if (zone === "Africa/Lagos") return "NGN"
@@ -43,6 +44,6 @@ export function currencyForTimeZone(zone: string | undefined): SiteCurrency {
     )
   )
     return "XOF"
-  if (zone.startsWith("America/")) return "USD"
-  return DEFAULT_CURRENCY
+  if (zone.startsWith("Europe/") || ["Africa/Ceuta", "Atlantic/Canary", "Atlantic/Madeira", "Atlantic/Azores"].includes(zone)) return "EUR"
+  return "USD"
 }
