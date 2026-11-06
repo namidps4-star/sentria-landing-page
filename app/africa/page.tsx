@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { AfricaHero } from "@/components/africa-hero"
 
 export const metadata: Metadata = {
-  title: "Pharmacy stock and days of stock for West African pharmacies | SentrIA",
+  title: "Pharmacy stock and days of stock for African pharmacies | SentrIA",
   description: "SentrIA works out the days of stock left in your pharmacy from your counts and sales, and warns you before a delivery is late.",
   alternates: { canonical: "/africa", languages: { en: "/africa", fr: "/afrique" } },
   openGraph: {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://sentriahq.dev/africa",
     siteName: "SentrIA",
     locale: "en_US",
-    title: "Pharmacy stock and days of stock for West African pharmacies | SentrIA",
+    title: "Pharmacy stock and days of stock for African pharmacies | SentrIA",
     description: "SentrIA works out the days of stock left in your pharmacy from your counts and sales, and warns you before a delivery is late.",
   },
 }

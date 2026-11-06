@@ -17,7 +17,7 @@ type Copy = {
 export const AFRICA_EN: Copy = {
   h1: ["Pharmacy stock,", "days left", "and order in time."],
   lead: "Count your shelves. SentrIA works out how many days of stock you have left and warns you before a delivery is late.",
-  start: "Starting in West Africa.",
+  start: "Starting in Africa.",
   cta: "Book a demo →",
   cta2: "Read how a count works",
   cta2Href: "/articles/how-to-count-pharmacy-stock",
@@ -32,7 +32,7 @@ export const AFRICA_EN: Copy = {
 export const AFRIQUE_FR: Copy = {
   h1: ["Stock de pharmacie,", "jours restants", "et commande à temps."],
   lead: "Comptez vos rayons. SentrIA calcule le nombre de jours de stock restants et vous prévient avant qu'une livraison soit en retard.",
-  start: "Démarrage en Afrique de l'Ouest.",
+  start: "Démarrage en Afrique.",
   cta: "Demander une démo →",
   cta2: "Voir comment fonctionne un comptage",
   cta2Href: "/articles/compter-le-stock-en-pharmacie",
@@ -44,7 +44,7 @@ export const AFRIQUE_FR: Copy = {
   ],
 }
 
-/* The regional hero: pharmacy first, for West African pharmacies. */
+/* The regional hero: pharmacy first, for African pharmacies. */
 export function AfricaHero({ copy = AFRICA_EN, id = "afr" }: { copy?: Copy; id?: string }) {
   return (
     <>
