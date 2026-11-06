@@ -11,7 +11,7 @@ const grab = (html, re) => (html.match(re) || [])[1]
   const desc = grab(html, /<meta name="description" content="([^"]*)"/)
   pass(title === 'SentrIA | Operational decision software with evidence', `title is the English one: ${title}`)
   pass(!!desc && desc.length <= 160 && title.length <= 60, `lengths hold: title ${title && title.length}, description ${desc && desc.length}`)
-  pass(/<link rel="canonical" href="https:\/\/sentriahq\.dev\/?"/.test(html), 'canonical points at https://sentriahq.dev')
+  pass(/<link rel="canonical" href="https:\/\/sentriahq\.dev(\/en)?\/?"/.test(html), 'canonical points at the English home page (the root address redirects to it)')
   pass(/<meta name="robots" content="index, follow"/.test(html) || !/noindex/.test(html), 'the home page is not noindex')
 
   console.log('== icons (the logo Google shows beside a result)')
@@ -27,7 +27,7 @@ const grab = (html, re) => (html.match(re) || [])[1]
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } })
   const p = await ctx.newPage()
   await p.addInitScript(() => localStorage.setItem('sentria-language', 'fr'))
-  await p.goto(APP_URL)
+  await p.goto(`${APP_URL}/fr`)
   await p.waitForTimeout(1500)
   const frTitle = await p.title()
   const frDesc = await p.getAttribute('meta[name="description"]', 'content')
@@ -47,9 +47,10 @@ const grab = (html, re) => (html.match(re) || [])[1]
 
   await p.goto(`${APP_URL}/fr`)
   await p.waitForTimeout(1200)
-  pass(await p.evaluate(() => document.documentElement.lang) === 'fr', '/fr sets <html lang> to fr in the browser')
-  await p.locator('.lang-switch button', { hasText: 'EN' }).first().click()
-  await p.waitForTimeout(300)
+  pass(await p.evaluate(() => document.documentElement.lang) === 'fr', '/fr has <html lang="fr">')
+  // The switch is a link to the other language's own page.
+  await Promise.all([p.waitForURL('**/en'), p.locator('.lang-switch a', { hasText: 'EN' }).first().click()])
+  await p.waitForTimeout(800)
   pass(new URL(p.url()).pathname === '/en', `the switch moves /fr to /en: ${new URL(p.url()).pathname}`)
   pass(await p.title() === 'SentrIA | Operational decision software with evidence', 'after the switch the title is English')
 

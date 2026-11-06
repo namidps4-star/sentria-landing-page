@@ -87,6 +87,7 @@ export const metadataEn: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/icon.png?v=3", type: "image/png", sizes: "192x192" },
       { url: "/icon.svg?v=3", type: "image/svg+xml" },
     ],
@@ -118,6 +119,7 @@ export const metadataFr: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/icon.png?v=3", type: "image/png", sizes: "192x192" },
       { url: "/icon.svg?v=3", type: "image/svg+xml" },
     ],
@@ -155,8 +157,10 @@ export function SiteShell({ lang, children }: { lang: Lang; children: React.Reac
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       </head>
       <body>
-        <DocumentLanguage />
-        <LangProvider lang={lang}>{children}</LangProvider>
+        <LangProvider lang={lang}>
+          <DocumentLanguage />
+          {children}
+        </LangProvider>
       </body>
     </html>
   )
