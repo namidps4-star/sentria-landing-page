@@ -4,6 +4,7 @@ import "./globals.css"
 import "./revamp.css"
 import "./connect.css"
 import { DocumentLanguage } from "@/components/document-language"
+import { LangProvider } from "@/components/lang-provider"
 import { HREFLANG, SEO } from "@/content/seo"
 import { ARTICLE_PAGES } from "@/content/articles"
 
@@ -119,7 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <DocumentLanguage />
-        {children}
+        <LangProvider>{children}</LangProvider>
       </body>
     </html>
   )

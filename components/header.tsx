@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { C } from "@/content/en"
 import { T } from "./t"
 import { Mark } from "./ui"
-import { setLang, useLang, useText } from "./lang"
+import { useLang, useText } from "./lang"
 
 const APP_URL = "https://app.sentriahq.dev"
 const HREFS = ["/#situations", "/#methode", "/#cockpit", "/#tarifs", "/#fit", "/#faq", "/articles"]
@@ -13,13 +13,13 @@ export function LangSwitch() {
   const lang = useLang()
   return (
     <div className="lang-switch" role="group" aria-label="Language">
-      <button type="button" aria-pressed={lang === "en"} onClick={() => setLang("en")}>
+      <a href="/en" aria-current={lang === "en" ? "true" : undefined} hrefLang="en" lang="en">
         EN
-      </button>
+      </a>
       <span aria-hidden="true">/</span>
-      <button type="button" aria-pressed={lang === "fr"} onClick={() => setLang("fr")}>
+      <a href="/fr" aria-current={lang === "fr" ? "true" : undefined} hrefLang="fr" lang="fr">
         FR
-      </button>
+      </a>
     </div>
   )
 }

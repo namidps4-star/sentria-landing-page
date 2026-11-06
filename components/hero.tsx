@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react"
 import { C } from "@/content/en"
 import { FR } from "@/content/fr"
-import { T, B } from "./t"
+import { T, B, LangPick } from "./t"
 import { Check } from "./ui"
 import { HeroFx } from "./hero-fx"
 import { HeroFilm } from "./hero-film"
@@ -22,12 +22,7 @@ function Line({ s, tone, n, en0, fr0 }: { s: string; tone?: "lime"; n: number; e
   const f = FR[s]
   return (
     <span className={`hl${tone ? ` ${tone}` : ""}`} style={d(n)} aria-hidden="true">
-      <span className="en">{letters(s, en0)}</span>
-      {f && f !== s ? (
-        <span className="fr" lang="fr">
-          {letters(f, fr0)}
-        </span>
-      ) : null}
+      <LangPick en={letters(s, en0)} fr={f && f !== s ? letters(f, fr0) : letters(s, en0)} />
     </span>
   )
 }

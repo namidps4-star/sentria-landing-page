@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import { B } from "./t"
+import { B, LangPick } from "./t"
 import dashEn from "@/assets/dash/dash-crop-en.webp"
 import dashFr from "@/assets/dash/dash-crop-fr.webp"
 
@@ -132,10 +132,7 @@ export function ProductTour() {
           <B en="The product" fr="Le produit" />
         </p>
         <h2 className="rv-h pt-h" data-rv="rise">
-          <span className="en">Every risk, ranked. One screen.</span>
-          <span className="fr" lang="fr">
-            Chaque risque, classé. Un seul écran.
-          </span>
+          <LangPick en="Every risk, ranked. One screen." fr="Chaque risque, classé. Un seul écran." />
         </h2>
         <div className="pt-cap" aria-live="polite">
           {CAPS.map((c, i) => (
@@ -153,8 +150,10 @@ export function ProductTour() {
               <i />
             </div>
             <div className="pt-shot" ref={shot}>
-              <Image className="en" src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
-              <Image className="fr" src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
+              <LangPick
+                en={<Image src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
+                fr={<Image src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
+              />
               <div className="pt-light" aria-hidden="true" />
               {part && (
                 <div
