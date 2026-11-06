@@ -191,6 +191,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               ))}
             </section>
             <p className="blog-closing">{page.closing}</p>
+            {page.regional && (
+              <p className="blog-links">
+                <a href={page.regional.href}>{page.regional.label}</a>
+              </p>
+            )}
             {sources.length > 0 && (
               <section className="blog-sources">
                 <h2>Sources</h2>

@@ -87,6 +87,8 @@ export type ArticlePage = {
   sections: { heading: string; paragraphs: string[]; links?: { intro: string; items: { label: string; url: string }[] } }[]
   faq: { q: string; a: string }[]
   closing: string
+  /** A link to the regional page for this audience, shown after the closing line. */
+  regional?: { label: string; href: string }
   image: string
   /** Show from this time (ISO, UTC). Missing: shown now. */
   publishAt?: string
@@ -175,6 +177,7 @@ export const ARTICLE_PAGES: ArticlePage[] = [
       { q: "Does a cycle count replace the full count?", a: "Not for accounts or audits. It keeps the stock accurate between full counts." },
     ],
     closing: "To see how SentrIA tracks days of stock on your own figures, book a demo.",
+    regional: { label: "Pharmacies in West Africa: see how SentrIA works there", href: "/africa" },
     image: "/articles/rfid-device.jpg",
     sources: [
       { label: "American Hospital Association, RFID Solutions Attract Attention for Medication Inventory Management, 25 February 2025", url: "https://www.aha.org/aha-center-health-innovation-market-scan/2025-02-25-rfid-solutions-attract-attention-medication-inventory-management" },
@@ -264,6 +267,7 @@ export const ARTICLE_PAGES: ArticlePage[] = [
       { q: "Un comptage tournant remplace-t-il l'inventaire complet ?", a: "Non, pour la comptabilité ou un audit. Il garde le stock juste entre deux inventaires complets." },
     ],
     closing: "Pour voir comment SentrIA suit les jours de stock sur vos propres chiffres, réservez une démo.",
+    regional: { label: "Pharmacies en Afrique de l'Ouest : voyez comment SentrIA fonctionne là-bas", href: "/afrique" },
     image: "/articles/rfid-device.jpg",
     sources: [
       { label: "American Hospital Association, RFID Solutions Attract Attention for Medication Inventory Management, 25 février 2025 (en anglais)", url: "https://www.aha.org/aha-center-health-innovation-market-scan/2025-02-25-rfid-solutions-attract-attention-medication-inventory-management" },
