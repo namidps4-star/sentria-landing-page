@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { C } from "@/content/en"
 import { T } from "./t"
 import { Mark } from "./ui"
-import { useLang, useText } from "./lang"
+import { localHref, useLang, useText } from "./lang"
 
 const APP_URL = "https://app.sentriahq.dev"
 const HREFS = ["/#situations", "/#methode", "/#cockpit", "/#tarifs", "/#fit", "/#faq", "/articles"]
@@ -28,6 +28,7 @@ export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const txt = useText()
+  const lang = useLang()
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 30)
@@ -53,7 +54,7 @@ export function Header() {
   return (
     <header className="hd" data-scrolled={scrolled ? "1" : undefined}>
       <nav className="bar" aria-label={txt("Main", "Principal")}>
-        <a className="logo" href="/#top" aria-label={txt("SentrIA, back to top", "SentrIA, retour en haut")} onClick={() => setOpen(false)}>
+        <a className="logo" href={localHref("/#top", lang)} aria-label={txt("SentrIA, back to top", "SentrIA, retour en haut")} onClick={() => setOpen(false)}>
           <span className="logo-mark">
             <Mark />
           </span>
@@ -64,7 +65,7 @@ export function Header() {
 
         <div className="nav-links">
           {C.nav.map((n, i) => (
-            <a key={n} href={HREFS[i]}>
+            <a key={n} href={localHref(HREFS[i], lang)}>
               <T s={n} />
             </a>
           ))}
@@ -75,7 +76,7 @@ export function Header() {
           <a className="nav-signin" href={APP_URL}>
             {txt("Sign in", "Connexion")}
           </a>
-          <a className="btn btn-lime nav-cta" href="/#demo" data-mag="">
+          <a className="btn btn-lime nav-cta" href={localHref("/#demo", lang)} data-mag="">
             <T s="Book a demo →" />
           </a>
           <button
@@ -96,7 +97,7 @@ export function Header() {
         <ul>
           {C.nav.map((n, i) => (
             <li key={n} style={{ ["--i" as string]: i } as React.CSSProperties}>
-              <a href={HREFS[i]} onClick={() => setOpen(false)}>
+              <a href={localHref(HREFS[i], lang)} onClick={() => setOpen(false)}>
                 <T s={n} />
               </a>
             </li>
@@ -107,7 +108,7 @@ export function Header() {
           <a className="btn btn-line" href={APP_URL}>
             {txt("Sign in", "Connexion")}
           </a>
-          <a className="btn btn-lime" href="/#demo" onClick={() => setOpen(false)}>
+          <a className="btn btn-lime" href={localHref("/#demo", lang)} onClick={() => setOpen(false)}>
             <T s="Book a demo →" />
           </a>
         </div>

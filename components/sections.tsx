@@ -3,6 +3,7 @@ import { C } from "@/content/en"
 import { FR } from "@/content/fr"
 import { T, B, LangPick } from "./t"
 import { ConnectStack } from "./connect-stack"
+import { LocalLink } from "./local-link"
 import { FootReveal } from "./foot-reveal"
 import { FlowCircles } from "./flow-circles"
 import { ReasoningPlates } from "./reasoning-plates"
@@ -470,9 +471,15 @@ export function Footer() {
   const f = C.footer
   const link = (href: string, s: string) => (
     <li>
-      <a href={href}>
-        <T s={s} />
-      </a>
+      {href.startsWith("/") ? (
+        <LocalLink href={href}>
+          <T s={s} />
+        </LocalLink>
+      ) : (
+        <a href={href}>
+          <T s={s} />
+        </a>
+      )}
     </li>
   )
   return (
