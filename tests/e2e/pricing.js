@@ -26,7 +26,7 @@ const digits = (t) => Number(String(t).replace(/[^\d]/g, ''))
   const b = await playwright().chromium.launch(LAUNCH)
   for (const [lang, url, width] of [['en', '/en', 1440], ['fr', '/fr', 1440], ['en', '/en', 390]]) {
     console.log(`== ${lang} at ${width}px`)
-    const ctx = await b.newContext({ viewport: { width, height: 900 } })
+    const ctx = await b.newContext({ viewport: { width, height: 900 }, timezoneId: 'Europe/Paris' })
     const p = await ctx.newPage()
     const errs = []
     p.on('pageerror', (e) => errs.push(e.message))
@@ -53,6 +53,26 @@ const digits = (t) => Number(String(t).replace(/[^\d]/g, ''))
     const over = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth)
     pass(over <= 0, `no horizontal overflow (${over})`)
     pass(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs[0] : ''))
+    await ctx.close()
+  }
+  console.log('== currency from the visitor region')
+  for (const [zone, want] of [['Europe/Paris', 49], ['Africa/Dakar', 32000], ['Africa/Abidjan', 32000], ['Africa/Lagos', 42000], ['Africa/Accra', 540], ['Africa/Nairobi', 5400], ['America/New_York', 49]]) {
+    const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, timezoneId: zone })
+    const p = await ctx.newPage()
+    await p.goto(`${APP_URL}/en`, { waitUntil: 'networkidle' })
+    await p.locator('#tarifs').scrollIntoViewIfNeeded()
+    await p.waitForTimeout(800)
+    const pro = digits(await p.locator('#tarifs [data-plan="pro"] .price-amount').first().innerText())
+    const chip = await p.locator('#tarifs .price-cur button[aria-pressed="true"]').innerText()
+    pass(pro === want, `${zone}: Pro shows ${pro} (chip ${chip})`)
+    await ctx.close()
+  }
+  console.log('== the Intelligence mark')
+  {
+    const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } })
+    const p = await ctx.newPage()
+    await p.goto(`${APP_URL}/en`, { waitUntil: 'networkidle' })
+    pass((await p.locator('#tarifs .intel svg.intel-mark').count()) === 1, 'the banner carries the app mark')
     await ctx.close()
   }
   await b.close()

@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { useLang } from "@/components/lang"
 import { B } from "@/components/t"
 import { Check, iv } from "@/components/ui"
-import { DEFAULT_CURRENCY, SITE_CURRENCIES, SITE_PRICES, formatPrice, perSite, type SiteCurrency } from "@/content/prices"
+import { DEFAULT_CURRENCY, SITE_CURRENCIES, currencyForTimeZone, SITE_PRICES, formatPrice, perSite, type SiteCurrency } from "@/content/prices"
 
 type Plan = {
   id: "decouverte" | "pro" | "business" | "entreprise"
@@ -71,6 +71,20 @@ const PLANS: Plan[] = [
   },
 ]
 
+/* The app's Intelligence mark (a chip with a bolt), drawn the same, in lime. */
+function IntelligenceMark() {
+  return (
+    <svg className="intel-mark" viewBox="0 0 24 24" aria-hidden="true">
+      <g fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5">
+        <path d="M7 10C7 8.58579 7 7.87868 7.43934 7.43934C7.87868 7 8.58579 7 10 7H14C15.4142 7 16.1213 7 16.5607 7.43934C17 7.87868 17 8.58579 17 10V14C17 15.4142 17 16.1213 16.5607 16.5607C16.1213 17 15.4142 17 14 17H10C8.58579 17 7.87868 17 7.43934 16.5607C7 16.1213 7 15.4142 7 14V10Z" />
+        <path strokeLinejoin="round" d="M12.4286 10L11 12H13L11.5714 14" />
+        <path d="M4 12C4 8.22876 4 6.34315 5.17157 5.17157C6.34315 4 8.22876 4 12 4C15.7712 4 17.6569 4 18.8284 5.17157C20 6.34315 20 8.22876 20 12C20 15.7712 20 17.6569 18.8284 18.8284C17.6569 20 15.7712 20 12 20C8.22876 20 6.34315 20 5.17157 18.8284C4 17.6569 4 15.7712 4 12Z" />
+        <path d="M4 12H2M22 12H20M4 9H2M22 9H20M4 15H2M22 15H20M12 20L12 22M12 2L12 4M9 20L9 22M9 2L9 4M15 20L15 22M15 2L15 4" />
+      </g>
+    </svg>
+  )
+}
+
 function Soon() {
   return (
     <svg className="ck" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ opacity: 0.6 }}>
@@ -82,6 +96,11 @@ function Soon() {
 export function PricingGrid() {
   const lang = useLang()
   const [currency, setCurrency] = useState<SiteCurrency>(DEFAULT_CURRENCY)
+
+  // Start from the visitor's region. The server HTML shows euros, then the browser picks its own currency.
+  useEffect(() => {
+    setCurrency(currencyForTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone)) // eslint-disable-line react-hooks/set-state-in-effect
+  }, [])
 
   return (
     <>
@@ -171,6 +190,7 @@ export function PricingGrid() {
       <div className="intel-row" data-rv="rise">
         <section className="intel">
           <h3>
+            <IntelligenceMark />
             SentrIA Intelligence{" "}
             <span>
               <B en="Business and Entreprise" fr="Business et Entreprise" />

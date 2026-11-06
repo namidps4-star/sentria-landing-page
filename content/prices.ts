@@ -28,3 +28,21 @@ export function perSite(amount: number) {
   const step = each >= 1000 ? 100 : each >= 100 ? 10 : 1
   return Math.round(each / step) * step
 }
+
+/** The currency to show first, from the visitor's time zone (no tracking, nothing leaves the browser).
+ *  West and Central Africa show FCFA, Nigeria naira, Ghana cedi, Kenya shillings, the Americas dollars,
+ *  and everywhere else euros. The chips let the visitor change it. */
+export function currencyForTimeZone(zone: string | undefined): SiteCurrency {
+  if (!zone) return DEFAULT_CURRENCY
+  if (zone === "Africa/Lagos") return "NGN"
+  if (zone === "Africa/Accra") return "GHS"
+  if (zone === "Africa/Nairobi") return "KES"
+  if (
+    ["Abidjan", "Dakar", "Bamako", "Ouagadougou", "Lome", "Niamey", "Porto-Novo", "Bissau", "Douala", "Libreville", "Brazzaville", "Bangui", "Ndjamena", "Malabo", "Kinshasa"].some(
+      (city) => zone === `Africa/${city}`
+    )
+  )
+    return "XOF"
+  if (zone.startsWith("America/")) return "USD"
+  return DEFAULT_CURRENCY
+}
