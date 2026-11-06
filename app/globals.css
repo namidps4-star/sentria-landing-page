@@ -1927,37 +1927,6 @@ html.op-run .op {
   padding: 5px 10px;
   letter-spacing: 0.1em;
 }
-.price-cur {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-top: 28px;
-  font: 600 13px var(--f-body), system-ui, sans-serif;
-}
-.price-cur > span {
-  margin-right: 4px;
-  opacity: 0.75;
-}
-.price-cur button {
-  min-height: 40px;
-  padding: 0 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(20, 21, 15, 0.28);
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-.price-cur button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--lime);
-  border-color: var(--ink);
-}
-.price-cur button:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-}
 .plan.featured {
   background: var(--lime);
   border-color: var(--lime);
