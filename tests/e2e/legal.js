@@ -25,8 +25,9 @@ const { playwright, LAUNCH, APP_URL, pass, results, IGNORED_ERRORS, SHOTS } = re
     await p.locator('.lg-tabs a').nth(1).click()
     await p.waitForURL('**/terms')
     pass(true, `${tag}: the Terms tab opens /terms`)
-    await p.evaluate(() => (document.documentElement.lang = 'fr'))
-    await p.waitForTimeout(300)
+    // French has its own address now: /fr/terms.
+    await p.goto(`${APP_URL}/fr/terms`)
+    await p.waitForTimeout(500)
     const fr = await p.evaluate(() => document.querySelector('h1').innerText)
     pass(/Conditions/.test(fr), `${tag}: French title (${fr})`)
     pass(errs.length === 0, `${tag}: no page errors${errs.length ? ': ' + errs.join(' | ') : ''}`)
