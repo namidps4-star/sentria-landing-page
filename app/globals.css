@@ -1881,6 +1881,83 @@ html.op-run .op {
 .plan > * {
   position: relative;
 }
+.plans-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.plans-4 .plan {
+  padding: clamp(22px, 2vw, 30px);
+}
+.plans-4 .plan h3 {
+  font-size: clamp(24px, 2vw, 30px);
+}
+.plans-4 .price {
+  position: relative;
+  line-height: 1.05;
+}
+.price-amount {
+  display: block;
+  font-size: clamp(24px, 2.05vw, 30px);
+  white-space: nowrap;
+}
+.plans-4 .plan.featured {
+  --lift: 0px;
+}
+.plans-4 .plan ul {
+  align-content: start;
+}
+.pricing .lead {
+  text-wrap: balance;
+}
+.price-amount.price-quote {
+  font-size: 24px;
+}
+.price-per {
+  display: block;
+  margin-top: 6px;
+  font: 500 13px var(--f-body), system-ui, sans-serif;
+  letter-spacing: 0;
+  opacity: 0.75;
+}
+.plans-4 .price .badge {
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  margin: 0;
+  font-size: 10px;
+  padding: 5px 10px;
+  letter-spacing: 0.1em;
+}
+.price-cur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  font: 600 13px var(--f-body), system-ui, sans-serif;
+}
+.price-cur > span {
+  margin-right: 4px;
+  opacity: 0.75;
+}
+.price-cur button {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 21, 15, 0.28);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.price-cur button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--lime);
+  border-color: var(--ink);
+}
+.price-cur button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
 .plan.featured {
   background: var(--lime);
   border-color: var(--lime);
@@ -2549,7 +2626,8 @@ html.op-run .op {
 }
 @media (max-width: 860px) {
   .grid3,
-  .plans {
+  .plans,
+  .plans-4 {
     grid-template-columns: 1fr;
   }
   .shift-grid {
@@ -2709,4 +2787,15 @@ html.op-run .op {
    box clipped the bottom of the widget and its cookie buttons */
 .calendly-inline-widget:has(iframe) .cal-fallback {
   display: none;
+}
+
+@media (max-width: 1100px) {
+  .plans-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 860px) {
+  .plans-4 {
+    grid-template-columns: 1fr;
+  }
 }

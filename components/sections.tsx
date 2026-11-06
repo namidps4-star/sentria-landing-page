@@ -9,6 +9,7 @@ import { FlowCircles } from "./flow-circles"
 import { ReasoningPlates } from "./reasoning-plates"
 import { TrustCluster } from "./trust-cluster"
 import { WordPicker } from "./rv"
+import { PricingGrid } from "./pricing"
 import { Arrow, Check, Eyebrow, iv } from "./ui"
 
 type Tone = "cream" | "sand" | "dark" | "olive" | "lime" | "deep"
@@ -284,54 +285,23 @@ export function Cockpit() {
 /* ---------------------------------------------------------------- pricing */
 
 export function Pricing() {
-  const s = C.pricing
   return (
     <Sec id="tarifs" tone="sand" className="pricing">
       <Eyebrow>
-        <T s={s.eyebrow} />
+        <B en="Pricing" fr="Tarifs" />
       </Eyebrow>
       <H2>
-        <T s={s.title} />
+        <B en="Plans and prices." fr="Offres et tarifs." />
       </H2>
       <p className="lead" data-rv="rise" style={iv(1)}>
-        <T s={s.lead} />
+        <B
+          en="Pick a plan. Prices are set per market and shown in your currency. Annual billing is 10 months for 12."
+          fr="Choisissez une offre. Les prix sont fixés par marché et affichés dans votre devise. La facturation annuelle compte 10 mois pour 12."
+        />
       </p>
-      <div className="plans">
-        {s.plans.map((p, i) => {
-          const featured = "badge" in p
-          return (
-            <article key={p.name} className={`plan${featured ? " featured" : ""}`} data-tilt="" data-rv="rise" style={iv(i + 2)}>
-              {"badge" in p ? (
-                <span className="badge">
-                  <T s={p.badge} />
-                </span>
-              ) : null}
-              <h3>
-                <T s={p.name} />
-              </h3>
-              <p className="plan-p">
-                <T s={p.p} />
-              </p>
-              <div className="price">
-                <T s={p.price} />
-              </div>
-              <ul>
-                {p.items.map((it) => (
-                  <li key={it}>
-                    <Check />
-                    <T s={it} />
-                  </li>
-                ))}
-              </ul>
-              <a className={`btn ${featured ? "btn-ink" : "btn-line"}`} href="#demo" data-mag="">
-                <T s={p.cta} />
-              </a>
-            </article>
-          )
-        })}
-      </div>
+      <PricingGrid />
       <p className="note" data-rv="fade">
-        <T s={s.note} />
+        <B en="Entreprise is priced to your scope: sectors, sites, users and integration." fr="Entreprise est chiffrée selon votre périmètre : secteurs, sites, utilisateurs et intégration." />
       </p>
     </Sec>
   )
