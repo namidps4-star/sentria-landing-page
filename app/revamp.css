@@ -2365,3 +2365,23 @@
 .cmp-table thead th.cmp-us { display: table-cell; vertical-align: middle; }
 .cmp-table thead th.cmp-us .cmp-logo { vertical-align: middle; margin-right: 9px; }
 .cmp-name { vertical-align: middle; color: #fff; font: 700 16px var(--f-display), sans-serif; letter-spacing: -0.01em; }
+
+/* compare table: premium motion (all of it off under reduced motion) */
+.cmp-table .cmp-on { position: relative; background: #eceef0; }
+.cmp-table .cmp-on::before { content: ""; position: absolute; inset: 0; background: #0b0c08; transform-origin: 0 50%; }
+.cmp-table td.cmp-us { position: relative; background: #eceef0; }
+.cmp-table td.cmp-us::before { content: ""; position: absolute; inset: 0; background: #e8ff1f; transform-origin: 50% 0; }
+.cmp-table tbody tr:hover th { background: #f1f4e0; }
+.cmp-table tbody tr:hover td.cmp-off { background: #e2e6ea; }
+@media (prefers-reduced-motion: no-preference) {
+  .cmp-table tbody th, .cmp-table .cmp-off { transition: background 0.35s ease; }
+  .js .cmp-table:not([data-in]) .cmp-on::before { transform: scaleX(0); }
+  .js .cmp-table:not([data-in]) td.cmp-us::before { transform: scaleY(0); }
+  .js .cmp-table:not([data-in]) tbody th { opacity: 0; transform: translateX(-12px); }
+  .js .cmp-table:not([data-in]) thead th { opacity: 0; transform: translateY(-8px); }
+  .cmp-table[data-in] .cmp-on::before { transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1) calc(0.35s + var(--r) * 0.09s + var(--c) * 0.07s); }
+  .cmp-table[data-in] td.cmp-us::before { transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) calc(0.55s + var(--r) * 0.1s); }
+  .cmp-table[data-in] tbody th, .cmp-table[data-in] thead th { transition: opacity 0.6s ease calc(var(--r, 0) * 0.07s), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--r, 0) * 0.07s), background 0.35s ease; }
+  .cmp-table[data-in] thead th.cmp-us .cmp-logo { animation: cmp-pop 0.8s cubic-bezier(0.34, 1.5, 0.5, 1) 0.3s both; }
+  @keyframes cmp-pop { from { transform: scale(0) rotate(-40deg); } }
+}

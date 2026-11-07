@@ -1,5 +1,6 @@
 import { T, B } from "./t"
 import { Mark } from "./ui"
+import { CompareFx } from "./compare-fx"
 
 /**
  * How SentrIA compares with the usual ways of watching operations. A real table: row headings on the
@@ -28,6 +29,7 @@ const COVER = [
 export function Compare() {
   return (
     <section className="rv-sec cmp" id="compare">
+      <CompareFx />
       <div className="wrap">
         <p className="rv-kicker" data-rv="fade">
           <B en="How it compares" fr="Comparaison" />
@@ -55,12 +57,12 @@ export function Compare() {
             </thead>
             <tbody>
               {ROWS.map((r, i) => (
-                <tr key={r}>
+                <tr key={r} style={{ "--r": i } as React.CSSProperties}>
                   <th scope="row">
                     <T s={r} />
                   </th>
                   {COVER[i].map((v, j) => (
-                    <td key={j} className={v ? "cmp-on" : "cmp-off"}>
+                    <td key={j} className={v ? "cmp-on" : "cmp-off"} style={{ "--c": j } as React.CSSProperties}>
                       <span className="sr-only">{v ? <B en="Covered" fr="Couvert" /> : <B en="Not covered" fr="Non couvert" />}</span>
                     </td>
                   ))}
