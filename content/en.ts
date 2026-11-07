@@ -12,7 +12,7 @@ export const C = {
   "checks": [
    "Evidence for every risk",
    "Confidence and impact shown",
-   "Decision logged, outcome measured"
+   "Decision logged, action tracked"
   ],
   "mock": {
    "brand": "SentrIA",
@@ -260,7 +260,7 @@ export const C = {
      "Multiple operational flows",
      "Custom priorities",
      "Predictive analysis",
-     "AI recommendations",
+     "Adaptive recommendations",
      "Custom business views",
      "Operational support"
     ],
@@ -448,27 +448,47 @@ export const C = {
  },
  "faq": {
   "eyebrow": "FAQ",
-  "title": "The questions we get asked.",
+  "title": "What teams ask before the first call.",
   "items": [
    {
-    "q": "Does SentrIA replace our existing tools?",
-    "a": "No. SentrIA sits on top of your existing data and tools, and turns them into a decision layer, with evidence, confidence, impact and outcome."
+    "q": "Does SentrIA replace our ERP or BI tools?",
+    "a": "No. Your ERP and BI tools show you data. SentrIA tells you what that data means for the decision in front of you: which risks, how confident the detection is, what it costs if ignored, and what to do. It sits on top of what you already have."
    },
    {
-    "q": "Do we need to change our infrastructure?",
-    "a": "Not necessarily. We start with the data sources that are most useful for your first problem, no rip-and-replace."
+    "q": "How long does a pilot take?",
+    "a": "Four to six weeks. We start from one real operational problem, connect to the data you already have, and show a first measurable result. The timeline depends on data access, not on a long implementation."
    },
    {
-    "q": "Who is SentrIA for?",
-    "a": "Teams that manage complex operations and need to defend their decisions from multiple data sources."
+    "q": "What data do we need to get started?",
+    "a": "Whatever you already use: ERP exports, CSV files, IoT feeds, supplier data. We identify the useful sources for your specific problem and work with what you have. No special format required."
    },
    {
-    "q": "How much does SentrIA cost?",
-    "a": "It depends on the pilot scope, the data to connect and the level of integration. We define the scope and the success metric during the first demo."
+    "q": "What if the pilot does not show a result?",
+    "a": "We scope every pilot around a specific problem and a success metric agreed before we start. If we miss the target, the conversation stays honest. We do not invoice for a pilot that did not deliver."
    },
    {
-    "q": "Can we start with a single use case?",
-    "a": "Yes. That's the recommended approach. One measurable operational problem, one pilot, one proven ROI, then expand."
+    "q": "Who inside our organization uses SentrIA?",
+    "a": "Operations managers and site managers, not IT. The decision queue is built to be read in under a minute: one screen, the situations that need attention now, with everything needed to act. IT handles the initial connection; operations takes it from there."
+   },
+   {
+    "q": "Where does our data go? Is it secure?",
+    "a": "Your data stays in a controlled environment. We work with infrastructure hosted in France. Nothing is sold, shared, or used to train models. Access is controlled and logged."
+   },
+   {
+    "q": "Do we need to change our existing infrastructure?",
+    "a": "No rip-and-replace. We configure SentrIA around what you already use. The first pilot typically connects in days, not months."
+   },
+   {
+    "q": "What does the pilot cost?",
+    "a": "Cost is defined by the scope: the problem to solve, the data to connect, and the integration effort. We set the budget and the success metric together during the first call. No subscription. No platform fee before results."
+   },
+   {
+    "q": "Which sectors does SentrIA cover?",
+    "a": "Pharmacy, retail, agriculture, industrial, logistics, transport and energy. Each gets its own detection logic and decision vocabulary — a pharmacy stock alert is not the same as a fleet maintenance alert. SentrIA is configured for your sector, not patched from a generic template."
+   },
+   {
+    "q": "What is the decision queue, exactly?",
+    "a": "A ranked list of the operational situations that need a human decision right now. Each item shows what triggered it, how confident the detection is, what it costs if ignored, and a suggested action drawn from your own mitigation methods. You decide; the queue logs it."
    }
   ]
  },
