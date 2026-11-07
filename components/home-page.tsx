@@ -13,7 +13,6 @@ import {
   Situations,
   Shift,
   Method,
-  Why,
   Cockpit,
   Pricing,
   Flow,
@@ -42,7 +41,6 @@ export default function HomePage() {
         <Shift />
         <Compare />
         <Method />
-        <Why />
         <Cockpit />
         <Pricing />
         <Flow />
