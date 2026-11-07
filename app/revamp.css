@@ -2362,3 +2362,6 @@
 .cmp-scroll { max-width: 100%; width: 100%; -webkit-overflow-scrolling: touch; }
 .cmp-scroll { position: relative; }
 .cmp-table th, .cmp-table td { position: relative; }
+.cmp-table thead th.cmp-us { display: table-cell; vertical-align: middle; }
+.cmp-table thead th.cmp-us .cmp-logo { vertical-align: middle; margin-right: 9px; }
+.cmp-name { vertical-align: middle; color: #fff; font: 700 16px var(--f-display), sans-serif; letter-spacing: -0.01em; }

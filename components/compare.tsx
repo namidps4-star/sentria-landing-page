@@ -3,7 +3,7 @@ import { Mark } from "./ui"
 
 /**
  * How SentrIA compares with the usual ways of watching operations. A real table: row headings on the
- * left, one column per option, and SentrIA's column (logo only, no name) full all the way down.
+ * left, one column per option, and SentrIA's column (logo and name) full all the way down.
  * The black cells are PLACEHOLDER content and need the team's review before this goes live.
  */
 const ROWS = [
@@ -49,7 +49,7 @@ export function Compare() {
                   <span className="cmp-logo">
                     <Mark />
                   </span>
-                  <span className="sr-only">SentrIA</span>
+                  <span className="cmp-name">SentrIA</span>
                 </th>
               </tr>
             </thead>
