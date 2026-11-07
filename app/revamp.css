@@ -641,13 +641,6 @@
 #hero-stage[data-phase="opening"] .hero-h {
   text-align: center;
 }
-#hero-stage[data-phase="opening"] .hf-slide {
-  opacity: 0 !important;
-  transition: none !important;
-}
-#hero-stage[data-phase="opening"] .hf-img {
-  animation: none !important;
-}
 #hero-stage[data-phase="opening"] .hf-cap {
   opacity: 0;
   pointer-events: none;
@@ -882,16 +875,6 @@
 .lg-tabs a[aria-selected="true"] {
   background: #0b0c08;
   color: #d6ff3f;
-}
-.lg-draft {
-  margin-top: 18px;
-  max-width: 760px;
-  padding: 12px 16px;
-  border-radius: 16px;
-  background: #fff4d6;
-  color: #6b4f00;
-  font-size: 13px;
-  line-height: 1.55;
 }
 .lg-grid {
   display: grid;
