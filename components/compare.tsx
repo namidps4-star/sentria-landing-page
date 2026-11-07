@@ -35,7 +35,7 @@ export function Compare() {
           <B en="How it compares" fr="Comparaison" />
         </p>
         <h2 className="rv-h" data-rv="rise">
-          <B en="Not another dashboard." fr="Pas un tableau de bord de plus." />
+          <T s="Not a dashboard. A decision layer." />
         </h2>
         <div className="cmp-scroll" data-rv="rise">
           <table className="cmp-table">
