@@ -7,6 +7,7 @@ import { T } from "@/components/t"
 import { QuickFit, FitSection } from "@/components/fit"
 import { Faq } from "@/components/faq"
 import { Demo } from "@/components/demo"
+import { Compare } from "@/components/compare"
 import {
   Proof,
   Situations,
@@ -39,6 +40,7 @@ export default function HomePage() {
         <QuickFit />
         <Situations />
         <Shift />
+        <Compare />
         <Method />
         <Why />
         <Cockpit />

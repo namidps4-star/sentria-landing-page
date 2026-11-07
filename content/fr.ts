@@ -218,5 +218,12 @@ export const FR: Record<string, string> = {
  "SentrIA": "SentrIA",
  "ERP": "ERP",
  "IoT": "IoT",
- "APIs": "API"
+ "APIs": "API",
+ "Ranked by operational impact": "Classé par impact opérationnel",
+ "Action from standard mitigation methods": "Action issue des méthodes d'atténuation standard",
+ "Works on top of your existing tools": "Se branche sur vos outils existants",
+ "Dashboards": "Tableaux de bord",
+ "Alert tools": "Outils d'alerte",
+ "Spreadsheets": "Tableurs",
+ "Consultants": "Consultants"
 }
