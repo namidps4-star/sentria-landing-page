@@ -1,52 +1,33 @@
+import { C } from "@/content/en"
 import { T, B } from "./t"
 import { Mark } from "./ui"
 import { CompareFx } from "./compare-fx"
 
 /**
- * How SentrIA compares with the usual ways of watching operations. A real table: row headings on the
- * left, one column per option, and SentrIA's column (logo and name) full all the way down.
- * The black cells are PLACEHOLDER content and need the team's review before this goes live.
+ * SentrIA against a traditional dashboard, row by row, with the wording from the site's own comparison
+ * (content `why`). Dashboard cells are blocks: solid when it does the job, half when partly, empty when
+ * not. SentrIA's column is lime and says what it does in each row.
  */
-const ROWS = [
-  "Evidence for every risk",
-  "Confidence and impact shown",
-  "Ranked by operational impact",
-  "Action from standard mitigation methods",
-  "Decision logged, outcome measured",
-  "Works on top of your existing tools",
-]
-const COLS = ["Dashboards", "Alert tools", "Spreadsheets", "Consultants"]
-// 1 = the option covers the row. Placeholder pattern.
-const COVER = [
-  [0, 0, 1, 1],
-  [0, 0, 0, 1],
-  [0, 1, 0, 0],
-  [0, 0, 0, 1],
-  [0, 0, 0, 0],
-  [1, 1, 1, 0],
-]
-
 export function Compare() {
+  const s = C.why
   return (
     <section className="rv-sec cmp" id="compare">
       <CompareFx />
       <div className="wrap">
         <p className="rv-kicker" data-rv="fade">
-          <B en="How it compares" fr="Comparaison" />
+          <T s={s.eyebrow} />
         </p>
         <h2 className="rv-h" data-rv="rise">
-          <T s="Not a dashboard. A decision layer." />
+          <T s={s.title} />
         </h2>
         <div className="cmp-scroll" data-rv="rise">
           <table className="cmp-table">
             <thead>
               <tr>
                 <td />
-                {COLS.map((c) => (
-                  <th key={c} scope="col">
-                    <T s={c} />
-                  </th>
-                ))}
+                <th scope="col">
+                  <T s={s.cols[1]} />
+                </th>
                 <th scope="col" className="cmp-us">
                   <span className="cmp-logo">
                     <Mark />
@@ -56,23 +37,23 @@ export function Compare() {
               </tr>
             </thead>
             <tbody>
-              {ROWS.map((r, i) => (
-                <tr key={r} style={{ "--r": i } as React.CSSProperties}>
-                  <th scope="row">
-                    <T s={r} />
-                  </th>
-                  {COVER[i].map((v, j) => (
-                    <td key={j} className={v ? "cmp-on" : "cmp-off"} style={{ "--c": j } as React.CSSProperties}>
-                      <span className="sr-only">{v ? <B en="Covered" fr="Couvert" /> : <B en="Not covered" fr="Non couvert" />}</span>
+              {s.rows.map((r, i) => {
+                const old = r[1]
+                const cls = old === "✓" ? "cmp-on" : old === "Partially" ? "cmp-on cmp-part" : "cmp-off"
+                return (
+                  <tr key={r[0]} style={{ "--r": i } as React.CSSProperties}>
+                    <th scope="row">
+                      <T s={r[0]} />
+                    </th>
+                    <td className={cls} style={{ "--c": 0 } as React.CSSProperties}>
+                      <span className="sr-only">{old === "✓" ? <B en="Yes" fr="Oui" /> : old === "Partially" ? <B en="Partially" fr="Partiellement" /> : <B en="No" fr="Non" />}</span>
                     </td>
-                  ))}
-                  <td className="cmp-us">
-                    <span className="sr-only">
-                      <B en="Covered" fr="Couvert" />
-                    </span>
-                  </td>
-                </tr>
-              ))}
+                    <td className="cmp-us">
+                      <span className="cmp-val">{r[2] === "✓" ? "✓" : <T s={r[2]} />}</span>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>

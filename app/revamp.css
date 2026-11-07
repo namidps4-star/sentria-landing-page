@@ -2385,3 +2385,12 @@
   .cmp-table[data-in] thead th.cmp-us .cmp-logo { animation: cmp-pop 0.8s cubic-bezier(0.34, 1.5, 0.5, 1) 0.3s both; }
   @keyframes cmp-pop { from { transform: scale(0) rotate(-40deg); } }
 }
+
+/* compare table, two columns: the dashboard's cell blocks and SentrIA's own words */
+.cmp-table { min-width: 520px; }
+.cmp-table tbody th { width: 34%; }
+.cmp-table thead th.cmp-us { width: 40%; }
+.cmp-table .cmp-part::before { right: 50%; }
+.cmp-table td.cmp-us { padding: 0 18px; }
+.cmp-table td.cmp-us .cmp-val { position: relative; z-index: 1; font: 600 13.5px var(--f-body), sans-serif; color: #0b0c08; }
+.cmp-table td.cmp-us::before { z-index: 0; }
