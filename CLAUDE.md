@@ -17,3 +17,9 @@ Whenever the user asks for a better UI, a better look, or better front-end desig
 
 ## Code search
 - For code search, use an Explore subagent and ask for a summary, so raw files stay out of this context.
+
+## Where to find things
+- Africa pages: `app/(en)/africa/`, `app/(fr)/afrique/`, hero in `components/africa-hero.tsx`.
+- Language mapping (/africa to /afrique): `components/lang.ts`. Root redirect: `proxy.ts`.
+- Sitemap and hreflang pairs: `app/(en)/sitemap.ts`.
+- Browser tests: `tests/e2e/`, run through `tests/e2e/run-all.js`.
