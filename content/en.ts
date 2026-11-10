@@ -505,6 +505,7 @@ export const C = {
   "Pricing",
   "Sectors",
   "FAQ",
-  "Articles"
+  "Articles",
+  "Africa"
  ]
 } as const
