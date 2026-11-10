@@ -19,16 +19,14 @@ const landing = async (acceptLanguage) => {
     pass(r.status === 307 && r.to === "/en", `English-only browser goes to /en (${r.status} ${r.to})`)
   }
   {
-    // Pending founder decision (F-AFRICA-LANG): this asserts the current rule, French first goes to /fr.
+    // Founder decision (F-AFRICA-LANG): a French-first browser goes to /fr. No saved-choice rule.
     const r = await landing('fr-FR,fr;q=0.9,en;q=0.8')
-    pass(r.status === 307 && r.to === "/fr", `French-first browser goes to /fr, current rule, pending decision (${r.status} ${r.to})`)
+    pass(r.status === 307 && r.to === "/fr", `French-first browser goes to /fr (${r.status} ${r.to})`)
   }
   {
     const r = await landing('de-DE,de;q=0.9,en;q=0.5')
     pass(r.status === 307 && r.to === "/en", `no French, English fallback goes to /en (${r.status} ${r.to})`)
   }
-  console.log('== saved choice: not testable yet (no stored choice exists; the language switch is plain links)')
-
   console.log('== sitemap pairs /africa and /afrique')
   const xml = await (await fetch(`${APP_URL}/sitemap.xml`)).text()
   const entry = (loc) => (xml.split('<url>').find((u) => u.includes(`<loc>${loc}</loc>`)) || '')
