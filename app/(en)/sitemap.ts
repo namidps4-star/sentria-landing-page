@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://sentriahq.dev/", changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
     { url: LANGS.en, changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
     { url: LANGS.fr, changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
-    { url: "https://sentriahq.dev/africa", changeFrequency: "monthly", priority: 0.8 },
+    { url: "https://sentriahq.dev/africa", changeFrequency: "monthly", priority: 0.8, alternates: { languages: { en: "https://sentriahq.dev/africa", fr: "https://sentriahq.dev/afrique" } } },
     { url: "https://sentriahq.dev/afrique", changeFrequency: "monthly", priority: 0.8, alternates: { languages: { en: "https://sentriahq.dev/africa", fr: "https://sentriahq.dev/afrique" } } },
     { url: "https://sentriahq.dev/articles", changeFrequency: "weekly", priority: 0.6 },
     { url: "https://sentriahq.dev/fr/articles", changeFrequency: "weekly", priority: 0.6 },
