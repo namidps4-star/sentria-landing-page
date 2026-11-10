@@ -23,3 +23,13 @@ Whenever the user asks for a better UI, a better look, or better front-end desig
 - Language mapping (/africa to /afrique): `components/lang.ts`. Root redirect: `proxy.ts`.
 - Sitemap and hreflang pairs: `app/(en)/sitemap.ts`.
 - Browser tests: `tests/e2e/`, run through `tests/e2e/run-all.js`.
+
+## Folder rules (labeled drawers)
+- `app/`: screens and routes only. One folder per route, one `page.tsx` per screen.
+- `components/`: pieces used on more than one screen. One copy, used everywhere. Never copy a button or card; import it.
+- `content/`: the text and data pages read (copy, prices, article lists). No layout code here.
+- `tests/`: browser and unit tests. `email/`, `assets/`, `public/`: leave their layout as it is.
+- One job per file. If a file does two jobs, split it when you touch it.
+- No file over 300 lines. Split it when you touch it, or name the exception in the commit message.
+- Before writing anything new, search for an existing one first (`rg`, or an Explore subagent).
+- Cleanup runs one folder per step: a Git commit as save point before, no change in behaviour, click through the site after, then the next folder.
