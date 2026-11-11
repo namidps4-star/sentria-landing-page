@@ -1,0 +1,241 @@
+/* ---------------------------------------------------------------- opening */
+.op {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  visibility: hidden;
+}
+html.op-run .op {
+  visibility: visible;
+  pointer-events: auto;
+  animation: op-end 0s linear 3.55s forwards;
+}
+@keyframes op-end {
+  to {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+.op-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  will-change: transform;
+  animation: op-lift 0.95s var(--ease-io) 2.55s forwards;
+}
+@keyframes op-lift {
+  to {
+    transform: translateY(-100%);
+  }
+}
+.op-lock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --wm: min(35vw, 91vh);
+  gap: calc(var(--wm) * 0.07);
+  animation: op-trail 1s var(--ease-io) 2.55s forwards;
+}
+@keyframes op-trail {
+  to {
+    transform: translateY(14vh);
+  }
+}
+
+/* the dome mark, in two pieces: the lime dome rises from below, the white bowl drops from above */
+.op-mark {
+  width: calc(var(--wm, min(58vw, 150vh)) * 0.21);
+  height: calc(var(--wm, min(58vw, 150vh)) * 0.21);
+  flex: none;
+  overflow: visible;
+}
+.op-m-top {
+  animation: op-top 0.9s var(--ease) 0.15s backwards;
+}
+.op-m-bot {
+  animation: op-bot 0.9s var(--ease) 0.3s backwards;
+}
+@keyframes op-top {
+  from {
+    opacity: 0;
+    transform: translateY(70vh);
+  }
+}
+@keyframes op-bot {
+  from {
+    opacity: 0;
+    transform: translateY(-70vh);
+  }
+}
+
+/* the wordmark, cropped to its ink: 800 x 140 */
+.sw {
+  width: var(--wm, min(58vw, 150vh));
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.sw-l {
+  animation: sw-rise 0.9s var(--ease) both;
+  animation-delay: calc(1.1s + var(--i) * 0.07s);
+}
+.sw-shard {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: sw-grow 0.5s var(--ease-io) both;
+  animation-delay: calc(1.9s + var(--k) * 0.1s);
+}
+.sw-mark {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: sw-fade 0.5s var(--ease) 2s both;
+}
+@keyframes sw-rise {
+  from {
+    opacity: 0;
+    transform: translateY(120px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes sw-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes sw-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sw-l,
+  .sw-shard,
+  .sw-mark {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------- hero */
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--cream);
+  background: var(--ink);
+}
+.hero > * {
+  position: relative;
+}
+.hero-stage {
+  position: relative;
+  min-height: max(calc(100svh - 112px), 660px);
+  display: flex;
+}
+.hero-in {
+  position: relative;
+  z-index: 2;
+  max-width: none; /* the hero uses the full width, so the headline sits at the far left like the reference */
+  padding-inline: clamp(20px, 3.4vw, 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  padding-top: 132px;
+  padding-bottom: 44px;
+}
+.hero-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 24px;
+}
+.hero-checks {
+  display: grid;
+  gap: 9px;
+  text-align: right;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-checks li {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+.hero-checks .ck {
+  color: var(--lime);
+  width: 14px;
+  height: 14px;
+}
+/* the three proof lines keep moving: each tick lights up in turn, row after row */
+.hero-checks .ck {
+  animation: hc-tick 6s var(--ease) infinite;
+}
+.hero-checks li:nth-child(2) .ck {
+  animation-delay: 0.9s;
+}
+.hero-checks li:nth-child(3) .ck {
+  animation-delay: 1.8s;
+}
+@keyframes hc-tick {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: none;
+  }
+  8% {
+    transform: scale(1.45);
+    filter: drop-shadow(0 0 6px rgba(214, 255, 63, 0.9));
+  }
+  20% {
+    transform: scale(1);
+    filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-checks .ck {
+    animation: none;
+  }
+}
+.hero-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 27%);
+  column-gap: clamp(20px, 3vw, 48px);
+  align-items: start;
+}
+.hero-h {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--f-open), var(--f-display), sans-serif; /* Unbounded (SIL OFL), self-hosted */
+  font-weight: 600;
+  font-size: clamp(27px, 5vw, 88px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  padding-bottom: 0.1em;
+}
+.hl {
+  display: block;
+  white-space: nowrap;
+}
+.hl.lime {
+  color: var(--lime);
+}
+.wvl {
+  display: inline-block;
+  position: relative;
+}

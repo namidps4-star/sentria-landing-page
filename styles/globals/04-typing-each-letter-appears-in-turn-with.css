@@ -1,0 +1,264 @@
+/* Typing: each letter appears in turn with a caret at the typing position. The wave starts once the last letter is in. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero-h .hl {
+    animation: none; /* the lines no longer rise as blocks: the letters type themselves */
+  }
+  .hero-h:not(.lens-clone) .wvl {
+    animation: wvl-type 0.001s linear backwards;
+    animation-delay: calc(var(--t0) + 0.25s + var(--c, 0) * 0.044s + var(--j, 0) * 0.008s);
+  }
+  .hero-h:not(.lens-clone) .wvl::after {
+    content: "";
+    position: absolute;
+    right: -0.03em;
+    top: 0.14em;
+    bottom: 0.1em;
+    width: 0.05em;
+    background: currentColor;
+    opacity: 0;
+    animation: wvl-caret 0.05s linear;
+    animation-delay: calc(var(--t0) + 0.25s + var(--c, 0) * 0.044s + var(--j, 0) * 0.008s);
+    pointer-events: none;
+  }
+}
+@keyframes wvl-type {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes wvl-caret {
+  from,
+  to {
+    opacity: 0.9;
+  }
+}
+.hero-lead {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 0.8em;
+  font-size: clamp(14px, 1.15vw, 17.5px);
+  line-height: 1.55;
+  color: rgba(245, 243, 234, 0.92);
+}
+.js [data-h] {
+  animation: h-in 0.7s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
+}
+.js .hl {
+  animation: line-in 0.8s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
+}
+@keyframes h-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(45%);
+  }
+}
+.hero-down {
+  position: absolute;
+  right: var(--pad);
+  bottom: 44px;
+  width: 26px;
+  color: var(--lime);
+  animation: bob 2s ease-in-out infinite;
+}
+.js .hero-down {
+  animation: h-in 0.7s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards, bob 2s ease-in-out calc(var(--t0) + 1.2s) infinite;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(12px);
+  }
+}
+.lens {
+  position: absolute;
+  left: 0;
+  top: 0;
+  --R: 105px;
+  width: calc(var(--R) * 2);
+  height: calc(var(--R) * 2);
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.5s;
+  background: transparent; /* clear glass: the film shows through all round */
+  backdrop-filter: brightness(1.1) saturate(1.2);
+  -webkit-backdrop-filter: brightness(1.1) saturate(1.2);
+  will-change: transform;
+}
+.lens[data-on] {
+  opacity: 1;
+}
+.lens-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+#hero-h[data-lens] {
+  -webkit-mask-image: radial-gradient(circle at var(--lx) var(--ly), transparent calc(var(--lr) - 1px), #000 var(--lr));
+  mask-image: radial-gradient(circle at var(--lx) var(--ly), transparent calc(var(--lr) - 1px), #000 var(--lr));
+}
+.lens-clone .hl,
+.lens-clone [data-h] {
+  animation: none !important; /* the copy is made after the entrance, so it must not replay it */
+}
+.lens-clone {
+  position: absolute;
+  margin: 0;
+  pointer-events: none;
+}
+.lens-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.3), transparent 28%);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.4), inset 0 0 42px rgba(214, 255, 63, 0.22), 0 0 60px rgba(214, 255, 63, 0.18);
+}
+.lens-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, rgba(255, 106, 213, 0), rgba(143, 107, 255, 0.55), rgba(58, 209, 255, 0.55), rgba(214, 255, 63, 0.5), rgba(255, 184, 77, 0.45), rgba(255, 106, 213, 0));
+  -webkit-mask: radial-gradient(circle, transparent 64%, #000 78%);
+  mask: radial-gradient(circle, transparent 64%, #000 78%);
+  mix-blend-mode: screen;
+}
+@media (hover: none), (pointer: coarse), (max-width: 860px) {
+  .lens {
+    display: none;
+  }
+}
+.hero-strip {
+  display: grid;
+  grid-template-columns: 50% 13.5% 1fr;
+  height: 112px;
+  position: relative;
+  z-index: 3;
+}
+.hero-strip > a {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  transition: background 0.3s, color 0.3s;
+}
+.hero-strip a > span:not(.sr-only) {
+  position: relative;
+  z-index: 1;
+  padding-inline: var(--pad);
+  transition: transform 0.4s var(--ease);
+}
+.strip-a {
+  background: var(--lime);
+}
+.strip-a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--lime-deep);
+  transform: translateX(-101%);
+  transition: transform 0.5s var(--ease);
+}
+.strip-a:hover::before {
+  transform: none;
+}
+.strip-b {
+  background: var(--cream);
+  justify-content: center;
+}
+.strip-b svg {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.4s var(--ease);
+}
+.strip-b:hover svg {
+  transform: scale(1.25);
+}
+.strip-b:hover {
+  background: var(--lime);
+}
+.strip-c {
+  background: var(--sand);
+}
+.strip-c:hover {
+  background: var(--cream);
+}
+.strip-c:hover > span,
+.strip-a:hover > span {
+  transform: translateX(8px);
+}
+
+/* ------------------------------------------------------------------ proof */
+.proof {
+  background: var(--lime);
+  color: var(--ink);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(20, 21, 15, 0.18);
+}
+.marq {
+  display: flex;
+  overflow: hidden;
+}
+.marq-track {
+  display: flex;
+  flex: none;
+}
+.marq-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex: none;
+}
+/* the strip keeps moving: the list runs across once and starts again (the copy makes the loop seamless) */
+.marq-track {
+  animation: marq 28s linear infinite;
+}
+@keyframes marq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marq-track {
+    animation: none;
+  }
+}
+.marq-group li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 0 22px 34px;
+  white-space: nowrap;
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.5vw, 36px);
+  letter-spacing: -0.02em;
+}
+.marq-group li b {
+  font-family: var(--f-body), sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+}
+.marq-group li i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+  margin-left: 34px;
+}
+
