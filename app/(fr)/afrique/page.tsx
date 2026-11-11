@@ -20,5 +20,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AfricaHero copy={AFRIQUE_FR} id="afq" />
+  return <AfricaHero copy={AFRIQUE_FR} id="afq" activities="fr" />
 }

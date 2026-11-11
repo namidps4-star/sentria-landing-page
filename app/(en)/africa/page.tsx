@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AfricaHero />
+  return <AfricaHero activities="en" />
 }

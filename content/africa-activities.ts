@@ -99,3 +99,21 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
     },
   },
 }
+
+export const ACTIVITY_LIST: { slug: string; name: Record<"en" | "fr", string>; teaser: Record<"en" | "fr", string> }[] = [
+  {
+    slug: "pharmacie",
+    name: { en: "Pharmacy", fr: "Pharmacie" },
+    teaser: { en: "Days of stock and expiring batches.", fr: "Jours de stock et lots qui expirent." },
+  },
+  {
+    slug: "grossiste-pharma",
+    name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" },
+    teaser: { en: "Transfers between pharmacies and quiet pharmacies.", fr: "Transferts entre pharmacies et pharmacies silencieuses." },
+  },
+  {
+    slug: "exploitation-agricole",
+    name: { en: "Farm", fr: "Exploitation agricole" },
+    teaser: { en: "Days in storage and hours left before spoilage.", fr: "Jours en stockage et heures restantes avant la détérioration." },
+  },
+]

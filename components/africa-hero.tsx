@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Header } from "./header"
 import { Footer } from "./sections"
+import { AfricaActivities } from "./africa-activities"
 import "./africa.css"
 
 export type Copy = {
@@ -45,7 +46,7 @@ export const AFRIQUE_FR: Copy = {
 }
 
 /* The regional hero: pharmacy first, for African pharmacies. */
-export function AfricaHero({ copy = AFRICA_EN, id = "afr" }: { copy?: Copy; id?: string }) {
+export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities }: { copy?: Copy; id?: string; activities?: "en" | "fr" }) {
   return (
     <>
       <Header />
@@ -83,6 +84,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr" }: { copy?: Copy; id?:
             ))}
           </ul>
         </section>
+        {activities && <AfricaActivities lang={activities} />}
       </main>
       <Footer />
     </>
