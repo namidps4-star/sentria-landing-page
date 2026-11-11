@@ -1,5 +1,6 @@
 import { PHARMACY_STOCK_COUNT } from "./article-pages/pharmacy-stock-count"
 import { PHARMACY_STOCK_OUTS } from "./article-pages/pharmacy-stock-outs"
+import { FEFO_PAGES } from "./article-pages/fefo"
 
 // Articles page content: the listing (ARTICLES) and the article pages (ARTICLE_PAGES).
 
@@ -49,6 +50,19 @@ export const DEPARTMENTS: Record<Article["sector"], { key: string; label: Bi }[]
 // Listing cards. Each card is one article in both languages; its link goes to the
 // English page. Keep ids in step with ARTICLE_PAGES.
 export const ARTICLES: Article[] = [
+  {
+    id: "fefo-first-expired-first-out",
+    publishAt: "2026-11-18T06:00:00Z",
+    sector: "health",
+    dept: "pharmacy",
+    tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
+    title: {
+      en: "FEFO: how a pharmacy sells the stock that expires first",
+      fr: "FEFO : la pharmacie vend d'abord le stock qui expire en premier",
+    },
+    minutes: 4,
+    image: "/articles/fefo-pharmacist.jpg",
+  },
   {
     id: "how-to-count-pharmacy-stock",
     publishAt: "2026-11-04T06:00:00Z",
@@ -100,7 +114,7 @@ export type ArticlePage = {
 }
 
 
-export const ARTICLE_PAGES: ArticlePage[] = [...PHARMACY_STOCK_COUNT, ...PHARMACY_STOCK_OUTS]
+export const ARTICLE_PAGES: ArticlePage[] = [...PHARMACY_STOCK_COUNT, ...PHARMACY_STOCK_OUTS, ...FEFO_PAGES]
 
 
 /* Text changes that go live on a set date, without a new deploy. Until `from`
