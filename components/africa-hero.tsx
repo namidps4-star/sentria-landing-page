@@ -3,7 +3,7 @@ import { Header } from "./header"
 import { Footer } from "./sections"
 import "./africa.css"
 
-type Copy = {
+export type Copy = {
   h1: [string, string, string]
   lead: string
   start: string
