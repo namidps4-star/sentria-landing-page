@@ -1,26 +1,26 @@
 .afr-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding-top:112px;background:var(--ink,#0b0c08);color:var(--cream,#f5f3ea)}
-.afr-photo{object-fit:cover;object-position:72% 30%;z-index:0}
-.afr-credit{position:absolute;right:var(--pad,56px);top:104px;z-index:1;margin:0;font-size:12px;opacity:.7}
-.afr-hero::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(11,12,8,.88) 0%,rgba(11,12,8,.72) 38%,rgba(11,12,8,.2) 72%),linear-gradient(180deg,rgba(11,12,8,.45) 0%,rgba(11,12,8,0) 30%,rgba(11,12,8,.92) 92%)}
-.afr-copy{position:relative;z-index:1;padding:0 var(--pad,56px) clamp(56px,9vh,96px);max-width:1280px}
-.afr-hero h1{margin:0;font-weight:600;font-size:clamp(44px,7.4vw,112px);line-height:.98;letter-spacing:-.035em}
+.afr-photo{object-fit:cover;object-position:68% 28%;z-index:0}
+.afr-credit{position:absolute;right:var(--pad,56px);top:104px;z-index:1;margin:0;font-size:11px;opacity:.45;letter-spacing:.03em}
+.afr-hero::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(11,12,8,.82) 0%,rgba(11,12,8,.64) 42%,rgba(11,12,8,.12) 74%),linear-gradient(180deg,rgba(11,12,8,.38) 0%,rgba(11,12,8,0) 28%,rgba(11,12,8,.96) 88%)}
+.afr-copy{position:relative;z-index:1;padding:0 var(--pad,56px) clamp(48px,8vh,88px);max-width:1280px}
+.afr-hero h1{margin:0;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(44px,7.4vw,112px);line-height:.95;letter-spacing:-.04em}
 .afr-lime{color:var(--lime,#d6ff3f)}
-.afr-lead{margin:28px 0 0;max-width:34ch;font-size:clamp(17px,1.5vw,21px);line-height:1.5}
-.afr-start{margin:22px 0 0;font-size:15px;opacity:.8}
-.afr-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
-.afr-btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:16px 26px;font-weight:600;font-size:16px;text-decoration:none}
+.afr-lead{margin:28px 0 0;max-width:36ch;font-size:clamp(16px,1.4vw,20px);line-height:1.55;opacity:.82}
+.afr-start{display:inline-flex;align-items:center;margin:20px 0 0;padding:5px 14px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--lime,#d6ff3f);border:1px solid rgba(214,255,63,.3);border-radius:999px}
+.afr-actions{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.afr-btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 26px;font-weight:600;font-size:15px;text-decoration:none;letter-spacing:.01em}
 .afr-btn-p{background:var(--lime,#d6ff3f);color:var(--ink,#0b0c08)}
-.afr-btn-s{border:1px solid rgba(245,243,234,.25);color:var(--cream,#f5f3ea)}
-.afr-stats{position:relative;z-index:1;list-style:none;margin:0 var(--pad,56px);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(245,243,234,.14)}
-.afr-stats li{padding:22px 0 26px;font-size:15px;line-height:1.45;opacity:.85}
-.afr-stats li+li{padding-left:24px;border-left:1px solid rgba(245,243,234,.14)}
-.afr-stats b{display:block;font-weight:600;font-size:17px;margin-bottom:6px;opacity:1}
+.afr-btn-s{border:1px solid rgba(245,243,234,.32);color:var(--cream,#f5f3ea)}
+.afr-stats{position:relative;z-index:1;list-style:none;margin:0 var(--pad,56px);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(245,243,234,.12)}
+.afr-stats li{padding:20px 0 28px;font-size:14px;line-height:1.5;color:rgba(245,243,234,.7)}
+.afr-stats li+li{padding-left:28px;border-left:1px solid rgba(245,243,234,.12)}
+.afr-stats b{display:block;font-family:var(--f-display),sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em;margin-bottom:6px;color:var(--cream,#f5f3ea)}
 @media (max-width:760px){
   .afr-hero{padding-top:96px}
-  .afr-hero::after{background:linear-gradient(180deg,rgba(11,12,8,.7) 0%,rgba(11,12,8,.45) 30%,rgba(11,12,8,.93) 80%)}
+  .afr-hero::after{background:linear-gradient(180deg,rgba(11,12,8,.65) 0%,rgba(11,12,8,.4) 30%,rgba(11,12,8,.95) 80%)}
   .afr-credit{position:relative;top:auto;right:auto;padding:0 var(--pad,20px);margin:0 0 14px}
   .afr-stats{grid-template-columns:1fr}
-  .afr-stats li+li{padding-left:0;border-left:0;border-top:1px solid rgba(245,243,234,.14)}
+  .afr-stats li+li{padding-left:0;border-left:0;border-top:1px solid rgba(245,243,234,.12)}
   .afr-actions .afr-btn{width:100%;justify-content:center}
 }
 .afr-acts{background:var(--ink,#0b0c08);color:var(--cream,#f5f3ea);padding:clamp(56px,8vh,96px) var(--pad,56px)}
