@@ -17,6 +17,7 @@ export const FEFO_PAGES: ArticlePage[] = [
         heading: "What FEFO means",
         paragraphs: [
           "Health guidance says FEFO matters because it \"emphasises expiration dates of products, irrespective of when those items may have entered general storage.\" Products leave the shelf based on how close they are to expiry, not on the order they arrived.",
+          "The WHO good distribution practices (2010) define FEFO as \"a distribution procedure that ensures that the stock with the earliest expiry date is distributed and/or used before an identical stock item with a later expiry date is distributed and/or used.\"",
           "The aim is to reduce loss. In the words of one logistics guide, FEFO \"helps reduce product loss by ensuring that wherever possible, the shortest shelf-life items are used first.\"",
         ],
       },
@@ -83,6 +84,100 @@ export const FEFO_PAGES: ArticlePage[] = [
       {
         label: "USAID and PEPFAR, Effective Management of Health Commodities at Health Facilities",
         url: "https://www.ghsupplychain.org/sites/default/files/2021-05/StoragePractices.pdf",
+      },
+      {
+        label: "World Health Organization, WHO good distribution practices for pharmaceutical products, WHO Technical Report Series No. 957, Annex 5 (2010)",
+        url: "https://cdn.who.int/media/docs/default-source/medicines/norms-and-standards/guidelines/distribution/trs957-annex5-who-good-distribution-practices-for-pharmaceutical-products.pdf",
+      },
+    ],
+  },
+  {
+    slug: "fefo-premier-expire-premier-sorti",
+    lang: "fr",
+    pairId: "fefo-first-expired-first-out",
+    title: "FEFO : la pharmacie vend d'abord le stock qui expire en premier",
+    description: "FEFO veut dire que le produit le plus proche de sa date de péremption sort en premier. Voici comment l'organiser en rayon, au comptoir et dans le registre de stock.",
+    date: "2026-11-18",
+    dateLabel: "18 nov. 2026",
+    minutes: 4,
+    intro:
+      "FEFO signifie « premier périmé, premier sorti ». Le produit dont la date de péremption est la plus proche sort en premier, quel que soit le jour où il est arrivé. La règle est simple. Dans une pharmacie qui a plusieurs lots du même médicament, elle est facile à oublier sans s'en rendre compte.",
+    sections: [
+      {
+        heading: "Ce que signifie FEFO",
+        paragraphs: [
+          "Selon un guide de logistique sanitaire (en anglais), FEFO « met l'accent sur les dates de péremption des produits, quel que soit le moment où ils sont entrés dans le stock » (traduction).",
+          "Les bonnes pratiques de distribution de l'OMS (2010, en anglais) définissent FEFO comme « une procédure de distribution qui garantit que le stock dont la date de péremption est la plus proche est distribué et/ou utilisé avant un article identique dont la date de péremption est plus tardive » (traduction).",
+          "L'objectif est de réduire les pertes. Le même guide dit que FEFO « permet de réduire les pertes de produits en veillant, dans la mesure du possible, à ce que les produits à la durée de vie la plus courte soient utilisés en premier » (traduction).",
+        ],
+      },
+      {
+        heading: "Organiser le rayon",
+        paragraphs: [
+          "Placez les produits qui expirent en premier devant, ou au-dessus, des produits qui expirent plus tard. Un poster de l'USAID et du PEPFAR pour les établissements de santé (en anglais) donne la même règle en une ligne.",
+          "Séparez les lots du même médicament quand leurs dates de péremption diffèrent. Le guide logistique demande que les produits aux dates les plus proches soient placés à l'avant des rayonnages.",
+        ],
+      },
+      {
+        heading: "Écrire les dates là où on peut les lire",
+        paragraphs: [
+          "Inscrivez clairement les dates de péremption sur les boîtes et sur les fiches de stock, et veillez à ce qu'elles restent visibles. Si la date ne se lit pas sur le carton, le même guide suggère une étiquette ou une note collée à l'extérieur.",
+          "Une date cachée à l'intérieur d'une boîte ne sert à personne au moment de prendre le produit suivant.",
+        ],
+      },
+      {
+        heading: "Délivrer dans le même ordre",
+        paragraphs: [
+          "La délivrance doit suivre la même règle que le rangement. Le poster indique de toujours expédier et délivrer selon le système FEFO.",
+          "Le guide demande aussi de délivrer en premier les produits à courte durée de vie dès que possible. Intégrez cette consigne dans la routine de l'équipe, pour qu'un nouveau collaborateur n'ait pas à deviner.",
+        ],
+      },
+      {
+        heading: "Signaler avant que le temps ne manque",
+        paragraphs: [
+          "Un guide logistique suggère de signaler un produit lorsque sa péremption approche de trois à six mois. Tout produit dont il reste moins de trois mois de durée de vie doit être signalé immédiatement, pour qu'on décide quoi en faire.",
+          "Ce seuil n'est qu'un point de départ. Un médicament qui se vend lentement peut demander un délai d'alerte plus long, un produit qui part vite peut en demander un plus court.",
+        ],
+      },
+      {
+        heading: "Utiliser une seule méthode",
+        paragraphs: [
+          "Le poster déconseille d'utiliser deux méthodes de rotation du stock ou plus en même temps, car cela crée de la confusion. Choisissez FEFO pour les médicaments datés et indiquez-le dans la procédure de la pharmacie.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "FEFO est-il la même chose que FIFO ?",
+        a: "Non. FIFO suit l'ordre d'arrivée des produits. FEFO suit la date de péremption : un lot arrivé en dernier peut donc sortir en premier s'il expire avant les autres.",
+      },
+      {
+        q: "Quand faut-il signaler un produit ?",
+        a: "Un guide logistique suggère de le signaler trois à six mois avant la péremption, et de remonter tout produit dont il reste moins de trois mois de durée de vie, pour qu'une action soit prise.",
+      },
+    ],
+    closing:
+      "Commencez par une étagère cette semaine. Placez la date la plus proche à l'avant, inscrivez les dates là où on peut les lire, et listez les produits qui ont trois mois ou moins devant eux.",
+    image: "/articles/fefo-pick-medicine.jpg",
+    figures: [
+      {
+        src: "/articles/fefo-shelf-medicine.jpg",
+        alt: "Une étagère garnie de nombreux types de boîtes de médicaments",
+        caption: "Photo : David Trinks, Unsplash.",
+      },
+    ],
+    sources: [
+      {
+        label: "Logistics Cluster (LogCluster), Inventory Management of Medical Items (en anglais)",
+        url: "https://log.logcluster.org/sites/default/files/pages/273/en/inventory-management-of-medical-items.pdf",
+      },
+      {
+        label: "USAID et PEPFAR, Effective Management of Health Commodities at Health Facilities (en anglais)",
+        url: "https://www.ghsupplychain.org/sites/default/files/2021-05/StoragePractices.pdf",
+      },
+      {
+        label: "Organisation mondiale de la santé, WHO good distribution practices for pharmaceutical products, Série de rapports techniques no 957, annexe 5 (2010, en anglais)",
+        url: "https://cdn.who.int/media/docs/default-source/medicines/norms-and-standards/guidelines/distribution/trs957-annex5-who-good-distribution-practices-for-pharmaceutical-products.pdf",
       },
     ],
   },
