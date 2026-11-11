@@ -98,7 +98,7 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   },
 }
 
-export type Capability = { title: string; does: string; example: string; imports: string }
+export type Capability = { title: string; problem: string; does: string; example: string; imports: string }
 export type Capabilities = { heading: string; items: Capability[]; notDo: string }
 
 // What an expert in each activity gets. Examples are the product's own alert
@@ -110,24 +110,28 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Days of stock, product by product",
+          problem: "A product runs out before the next delivery arrives.",
           does: "SentrIA divides what is on the shelf by what you sold over the last 30 days. It warns you when a product will run out before the next delivery arrives.",
           example: "Stock-out imminent: 38 units left (minimum: 40): order now",
           imports: "Medicine name, stock quantity, minimum stock, sales over the last 30 days",
         },
         {
           title: "Batches that expire first",
+          problem: "A batch reaches its expiry date before it is sold.",
           does: "Each batch is checked against its expiry date. A product close to its date is flagged, so you sell it or return it before it expires.",
           example: "Product expires in 30 days: sell or return to supplier",
           imports: "Expiry date, and the batch number if you have it",
         },
         {
           title: "Checks when goods arrive",
+          problem: "A missing date or an expired lot goes on the shelf.",
           does: "When a delivery comes in, SentrIA checks each line for a missing date or an expired lot, before the box goes on the shelf.",
           example: "Paracetamol (lot A12): already expired at receipt (2026-10-01): do not shelve it, set it aside",
           imports: "The delivery file: product, lot and expiry date",
         },
         {
           title: "Real delivery times per supplier",
+          problem: "A supplier's promised delivery time is not the real one.",
           does: "SentrIA compares each supplier's promised delivery time with the time it really takes, from your past orders, and tells you when to order earlier.",
           example: "7 days promised, 11 days in reality (up to 14) across 9 deliveries: adjust your ordering or renegotiate",
           imports: "For each delivery: the order date, the promised date and the date it arrived",
@@ -140,24 +144,28 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Jours de stock, produit par produit",
+          problem: "Un produit manque avant l'arrivée de la livraison suivante.",
           does: "SentrIA divise ce qui est en rayon par ce que vous avez vendu sur les 30 derniers jours. Il vous prévient quand un produit va manquer avant l'arrivée de la livraison suivante.",
           example: "Rupture imminente : il reste 38 unités (minimum requis : 40) : commandez maintenant",
           imports: "Nom du médicament, quantité en stock, stock minimum, ventes des 30 derniers jours",
         },
         {
           title: "Lots qui expirent en premier",
+          problem: "Un lot atteint sa date de péremption avant d'être vendu.",
           does: "Chaque lot est comparé à sa date de péremption. Un produit proche de sa date est signalé, pour être vendu ou retourné avant d'expirer.",
           example: "Produit expire dans 30 jours : écoulez ou retournez au fournisseur",
           imports: "Date de péremption, et le numéro de lot si vous l'avez",
         },
         {
           title: "Contrôles à la réception",
+          problem: "Une date manquante ou un lot périmé est rangé en rayon.",
           does: "À l'arrivée d'une livraison, SentrIA contrôle chaque ligne : date manquante ou lot périmé, avant que la boîte ne soit rangée.",
           example: "Paracétamol (lot A12) : déjà périmé à la réception (01/10/2026) : ne le rangez pas, mettez-le de côté",
           imports: "Le fichier de livraison : produit, lot et date de péremption",
         },
         {
           title: "Délais réels de chaque fournisseur",
+          problem: "Le délai annoncé par un fournisseur n'est pas le délai réel.",
           does: "SentrIA compare le délai annoncé par chaque fournisseur au délai réellement observé dans vos commandes passées, et vous dit quand commander plus tôt.",
           example: "7 jours promis, 11 jours en réalité (jusqu'à 14) sur 9 livraisons : ajustez vos commandes ou renégociez",
           imports: "Pour chaque livraison : la date de commande, la date promise et la date d'arrivée",
@@ -172,12 +180,14 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Transfers between your pharmacies",
+          problem: "One pharmacy has units unsold while another reorders the same product.",
           does: "SentrIA compares what each pharmacy sold with what it received. When one pharmacy has units sitting unsold and another is reordering the same product, it proposes the transfer and the quantity.",
           example: "Pharmacy B reordered 30 units this month. Pharmacy A has 34 units sitting unsold. Suggested transfer: 30 units.",
           imports: "Pharmacy ID and name, product, quantity shipped in the period, quantity reordered, quantity sold",
         },
         {
           title: "The biggest transfer first",
+          problem: "With several possible transfers, the one that matters most is not obvious.",
           does: "Transfers are ranked by the value at stake, so the one that matters most to the network is handled first.",
           example: "Transfers listed from the largest value at stake to the smallest",
           imports: "The same file as above, with a unit cost if you have one",
@@ -190,12 +200,14 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Transferts entre vos pharmacies",
+          problem: "Une pharmacie a des invendus pendant qu'une autre recommande le même produit.",
           does: "SentrIA compare ce que chaque pharmacie a vendu avec ce qu'elle a reçu. Quand une pharmacie a des unités invendues et qu'une autre recommande le même produit, il propose le transfert et la quantité.",
           example: "Pharmacie B a recommandé 30 unités ce mois-ci. La pharmacie A a 34 unités invendues. Transfert proposé : 30 unités.",
           imports: "Identifiant et nom de la pharmacie, produit, quantité expédiée sur la période, quantité recommandée, quantité vendue",
         },
         {
           title: "Le transfert le plus important d'abord",
+          problem: "Plusieurs transferts sont possibles, et le plus important n'est pas évident.",
           does: "Les transferts sont classés selon la valeur en jeu, pour traiter d'abord celui qui compte le plus pour le réseau.",
           example: "Transferts classés de la plus grande valeur en jeu à la plus petite",
           imports: "Le même fichier que ci-dessus, avec le coût unitaire si vous l'avez",
@@ -210,18 +222,21 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Hours left before spoilage",
+          problem: "You do not know how many hours stored produce has left before the loss starts.",
           does: "From the storage temperature and the days a lot has been stored, SentrIA estimates how many hours are left before the loss starts, and how soon you need to act.",
           example: "Harvest waiting 4 days, estimated loss within the next 12 hours: arrange delivery now",
           imports: "Product, days in storage, storage temperature",
         },
         {
           title: "Temperature warnings",
+          problem: "Storage gets too hot for the product.",
           does: "When the storage temperature goes above what the product can take, you are warned straight away.",
           example: "Storage too hot: 31°C: risk of spoilage",
           imports: "Storage temperature for each lot",
         },
         {
           title: "Lots at critical risk",
+          problem: "A lot stays in storage too long.",
           does: "A lot that has stayed in storage too long is flagged as critical, with the number of days, so you deliver it first.",
           example: "Harvest at risk: in storage for 9 days: deliver urgently",
           imports: "Product and days in storage",
@@ -234,18 +249,21 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Heures restantes avant la détérioration",
+          problem: "Vous ne savez pas combien d'heures il reste avant que la perte ne commence.",
           does: "À partir de la température de stockage et du nombre de jours passés en stock, SentrIA estime les heures qui restent avant que la perte ne commence, et vous indique l'urgence.",
           example: "Récolte en attente depuis 4 jours, perte estimée dans les 12 prochaines heures : organisez la livraison",
           imports: "Produit, jours en stockage, température de stockage",
         },
         {
           title: "Alertes de température",
+          problem: "La température de stockage devient trop élevée pour le produit.",
           does: "Quand la température de stockage dépasse ce que le produit supporte, vous êtes prévenu tout de suite.",
           example: "Température de stockage trop élevée : 31°C : risque de perte",
           imports: "Température de stockage pour chaque lot",
         },
         {
           title: "Lots à risque critique",
+          problem: "Un lot reste trop longtemps en stockage.",
           does: "Un lot resté trop longtemps en stockage est signalé comme critique, avec le nombre de jours, pour être livré en premier.",
           example: "Récolte en danger : en stockage depuis 9 jours : livrez d'urgence",
           imports: "Produit et jours en stockage",

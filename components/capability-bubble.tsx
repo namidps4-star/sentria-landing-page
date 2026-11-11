@@ -3,14 +3,16 @@
 import { useId, useRef, useState, type PointerEvent } from "react"
 
 type Props = {
-  index: number
   example: string
   imports: string
-  labels: { hint: string; example: string; youImport: string }
+  labels: { solution: string; hint: string; example: string; youImport: string }
 }
 
-/** Floating half-disc. Hover (mouse) or tap/Enter (touch, keyboard) opens it to show a real product alert. */
-export function CapabilityBubble({ index, example, imports, labels }: Props) {
+/**
+ * The green "Solution" half-disc. Hover (mouse) or tap/Enter (touch, keyboard)
+ * opens it to show the real SentrIA alert and what the user imports.
+ */
+export function CapabilityBubble({ example, imports, labels }: Props) {
   const [open, setOpen] = useState(false)
   const lastPointer = useRef("")
   const panelId = useId()
@@ -45,14 +47,17 @@ export function CapabilityBubble({ index, example, imports, labels }: Props) {
     >
       <span className="afr-caps-body">
         <span className="afr-caps-face afr-caps-idle">
-          <span className="afr-caps-num">{String(index).padStart(2, "0")}</span>
-          <span className="afr-caps-hint">
-            <i aria-hidden="true">+</i>
-            {labels.hint}
+          <span className="afr-caps-tag">
+            <i className="afr-caps-dot afr-caps-dot-sol" aria-hidden="true" />
+            {labels.solution}
           </span>
+          <span className="afr-caps-hint">{labels.hint}</span>
         </span>
         <span className="afr-caps-face afr-caps-open" id={panelId}>
-          <span className="afr-caps-k">{labels.example}</span>
+          <span className="afr-caps-tag">
+            <i className="afr-caps-dot afr-caps-dot-sol" aria-hidden="true" />
+            {labels.example}
+          </span>
           <span className="afr-caps-v">{example}</span>
           <span className="afr-caps-f">
             <b>{labels.youImport}:</b> {imports}
