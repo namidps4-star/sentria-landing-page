@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
+import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { ACTIVITY_COPY, AFRICA_ACTIVITIES } from "@/content/africa-activities"
 
 type Params = Promise<{ lang: string; activity: string }>
@@ -19,5 +20,5 @@ export default async function Page({ params }: { params: Params }) {
   const { lang, activity } = await params
   const copy = ACTIVITY_COPY[activity]
   if (lang !== "fr" || !copy) notFound()
-  return <AfricaHero copy={copy.fr} id={activity} />
+  return <AfricaHero copy={copy.fr} id={activity} extra={<AfricaCapabilities slug={activity} lang="fr" />} />
 }
