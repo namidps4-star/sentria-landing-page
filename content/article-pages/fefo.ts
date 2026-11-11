@@ -67,12 +67,12 @@ export const FEFO_PAGES: ArticlePage[] = [
     ],
     closing:
       "Start with one shelf this week. Put the nearest expiry at the front, write the dates where you can read them, and check which products have three months or less left.",
-    image: "/articles/fefo-pharmacist.jpg",
+    image: "/articles/fefo-pick-medicine.jpg",
     figures: [
       {
-        src: "/articles/fefo-shelves.jpg",
-        alt: "A storage room with shelves of boxes",
-        caption: "Photo: Árpád Czapp, Unsplash.",
+        src: "/articles/fefo-shelf-medicine.jpg",
+        alt: "A shelf holding many different types of medicine boxes",
+        caption: "Photo: David Trinks, Unsplash.",
       },
     ],
     sources: [

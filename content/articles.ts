@@ -61,7 +61,7 @@ export const ARTICLES: Article[] = [
       fr: "FEFO : la pharmacie vend d'abord le stock qui expire en premier",
     },
     minutes: 4,
-    image: "/articles/fefo-pharmacist.jpg",
+    image: "/articles/fefo-pick-medicine.jpg",
   },
   {
     id: "how-to-count-pharmacy-stock",
