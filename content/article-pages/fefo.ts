@@ -7,8 +7,8 @@ export const FEFO_PAGES: ArticlePage[] = [
     pairId: "fefo-first-expired-first-out",
     title: "FEFO: how a pharmacy sells the stock that expires first",
     description: "FEFO means the product closest to expiry leaves first. Here is how to set it up on the shelf, at the counter and in the stock list.",
-    date: "2026-11-18",
-    dateLabel: "Nov 18, 2026",
+    date: "2026-11-11",
+    dateLabel: "Nov 11, 2026",
     minutes: 4,
     intro:
       "FEFO stands for first expired, first out. The product with the earliest expiry date is the first to leave, whatever day it arrived. The rule is simple. In a pharmacy with several batches of the same medicine, it is easy to break without noticing.",
@@ -97,8 +97,8 @@ export const FEFO_PAGES: ArticlePage[] = [
     pairId: "fefo-first-expired-first-out",
     title: "FEFO : la pharmacie vend d'abord le stock qui expire en premier",
     description: "FEFO veut dire que le produit le plus proche de sa date de péremption sort en premier. Voici comment l'organiser en rayon, au comptoir et dans le registre de stock.",
-    date: "2026-11-18",
-    dateLabel: "18 nov. 2026",
+    date: "2026-11-11",
+    dateLabel: "11 nov. 2026",
     minutes: 4,
     intro:
       "FEFO signifie « premier périmé, premier sorti ». Le produit dont la date de péremption est la plus proche sort en premier, quel que soit le jour où il est arrivé. La règle est simple. Dans une pharmacie qui a plusieurs lots du même médicament, elle est facile à oublier sans s'en rendre compte.",

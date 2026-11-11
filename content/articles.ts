@@ -52,7 +52,6 @@ export const DEPARTMENTS: Record<Article["sector"], { key: string; label: Bi }[]
 export const ARTICLES: Article[] = [
   {
     id: "fefo-first-expired-first-out",
-    publishAt: "2026-11-18T06:00:00Z",
     sector: "health",
     dept: "pharmacy",
     tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
