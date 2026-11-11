@@ -10,12 +10,16 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       <ul>
         {c.items.map((item) => (
           <li key={item.title}>
-            <h3>{item.title}</h3>
-            <p>{item.does}</p>
-            <blockquote>{item.example}</blockquote>
-            <p className="afr-caps-imp">
-              <b>{youImport}:</b> {item.imports}
-            </p>
+            <div className="afr-caps-ed">
+              <h3>{item.title}</h3>
+              <p>{item.does}</p>
+              <p className="afr-caps-imp">
+                <b>{youImport}:</b> {item.imports}
+              </p>
+            </div>
+            <div className="afr-caps-circ">
+              <div className="afr-caps-semi">{item.example}</div>
+            </div>
           </li>
         ))}
       </ul>
