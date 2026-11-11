@@ -18,7 +18,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
               </p>
             </div>
             <div className="afr-caps-circ">
-              <div className="afr-caps-semi">{item.example}</div>
+              <div className="afr-caps-semi"><span>{item.example}</span></div>
             </div>
           </li>
         ))}
