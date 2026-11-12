@@ -1,16 +1,19 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { LensGlass } from "./lens-glass-layers"
+import { glassParts, moveGlass, sizeLensFilter } from "./lens-glass"
 
 /**
- * Hero motion: the headline waves like a flag and a glass lens magnifies the
- * headline under the pointer.
+ * Hero motion: the headline waves like a flag and a glass lens, built like the Loupe on
+ * motionin.design, magnifies and bends everything under the pointer: the photo, the
+ * headline, the proof lines and the caption.
  *
  * Cost is kept to almost nothing at the moment the opening ends:
  *  - the wave is a set of Web Animations (compositor, no script per frame),
  *    started on the real letters only;
- *  - the lens copy of the headline is built the first time the pointer
- *    arrives, and its letters join the same wave (same start time);
+ *  - the lens copy of the hero is built the first time the pointer arrives
+ *    (and again when the photo changes); its headline letters join the same wave;
  *  - the lens loop runs only while the pointer is over the hero.
  * None of it runs with reduced motion, and the lens never runs on touch.
  */
@@ -26,29 +29,32 @@ const FRAMES: Keyframe[] = [
 export function HeroFx() {
   const lensRef = useRef<HTMLDivElement>(null)
   const worldRef = useRef<HTMLDivElement>(null)
+  const defsRef = useRef<SVGSVGElement>(null)
 
   useEffect(() => {
     const stage = document.getElementById("hero-stage")
     const h1 = document.getElementById("hero-h")
     const lens = lensRef.current
     const world = worldRef.current
-    if (!stage || !h1 || !lens || !world) return
+    const defs = defsRef.current
+    if (!stage || !h1 || !lens || !world || !defs) return
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
     const fine = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 861px)").matches
 
     const root = document.documentElement
-    const S = 1.38
+    const S = 1.32
     let R = 105
-    let hox = 0
-    let hoy = 0
+    let size = 0
     let raf = 0
     let ptr = { x: 0, y: 0, in: false }
     const pos = { x: 0, y: 0 }
     let letters: HTMLElement[] = []
     let clone: HTMLElement | null = null
     let waves: Animation[] = []
+    let copyWaves: Animation[] = []
+    const glass = glassParts(lens)
     let t0 = 0
     let playing = true
 
@@ -78,35 +84,73 @@ export function HeroFx() {
       letters = letterList(h1)
       t0 = Number(document.timeline.currentTime ?? 0)
       waves = wave(letters)
+      dropCopy()
+    }
+
+    const dropCopy = () => {
+      copyWaves.forEach((a) => a.cancel())
+      copyWaves = []
       clone = null
       world.innerHTML = ""
     }
 
-    // The lens copy is made once, the first time the pointer comes over the hero.
+    // The lens copy is made the first time the pointer comes over the hero, and again when the photo changes.
+    // It is the hero without the lens: only the photo that is showing, the dark layer, the headline, the proof lines, the caption.
+    const buildCopy = () => {
+      const copy = document.createElement("div") // a div, not another stage: ids are stripped and the page keeps one heading level 1
+      copy.className = "hero-stage lens-copy"
+      copy.setAttribute("aria-hidden", "true")
+      copy.setAttribute("inert", "")
+      Array.from(stage.children).forEach((child) => {
+        const el = child as HTMLElement
+        if (el.classList.contains("lens")) return
+        if (el.classList.contains("hero-film")) {
+          const film = el.cloneNode(false) as HTMLElement
+          const slide = el.querySelector(".hf-slide[data-active=\"1\"]")
+          const scrim = el.querySelector(".hf-scrim")
+          if (slide) film.appendChild(slide.cloneNode(true))
+          if (scrim) film.appendChild(scrim.cloneNode(true))
+          copy.appendChild(film)
+          return
+        }
+        copy.appendChild(el.cloneNode(true))
+      })
+      copy.querySelectorAll("[id]").forEach((n) => n.removeAttribute("id"))
+      // the page keeps one heading level 1: the copy's headline becomes a plain div with the same classes
+      copy.querySelectorAll("h1").forEach((h) => {
+        const div = document.createElement("div")
+        div.className = h.className
+        div.innerHTML = h.innerHTML
+        h.replaceWith(div)
+      })
+      copy.querySelectorAll("a, button").forEach((n) => n.setAttribute("tabindex", "-1"))
+      return copy
+    }
+
     const ensureClone = () => {
       if (clone || !fine) return
-      clone = document.createElement("div") // a div, not another h1: the page has one heading level 1
-      clone.className = `${h1.className} lens-clone`
-      clone.innerHTML = h1.innerHTML
-      clone.setAttribute("aria-hidden", "true")
+      clone = buildCopy()
       world.appendChild(clone)
-      waves.push(...wave(letterList(clone)))
+      const copyH1 = clone.querySelector<HTMLElement>(".hero-h")
+      if (copyH1) copyWaves = wave(letterList(copyH1))
+      waves.push(...copyWaves)
       measure()
     }
 
     const measure = () => {
       const sr = stage.getBoundingClientRect()
-      R = Math.max(80, Math.min(120, sr.width * 0.075))
+      R = Math.round(Math.max(80, Math.min(120, sr.width * 0.075)))
       lens.style.setProperty("--R", `${R}px`)
-      if (!clone) return
-      const hr = h1.getBoundingClientRect()
-      hox = hr.left - sr.left
-      hoy = hr.top - sr.top
-      clone.style.left = `${hr.left - sr.left}px`
-      clone.style.top = `${hr.top - sr.top}px`
-      clone.style.width = `${hr.width}px`
+      if (size !== R * 2) {
+        size = R * 2
+        sizeLensFilter(defs, size)
+      }
       world.style.width = `${sr.width}px`
       world.style.height = `${sr.height}px`
+      if (clone) {
+        clone.style.width = `${sr.width}px`
+        clone.style.height = `${sr.height}px`
+      }
     }
 
     const lensTick = () => {
@@ -116,20 +160,17 @@ export function HeroFx() {
           pos.x = ptr.x
           pos.y = ptr.y
         }
-        pos.x += (ptr.x - pos.x) * 0.2
-        pos.y += (ptr.y - pos.y) * 0.2
+        const vx = (ptr.x - pos.x) * 0.2
+        const vy = (ptr.y - pos.y) * 0.2
+        pos.x += vx
+        pos.y += vy
         lens.style.transform = `translate3d(${pos.x - R}px,${pos.y - R}px,0)`
         world.style.transform = `translate3d(${R - pos.x * S}px,${R - pos.y * S}px,0) scale(${S})`
-        // the lens is clear glass, so the real headline is cut out under it: no doubled letters
-        h1.style.setProperty("--lx", `${pos.x - hox}px`)
-        h1.style.setProperty("--ly", `${pos.y - hoy}px`)
-        h1.style.setProperty("--lr", `${R}px`)
-        h1.dataset.lens = "1"
+        if (glass) moveGlass(glass, performance.now() / 1000, vx, vy)
         lens.dataset.on = "1"
         raf = requestAnimationFrame(lensTick)
       } else if (lens.dataset.on) {
         delete lens.dataset.on
-        delete h1.dataset.lens
       }
     }
 
@@ -155,6 +196,14 @@ export function HeroFx() {
     io.observe(stage)
     const onVis = () => setPlaying(!document.hidden)
     document.addEventListener("visibilitychange", onVis)
+
+    // The photo changes every few seconds: the lens copy must show the new one.
+    const film = stage.querySelector(".hero-film")
+    const fo = new MutationObserver(() => {
+      dropCopy()
+      if (ptr.in) ensureClone()
+    })
+    if (film) fo.observe(film, { attributes: true, attributeFilter: ["data-active"], subtree: true })
 
     // The headline text changes with the language: rebuild the wave then.
     const mo = new MutationObserver(() => startAfterTyping())
@@ -188,6 +237,7 @@ export function HeroFx() {
       cancelAnimationFrame(raf)
       io.disconnect()
       mo.disconnect()
+      fo.disconnect()
       waitObserver?.disconnect()
       document.removeEventListener("visibilitychange", onVis)
       window.removeEventListener("resize", onResize)
@@ -199,8 +249,7 @@ export function HeroFx() {
 
   return (
     <div className="lens" ref={lensRef} aria-hidden="true">
-      <div className="lens-world" ref={worldRef} />
-      <span className="lens-ring" />
+      <LensGlass worldRef={worldRef} defsRef={defsRef} />
     </div>
   )
 }
