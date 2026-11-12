@@ -4,18 +4,24 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   const c = CAPABILITIES[slug]?.[lang]
   if (!c) return null
   const youImport = lang === "en" ? "You import" : "Vous importez"
+  const youSee = lang === "en" ? "What you see" : "Ce que vous voyez"
   return (
     <section className="afr-caps" aria-labelledby={`afr-caps-${slug}-${lang}`}>
       <h2 id={`afr-caps-${slug}-${lang}`}>{c.heading}</h2>
       <ul>
         {c.items.map((item) => (
-          <li key={item.title}>
-            <h3>{item.title}</h3>
-            <p>{item.does}</p>
-            <blockquote>{item.example}</blockquote>
-            <p className="afr-caps-imp">
-              <b>{youImport}:</b> {item.imports}
-            </p>
+          <li key={item.title} className="afr-caps-row">
+            <div className="afr-caps-copy">
+              <h3>{item.title}</h3>
+              <p>{item.does}</p>
+              <p className="afr-caps-imp">
+                <b>{youImport}:</b> {item.imports}
+              </p>
+            </div>
+            <div className="afr-caps-view">
+              <span className="afr-caps-tag">{youSee}</span>
+              <blockquote className="afr-caps-alert">{item.example}</blockquote>
+            </div>
           </li>
         ))}
       </ul>
