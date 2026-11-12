@@ -74,7 +74,7 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
             style: { opacity: 0 },
             "data-card": i,
             "data-d": d,
-            "aria-label": `${c.name[lang]}, ${i + 1} / ${n}`,
+            "aria-label": `${c.name[lang]}${c.sector ? ` (${c.sector[lang]})` : ""}, ${i + 1} / ${n}`,
             "aria-hidden": far || undefined,
             tabIndex: far ? -1 : 0,
             onFocus: () => i !== activeRef.current && goTo.current(i),
@@ -82,6 +82,10 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
           const inner = (
             <>
               <Image src={c.photo} alt={c.alt[lang]} fill sizes="(max-width: 760px) 220px, 300px" className="afr-ring-img" draggable={false} />
+              <span className="afr-ring-tag">
+                <span className="afr-ring-kick">{c.sector ? c.sector[lang] : c.line[lang]}</span>
+                <span className="afr-ring-nm">{c.name[lang]}</span>
+              </span>
               <span className="afr-ring-veil" ref={(el) => void (veilEls.current[i] = el)} />
             </>
           )
@@ -116,6 +120,7 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
           </button>
         </div>
         <div className="afr-ring-text" key={cur.id}>
+          {cur.sector && <p className="afr-ring-kicker">{cur.sector[lang]}</p>}
           <h3>{cur.name[lang]}</h3>
           <p>{cur.line[lang]}</p>
           {cur.slug && (

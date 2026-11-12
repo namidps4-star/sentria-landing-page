@@ -5,6 +5,7 @@ type L = Record<"en" | "fr", string>
 export type ActivityCard = {
   id: string
   slug?: string
+  sector?: L
   name: L
   line: L
   photo: string
@@ -32,6 +33,12 @@ const LIVE_PHOTOS: Record<string, Pick<ActivityCard, "photo" | "alt" | "by" | "u
     by: "proudlyswazi",
     user: "proudlyswazi",
   },
+}
+
+const SECTOR: Record<string, L> = {
+  pharmacie: { en: "Health", fr: "Santé" },
+  "grossiste-pharma": { en: "Health", fr: "Santé" },
+  "exploitation-agricole": { en: "Agriculture", fr: "Agriculture" },
 }
 
 const SOON: L = { en: "Coming soon", fr: "Bientôt disponible" }
@@ -76,6 +83,6 @@ const COMING_SOON: ActivityCard[] = [
 ]
 
 export const ACTIVITY_CARDS: ActivityCard[] = [
-  ...ACTIVITY_LIST.map((a) => ({ id: a.slug, slug: a.slug, name: a.name, line: a.teaser, ...LIVE_PHOTOS[a.slug] })),
+  ...ACTIVITY_LIST.map((a) => ({ id: a.slug, slug: a.slug, sector: SECTOR[a.slug], name: a.name, line: a.teaser, ...LIVE_PHOTOS[a.slug] })),
   ...COMING_SOON,
 ]
