@@ -17,7 +17,7 @@ export type RingRefs = {
   goTo: MutableRefObject<(i: number) => void>
   stepBy: MutableRefObject<(d: number) => void>
 }
-export type RingWords = { view: string; open: string; soon: string }
+export type RingWords = { view: string; open: string }
 
 const DRAG = 0.0052 // cards per pixel dragged
 
@@ -125,7 +125,7 @@ export function startRing(refs: RingRefs, cards: ActivityCard[], text: RingWords
       ring.style.opacity = spring.a.toFixed(3)
       ring.style.visibility = spring.a > 0.015 ? "visible" : "hidden"
       const h = hover.current
-      const word = h < 0 ? "" : h !== activeRef.current ? text.view : cards[h].slug ? text.open : text.soon
+      const word = h < 0 ? "" : h !== activeRef.current ? text.view : text.open
       if (cursorLabel.current && cursorLabel.current.textContent !== word && word) cursorLabel.current.textContent = word
     }
   }

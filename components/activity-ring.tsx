@@ -9,7 +9,7 @@ import { startRing } from "./activity-ring-engine"
 import { newPhys, type Phys } from "./activity-ring-physics"
 import "./activity-ring.css"
 
-export type RingText = { carousel: string; label: string; prev: string; next: string; more: string; photo: string; view: string; open: string; soon: string; hint: string }
+export type RingText = { carousel: string; label: string; prev: string; next: string; more: string; photo: string; view: string; open: string; hint: string }
 type Props = { lang: "en" | "fr"; base: string; cards: ActivityCard[]; text: RingText }
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -57,6 +57,7 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
     if (e.key === "ArrowRight") stepBy.current(1)
   }
 
+  const hrefOf = (c: ActivityCard) => (c.slug ? `${base}/${c.slug}` : (c.href?.[lang] ?? "#"))
   const cur = cards[active]
   return (
     <div className="afr-ring" role="group" aria-roledescription={text.carousel} aria-label={text.label} onKeyDown={onKeyDown}>
@@ -83,20 +84,16 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
             <>
               <Image src={c.photo} alt={c.alt[lang]} fill sizes="(max-width: 760px) 220px, 300px" className="afr-ring-img" draggable={false} />
               <span className="afr-ring-tag">
-                <span className="afr-ring-kick">{c.sector ? c.sector[lang] : c.line[lang]}</span>
+                {c.sector && <span className="afr-ring-kick">{c.sector[lang]}</span>}
                 <span className="afr-ring-nm">{c.name[lang]}</span>
               </span>
               <span className="afr-ring-veil" ref={(el) => void (veilEls.current[i] = el)} />
             </>
           )
-          return c.slug ? (
-            <a key={c.id} {...common} href={`${base}/${c.slug}`} draggable={false}>
+          return (
+            <a key={c.id} {...common} href={hrefOf(c)} draggable={false}>
               {inner}
             </a>
-          ) : (
-            <button key={c.id} type="button" {...common}>
-              {inner}
-            </button>
           )
         })}
         <div className="afr-ring-cursor" ref={cursor} aria-hidden="true">
@@ -123,11 +120,9 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
           {cur.sector && <p className="afr-ring-kicker">{cur.sector[lang]}</p>}
           <h3>{cur.name[lang]}</h3>
           <p>{cur.line[lang]}</p>
-          {cur.slug && (
-            <a className="afr-ring-cta" href={`${base}/${cur.slug}`}>
-              {text.more}
-            </a>
-          )}
+          <a className="afr-ring-cta" href={hrefOf(cur)}>
+            {text.more}
+          </a>
         </div>
         <p className="afr-ring-hint">{text.hint}</p>
         <p className="afr-ring-credit">
