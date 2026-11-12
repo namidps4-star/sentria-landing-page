@@ -38,6 +38,15 @@ const SOON: L = { en: "Coming soon", fr: "Bientôt disponible" }
 
 const COMING_SOON: ActivityCard[] = [
   {
+    id: "retail",
+    name: { en: "Retail & Distribution", fr: "Commerce et distribution" },
+    line: SOON,
+    photo: "/africa/activities/retail.jpg",
+    alt: { en: "Woman at a fruit market stall", fr: "Femme devant un étal de fruits au marché" },
+    by: "K Studios",
+    user: "kstudios",
+  },
+  {
     id: "logistics",
     name: { en: "Logistics", fr: "Logistique" },
     line: SOON,
