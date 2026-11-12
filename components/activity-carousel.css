@@ -1,0 +1,189 @@
+@font-face {
+  font-family: "Chillax";
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/Chillax-Light.woff2") format("woff2");
+}
+
+.afr-acts h2 {
+  margin: 0 auto;
+  max-width: 9em;
+  text-align: center;
+  font-family: "Chillax", var(--f-display), sans-serif;
+  font-weight: 300;
+  font-size: clamp(34px, 4.4vw, 62px);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+
+.afr-car {
+  --cw: 320px;
+  --ch: 440px;
+}
+.afr-car-stage {
+  position: relative;
+  width: 100%;
+  height: calc(var(--ch) + 90px);
+  margin-top: clamp(32px, 6vh, 64px);
+  perspective: 1500px;
+  perspective-origin: 50% 45%;
+  touch-action: pan-y;
+  user-select: none;
+}
+.afr-car-rig {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.afr-car-card {
+  --x: 0px;
+  --y: 0px;
+  --z: 0px;
+  --ry: 0deg;
+  --s: 1;
+  --o: 1;
+  --b: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: var(--cw);
+  height: var(--ch);
+  margin: calc(var(--ch) / -2) 0 0 calc(var(--cw) / -2);
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+  color: var(--cream, #f5f3ea);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65);
+  transform: translate3d(var(--x), var(--y), var(--z)) rotateY(var(--ry)) scale(var(--s));
+  opacity: var(--o);
+  filter: brightness(var(--b));
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, filter 0.6s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.afr-car-card[data-d="0"] { --y: -10px; z-index: 10; }
+.afr-car-card[data-d="1"],
+.afr-car-card[data-d="-1"] { --s: 0.93; --z: -90px; z-index: 9; }
+.afr-car-card[data-d="2"],
+.afr-car-card[data-d="-2"] { --s: 0.8; --z: -260px; --b: 0.9; z-index: 8; }
+.afr-car-card[data-d="1"] { --x: 372px; --ry: 38deg; }
+.afr-car-card[data-d="-1"] { --x: -372px; --ry: -38deg; }
+.afr-car-card[data-d="2"] { --x: 590px; --ry: 62deg; }
+.afr-car-card[data-d="-2"] { --x: -590px; --ry: -62deg; }
+.afr-car-card[data-d="-3"],
+.afr-car-card[data-d="3"] { --x: -700px; --ry: -72deg; --s: 0.7; --z: -420px; --o: 0; --b: 0.6; pointer-events: none; z-index: 7; }
+
+.afr-car-card:focus-visible {
+  outline: 2px solid var(--lime, #d6ff3f);
+  outline-offset: 4px;
+}
+.afr-car-img {
+  object-fit: cover;
+  pointer-events: none;
+}
+.afr-car-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0.9) 100%);
+  pointer-events: none;
+}
+.afr-car-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 0 22px 26px;
+  text-align: center;
+}
+.afr-car-name {
+  display: block;
+  font-family: "Chillax", var(--f-display), sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+.afr-car-line {
+  display: block;
+  margin-top: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.88);
+}
+.afr-car-go {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lime, #d6ff3f);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s 0.25s, transform 0.5s 0.25s;
+}
+.afr-car-card[data-active="1"] .afr-car-go {
+  opacity: 1;
+  transform: none;
+}
+
+.afr-car-ctl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 6px;
+}
+.afr-car-arrow {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(245, 243, 234, 0.28);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--cream, #f5f3ea);
+  font-size: 18px;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+.afr-car-arrow:hover { border-color: var(--lime, #d6ff3f); }
+.afr-car-arrow:focus-visible { outline: 2px solid var(--lime, #d6ff3f); outline-offset: 3px; }
+.afr-car-count {
+  min-width: 64px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: rgba(245, 243, 234, 0.7);
+}
+.afr-car-credit {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: rgba(245, 243, 234, 0.62);
+}
+.afr-car-credit a { color: inherit; }
+
+@media (max-width: 760px) {
+  .afr-car { --cw: 230px; --ch: 330px; }
+  .afr-car-card[data-d="1"] { --x: 172px; --ry: 40deg; }
+  .afr-car-card[data-d="-1"] { --x: -172px; --ry: -40deg; }
+  .afr-car-card[data-d="2"] { --x: 262px; }
+  .afr-car-card[data-d="-2"] { --x: -262px; }
+  .afr-car-card[data-d="-3"], .afr-car-card[data-d="3"] { --x: -320px; }
+  .afr-car-name { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .afr-car-card, .afr-car-go { transition-duration: 0.01ms; }
+}
