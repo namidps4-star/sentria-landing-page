@@ -9,7 +9,7 @@ export function Faq() {
   const s = C.faq
   const [open, setOpen] = useState<number | null>(null)
   return (
-    <section id="faq" className="sc sc-cream faq">
+    <section id="faq" className="sc sc-lime faq">
       <div className="wrap faq-grid">
         <div>
           <Eyebrow>

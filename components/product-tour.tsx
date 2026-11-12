@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import { B } from "./t"
+import { B, LangPick } from "./t"
 import dashEn from "@/assets/dash/dash-crop-en.webp"
 import dashFr from "@/assets/dash/dash-crop-fr.webp"
 
@@ -35,6 +35,7 @@ export function ProductTour() {
   const [scrollStep, setScrollStep] = useState(0)
   const [hover, setHover] = useState(0)
   const [pick, setPick] = useState<{ n: number } | null>(null)
+  const [ready, setReady] = useState(false)
   const tilt = useRef({ x: 0, y: 0 })
   const rise = useRef(1)
   const lit = useRef(0)
@@ -65,6 +66,11 @@ export function ProductTour() {
       rise.current = 1 - Math.pow(1 - g, 3)
       paint()
       lit.current = g
+      if (g > 0.97) setReady(true)
+      // progress through the current part (0 to 1), so the rail's bar fills as you scroll
+      const edges = [0.12, 0.3, 0.5, 0.72, 1]
+      const k = p < 0.3 ? 0 : p < 0.5 ? 1 : p < 0.72 ? 2 : 3
+      el.style.setProperty("--sp", clamp((p - edges[k]) / (edges[k + 1] - edges[k])).toFixed(3))
       setScrollStep(p < 0.12 ? 0 : p < 0.3 ? 1 : p < 0.5 ? 2 : p < 0.72 ? 3 : 4)
     }
     const on = () => {
@@ -119,7 +125,6 @@ export function ProductTour() {
     setHover(0)
   }
 
-  const right = part ? part.l + part.w / 2 > 60 : false
   return (
     <section id="product" ref={root} className="rv-sec pt">
       <div className="pt-stage">
@@ -127,10 +132,7 @@ export function ProductTour() {
           <B en="The product" fr="Le produit" />
         </p>
         <h2 className="rv-h pt-h" data-rv="rise">
-          <span className="en">Every risk, ranked. One screen.</span>
-          <span className="fr" lang="fr">
-            Chaque risque, classé. Un seul écran.
-          </span>
+          <LangPick en="Every risk, ranked. One screen." fr="Chaque risque, classé. Un seul écran." />
         </h2>
         <div className="pt-cap" aria-live="polite">
           {CAPS.map((c, i) => (
@@ -139,6 +141,7 @@ export function ProductTour() {
             </span>
           ))}
         </div>
+        <div className="pt-body">
         <div className="pt-wrap">
           <div className="pt-win" ref={win} onPointerMove={move} onPointerLeave={leave}>
             <div className="pt-bar" aria-hidden="true">
@@ -147,44 +150,47 @@ export function ProductTour() {
               <i />
             </div>
             <div className="pt-shot" ref={shot}>
-              <Image className="en" src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
-              <Image className="fr" src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
-              <div className="pt-glow" aria-hidden="true" />
+              <LangPick
+                en={<Image src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
+                fr={<Image src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
+              />
+              <div className="pt-light" aria-hidden="true" />
               {part && (
                 <div
                   className="pt-spot"
                   aria-hidden="true"
                   style={{ left: `${part.l}%`, top: `${part.t}%`, width: `${part.w}%`, height: `${part.h}%` }}
-                />
-              )}
-              {part && (
-                <div
-                  key={step}
-                  className="pt-tip"
-                  aria-hidden="true"
-                  style={
-                    right
-                      ? { right: `${100 - part.l - part.w}%`, top: `${part.t < 30 ? part.t + part.h + 2 : part.t - 7}%` }
-                      : { left: `${part.l + 1}%`, top: `${part.t < 30 ? part.t + part.h + 2 : part.t - 7}%` }
-                  }
                 >
-                  <b>{step}</b> <B en={part.en} fr={part.fr} />
+                  <span key={step} className="pt-scan" />
                 </div>
               )}
             </div>
           </div>
         </div>
-        <div className="pt-dots" role="group" aria-label="Dashboard parts">
-          {STEPS.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              className="pt-dot"
-              aria-pressed={step === i}
-              aria-label={i === 0 ? "Whole dashboard" : `Part ${i}`}
-              onClick={() => setPick({ n: i })}
-            />
+        <ol className="pt-rail" aria-label="Dashboard parts" data-ready={ready ? "1" : undefined} data-manual={hover > 0 || pick ? "1" : undefined}>
+          {STEPS.slice(1).map((p, i) => (
+            <li key={i} style={{ ["--k" as string]: i } as React.CSSProperties}>
+              <button
+                type="button"
+                data-on={step === i + 1 ? "1" : undefined}
+                aria-pressed={step === i + 1}
+                onClick={() => setPick({ n: i + 1 })}
+                onPointerEnter={(e) => e.pointerType === "mouse" && setHover(i + 1)}
+                onPointerLeave={(e) => e.pointerType === "mouse" && setHover(0)}
+              >
+                <b>{String(i + 1).padStart(2, "0")}</b>
+                <span>
+                  <strong>
+                    <B en={p!.en} fr={p!.fr} />
+                  </strong>
+                  <small>
+                    <B en={CAPS[i + 1].en} fr={CAPS[i + 1].fr} />
+                  </small>
+                </span>
+              </button>
+            </li>
           ))}
+        </ol>
         </div>
         <p className="sr-only">
           <B

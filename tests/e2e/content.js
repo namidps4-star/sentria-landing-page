@@ -62,11 +62,12 @@ async function legacyTexts(browser) {
 async function newText(browser, lang) {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
   await ctx.addInitScript((l) => {
-    sessionStorage.setItem('sentria-opened', '1')
+    localStorage.setItem('sentria-skip-intro', '1')
     localStorage.setItem('sentria-language', l)
   }, lang)
   const page = await ctx.newPage()
-  await page.goto(APP_URL, { waitUntil: 'load' })
+  // Each language has its own address now: /en and /fr.
+  await page.goto(`${APP_URL}/${lang}`, { waitUntil: 'load' })
   await page.waitForTimeout(1200)
   const blob = await page.evaluate(() => {
     const vis = (el) => {

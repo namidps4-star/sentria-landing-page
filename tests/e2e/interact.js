@@ -7,7 +7,7 @@ const { chromium } = playwright()
   const open = async (opts = {}) => {
     const ctx = await browser.newContext({ viewport: { width: opts.w || 1440, height: opts.h || 900 }, ...(opts.ctx || {}) })
     await ctx.addInitScript((l) => {
-      sessionStorage.setItem('sentria-opened', '1')
+      localStorage.setItem('sentria-skip-intro', '1')
       if (l && !localStorage.getItem('sentria-language')) localStorage.setItem('sentria-language', l)
     }, opts.lang === undefined ? 'en' : opts.lang)
     const page = await ctx.newPage()

@@ -1,22 +1,23 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef, type CSSProperties } from "react"
+import { SentriaWordmark } from "@/components/sentria-wordmark"
+import { startOpeningFx } from "@/components/opening-fx"
+import { useLang } from "@/components/lang"
+import { TAGLINES } from "@/content/taglines"
 
-const WORD = "SentrIA"
+const COLS = 12
+const ROWS = 8
+const BLOCKS = 6
+const LABEL = { en: "Loading", fr: "Chargement" } as const
 
-function Letters() {
-  return (
-    <div className="op-word">
-      {[...WORD].map((c, i) => (
-        <i key={i} className={i >= 5 ? "op-ia" : undefined}>
-          {c}
-        </i>
-      ))}
-    </div>
-  )
-}
+/** The black panel is a grid of tiles that dissolves in a diagonal sweep (pure CSS, see 03-opening.css). */
+const TILES = Array.from({ length: COLS * ROWS }, (_, n) => {
+  const c = n % COLS
+  const r = Math.floor(n / COLS)
+  return { n, d: `${((c + (ROWS - 1 - r)) * 0.05).toFixed(2)}s` }
+})
 
-/** The mark in two pieces, so the lime dome and the white bowl can settle into place on their own. */
 function MarkPieces() {
   return (
     <svg viewBox="0 0 100 100" aria-hidden="true" className="op-mark">
@@ -33,39 +34,71 @@ function MarkPieces() {
 }
 
 /**
- * The opening, about 3.5 s, in Unbounded: the two halves of the mark settle
- * (0.15 s), the mark glides left while the name is revealed in one sweep with "IA"
- * in lime (1 s), they hold, then the black panel lifts away with the name trailing
- * behind it and the page is underneath (2.55 s). No line, no caption, no glow. Pure CSS, so it ends itself (visibility: hidden) even if no script runs.
- * Only shown when <html> has .op-run (set before paint by the head script).
- * The timings are shared with the hero entrance (--t0) and the scroll unlock (a little before the end, so the unlock never loses a race with the end of the opening)
- * (components/motion.tsx): change them together.
+ * The opening, about 3.7 s, on every fresh load of the home page. The dome mark settles, the letters of SentrIA flicker
+ * through the site's typefaces while lime blocks flash over them, and a LOADING counter runs to 100% along
+ * the bottom edge. The name settles, the lime shards grow, the tagline steps in, then the black panel
+ * dissolves tile by tile to show the page.
+ *
+ * The letters, blocks and counter are driven by opening-fx.ts; the dissolve is pure CSS, so the panel
+ * ends itself (visibility: hidden) even if no script runs. Only shown when <html> has .op-run, which the
+ * head script sets before paint (never with reduced motion).
+ * The timings are shared with the hero entrance (--t0) and the scroll unlock (components/motion.tsx).
  */
 export function Opening() {
+  const lang = useLang()
+  const root = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
-    const root = document.documentElement
-    if (!root.classList.contains("op-wait")) return
-    // Play as soon as the fonts are ready and two frames are painted (never wait for images).
-    // The head script lifts the pause after 0.9 s whatever happens.
+    const html = document.documentElement
+    if (!html.classList.contains("op-run")) return
     let cancelled = false
-    Promise.resolve(document.fonts ? document.fonts.ready : undefined).then(() => {
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => {
-          if (!cancelled) root.classList.remove("op-wait")
-        })
-      )
-    })
+    let stop = () => {}
+    if (html.classList.contains("op-wait") && document.fonts) {
+      const fonts = document.fonts
+      Promise.resolve(fonts.load("600 100px Chillax").then(() => fonts.ready, () => fonts.ready)).then(() => {
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => {
+            if (!cancelled) html.classList.remove("op-wait")
+          })
+        )
+      })
+    }
+    if (root.current) stop = startOpeningFx(root.current, LABEL[lang])
     return () => {
       cancelled = true
+      stop()
     }
-  }, [])
+  }, [lang])
+
   return (
-    <div className="op" aria-hidden="true">
-      <div className="op-bg">
-        <div className="op-lock">
-          <MarkPieces />
-          <Letters />
+    <div className="op" aria-hidden="true" ref={root}>
+      <div className="op-tiles">
+        {TILES.map((t) => (
+          <i key={t.n} className="op-tile" style={{ "--d": t.d } as CSSProperties} />
+        ))}
+      </div>
+      <div className="op-lock">
+        <MarkPieces />
+        <SentriaWordmark />
+      </div>
+      <div className="op-hud">
+        <p className="op-tag">{TAGLINES.healthcare[lang]}</p>
+        <div className="op-blocks">
+          {Array.from({ length: BLOCKS }, (_, i) => (
+            <i key={i} className="op-blk" />
+          ))}
         </div>
+        <div className="op-rail" />
+        <div className="op-bar" />
+        <span className="op-cnt" />
+      </div>
+      {/* Asks the browser to load every face the letters flicker through before the clock starts. */}
+      <div className="op-warm">
+        {[0, 1, 2, 3, 4, 5].map((f) => (
+          <span key={f} className={`op-f${f}`}>
+            SentrIA
+          </span>
+        ))}
       </div>
     </div>
   )

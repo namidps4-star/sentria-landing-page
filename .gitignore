@@ -6,3 +6,5 @@ next-env.d.ts
 .DS_Store
 .env*.local
 tests/e2e/shots/
+.claude/skills/ui-ux-pro-max/scripts/__pycache__/
+handoff.md

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sentriahq.dev/sitemap.xml
+Host: https://sentriahq.dev

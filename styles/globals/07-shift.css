@@ -1,0 +1,187 @@
+/* ------------------------------------------------------------------ shift */
+.shift-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(14px, 2vw, 28px);
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.shift-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  padding: clamp(26px, 3vw, 44px);
+}
+.shift-card > * {
+  position: relative;
+}
+.shift-card h3 {
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 2.6vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-top: 18px;
+}
+.shift-card p {
+  margin-top: 18px;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+.kicker {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.shift-card.before {
+  background: rgba(245, 243, 234, 0.05);
+  border: 1px solid rgba(245, 243, 234, 0.12);
+  color: rgba(245, 243, 234, 0.7);
+}
+.shift-card.after {
+  background: var(--lime);
+  color: var(--paper);
+}
+.shift-card.after p {
+  opacity: 0.85;
+}
+.shift-arrow {
+  align-self: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--lime-dim);
+  color: var(--ink);
+}
+.shift-arrow .ar {
+  width: 28px;
+  height: 28px;
+  animation: nudge 1.8s ease-in-out infinite;
+}
+@keyframes nudge {
+  50% {
+    transform: translateX(7px);
+  }
+}
+
+/* ----------------------------------------------------------------- method */
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  margin-top: clamp(64px, 7vw, 100px);
+}
+.steps-line,
+.flow-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -28px;
+  height: 2px;
+  background: rgba(245, 243, 234, 0.14);
+}
+.steps-line i,
+.flow-line i {
+  display: block;
+  height: 100%;
+  background: var(--lime);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--p, 0));
+  box-shadow: 0 0 18px rgba(214, 255, 63, 0.6);
+}
+.step,
+.flow-step {
+  position: relative;
+  padding: 8px 4px 0 0;
+  transition: opacity 0.5s, transform 0.5s var(--ease);
+}
+.js .step:not([data-active]) {
+  opacity: 0.52;
+}
+.step[data-active] {
+  transform: translateY(-8px);
+}
+.step[data-active] .num {
+  -webkit-text-stroke-color: var(--lime);
+  color: rgba(214, 255, 63, 0.14);
+}
+.step::before,
+.flow-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -35px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ink-4);
+  border: 2px solid rgba(245, 243, 234, 0.3);
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+.step[data-active]::before {
+  background: var(--lime);
+  border-color: var(--lime);
+  box-shadow: 0 0 20px rgba(214, 255, 63, 0.8);
+}
+
+/* -------------------------------------------------------------------- why */
+.table {
+  margin-top: clamp(40px, 5vw, 72px);
+  border: 1px solid rgba(20, 21, 15, 0.14);
+  border-radius: 30px;
+  overflow: hidden;
+  background: #fff;
+}
+.trow {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1.25fr;
+  align-items: center;
+  border-top: 1px solid rgba(20, 21, 15, 0.09);
+  transition: background 0.25s;
+}
+.trow > div {
+  padding: 18px clamp(14px, 2vw, 28px);
+  font-size: 15px;
+}
+.trow:not(.thead):hover {
+  background: rgba(214, 255, 63, 0.14);
+}
+.thead {
+  border-top: 0;
+  background: var(--paper);
+  color: var(--cream);
+}
+.thead > div {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.col-us {
+  background: rgba(214, 255, 63, 0.3);
+  font-weight: 600;
+}
+.thead .col-us {
+  background: var(--lime);
+  color: var(--ink);
+}
+.c-name {
+  font-weight: 500;
+}
+.c-old {
+  color: var(--muted-l);
+}
+.c-us .ck {
+  color: var(--paper);
+  width: 20px;
+  height: 20px;
+}
+

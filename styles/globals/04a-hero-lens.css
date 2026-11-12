@@ -1,0 +1,126 @@
+/* ------------------------------------------------------------ hero lens: glass (see components/lens-glass.ts) */
+.lens {
+  position: absolute;
+  left: 0;
+  top: 0;
+  --R: 105px;
+  width: calc(var(--R) * 2);
+  height: calc(var(--R) * 2);
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.5s;
+  will-change: transform;
+}
+.lens[data-on] {
+  opacity: 1;
+}
+.lg-defs {
+  position: absolute;
+}
+/* the wobbling rounded outline: it clips everything inside and carries the rim and the shadows */
+.lg-blob {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50.57% 54.1% 39.02% 39.33% / 60.45% 54.13% 52.19% 59.79%;
+  box-shadow: rgba(30, 58, 38, 0.22) 0 0 0 1px, rgba(0, 0, 0, 0.5) 0 20px 30px -6px, rgba(0, 0, 0, 0.4) 0 3px 8px -2px;
+  scale: 0.72;
+  transition: scale 0.6s var(--ease);
+}
+.lens[data-on] .lg-blob {
+  scale: 1;
+}
+/* the magnified copy, bent and split into colours by the filter */
+.lg-refr {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: url("#hero-lens-glass") blur(0.5px) saturate(1.26) brightness(1.03) contrast(1.06);
+}
+.lens-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.lg-layer,
+.lg-fill,
+.lg-mask {
+  position: absolute;
+  inset: 0;
+}
+.lg-tints {
+  opacity: 0.3;
+}
+.lg-mask {
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(circle, transparent 14%, rgba(0, 0, 0, 0.22) 34%, rgba(0, 0, 0, 0.55) 54%, rgba(0, 0, 0, 0.85) 74%, #000 90%, #000 100%);
+  mask-image: radial-gradient(circle, transparent 14%, rgba(0, 0, 0, 0.22) 34%, rgba(0, 0, 0, 0.55) 54%, rgba(0, 0, 0, 0.85) 74%, #000 90%, #000 100%);
+}
+.lg-tint {
+  position: absolute;
+  inset: -45%;
+  mix-blend-mode: screen; /* the hero is a dark photo: the tints glow instead of darkening */
+  will-change: transform;
+}
+.lg-spec {
+  opacity: 0.572;
+}
+.lg-spec-a {
+  background: radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 12%, rgba(255, 255, 255, 0) 21%);
+}
+.lg-spec-b {
+  background: radial-gradient(circle at 30% 21%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.22) 3.5%, rgba(255, 255, 255, 0) 6.5%);
+}
+.lg-spec-c {
+  background: radial-gradient(circle at 50% 34%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 46%), radial-gradient(circle at 50% 118%, rgba(22, 44, 30, 0.2), rgba(22, 44, 30, 0) 54%),
+    radial-gradient(circle, rgba(44, 76, 52, 0) 58%, rgba(44, 76, 52, 0.1) 80%, rgba(32, 60, 40, 0.26) 93%, rgba(24, 48, 32, 0.4) 100%);
+}
+.lg-rim1 {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: rgba(255, 255, 255, 0.55) 0 0 0 1px inset, rgba(255, 255, 255, 0.7) 0 2px 1.5px -1px inset, rgba(255, 255, 255, 0.3) 0 -2px 1.5px -1px inset, rgba(24, 48, 32, 0.45) 0 0 10px -3px inset;
+}
+.lg-rim2 {
+  --lg-rim: -34;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 2.2px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background: conic-gradient(from calc(var(--lg-rim) * 1deg), rgba(255, 255, 255, 0.92) 0deg, rgba(24, 48, 32, 0.2) 26deg, rgba(24, 48, 32, 0.2) 90deg, rgba(24, 48, 32, 0.4) 180deg, rgba(24, 48, 32, 0.2) 270deg, rgba(24, 48, 32, 0.2) 334deg, rgba(255, 255, 255, 0.92) 360deg);
+}
+/* the copy is made after the entrance and the pointer is on it, so it must stand still: no replay, no push-in, no fade */
+.lens-copy {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 0;
+  pointer-events: none;
+}
+.lens-copy *,
+.lens-copy *::after {
+  animation: none !important;
+  transition: none !important;
+}
+.lens-copy .hf-slide {
+  opacity: 1;
+}
+@media (hover: none), (pointer: coarse), (max-width: 860px) {
+  .lens {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lg-blob {
+    transition: none;
+  }
+}

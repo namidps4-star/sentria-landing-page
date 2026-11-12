@@ -12,7 +12,7 @@ const WIDTHS = [1920, 1440, 1280, 1024, 768, 480, 375]
     for (const w of WIDTHS) {
       const ctx = await browser.newContext({ viewport: { width: w, height: w < 600 ? 800 : 900 } })
       await ctx.addInitScript((l) => {
-        sessionStorage.setItem('sentria-opened', '1')
+        localStorage.setItem('sentria-skip-intro', '1')
         localStorage.setItem('sentria-language', l)
       }, lang)
       const page = await ctx.newPage()
@@ -66,7 +66,7 @@ const WIDTHS = [1920, 1440, 1280, 1024, 768, 480, 375]
     // The hero film is a full-width background under a dark layer, so its photos are enlarged on purpose
     // (the old rule "never above x1.00" belonged to the sector block, which is gone). This guards against a tiny file.
     const ctx = await browser.newContext({ viewport: { width: 1920, height: 1000 }, deviceScaleFactor: 1 })
-    await ctx.addInitScript(() => sessionStorage.setItem('sentria-opened', '1'))
+    await ctx.addInitScript(() => localStorage.setItem('sentria-skip-intro', '1'))
     const page = await ctx.newPage()
     await page.goto(APP_URL, { waitUntil: 'load' })
     await page.waitForTimeout(800)
