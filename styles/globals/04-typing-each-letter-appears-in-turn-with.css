@@ -1,35 +1,17 @@
-/* Typing: each letter appears in turn with a caret at the typing position. The wave starts once the last letter is in. */
+/* The headline draws itself: every letter appears at once as a random letter and the real letters settle in one by one
+   (components/hero-scramble.ts reads this animation as its clock). The wave starts once the last letter has settled. */
 @media (prefers-reduced-motion: no-preference) {
   .js .hero-h .hl {
-    animation: none; /* the lines no longer rise as blocks: the letters type themselves */
+    animation: none; /* the lines no longer rise as blocks */
   }
   .hero-h:not(.lens-clone) .wvl {
     animation: wvl-type 0.001s linear backwards;
-    animation-delay: calc(var(--t0) + 0.25s + var(--c, 0) * 0.044s + var(--j, 0) * 0.008s);
-  }
-  .hero-h:not(.lens-clone) .wvl::after {
-    content: "";
-    position: absolute;
-    right: -0.03em;
-    top: 0.14em;
-    bottom: 0.1em;
-    width: 0.05em;
-    background: currentColor;
-    opacity: 0;
-    animation: wvl-caret 0.05s linear;
-    animation-delay: calc(var(--t0) + 0.25s + var(--c, 0) * 0.044s + var(--j, 0) * 0.008s);
-    pointer-events: none;
+    animation-delay: calc(var(--t0) + 0.25s);
   }
 }
 @keyframes wvl-type {
   from {
     opacity: 0;
-  }
-}
-@keyframes wvl-caret {
-  from,
-  to {
-    opacity: 0.9;
   }
 }
 .hero-lead {

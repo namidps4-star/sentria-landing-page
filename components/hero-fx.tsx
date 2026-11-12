@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { LensGlass } from "./lens-glass-layers"
 import { glassParts, moveGlass, sizeLensFilter } from "./lens-glass"
+import { startScramble } from "./hero-scramble"
 
 /**
  * Hero motion: the headline waves like a flag and a glass lens, built like the Loupe on
@@ -44,6 +45,9 @@ export function HeroFx() {
     const fine = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 861px)").matches
 
     const root = document.documentElement
+    const scramble = startScramble(h1)
+    let settled = false
+    void scramble.done.then(() => (settled = true))
     const S = 1.32
     let R = 105
     let size = 0
@@ -68,13 +72,12 @@ export function HeroFx() {
         return a
       })
 
-    // The wave starts only after the headline has finished typing itself.
+    // The wave starts only after the headline has finished drawing itself.
     let token = 0
     const startAfterTyping = () => {
       const mine = ++token
       const typing = h1.getAnimations({ subtree: true }).filter((a) => ((a as CSSAnimation).animationName ?? "").startsWith("wvl-"))
-      if (!typing.length) return startWaves()
-      Promise.allSettled(typing.map((a) => a.finished)).then(() => {
+      Promise.allSettled([...typing.map((a) => a.finished), scramble.done]).then(() => {
         if (mine === token) startWaves()
       })
     }
@@ -128,7 +131,7 @@ export function HeroFx() {
     }
 
     const ensureClone = () => {
-      if (clone || !fine) return
+      if (clone || !fine || !settled) return
       clone = buildCopy()
       world.appendChild(clone)
       const copyH1 = clone.querySelector<HTMLElement>(".hero-h")
@@ -235,6 +238,7 @@ export function HeroFx() {
 
     return () => {
       cancelAnimationFrame(raf)
+      scramble.stop()
       io.disconnect()
       mo.disconnect()
       fo.disconnect()
