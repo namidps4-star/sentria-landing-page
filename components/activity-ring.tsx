@@ -9,7 +9,7 @@ import { startRing } from "./activity-ring-engine"
 import { newPhys, type Phys } from "./activity-ring-physics"
 import "./activity-ring.css"
 
-export type RingText = { label: string; prev: string; next: string; more: string; photo: string; view: string; open: string; soon: string; hint: string }
+export type RingText = { carousel: string; label: string; prev: string; next: string; more: string; photo: string; view: string; open: string; soon: string; hint: string }
 type Props = { lang: "en" | "fr"; base: string; cards: ActivityCard[]; text: RingText }
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -59,7 +59,7 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
 
   const cur = cards[active]
   return (
-    <div className="afr-ring" role="group" aria-roledescription="carousel" aria-label={text.label} onKeyDown={onKeyDown}>
+    <div className="afr-ring" role="group" aria-roledescription={text.carousel} aria-label={text.label} onKeyDown={onKeyDown}>
       <RingFilters />
       <div className="afr-ring-stage" ref={stage} onClickCapture={onClickCapture}>
         {cards.map((c, i) => {
