@@ -1,100 +1,68 @@
-/* What SentrIA does — one hero, the capabilities side by side.
-   Each capability: title + description on top, and under it ONE perfect circle (white top half = the
-   Problem, green bottom half = the Solution / the laptop "deck"). Hover or tap opens it like a laptop:
-   a screen swings up from the hinge at the circle's middle line and the feature, its real example
-   alert and what you import slide in one after another.
-   The open state is driven by the .is-open class only (set from React), never by :hover, so touch
-   screens, where :hover sticks after a tap, behave. */
-.afr-caps{background:#fff;color:#111;padding:clamp(72px,10vh,128px) var(--pad,56px) clamp(64px,9vh,112px);overflow:hidden;border-top:1px solid #ececea}
-.afr-caps h2{margin:0 0 clamp(56px,7vw,96px);max-width:18ch;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,68px);line-height:1;letter-spacing:-.035em;color:#111}
+/* What SentrIA does: flat bubbles orbit a white pop-up screen.
+   Hover, tap or focus a bubble: the orbit stops and the screen swaps to that capability.
+   The open state is set from React (aria-pressed / .is-active), never from :hover, so touch screens behave. */
+.afr-caps{position:relative;background:#fff;color:#111;padding:clamp(64px,9vh,112px) var(--pad,56px) clamp(56px,8vh,96px);overflow:hidden;border-top:1px solid #ececea}
+.afr-caps h2{margin:0;max-width:14ch;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,4.4vw,60px);line-height:1;letter-spacing:-.035em;color:#111;text-wrap:balance}
+.afr-caps-not{margin:20px 0 0;max-width:46ch;font-size:14px;line-height:1.55;color:#6b6b66}
 
-/* One row, side by side. Rows of caption + bubble share tracks (subgrid) so the circles line up. */
-.afr-caps-list{--dmax:320px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));column-gap:clamp(20px,2.4vw,40px);align-items:start}
-.afr-caps-list[data-n="3"]{--dmax:360px}
-.afr-caps-list[data-n="2"]{--dmax:400px}
-.afr-caps-row{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:clamp(20px,2.4vw,32px);min-width:0;margin-bottom:clamp(48px,6vw,80px)}
+/* ---------- stage ---------- */
+.afr-orb{position:relative;margin-top:24px;display:flex;flex-direction:column;gap:32px}
+.afr-orb-sys{display:none}
+.afr-orb-bubs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 16px;justify-items:center}
+.afr-orb-bub{width:min(100%,170px)}
 
-/* Caption above the bubble; it gives way to the screen when the lid opens */
-.afr-caps-ed{align-self:end;transition:opacity .35s ease}
-.afr-caps-row:has(.afr-caps-bub.is-open) .afr-caps-ed{opacity:0}
-.afr-caps h3{margin:0 0 10px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(20px,1.9vw,26px);line-height:1.15;letter-spacing:-.02em;color:#111}
-.afr-caps-ed>p{margin:0;font-size:15px;line-height:1.55;color:#55554f}
+/* ---------- bubble ---------- */
+.afr-bub{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.afr-bub-disc{display:block;width:100%;aspect-ratio:1/1;border-radius:50%;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.afr-bub:hover .afr-bub-disc,.afr-bub.is-active .afr-bub-disc{transform:scale(1.05)}
+.afr-bub:focus-visible{outline:none}
+.afr-bub:focus-visible .afr-bub-disc{outline:2px solid #111;outline-offset:4px}
+.afr-bub-lime{transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.afr-bub.is-active .afr-bub-lime{transform:translateY(-62px)}
+.afr-bub-icon{transform:translate(76px,50px) scale(2);transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.afr-bub.is-active .afr-bub-icon{transform:translate(76px,76px) scale(2)}
+.afr-bub-pill{display:inline-block;max-width:100%;padding:4px 14px;border-radius:999px;background:#f1f1ef;font-family:var(--f-display),sans-serif;font-weight:700;font-size:15px;line-height:1.15;letter-spacing:-.01em;color:#111;text-align:center;transition:background-color .3s ease,color .3s ease}
+.afr-bub.is-active .afr-bub-pill{background:#111;color:#fff}
 
-/* Shared label: dot + word */
-.afr-caps-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-display),sans-serif;font-weight:600;font-size:15px;letter-spacing:-.01em;color:#111}
-.afr-caps-dot{display:inline-block;flex:none;width:12px;height:12px;border-radius:50%}
-.afr-caps-dot-prob{background:#e5484d;box-shadow:0 0 0 3px rgba(229,72,77,.22)}
-.afr-caps-dot-sol{background:#111;box-shadow:0 0 0 3px rgba(17,17,17,.16)}
+/* ---------- screen ---------- */
+.afr-scr{position:relative;width:100%;border-radius:18px 18px 6px 6px;background:#fff;box-shadow:0 50px 80px -34px rgba(11,12,8,.4),0 0 0 1px rgba(11,12,8,.08);overflow:hidden}
+.afr-scr-bar{display:flex;align-items:center;gap:6px;padding:11px 20px;background:#c6ff4a;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#1c2208}
+.afr-scr-bar i{width:8px;height:8px;border-radius:50%;background:rgba(11,12,8,.28)}
+.afr-scr-bar b{margin-left:6px;font-weight:600}
+.afr-scr-body,.afr-scr-rest{padding:22px 28px 26px;display:flex;flex-direction:column;gap:12px}
+.afr-scr h3{margin:0;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(22px,2.2vw,26px);line-height:1.1;letter-spacing:-.025em;color:#111}
+.afr-scr p{margin:0}
+.afr-scr-does{font-size:14px;line-height:1.55;color:#55554f}
+.afr-scr-prob{display:flex;align-items:center;gap:8px;font-size:14px;line-height:1.45;color:#55554f}
+.afr-scr-prob i{flex:none;width:11px;height:11px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 3px rgba(229,72,77,.22)}
+.afr-scr-alert{padding:13px 16px;border-radius:12px;background:#f1f1ef}
+.afr-scr-alert span{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#3d4a05}
+.afr-scr-alert i{width:7px;height:7px;border-radius:50%;background:#6e8f00;box-shadow:0 0 0 5px rgba(110,143,0,.18)}
+.afr-scr-alert p{font-size:16px;line-height:1.4;font-weight:600;color:#111}
+.afr-scr-imp{font-size:12.5px;line-height:1.5;color:#55554f}
+.afr-scr-imp b{color:#111;font-weight:600}
+.afr-scr-rest{padding:44px 28px;text-align:center}
+.afr-scr-rest p{font-size:14px;color:#55554f}
+.afr-scr-body>*,.afr-scr-rest>*{animation:afrIn .55s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes afrIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* The bubble is the button. perspective makes the lid's swing read as 3D. */
-.afr-caps-bub{position:relative;display:block;width:min(100%,var(--dmax));justify-self:center;margin:0;padding:0;border:0;background:transparent;font:inherit;color:inherit;text-align:center;cursor:pointer;perspective:1100px;-webkit-tap-highlight-color:transparent;animation:afrFloat 7s ease-in-out infinite}
-.afr-caps-row:nth-child(2) .afr-caps-bub{animation-delay:-1.8s}
-.afr-caps-row:nth-child(3) .afr-caps-bub{animation-delay:-3.6s}
-.afr-caps-row:nth-child(4) .afr-caps-bub{animation-delay:-5.4s}
-.afr-caps-bub.is-open{z-index:6}
-.afr-caps-bub:focus-visible{outline:none}
-.afr-caps-bub:focus-visible .afr-caps-orb{box-shadow:0 0 0 2px #fff,0 0 0 4px #111}
+/* ---------- wide: the orbit ---------- */
+.afr-orb[data-orbit="1"]{display:block;height:660px;--rx:575px;--sy:.36}
+.afr-orb[data-orbit="1"] .afr-orb-sys{display:block;position:absolute;left:50%;top:300px;width:calc(var(--rx)*2);height:calc(var(--rx)*2);transform:translate(-50%,-50%) scaleY(var(--sy));pointer-events:none;z-index:0}
+.afr-orb[data-orbit="1"] .afr-orb-ring{position:absolute;inset:0;border-radius:50%;border:1px dashed #e4e4df}
+.afr-orb[data-orbit="1"] .afr-orb-trail{position:absolute;inset:0}
+.afr-orb[data-orbit="1"] .afr-scr{position:absolute;left:50%;top:300px;width:min(560px,46%);transform:translate(-50%,-50%);z-index:5}
+.afr-orb[data-orbit="1"] .afr-orb-bubs{display:contents}
+.afr-orb[data-orbit="1"] .afr-orb-bub{position:absolute;left:0;top:0;width:170px;transform-origin:50% 85px;will-change:transform}
 
-.afr-caps-orb{position:relative;display:block;width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:#f1f1ef;box-shadow:inset 0 0 0 1px #e6e6e2}
-.afr-caps-green{position:absolute;inset:0;background:#c6ff4a;clip-path:inset(50% 0 0 0)}
-
-/* Text zones in the two halves */
-.afr-caps-zone{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:0 16%;transition:opacity .3s ease,transform .5s cubic-bezier(.16,1,.3,1)}
-.afr-caps-top{top:0;height:50%}
-.afr-caps-idle{bottom:0;height:50%}
-.afr-caps-ptxt{display:block;font-size:13.5px;line-height:1.45;color:#55554f}
-.afr-caps-hint{display:block;max-width:18ch;font-size:13px;line-height:1.4;font-weight:500;color:#33332f}
-.afr-caps-bub.is-open .afr-caps-top{opacity:0;transform:translateY(-8px)}
-.afr-caps-bub.is-open .afr-caps-idle{opacity:0;transform:translateY(8px)}
-
-/* The hinge: a dark bar on the middle line, visible once the lid is up */
-.afr-caps-hinge{position:absolute;z-index:3;left:9%;right:9%;top:50%;height:8px;margin-top:-4px;border-radius:4px;background:linear-gradient(#34362c,#0b0c08);opacity:0;transform:scaleX(.6);transition:opacity .25s ease,transform .5s cubic-bezier(.16,1,.3,1)}
-.afr-caps-bub.is-open .afr-caps-hinge{opacity:1;transform:scaleX(1);transition-delay:.12s}
-
-/* The laptop screen: hinged on its bottom edge, folded back (edge-on, invisible) until opened */
-.afr-caps-screen{position:absolute;z-index:2;left:0;width:100%;bottom:50%;height:100%;display:flex;flex-direction:column;gap:10px;padding:16px 22px 22px;text-align:left;border-radius:18px 18px 4px 4px;background:linear-gradient(180deg,#14160e,#0b0c08);color:#f5f3ea;box-shadow:0 34px 60px -24px rgba(11,12,8,.55),inset 0 1px 0 rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.08);border-bottom:0;transform-origin:50% 100%;transform:rotateX(92deg);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.4,0,.6,1),opacity .2s ease .15s}
-.afr-caps-bub.is-open .afr-caps-screen{transform:rotateX(6deg);opacity:1;pointer-events:auto;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .15s ease}
-
-/* Screen contents slide in one after another once the lid is up */
-.afr-caps-sl{display:block;opacity:0;transform:translateY(14px);transition:opacity .25s ease,transform .3s ease}
-.afr-caps-bub.is-open .afr-caps-sl{opacity:1;transform:translateY(0);transition:opacity .5s ease,transform .7s cubic-bezier(.16,1,.3,1)}
-.afr-caps-bub.is-open .afr-caps-chrome{transition-delay:.3s}
-.afr-caps-bub.is-open .afr-caps-st{transition-delay:.42s}
-.afr-caps-bub.is-open .afr-caps-alert{transition-delay:.56s}
-.afr-caps-bub.is-open .afr-caps-imp{transition-delay:.72s}
-
-.afr-caps-chrome{display:flex;align-items:center;gap:6px}
-.afr-caps-chrome i{width:8px;height:8px;border-radius:50%;background:#3a3c33}
-.afr-caps-chrome b{margin-left:6px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,234,.6)}
-.afr-caps-st{font-family:var(--f-display),sans-serif;font-weight:700;font-size:17px;line-height:1.2;letter-spacing:-.015em;color:#f5f3ea}
-.afr-caps-alert{padding:11px 14px;border-radius:10px;background:rgba(214,255,63,.12)}
-.afr-caps-ak{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6ff3f}
-.afr-caps-pulse{width:7px;height:7px;border-radius:50%;background:#d6ff3f}
-.afr-caps-bub.is-open .afr-caps-pulse{animation:afrPulse 1.8s ease-out .9s infinite}
-.afr-caps-av{display:block;font-size:14px;line-height:1.4;font-weight:600;color:#f5f3ea}
-.afr-caps-imp{font-size:12px;line-height:1.5;color:rgba(245,243,234,.72)}
-.afr-caps-imp b{color:#f5f3ea}
-
-@keyframes afrFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-10px,0)}}
-@keyframes afrPulse{0%{box-shadow:0 0 0 0 rgba(214,255,63,.55)}100%{box-shadow:0 0 0 9px rgba(214,255,63,0)}}
-
-.afr-caps-not{margin:clamp(8px,2vw,24px) 0 0;max-width:72ch;font-size:15px;line-height:1.6;color:#6b6b66}
-
-/* Tablet: two per row */
-@media (max-width:1100px){
-  .afr-caps-list{grid-template-columns:repeat(2,minmax(0,1fr));--dmax:340px}
-  .afr-caps-list[data-n="3"],.afr-caps-list[data-n="2"]{--dmax:340px}
-}
-/* Phone: one per row, still the same circle and the same lid */
+/* ---------- narrow: no orbit ---------- */
 @media (max-width:760px){
   .afr-caps{padding:64px var(--pad,20px)}
-  .afr-caps-list{grid-template-columns:minmax(0,1fr);--dmax:300px}
-  .afr-caps-list[data-n="3"],.afr-caps-list[data-n="2"]{--dmax:300px}
-  .afr-caps-screen{left:-6%;width:112%;height:106%;padding:14px 18px 18px;gap:8px}
+  .afr-orb-bubs{gap:28px 12px}
+  .afr-bub-pill{font-size:14px}
+  .afr-scr-body{padding:20px 20px 22px}
 }
 @media (prefers-reduced-motion:reduce){
-  .afr-caps-bub{animation:none}
-  .afr-caps-screen,.afr-caps-sl,.afr-caps-hinge,.afr-caps-zone,.afr-caps-ed{transition:none}
-  .afr-caps-bub.is-open .afr-caps-screen,.afr-caps-bub.is-open .afr-caps-sl,.afr-caps-bub.is-open .afr-caps-hinge{transition:none}
-  .afr-caps-bub.is-open .afr-caps-pulse{animation:none}
+  .afr-bub-disc,.afr-bub-lime,.afr-bub-icon,.afr-bub-pill{transition:none}
+  .afr-scr-body>*,.afr-scr-rest>*{animation:none}
 }
