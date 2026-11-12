@@ -41,7 +41,7 @@
   --t0: 0.15s;
 }
 html.op-run {
-  --t0: 2.65s;
+  --t0: 3s;
 }
 /* The opening and the hero entrance wait (paused) until the page is ready, then start together. */
 html.op-wait *,

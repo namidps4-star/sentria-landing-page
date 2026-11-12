@@ -1,6 +1,7 @@
 import "../../styles/globals/01-section.css"
 import "../../styles/globals/02-header.css"
 import "../../styles/globals/03-opening.css"
+import "../../styles/globals/03a-opening-intro.css"
 import "../../styles/globals/04-typing-each-letter-appears-in-turn-with.css"
 import "../../styles/globals/05-sections.css"
 import "../../styles/globals/06-product.css"

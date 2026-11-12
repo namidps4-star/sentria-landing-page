@@ -9,7 +9,7 @@ const path = require('path')
     console.log(`== ${lang.toUpperCase()} ${w}px`)
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 } })
     await ctx.addInitScript((l) => {
-      sessionStorage.setItem('sentria-opened', '1')
+      localStorage.setItem('sentria-intro-v2', '1')
       localStorage.setItem('sentria-language', l)
     }, lang)
     const page = await ctx.newPage()

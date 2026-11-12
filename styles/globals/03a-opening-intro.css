@@ -1,0 +1,161 @@
+/* ------------------------------------------- opening: tiles, counter, flicker (see components/opening-fx.ts) */
+/* the black panel is a grid of tiles; they dissolve in a diagonal sweep, in four hard steps each */
+.op-tiles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+.op-tile {
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--ink); /* no hairline seams between tiles */
+  animation: op-tile 0.25s steps(4, end) calc(2.55s + var(--d, 0s)) forwards;
+}
+@keyframes op-tile {
+  to {
+    opacity: 0;
+  }
+}
+.op-lock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --wm: min(35vw, 91vh);
+  gap: calc(var(--wm) * 0.07);
+  animation: op-out 0.2s steps(3, end) 2.5s forwards;
+}
+.op-hud {
+  position: absolute;
+  inset: 0;
+  animation: op-out 0.2s steps(3, end) 2.5s forwards;
+}
+@keyframes op-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* LOADING counter and bar along the bottom edge, lime blocks over the name, the tagline */
+.op-rail,
+.op-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+}
+.op-rail {
+  border-top: 1px solid rgba(245, 243, 234, 0.28);
+}
+.op-bar {
+  background: var(--lime);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.op-cnt {
+  position: absolute;
+  bottom: 26px;
+  left: 24px;
+  font: 500 13px/1 var(--f-body), sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.op-bar,
+.op-cnt,
+.op-rail {
+  opacity: 0;
+}
+.op[data-live] .op-bar,
+.op[data-live] .op-cnt,
+.op[data-live] .op-rail {
+  opacity: 1;
+}
+.op-blk {
+  position: absolute;
+  display: none;
+  background: var(--lime);
+}
+.op-tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% + var(--wm, min(35vw, 91vh)) * 0.2);
+  margin: 0;
+  padding-inline: 24px;
+  text-align: center;
+  font: 500 clamp(11px, 1.1vw, 14px) / 1.4 var(--f-body), sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0;
+}
+
+/* the name flickers through these faces while it loads (set by components/opening-fx.ts) */
+.op .sw-l {
+  animation: none;
+}
+html.op-run .op .sw-l {
+  opacity: 0;
+}
+.op .sw-l.op-f1 {
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+}
+.op .sw-l.op-f2 {
+  font-family: var(--f-brand), sans-serif;
+  font-weight: 400;
+}
+.op .sw-l.op-f3 {
+  font-family: var(--f-open), sans-serif;
+  font-weight: 600;
+}
+.op .sw-l.op-f4 {
+  font-family: var(--f-hero), sans-serif;
+  font-weight: 400;
+}
+.op .sw-l.op-f5 {
+  font-family: var(--f-body), sans-serif;
+  font-weight: 500;
+}
+.op .sw-shard {
+  animation-delay: calc(1.8s + var(--k) * 0.1s);
+}
+.op .sw-mark {
+  animation-delay: 1.95s;
+}
+/* hidden copies that make the browser load every face before the opening starts */
+.op-warm {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.op-warm .op-f0 {
+  font-family: "Chillax", sans-serif;
+  font-weight: 600;
+}
+.op-warm .op-f1 {
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+}
+.op-warm .op-f2 {
+  font-family: var(--f-brand), sans-serif;
+}
+.op-warm .op-f3 {
+  font-family: var(--f-open), sans-serif;
+  font-weight: 600;
+}
+.op-warm .op-f4 {
+  font-family: var(--f-hero), sans-serif;
+}
+.op-warm .op-f5 {
+  font-family: var(--f-body), sans-serif;
+  font-weight: 500;
+}

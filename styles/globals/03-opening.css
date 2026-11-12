@@ -9,7 +9,7 @@
 html.op-run .op {
   visibility: visible;
   pointer-events: auto;
-  animation: op-end 0s linear 3.55s forwards;
+  animation: op-end 0s linear 3.75s forwards;
 }
 @keyframes op-end {
   to {
@@ -17,34 +17,6 @@ html.op-run .op {
     pointer-events: none;
   }
 }
-.op-bg {
-  position: absolute;
-  inset: 0;
-  background: var(--ink);
-  will-change: transform;
-  animation: op-lift 0.95s var(--ease-io) 2.55s forwards;
-}
-@keyframes op-lift {
-  to {
-    transform: translateY(-100%);
-  }
-}
-.op-lock {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  --wm: min(35vw, 91vh);
-  gap: calc(var(--wm) * 0.07);
-  animation: op-trail 1s var(--ease-io) 2.55s forwards;
-}
-@keyframes op-trail {
-  to {
-    transform: translateY(14vh);
-  }
-}
-
 /* the dome mark, in two pieces: the lime dome rises from below, the white bowl drops from above */
 .op-mark {
   width: calc(var(--wm, min(58vw, 150vh)) * 0.21);

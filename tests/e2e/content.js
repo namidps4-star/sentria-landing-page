@@ -62,7 +62,7 @@ async function legacyTexts(browser) {
 async function newText(browser, lang) {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
   await ctx.addInitScript((l) => {
-    sessionStorage.setItem('sentria-opened', '1')
+    localStorage.setItem('sentria-intro-v2', '1')
     localStorage.setItem('sentria-language', l)
   }, lang)
   const page = await ctx.newPage()
