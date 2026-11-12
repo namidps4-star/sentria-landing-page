@@ -3,6 +3,7 @@
 import { useId, useRef, useState, type PointerEvent } from "react"
 
 type Props = {
+  title: string
   problem: string
   example: string
   imports: string
@@ -10,11 +11,12 @@ type Props = {
 }
 
 /**
- * One circle: white top half = the Problem, green bottom half = the Solution.
- * Hover (mouse) or tap/Enter (touch, keyboard) lifts the green to open the SentrIA
- * feature, with its real example alert and what the user imports.
+ * One circle: white top half = the Problem, green bottom half = the Solution (the "deck").
+ * Hover (mouse) or tap/Enter (touch, keyboard) raises a laptop screen from the hinge at the
+ * circle's middle line. The screen shows the SentrIA feature, its real example alert and what
+ * the user imports, each line sliding in after the lid has opened.
  */
-export function CapabilityBubble({ problem, example, imports, labels }: Props) {
+export function CapabilityBubble({ title, problem, example, imports, labels }: Props) {
   const [open, setOpen] = useState(false)
   const lastPointer = useRef("")
   const panelId = useId()
@@ -65,16 +67,27 @@ export function CapabilityBubble({ problem, example, imports, labels }: Props) {
           </span>
           <span className="afr-caps-hint">{labels.hint}</span>
         </span>
+      </span>
 
-        <span className="afr-caps-zone afr-caps-feat" id={panelId}>
-          <span className="afr-caps-tag">
-            <i className="afr-caps-dot afr-caps-dot-sol" aria-hidden="true" />
+      <span className="afr-caps-hinge" aria-hidden="true" />
+
+      <span className="afr-caps-screen" id={panelId}>
+        <span className="afr-caps-sl afr-caps-chrome" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <b>SentrIA</b>
+        </span>
+        <span className="afr-caps-sl afr-caps-st">{title}</span>
+        <span className="afr-caps-sl afr-caps-alert">
+          <span className="afr-caps-ak">
+            <i className="afr-caps-pulse" aria-hidden="true" />
             {labels.example}
           </span>
-          <span className="afr-caps-v">{example}</span>
-          <span className="afr-caps-f">
-            <b>{labels.youImport}:</b> {imports}
-          </span>
+          <span className="afr-caps-av">{example}</span>
+        </span>
+        <span className="afr-caps-sl afr-caps-imp">
+          <b>{labels.youImport}:</b> {imports}
         </span>
       </span>
     </button>
