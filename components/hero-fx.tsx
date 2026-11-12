@@ -3,22 +3,18 @@
 import { useEffect, useRef } from "react"
 import { LensGlass } from "./lens-glass-layers"
 import { glassParts, moveGlass, sizeLensFilter } from "./lens-glass"
-import { bob, clampTo, flingFrom, glide, newBody, type Bounds, type Trail } from "./lens-drag"
-import { useLang } from "./lang"
-import { buildLensCopy } from "./lens-copy"
 
 /**
- * Hero motion: the headline waves like a flag, and a glass lens rests on the word "evidence".
- * The lens is built like the Loupe and moves like Isle (both on motionin.design): you grab it,
- * fling it, and it glides to a stop. It magnifies and bends everything under it: the photo,
- * the headline, the proof lines and the caption.
+ * Hero motion: the headline waves like a flag and a glass lens, built like the Loupe on
+ * motionin.design, magnifies and bends everything under the pointer: the photo, the
+ * headline, the proof lines and the caption.
  *
  * Cost is kept to almost nothing at the moment the opening ends:
  *  - the wave is a set of Web Animations (compositor, no script per frame),
  *    started on the real letters only;
- *  - the lens copy of the hero is built once the headline has typed itself
+ *  - the lens copy of the hero is built the first time the pointer arrives
  *    (and again when the photo changes); its headline letters join the same wave;
- *  - the lens loop runs only while the hero is on screen.
+ *  - the lens loop runs only while the pointer is over the hero.
  * None of it runs with reduced motion, and the lens never runs on touch.
  */
 const PERIOD_MS = ((2 * Math.PI) / 1.3) * 1000 // same speed as before
@@ -31,7 +27,6 @@ const FRAMES: Keyframe[] = [
 ]
 
 export function HeroFx() {
-  const lang = useLang()
   const lensRef = useRef<HTMLDivElement>(null)
   const worldRef = useRef<HTMLDivElement>(null)
   const defsRef = useRef<SVGSVGElement>(null)
@@ -53,11 +48,8 @@ export function HeroFx() {
     let R = 105
     let size = 0
     let raf = 0
-    const body = newBody()
-    let trail: Trail = []
-    let grab = { x: 0, y: 0 }
-    let last = 0
-    let onScreen = true
+    let ptr = { x: 0, y: 0, in: false }
+    const pos = { x: 0, y: 0 }
     let letters: HTMLElement[] = []
     let clone: HTMLElement | null = null
     let waves: Animation[] = []
@@ -93,10 +85,6 @@ export function HeroFx() {
       t0 = Number(document.timeline.currentTime ?? 0)
       waves = wave(letters)
       dropCopy()
-      if (fine) {
-        ensureClone()
-        goHome()
-      }
     }
 
     const dropCopy = () => {
@@ -106,10 +94,42 @@ export function HeroFx() {
       world.innerHTML = ""
     }
 
-    // The lens copy is made once the headline has typed itself, and again when the photo changes (see lens-copy.ts).
+    // The lens copy is made the first time the pointer comes over the hero, and again when the photo changes.
+    // It is the hero without the lens: only the photo that is showing, the dark layer, the headline, the proof lines, the caption.
+    const buildCopy = () => {
+      const copy = document.createElement("div") // a div, not another stage: ids are stripped and the page keeps one heading level 1
+      copy.className = "hero-stage lens-copy"
+      copy.setAttribute("aria-hidden", "true")
+      copy.setAttribute("inert", "")
+      Array.from(stage.children).forEach((child) => {
+        const el = child as HTMLElement
+        if (el.classList.contains("lens")) return
+        if (el.classList.contains("hero-film")) {
+          const film = el.cloneNode(false) as HTMLElement
+          const slide = el.querySelector(".hf-slide[data-active=\"1\"]")
+          const scrim = el.querySelector(".hf-scrim")
+          if (slide) film.appendChild(slide.cloneNode(true))
+          if (scrim) film.appendChild(scrim.cloneNode(true))
+          copy.appendChild(film)
+          return
+        }
+        copy.appendChild(el.cloneNode(true))
+      })
+      copy.querySelectorAll("[id]").forEach((n) => n.removeAttribute("id"))
+      // the page keeps one heading level 1: the copy's headline becomes a plain div with the same classes
+      copy.querySelectorAll("h1").forEach((h) => {
+        const div = document.createElement("div")
+        div.className = h.className
+        div.innerHTML = h.innerHTML
+        h.replaceWith(div)
+      })
+      copy.querySelectorAll("a, button").forEach((n) => n.setAttribute("tabindex", "-1"))
+      return copy
+    }
+
     const ensureClone = () => {
       if (clone || !fine) return
-      clone = buildLensCopy(stage)
+      clone = buildCopy()
       world.appendChild(clone)
       const copyH1 = clone.querySelector<HTMLElement>(".hero-h")
       if (copyH1) copyWaves = wave(letterList(copyH1))
@@ -133,102 +153,44 @@ export function HeroFx() {
       }
     }
 
-    const bounds = (): Bounds => {
-      const sr = stage.getBoundingClientRect()
-      return { minX: R, maxX: Math.max(R, sr.width - R), minY: R, maxY: Math.max(R, sr.height - R) }
-    }
-
-    // Home: the middle of the last word of the lime headline line ("evidence").
-    const goHome = () => {
-      const sr = stage.getBoundingClientRect()
-      const line = h1.querySelector<HTMLElement>(".hl.lime")
-      const ls = line ? letterList(line) : []
-      let i = ls.length
-      while (i > 0 && (ls[i - 1].textContent ?? "").trim() !== "") i--
-      const word = ls.slice(i)
-      if (!line || !word.length) return
-      const first = word[0].getBoundingClientRect()
-      const end = word[word.length - 1].getBoundingClientRect()
-      const lr = line.getBoundingClientRect()
-      body.x = (first.left + end.right) / 2 - sr.left
-      body.y = (lr.top + lr.bottom) / 2 - sr.top
-      body.vx = body.vy = 0
-      body.moved = false
-      clampTo(body, bounds())
-      lens.dataset.on = "1"
-      draw()
-      wake()
-    }
-
-    const draw = () => {
-      const t = performance.now() / 1000
-      const rest = !body.dragging && !body.vx && !body.vy
-      const y = body.y + (rest ? bob(t) : 0)
-      lens.style.transform = `translate3d(${body.x - R}px,${y - R}px,0)`
-      world.style.transform = `translate3d(${R - body.x * S}px,${R - y * S}px,0) scale(${S})`
-      if (glass) moveGlass(glass, t, body.vx / 60, body.vy / 60)
-    }
-
-    const loop = () => {
+    const lensTick = () => {
       raf = 0
-      if (!onScreen || document.hidden || !lens.dataset.on) return
-      const now = performance.now()
-      const dt = Math.min(0.05, (now - last) / 1000)
-      last = now
-      glide(body, dt, bounds())
-      draw()
-      raf = requestAnimationFrame(loop)
-    }
-    const wake = () => {
-      if (raf || !onScreen) return
-      last = performance.now()
-      raf = requestAnimationFrame(loop)
+      if (ptr.in) {
+        if (!lens.dataset.on) {
+          pos.x = ptr.x
+          pos.y = ptr.y
+        }
+        const vx = (ptr.x - pos.x) * 0.2
+        const vy = (ptr.y - pos.y) * 0.2
+        pos.x += vx
+        pos.y += vy
+        lens.style.transform = `translate3d(${pos.x - R}px,${pos.y - R}px,0)`
+        world.style.transform = `translate3d(${R - pos.x * S}px,${R - pos.y * S}px,0) scale(${S})`
+        if (glass) moveGlass(glass, performance.now() / 1000, vx, vy)
+        lens.dataset.on = "1"
+        raf = requestAnimationFrame(lensTick)
+      } else if (lens.dataset.on) {
+        delete lens.dataset.on
+      }
     }
 
-    const onDown = (e: PointerEvent) => {
-      if (e.button !== 0) return
-      lens.setPointerCapture(e.pointerId)
-      const sr = stage.getBoundingClientRect()
-      grab = { x: e.clientX - sr.left - body.x, y: e.clientY - sr.top - body.y }
-      body.dragging = true
-      body.moved = true
-      body.vx = body.vy = 0
-      trail = []
-      lens.dataset.drag = "1"
-      lens.dataset.used = "1"
-      wake()
-    }
     const onMove = (e: PointerEvent) => {
-      if (!body.dragging) return
       const sr = stage.getBoundingClientRect()
-      body.x = e.clientX - sr.left - grab.x
-      body.y = e.clientY - sr.top - grab.y
-      clampTo(body, bounds())
-      trail.push({ t: performance.now(), x: body.x, y: body.y })
-      if (trail.length > 12) trail.shift()
+      ptr = { x: e.clientX - sr.left, y: e.clientY - sr.top, in: true }
+      ensureClone()
+      if (!raf) raf = requestAnimationFrame(lensTick)
     }
-    const onUp = () => {
-      if (!body.dragging) return
-      body.dragging = false
-      const v = flingFrom(trail, performance.now())
-      body.vx = v.vx
-      body.vy = v.vy
-      delete lens.dataset.drag
-      wake()
+    const onLeave = () => {
+      ptr.in = false
+      if (!raf) raf = requestAnimationFrame(lensTick)
     }
-
     const onResize = () => {
       measure()
-      if (body.moved) clampTo(body, bounds())
-      else if (fine && clone) goHome()
-      draw()
     }
 
     const setPlaying = (on: boolean) => {
       playing = on
       waves.forEach((a) => (on ? a.play() : a.pause()))
-      onScreen = on
-      if (on) wake()
     }
     const io = new IntersectionObserver(([e]) => setPlaying(e.isIntersecting && !document.hidden))
     io.observe(stage)
@@ -239,7 +201,7 @@ export function HeroFx() {
     const film = stage.querySelector(".hero-film")
     const fo = new MutationObserver(() => {
       dropCopy()
-      if (fine) ensureClone()
+      if (ptr.in) ensureClone()
     })
     if (film) fo.observe(film, { attributes: true, attributeFilter: ["data-active"], subtree: true })
 
@@ -267,10 +229,8 @@ export function HeroFx() {
 
     window.addEventListener("resize", onResize)
     if (fine) {
-      lens.addEventListener("pointerdown", onDown)
-      lens.addEventListener("pointermove", onMove)
-      lens.addEventListener("pointerup", onUp)
-      lens.addEventListener("pointercancel", onUp)
+      stage.addEventListener("pointermove", onMove)
+      stage.addEventListener("pointerleave", onLeave)
     }
 
     return () => {
@@ -281,10 +241,8 @@ export function HeroFx() {
       waitObserver?.disconnect()
       document.removeEventListener("visibilitychange", onVis)
       window.removeEventListener("resize", onResize)
-      lens.removeEventListener("pointerdown", onDown)
-      lens.removeEventListener("pointermove", onMove)
-      lens.removeEventListener("pointerup", onUp)
-      lens.removeEventListener("pointercancel", onUp)
+      stage.removeEventListener("pointermove", onMove)
+      stage.removeEventListener("pointerleave", onLeave)
       waves.forEach((a) => a.cancel())
     }
   }, [])
@@ -292,7 +250,6 @@ export function HeroFx() {
   return (
     <div className="lens" ref={lensRef} aria-hidden="true">
       <LensGlass worldRef={worldRef} defsRef={defsRef} />
-      <span className="lens-hint">{lang === "fr" ? "Glissez-moi" : "Drag me"}</span>
     </div>
   )
 }
