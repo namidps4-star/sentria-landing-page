@@ -27,39 +27,48 @@ const Arrow = () => (
 /**
  * The centre card. The Problem panel is always on show. The Solution card sits behind it and slides
  * out to the right when a capability is open, widening the white frame as it goes.
+ * Every capability is rendered in the same grid cell and only the current one is visible, so the card
+ * is exactly as tall as the tallest capability on the page and never jumps when the text changes.
  */
 export function CapabilityScreen({
-  item,
+  items,
+  shown,
   open,
   labels,
   id,
   onPointerEnter,
   onPointerLeave,
 }: {
-  item: Capability
+  items: Capability[]
+  shown: number
   open: boolean
   labels: Labels
   id: string
   onPointerEnter?: PointerEventHandler<HTMLDivElement>
   onPointerLeave?: PointerEventHandler<HTMLDivElement>
 }) {
-  const [lead, action] = splitAlert(item.example)
   return (
     <div className={`afr-card${open ? " is-open" : ""}`} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
       <div className="afr-card-inner">
-        <div className="afr-lp" key={`p-${item.title}`}>
-          <h3 style={step(0)}>
-            <span className="afr-lp-a">{item.title}</span>
-            <span className="afr-lp-b">{item.problem}</span>
-          </h3>
-          <p className="afr-lp-does" style={step(1)}>
-            {item.does}
-          </p>
-          <ul className="afr-lp-chips" aria-label={labels.youImport} style={step(2)}>
-            {item.chips.map((c) => (
-              <li key={c}>{c}</li>
+        <div className="afr-lp">
+          <div className="afr-layers">
+            {items.map((item, i) => (
+              <div className="afr-layer" data-on={i === shown ? "1" : "0"} key={item.title}>
+                <h3 style={step(0)}>
+                  <span className="afr-lp-a">{item.title}</span>
+                  <span className="afr-lp-b">{item.problem}</span>
+                </h3>
+                <p className="afr-lp-does" style={step(1)}>
+                  {item.does}
+                </p>
+                <ul className="afr-lp-chips" aria-label={labels.youImport} style={step(2)}>
+                  {item.chips.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
           <span className="afr-pill-dark" aria-hidden="true">
             {open ? labels.hintOpen : labels.hint}
             <i>
@@ -69,19 +78,24 @@ export function CapabilityScreen({
         </div>
 
         <div className="afr-rp" id={id} aria-live="polite" aria-hidden={!open}>
-          <div className="afr-rp-body" key={`s-${item.title}`}>
-            <h3 style={step(0)}>{labels.alert}</h3>
-            <p className="afr-rp-alert" style={step(1)}>
-              {lead}
-              {action && <b>{action}</b>}
-            </p>
-            <a className="afr-pill-lime" href={labels.ctaHref} tabIndex={open ? 0 : -1} style={step(2)}>
-              {labels.cta}
-              <i>
-                <Arrow />
-              </i>
-            </a>
-          </div>
+          {items.map((item, i) => {
+            const [lead, action] = splitAlert(item.example)
+            return (
+              <div className="afr-layer afr-rp-body" data-on={i === shown ? "1" : "0"} key={item.title}>
+                <h3 style={step(0)}>{labels.alert}</h3>
+                <p className="afr-rp-alert" style={step(1)}>
+                  {lead}
+                  {action && <b>{action}</b>}
+                </p>
+                <a className="afr-pill-lime" href={labels.ctaHref} tabIndex={open && i === shown ? 0 : -1} style={step(2)}>
+                  {labels.cta}
+                  <i>
+                    <Arrow />
+                  </i>
+                </a>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

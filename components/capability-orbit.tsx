@@ -259,7 +259,8 @@ export function CapabilityOrbit({ items, labels }: { items: Capability[]; labels
       </div>
 
       <CapabilityScreen
-        item={items[shown]}
+        items={items}
+        shown={shown}
         open={active !== null}
         labels={labels}
         id={panelId}
