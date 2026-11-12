@@ -60,12 +60,23 @@ const path = require('path')
   console.log('== the off switch (used by the other suites)')
   {
     const c0 = await browser.newContext({ viewport: { width: 1440, height: 860 } })
-    await c0.addInitScript(() => localStorage.setItem('sentria-intro-v2', '1'))
+    await c0.addInitScript(() => localStorage.setItem('sentria-skip-intro', '1'))
     const p0 = await c0.newPage()
     await p0.goto(APP_URL, { waitUntil: 'commit' })
     await p0.waitForTimeout(500)
     pass(!/op-run/.test(await p0.evaluate(() => document.documentElement.className)), 'the switch skips it')
     await c0.close()
+  }
+
+  console.log('== a browser that still holds the old "seen" flag')
+  {
+    const cl = await browser.newContext({ viewport: { width: 1440, height: 860 } })
+    await cl.addInitScript(() => localStorage.setItem('sentria-intro-v2', '1'))
+    const pl = await cl.newPage()
+    await pl.goto(APP_URL, { waitUntil: 'commit' })
+    await pl.waitForTimeout(600)
+    pass(/op-run/.test(await pl.evaluate(() => document.documentElement.className)), 'the old flag is ignored, so it still plays')
+    await cl.close()
   }
 
   console.log('== French, new visitor')

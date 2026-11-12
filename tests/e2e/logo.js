@@ -8,7 +8,7 @@ const path = require('path')
   for (const w of [1440, 390]) {
     console.log(`== header mark at ${w}px`)
     const ctx = await browser.newContext({ viewport: { width: w, height: 800 } })
-    await ctx.addInitScript(() => localStorage.setItem('sentria-intro-v2', '1'))
+    await ctx.addInitScript(() => localStorage.setItem('sentria-skip-intro', '1'))
     const page = await ctx.newPage()
     const errs = []
     page.on('pageerror', (e) => errs.push(e.message))
