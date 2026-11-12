@@ -99,7 +99,19 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
 }
 
 export type Capability = { title: string; does: string; example: string; imports: string }
-export type Capabilities = { heading: string; items: Capability[]; notDo: string }
+export type Step = { title: string; text: string }
+export type Example = { title: string; lines: string[]; result: string }
+export type Faq = { q: string; a: string }
+export type Capabilities = {
+  heading: string
+  items: Capability[]
+  notDo: string
+  steps?: Step[]
+  stepsHeading?: string
+  example?: Example
+  faq?: Faq[]
+  faqHeading?: string
+}
 
 // What an expert in each activity gets. Examples are the product's own alert
 // wording with sample numbers. "Imports" is the file the product reads.
@@ -134,6 +146,29 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         },
       ],
       notDo: "SentrIA does not know what your wholesaler has in stock today, and it does not forecast demand beyond your last 30 days of sales.",
+      stepsHeading: "Start in three steps",
+      steps: [
+        { title: "Send your stock file", text: "Export your stock list from your software, or use a spreadsheet. You match the columns once." },
+        { title: "Read your alerts", text: "Each alert names the product, says what is wrong and tells you what to do." },
+        { title: "Act the same day", text: "Order, move or sell the products flagged. Next morning, the list is up to date." },
+      ],
+      example: {
+        title: "One product, one morning",
+        lines: [
+          "Product: paracetamol 500 mg",
+          "Stock on the shelf: 38 boxes",
+          "Sales: 8 boxes a day",
+          "Next delivery: in 5 days",
+        ],
+        result: "38 boxes last about 4 days. The delivery arrives on day 5. SentrIA flags it today, so the order goes out before the shelf empties. The numbers are an example.",
+      },
+      faqHeading: "Questions pharmacists ask",
+      faq: [
+        { q: "What file do I need?", a: "A stock list with the product name, quantity on hand, minimum stock, sales over the last 30 days and expiry date. Column names can differ from ours." },
+        { q: "Does it connect to my software?", a: "Not today. You upload a file. If your software can export a spreadsheet, it works." },
+        { q: "Who can see my figures?", a: "Only your company. Each company's figures are kept separate from every other company's." },
+        { q: "Do I have to change how I work?", a: "No. You keep your routine and check the alert list each morning." },
+      ],
     },
     fr: {
       heading: "Ce que SentrIA fait dans votre pharmacie",
@@ -164,6 +199,29 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         },
       ],
       notDo: "SentrIA ne connaît pas le stock de votre grossiste aujourd'hui, et ne prévoit pas la demande au-delà de vos ventes des 30 derniers jours.",
+      stepsHeading: "Démarrer en trois étapes",
+      steps: [
+        { title: "Envoyez votre fichier de stock", text: "Exportez votre liste de stock depuis votre logiciel, ou utilisez un tableur. Vous associez les colonnes une seule fois." },
+        { title: "Lisez vos alertes", text: "Chaque alerte nomme le produit, dit ce qui ne va pas et indique quoi faire." },
+        { title: "Agissez le jour même", text: "Commandez, déplacez ou écoulez les produits signalés. Le lendemain matin, la liste est à jour." },
+      ],
+      example: {
+        title: "Un produit, un matin",
+        lines: [
+          "Produit : paracétamol 500 mg",
+          "Stock en rayon : 38 boîtes",
+          "Ventes : 8 boîtes par jour",
+          "Prochaine livraison : dans 5 jours",
+        ],
+        result: "38 boîtes tiennent environ 4 jours. La livraison arrive au 5e jour. SentrIA le signale aujourd'hui, donc la commande part avant que le rayon ne se vide. Les chiffres sont un exemple.",
+      },
+      faqHeading: "Les questions des pharmaciens",
+      faq: [
+        { q: "Quel fichier faut-il ?", a: "Une liste de stock avec le nom du produit, la quantité en stock, le stock minimum, les ventes des 30 derniers jours et la date de péremption. Les noms de colonnes peuvent différer des nôtres." },
+        { q: "Est-ce relié à mon logiciel ?", a: "Pas encore. Vous importez un fichier. Si votre logiciel exporte un tableur, cela fonctionne." },
+        { q: "Qui peut voir mes chiffres ?", a: "Seule votre entreprise. Les chiffres de chaque entreprise sont séparés de ceux des autres." },
+        { q: "Dois-je changer ma façon de travailler ?", a: "Non. Vous gardez votre routine et vous consultez la liste d'alertes chaque matin." },
+      ],
     },
   },
   "grossiste-pharma": {
