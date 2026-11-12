@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import Image from "next/image"
 import { Header } from "./header"
-import { Footer } from "./sections"
+import { Footer, Proof } from "./sections"
 import { AfricaActivities } from "./africa-activities"
 import { Motion } from "./motion"
 import "./africa.css"
@@ -87,6 +87,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
             ))}
           </ul>
         </section>
+        <Proof />
         {extra}
         {activities && <AfricaActivities lang={activities} />}
       </main>
