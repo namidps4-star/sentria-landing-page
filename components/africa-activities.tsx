@@ -15,7 +15,7 @@ export function AfricaActivities({ lang }: { lang: "en" | "fr" }) {
           const firstLive = sector.activities.find((a) => a.live)
           const href = firstLive ? `${base}/${firstLive.slug}` : undefined
           return (
-            <li key={sector.key} className={`afr-hub-card${href ? "" : " afr-hub-soon"}`}>
+            <li key={sector.key} className={`afr-hub-card${href ? "" : " afr-hub-soon"}`} data-rv="rise" style={{ "--i": SECTOR_LIST.indexOf(sector) } as React.CSSProperties}>
               {href ? (
                 <Link href={href} className="afr-hub-inner">
                   <HubCardContent sector={sector} lang={lang} seeLabel={seeLabel} hasLink />

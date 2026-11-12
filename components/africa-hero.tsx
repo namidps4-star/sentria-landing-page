@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Header } from "./header"
 import { Footer } from "./sections"
 import { AfricaActivities } from "./africa-activities"
+import { Motion } from "./motion"
 import "./africa.css"
 
 export type Copy = {
@@ -55,18 +56,18 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
         <section className="afr-hero" aria-labelledby={`${id}-h`}>
           <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
           <div className="afr-copy">
-            <h1 id={`${id}-h`}>
+            <h1 id={`${id}-h`} data-rv="rise">
               {copy.h1[0]}
               <br />
               <span className="afr-lime">{copy.h1[1]}</span>
               <br />
               {copy.h1[2]}
             </h1>
-            <p className="afr-lead">
+            <p className="afr-lead" data-rv="rise" style={{ "--i": 1 } as React.CSSProperties}>
               {copy.lead}
             </p>
-            <p className="afr-start">{copy.start}</p>
-            <div className="afr-actions">
+            <p className="afr-start" data-rv="fade" style={{ "--i": 2 } as React.CSSProperties}>{copy.start}</p>
+            <div className="afr-actions" data-rv="rise" style={{ "--i": 2 } as React.CSSProperties}>
               <a className="afr-btn afr-btn-p" href="#demo">
                 {copy.cta}
               </a>
@@ -78,9 +79,9 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
           {panel}
           <p className="afr-credit">Photo: Ninthgrid, Unsplash</p>
           <ul className="afr-stats" aria-label="SentrIA">
-            {copy.stats.map(([b, t]) => (
-              <li key={b}>
-                <b>{b}</b>
+            {copy.stats.map(([b, t], i) => (
+              <li key={b} data-rv="rise" style={{ "--i": i } as React.CSSProperties}>
+                <b className="afr-lime">{b}</b>
                 {t}
               </li>
             ))}
@@ -90,6 +91,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
         {activities && <AfricaActivities lang={activities} />}
       </main>
       <Footer />
+      <Motion />
     </>
   )
 }

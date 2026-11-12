@@ -9,8 +9,8 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
     <section className="afr-caps" aria-labelledby={`afr-caps-${slug}-${lang}`}>
       <h2 id={`afr-caps-${slug}-${lang}`}>{c.heading}</h2>
       <ul>
-        {c.items.map((item) => (
-          <li key={item.title} className="afr-caps-row">
+        {c.items.map((item, i) => (
+          <li key={item.title} className="afr-caps-row" data-rv="rise" style={{ "--i": i } as React.CSSProperties}>
             <div className="afr-caps-copy">
               <h3>{item.title}</h3>
               <p>{item.does}</p>
