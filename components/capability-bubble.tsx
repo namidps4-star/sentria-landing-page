@@ -1,5 +1,5 @@
 import { useId, type ButtonHTMLAttributes } from "react"
-import type { CapabilityIcon } from "@/content/africa-activities"
+import type { CapabilityIcon } from "@/content/africa-capabilities"
 import { IconPath } from "@/components/capability-icons"
 
 type Props = {

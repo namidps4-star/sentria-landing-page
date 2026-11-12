@@ -1,19 +1,23 @@
 import "./africa-capabilities.css"
-import { CAPABILITIES } from "@/content/africa-activities"
+import { CAPABILITIES } from "@/content/africa-capabilities"
 import { CapabilityOrbit } from "@/components/capability-orbit"
 
 const LABELS = {
   en: {
     alert: "SentrIA alert",
     youImport: "You import",
-    restTitle: "Hover a bubble",
-    restText: "to see what SentrIA does for you.",
+    hint: "Hover a bubble",
+    hintOpen: "Solution open",
+    cta: "Book a demo",
+    ctaHref: "#demo",
   },
   fr: {
     alert: "Alerte SentrIA",
     youImport: "Vous importez",
-    restTitle: "Survolez une bulle",
-    restText: "pour voir ce que SentrIA fait pour vous.",
+    hint: "Survolez une bulle",
+    hintOpen: "Solution ouverte",
+    cta: "Demander une démo",
+    ctaHref: "#demo",
   },
 } as const
 

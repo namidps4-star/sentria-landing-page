@@ -1,4 +1,4 @@
-import type { CapabilityIcon } from "@/content/africa-activities"
+import type { CapabilityIcon } from "@/content/africa-capabilities"
 
 const PATHS: Record<CapabilityIcon, string> = {
   box: "M3 8l9-5 9 5v8l-9 5-9-5V8z M3 8l9 5 9-5 M12 13v8",

@@ -1,47 +1,89 @@
-import type { CSSProperties } from "react"
-import type { Capability } from "@/content/africa-activities"
+import type { CSSProperties, PointerEventHandler } from "react"
+import type { Capability } from "@/content/africa-capabilities"
 
-type Labels = { alert: string; youImport: string; restTitle: string; restText: string }
+type Labels = {
+  alert: string
+  youImport: string
+  hint: string
+  hintOpen: string
+  cta: string
+  ctaHref: string
+}
 
 const step = (i: number) => ({ "--i": i }) as CSSProperties
 
-/** The white pop-up screen in the middle. Shows one capability, or a prompt when nothing is hovered. */
-export function CapabilityScreen({ item, labels, id }: { item: Capability | null; labels: Labels; id: string }) {
+/** Split an alert at its last colon: the lead-in, then the action to take (set in lime). */
+function splitAlert(text: string): [string, string] {
+  const m = /^(.*[:：]\s)(\S.*)$/.exec(text)
+  return m ? [m[1], m[2]] : [text, ""]
+}
+
+const Arrow = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+)
+
+/**
+ * The centre card. The Problem panel is always on show. The Solution card sits behind it and slides
+ * out to the right when a capability is open, widening the white frame as it goes.
+ */
+export function CapabilityScreen({
+  item,
+  open,
+  labels,
+  id,
+  onPointerEnter,
+  onPointerLeave,
+}: {
+  item: Capability
+  open: boolean
+  labels: Labels
+  id: string
+  onPointerEnter?: PointerEventHandler<HTMLDivElement>
+  onPointerLeave?: PointerEventHandler<HTMLDivElement>
+}) {
+  const [lead, action] = splitAlert(item.example)
   return (
-    <div className="afr-scr" id={id} aria-live="polite">
-      <div className="afr-scr-bar" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-        <b>SentrIA</b>
-      </div>
-      {item ? (
-        <div className="afr-scr-body" key={item.title}>
-          <h3 style={step(0)}>{item.title}</h3>
-          <p className="afr-scr-does" style={step(1)}>
+    <div className={`afr-card${open ? " is-open" : ""}`} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
+      <div className="afr-card-inner">
+        <div className="afr-lp" key={`p-${item.title}`}>
+          <h3 style={step(0)}>
+            <span className="afr-lp-a">{item.title}</span>
+            <span className="afr-lp-b">{item.problem}</span>
+          </h3>
+          <p className="afr-lp-does" style={step(1)}>
             {item.does}
           </p>
-          <p className="afr-scr-prob" style={step(2)}>
-            <i aria-hidden="true" />
-            {item.problem}
-          </p>
-          <div className="afr-scr-alert" style={step(3)}>
-            <span>
-              <i aria-hidden="true" />
-              {labels.alert}
-            </span>
-            <p>{item.example}</p>
+          <ul className="afr-lp-chips" aria-label={labels.youImport} style={step(2)}>
+            {item.chips.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+          <span className="afr-pill-dark" aria-hidden="true">
+            {open ? labels.hintOpen : labels.hint}
+            <i>
+              <Arrow />
+            </i>
+          </span>
+        </div>
+
+        <div className="afr-rp" id={id} aria-live="polite" aria-hidden={!open}>
+          <div className="afr-rp-body" key={`s-${item.title}`}>
+            <h3 style={step(0)}>{labels.alert}</h3>
+            <p className="afr-rp-alert" style={step(1)}>
+              {lead}
+              {action && <b>{action}</b>}
+            </p>
+            <a className="afr-pill-lime" href={labels.ctaHref} tabIndex={open ? 0 : -1} style={step(2)}>
+              {labels.cta}
+              <i>
+                <Arrow />
+              </i>
+            </a>
           </div>
-          <p className="afr-scr-imp" style={step(4)}>
-            <b>{labels.youImport}:</b> {item.imports}
-          </p>
         </div>
-      ) : (
-        <div className="afr-scr-rest" key="rest">
-          <h3 style={step(0)}>{labels.restTitle}</h3>
-          <p style={step(1)}>{labels.restText}</p>
-        </div>
-      )}
+      </div>
     </div>
   )
 }
