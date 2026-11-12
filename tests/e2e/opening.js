@@ -1,6 +1,6 @@
-// The opening (about 3.7 s, first visit only): the letters of SentrIA flicker through the site's faces while
+// The opening (about 3.7 s, on every fresh load): the letters of SentrIA flicker through the site's faces while
 // lime blocks flash over them, a LOADING counter runs to 100% along the bottom edge, the name settles, the
-// tagline steps in, and the black panel dissolves tile by tile. Returning visitors skip it.
+// tagline steps in, and the black panel dissolves tile by tile. It plays on every fresh load.
 const { playwright, LAUNCH, APP_URL, pass, results, SHOTS } = require('./env')
 const { chromium } = playwright()
 const path = require('path')
@@ -51,10 +51,22 @@ const path = require('path')
   const h1 = await page.locator('#hero-h').boundingBox()
   pass(!!h1 && h1.width > 300, 'the headline is on screen')
 
-  console.log('== returning visit (same visitor)')
+  console.log('== reload: it plays again')
   await page.reload({ waitUntil: 'commit' })
-  await page.waitForTimeout(500)
-  pass(await page.evaluate(() => getComputedStyle(document.querySelector('.op')).visibility === 'hidden' && !/op-run/.test(document.documentElement.className)), 'it does not play again')
+  await page.waitForTimeout(1500)
+  pass(await page.evaluate(() => getComputedStyle(document.querySelector('.op')).visibility === 'visible' && /op-run/.test(document.documentElement.className)), 'a fresh load plays it again')
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.op')).visibility === 'hidden', null, { timeout: 7000 }).catch(() => {})
+
+  console.log('== the off switch (used by the other suites)')
+  {
+    const c0 = await browser.newContext({ viewport: { width: 1440, height: 860 } })
+    await c0.addInitScript(() => localStorage.setItem('sentria-intro-v2', '1'))
+    const p0 = await c0.newPage()
+    await p0.goto(APP_URL, { waitUntil: 'commit' })
+    await p0.waitForTimeout(500)
+    pass(!/op-run/.test(await p0.evaluate(() => document.documentElement.className)), 'the switch skips it')
+    await c0.close()
+  }
 
   console.log('== French, new visitor')
   {

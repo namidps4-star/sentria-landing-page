@@ -34,14 +34,14 @@ function MarkPieces() {
 }
 
 /**
- * The opening, about 3.7 s, only on a first visit. The dome mark settles, the letters of SentrIA flicker
+ * The opening, about 3.7 s, on every fresh load of the home page. The dome mark settles, the letters of SentrIA flicker
  * through the site's typefaces while lime blocks flash over them, and a LOADING counter runs to 100% along
  * the bottom edge. The name settles, the lime shards grow, the tagline steps in, then the black panel
  * dissolves tile by tile to show the page.
  *
  * The letters, blocks and counter are driven by opening-fx.ts; the dissolve is pure CSS, so the panel
  * ends itself (visibility: hidden) even if no script runs. Only shown when <html> has .op-run, which the
- * head script sets before paint, once per visitor and never with reduced motion.
+ * head script sets before paint (never with reduced motion).
  * The timings are shared with the hero entrance (--t0) and the scroll unlock (components/motion.tsx).
  */
 export function Opening() {

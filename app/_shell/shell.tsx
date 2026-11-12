@@ -138,15 +138,15 @@ export const viewport: Viewport = {
 /**
  * Runs before first paint: picks the language, marks that JavaScript is on
  * (so reveal animations may hide things), and decides whether the opening
- * plays. The opening plays on a visitor's first visit only (remembered in localStorage, so a returning
- * visitor skips it), only on the home page, and never with reduced motion. If storage is blocked the
- * opening is skipped, so it can never replay.
+ * plays. The opening plays on every fresh load of the home page, and never with reduced motion. Setting
+ * localStorage 'sentria-intro-v2' to anything switches it off (used by the browser tests; nothing in the
+ * site sets it). If storage is blocked the opening is skipped.
  */
 const ARTICLE_LANG = JSON.stringify(
   Object.fromEntries(ARTICLE_PAGES.map((page) => [page.slug, page.lang]))
 )
 
-const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=localStorage.getItem('sentria-intro-v2');var p=location.pathname;if(!rm&&!seen&&['/','/en','/fr','/en/','/fr/'].indexOf(p)>-1){d.classList.add('op-run','op-wait');localStorage.setItem('sentria-intro-v2','1');setTimeout(function(){d.classList.remove('op-wait')},900)}d.classList.add('js')}catch(e){d.classList.add('js')}})();`
+const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var skip=localStorage.getItem('sentria-intro-v2');var p=location.pathname;if(!rm&&!skip&&['/','/en','/fr','/en/','/fr/'].indexOf(p)>-1){d.classList.add('op-run','op-wait');setTimeout(function(){d.classList.remove('op-wait')},900)}d.classList.add('js')}catch(e){d.classList.add('js')}})();`
 
 
 /** The page shell for one language section: its own <html lang>, fonts and head. */
