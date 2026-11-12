@@ -1,12 +1,13 @@
 /* What SentrIA does — white editorial model.
-   Per capability: a light "Problem" circle on the left, and a green "Solution" circle under the
-   description. Both are perfect circles (aspect-ratio 1, radius 50%) and float gently; the green one
-   opens on hover/tap to show SentrIA at work. */
+   Per capability: ONE perfect circle. White top half = the Problem, green bottom half = the Solution.
+   It floats gently; on hover/tap the green rises and opens the SentrIA feature with its example alert.
+   Open state is driven by the .is-open class only (set from React), never by :hover, so touch
+   screens, where :hover sticks after a tap, behave. */
 .afr-caps{background:#fff;color:#111;padding:clamp(64px,9vh,112px) var(--pad,56px);overflow:hidden;border-top:1px solid #ececea}
 .afr-caps h2{margin:0 0 clamp(48px,6vw,80px);font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,52px);line-height:1.05;letter-spacing:-.03em;color:#111}
 
-.afr-caps-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(64px,8vw,112px)}
-.afr-caps-row{display:grid;grid-template-columns:clamp(260px,26vw,360px) minmax(0,1fr);align-items:center;gap:clamp(32px,5vw,88px)}
+.afr-caps-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(56px,7vw,104px)}
+.afr-caps-row{display:grid;grid-template-columns:clamp(300px,32vw,460px) minmax(0,1fr);align-items:center;gap:clamp(32px,6vw,96px)}
 
 /* Shared label: dot + word */
 .afr-caps-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-display),sans-serif;font-weight:600;font-size:clamp(16px,1.4vw,19px);letter-spacing:-.01em;color:#111}
@@ -14,47 +15,53 @@
 .afr-caps-dot-prob{background:#e5484d;box-shadow:0 0 0 4px rgba(229,72,77,.22)}
 .afr-caps-dot-sol{background:#111;box-shadow:0 0 0 4px rgba(17,17,17,.16)}
 
-/* Problem: light circle */
-.afr-caps-prob{animation:afrFloat 8s ease-in-out infinite}
-.afr-caps-pbody{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;aspect-ratio:1/1;padding:14%;border-radius:50%;background:#f1f1ef;box-shadow:inset 0 0 0 1px #e6e6e2;text-align:center}
-.afr-caps-pbody p{margin:0;font-size:clamp(14px,1.15vw,16px);line-height:1.5;color:#55554f}
+/* The bubble is the button */
+.afr-caps-bub{position:relative;display:block;width:100%;margin:0;padding:0;border:0;background:transparent;font:inherit;color:inherit;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:afrFloat 7s ease-in-out infinite}
+.afr-caps-row:nth-child(even) .afr-caps-bub{animation-delay:-3s}
+.afr-caps-orb{position:relative;display:block;width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:#f1f1ef;box-shadow:inset 0 0 0 1px #e6e6e2;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.afr-caps-bub.is-open .afr-caps-orb{transform:scale(1.04)}
+.afr-caps-bub:focus-visible{outline:none}
+.afr-caps-bub:focus-visible .afr-caps-orb{box-shadow:0 0 0 2px #fff,0 0 0 4px #111}
+
+/* Green layer: bottom half at rest, rises to leave only a white cap when open */
+.afr-caps-green{position:absolute;inset:0;background:#c6ff4a;clip-path:inset(50% 0 0 0);transition:clip-path .7s cubic-bezier(.16,1,.3,1)}
+.afr-caps-bub.is-open .afr-caps-green{clip-path:inset(20% 0 0 0)}
+
+/* Text zones are laid over the layers */
+.afr-caps-zone{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:0 17%;transition:opacity .35s ease,transform .5s cubic-bezier(.16,1,.3,1)}
+.afr-caps-top{top:0;height:50%}
+.afr-caps-ptxt{display:block;font-size:clamp(14px,1.15vw,16px);line-height:1.5;color:#55554f;transition:opacity .25s ease}
+.afr-caps-idle{bottom:0;height:50%}
+.afr-caps-hint{display:block;max-width:20ch;font-size:15px;line-height:1.45;font-weight:500;color:#33332f}
+.afr-caps-feat{top:20%;bottom:20%;padding:0 15%;opacity:0;transform:translateY(10px);pointer-events:none}
+.afr-caps-v{display:block;font-size:clamp(14px,1.15vw,16px);line-height:1.4;font-weight:600;color:#111}
+.afr-caps-f{display:block;font-size:12.5px;line-height:1.45;color:#33332f}
+.afr-caps-f b{color:#111}
+
+/* Open: Problem collapses to a label in the white cap, Solution hint gives way to the feature */
+.afr-caps-bub.is-open .afr-caps-top{transform:translateY(-16%)}
+.afr-caps-bub.is-open .afr-caps-ptxt{opacity:0}
+.afr-caps-bub.is-open .afr-caps-idle{opacity:0;transform:translateY(10px)}
+.afr-caps-bub.is-open .afr-caps-feat{opacity:1;transform:translateY(0);transition-delay:.18s}
 
 /* Editorial side */
 .afr-caps h3{margin:0 0 12px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.15;letter-spacing:-.02em;color:#111}
 .afr-caps-ed>p{margin:0;max-width:58ch;font-size:16px;line-height:1.6;color:#55554f}
 
-/* Solution: green circle. It is the button. */
-.afr-caps-bub{position:relative;display:block;width:min(100%,clamp(320px,30vw,420px));margin:32px 0 0;padding:0;border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:afrFloat 7s ease-in-out -3s infinite}
-.afr-caps-body{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:1/1;padding:13%;border-radius:50%;background:#c6ff4a;text-align:center;transition:transform .7s cubic-bezier(.16,1,.3,1)}
-.afr-caps-bub.is-open .afr-caps-body,.afr-caps-bub:hover .afr-caps-body{transform:scale(1.05)}
-.afr-caps-bub:focus-visible{outline:none}
-.afr-caps-bub:focus-visible .afr-caps-body{box-shadow:0 0 0 2px #fff,0 0 0 4px #111}
-
-/* Both faces share one grid cell, so the circle never changes size */
-.afr-caps-face{grid-area:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity .35s ease,transform .5s cubic-bezier(.16,1,.3,1)}
-.afr-caps-idle{opacity:1;transform:translateY(0)}
-.afr-caps-hint{max-width:20ch;font-size:15px;line-height:1.45;font-weight:500;color:#33332f}
-.afr-caps-open{opacity:0;transform:translateY(10px);pointer-events:none}
-.afr-caps-bub.is-open .afr-caps-idle,.afr-caps-bub:hover .afr-caps-idle{opacity:0;transform:translateY(-10px)}
-.afr-caps-bub.is-open .afr-caps-open,.afr-caps-bub:hover .afr-caps-open{opacity:1;transform:translateY(0);transition-delay:.18s}
-.afr-caps-v{display:block;font-size:clamp(14px,1.15vw,16px);line-height:1.4;font-weight:600;color:#111}
-.afr-caps-f{display:block;font-size:12.5px;line-height:1.45;color:#33332f}
-.afr-caps-f b{color:#111}
-
-@keyframes afrFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(8px,-12px,0)}}
+@keyframes afrFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(6px,-10px,0)}}
 
 .afr-caps-not{margin:clamp(48px,6vw,72px) 0 0;max-width:72ch;font-size:15px;line-height:1.6;color:#6b6b66}
 
 @media (max-width:760px){
   .afr-caps{padding:64px var(--pad,20px)}
   .afr-caps-row{grid-template-columns:1fr;gap:28px;justify-items:start}
-  .afr-caps-prob{width:min(100%,300px)}
-  .afr-caps-bub{width:min(100%,360px);margin-top:28px}
-  .afr-caps-body{padding:11%}
+  .afr-caps-bub{width:min(100%,360px)}
+  .afr-caps-zone{padding:0 14%}
+  .afr-caps-feat{padding:0 13%}
   .afr-caps-v{font-size:14px}
   .afr-caps-f{font-size:12px}
 }
 @media (prefers-reduced-motion:reduce){
-  .afr-caps-prob,.afr-caps-bub{animation:none}
-  .afr-caps-body,.afr-caps-face{transition:none}
+  .afr-caps-bub{animation:none}
+  .afr-caps-orb,.afr-caps-green,.afr-caps-zone,.afr-caps-ptxt{transition:none}
 }

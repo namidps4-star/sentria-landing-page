@@ -3,16 +3,18 @@
 import { useId, useRef, useState, type PointerEvent } from "react"
 
 type Props = {
+  problem: string
   example: string
   imports: string
-  labels: { solution: string; hint: string; example: string; youImport: string }
+  labels: { problem: string; solution: string; hint: string; example: string; youImport: string }
 }
 
 /**
- * The green "Solution" half-disc. Hover (mouse) or tap/Enter (touch, keyboard)
- * opens it to show the real SentrIA alert and what the user imports.
+ * One circle: white top half = the Problem, green bottom half = the Solution.
+ * Hover (mouse) or tap/Enter (touch, keyboard) lifts the green to open the SentrIA
+ * feature, with its real example alert and what the user imports.
  */
-export function CapabilityBubble({ example, imports, labels }: Props) {
+export function CapabilityBubble({ problem, example, imports, labels }: Props) {
   const [open, setOpen] = useState(false)
   const lastPointer = useRef("")
   const panelId = useId()
@@ -45,15 +47,26 @@ export function CapabilityBubble({ example, imports, labels }: Props) {
       onPointerLeave={onPointerLeave}
       onClick={onClick}
     >
-      <span className="afr-caps-body">
-        <span className="afr-caps-face afr-caps-idle">
+      <span className="afr-caps-orb">
+        <span className="afr-caps-green" aria-hidden="true" />
+
+        <span className="afr-caps-zone afr-caps-top">
+          <span className="afr-caps-tag">
+            <i className="afr-caps-dot afr-caps-dot-prob" aria-hidden="true" />
+            {labels.problem}
+          </span>
+          <span className="afr-caps-ptxt">{problem}</span>
+        </span>
+
+        <span className="afr-caps-zone afr-caps-idle">
           <span className="afr-caps-tag">
             <i className="afr-caps-dot afr-caps-dot-sol" aria-hidden="true" />
             {labels.solution}
           </span>
           <span className="afr-caps-hint">{labels.hint}</span>
         </span>
-        <span className="afr-caps-face afr-caps-open" id={panelId}>
+
+        <span className="afr-caps-zone afr-caps-feat" id={panelId}>
           <span className="afr-caps-tag">
             <i className="afr-caps-dot afr-caps-dot-sol" aria-hidden="true" />
             {labels.example}

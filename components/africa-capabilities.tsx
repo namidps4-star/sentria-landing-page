@@ -29,19 +29,15 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       <ul className="afr-caps-list">
         {c.items.map((item) => (
           <li key={item.title} className="afr-caps-row">
-            <div className="afr-caps-prob">
-              <div className="afr-caps-pbody">
-                <span className="afr-caps-tag">
-                  <i className="afr-caps-dot afr-caps-dot-prob" aria-hidden="true" />
-                  {labels.problem}
-                </span>
-                <p>{item.problem}</p>
-              </div>
-            </div>
+            <CapabilityBubble
+              problem={item.problem}
+              example={item.example}
+              imports={item.imports}
+              labels={labels}
+            />
             <div className="afr-caps-ed">
               <h3>{item.title}</h3>
               <p>{item.does}</p>
-              <CapabilityBubble example={item.example} imports={item.imports} labels={labels} />
             </div>
           </li>
         ))}
