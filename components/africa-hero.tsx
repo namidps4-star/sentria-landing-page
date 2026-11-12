@@ -47,7 +47,7 @@ export const AFRIQUE_FR: Copy = {
 }
 
 /* The regional hero: pharmacy first, for African pharmacies. */
-export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode }) {
+export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode }) {
   return (
     <>
       <Header />
@@ -75,6 +75,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra }: 
               </a>
             </div>
           </div>
+          {panel}
           <p className="afr-credit">Photo: Ninthgrid, Unsplash</p>
           <ul className="afr-stats" aria-label="SentrIA">
             {copy.stats.map(([b, t]) => (

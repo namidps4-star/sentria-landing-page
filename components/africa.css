@@ -36,15 +36,28 @@
 }
 .afr-caps{background:var(--ink,#0b0c08);color:var(--cream,#f5f3ea);padding:clamp(56px,8vh,96px) var(--pad,56px);border-top:1px solid rgba(245,243,234,.14)}
 .afr-caps h2{margin:0 0 32px;font-weight:600;font-size:clamp(28px,3.2vw,44px);letter-spacing:-.02em}
-.afr-caps ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.afr-caps li{padding:28px;border:1px solid rgba(245,243,234,.14);border-radius:20px;display:flex;flex-direction:column;gap:12px}
+.afr-caps ul{list-style:none;margin:0;padding:0}
+.afr-caps li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px;padding:32px 0;border-top:1px solid rgba(245,243,234,.14)}
 .afr-caps h3{margin:0;font-size:20px;font-weight:600}
 .afr-caps li p{margin:0;font-size:15px;line-height:1.55;opacity:.9}
-.afr-caps blockquote{margin:6px 0 0;padding:12px 16px;border-left:3px solid var(--lime,#d6ff3f);background:rgba(245,243,234,.04);font-size:15px;line-height:1.5;border-radius:0 12px 12px 0}
+.afr-caps blockquote{margin:0;align-self:start;padding:14px 18px;background:rgba(214,255,63,.08);border-radius:12px;font-size:16px;line-height:1.5;color:var(--cream,#f5f3ea)}
 .afr-caps-imp{font-size:14px!important;opacity:.75!important}
 .afr-caps-not{margin:28px 0 0;max-width:72ch;font-size:15px;line-height:1.6;opacity:.8}
 @media (max-width:760px){
-  .afr-caps ul{grid-template-columns:1fr}
-  .afr-caps li{padding:22px}
+  .afr-caps li{grid-template-columns:1fr;padding:24px 0}
+}
+
+
+.afr-panel{position:relative;z-index:1;margin:0 var(--pad,56px) 40px;max-width:520px;padding:24px;border-radius:20px;background:rgba(11,12,8,.72);backdrop-filter:blur(14px);border:1px solid rgba(245,243,234,.14)}
+.afr-panel-head{margin:0 0 16px;display:flex;flex-direction:column;gap:4px}
+.afr-panel-head b{font-size:16px;font-weight:600}
+.afr-panel-head span{font-size:13px;opacity:.7}
+.afr-panel ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.afr-alert{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:rgba(245,243,234,.05);font-size:15px;line-height:1.45}
+.afr-alert i{flex:none;width:9px;height:9px;margin-top:6px;border-radius:50%;background:var(--lime,#d6ff3f)}
+.afr-alert-critical i{background:#ff7a5c}
+.afr-alert-warning i{background:#ffc857}
+@media (min-width:961px){
+  .afr-hero .afr-panel{position:absolute;right:var(--pad,56px);bottom:150px;margin:0;width:min(440px,32vw);z-index:1}
 }
 

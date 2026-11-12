@@ -273,3 +273,17 @@ export const ACTIVITY_LIST: { slug: string; name: Record<"en" | "fr", string>; t
     teaser: { en: "Days in storage and hours left before spoilage.", fr: "Jours en stockage et heures restantes avant la détérioration." },
   },
 ]
+
+// Example alerts shown in the hero of the pharmacy page. Sample numbers, real wording.
+export const ALERT_PREVIEW: Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]> = {
+  en: [
+    { level: "critical", text: "Stock-out imminent: 38 units left (minimum: 40): order now" },
+    { level: "warning", text: "Product expires in 30 days: sell or return to supplier" },
+    { level: "warning", text: "7 days promised, 11 days in reality (up to 14): adjust your ordering" },
+  ],
+  fr: [
+    { level: "critical", text: "Rupture imminente : il reste 38 unités (minimum requis : 40) : commandez maintenant" },
+    { level: "warning", text: "Produit expire dans 30 jours : écoulez ou retournez au fournisseur" },
+    { level: "warning", text: "7 jours promis, 11 jours en réalité (jusqu'à 14) : ajustez vos commandes" },
+  ],
+}
