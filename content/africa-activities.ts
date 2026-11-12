@@ -334,6 +334,103 @@ export const ACTIVITY_LIST: { slug: string; name: Record<"en" | "fr", string>; t
   },
 ]
 
+export type SectorActivity = {
+  slug: string
+  name: Record<"en" | "fr", string>
+  live: boolean
+}
+
+export type Sector = {
+  key: string
+  name: Record<"en" | "fr", string>
+  direct: Record<"en" | "fr", string>
+  activities: SectorActivity[]
+}
+
+// Hub page: one card per sector, speaks directly to the expert.
+// "direct" is a single sentence addressed to the person who runs that business.
+export const SECTOR_LIST: Sector[] = [
+  {
+    key: "health",
+    name: { en: "Health", fr: "Santé" },
+    direct: {
+      en: "You run a pharmacy, clinic or lab. Your stock expires. Your deliveries run late. SentrIA tells you before it costs you.",
+      fr: "Vous gérez une pharmacie, une clinique ou un laboratoire. Vos stocks périment. Vos livraisons arrivent en retard. SentrIA vous prévient avant que ça vous coûte.",
+    },
+    activities: [
+      { slug: "pharmacie", name: { en: "Pharmacy", fr: "Pharmacie" }, live: true },
+      { slug: "grossiste-pharma", name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" }, live: true },
+      { slug: "clinique-hopital", name: { en: "Clinic / Hospital", fr: "Clinique / Hôpital" }, live: false },
+      { slug: "laboratoire", name: { en: "Laboratory", fr: "Laboratoire" }, live: false },
+      { slug: "veterinaire", name: { en: "Veterinary clinic", fr: "Clinique vétérinaire" }, live: false },
+    ],
+  },
+  {
+    key: "agriculture",
+    name: { en: "Agriculture", fr: "Agriculture" },
+    direct: {
+      en: "You grow or store produce. Every extra day in storage risks a loss. SentrIA tracks each lot and warns you before it spoils.",
+      fr: "Vous produisez ou stockez des récoltes. Chaque jour de trop en stockage risque une perte. SentrIA suit chaque lot et vous prévient avant la détérioration.",
+    },
+    activities: [
+      { slug: "exploitation-agricole", name: { en: "Farm", fr: "Exploitation agricole" }, live: true },
+      { slug: "cooperative-agricole", name: { en: "Agricultural cooperative", fr: "Coopérative agricole" }, live: false },
+      { slug: "silo-stockage", name: { en: "Storage silo", fr: "Silo de stockage" }, live: false },
+    ],
+  },
+  {
+    key: "retail",
+    name: { en: "Retail & Distribution", fr: "Commerce & Distribution" },
+    direct: {
+      en: "You supply dozens of points of sale. Some are running dry while others hold unsold stock. SentrIA finds the mismatch before you lose the sale.",
+      fr: "Vous approvisionnez des dizaines de points de vente. Certains manquent de stock pendant que d'autres en ont trop. SentrIA trouve l'écart avant que vous perdiez la vente.",
+    },
+    activities: [
+      { slug: "grossiste-distributeur", name: { en: "Wholesaler / Distributor", fr: "Grossiste / Distributeur" }, live: false },
+      { slug: "chaine-magasins", name: { en: "Chain of stores", fr: "Chaîne de magasins" }, live: false },
+      { slug: "supermarche-hypermarche", name: { en: "Supermarket / Hypermarket", fr: "Supermarché / Hypermarché" }, live: false },
+    ],
+  },
+  {
+    key: "logistics",
+    name: { en: "Logistics", fr: "Logistique" },
+    direct: {
+      en: "You move, store and ship goods. A late container or a cold chain break costs more than the product. SentrIA tracks every lot and every deadline.",
+      fr: "Vous déplacez, stockez et expédiez des marchandises. Un conteneur en retard ou une rupture de chaîne du froid coûte plus que le produit. SentrIA suit chaque lot et chaque échéance.",
+    },
+    activities: [
+      { slug: "entrepot-manutention", name: { en: "Warehouse", fr: "Entrepôt / Manutention" }, live: false },
+      { slug: "transport-distribution", name: { en: "Transport & Distribution", fr: "Transport & Distribution" }, live: false },
+      { slug: "chaine-froid", name: { en: "Cold chain", fr: "Chaîne du froid" }, live: false },
+      { slug: "port-conteneurs", name: { en: "Container port", fr: "Port à conteneurs" }, live: false },
+    ],
+  },
+  {
+    key: "energy",
+    name: { en: "Energy", fr: "Énergie" },
+    direct: {
+      en: "You produce or distribute energy. Equipment downtime and stock gaps stop output. SentrIA monitors what you have and what you need.",
+      fr: "Vous produisez ou distribuez de l'énergie. Les pannes et les ruptures de stock arrêtent la production. SentrIA surveille ce que vous avez et ce qu'il vous faut.",
+    },
+    activities: [
+      { slug: "centrale-production", name: { en: "Production plant", fr: "Centrale de production" }, live: false },
+      { slug: "distribution-energetique", name: { en: "Energy distribution", fr: "Distribution énergétique" }, live: false },
+    ],
+  },
+  {
+    key: "transportation",
+    name: { en: "Transportation", fr: "Transport" },
+    direct: {
+      en: "You run a fleet of vehicles. A truck off the road costs you every hour. SentrIA tracks parts, maintenance windows and what needs ordering today.",
+      fr: "Vous gérez une flotte de véhicules. Un camion immobilisé vous coûte chaque heure. SentrIA suit les pièces, les fenêtres de maintenance et ce qu'il faut commander aujourd'hui.",
+    },
+    activities: [
+      { slug: "transporteur-routier", name: { en: "Road freight", fr: "Transporteur routier" }, live: false },
+      { slug: "location-vehicules", name: { en: "Vehicle rental", fr: "Location de véhicules" }, live: false },
+    ],
+  },
+]
+
 // Example alerts shown in the hero of the pharmacy page. Sample numbers, real wording.
 export const ALERT_PREVIEW: Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]> = {
   en: [
