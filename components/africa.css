@@ -30,7 +30,7 @@
   .afr-stats li+li{padding-left:0;border-left:0;border-top:1px solid rgba(245,243,234,.14)}
   .afr-actions .afr-btn{width:100%;justify-content:center}
 }
-.afr-acts{background:var(--ink,#0b0c08);color:var(--cream,#f5f3ea);padding:clamp(56px,8vh,96px) var(--pad,56px)}
+.afr-acts{background:var(--ink,#0b0c08);color:var(--cream,#f5f3ea);padding:clamp(56px,8vh,96px) 0;overflow:hidden}
 .afr-acts h2{margin:0 0 32px;font-weight:600;font-size:clamp(28px,3.2vw,44px);letter-spacing:-.02em}
 .afr-acts ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .afr-acts a{display:flex;flex-direction:column;gap:10px;height:100%;padding:28px;border:1px solid rgba(245,243,234,.14);border-radius:20px;color:inherit;text-decoration:none}
