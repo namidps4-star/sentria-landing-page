@@ -2,8 +2,8 @@
 .afr-photo{object-fit:cover;object-position:72% 30%;z-index:0}
 .afr-credit{position:absolute;right:var(--pad,56px);top:104px;z-index:1;margin:0;font-size:12px;opacity:.7}
 .afr-hero::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(11,12,8,.88) 0%,rgba(11,12,8,.72) 38%,rgba(11,12,8,.2) 72%),linear-gradient(180deg,rgba(11,12,8,.45) 0%,rgba(11,12,8,0) 30%,rgba(11,12,8,.92) 92%)}
-.afr-copy{position:relative;z-index:1;padding:0 var(--pad,56px) clamp(56px,9vh,96px);max-width:clamp(320px,46vw,580px)}
-.afr-hero h1{margin:0;font-weight:600;font-size:clamp(44px,6.4vw,96px);line-height:.98;letter-spacing:-.035em}
+.afr-copy{position:relative;z-index:1;padding:0 var(--pad,56px) clamp(56px,9vh,96px);max-width:clamp(480px,68vw,860px)}
+.afr-hero h1{margin:0;font-weight:600;font-size:clamp(52px,8vw,120px);line-height:.95;letter-spacing:-.04em}
 .afr-lime{color:var(--lime,#d6ff3f)}
 .afr-lead{margin:28px 0 0;max-width:34ch;font-size:clamp(17px,1.5vw,21px);line-height:1.5}
 .afr-start{margin:22px 0 0;font-size:15px;opacity:.8}
