@@ -14,7 +14,7 @@ export type Copy = {
   cta2: string
   cta2Href: string
   photoAlt: string
-  stats: [string, string][]
+  stats: [string, string, string][]
 }
 
 export const AFRICA_EN: Copy = {
@@ -26,9 +26,9 @@ export const AFRICA_EN: Copy = {
   cta2Href: "/articles/how-to-count-pharmacy-stock",
   photoAlt: "Two customers reading a medicine box at a pharmacy shelf in Lagos",
   stats: [
-    ["Days of stock", "From the last 30 days of sales, per product."],
-    ["Real delivery times", "Each supplier's actual lead time, not the promised one."],
-    ["Warnings in time", "A message before a product runs out, not after."],
+    ["30", "Days of stock", "Worked out for each product, from the last 30 days of sales."],
+    ["FEFO", "Batches that expire first", "The batches closest to their date are flagged, so they leave first."],
+    ["+4d", "What to order today", "The quantity you need, based on each supplier's real delivery time."],
   ],
 }
 
@@ -41,9 +41,9 @@ export const AFRIQUE_FR: Copy = {
   cta2Href: "/articles/compter-le-stock-en-pharmacie",
   photoAlt: "Deux clients lisent une boîte de médicament devant un rayon de pharmacie à Lagos",
   stats: [
-    ["Jours de stock", "Calculés sur les ventes des 30 derniers jours, produit par produit."],
-    ["Délais réels", "Le délai réel de chaque fournisseur, pas le délai promis."],
-    ["Alertes à temps", "Un message avant qu'un produit ne s'épuise, pas après."],
+    ["30", "Jours de stock", "Calculés sur les ventes des 30 derniers jours, produit par produit."],
+    ["FEFO", "Lots qui expirent en premier", "Les lots les plus proches de leur date sont signalés en premier."],
+    ["+4j", "À commander aujourd'hui", "La quantité dont vous avez besoin, selon le délai réel de chaque fournisseur."],
   ],
 }
 
@@ -79,10 +79,11 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
           {panel}
           <p className="afr-credit">Photo: Ninthgrid, Unsplash</p>
           <ul className="afr-stats" aria-label="SentrIA">
-            {copy.stats.map(([b, t], i) => (
-              <li key={b} data-rv="rise" style={{ "--i": i } as React.CSSProperties}>
-                <b className="afr-lime">{b}</b>
-                {t}
+            {copy.stats.map(([num, label, desc], i) => (
+              <li key={label} data-rv="rise" style={{ "--i": i } as React.CSSProperties}>
+                <b>{num}</b>
+                <span className="afr-stat-label">{label}</span>
+                <span className="afr-stat-desc">{desc}</span>
               </li>
             ))}
           </ul>
