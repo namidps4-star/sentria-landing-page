@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import type { KeyboardEvent, TouchEvent, WheelEvent } from "react"
 import { ALERT_PREVIEW } from "@/content/africa-activities"
 import "./africa-alert-panel.css"
@@ -15,56 +15,6 @@ const GAP = 12
 const STEP = ROW + GAP
 const HOLD_MS = 8000
 const AUTO_MS = 4800
-
-/* A glossy sphere with a specular highlight and an embossed mark: drawn in SVG, not an icon font. */
-function Orb({ level }: { level: "critical" | "warning" }) {
-  const id = useId()
-  const c =
-    level === "critical"
-      ? { hi: "#ffc2ae", mid: "#f0573a", lo: "#8f1f0c" }
-      : { hi: "#fff0b3", mid: "#f6b530", lo: "#8a5600" }
-  return (
-    <svg viewBox="0 0 56 56" aria-hidden="true">
-      <defs>
-        <radialGradient id={`${id}-b`} cx="36%" cy="30%" r="78%">
-          <stop offset="0%" stopColor={c.hi} />
-          <stop offset="48%" stopColor={c.mid} />
-          <stop offset="100%" stopColor={c.lo} />
-        </radialGradient>
-        <radialGradient id={`${id}-s`} cx="50%" cy="46%" r="52%">
-          <stop offset="70%" stopColor="#000" stopOpacity="0" />
-          <stop offset="100%" stopColor="#000" stopOpacity="0.28" />
-        </radialGradient>
-        <linearGradient id={`${id}-m`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#fff" />
-          <stop offset="100%" stopColor="#fff" stopOpacity="0.82" />
-        </linearGradient>
-        <filter id={`${id}-f`} x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="1.6" />
-        </filter>
-      </defs>
-      <circle cx="28" cy="31" r="24" fill="#000" opacity="0.28" filter={`url(#${id}-f)`} />
-      <circle cx="28" cy="28" r="24" fill={`url(#${id}-b)`} />
-      <circle cx="28" cy="28" r="24" fill={`url(#${id}-s)`} />
-      <ellipse cx="21" cy="17" rx="10" ry="5.5" fill="#fff" opacity="0.55" transform="rotate(-24 21 17)" />
-      {level === "critical" ? (
-        <g>
-          <rect x="25.2" y="17.5" width="5.6" height="13" rx="2.8" fill="#000" opacity="0.25" transform="translate(0 1)" />
-          <rect x="25.2" y="17.5" width="5.6" height="13" rx="2.8" fill={`url(#${id}-m)`} />
-          <circle cx="28" cy="37.2" r="3.1" fill="#000" opacity="0.25" transform="translate(0 1)" />
-          <circle cx="28" cy="37.2" r="3.1" fill={`url(#${id}-m)`} />
-        </g>
-      ) : (
-        <g>
-          <path d="M28 15.5 L40.5 37.5 H15.5 Z" fill="#000" opacity="0.25" transform="translate(0 1)" stroke="#000" strokeWidth="3" strokeLinejoin="round" />
-          <path d="M28 15.5 L40.5 37.5 H15.5 Z" fill={`url(#${id}-m)`} stroke={`url(#${id}-m)`} strokeWidth="3" strokeLinejoin="round" />
-          <rect x="26.3" y="23" width="3.4" height="8.6" rx="1.7" fill={c.lo} />
-          <circle cx="28" cy="34.6" r="1.9" fill={c.lo} />
-        </g>
-      )}
-    </svg>
-  )
-}
 
 export function AfricaAlertPanel({ lang }: { lang: "en" | "fr" }) {
   const l = LABEL[lang]
@@ -135,10 +85,7 @@ export function AfricaAlertPanel({ lang }: { lang: "en" | "fr" }) {
   return (
     <aside className="afr-panel alp" aria-label={l.title}>
       <div className="alp-top">
-        <span className="alp-pill">
-          <i className="alp-dot" aria-hidden="true" />
-          {l.title}
-        </span>
+        <span className="alp-pill">{l.title}</span>
         <span className="alp-count">{l.count(n)}</span>
         <button type="button" className="alp-next" aria-label={l.next} onClick={() => go(1)}>
           ↗
@@ -178,8 +125,10 @@ export function AfricaAlertPanel({ lang }: { lang: "en" | "fr" }) {
                   zIndex: 10 - abs,
                 }}
               >
-                <span className="alp-orb">
-                  <Orb level={a.level} />
+                <span className="alp-orb" aria-hidden="true">
+                  <span className="alp-ball">
+                    <b>!</b>
+                  </span>
                 </span>
                 <span className="alp-text">
                   <b>{name.trim()}</b>
