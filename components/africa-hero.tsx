@@ -66,7 +66,22 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
       <Header />
       <main id="main" className="afr">
         <section className={`afr-hero${activities ? " afr-hero--hub" : " afr-hero--sector"}`} aria-labelledby={`${id}-h`}>
-          <Image src={photo.src} alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
+          {activities ? (
+            <video
+              className="afr-photo"
+              src="/videos/africa-hub-cinematic.mp4"
+              poster={photo.src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-hidden="true"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+            />
+          ) : (
+            <Image src={photo.src} alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
+          )}
           <div className="afr-copy">
             {activities ? (
               <h1 id={`${id}-h`} data-rv={rise}>
@@ -110,20 +125,6 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
             ))}
           </ul>
         </section>
-        {activities && (
-          <section className="afr-cinema" aria-label={activities === "fr" ? "Montage des secteurs" : "Sector montage"} style={{ background: "#000", padding: 0 }}>
-            <video
-              src="/videos/africa-hub-cinematic.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-hidden="true"
-              style={{ display: "block", width: "100%", height: "auto" }}
-            />
-          </section>
-        )}
         <Proof />
         {extra}
         {activities && <AfricaHubBrowse lang={activities} />}
