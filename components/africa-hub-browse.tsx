@@ -32,19 +32,6 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
     requestAnimationFrame(() => acts.current?.scrollIntoView({ behavior: "smooth", block: "start" }))
   }
 
-  // One sector card. The row is drawn twice so the loop never shows an edge; only the first copy reveals and takes input.
-  const card = (s: (typeof SECTORS)[number], i: number, live: boolean) => (
-    <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)} data-rv={live ? "rise" : undefined} style={live ? ({ "--i": i } as CSSProperties) : undefined}>
-      <span className="sp-photo">
-        <img src={s.photo} alt="" loading="lazy" />
-        <span className="sp-info">
-          <span className="sp-name">{s.name[lang]}</span>
-          <span className="sp-count">{s.count[lang]}</span>
-        </span>
-      </span>
-    </button>
-  )
-
   return (
     <>
       <section className="sp" aria-labelledby={`sp-${lang}`}>
@@ -53,11 +40,18 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
           {lang === "fr" ? "Choisissez votre secteur." : "Pick your sector."}
         </h2>
         <p className="sp-lead" data-rv="rise" style={{ "--i": 1 } as CSSProperties}>{lang === "fr" ? "Chaque secteur ouvre ses activités ci-dessous." : "Each sector opens its own activities below."}</p>
-        <div className="sp-row" role="region" aria-label={lang === "fr" ? "Secteurs" : "Sectors"}>
-          <div className="sp-track">
-            <div className="sp-set">{SECTORS.map((s, i) => card(s, i, true))}</div>
-            <div className="sp-set" aria-hidden="true" inert>{SECTORS.map((s, i) => card(s, i, false))}</div>
-          </div>
+        <div className="sp-grid">
+          {SECTORS.map((s, i) => (
+            <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)} data-rv="rise" style={{ "--i": i } as CSSProperties}>
+              <span className="sp-photo">
+                <img src={s.photo} alt="" loading="lazy" />
+                <span className="sp-info">
+                  <span className="sp-name">{s.name[lang]}</span>
+                  <span className="sp-count">{s.count[lang]}</span>
+                </span>
+              </span>
+            </button>
+          ))}
         </div>
       </section>
       {current && (
