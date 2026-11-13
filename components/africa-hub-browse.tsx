@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import type { CSSProperties } from "react"
-import { ACTIVITY_CARDS } from "@/content/africa-activity-cards"
+import { SECTOR_ACTIVITIES, cardsFor, type HubSector } from "@/content/africa-sector-catalog"
 import { ActivityRing } from "./activity-ring"
 import { COPY } from "./africa-activities"
 import "./africa-browse.css"
@@ -10,15 +10,15 @@ import "./africa-browse.css"
 type Lang = "en" | "fr"
 
 /* The hub's two steps: a white row of sectors, then the black carousel of the chosen sector's activities.
-   Each sector lists the activity cards that have a built page; its count is the length of that list. */
-const SECTORS = [
-  { id: "health", name: { en: "Health", fr: "Santé" }, photo: "/africa/activities/pharmacy.jpg", cards: ["pharmacie", "grossiste-pharma", "clinique-hopital", "laboratoire", "veterinaire"] },
-  { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, photo: "/africa/activities/farm.jpg", cards: ["exploitation-agricole"] },
-  { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, photo: "/africa/activities/retail.jpg", cards: ["retail"] },
-  { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, photo: "/africa/activities/logistics.jpg", cards: ["logistics"] },
-  { id: "industry", name: { en: "Industry", fr: "Industrie" }, photo: "/africa/activities/industry.jpg", cards: ["industry"] },
-  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, photo: "/africa/activities/transport.jpg", cards: ["transportation"] },
-  { id: "energy", name: { en: "Energy", fr: "Énergie" }, photo: "/africa/activities/energy.jpg", cards: ["energy"] },
+   Each sector's activities come from the app's catalog (content/africa-sector-catalog.ts); the count is taken from it. */
+const SECTORS: { id: HubSector; name: { en: string; fr: string }; photo: string }[] = [
+  { id: "health", name: { en: "Health", fr: "Santé" }, photo: "/africa/activities/pharmacy.jpg" },
+  { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, photo: "/africa/activities/farm.jpg" },
+  { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, photo: "/africa/activities/retail.jpg" },
+  { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, photo: "/africa/activities/logistics.jpg" },
+  { id: "industry", name: { en: "Industry", fr: "Industrie" }, photo: "/africa/activities/industry.jpg" },
+  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, photo: "/africa/activities/transport.jpg" },
+  { id: "energy", name: { en: "Energy", fr: "Énergie" }, photo: "/africa/activities/energy.jpg" },
 ]
 
 // "1 activity", "5 activities"; "1 activité", "5 activités".
@@ -29,7 +29,7 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
   const [sector, setSector] = useState<string | null>(null)
   const acts = useRef<HTMLElement>(null)
   const current = SECTORS.find((s) => s.id === sector)
-  const cards = current ? ACTIVITY_CARDS.filter((c) => (current.cards as readonly string[]).includes(c.id)) : []
+  const cards = current ? cardsFor(current.id) : []
 
   // The arc: the seven cards travel slowly around it. The travel stops while the cursor or keyboard focus is
   // on the row, and the photos float instead. Reduced motion keeps the arc still.
@@ -87,7 +87,7 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
                 <img src={s.photo} alt="" loading="lazy" />
                 <span className="sp-info">
                   <span className="sp-name">{s.name[lang]}</span>
-                  <span className="sp-count">{countLabel(s.cards.length, lang)}</span>
+                  <span className="sp-count">{countLabel(SECTOR_ACTIVITIES[s.id].length, lang)}</span>
                 </span>
               </span>
             </button>
