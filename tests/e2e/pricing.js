@@ -1,4 +1,4 @@
-// Pricing section: four plans, prices from content/prices.ts, the currency chips switch them,
+// Pricing section: four plans, prices from content/prices.ts, the visitor's country sets the currency,
 // both languages, no horizontal overflow on a phone, and the list matches the app's when the app is next to this repo.
 const fs = require('fs')
 const path = require('path')
@@ -24,9 +24,16 @@ const digits = (t) => Number(String(t).replace(/[^\d]/g, ''))
   }
 
   const b = await playwright().chromium.launch(LAUNCH)
-  for (const [lang, url, width] of [['en', '/en', 1440], ['fr', '/fr', 1440], ['en', '/en', 390]]) {
-    console.log(`== ${lang} at ${width}px`)
+  // [language, path, width, country cookie, [Pro, Business] expected]. No cookie means USD.
+  const runs = [
+    ['en', '/en', 1440, null, [39, 99]],
+    ['fr', '/fr', 1440, 'BJ', [25000, 65000]],
+    ['en', '/en', 390, 'KE', [4200, 11000]],
+  ]
+  for (const [lang, url, width, country, [pro, business]] of runs) {
+    console.log(`== ${lang} at ${width}px${country ? `, country ${country}` : ', no country'}`)
     const ctx = await b.newContext({ viewport: { width, height: 900 } })
+    if (country) await ctx.addCookies([{ name: 'sentria_country', value: country, url: APP_URL }])
     const p = await ctx.newPage()
     const errs = []
     p.on('pageerror', (e) => errs.push(e.message))
@@ -36,10 +43,8 @@ const digits = (t) => Number(String(t).replace(/[^\d]/g, ''))
     await p.waitForTimeout(1200)
     pass((await p.locator('#tarifs .plan').count()) === 4, 'four plans')
     const amount = (id) => p.locator(`#tarifs [data-plan="${id}"] .price-amount`).first().innerText()
-    pass(digits(await amount('pro')) === 39 && digits(await amount('business')) === 99, `EUR by default: ${(await amount('pro')).trim()} / ${(await amount('business')).trim()}`)
-    await p.locator('#tarifs .price-cur button', { hasText: 'FCFA' }).click()
-    pass(digits(await amount('pro')) === 25000 && digits(await amount('business')) === 65000, `FCFA: ${(await amount('pro')).trim()} / ${(await amount('business')).trim()}`)
-    pass((await p.locator('#tarifs .price-cur button[aria-pressed="true"]').innerText()) === 'FCFA', 'the chip shows the choice')
+    pass(digits(await amount('pro')) === pro && digits(await amount('business')) === business, `${country || 'no country'}: ${(await amount('pro')).trim()} / ${(await amount('business')).trim()}`)
+    pass((await p.locator('#tarifs .price-cur').count()) === 0, 'no currency picker')
     const text = await p.locator('#tarifs').innerText()
     if (lang === 'fr') {
       pass(/Offres et tarifs/.test(text) && /par mois/.test(text) && /Nous contacter/.test(text) && !/per month|Contact us/.test(text), 'French only')

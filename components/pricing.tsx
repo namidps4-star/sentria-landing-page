@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { useLang } from "@/components/lang"
 import { B } from "@/components/t"
 import { Check, iv } from "@/components/ui"
-import { DEFAULT_CURRENCY, SITE_CURRENCIES, SITE_PRICES, formatPrice, type SiteCurrency } from "@/content/prices"
+import { COUNTRY_COOKIE, FALLBACK_CURRENCY, SITE_PRICES, currencyForCountry, formatPrice, type SiteCurrency } from "@/content/prices"
 
 type Plan = {
   id: "decouverte" | "pro" | "business" | "entreprise"
@@ -71,20 +71,16 @@ const PLANS: Plan[] = [
 
 export function PricingGrid() {
   const lang = useLang()
-  const [currency, setCurrency] = useState<SiteCurrency>(DEFAULT_CURRENCY)
+  // The visitor's currency comes from their country (cookie set by proxy.ts). Until the page
+  // has read it, USD shows, so the server and the first paint agree.
+  const [currency, setCurrency] = useState<SiteCurrency>(FALLBACK_CURRENCY)
+  useEffect(() => {
+    const entry = document.cookie.split("; ").find((c) => c.startsWith(`${COUNTRY_COOKIE}=`))
+    setCurrency(currencyForCountry(entry?.split("=")[1]))
+  }, [])
 
   return (
     <>
-      <div className="price-cur" role="group" aria-label={lang === "fr" ? "Devise" : "Currency"}>
-        <span>
-          <B en="Show prices in" fr="Afficher les prix en" />
-        </span>
-        {SITE_CURRENCIES.map((c) => (
-          <button key={c} type="button" aria-pressed={currency === c} onClick={() => setCurrency(c)}>
-            {c === "XOF" ? "FCFA" : c}
-          </button>
-        ))}
-      </div>
       <div className="plans plans-4">
         {PLANS.map((p, i) => {
           const tier = p.id === "pro" ? 0 : p.id === "business" ? 1 : null
