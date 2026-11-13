@@ -8,6 +8,7 @@ import { SECTOR_DATA } from "@/content/sectors"
 import { SECTORS } from "./sectors"
 import { B } from "./t"
 import { iv } from "./ui"
+import { useLang } from "./lang"
 
 export const FIT_KEYS = ["industry", "healthcare", "agriculture", "transportation", "logistics", "energy", "retail"] as const
 export type FitKey = (typeof FIT_KEYS)[number]
@@ -156,8 +157,21 @@ export function QuickFit() {
   )
 }
 
+// Sectors that have their own page for anyone outside Africa.
+const GENERAL_PAGE: Partial<Record<FitKey, { href: { en: string; fr: string }; label: { en: string; fr: string } }>> = {
+  healthcare: {
+    href: { en: "/activities/pharmacy", fr: "/fr/activites/pharmacie" },
+    label: { en: "See the pharmacy page →", fr: "Voir la page pharmacie →" },
+  },
+  agriculture: {
+    href: { en: "/activities/farm", fr: "/fr/activites/exploitation-agricole" },
+    label: { en: "See the farm page →", fr: "Voir la page exploitation agricole →" },
+  },
+}
+
 export function FitSection() {
   const active = useFit()
+  const lang = useLang()
   const s = C.fit
   return (
     <section id="fit" className="rv-sec fit">
@@ -229,6 +243,11 @@ export function FitSection() {
                   <a className="rv-fit-cta" href="#demo">
                     <T s={C.hero.cta1} />
                   </a>
+                  {GENERAL_PAGE[sec.key as FitKey] && (
+                    <a className="rv-fit-cta" href={GENERAL_PAGE[sec.key as FitKey]!.href[lang]}>
+                      <B en={GENERAL_PAGE[sec.key as FitKey]!.label.en} fr={GENERAL_PAGE[sec.key as FitKey]!.label.fr} />
+                    </a>
+                  )}
                 </div>
               )
             })}
