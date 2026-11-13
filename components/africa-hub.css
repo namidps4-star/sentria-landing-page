@@ -1,9 +1,10 @@
-/* Africa hub hero (the pages that show the live alerts panel). Scoped to .afr-hero--hub so the sector pages keep their layout. */
+/* Africa hub (the pages that show the live alerts panel). Scoped to .afr-hero--hub and main .afr-acts so the sector pages keep their layout.
+   Type follows the site: Syne bold for headings and names, Poppins for body. */
 
 @media (min-width:961px){
   .afr-hero--hub .afr-copy{position:absolute;top:clamp(120px,17vh,180px);left:var(--pad,56px);right:auto;width:min(860px,calc(100vw - 2*var(--pad,56px) - min(400px,30vw) - 40px));max-width:none;padding:0}
-  .afr-hero--hub h1{font-size:clamp(44px,5.4vw,80px);font-weight:300;letter-spacing:-.035em;line-height:1.02;white-space:normal}
-  .afr-hero--hub h1 .afr-lime{color:#f5f3ea;font-weight:500;background-image:linear-gradient(#f5f3ea,#f5f3ea);background-repeat:no-repeat;background-size:0% .09em;background-position:0 94%;animation:afr-underline 1s cubic-bezier(.2,.7,.2,1) .6s forwards}
+  .afr-hero--hub h1{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,96px);letter-spacing:-.03em;line-height:1.02;white-space:normal}
+  .afr-hero--hub h1 .afr-lime{color:#f5f3ea}
   .afr-hero--hub .afr-lead{max-width:36ch;font-size:clamp(16px,1.3vw,19px);line-height:1.55;text-wrap:balance;opacity:.85}
 }
 
@@ -16,15 +17,18 @@
 .afr-hero--hub .afr-photo{animation:afr-drift 16s cubic-bezier(.2,.6,.2,1) both}
 .afr-hero--hub .alp{animation:afr-panel-in 1.1s cubic-bezier(.2,.7,.2,1) .35s both}
 
-@keyframes afr-underline{to{background-size:100% .09em}}
+/* Activities heading and names: the same Syne title as the home page sections. */
+main .afr-acts h2{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(32px,4.5vw,74px);line-height:1.03;letter-spacing:-.03em;text-align:left;max-width:17ch;margin:0 0 40px}
+main .afr-acts .eyebrow{display:block}
+main .afr-ring-nm{font-family:var(--f-display),sans-serif;font-weight:700}
+main .afr-ring-text h3{font-family:var(--f-display),sans-serif;font-weight:700}
+
 @keyframes afr-drift{from{transform:scale(1.08)}to{transform:scale(1)}}
 @keyframes afr-panel-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 
 @media (prefers-reduced-motion:reduce){
   .afr-hero--hub .afr-photo,
-  .afr-hero--hub .alp,
-  .afr-hero--hub h1 .afr-lime{animation:none !important}
-  .afr-hero--hub h1 .afr-lime{background-size:100% .09em}
+  .afr-hero--hub .alp{animation:none !important}
   .afr-hero--hub .afr-btn{transition:none}
   .afr-hero--hub .afr-btn:hover{transform:none}
 }
