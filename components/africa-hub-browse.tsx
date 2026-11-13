@@ -9,16 +9,20 @@ import "./africa-browse.css"
 
 type Lang = "en" | "fr"
 
-/* The hub's two steps: a white row of sectors, then the black carousel of the chosen sector's activities. */
+/* The hub's two steps: a white row of sectors, then the black carousel of the chosen sector's activities.
+   Each sector lists the activity cards that have a built page; its count is the length of that list. */
 const SECTORS = [
-  { id: "health", name: { en: "Health", fr: "Santé" }, count: { en: "5 activities", fr: "5 activités" }, photo: "/africa/activities/pharmacy.jpg", cards: ["pharmacie", "grossiste-pharma"] },
-  { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, count: { en: "3 activities", fr: "3 activités" }, photo: "/africa/activities/farm.jpg", cards: ["exploitation-agricole"] },
-  { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, count: { en: "3 activities", fr: "3 activités" }, photo: "/africa/activities/retail.jpg", cards: ["retail"] },
-  { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, count: { en: "4 activities", fr: "4 activités" }, photo: "/africa/activities/logistics.jpg", cards: ["logistics"] },
-  { id: "industry", name: { en: "Industry", fr: "Industrie" }, count: { en: "Soon", fr: "Bientôt" }, photo: "/africa/activities/industry.jpg", cards: [] as string[] },
-  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, count: { en: "1 activity", fr: "1 activité" }, photo: "/africa/activities/transport.jpg", cards: ["transportation"] },
-  { id: "energy", name: { en: "Energy", fr: "Énergie" }, count: { en: "1 activity", fr: "1 activité" }, photo: "/africa/activities/energy.jpg", cards: ["energy"] },
+  { id: "health", name: { en: "Health", fr: "Santé" }, photo: "/africa/activities/pharmacy.jpg", cards: ["pharmacie", "grossiste-pharma", "clinique-hopital", "laboratoire", "veterinaire"] },
+  { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, photo: "/africa/activities/farm.jpg", cards: ["exploitation-agricole"] },
+  { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, photo: "/africa/activities/retail.jpg", cards: ["retail"] },
+  { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, photo: "/africa/activities/logistics.jpg", cards: ["logistics"] },
+  { id: "industry", name: { en: "Industry", fr: "Industrie" }, photo: "/africa/activities/industry.jpg", cards: ["industry"] },
+  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, photo: "/africa/activities/transport.jpg", cards: ["transportation"] },
+  { id: "energy", name: { en: "Energy", fr: "Énergie" }, photo: "/africa/activities/energy.jpg", cards: ["energy"] },
 ]
+
+// "1 activity", "5 activities"; "1 activité", "5 activités".
+const countLabel = (n: number, lang: Lang) => (lang === "fr" ? `${n} activité${n > 1 ? "s" : ""}` : `${n} ${n === 1 ? "activity" : "activities"}`)
 
 export function AfricaHubBrowse({ lang }: { lang: Lang }) {
   const t = COPY[lang]
@@ -83,7 +87,7 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
                 <img src={s.photo} alt="" loading="lazy" />
                 <span className="sp-info">
                   <span className="sp-name">{s.name[lang]}</span>
-                  <span className="sp-count">{s.count[lang]}</span>
+                  <span className="sp-count">{countLabel(s.cards.length, lang)}</span>
                 </span>
               </span>
             </button>
@@ -99,11 +103,7 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
           </div>
           <p className="eyebrow">{t.eyebrow}</p>
           <h2 id={`afr-acts-${lang}`}>{lang === "fr" ? `Activités : ${current.name[lang]}` : `${current.name[lang]} activities`}</h2>
-          {cards.length ? (
-            <ActivityRing key={sector} lang={lang} base={t.base} cards={cards} text={t.text} />
-          ) : (
-            <p className="sp-soon">{lang === "fr" ? "Bientôt disponible." : "Coming soon."}</p>
-          )}
+          <ActivityRing key={sector} lang={lang} base={t.base} cards={cards} text={t.text} />
         </section>
       )}
     </>

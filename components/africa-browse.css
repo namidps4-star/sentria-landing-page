@@ -43,7 +43,6 @@
   .sp-card{--p:calc(var(--i) - 3);--op:1;--slot:calc(100cqw / 7);position:absolute;left:50%;top:0;width:calc(var(--slot) - 12px);margin-left:calc(var(--slot) / -2 + 6px);translate:calc(var(--p) * var(--slot)) calc(var(--p) * var(--p) * 9px)}
   .sp-card .sp-photo{height:calc(420px - var(--p) * var(--p) * 8px);transform:perspective(1400px) rotateY(calc(var(--p) * -9deg));opacity:var(--op);transition:scale .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
 }
-.sp-soon{margin:8px 0 0;font-family:var(--f-body),sans-serif;font-size:17px;color:#f5f3ea;opacity:.7}
 
 /* Seven narrow cards on desktop: names and counts scale down so no name runs into the next card. */
 @media (min-width:961px){
