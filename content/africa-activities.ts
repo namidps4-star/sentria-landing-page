@@ -444,3 +444,29 @@ export const ALERT_PREVIEW: Record<"en" | "fr", { level: "critical" | "warning";
     { level: "warning", text: "COPHAC Pharma : promet 5 jours, livre en 9 en moyenne. Commandez 4 jours plus tôt." },
   ],
 }
+
+/* Live alerts shown on the sector heroes that have them. Pharmacy uses ALERT_PREVIEW. */
+export const SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]>> = {
+  "grossiste-pharma": {
+    en: [
+      { level: "warning", text: "Clinique du Nord: reordering 30 units of Metformin 500mg. Pharmacy Centrale: 34 units unsold. Suggested transfer: 30 units." },
+      { level: "warning", text: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA." },
+    ],
+    fr: [
+      { level: "warning", text: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Transfert proposé : 30 unités." },
+      { level: "warning", text: "Metformine 500mg : 30 unités, 180 000 FCFA. Amoxicilline 500mg : 12 unités, 72 000 FCFA." },
+    ],
+  },
+  "exploitation-agricole": {
+    en: [
+      { level: "critical", text: "Tomatoes Lot 7: 4 days in storage at 32°C. Estimated loss in 12 hours. Arrange delivery now." },
+      { level: "warning", text: "Cold room 3: reached 31°C. Tomatoes at risk of spoilage. Check temperature and ventilation now." },
+      { level: "critical", text: "Maize Lot 3: 9 days in storage. Deliver urgently before full loss." },
+    ],
+    fr: [
+      { level: "critical", text: "Tomates Lot 7 : 4 jours en stockage à 32°C. Perte estimée dans 12 heures. Organisez la livraison maintenant." },
+      { level: "warning", text: "Chambre froide 3 : a atteint 31°C. Tomates à risque de détérioration. Vérifiez la température et la ventilation maintenant." },
+      { level: "critical", text: "Maïs Lot 3 : 9 jours en stockage. Livrez d'urgence avant la perte totale." },
+    ],
+  },
+}
