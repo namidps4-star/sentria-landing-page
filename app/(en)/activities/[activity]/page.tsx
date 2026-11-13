@@ -5,6 +5,7 @@ import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { GENERAL_ACTIVITIES, generalBySlug } from "@/content/general-activities"
 import { PLACEHOLDER_ACTIVITIES } from "@/content/health-sector"
 import { ActivityPlaceholder } from "@/components/activity-placeholder"
+import { share, headline } from "@/content/share"
 
 type Params = Promise<{ activity: string }>
 
@@ -16,7 +17,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { activity } = await params
   const a = generalBySlug("en", activity)
   if (!a) return {}
-  return { alternates: { languages: { en: `https://sentriahq.dev/activities/${a.en}`, fr: `https://sentriahq.dev/fr/activites/${a.fr}` } } }
+  const alternates = { languages: { en: `https://sentriahq.dev/activities/${a.en}`, fr: `https://sentriahq.dev/fr/activites/${a.fr}` } }
+  return { ...share(`${headline(a.copy.en.h1)} | SentrIA`, a.copy.en.lead), alternates }
 }
 
 export default async function Page({ params }: { params: Params }) {
