@@ -59,8 +59,8 @@ export type HeroPhoto = { src: string; credit: string }
 const AFRICA_PHOTO: HeroPhoto = { src: "/africa/pharmacy-lagos.jpg", credit: "Photo: Ninthgrid, Unsplash" }
 
 export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel, photo = AFRICA_PHOTO }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode; photo?: HeroPhoto }) {
-  const rise = activities ? undefined : "rise"
-  const fade = activities ? undefined : "fade"
+  const rise = "rise"
+  const fade = "fade"
   return (
     <>
       <Header />
@@ -69,7 +69,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
           <Image src={photo.src} alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
           <div className="afr-copy">
             {activities ? (
-              <h1 id={`${id}-h`}>
+              <h1 id={`${id}-h`} data-rv={rise}>
                 {copy.h1.filter(Boolean).map((line, row) => (
                   <span key={row} className="afr-line">
                     {line}
