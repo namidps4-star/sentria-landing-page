@@ -160,7 +160,7 @@ export function QuickFit() {
 // Every sector's own page, for anyone outside Africa.
 const GENERAL_PAGE: Partial<Record<FitKey, { href: { en: string; fr: string }; label: { en: string; fr: string } }>> = {
   industry: { href: { en: "/activities/industry", fr: "/fr/activites/industrie" }, label: { en: "See the industry page →", fr: "Voir la page industrie →" } },
-  healthcare: { href: { en: "/activities/pharmacy", fr: "/fr/activites/pharmacie" }, label: { en: "See the pharmacy page →", fr: "Voir la page pharmacie →" } },
+  healthcare: { href: { en: "/sectors/healthcare", fr: "/fr/secteurs/sante" }, label: { en: "See all health activities →", fr: "Voir toutes les activités santé →" } },
   agriculture: { href: { en: "/activities/farm", fr: "/fr/activites/exploitation-agricole" }, label: { en: "See the farm page →", fr: "Voir la page exploitation agricole →" } },
   transportation: { href: { en: "/activities/transportation", fr: "/fr/activites/transport" }, label: { en: "See the transport page →", fr: "Voir la page transport →" } },
   logistics: { href: { en: "/activities/logistics", fr: "/fr/activites/logistique" }, label: { en: "See the logistics page →", fr: "Voir la page logistique →" } },

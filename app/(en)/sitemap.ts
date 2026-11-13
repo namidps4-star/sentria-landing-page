@@ -19,6 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://sentriahq.dev/fr/articles", changeFrequency: "weekly", priority: 0.6 },
     { url: "https://sentriahq.dev/fr/privacy", changeFrequency: "yearly", priority: 0.3 },
     { url: "https://sentriahq.dev/fr/terms", changeFrequency: "yearly", priority: 0.3 },
+    { url: "https://sentriahq.dev/sectors/healthcare", changeFrequency: "monthly", priority: 0.7, alternates: { languages: { en: "https://sentriahq.dev/sectors/healthcare", fr: "https://sentriahq.dev/fr/secteurs/sante" } } },
+    { url: "https://sentriahq.dev/fr/secteurs/sante", changeFrequency: "monthly", priority: 0.7, alternates: { languages: { en: "https://sentriahq.dev/sectors/healthcare", fr: "https://sentriahq.dev/fr/secteurs/sante" } } },
     ...GENERAL_ACTIVITIES.flatMap((a) => {
       const alternates = { languages: { en: `https://sentriahq.dev/activities/${a.en}`, fr: `https://sentriahq.dev/fr/activites/${a.fr}` } }
       return [
