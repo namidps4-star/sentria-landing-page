@@ -5,6 +5,7 @@ import { Footer, Proof } from "./sections"
 import { AfricaActivities } from "./africa-activities"
 import { Motion } from "./motion"
 import { HeroFx } from "./hero-fx"
+import { AfricaOpening } from "./africa-opening"
 import "./africa.css"
 import "./africa-hub.css"
 
@@ -57,6 +58,7 @@ export const AFRIQUE_FR: Copy = {
 export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode }) {
   return (
     <>
+      {activities && <AfricaOpening lang={activities} word={activities === "fr" ? "Afrique" : "Africa"} />}
       <Header />
       <main id="main" className="afr">
         <section
@@ -74,7 +76,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
                   <span key={row} className="hl">
                     {[...line].map((c, i) => (
                       <span key={i} className="wvl">
-                        {c === " " ? " " : c}
+                        {c === " " ? " " : c}
                       </span>
                     ))}
                   </span>
