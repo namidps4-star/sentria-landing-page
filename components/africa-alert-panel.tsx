@@ -93,6 +93,7 @@ export function AfricaAlertPanel({ lang, auto = true, alerts: custom }: { lang: 
       </div>
       <div
         className="alp-stage"
+        style={{ height: n * ROW + (n - 1) * GAP }}
         role="group"
         aria-label={l.list}
         tabIndex={0}
@@ -107,11 +108,9 @@ export function AfricaAlertPanel({ lang, auto = true, alerts: custom }: { lang: 
       >
         <ol className="alp-stack">
           {alerts.map((a, i) => {
-            // Signed distance from the active row, going the short way round the list.
-            let d = (i - active + n) % n
-            if (d > n / 2) d -= n
-            const abs = Math.abs(d)
-            const on = d === 0
+            // The row being read sits on top; the others stack under it in order.
+            const pos = (i - active + n) % n
+            const on = pos === 0
             const [name, ...rest] = a.text.split(":")
             const detail = rest.join(":").trim()
             return (
@@ -119,11 +118,7 @@ export function AfricaAlertPanel({ lang, auto = true, alerts: custom }: { lang: 
                 key={i}
                 className={`alp-item alp-${a.level}${on ? " alp-on" : ""}`}
                 aria-current={on ? "true" : undefined}
-                style={{
-                  transform: `translateY(${d * STEP}px) rotateX(${-d * 20}deg) scale(${1 - abs * 0.07})`,
-                  opacity: abs > 1.5 ? 0 : 1 - abs * 0.4,
-                  zIndex: 10 - abs,
-                }}
+                style={{ transform: `translateY(${pos * STEP}px)`, zIndex: n - pos }}
               >
                 <span className="alp-orb" aria-hidden="true">
                   <span className="alp-ball">
