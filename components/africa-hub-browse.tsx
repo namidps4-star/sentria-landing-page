@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
+import type { CSSProperties } from "react"
 import { ACTIVITY_CARDS } from "@/content/africa-activity-cards"
 import { ActivityRing } from "./activity-ring"
 import { COPY } from "./africa-activities"
@@ -14,7 +15,10 @@ const SECTORS = [
   { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, count: { en: "3 activities", fr: "3 activités" }, photo: "/africa/activities/farm.jpg", cards: ["exploitation-agricole"] },
   { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, count: { en: "3 activities", fr: "3 activités" }, photo: "/africa/activities/retail.jpg", cards: ["retail"] },
   { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, count: { en: "4 activities", fr: "4 activités" }, photo: "/africa/activities/logistics.jpg", cards: ["logistics"] },
-] as const
+  { id: "industry", name: { en: "Industry", fr: "Industrie" }, count: { en: "Soon", fr: "Bientôt" }, photo: "/africa/activities/industry.jpg", cards: [] as string[] },
+  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, count: { en: "1 activity", fr: "1 activité" }, photo: "/africa/activities/transport.jpg", cards: ["transportation"] },
+  { id: "energy", name: { en: "Energy", fr: "Énergie" }, count: { en: "1 activity", fr: "1 activité" }, photo: "/africa/activities/energy.jpg", cards: ["energy"] },
+]
 
 export function AfricaHubBrowse({ lang }: { lang: Lang }) {
   const t = COPY[lang]
@@ -37,8 +41,8 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
         </h2>
         <p className="sp-lead">{lang === "fr" ? "Chaque secteur ouvre ses activités ci-dessous." : "Each sector opens its own activities below."}</p>
         <div className="sp-grid">
-          {SECTORS.map((s) => (
-            <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)}>
+          {SECTORS.map((s, i) => (
+            <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)} style={{ "--i": i } as CSSProperties}>
               <span className="sp-photo">
                 <img src={s.photo} alt="" loading="lazy" />
               </span>
@@ -57,7 +61,11 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
           </div>
           <p className="eyebrow">{t.eyebrow}</p>
           <h2 id={`afr-acts-${lang}`}>{lang === "fr" ? `Activités : ${current.name[lang]}` : `${current.name[lang]} activities`}</h2>
-          <ActivityRing key={sector} lang={lang} base={t.base} cards={cards} text={t.text} />
+          {cards.length ? (
+            <ActivityRing key={sector} lang={lang} base={t.base} cards={cards} text={t.text} />
+          ) : (
+            <p className="sp-soon">{lang === "fr" ? "Bientôt disponible." : "Coming soon."}</p>
+          )}
         </section>
       )}
     </>
