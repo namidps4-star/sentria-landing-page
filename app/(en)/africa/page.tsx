@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { AfricaHero } from "@/components/africa-hero"
-import { AfricaAlertPanel } from "@/components/africa-alert-panel"
 
 export const metadata: Metadata = {
   title: "Pharmacy stock and days of stock for African pharmacies | SentrIA",
@@ -17,5 +16,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AfricaHero activities="en" panel={<AfricaAlertPanel lang="en" auto={false} />} />
+  return <AfricaHero activities="en" />
 }
