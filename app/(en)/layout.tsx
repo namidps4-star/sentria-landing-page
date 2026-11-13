@@ -1,3 +1,5 @@
+import "../globals.css"
+import "../revamp.css"
 import "../../styles/globals/01-section.css"
 import "../../styles/globals/02-header.css"
 import "../../styles/globals/03-opening.css"
