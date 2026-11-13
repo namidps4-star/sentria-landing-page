@@ -10,11 +10,6 @@ const LABEL = {
   fr: { title: "Alertes en direct", count: (n: number) => `${n} alertes actives`, next: "Alerte suivante", list: "Liste des alertes en direct" },
 } as const
 
-const TAG = {
-  en: { critical: "Critical", warning: "Warning" },
-  fr: { critical: "Critique", warning: "Alerte" },
-} as const
-
 const ROW = 104
 const GAP = 12
 const STEP = ROW + GAP
@@ -130,7 +125,11 @@ export function AfricaAlertPanel({ lang, auto = true, alerts: custom }: { lang: 
                   zIndex: 10 - abs,
                 }}
               >
-                <span className={`alp-tag alp-tag-${a.level}`}>{TAG[lang][a.level]}</span>
+                <span className="alp-orb" aria-hidden="true">
+                  <span className="alp-ball">
+                    <b>!</b>
+                  </span>
+                </span>
                 <span className="alp-text">
                   <b>{name.trim()}</b>
                   <span className="alp-detail">{detail}</span>
