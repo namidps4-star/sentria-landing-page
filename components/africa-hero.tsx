@@ -5,6 +5,7 @@ import { Footer, Proof } from "./sections"
 import { AfricaActivities } from "./africa-activities"
 import { Motion } from "./motion"
 import "./africa.css"
+import "./africa-hub.css"
 
 export type Copy = {
   h1: [string, string, string]
@@ -57,7 +58,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
     <>
       <Header />
       <main id="main" className="afr">
-        <section className="afr-hero" aria-labelledby={`${id}-h`}>
+        <section className={`afr-hero${panel ? " afr-hero--hub" : ""}`} aria-labelledby={`${id}-h`}>
           <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
           <div className="afr-copy">
             <h1 id={`${id}-h`} data-rv="rise" style={{ "--fit": copy.fit } as React.CSSProperties}>
