@@ -218,7 +218,7 @@ export const EN_PRODUCT = {
    {
     "n": "03",
     "h": "Action",
-    "p": "A recommendation must be understandable, actionable, and drawn from standard mitigation methods, not invented on the spot."
+    "p": "Recommendations come from your data and from standard mitigation methods adapted to the situation, not from guesswork. Each one links to the signals that triggered it. The human decides; the outcome feeds back."
    }
   ]
  },

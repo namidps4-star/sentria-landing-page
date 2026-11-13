@@ -129,7 +129,7 @@ export const EN_STORY = {
    {
     "n": "04",
     "h": "Act",
-    "p": "Recommendations come from the data and from standard mitigation methods adapted to the situation, not from guesswork. The human decides; the outcome feeds back."
+    "p": "Recommendations come from your data and from standard mitigation methods adapted to the situation, not from guesswork. Each one links to the signals that triggered it. The human decides; the outcome feeds back."
    }
   ]
  },

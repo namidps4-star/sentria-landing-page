@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   title: "Trouvez votre activité | SentrIA",
   description: "Choisissez l'activité qui correspond à votre entreprise et découvrez comment SentrIA la suit.",
   alternates: { languages: { en: "https://sentriahq.dev/activities", fr: "https://sentriahq.dev/fr/activites" } },
+  openGraph: { title: "Trouvez votre activité | SentrIA", description: "Choisissez l'activité qui correspond à votre entreprise et découvrez comment SentrIA la suit.", type: "website" },
+  twitter: { card: "summary_large_image", title: "Trouvez votre activité | SentrIA", description: "Choisissez l'activité qui correspond à votre entreprise et découvrez comment SentrIA la suit." },
 }
 
 export default function Page() {

@@ -3,10 +3,16 @@ import { AfricaHero } from "@/components/africa-hero"
 import { ActivityRing } from "@/components/activity-ring"
 import { HEALTH_SECTOR, HEALTH_PHOTO } from "@/content/health-sector"
 import { HEALTH_HUB_CARDS } from "@/content/health-hub-cards"
+import { share } from "@/content/share"
+import type { Metadata } from "next"
 
 type Params = Promise<{ sector: string }>
 
 const TEXT = { carousel: "carrousel", label: "Activités santé", prev: "Activité précédente", next: "Activité suivante", more: "Lire la suite →", view: "Voir", open: "Ouvrir", hint: "Faites défiler ou glissez" }
+
+export async function generateMetadata(): Promise<Metadata> {
+  return share(`${HEALTH_SECTOR.fr.title} | SentrIA`, HEALTH_SECTOR.fr.lead)
+}
 
 export function generateStaticParams() {
   return [{ sector: HEALTH_SECTOR.fr.slug }]

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { AfricaAlertPanel } from "@/components/africa-alert-panel"
+import { share, headline } from "@/content/share"
 import { ACTIVITY_COPY, AFRICA_ACTIVITIES, SECTOR_ALERTS } from "@/content/africa-activities"
 
 type Params = Promise<{ lang: string; activity: string }>
@@ -13,8 +14,9 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { lang, activity } = await params
-  if (lang !== "fr" || !ACTIVITY_COPY[activity]) return {}
-  return { robots: { index: false, follow: false } }
+  const copy = ACTIVITY_COPY[activity]
+  if (lang !== "fr" || !copy) return {}
+  return { ...share(`${headline(copy.fr.h1)} | SentrIA`, copy.fr.lead), robots: { index: false, follow: false } }
 }
 
 export default async function Page({ params }: { params: Params }) {

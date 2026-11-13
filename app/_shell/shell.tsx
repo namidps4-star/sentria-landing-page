@@ -40,7 +40,6 @@ const absans = localFont({
   display: "swap",
 })
 
-const TITLE = "SentrIA: The operational decision layer"
 
 const SITE = "https://sentriahq.dev"
 
@@ -75,15 +74,14 @@ export const metadataEn: Metadata = {
     url: SITE,
     images: ["/opengraph-image.png"],
     siteName: "SentrIA",
-    title: TITLE,
-    description:
-      "Evidence, confidence, impact and recommended action for every operational risk. Your team decides faster and the outcome feeds back.",
+    title: SEO.en.title,
+    description: SEO.en.description,
   },
   twitter: {
     card: "summary_large_image",
     images: ["/twitter-image.png"],
-    title: TITLE,
-    description: "Evidence, confidence, impact and recommended action for every operational risk.",
+    title: SEO.en.title,
+    description: SEO.en.description,
   },
   icons: {
     icon: [
@@ -107,15 +105,14 @@ export const metadataFr: Metadata = {
     images: ["/opengraph-image.png"],
     locale: "fr_FR",
     siteName: "SentrIA",
-    title: TITLE,
-    description:
-      "Evidence, confidence, impact and recommended action for every operational risk. Your team decides faster and the outcome feeds back.",
+    title: SEO.fr.title,
+    description: SEO.fr.description,
   },
   twitter: {
     card: "summary_large_image",
     images: ["/twitter-image.png"],
-    title: TITLE,
-    description: "Evidence, confidence, impact and recommended action for every operational risk.",
+    title: SEO.fr.title,
+    description: SEO.fr.description,
   },
   icons: {
     icon: [
