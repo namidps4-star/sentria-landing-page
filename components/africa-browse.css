@@ -33,13 +33,15 @@
   .sp-photo{transition:none}
 }
 
-/* Desktop: all seven sectors on one curved arc. Each card sets its position from its index (--i):
-   the centre card is level and tallest, the outer ones turn away and drop lower. Only the photos turn. */
+/* Desktop: seven sectors on one curved arc that travels slowly. The row script sets each card's place on
+   the arc (--p, from -3.5 to 3.5, centre 0) and its fade (--op) every frame. Cards fade out at one end and
+   fade in at the other, so the turn has no visible jump. The shape is the same as before: the centre card is
+   level and tallest, the outer ones turn away and drop lower. */
 @media (min-width:961px){
   .sp{padding-bottom:clamp(170px,22vh,220px)}
-  .sp-grid{flex-wrap:nowrap;gap:12px;align-items:center;margin-top:56px}
-  .sp-card{--o:calc(var(--i) - 3);width:calc((100vw - 2*56px - 6*12px) / 7);translate:0 calc(var(--o) * var(--o) * 9px);transition:translate .45s cubic-bezier(.2,.7,.2,1)}
-  .sp-card .sp-photo{height:calc(420px - var(--o) * var(--o) * 8px);transform:perspective(1400px) rotateY(calc(var(--o) * -9deg))}
+  .sp-grid{display:block;position:relative;height:540px;margin-top:56px;container-type:inline-size}
+  .sp-card{--p:calc(var(--i) - 3);--op:1;--slot:calc(100cqw / 7);position:absolute;left:50%;top:0;width:calc(var(--slot) - 12px);margin-left:calc(var(--slot) / -2 + 6px);translate:calc(var(--p) * var(--slot)) calc(var(--p) * var(--p) * 9px)}
+  .sp-card .sp-photo{height:calc(420px - var(--p) * var(--p) * 8px);transform:perspective(1400px) rotateY(calc(var(--p) * -9deg));opacity:var(--op);transition:scale .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
 }
 .sp-soon{margin:8px 0 0;font-family:var(--f-body),sans-serif;font-size:17px;color:#f5f3ea;opacity:.7}
 
@@ -62,14 +64,13 @@
   .sp-acts .sp-back,.sp-acts .eyebrow,.sp-acts h2,.sp-acts .afr-ring{animation:none}
 }
 
-/* Motion on the sector cards (desktop): each photo drifts gently, staggered across the row;
-   hovering lifts the card and enlarges its photo, and pauses the drift. */
+/* Stopped (cursor or keyboard focus on the row, set by the row script): the travel halts and the photos
+   float gently, staggered across the arc. Hovering a card enlarges its photo. */
 @keyframes sp-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media (min-width:961px){
-  .sp-card:hover{translate:0 calc(var(--o) * var(--o) * 9px - 8px)}
-  .sp-card:hover .sp-photo{scale:1.03;animation-play-state:paused}
-  .sp-card .sp-photo{animation:sp-float 7s ease-in-out infinite;animation-delay:calc(var(--i) * -1.1s)}
+  .sp-card:hover .sp-photo{scale:1.03}
+  .sp-grid[data-stopped] .sp-card .sp-photo{animation:sp-float 7s ease-in-out infinite;animation-delay:calc(var(--i) * -1.1s)}
 }
 @media (prefers-reduced-motion:reduce){
-  .sp-card .sp-photo{animation:none}
+  .sp-grid[data-stopped] .sp-card .sp-photo{animation:none}
 }

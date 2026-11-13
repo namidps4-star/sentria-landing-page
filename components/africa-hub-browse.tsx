@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import type { CSSProperties } from "react"
 import { ACTIVITY_CARDS } from "@/content/africa-activity-cards"
 import { ActivityRing } from "./activity-ring"
@@ -27,6 +27,42 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
   const current = SECTORS.find((s) => s.id === sector)
   const cards = current ? ACTIVITY_CARDS.filter((c) => (current.cards as readonly string[]).includes(c.id)) : []
 
+  // The arc: the seven cards travel slowly around it. The travel stops while the cursor or keyboard focus is
+  // on the row, and the photos float instead. Reduced motion keeps the arc still.
+  const row = useRef<HTMLDivElement>(null)
+  const stopped = useRef({ hover: false, focus: false })
+  const setStop = (kind: "hover" | "focus", on: boolean) => {
+    stopped.current[kind] = on
+    if (stopped.current.hover || stopped.current.focus) row.current?.setAttribute("data-stopped", "")
+    else row.current?.removeAttribute("data-stopped")
+  }
+
+  useEffect(() => {
+    const el = row.current
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(".sp-card"))
+    const SLOTS_PER_SECOND = 0.12 // about one slot every 8 seconds; a full turn of seven takes about a minute
+    let offset = 0
+    let last = performance.now()
+    let frame = 0
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 100) / 1000 // after a long pause (background tab) the arc must not jump
+      last = now
+      if (!el.hasAttribute("data-stopped")) offset = (offset + dt * SLOTS_PER_SECOND) % 7
+      cards.forEach((card, i) => {
+        // Place on a ring of seven slots, running from -3.5 to 3.5 with the centre at 0.
+        const p = ((((i + 0.5 + offset) % 7) + 7) % 7) - 3.5
+        // Full opacity across the middle, fading over the last half slot at each end.
+        const op = Math.min(1, Math.max(0, 1 - (Math.abs(p) - 3) / 0.5))
+        card.style.setProperty("--p", p.toFixed(4))
+        card.style.setProperty("--op", op.toFixed(3))
+      })
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [])
+
   const pick = (id: string) => {
     setSector(id)
     requestAnimationFrame(() => acts.current?.scrollIntoView({ behavior: "smooth", block: "start" }))
@@ -40,7 +76,7 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
           {lang === "fr" ? "Choisissez votre secteur." : "Pick your sector."}
         </h2>
         <p className="sp-lead" data-rv="rise" style={{ "--i": 1 } as CSSProperties}>{lang === "fr" ? "Chaque secteur ouvre ses activités ci-dessous." : "Each sector opens its own activities below."}</p>
-        <div className="sp-grid">
+        <div className="sp-grid" ref={row} onPointerEnter={() => setStop("hover", true)} onPointerLeave={() => setStop("hover", false)} onFocus={() => setStop("focus", true)} onBlur={() => setStop("focus", false)}>
           {SECTORS.map((s, i) => (
             <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)} data-rv="rise" style={{ "--i": i } as CSSProperties}>
               <span className="sp-photo">
