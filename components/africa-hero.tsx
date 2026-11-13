@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 import Image from "next/image"
 import { Header } from "./header"
 import { Footer, Proof } from "./sections"
-import { AfricaActivities } from "./africa-activities"
+import { AfricaHubBrowse } from "./africa-hub-browse"
 import { Motion } from "./motion"
 import "./africa.css"
 import "./africa-hub.css"
@@ -112,7 +112,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
         </section>
         <Proof />
         {extra}
-        {activities && <AfricaActivities lang={activities} />}
+        {activities && <AfricaHubBrowse lang={activities} />}
       </main>
       <Footer />
       <Motion />

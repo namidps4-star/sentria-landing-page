@@ -1,7 +1,7 @@
 import { ACTIVITY_CARDS } from "@/content/africa-activity-cards"
 import { ActivityRing } from "./activity-ring"
 
-const COPY = {
+export const COPY = {
   en: {
     eyebrow: "Activities",
     heading: "Pick your activity",
