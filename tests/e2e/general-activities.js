@@ -4,12 +4,12 @@ const base = process.env.APP_URL || 'http://localhost:3300'
 let bad = 0
 const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) bad++ }
 const PAGES = [
-  ['/activities/pharmacy', 'Know your medicines'],
-  ['/activities/wholesaler', 'See which pharmacies'],
+  ['/activities/pharmacy', 'See your stock'],
+  ['/activities/wholesaler', 'Find the stock'],
   ['/activities/farm', 'Keep stored produce'],
-  ['/fr/activites/pharmacie', 'Sachez combien de jours'],
-  ['/fr/activites/grossiste', 'Voyez quelles pharmacies'],
-  ['/fr/activites/exploitation-agricole', 'Gardez les produits stockés'],
+  ['/fr/activites/pharmacie', 'Voyez vos stocks'],
+  ['/fr/activites/grossiste', 'Trouvez le stock'],
+  ['/fr/activites/exploitation-agricole', 'Gardez vos produits'],
 ]
 
 ;(async () => {
@@ -32,7 +32,7 @@ const PAGES = [
     ok(info.h1.startsWith(h1.replace(/\s+/g, '')), `${path}: heading is "${h1}…"`)
     ok(info.heroImg, `${path}: photo loads`)
     ok(info.overflow <= 0, `${path}: no horizontal overflow`)
-    ok(!/Lagos|Ninthgrid|Nigeria/.test(info.inMain), `${path}: no Africa-specific wording in the page`)
+    ok(!/Lagos|Ninthgrid|Nigeria|Africa|Afrique/.test(info.inMain), `${path}: no Africa-specific wording in the page`)
     ok(errs.length === 0, `${path}: no console or page errors${errs.length ? ' ' + errs[0] : ''}`)
     await ctx.close()
   }
