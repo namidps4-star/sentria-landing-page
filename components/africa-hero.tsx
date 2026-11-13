@@ -64,6 +64,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
         <section
           id={activities ? "hero-stage" : undefined}
           data-lens-class={activities ? "afr-hero afr-hero--hub" : undefined}
+          data-wave={activities ? "off" : undefined}
           className={`afr-hero${activities ? " afr-hero--hub" : ""}`}
           aria-labelledby={activities ? "hero-h" : `${id}-h`}
         >

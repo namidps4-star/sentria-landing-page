@@ -18,7 +18,8 @@
 .afr-hero--hub .alp{animation:afr-panel-in 1.1s cubic-bezier(.2,.7,.2,1) .35s both}
 
 /* Activities heading and names: the same Syne title as the home page sections. */
-main .afr-acts h2{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(32px,4.5vw,74px);line-height:1.03;letter-spacing:-.03em;text-align:left;max-width:17ch;margin:0 0 40px}
+main .afr-acts > .eyebrow,main .afr-acts > h2{margin-left:var(--pad,56px);margin-right:var(--pad,56px)}
+main .afr-acts h2{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(32px,4.5vw,74px);line-height:1.03;letter-spacing:-.03em;text-align:left;max-width:17ch;margin-bottom:40px}
 main .afr-acts .eyebrow{display:block}
 main .afr-ring-nm{font-family:var(--f-display),sans-serif;font-weight:700}
 main .afr-ring-text h3{font-family:var(--f-display),sans-serif;font-weight:700}

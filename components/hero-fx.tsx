@@ -65,7 +65,7 @@ export function HeroFx() {
     const letterList = (host: HTMLElement) => Array.from(host.querySelectorAll<HTMLElement>(".wvl")).filter((e) => e.offsetParent !== null)
 
     const wave = (els: HTMLElement[]) =>
-      els.map((el, i) => {
+      stage.dataset.wave === "off" ? [] : els.map((el, i) => {
         const a = el.animate(FRAMES, { duration: PERIOD_MS, iterations: Infinity, easing: "cubic-bezier(0.37, 0, 0.63, 1)", delay: -((i * 0.42) / 1.3) * 1000 })
         a.startTime = t0 // every letter, and the lens copy, share one clock
         if (!playing) a.pause()
