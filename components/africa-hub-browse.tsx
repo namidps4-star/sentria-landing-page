@@ -45,9 +45,11 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
             <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)} style={{ "--i": i } as CSSProperties}>
               <span className="sp-photo">
                 <img src={s.photo} alt="" loading="lazy" />
+                <span className="sp-info">
+                  <span className="sp-name">{s.name[lang]}</span>
+                  <span className="sp-count">{s.count[lang]}</span>
+                </span>
               </span>
-              <span className="sp-name">{s.name[lang]}</span>
-              <span className="sp-count">{s.count[lang]}</span>
             </button>
           ))}
         </div>
