@@ -2,7 +2,11 @@ import { notFound } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/sections"
 import "@/components/health-sector.css"
-import { HEALTH_SECTOR, HEALTH_ACTIVITIES, healthActivityHref } from "@/content/health-sector"
+import { HEALTH_SECTOR } from "@/content/health-sector"
+import { HEALTH_HUB_CARDS } from "@/content/health-hub-cards"
+import { ActivityRing } from "@/components/activity-ring"
+
+const TEXT = { carousel: "carousel", label: "Healthcare activities", prev: "Previous activity", next: "Next activity", more: "Read more →", view: "View", open: "Open", hint: "Scroll or drag" }
 
 type Params = Promise<{ sector: string }>
 
@@ -21,16 +25,12 @@ export default async function Page({ params }: { params: Params }) {
         <h1 className="hs-h">{t.title}</h1>
         <p className="hs-lead">{t.lead}</p>
         <p className="hs-lead" style={{ marginTop: 14 }}>{t.choose}</p>
-        <ul className="hs-list">
-          {HEALTH_ACTIVITIES.map((a) => (
-            <li key={a.key}>
-              <a href={healthActivityHref("en", a)}>
-                <b>{a.name.en}</b>
-                <em>{a.live ? "Read more →" : "Page in preparation →"}</em>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <ActivityRing
+          lang="en"
+          base=""
+          cards={HEALTH_HUB_CARDS}
+          text={TEXT}
+        />
         <a className="hs-btn" href="/en#demo">{t.demo}</a>
       </main>
       <Footer />
