@@ -12,13 +12,13 @@ type Lang = "en" | "fr"
 /* The hub's two steps: a white row of sectors, then the black carousel of the chosen sector's activities.
    Each sector's activities come from the app's catalog (content/africa-sector-catalog.ts); the count is taken from it. */
 const SECTORS: { id: HubSector; name: { en: string; fr: string }; photo: string }[] = [
-  { id: "health", name: { en: "Health", fr: "Santé" }, photo: "/africa/activities/pharmacy.jpg" },
-  { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, photo: "/africa/activities/farm.jpg" },
-  { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, photo: "/africa/activities/retail.jpg" },
-  { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, photo: "/africa/activities/logistics.jpg" },
-  { id: "industry", name: { en: "Industry", fr: "Industrie" }, photo: "/africa/activities/industry.jpg" },
-  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, photo: "/africa/activities/transport.jpg" },
-  { id: "energy", name: { en: "Energy", fr: "Énergie" }, photo: "/africa/activities/energy.jpg" },
+  { id: "health", name: { en: "Health", fr: "Santé" }, photo: "/africa/hq/row-health.jpg" },
+  { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, photo: "/africa/hq/row-agriculture.jpg" },
+  { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, photo: "/africa/hq/row-distribution.jpg" },
+  { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, photo: "/africa/hq/row-logistics.jpg" },
+  { id: "industry", name: { en: "Industry", fr: "Industrie" }, photo: "/africa/hq/row-industry.jpg" },
+  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, photo: "/africa/hq/row-transportation.jpg" },
+  { id: "energy", name: { en: "Energy", fr: "Énergie" }, photo: "/africa/hq/row-energy.jpg" },
 ]
 
 // "1 activity", "5 activities"; "1 activité", "5 activités".

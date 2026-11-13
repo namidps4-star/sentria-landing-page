@@ -17,9 +17,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { robots: { index: false, follow: false } }
 }
 
+/* One picture per activity page, none shared with another page. */
+const AFRICA_PHOTOS: Record<string, { src: string; credit: string }> = {
+  pharmacie: { src: "/africa/hq/africa-pharmacie.jpg", credit: "Photo: Yikai Sun, Unsplash" },
+  "grossiste-pharma": { src: "/africa/hq/africa-grossiste.jpg", credit: "Photo: Adrian Sulyok, Unsplash" },
+  "exploitation-agricole": { src: "/africa/hq/africa-farm.jpg", credit: "Photo: Richard Nyoni, Unsplash" },
+}
+
 export default async function Page({ params }: { params: Params }) {
   const { lang, activity } = await params
   const copy = ACTIVITY_COPY[activity]
   if (lang !== "en" || !copy) notFound()
-  return <AfricaHero copy={copy.en} id={activity} panel={activity === "pharmacie" || SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="en" alerts={SECTOR_ALERTS[activity]?.en} /> : undefined} extra={<AfricaCapabilities slug={activity} lang="en" />} />
+  return <AfricaHero copy={copy.en} id={activity} panel={activity === "pharmacie" || SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="en" alerts={SECTOR_ALERTS[activity]?.en} /> : undefined} extra={<AfricaCapabilities slug={activity} lang="en" />} photo={AFRICA_PHOTOS[activity]} />
 }

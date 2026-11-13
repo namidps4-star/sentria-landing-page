@@ -17,15 +17,43 @@ export const SECTOR_ACTIVITIES: Record<HubSector, string[]> = {
   energy: ["centrale-production", "generateurs-secours", "distribution-energetique"],
 }
 
-/* The photo of each sector, and the built page a sector's activities fall back to. */
-const SECTOR: Record<HubSector, { photo: string; alt: L; page: L }> = {
-  health: { photo: "/hub-photos/health-hero.jpg", alt: { en: "Health care setting", fr: "Cadre de soins" }, page: { en: "/activities/clinic", fr: "/fr/activites/clinique" } },
-  agriculture: { photo: "/africa/activities/farm.jpg", alt: { en: "Two people working in a crop field", fr: "Deux personnes travaillent dans un champ" }, page: { en: "/activities/farm", fr: "/fr/activites/exploitation-agricole" } },
-  distribution: { photo: "/africa/activities/retail.jpg", alt: { en: "Woman at a fruit market stall", fr: "Femme devant un étal de fruits au marché" }, page: { en: "/activities/retail", fr: "/fr/activites/commerce" } },
-  logistics: { photo: "/africa/activities/logistics.jpg", alt: { en: "Stacked orange shipping containers against a deep blue sky", fr: "Conteneurs orange empilés sous un ciel bleu profond" }, page: { en: "/activities/logistics", fr: "/fr/activites/logistique" } },
-  industry: { photo: "/africa/activities/industry.jpg", alt: { en: "Cooling towers and smoke stacks at an industrial plant", fr: "Tours de refroidissement et cheminées d'une usine" }, page: { en: "/activities/industry", fr: "/fr/activites/industrie" } },
-  transportation: { photo: "/africa/activities/transport.jpg", alt: { en: "Cars driving on a highway at sunset", fr: "Voitures sur une autoroute au coucher du soleil" }, page: { en: "/activities/transportation", fr: "/fr/activites/transport" } },
-  energy: { photo: "/africa/activities/energy.jpg", alt: { en: "Close-up of a solar panel", fr: "Gros plan sur un panneau solaire" }, page: { en: "/activities/energy", fr: "/fr/activites/energie" } },
+/* The built page a sector's activities fall back to, until an activity has a page of its own. */
+const SECTOR: Record<HubSector, { page: L }> = {
+  health: { page: { en: "/activities/clinic", fr: "/fr/activites/clinique" } },
+  agriculture: { page: { en: "/activities/farm", fr: "/fr/activites/exploitation-agricole" } },
+  distribution: { page: { en: "/activities/retail", fr: "/fr/activites/commerce" } },
+  logistics: { page: { en: "/activities/logistics", fr: "/fr/activites/logistique" } },
+  industry: { page: { en: "/activities/industry", fr: "/fr/activites/industrie" } },
+  transportation: { page: { en: "/activities/transportation", fr: "/fr/activites/transport" } },
+  energy: { page: { en: "/activities/energy", fr: "/fr/activites/energie" } },
+}
+
+/* One picture per activity, and no picture used twice on the site. Photos from Unsplash (credit in `by`). */
+const PHOTO: Record<string, { photo: string; alt: L; by: string; user: string }> = {
+  "clinique-hopital": { photo: "/africa/hq/card-clinique.jpg", alt: { en: "Hospital corridor", fr: "Couloir d'hôpital" }, by: "Gonzalo Kenny", user: "gonzakenny" },
+  laboratoire: { photo: "/africa/hq/card-laboratoire.jpg", alt: { en: "Microscope in a laboratory", fr: "Microscope en laboratoire" }, by: "Logan Gutierrez", user: "photosoflogan" },
+  veterinaire: { photo: "/africa/hq/card-veterinaire.jpg", alt: { en: "Vet giving an injection to a dog", fr: "Vétérinaire qui pique un chien" }, by: "Alexander Mass", user: "alexandermassph" },
+  "cooperative-agricole": { photo: "/africa/hq/card-cooperative.jpg", alt: { en: "Metal grain silos under a clear sky", fr: "Silos à grain métalliques sous un ciel clair" }, by: "Alex Quezada", user: "alex_quezada" },
+  "silo-stockage": { photo: "/africa/hq/card-silo.jpg", alt: { en: "Tall metal silos with ladders", fr: "Grands silos métalliques avec échelles" }, by: "Grant Ritchie", user: "grantritchie" },
+  "grossiste-distributeur": { photo: "/africa/hq/card-grossiste-distributeur.jpg", alt: { en: "Cardboard boxes stacked in a warehouse", fr: "Cartons empilés dans un entrepôt" }, by: "Wonderlane", user: "wonderlane" },
+  "supermarche-hypermarche": { photo: "/africa/hq/card-supermarche.jpg", alt: { en: "Shopping cart in a grocery aisle", fr: "Chariot dans un rayon de supermarché" }, by: "Eduardo Soares", user: "eduschadesoares" },
+  "chaine-magasins": { photo: "/africa/hq/card-chaine-magasins.jpg", alt: { en: "Refrigerated display in a grocery store", fr: "Vitrine réfrigérée dans un magasin" }, by: "Eduardo Soares", user: "eduschadesoares" },
+  "epicerie-proximite": { photo: "/africa/hq/card-epicerie.jpg", alt: { en: "Products on shelves in a small store", fr: "Produits sur des étagères" }, by: "Eduardo Soares", user: "eduschadesoares" },
+  "port-conteneurs": { photo: "/africa/hq/card-port.jpg", alt: { en: "Crane loading containers onto a ship", fr: "Grue chargeant des conteneurs sur un navire" }, by: "Sorin Basangeac", user: "sorinbasangeac" },
+  "entrepot-manutention": { photo: "/africa/hq/card-entrepot.jpg", alt: { en: "Forklift in a large warehouse", fr: "Chariot élévateur dans un grand entrepôt" }, by: "Kseniia Ilinykh", user: "sizzzikova" },
+  "transport-distribution": { photo: "/africa/hq/card-transport-distribution.jpg", alt: { en: "Van driving down a street at night", fr: "Camionnette dans une rue la nuit" }, by: "Michal Lauko", user: "jingspiral" },
+  "preparation-expedition": { photo: "/africa/hq/card-preparation.jpg", alt: { en: "Workers in a warehouse aisle", fr: "Équipe dans une allée d'entrepôt" }, by: "Ruchindra Gunasekara", user: "ruchindra" },
+  "chaine-froid": { photo: "/africa/hq/card-chaine-froid.jpg", alt: { en: "Frozen fish stacked in cold storage", fr: "Poisson congelé en chambre froide" }, by: "Bastian Ragas", user: "baslightyearrr" },
+  "plusieurs-activites": { photo: "/africa/hq/card-plusieurs.jpg", alt: { en: "Aerial view of a warehouse with solar panels and trucks", fr: "Vue aérienne d'un entrepôt avec panneaux solaires et camions" }, by: "Bernd Dittrich", user: "hdbernd" },
+  "usine-production": { photo: "/africa/hq/card-usine-production.jpg", alt: { en: "Workers at a factory assembly line", fr: "Ouvriers sur une chaîne de production" }, by: "Remy Gieling", user: "gieling" },
+  "atelier-soustraitance": { photo: "/africa/hq/card-atelier.jpg", alt: { en: "Machine cutting metal with sparks", fr: "Machine qui découpe du métal, étincelles" }, by: "Cemrecan Yurtman", user: "cmrcn_" },
+  "usine-agroalimentaire": { photo: "/africa/hq/card-usine-agroalimentaire.jpg", alt: { en: "Factory floor with production machines", fr: "Atelier de production avec machines" }, by: "Arno Senoner", user: "arnosenoner" },
+  "transporteur-routier": { photo: "/africa/hq/card-transporteur.jpg", alt: { en: "Freight truck on a bridge at dawn", fr: "Camion de fret sur un pont à l'aube" }, by: "Taylor", user: "xoutcastx" },
+  "flotte-entreprise": { photo: "/africa/hq/card-flotte.jpg", alt: { en: "Parking lot full of cars", fr: "Parking plein de voitures" }, by: "Laryssa Ares", user: "laryssaares" },
+  "location-vehicules": { photo: "/africa/hq/card-location.jpg", alt: { en: "Aerial view of a parking lot", fr: "Vue aérienne d'un parking" }, by: "Ryan Searle", user: "ryansearle" },
+  "centrale-production": { photo: "/africa/hq/card-centrale.jpg", alt: { en: "Cooling towers behind grass", fr: "Tours de refroidissement derrière des herbes" }, by: "Kris Tian", user: "kris_tian" },
+  "generateurs-secours": { photo: "/africa/hq/card-generateurs.jpg", alt: { en: "Factory with machinery", fr: "Usine avec machines" }, by: "Abhijeet Gaikwad", user: "abhijeetgaikwad10" },
+  "distribution-energetique": { photo: "/africa/hq/card-distribution-energetique.jpg", alt: { en: "Electrical transformer station", fr: "Poste de transformation électrique" }, by: "Gez Xavier Mansfield", user: "gezxaviermansfield" },
 }
 
 /* Activities that have a page of their own. */
@@ -68,7 +96,8 @@ function build(sector: HubSector, id: string): ActivityCard {
   if (existing) return existing
   const s = SECTOR[sector]
   const a = APP[id]
-  return { id, href: OWN_PAGE[id] ?? s.page, name: a.name, line: a.line, photo: s.photo, alt: s.alt, by: "Unsplash", user: "unsplash" }
+  const p = PHOTO[id]
+  return { id, href: OWN_PAGE[id] ?? s.page, name: a.name, line: a.line, photo: p.photo, alt: p.alt, by: p.by, user: p.user }
 }
 
 export function cardsFor(sector: HubSector): ActivityCard[] {

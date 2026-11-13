@@ -9,7 +9,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "pharmacie",
     en: "pharmacy",
     fr: "pharmacie",
-    photo: { src: "/africa/activities/pharmacy.jpg", credit: "Photo: Martina Jorden, Unsplash" },
+    photo: { src: "/africa/hq/hero-pharmacy.jpg", credit: "Photo: National Cancer Institute, Unsplash" },
     copy: {
       en: {
         h1: ["See your stock", "in days, not units", "before anything expires."],
@@ -45,7 +45,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "grossiste-pharma",
     en: "wholesaler",
     fr: "grossiste",
-    photo: { src: "/africa/activities/wholesaler.jpg", credit: "Photo: Árpád Czapp, Unsplash" },
+    photo: { src: "/africa/hq/hero-wholesaler.jpg", credit: "Photo: MAK, Unsplash" },
     copy: {
       en: {
         h1: ["Find the stock sitting", "unsold at one pharmacy", "that another needs."],
@@ -81,7 +81,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "exploitation-agricole",
     en: "farm",
     fr: "exploitation-agricole",
-    photo: { src: "/africa/activities/farm.jpg", credit: "Photo: proudlyswazi, Unsplash" },
+    photo: { src: "/africa/hq/hero-farm.jpg", credit: "Photo: Sebastian Staines, Unsplash" },
     copy: {
       en: {
         h1: ["Keep stored produce", "in saleable condition", "until you sell it."],
@@ -117,7 +117,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "retail",
     en: "retail",
     fr: "commerce",
-    photo: { src: "/africa/activities/retail.jpg", credit: "Photo: K Studios, Unsplash" },
+    photo: { src: "/africa/hq/hero-retail.jpg", credit: "Photo: Bernard Hermant, Unsplash" },
     copy: {
       en: {
         h1: ["Catch shortages", "and slow stock", "before they hurt sales."],
@@ -153,7 +153,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "logistics",
     en: "logistics",
     fr: "logistique",
-    photo: { src: "/africa/activities/logistics.jpg", credit: "Photo: Aron Yigin, Unsplash" },
+    photo: { src: "/africa/hq/hero-logistics.jpg", credit: "Photo: Steffen Lemmerzahl, Unsplash" },
     copy: {
       en: {
         h1: ["See the bottlenecks", "before they delay", "your shipments."],
@@ -189,7 +189,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "energy",
     en: "energy",
     fr: "energie",
-    photo: { src: "/africa/activities/energy.jpg", credit: "Photo: Benjamin Jopen, Unsplash" },
+    photo: { src: "/africa/hq/hero-energy.jpg", credit: "Photo: iridial, Unsplash" },
     copy: {
       en: {
         h1: ["Anticipate pressure", "on your energy", "before an outage."],
@@ -225,7 +225,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "transportation",
     en: "transportation",
     fr: "transport",
-    photo: { src: "/africa/activities/transport.jpg", credit: "Photo: Markus McKay, Unsplash" },
+    photo: { src: "/africa/hq/hero-transportation.jpg", credit: "Photo: Sven Brandsma, Unsplash" },
     copy: {
       en: {
         h1: ["Spot delays", "before they spread", "across the fleet."],
@@ -261,7 +261,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "industry",
     en: "industry",
     fr: "industrie",
-    photo: { src: "/africa/activities/industry.jpg", credit: "Photo: Unsplash" },
+    photo: { src: "/africa/hq/hero-industry.jpg", credit: "Photo: ThisisEngineering, Unsplash" },
     copy: {
       en: {
         h1: ["Catch deviations", "before the line", "stops."],
@@ -297,7 +297,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "clinique-hopital",
     en: "clinic",
     fr: "clinique",
-    photo: { src: "/hub-photos/health-hero.jpg", credit: "Photo: Unsplash" },
+    photo: { src: "/africa/hq/hero-clinic.jpg", credit: "Photo: Joseph Akbrud, Unsplash" },
     copy: {
       en: {
         h1: ["Keep the supplies", "no pharmacy can replace", "in stock."],
@@ -333,7 +333,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "laboratoire",
     en: "laboratory",
     fr: "laboratoire",
-    photo: { src: "/hub-photos/health-hero.jpg", credit: "Photo: Unsplash" },
+    photo: { src: "/africa/hq/hero-laboratory.jpg", credit: "Photo: National Cancer Institute, Unsplash" },
     copy: {
       en: {
         h1: ["Know how many tests", "your reagents can still run", "before you run out."],
@@ -369,7 +369,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "veterinaire",
     en: "veterinary",
     fr: "veterinaire",
-    photo: { src: "/hub-photos/health-hero.jpg", credit: "Photo: Unsplash" },
+    photo: { src: "/africa/hq/hero-veterinary.jpg", credit: "Photo: Sueda Güzeldere, Unsplash" },
     copy: {
       en: {
         h1: ["Keep vaccines cold", "and sell the stock", "before it expires."],
