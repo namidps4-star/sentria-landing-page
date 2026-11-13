@@ -5,12 +5,12 @@ const COPY = {
   en: {
     heading: "Pick your activity",
     base: "/africa/en",
-    text: { carousel: "carousel", label: "Activities", prev: "Previous activity", next: "Next activity", more: "Read more →", photo: "Photo:", view: "View", open: "Open", hint: "Scroll or drag" },
+    text: { carousel: "carousel", label: "Activities", prev: "Previous activity", next: "Next activity", more: "Read more →", view: "View", open: "Open", hint: "Scroll or drag" },
   },
   fr: {
     heading: "Choisissez votre activité",
     base: "/afrique/fr",
-    text: { carousel: "carrousel", label: "Activités", prev: "Activité précédente", next: "Activité suivante", more: "Lire la suite →", photo: "Photo :", view: "Voir", open: "Ouvrir", hint: "Faites défiler ou glissez" },
+    text: { carousel: "carrousel", label: "Activités", prev: "Activité précédente", next: "Activité suivante", more: "Lire la suite →", view: "Voir", open: "Ouvrir", hint: "Faites défiler ou glissez" },
   },
 } as const
 

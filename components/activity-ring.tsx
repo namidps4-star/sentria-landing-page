@@ -9,7 +9,7 @@ import { startRing } from "./activity-ring-engine"
 import { newPhys, type Phys } from "./activity-ring-physics"
 import "./activity-ring.css"
 
-export type RingText = { carousel: string; label: string; prev: string; next: string; more: string; photo: string; view: string; open: string; hint: string }
+export type RingText = { carousel: string; label: string; prev: string; next: string; more: string; view: string; open: string; hint: string }
 type Props = { lang: "en" | "fr"; base: string; cards: ActivityCard[]; text: RingText }
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -125,16 +125,6 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
           </a>
         </div>
         <p className="afr-ring-hint">{text.hint}</p>
-        <p className="afr-ring-credit">
-          {text.photo}{" "}
-          <a href={`https://unsplash.com/@${cur.user}?utm_source=sentria&utm_medium=referral`} target="_blank" rel="noopener noreferrer">
-            {cur.by}
-          </a>{" "}
-          /{" "}
-          <a href="https://unsplash.com/?utm_source=sentria&utm_medium=referral" target="_blank" rel="noopener noreferrer">
-            Unsplash
-          </a>
-        </p>
       </div>
     </div>
   )

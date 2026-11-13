@@ -14,6 +14,8 @@ export type Copy = {
   cta2: string
   cta2Href: string
   photoAlt: string
+  /* Width of the longest headline line, in em: the headline is sized to fill the space beside the panel. Default 7.9. */
+  fit?: number
   stats: [string, string, string][]
 }
 
@@ -25,6 +27,7 @@ export const AFRICA_EN: Copy = {
   cta2: "How it works",
   cta2Href: "/articles/how-to-count-pharmacy-stock",
   photoAlt: "Two customers reading a medicine box at a pharmacy shelf in Lagos",
+  fit: 8.5,
   stats: [
     ["30", "Days of stock", "Worked out for each product, from the last 30 days of sales."],
     ["FEFO", "Batches that expire first", "The batches closest to their date are flagged, so they leave first."],
@@ -40,6 +43,7 @@ export const AFRIQUE_FR: Copy = {
   cta2: "Comment ça marche",
   cta2Href: "/articles/compter-le-stock-en-pharmacie",
   photoAlt: "Deux clients lisent une boîte de médicament devant un rayon de pharmacie à Lagos",
+  fit: 11.3,
   stats: [
     ["30", "Jours de stock", "Calculés sur les ventes des 30 derniers jours, produit par produit."],
     ["FEFO", "Lots qui expirent en premier", "Les lots les plus proches de leur date sont signalés en premier."],
@@ -56,7 +60,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
         <section className="afr-hero" aria-labelledby={`${id}-h`}>
           <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
           <div className="afr-copy">
-            <h1 id={`${id}-h`} data-rv="rise">
+            <h1 id={`${id}-h`} data-rv="rise" style={{ "--fit": copy.fit } as React.CSSProperties}>
               {copy.h1[0]}
               <br />
               <span className="afr-lime">{copy.h1[1]}</span>
@@ -77,7 +81,6 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
             </div>
           </div>
           {panel}
-          <p className="afr-credit">Photo: Ninthgrid, Unsplash</p>
           <ul className="afr-stats" aria-label="SentrIA">
             {copy.stats.map(([num, label, desc], i) => (
               <li key={label} data-rv="rise" style={{ "--i": i } as React.CSSProperties}>

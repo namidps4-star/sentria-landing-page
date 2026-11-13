@@ -115,8 +115,6 @@
 .afr-ring-cta:hover { text-decoration: underline; }
 .afr-ring-cta:focus-visible { outline: 2px solid var(--lime, #d6ff3f); outline-offset: 3px; }
 .afr-ring-hint { margin: 10px 0 0; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(245, 243, 234, 0.5); }
-.afr-ring-credit { margin: 14px 0 0; font-size: 12px; letter-spacing: 0.02em; color: rgba(245, 243, 234, 0.62); }
-.afr-ring-credit a { color: inherit; }
 
 @keyframes afr-ring-in {
   from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
