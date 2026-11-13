@@ -1,9 +1,10 @@
 /* Hub sector row: white, Apple-like, rounded photo cards. The activities below it stay black. */
 
-.sp{background:#fbfbfd;color:#1d1d1f;padding:clamp(72px,10vh,120px) 56px;text-align:center}
-.sp-eyebrow{margin:0 0 22px;font-family:var(--f-body),sans-serif;font-size:13px;font-weight:600;line-height:1;letter-spacing:.14em;text-transform:uppercase;color:#6e6e73}
-.sp-title{margin:0 auto;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(44px,5.6vw,80px);line-height:1.02;letter-spacing:-.035em;color:#1d1d1f}
-.sp-lead{margin:22px auto 0;max-width:46ch;font-family:var(--f-body),sans-serif;font-size:19px;line-height:1.5;color:#6e6e73}
+.sp{background:#fbfbfd;color:#1d1d1f;padding:clamp(72px,10vh,120px) 56px;text-align:left}
+.sp-eyebrow{display:flex;align-items:center;margin:0;font-family:var(--f-body),sans-serif;font-size:13px;font-weight:600;line-height:1;letter-spacing:.14em;text-transform:uppercase;color:#6e6e73}
+.sp-eyebrow::before{content:"";display:inline-block;width:9px;height:9px;margin-right:9px;border-radius:50%;background:#d6ff3f}
+.sp-title{margin:14px 0 0;max-width:17ch;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(44px,5.6vw,80px);line-height:1.02;letter-spacing:-.035em;color:#1d1d1f}
+.sp-lead{margin:18px 0 0;max-width:46ch;font-family:var(--f-body),sans-serif;font-size:19px;line-height:1.5;color:#6e6e73}
 
 .sp-grid{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start;margin-top:72px}
 .sp-card{width:270px;margin:0;padding:0;border:0;background:none;color:#1d1d1f;text-align:left;cursor:pointer;font:inherit}

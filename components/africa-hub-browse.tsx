@@ -35,14 +35,14 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
   return (
     <>
       <section className="sp" aria-labelledby={`sp-${lang}`}>
-        <p className="sp-eyebrow">{lang === "fr" ? "Secteurs" : "Sectors"}</p>
-        <h2 id={`sp-${lang}`} className="sp-title">
+        <p className="sp-eyebrow" data-rv="fade">{lang === "fr" ? "Secteurs" : "Sectors"}</p>
+        <h2 id={`sp-${lang}`} className="sp-title" data-rv="rise">
           {lang === "fr" ? "Choisissez votre secteur." : "Pick your sector."}
         </h2>
-        <p className="sp-lead">{lang === "fr" ? "Chaque secteur ouvre ses activités ci-dessous." : "Each sector opens its own activities below."}</p>
+        <p className="sp-lead" data-rv="rise" style={{ "--i": 1 } as CSSProperties}>{lang === "fr" ? "Chaque secteur ouvre ses activités ci-dessous." : "Each sector opens its own activities below."}</p>
         <div className="sp-grid">
           {SECTORS.map((s, i) => (
-            <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)} style={{ "--i": i } as CSSProperties}>
+            <button key={s.id} type="button" className={`sp-card${sector === s.id ? " is-on" : ""}`} aria-pressed={sector === s.id} onClick={() => pick(s.id)} data-rv="rise" style={{ "--i": i } as CSSProperties}>
               <span className="sp-photo">
                 <img src={s.photo} alt="" loading="lazy" />
                 <span className="sp-info">
