@@ -110,6 +110,20 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
             ))}
           </ul>
         </section>
+        {activities && (
+          <section className="afr-cinema" aria-label={activities === "fr" ? "Montage des secteurs" : "Sector montage"} style={{ background: "#000", padding: 0 }}>
+            <video
+              src="/videos/africa-hub-cinematic.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              style={{ display: "block", width: "100%", height: "auto" }}
+            />
+          </section>
+        )}
         <Proof />
         {extra}
         {activities && <AfricaHubBrowse lang={activities} />}
