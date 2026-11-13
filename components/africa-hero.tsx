@@ -54,7 +54,10 @@ export const AFRIQUE_FR: Copy = {
 
 /* The regional hero: pharmacy first, for African pharmacies.
    Hub pages (those with the activities section) are static: no entrance motion, no headline effects. */
-export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode }) {
+export type HeroPhoto = { src: string; credit: string }
+const AFRICA_PHOTO: HeroPhoto = { src: "/africa/pharmacy-lagos.jpg", credit: "Photo: Ninthgrid, Unsplash" }
+
+export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel, photo = AFRICA_PHOTO }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode; photo?: HeroPhoto }) {
   const rise = activities ? undefined : "rise"
   const fade = activities ? undefined : "fade"
   return (
@@ -62,7 +65,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
       <Header />
       <main id="main" className="afr">
         <section className={`afr-hero${activities ? " afr-hero--hub" : ""}`} aria-labelledby={`${id}-h`}>
-          <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
+          <Image src={photo.src} alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
           <div className="afr-copy">
             {activities ? (
               <h1 id={`${id}-h`}>
@@ -95,6 +98,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
             </div>
           </div>
           {panel}
+          <p className="afr-credit">{photo.credit}</p>
           <ul className="afr-stats" aria-label="SentrIA">
             {copy.stats.map(([num, label, desc], i) => (
               <li key={label} data-rv={rise} style={{ "--i": i } as React.CSSProperties}>
