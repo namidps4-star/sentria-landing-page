@@ -9,7 +9,7 @@ import { DEFAULT_CURRENCY, SITE_CURRENCIES, SITE_PRICES, formatPrice, type SiteC
 
 type Plan = {
   id: "decouverte" | "pro" | "business" | "entreprise"
-  name: string
+  name: { en: string; fr: string }
   blurb: { en: string; fr: string }
   items: { en: string; fr: string }[]
   cta: { en: string; fr: string }
@@ -20,7 +20,7 @@ type Plan = {
 const PLANS: Plan[] = [
   {
     id: "decouverte",
-    name: "Découverte",
+    name: { en: "Discovery", fr: "Découverte" },
     blurb: { en: "To see it work on one site.", fr: "Pour le voir fonctionner sur un site." },
     items: [
       { en: "1 site, 1 user", fr: "1 site, 1 utilisateur" },
@@ -31,7 +31,7 @@ const PLANS: Plan[] = [
   },
   {
     id: "pro",
-    name: "Pro",
+    name: { en: "Pro", fr: "Pro" },
     blurb: { en: "For one team running one site.", fr: "Pour une équipe qui gère un site." },
     items: [
       { en: "1 site, 3 users", fr: "1 site, 3 utilisateurs" },
@@ -44,7 +44,7 @@ const PLANS: Plan[] = [
   },
   {
     id: "business",
-    name: "Business",
+    name: { en: "Business", fr: "Business" },
     blurb: { en: "For several linked sites.", fr: "Pour plusieurs sites reliés." },
     items: [
       { en: "3 sites, 10 users", fr: "3 sites, 10 utilisateurs" },
@@ -58,7 +58,7 @@ const PLANS: Plan[] = [
   },
   {
     id: "entreprise",
-    name: "Entreprise",
+    name: { en: "Enterprise", fr: "Entreprise" },
     blurb: { en: "Multi-sector, multi-site.", fr: "Multi-secteur, multi-site." },
     items: [
       { en: "Unlimited sectors, sites and users", fr: "Secteurs, sites et utilisateurs illimités" },
@@ -91,7 +91,9 @@ export function PricingGrid() {
           const amount = tier === null ? null : SITE_PRICES[currency][tier]
           return (
             <article key={p.id} className={`plan${p.featured ? " featured" : ""}`} data-tilt="" data-rv="rise" data-plan={p.id} style={iv(i + 2)}>
-              <h3>{p.name}</h3>
+              <h3>
+                <B en={p.name.en} fr={p.name.fr} />
+              </h3>
               <p className="plan-p">
                 <B en={p.blurb.en} fr={p.blurb.fr} />
               </p>
