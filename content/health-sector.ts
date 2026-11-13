@@ -45,9 +45,9 @@ export const HEALTH_PHOTO = { src: "/hub-photos/health-hero.jpg", credit: "Photo
 export const HEALTH_ACTIVITIES = [
   { key: "pharmacie", en: "pharmacy", fr: "pharmacie", name: { en: "Pharmacy", fr: "Pharmacie" }, live: true },
   { key: "grossiste-pharma", en: "wholesaler", fr: "grossiste", name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" }, live: true },
-  { key: "clinique-hopital", en: "clinic", fr: "clinique", name: { en: "Clinic / Hospital", fr: "Clinique / Hôpital" }, live: false },
-  { key: "laboratoire", en: "laboratory", fr: "laboratoire", name: { en: "Laboratory", fr: "Laboratoire" }, live: false },
-  { key: "veterinaire", en: "veterinary", fr: "veterinaire", name: { en: "Veterinary clinic", fr: "Clinique vétérinaire" }, live: false },
+  { key: "clinique-hopital", en: "clinic", fr: "clinique", name: { en: "Clinic / Hospital", fr: "Clinique / Hôpital" }, live: true },
+  { key: "laboratoire", en: "laboratory", fr: "laboratoire", name: { en: "Laboratory", fr: "Laboratoire" }, live: true },
+  { key: "veterinaire", en: "veterinary", fr: "veterinaire", name: { en: "Veterinary clinic", fr: "Clinique vétérinaire" }, live: true },
 ] as const
 
 export const healthActivityHref = (lang: "en" | "fr", a: (typeof HEALTH_ACTIVITIES)[number]) =>

@@ -360,9 +360,9 @@ export const SECTOR_LIST: Sector[] = [
     activities: [
       { slug: "pharmacie", name: { en: "Pharmacy", fr: "Pharmacie" }, live: true },
       { slug: "grossiste-pharma", name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" }, live: true },
-      { slug: "clinique-hopital", name: { en: "Clinic / Hospital", fr: "Clinique / Hôpital" }, live: false },
-      { slug: "laboratoire", name: { en: "Laboratory", fr: "Laboratoire" }, live: false },
-      { slug: "veterinaire", name: { en: "Veterinary clinic", fr: "Clinique vétérinaire" }, live: false },
+      { slug: "clinique-hopital", name: { en: "Clinic / Hospital", fr: "Clinique / Hôpital" }, live: true },
+      { slug: "laboratoire", name: { en: "Laboratory", fr: "Laboratoire" }, live: true },
+      { slug: "veterinaire", name: { en: "Veterinary clinic", fr: "Clinique vétérinaire" }, live: true },
     ],
   },
   {
