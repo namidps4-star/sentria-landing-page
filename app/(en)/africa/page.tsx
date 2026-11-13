@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AfricaHero activities="en" panel={<AfricaAlertPanel lang="en" />} />
+  return <AfricaHero activities="en" panel={<AfricaAlertPanel lang="en" auto={false} />} />
 }

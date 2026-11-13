@@ -4,8 +4,6 @@ import { Header } from "./header"
 import { Footer, Proof } from "./sections"
 import { AfricaActivities } from "./africa-activities"
 import { Motion } from "./motion"
-import { HeroFx } from "./hero-fx"
-import { AfricaOpening } from "./africa-opening"
 import "./africa.css"
 import "./africa-hub.css"
 
@@ -54,37 +52,28 @@ export const AFRIQUE_FR: Copy = {
   ],
 }
 
-/* The regional hero: pharmacy first, for African pharmacies. */
+/* The regional hero: pharmacy first, for African pharmacies.
+   Hub pages (those with the activities section) are static: no entrance motion, no headline effects. */
 export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode }) {
+  const rise = activities ? undefined : "rise"
+  const fade = activities ? undefined : "fade"
   return (
     <>
-      {activities && <AfricaOpening lang={activities} word={activities === "fr" ? "Afrique" : "Africa"} />}
       <Header />
       <main id="main" className="afr">
-        <section
-          id={activities ? "hero-stage" : undefined}
-          data-lens-class={activities ? "afr-hero afr-hero--hub" : undefined}
-          data-wave={activities ? "off" : undefined}
-          className={`afr-hero${activities ? " afr-hero--hub" : ""}`}
-          aria-labelledby={activities ? "hero-h" : `${id}-h`}
-        >
+        <section className={`afr-hero${activities ? " afr-hero--hub" : ""}`} aria-labelledby={`${id}-h`}>
           <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
-          {activities && <HeroFx />}
           <div className="afr-copy">
             {activities ? (
-              <h1 id="hero-h" className="hero-h" data-rv="rise">
+              <h1 id={`${id}-h`}>
                 {copy.h1.filter(Boolean).map((line, row) => (
-                  <span key={row} className="hl">
-                    {[...line].map((c, i) => (
-                      <span key={i} className="wvl">
-                        {c === " " ? " " : c}
-                      </span>
-                    ))}
+                  <span key={row} className="afr-line">
+                    {line}
                   </span>
                 ))}
               </h1>
             ) : (
-              <h1 id={`${id}-h`} data-rv="rise" style={{ "--fit": copy.fit } as React.CSSProperties}>
+              <h1 id={`${id}-h`} data-rv={rise} style={{ "--fit": copy.fit } as React.CSSProperties}>
                 {copy.h1[0]}
                 <br />
                 <span className="afr-lime">{copy.h1[1]}</span>
@@ -92,11 +81,11 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
                 {copy.h1[2]}
               </h1>
             )}
-            <p className="afr-lead" data-rv="rise" style={{ "--i": 1 } as React.CSSProperties}>
+            <p className="afr-lead" data-rv={rise} style={{ "--i": 1 } as React.CSSProperties}>
               {copy.lead}
             </p>
-            <p className="afr-start" data-rv="fade" style={{ "--i": 2 } as React.CSSProperties}>{copy.start}</p>
-            <div className="afr-actions" data-rv="rise" style={{ "--i": 2 } as React.CSSProperties}>
+            <p className="afr-start" data-rv={fade} style={{ "--i": 2 } as React.CSSProperties}>{copy.start}</p>
+            <div className="afr-actions" data-rv={rise} style={{ "--i": 2 } as React.CSSProperties}>
               <a className="afr-btn afr-btn-p" href="#demo">
                 {copy.cta}
               </a>
@@ -108,7 +97,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
           {panel}
           <ul className="afr-stats" aria-label="SentrIA">
             {copy.stats.map(([num, label, desc], i) => (
-              <li key={label} data-rv="rise" style={{ "--i": i } as React.CSSProperties}>
+              <li key={label} data-rv={rise} style={{ "--i": i } as React.CSSProperties}>
                 <b>{num}</b>
                 <span className="afr-stat-label">{label}</span>
                 <span className="afr-stat-desc">{desc}</span>

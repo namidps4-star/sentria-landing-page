@@ -16,7 +16,7 @@ const STEP = ROW + GAP
 const HOLD_MS = 8000
 const AUTO_MS = 4800
 
-export function AfricaAlertPanel({ lang }: { lang: "en" | "fr" }) {
+export function AfricaAlertPanel({ lang, auto = true }: { lang: "en" | "fr"; auto?: boolean }) {
   const l = LABEL[lang]
   const alerts = ALERT_PREVIEW[lang]
   const n = alerts.length
@@ -43,11 +43,11 @@ export function AfricaAlertPanel({ lang }: { lang: "en" | "fr" }) {
 
   // Turn the list on its own every few seconds, unless the reader is on it or has asked for less motion.
   useEffect(() => {
-    if (paused || n < 2) return
+    if (!auto || paused || n < 2) return
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const t = setInterval(() => setActive((i) => (i + 1) % n), AUTO_MS)
     return () => clearInterval(t)
-  }, [paused, n])
+  }, [auto, paused, n])
 
   const go = (d: number) => {
     setActive((i) => (i + d + n) % n)
