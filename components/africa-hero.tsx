@@ -18,8 +18,8 @@ export type Copy = {
 }
 
 export const AFRICA_EN: Copy = {
-  h1: ["Stock days.", "Batch dates.", "Order today."],
-  lead: "For pharmacists who lose sales to empty shelves. SentrIA calculates your days of cover, flags FEFO batches, and tells you what to order — per product, per supplier.",
+  h1: ["Pharmacy stock,", "days left", "and order in time."],
+  lead: "SentrIA works out how many days of stock you have left and warns you before a delivery is late.",
   start: "Starting in Africa.",
   cta: "Book a demo →",
   cta2: "How it works",
@@ -33,8 +33,8 @@ export const AFRICA_EN: Copy = {
 }
 
 export const AFRIQUE_FR: Copy = {
-  h1: ["Jours de stock.", "Priorité des lots.", "Commandez aujourd'hui."],
-  lead: "Pour les pharmaciens qui perdent des ventes face aux ruptures. SentrIA calcule vos jours de couverture, identifie les lots FEFO et vous dit quoi commander — par produit, par fournisseur.",
+  h1: ["Stock en pharmacie,", "jours restants", "et commandez à temps."],
+  lead: "SentrIA calcule le nombre de jours de stock qu'il vous reste et vous prévient avant qu'une livraison soit en retard.",
   start: "Démarrage en Afrique.",
   cta: "Demander une démo →",
   cta2: "Comment ça marche",

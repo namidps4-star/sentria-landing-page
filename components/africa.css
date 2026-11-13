@@ -78,17 +78,17 @@
 @media (max-width:960px){.afr-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.afr-hub-grid{grid-template-columns:1fr}}
 
-.afr-panel{position:relative;z-index:1;margin:0 var(--pad,56px) 40px;max-width:520px;padding:24px;border-radius:20px;background:rgba(11,12,8,.72);backdrop-filter:blur(14px);border:1px solid rgba(245,243,234,.14)}
-.afr-panel-head{margin:0 0 16px;display:flex;flex-direction:column;gap:4px}
-.afr-panel-head b{font-size:16px;font-weight:600}
-.afr-panel-head span{font-size:13px;opacity:.7}
-.afr-panel ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.afr-alert{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:rgba(245,243,234,.05);font-size:15px;line-height:1.45}
-.afr-alert i{flex:none;width:9px;height:9px;margin-top:6px;border-radius:50%;background:var(--lime,#d6ff3f);animation:afr-pulse 2.8s ease-in-out infinite}
-.afr-alert:nth-child(2) i{animation-delay:.7s}
-.afr-alert:nth-child(3) i{animation-delay:1.4s}
-.afr-alert-critical i{background:#ff7a5c}
-.afr-alert-warning i{background:#ffc857}
+.afr-panel{position:relative;z-index:1;margin:0 var(--pad,56px) 40px;max-width:420px;padding:20px;border-radius:20px;background:rgba(11,12,8,.82);backdrop-filter:blur(18px);border:1px solid rgba(245,243,234,.12)}
+.afr-panel-head{margin:0 0 14px;display:flex;flex-direction:column;gap:4px}
+.afr-panel-live{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--cream,#f5f3ea)}
+.afr-panel-dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--lime,#d6ff3f);animation:afr-pulse 2.4s ease-in-out infinite}
+.afr-panel-sub{font-size:11px;opacity:.45;letter-spacing:.02em}
+.afr-panel-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.afr-alert-card{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;border-radius:12px;font-size:14px;line-height:1.5}
+.afr-alert-card-critical{background:rgba(255,122,92,.08);border:1px solid rgba(255,122,92,.22)}
+.afr-alert-card-warning{background:rgba(255,200,87,.06);border:1px solid rgba(255,200,87,.18)}
+.afr-alert-icon{flex:none;margin-top:1px;line-height:1}
+.afr-alert-body{color:var(--cream,#f5f3ea);opacity:.9}
 @media (min-width:961px){
   .afr-hero .afr-panel{position:absolute;right:var(--pad,56px);bottom:clamp(160px,22vh,220px);margin:0;width:min(400px,30vw);z-index:1}
 }
