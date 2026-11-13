@@ -2,10 +2,10 @@
    Static: no entrance or hover motion on the hero. Type follows the site: Syne bold for headings and names, Poppins for body. */
 
 @media (min-width:961px){
-  .afr-hero--hub .afr-copy{position:absolute;top:clamp(120px,17vh,180px);left:var(--pad,56px);right:auto;width:min(860px,calc(100vw - 2*var(--pad,56px) - min(400px,30vw) - 40px));max-width:none;padding:0}
-  .afr-hero--hub h1{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,96px);letter-spacing:-.03em;line-height:1.02;white-space:normal}
+  .afr-hero--hub .afr-copy,.afr-hero--sector .afr-copy{position:absolute;top:clamp(120px,17vh,180px);left:var(--pad,56px);right:auto;width:min(860px,calc(100vw - 2*var(--pad,56px) - min(400px,30vw) - 40px));max-width:none;padding:0}
+  .afr-hero--hub h1,.afr-hero--sector h1{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,96px);letter-spacing:-.03em;line-height:1.02;white-space:normal}
   .afr-hero--hub .afr-line{display:block}
-  .afr-hero--hub .afr-lead{max-width:36ch;font-size:clamp(16px,1.3vw,19px);line-height:1.55;text-wrap:balance;opacity:.85}
+  .afr-hero--hub .afr-lead,.afr-hero--sector .afr-lead{max-width:36ch;font-size:clamp(16px,1.3vw,19px);line-height:1.55;text-wrap:balance;opacity:.85}
 }
 
 .afr-hero--hub .afr-btn-s{border-color:rgba(245,243,234,.3)}
@@ -17,3 +17,9 @@ main .afr-acts .eyebrow{display:flex;align-items:center;gap:12px}
 main .afr-acts .eyebrow::before{background:#d6ff3f;width:42px}
 main .afr-ring-nm{font-family:var(--f-display),sans-serif;font-weight:700}
 main .afr-ring-text h3{font-family:var(--f-display),sans-serif;font-weight:700}
+
+/* The hub hero is the blueprint for every activity hero: same headline and lead on phone. */
+@media (max-width:960px){
+  .afr-hero--hub h1,.afr-hero--sector h1{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,96px);letter-spacing:-.03em;line-height:1.02}
+  .afr-hero--hub .afr-line{display:block}
+}
