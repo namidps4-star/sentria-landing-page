@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 
 import { ARTICLE_PAGES, isLive } from "@/content/articles"
+import { GENERAL_ACTIVITIES } from "@/content/general-activities"
 
 const LANGS = { en: "https://sentriahq.dev/en", fr: "https://sentriahq.dev/fr" }
 
@@ -18,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://sentriahq.dev/fr/articles", changeFrequency: "weekly", priority: 0.6 },
     { url: "https://sentriahq.dev/fr/privacy", changeFrequency: "yearly", priority: 0.3 },
     { url: "https://sentriahq.dev/fr/terms", changeFrequency: "yearly", priority: 0.3 },
+    ...GENERAL_ACTIVITIES.flatMap((a) => {
+      const alternates = { languages: { en: `https://sentriahq.dev/activities/${a.en}`, fr: `https://sentriahq.dev/fr/activites/${a.fr}` } }
+      return [
+        { url: `https://sentriahq.dev/activities/${a.en}`, changeFrequency: "monthly" as const, priority: 0.7, alternates },
+        { url: `https://sentriahq.dev/fr/activites/${a.fr}`, changeFrequency: "monthly" as const, priority: 0.7, alternates },
+      ]
+    }),
     ...ARTICLE_PAGES.filter(isLive).map((a) => ({
       url: `https://sentriahq.dev/articles/${a.slug}`,
       changeFrequency: "monthly" as const,

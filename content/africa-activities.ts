@@ -74,7 +74,7 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta: "Book a demo →",
       cta2: "See the storage features",
       cta2Href: "/en#demo",
-      photoAlt: PHARMACY_PHOTO_EN,
+      photoAlt: "Two people working in a crop field",
       stats: [
         ["Days in storage", "Counted for each lot from the day it went in."],
         ["Hours left", "An estimate of the time before the product spoils, from its storage temperature."],
@@ -88,7 +88,7 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta: "Demander une démo →",
       cta2: "Voir les fonctions de stockage",
       cta2Href: "/fr#demo",
-      photoAlt: PHARMACY_PHOTO_FR,
+      photoAlt: "Deux personnes travaillent dans un champ",
       stats: [
         ["Jours en stockage", "Comptés pour chaque lot à partir de son entrée en stock."],
         ["Heures restantes", "Une estimation du temps qui reste avant que le produit ne se détériore, selon sa température."],

@@ -47,13 +47,16 @@ export const AFRIQUE_FR: Copy = {
 }
 
 /* The regional hero: pharmacy first, for African pharmacies. */
-export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode }) {
+export type HeroPhoto = { src: string; credit: string }
+const AFRICA_PHOTO: HeroPhoto = { src: "/africa/pharmacy-lagos.jpg", credit: "Photo: Ninthgrid, Unsplash" }
+
+export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, photo = AFRICA_PHOTO }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; photo?: HeroPhoto }) {
   return (
     <>
       <Header />
       <main id="main" className="afr">
         <section className="afr-hero" aria-labelledby={`${id}-h`}>
-          <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
+          <Image src={photo.src} alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
           <div className="afr-copy">
             <h1 id={`${id}-h`}>
               {copy.h1[0]}
@@ -75,7 +78,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra }: 
               </a>
             </div>
           </div>
-          <p className="afr-credit">Photo: Ninthgrid, Unsplash</p>
+          <p className="afr-credit">{photo.credit}</p>
           <ul className="afr-stats" aria-label="SentrIA">
             {copy.stats.map(([b, t]) => (
               <li key={b}>
