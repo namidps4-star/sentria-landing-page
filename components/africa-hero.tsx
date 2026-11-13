@@ -56,7 +56,7 @@ export const AFRIQUE_FR: Copy = {
 /* The regional hero: pharmacy first, for African pharmacies.
    Hub pages (those with the activities section) are static: no entrance motion, no headline effects. */
 export type HeroPhoto = { src: string; credit: string }
-const AFRICA_PHOTO: HeroPhoto = { src: "/africa/pharmacy-lagos.jpg", credit: "Photo: Ninthgrid, Unsplash" }
+const AFRICA_PHOTO: HeroPhoto = { src: "/africa/pharmacy-lagos.jpg", credit: "Photo: Angel Sinigersky, Unsplash" }
 
 export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel, photo = AFRICA_PHOTO }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode; photo?: HeroPhoto }) {
   const rise = "rise"

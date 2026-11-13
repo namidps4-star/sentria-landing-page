@@ -87,7 +87,7 @@ export const PHARMACY_STOCK_COUNT: ArticlePage[] = [
       { label: "American Hospital Association, RFID Solutions Attract Attention for Medication Inventory Management, 25 February 2025", url: "https://www.aha.org/aha-center-health-innovation-market-scan/2025-02-25-rfid-solutions-attract-attention-medication-inventory-management" },
     ],
     figures: [
-      { src: "/articles/rfid-pharmacist-aisle.jpg", alt: "A pharmacist in a white coat checks a medicine box in a stockroom aisle", caption: "Illustrative photo. Credit: National Cancer Institute, Unsplash." },
+      { src: "/articles/rfid-pharmacist-aisle.jpg", alt: "Boxes of medicine on shelves in a pharmacy stockroom", caption: "Illustrative photo. Credit: Franki Chamaki, Unsplash." },
       { src: "/articles/rfid-warehouse.jpg", alt: "A warehouse filled with stacked boxes", caption: "Illustrative photo. Credit: Arum Visuals, Unsplash." },
     ],
   },
@@ -177,7 +177,7 @@ export const PHARMACY_STOCK_COUNT: ArticlePage[] = [
       { label: "American Hospital Association, RFID Solutions Attract Attention for Medication Inventory Management, 25 février 2025 (en anglais)", url: "https://www.aha.org/aha-center-health-innovation-market-scan/2025-02-25-rfid-solutions-attract-attention-medication-inventory-management" },
     ],
     figures: [
-      { src: "/articles/rfid-pharmacist-aisle.jpg", alt: "Un pharmacien en blouse blanche vérifie une boîte de médicament dans une allée de réserve", caption: "Photo d'illustration. Crédit : National Cancer Institute, Unsplash." },
+      { src: "/articles/rfid-pharmacist-aisle.jpg", alt: "Des boîtes de médicaments sur des étagères dans une réserve de pharmacie", caption: "Photo d'illustration. Crédit : Franki Chamaki, Unsplash." },
       { src: "/articles/rfid-warehouse.jpg", alt: "Un entrepôt rempli de cartons empilés", caption: "Photo d'illustration. Crédit : Arum Visuals, Unsplash." },
     ],
   },

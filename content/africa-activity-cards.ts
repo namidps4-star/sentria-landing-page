@@ -20,9 +20,9 @@ export type ActivityCard = {
 const LIVE_PHOTOS: Record<string, Pick<ActivityCard, "photo" | "alt" | "by" | "user">> = {
   pharmacie: {
     photo: "/africa/hq/card-pharmacie.jpg",
-    alt: { en: "Pharmacist at work", fr: "Pharmacien au travail" },
-    by: "nasro azaizia",
-    user: "nasro18dz",
+    alt: { en: "Medicine bottles on pharmacy shelves", fr: "Flacons de médicaments sur des étagères" },
+    by: "THLT LCX",
+    user: "thlt_lcx",
   },
   "grossiste-pharma": {
     photo: "/africa/hq/card-grossiste-pharma.jpg",
@@ -57,9 +57,9 @@ const SECTOR_CARDS: ActivityCard[] = [
     name: { en: "Retail & Distribution", fr: "Commerce et distribution" },
     line: fit("Retail"),
     photo: "/africa/hq/row-distribution.jpg",
-    alt: { en: "Woman at a fruit market stall", fr: "Femme devant un étal de fruits au marché" },
-    by: "K Studios",
-    user: "kstudios",
+    alt: { en: "Forklift parked in a warehouse", fr: "Chariot élévateur dans un entrepôt" },
+    by: "Jhonatan Londono",
+    user: "jhonjhon1995",
   },
   {
     id: "logistics",

@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AfricaHero activities="en" photo={{ src: "/africa/hq/africa-hub.jpg", credit: "Photo: Pharaoh Fontain, Unsplash" }} />
+  return <AfricaHero activities="en" photo={{ src: "/africa/hq/africa-hub.jpg", credit: "Photo: William Veitch, Unsplash" }} />
 }

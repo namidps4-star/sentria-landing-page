@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 /* One picture per activity page, none shared with another page. */
 const AFRICA_PHOTOS: Record<string, { src: string; credit: string }> = {
   pharmacie: { src: "/africa/hq/africa-pharmacie.jpg", credit: "Photo: Yikai Sun, Unsplash" },
-  "grossiste-pharma": { src: "/africa/hq/africa-grossiste.jpg", credit: "Photo: Adrian Sulyok, Unsplash" },
-  "exploitation-agricole": { src: "/africa/hq/africa-farm.jpg", credit: "Photo: Richard Nyoni, Unsplash" },
+  "grossiste-pharma": { src: "/africa/hq/africa-grossiste.jpg", credit: "Photo: Salah Ait Mokhtar, Unsplash" },
+  "exploitation-agricole": { src: "/africa/hq/africa-farm.jpg", credit: "Photo: Yulian Alexeyev, Unsplash" },
 }
 
 export default async function Page({ params }: { params: Params }) {

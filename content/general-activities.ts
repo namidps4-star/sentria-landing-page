@@ -9,7 +9,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "pharmacie",
     en: "pharmacy",
     fr: "pharmacie",
-    photo: { src: "/africa/hq/hero-pharmacy.jpg", credit: "Photo: National Cancer Institute, Unsplash" },
+    photo: { src: "/africa/hq/hero-pharmacy.jpg", credit: "Photo: freestocks, Unsplash" },
     copy: {
       en: {
         h1: ["See your stock", "in days, not units", "before anything expires."],
@@ -81,7 +81,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "exploitation-agricole",
     en: "farm",
     fr: "exploitation-agricole",
-    photo: { src: "/africa/hq/hero-farm.jpg", credit: "Photo: Sebastian Staines, Unsplash" },
+    photo: { src: "/africa/hq/hero-farm.jpg", credit: "Photo: Sreehari Devadas, Unsplash" },
     copy: {
       en: {
         h1: ["Keep stored produce", "in saleable condition", "until you sell it."],
@@ -117,7 +117,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "retail",
     en: "retail",
     fr: "commerce",
-    photo: { src: "/africa/hq/hero-retail.jpg", credit: "Photo: Bernard Hermant, Unsplash" },
+    photo: { src: "/africa/hq/hero-retail.jpg", credit: "Photo: Eduardo Soares, Unsplash" },
     copy: {
       en: {
         h1: ["Catch shortages", "and slow stock", "before they hurt sales."],
@@ -261,7 +261,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "industry",
     en: "industry",
     fr: "industrie",
-    photo: { src: "/africa/hq/hero-industry.jpg", credit: "Photo: ThisisEngineering, Unsplash" },
+    photo: { src: "/africa/hq/hero-industry.jpg", credit: "Photo: Simon Kadula, Unsplash" },
     copy: {
       en: {
         h1: ["Catch deviations", "before the line", "stops."],
@@ -333,7 +333,7 @@ export const GENERAL_ACTIVITIES: General[] = [
     key: "laboratoire",
     en: "laboratory",
     fr: "laboratoire",
-    photo: { src: "/africa/hq/hero-laboratory.jpg", credit: "Photo: National Cancer Institute, Unsplash" },
+    photo: { src: "/africa/hq/hero-laboratory.jpg", credit: "Photo: Ousa Chea, Unsplash" },
     copy: {
       en: {
         h1: ["Know how many tests", "your reagents can still run", "before you run out."],
