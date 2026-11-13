@@ -43,7 +43,7 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) bad++ }
     ok(tags.length === 7 && tags.every(Boolean), `${name}: every card names itself (${tags.join(' | ')})`)
     ok(/(Health|Santé)\s*(Pharmacy|Pharmacie)/.test(tags[0]) && /(Health|Santé)/.test(tags[1]) && /Agriculture/.test(tags[2]), `${name}: activity cards carry their sector above the name`)
     ok(g.length === 7 && g.every((c) => c.href), `${name}: all seven cards are links`)
-    ok(g.filter((c) => /\/(africa\/en|afrique\/fr)\/[a-z-]+$/.test(c.href)).length === 3 && g.filter((c) => /#fit$/.test(c.href)).length === 4, `${name}: three go to activity pages, four to the sector section`)
+    ok(g.every((c) => /\/(activities|fr\/activites|africa\/en|afrique\/fr)\/[a-z-]+$/.test(c.href || '')), `${name}: every card goes to its own page`)
     ok(!(await p.evaluate(() => /coming soon|bientôt/i.test(document.querySelector('.afr-acts').textContent))), `${name}: nothing says coming soon`)
     await click(g.find((c) => c.d === '1'))
     ok((await count()) === '02 / 07', `${name}: real click on the right neighbour centres it (${await count()})`)
@@ -89,7 +89,7 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) bad++ }
     await p.mouse.move(c1.x, c1.y, { steps: 8 })
     await p.waitForTimeout(500)
     if (c1.href) {
-      const nav = p.waitForURL(/\/(africa\/en|afrique\/fr)\/|\/(en|fr)#fit/, { timeout: 30000 }).then(() => true).catch(() => false)
+      const nav = p.waitForURL(/\/(africa\/en|afrique\/fr|activities|fr\/activites)\//, { timeout: 30000 }).then(() => true).catch(() => false)
       await p.mouse.down()
       await p.mouse.up()
       ok(await nav, `${name}: clicking the centre card opens its page`)

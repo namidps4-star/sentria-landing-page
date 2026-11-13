@@ -49,12 +49,11 @@ const fit = (name: string): L => {
   const en = EN_PRODUCT.fit.cards.find((c) => c.h === name)?.p ?? ""
   return { en, fr: FR[en] ?? en }
 }
-const HOME_SECTORS: L = { en: "/en#fit", fr: "/fr#fit" }
 
 const SECTOR_CARDS: ActivityCard[] = [
   {
     id: "retail",
-    href: HOME_SECTORS,
+    href: { en: "/activities/retail", fr: "/fr/activites/commerce" },
     name: { en: "Retail & Distribution", fr: "Commerce et distribution" },
     line: fit("Retail"),
     photo: "/africa/activities/retail.jpg",
@@ -64,7 +63,7 @@ const SECTOR_CARDS: ActivityCard[] = [
   },
   {
     id: "logistics",
-    href: HOME_SECTORS,
+    href: { en: "/activities/logistics", fr: "/fr/activites/logistique" },
     name: { en: "Logistics", fr: "Logistique" },
     line: fit("Logistics"),
     photo: "/africa/activities/logistics.jpg",
@@ -74,7 +73,7 @@ const SECTOR_CARDS: ActivityCard[] = [
   },
   {
     id: "energy",
-    href: HOME_SECTORS,
+    href: { en: "/activities/energy", fr: "/fr/activites/energie" },
     name: { en: "Energy", fr: "Énergie" },
     line: fit("Energy"),
     photo: "/africa/activities/energy.jpg",
@@ -84,7 +83,7 @@ const SECTOR_CARDS: ActivityCard[] = [
   },
   {
     id: "transportation",
-    href: HOME_SECTORS,
+    href: { en: "/activities/transportation", fr: "/fr/activites/transport" },
     name: { en: "Transportation", fr: "Transport" },
     line: fit("Transportation"),
     photo: "/africa/activities/transport.jpg",

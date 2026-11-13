@@ -87,6 +87,7 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
                 {c.sector && <span className="afr-ring-kick">{c.sector[lang]}</span>}
                 <span className="afr-ring-nm">{c.name[lang]}</span>
               </span>
+              <span className="afr-ring-go" aria-hidden="true">→</span>
               <span className="afr-ring-veil" ref={(el) => void (veilEls.current[i] = el)} />
             </>
           )
