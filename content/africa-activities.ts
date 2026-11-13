@@ -451,10 +451,12 @@ export const SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critica
     en: [
       { level: "warning", text: "Clinique du Nord: reordering 30 units of Metformin 500mg. Pharmacy Centrale: 34 units unsold. Suggested transfer: 30 units." },
       { level: "warning", text: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA." },
+      { level: "critical", text: "Amoxicillin 500mg: 12 units, 72,000 FCFA at risk. Transfer before it expires." },
     ],
     fr: [
       { level: "warning", text: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Transfert proposé : 30 unités." },
       { level: "warning", text: "Metformine 500mg : 30 unités, 180 000 FCFA. Amoxicilline 500mg : 12 unités, 72 000 FCFA." },
+      { level: "critical", text: "Amoxicilline 500mg : 12 unités, 72 000 FCFA à risque. Transférez avant péremption." },
     ],
   },
   "exploitation-agricole": {

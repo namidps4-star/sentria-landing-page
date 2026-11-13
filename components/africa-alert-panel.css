@@ -13,12 +13,13 @@
 
 .alp-stack{position:absolute;inset:0;margin:0;padding:0;list-style:none;transform-style:preserve-3d}
 
-.alp-item{position:absolute;left:0;right:0;top:50%;height:104px;margin-top:-52px;display:grid;grid-template-columns:56px minmax(0,1fr) 12px;align-items:center;gap:14px;padding:0 18px 0 14px;box-sizing:border-box;border-radius:26px;background:transparent;color:#0b0c08;transform-origin:50% 50%;backface-visibility:hidden;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,background-color .45s ease,box-shadow .45s ease}
+.alp-item{position:absolute;left:0;right:0;top:0;height:104px;margin-top:0;display:grid;grid-template-columns:56px minmax(0,1fr) 12px;align-items:center;gap:14px;padding:0 18px 0 14px;box-sizing:border-box;border-radius:20px;background:#ffffff;color:#0b0c08;box-shadow:0 10px 24px rgba(40,30,10,.10);transform-origin:50% 50%;backface-visibility:hidden;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,background-color .45s ease,box-shadow .45s ease}
 
-.alp-item.alp-on{background:#ffffff;box-shadow:0 16px 32px rgba(40,30,10,.14)}
+.alp-item.alp-on{background:#ffffff;box-shadow:0 16px 32px rgba(40,30,10,.18)}
+.alp-critical .alp-text b{color:#b42e16}
+.alp-warning .alp-text b{color:#8a5f00}
 
-/* Only the text of the rows that are not being read fades; the orbs keep their colour. */
-.alp-item:not(.alp-on) .alp-text{opacity:.5}
+/* Every row stays fully visible: white card, coloured severity. */
 
 .alp-orb{width:56px;height:56px;display:block}
 
