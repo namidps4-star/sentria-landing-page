@@ -19,7 +19,7 @@ export type Copy = {
 
 export const AFRICA_EN: Copy = {
   h1: ["Pharmacy stock,", "days left", "and order in time."],
-  lead: "SentrIA works out how many days of stock you have left and warns you before a delivery is late.",
+  lead: "Count your shelves. SentrIA works out how many days of stock you have left and warns you before a delivery is late.",
   start: "Starting in Africa.",
   cta: "Book a demo →",
   cta2: "How it works",
@@ -33,8 +33,8 @@ export const AFRICA_EN: Copy = {
 }
 
 export const AFRIQUE_FR: Copy = {
-  h1: ["Stock en pharmacie,", "jours restants", "et commandez à temps."],
-  lead: "SentrIA calcule le nombre de jours de stock qu'il vous reste et vous prévient avant qu'une livraison soit en retard.",
+  h1: ["Stock de pharmacie,", "jours restants", "et commande à temps."],
+  lead: "Comptez vos rayons. SentrIA calcule le nombre de jours de stock restants et vous prévient avant qu'une livraison soit en retard.",
   start: "Démarrage en Afrique.",
   cta: "Demander une démo →",
   cta2: "Comment ça marche",
