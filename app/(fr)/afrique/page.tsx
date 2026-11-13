@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { AFRIQUE_FR, AfricaHero } from "@/components/africa-hero"
+import { AfricaAlertPanel } from "@/components/africa-alert-panel"
 
 const TITLE = "Stock de pharmacie et jours de stock pour les pharmacies d'Afrique | SentrIA"
 const DESC = "SentrIA calcule les jours de stock restants de votre pharmacie à partir de vos comptages et de vos ventes, et vous prévient avant qu'une livraison soit en retard."
@@ -20,5 +21,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AfricaHero copy={AFRIQUE_FR} id="afq" activities="fr" />
+  return <AfricaHero copy={AFRIQUE_FR} id="afq" activities="fr" panel={<AfricaAlertPanel lang="fr" />} />
 }
