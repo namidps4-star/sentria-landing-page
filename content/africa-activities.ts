@@ -16,9 +16,9 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/articles/fefo-first-expired-first-out",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
-        ["Amoxicillin 500mg:", "4 days of stock left. Delivery in 7 days. Order today or the shelf goes empty."],
-        ["Paracetamol 500mg lot A47:", "Expires in 18 days. 24 boxes at risk. Sell first or return to supplier."],
-        ["COPHAC Pharma:", "Promises 5 days. Delivers in 9 on average. Order 4 days earlier than you think."],
+        ["4d", "Days of stock", "Amoxicillin 500mg — delivery in 7 days. Order today or the shelf goes empty."],
+        ["18d", "Batch expiry risk", "Paracetamol 500mg lot A47 — 24 boxes expire in 18 days. Sell first or return."],
+        ["+4d", "Order earlier", "COPHAC Pharma delivers in 9 days on average, not the 5 they promise."],
       ],
     },
     fr: {
@@ -30,9 +30,9 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/articles/fefo-premier-expire-premier-sorti",
       photoAlt: PHARMACY_PHOTO_FR,
       stats: [
-        ["Amoxicilline 500mg :", "4 jours de stock restants. Livraison dans 7 jours. Commandez aujourd'hui ou le rayon sera vide."],
-        ["Paracétamol 500mg lot A47 :", "Expire dans 18 jours. 24 boîtes à risque. Écoulez ou retournez au fournisseur."],
-        ["COPHAC Pharma :", "Promet 5 jours. Livre en 9 en moyenne. Commandez 4 jours plus tôt que prévu."],
+        ["4j", "Jours de stock", "Amoxicilline 500mg — livraison dans 7 jours. Commandez aujourd'hui ou le rayon sera vide."],
+        ["18j", "Risque lot", "Paracétamol 500mg lot A47 — 24 boîtes expirent dans 18 jours. Écoulez ou retournez."],
+        ["+4j", "Commandez plus tôt", "COPHAC Pharma livre en 9 jours en moyenne, pas les 5 jours promis."],
       ],
     },
   },
@@ -46,9 +46,9 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/articles/pharmacy-stock-outs",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
-        ["Clinique du Nord reordered 30 units:", "Metformin 500mg. Pharmacy Centrale holds 34 unsold. Suggested transfer: 30 units."],
-        ["Transfer value: 180,000 FCFA:", "Largest opportunity ranked first. Handle the one that matters most."],
-        ["Nothing moves without you:", "SentrIA proposes. You approve. No stock is moved or invoiced automatically."],
+        ["30", "Units to transfer", "Clinique du Nord reordered Metformin 500mg. Pharmacy Centrale holds 34 unsold."],
+        ["180k", "FCFA at stake", "Largest transfer opportunity ranked first. Handle the one that matters most."],
+        ["0", "Auto moves", "SentrIA proposes. You approve. Nothing is moved or invoiced automatically."],
       ],
     },
     fr: {
@@ -60,9 +60,9 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/articles/ruptures-de-stock-en-pharmacie",
       photoAlt: PHARMACY_PHOTO_FR,
       stats: [
-        ["Clinique du Nord a recommandé 30 unités :", "Metformine 500mg. Pharmacie Centrale en a 34 invendues. Transfert proposé : 30 unités."],
-        ["Valeur du transfert : 180 000 FCFA :", "La plus grande opportunité classée en premier. Traitez d'abord ce qui compte le plus."],
-        ["Rien ne bouge sans vous :", "SentrIA propose. Vous approuvez. Aucun stock ne se déplace ni n'est facturé automatiquement."],
+        ["30", "Unités à transférer", "Clinique du Nord a recommandé la Metformine 500mg. Pharmacie Centrale en a 34 invendues."],
+        ["180k", "FCFA en jeu", "La plus grande opportunité classée en premier. Traitez d'abord ce qui compte le plus."],
+        ["0", "Mouvements auto", "SentrIA propose. Vous approuvez. Aucun stock ne se déplace automatiquement."],
       ],
     },
   },
@@ -76,9 +76,9 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/en#demo",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
-        ["Tomatoes Lot 7:", "4 days at 32°C. Loss starts in 12 hours. Arrange delivery now."],
-        ["Maize Lot 3:", "9 days in storage. Critical risk. Deliver urgently before full loss."],
-        ["Cold room reached 31°C:", "Risk of spoilage. Check temperature and ventilation now."],
+        ["12h", "Before spoilage", "Tomatoes Lot 7 — 4 days at 32°C. Loss starts in 12 hours. Arrange delivery now."],
+        ["9d", "Days in storage", "Maize Lot 3 — critical risk. Deliver urgently before full loss."],
+        ["31°", "Cold room alert", "Temperature reached danger level. Check ventilation now."],
       ],
     },
     fr: {
@@ -90,9 +90,9 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/fr#demo",
       photoAlt: PHARMACY_PHOTO_FR,
       stats: [
-        ["Tomates Lot 7 :", "4 jours à 32°C. Perte dans 12 heures. Organisez la livraison maintenant."],
-        ["Maïs Lot 3 :", "9 jours en stockage. Risque critique. Livrez d'urgence avant la perte totale."],
-        ["Chambre froide à 31°C :", "Risque de détérioration. Vérifiez la température et la ventilation maintenant."],
+        ["12h", "Avant détérioration", "Tomates Lot 7 — 4 jours à 32°C. Perte dans 12 heures. Livraison maintenant."],
+        ["9j", "Jours en stockage", "Maïs Lot 3 — risque critique. Livrez d'urgence avant la perte totale."],
+        ["31°", "Alerte chambre froide", "Température atteinte. Vérifiez la température et la ventilation."],
       ],
     },
   },
