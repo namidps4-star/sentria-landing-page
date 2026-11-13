@@ -257,6 +257,42 @@ export const GENERAL_ACTIVITIES: General[] = [
       },
     },
   },
+  {
+    key: "industry",
+    en: "industry",
+    fr: "industrie",
+    photo: { src: "/africa/activities/industry.jpg", credit: "Photo: Unsplash" },
+    copy: {
+      en: {
+        h1: ["Catch deviations", "before the line", "stops."],
+        lead: "Anticipate production deviations, downtime, and capacity constraints before they impact the flow. Factories, manufacturing plants and machine shops.",
+        start: "For factories, manufacturing plants and machine shops.",
+        cta: "Book a demo →",
+        cta2: "See all sectors",
+        cta2Href: "/en#fit",
+        photoAlt: "Factory production line",
+        stats: [
+          ["Production", "Deviation detection", "Deviations detected early."],
+          ["Maintenance", "Downtime risks", "Downtime risks flagged in advance."],
+          ["Capacity", "Future pressure", "Capacity pressure anticipated."],
+        ],
+      },
+      fr: {
+        h1: ["Repérez les écarts", "avant l'arrêt", "de la ligne."],
+        lead: "Anticipez les écarts de production, les arrêts et les contraintes de capacité avant qu'ils n'impactent le flux. Usines, sites de production et ateliers d'usinage.",
+        start: "Pour les usines, sites de production et ateliers d'usinage.",
+        cta: "Demander une démo →",
+        cta2: "Voir tous les secteurs",
+        cta2Href: "/fr#fit",
+        photoAlt: "Ligne de production d'usine",
+        stats: [
+          ["Production", "Détection des écarts", "Écarts repérés tôt."],
+          ["Maintenance", "Risques d'arrêt", "Risques d'arrêt signalés à l'avance."],
+          ["Capacité", "Pression future", "Pression future anticipée."],
+        ],
+      },
+    },
+  },
 ]
 
 export const generalBySlug = (lang: "en" | "fr", slug: string) => GENERAL_ACTIVITIES.find((a) => a[lang] === slug)

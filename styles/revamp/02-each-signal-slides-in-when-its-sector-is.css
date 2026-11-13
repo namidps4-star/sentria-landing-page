@@ -127,3 +127,7 @@
   background: var(--lime);
 }
 
+
+.rv-board .rv-fit-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+.rv-board .rv-fit-acts .rv-fit-cta { margin-top: 0; }
+.rv-board .rv-fit-acts .rv-fit-go { margin-left: auto; }

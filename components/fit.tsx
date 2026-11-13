@@ -157,16 +157,15 @@ export function QuickFit() {
   )
 }
 
-// Sectors that have their own page for anyone outside Africa.
+// Every sector's own page, for anyone outside Africa.
 const GENERAL_PAGE: Partial<Record<FitKey, { href: { en: string; fr: string }; label: { en: string; fr: string } }>> = {
-  healthcare: {
-    href: { en: "/activities/pharmacy", fr: "/fr/activites/pharmacie" },
-    label: { en: "See the pharmacy page →", fr: "Voir la page pharmacie →" },
-  },
-  agriculture: {
-    href: { en: "/activities/farm", fr: "/fr/activites/exploitation-agricole" },
-    label: { en: "See the farm page →", fr: "Voir la page exploitation agricole →" },
-  },
+  industry: { href: { en: "/activities/industry", fr: "/fr/activites/industrie" }, label: { en: "See the industry page →", fr: "Voir la page industrie →" } },
+  healthcare: { href: { en: "/activities/pharmacy", fr: "/fr/activites/pharmacie" }, label: { en: "See the pharmacy page →", fr: "Voir la page pharmacie →" } },
+  agriculture: { href: { en: "/activities/farm", fr: "/fr/activites/exploitation-agricole" }, label: { en: "See the farm page →", fr: "Voir la page exploitation agricole →" } },
+  transportation: { href: { en: "/activities/transportation", fr: "/fr/activites/transport" }, label: { en: "See the transport page →", fr: "Voir la page transport →" } },
+  logistics: { href: { en: "/activities/logistics", fr: "/fr/activites/logistique" }, label: { en: "See the logistics page →", fr: "Voir la page logistique →" } },
+  energy: { href: { en: "/activities/energy", fr: "/fr/activites/energie" }, label: { en: "See the energy page →", fr: "Voir la page énergie →" } },
+  retail: { href: { en: "/activities/retail", fr: "/fr/activites/commerce" }, label: { en: "See the retail page →", fr: "Voir la page commerce →" } },
 }
 
 export function FitSection() {
@@ -240,14 +239,16 @@ export function FitSection() {
                       ))}
                     </ul>
                   ) : null}
-                  <a className="rv-fit-cta" href="#demo">
-                    <T s={C.hero.cta1} />
-                  </a>
-                  {GENERAL_PAGE[sec.key as FitKey] && (
-                    <a className="rv-fit-cta" href={GENERAL_PAGE[sec.key as FitKey]!.href[lang]}>
-                      <B en={GENERAL_PAGE[sec.key as FitKey]!.label.en} fr={GENERAL_PAGE[sec.key as FitKey]!.label.fr} />
+                  <div className="rv-fit-acts">
+                    <a className="rv-fit-cta" href="#demo">
+                      <T s={C.hero.cta1} />
                     </a>
-                  )}
+                    {GENERAL_PAGE[sec.key as FitKey] && (
+                      <a className="rv-fit-cta rv-fit-go" href={GENERAL_PAGE[sec.key as FitKey]!.href[lang]}>
+                        <B en={GENERAL_PAGE[sec.key as FitKey]!.label.en} fr={GENERAL_PAGE[sec.key as FitKey]!.label.fr} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               )
             })}
