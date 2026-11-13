@@ -4,7 +4,7 @@ import { Header } from "./header"
 import { Footer, Proof } from "./sections"
 import { AfricaActivities } from "./africa-activities"
 import { Motion } from "./motion"
-import { AfricaHubTitle } from "./africa-hub-title"
+import { HeroFx } from "./hero-fx"
 import "./africa.css"
 import "./africa-hub.css"
 
@@ -59,11 +59,27 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
     <>
       <Header />
       <main id="main" className="afr">
-        <section className={`afr-hero${activities ? " afr-hero--hub" : ""}`} aria-labelledby={`${id}-h`}>
+        <section
+          id={activities ? "hero-stage" : undefined}
+          data-lens-class={activities ? "afr-hero afr-hero--hub" : undefined}
+          className={`afr-hero${activities ? " afr-hero--hub" : ""}`}
+          aria-labelledby={activities ? "hero-h" : `${id}-h`}
+        >
           <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
+          {activities && <HeroFx />}
           <div className="afr-copy">
             {activities ? (
-              <AfricaHubTitle id={`${id}-h`} lines={copy.h1.filter(Boolean)} />
+              <h1 id="hero-h" className="hero-h" data-rv="rise">
+                {copy.h1.filter(Boolean).map((line, row) => (
+                  <span key={row} className="hl">
+                    {[...line].map((c, i) => (
+                      <span key={i} className="wvl">
+                        {c === " " ? " " : c}
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </h1>
             ) : (
               <h1 id={`${id}-h`} data-rv="rise" style={{ "--fit": copy.fit } as React.CSSProperties}>
                 {copy.h1[0]}

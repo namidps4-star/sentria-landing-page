@@ -3,7 +3,7 @@
 
 @media (min-width:961px){
   .afr-hero--hub .afr-copy{position:absolute;top:clamp(120px,17vh,180px);left:var(--pad,56px);right:auto;width:min(860px,calc(100vw - 2*var(--pad,56px) - min(400px,30vw) - 40px));max-width:none;padding:0}
-  .afr-hero--hub h1{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,96px);letter-spacing:-.03em;line-height:1.02;white-space:normal}
+  .afr-hero--hub h1,.afr-hero--hub .hero-h{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,96px);letter-spacing:-.03em;line-height:1.02;white-space:normal}
   .afr-hero--hub h1 .afr-lime{color:#f5f3ea}
   .afr-hero--hub .afr-lead{max-width:36ch;font-size:clamp(16px,1.3vw,19px);line-height:1.55;text-wrap:balance;opacity:.85}
 }

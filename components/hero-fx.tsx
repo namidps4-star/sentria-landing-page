@@ -101,7 +101,7 @@ export function HeroFx() {
     // It is the hero without the lens: only the photo that is showing, the dark layer, the headline, the proof lines, the caption.
     const buildCopy = () => {
       const copy = document.createElement("div") // a div, not another stage: ids are stripped and the page keeps one heading level 1
-      copy.className = "hero-stage lens-copy"
+      copy.className = `hero-stage lens-copy ${stage.dataset.lensClass ?? ""}`.trim() // hub pages pass their own layout classes
       copy.setAttribute("aria-hidden", "true")
       copy.setAttribute("inert", "")
       Array.from(stage.children).forEach((child) => {
