@@ -4,6 +4,7 @@ import { Header } from "./header"
 import { Footer, Proof } from "./sections"
 import { AfricaActivities } from "./africa-activities"
 import { Motion } from "./motion"
+import { AfricaHubTitle } from "./africa-hub-title"
 import "./africa.css"
 import "./africa-hub.css"
 
@@ -21,8 +22,8 @@ export type Copy = {
 }
 
 export const AFRICA_EN: Copy = {
-  h1: ["Pharmacy stock,", "days left", "and order in time."],
-  lead: "Count your shelves. SentrIA works out how many days of stock you have left and warns you before a delivery is late.",
+  h1: ["Stock intelligence", "", "for every sector."],
+  lead: "Pick your sector. SentrIA works out how many days of stock you have left and warns you before a delivery is late.",
   start: "Starting in Africa.",
   cta: "Book a demo →",
   cta2: "How it works",
@@ -37,8 +38,8 @@ export const AFRICA_EN: Copy = {
 }
 
 export const AFRIQUE_FR: Copy = {
-  h1: ["Stock de pharmacie,", "jours restants", "et commande à temps."],
-  lead: "Comptez vos rayons. SentrIA calcule le nombre de jours de stock restants et vous prévient avant qu'une livraison soit en retard.",
+  h1: ["Intelligence du stock", "", "pour chaque secteur."],
+  lead: "Choisissez votre secteur. SentrIA calcule le nombre de jours de stock restants et vous prévient avant qu'une livraison soit en retard.",
   start: "Démarrage en Afrique.",
   cta: "Demander une démo →",
   cta2: "Comment ça marche",
@@ -58,16 +59,20 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
     <>
       <Header />
       <main id="main" className="afr">
-        <section className={`afr-hero${panel ? " afr-hero--hub" : ""}`} aria-labelledby={`${id}-h`}>
+        <section className={`afr-hero${activities ? " afr-hero--hub" : ""}`} aria-labelledby={`${id}-h`}>
           <Image src="/africa/pharmacy-lagos.jpg" alt={copy.photoAlt} fill priority sizes="100vw" className="afr-photo" />
           <div className="afr-copy">
-            <h1 id={`${id}-h`} data-rv="rise" style={{ "--fit": copy.fit } as React.CSSProperties}>
-              {copy.h1[0]}
-              <br />
-              <span className="afr-lime">{copy.h1[1]}</span>
-              <br />
-              {copy.h1[2]}
-            </h1>
+            {activities ? (
+              <AfricaHubTitle id={`${id}-h`} lines={copy.h1.filter(Boolean)} />
+            ) : (
+              <h1 id={`${id}-h`} data-rv="rise" style={{ "--fit": copy.fit } as React.CSSProperties}>
+                {copy.h1[0]}
+                <br />
+                <span className="afr-lime">{copy.h1[1]}</span>
+                <br />
+                {copy.h1[2]}
+              </h1>
+            )}
             <p className="afr-lead" data-rv="rise" style={{ "--i": 1 } as React.CSSProperties}>
               {copy.lead}
             </p>
