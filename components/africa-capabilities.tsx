@@ -1,6 +1,7 @@
 import { ACTIVITY_LIST, CAPABILITIES } from "@/content/africa-activities"
 import { CapRuler } from "./africa-ruler"
 import { AfricaSteps } from "./africa-steps"
+import { AfricaExample } from "./africa-example"
 
 export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
   const c = CAPABILITIES[slug]?.[lang]
@@ -8,6 +9,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   const youImport = lang === "en" ? "You import" : "Vous importez"
   const youSee = lang === "en" ? "What you see" : "Ce que vous voyez"
   const kicker = ACTIVITY_LIST.find((a) => a.slug === slug)?.kicker?.[lang]
+  const firstSentence = c.items[0]?.does.split(/(?<=\.)\s/)[0] ?? ""
   return (
     <section className={slug === "grossiste-pharma" ? "afr-caps afr-caps--sand" : "afr-caps"} aria-labelledby={`afr-caps-${slug}-${lang}`}>
       {kicker && <p className="eyebrow">{kicker}</p>}
@@ -33,17 +35,17 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       <p className="afr-caps-not">{c.notDo}</p>
       {c.steps && <AfricaSteps heading={c.stepsHeading ?? ""} steps={c.steps} kicker={kicker} />}
       {c.example && (
-        <div className="afr-caps-block">
-          <h3>{c.example.title}</h3>
-          <div className="afr-ex">
-            <ul>
-              {c.example.lines.map((l) => (
-                <li key={l}>{l}</li>
-              ))}
-            </ul>
-            <p>{c.example.result}</p>
-          </div>
-        </div>
+        <AfricaExample
+          kicker={kicker}
+          title={c.example.title}
+          lines={c.example.lines}
+          result={c.example.result}
+          first={firstSentence}
+          imports={c.items[0].imports}
+          youImport={youImport}
+          lang={lang}
+          scale={slug === "pharmacie"}
+        />
       )}
       {c.faq && (
         <div className="afr-caps-block">
