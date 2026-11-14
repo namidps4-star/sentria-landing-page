@@ -31,7 +31,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         ))}
       </ul>
       <p className="afr-caps-not">{c.notDo}</p>
-      {c.steps && <AfricaSteps heading={c.stepsHeading ?? ""} steps={c.steps} />}
+      {c.steps && <AfricaSteps heading={c.stepsHeading ?? ""} steps={c.steps} kicker={kicker} />}
       {c.example && (
         <div className="afr-caps-block">
           <h3>{c.example.title}</h3>

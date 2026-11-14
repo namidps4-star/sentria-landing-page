@@ -38,7 +38,7 @@ function ActGraphic() {
 
 const GRAPHICS = [FileGraphic, BarsGraphic, ActGraphic]
 
-export function AfricaSteps({ heading, steps }: { heading: string; steps: Step[] }) {
+export function AfricaSteps({ heading, steps, kicker }: { heading: string; steps: Step[]; kicker?: string }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -64,6 +64,7 @@ export function AfricaSteps({ heading, steps }: { heading: string; steps: Step[]
 
   return (
     <div className="afr-steps-block" ref={ref}>
+      {kicker && <p className="eyebrow">{kicker}</p>}
       <h3>{heading}</h3>
       <div className="as-list">
         {steps.map((st, i) => {
