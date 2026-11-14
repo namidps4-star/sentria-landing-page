@@ -7,6 +7,7 @@ import { Motion } from "./motion"
 import "./africa.css"
 import "./africa-hub.css"
 import "./africa-sector.css"
+import "./africa-light.css"
 
 export type Copy = {
   h1: [string, string, string]
@@ -68,7 +69,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
     <>
       <Header />
       <main id="main" className="afr">
-        <section className={`afr-hero${activities ? " afr-hero--hub" : " afr-hero--sector"}`} aria-labelledby={`${id}-h`}>
+        <section className={`afr-hero afr-hero--light${activities ? " afr-hero--hub" : " afr-hero--sector"}`} aria-labelledby={`${id}-h`}>
           {activities ? (
             <video
               className="afr-photo"

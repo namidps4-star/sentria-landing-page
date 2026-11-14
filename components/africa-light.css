@@ -1,0 +1,11 @@
+/* Light Africa hero (brand cream #f8f1e7): ink type, the lime line set as a highlighter, the photo kept as a faint texture.
+   Loaded last so it wins over africa.css, africa-hub.css and africa-sector.css. */
+.afr-hero.afr-hero--light{background:#f8f1e7;color:#0b0c08}
+.afr-hero.afr-hero--light::after{background:rgba(248,241,231,.9)}
+.afr-hero.afr-hero--light .afr-photo{opacity:.35}
+.afr-hero.afr-hero--light h1,
+.afr-hero.afr-hero--light .afr-start,
+.afr-hero.afr-hero--light .afr-credit{color:#0b0c08}
+.afr-hero.afr-hero--light .afr-lead{color:rgba(11,12,8,.74)}
+.afr-hero.afr-hero--light .afr-lime{color:#0b0c08;background:#d6ff3f;padding:0 .12em;border-radius:.1em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.afr-hero.afr-hero--light .afr-btn-s{border-color:rgba(11,12,8,.3);color:#0b0c08}
