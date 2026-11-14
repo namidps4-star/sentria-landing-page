@@ -53,6 +53,9 @@ export const AFRIQUE_FR: Copy = {
   ],
 }
 
+/* Hyphenated words stay on one line: "stock-out" never breaks into "stock-" and "out". */
+const keepWords = (s: string) => s.replace(/(\S)-(\S)/g, "$1‑$2")
+
 /* The regional hero: pharmacy first, for African pharmacies.
    Hub pages (those with the activities section) are static: no entrance motion, no headline effects. */
 export type HeroPhoto = { src: string; credit: string }
@@ -93,11 +96,11 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
               </h1>
             ) : (
               <h1 id={`${id}-h`} data-rv={rise} style={{ "--fit": copy.fit } as React.CSSProperties}>
-                {copy.h1[0]}
+                {keepWords(copy.h1[0])}
                 <br />
-                <span className="afr-lime">{copy.h1[1]}</span>
+                <span className="afr-lime">{keepWords(copy.h1[1])}</span>
                 <br />
-                {copy.h1[2]}
+                {keepWords(copy.h1[2])}
               </h1>
             )}
             <p className="afr-lead" data-rv={rise} style={{ "--i": 1 } as React.CSSProperties}>

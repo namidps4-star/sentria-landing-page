@@ -2,8 +2,9 @@
    Static: no entrance or hover motion on the hero. Type follows the site: Syne bold for headings and names, Poppins for body. */
 
 @media (min-width:961px){
-  .afr-hero--hub .afr-copy,.afr-hero--sector .afr-copy{position:absolute;top:clamp(120px,17vh,180px);left:var(--pad,56px);right:auto;width:min(860px,calc(100vw - 2*var(--pad,56px) - min(400px,30vw) - 40px));max-width:none;padding:0}
-  .afr-hero--hub h1,.afr-hero--sector h1{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,96px);letter-spacing:-.03em;line-height:1.02;white-space:normal}
+  /* The copy is in the page flow and takes the room it needs: a longer headline pushes the stats band down, it never runs into it. */
+  .afr-hero--hub .afr-copy,.afr-hero--sector .afr-copy{position:relative;top:auto;left:auto;right:auto;flex:1 0 auto;display:flex;flex-direction:column;justify-content:flex-start;width:min(860px,calc(100vw - 2*var(--pad,56px) - min(400px,30vw) - 40px));max-width:none;padding:clamp(40px,11vh,130px) 0 clamp(40px,6vh,72px) var(--pad,56px)}
+  .afr-hero--hub h1,.afr-hero--sector h1{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,80px);letter-spacing:-.03em;line-height:1.02;white-space:normal}
   .afr-hero--hub .afr-line{display:block}
   .afr-hero--hub .afr-lead,.afr-hero--sector .afr-lead{max-width:36ch;font-size:clamp(16px,1.3vw,19px);line-height:1.55;text-wrap:balance;opacity:.85}
 }
