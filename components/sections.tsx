@@ -7,28 +7,8 @@ import { Sec, H2 } from "./section-frame"
 /* ------------------------------------------------------------------ proof */
 
 export function Proof() {
-  const group = (hidden: boolean) => (
-    <ul className="marq-group" aria-hidden={hidden || undefined}>
-      {C.proof.map((p) => (
-          <li key={p.n}>
-            <span>
-              <T s={p.t} />
-            </span>
-            <i aria-hidden="true" />
-          </li>
-      ))}
-    </ul>
-  )
-  return (
-    <div className="proof">
-      <div className="marq">
-        <div className="marq-track">
-          {group(false)}
-          {group(true)}
-        </div>
-      </div>
-    </div>
-  )
+  // Removed: the scrolling strip of words carried no information. Pages still render <Proof />, and it draws nothing.
+  return null
 }
 
 /* ------------------------------------------------------------- situations */

@@ -6,7 +6,7 @@ import { iv } from "./ui"
 
 /* ----------------------------------------------------------------- footer */
 
-export function Footer() {
+export function Footer({ credit }: { credit?: string } = {}) {
   const f = C.footer
   const link = (href: string, s: string) => (
     <li>
@@ -86,6 +86,7 @@ export function Footer() {
             <span>
               <T s={f.line} />
             </span>
+            {credit && <span>{credit}</span>}
           </div>
         </div>
       </div>
