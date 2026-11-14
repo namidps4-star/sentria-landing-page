@@ -1,5 +1,6 @@
 import { ACTIVITY_LIST, CAPABILITIES } from "@/content/africa-activities"
 import { CapRuler } from "./africa-ruler"
+import { AfricaSteps } from "./africa-steps"
 
 export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
   const c = CAPABILITIES[slug]?.[lang]
@@ -30,22 +31,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         ))}
       </ul>
       <p className="afr-caps-not">{c.notDo}</p>
-      {c.steps && (
-        <div className="afr-caps-block">
-          <h3>{c.stepsHeading}</h3>
-          <ol className="afr-steps">
-            {c.steps.map((st, i) => (
-              <li key={st.title}>
-                <span className="afr-step-n">{i + 1}</span>
-                <div>
-                  <b>{st.title}</b>
-                  <p>{st.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
+      {c.steps && <AfricaSteps heading={c.stepsHeading ?? ""} steps={c.steps} />}
       {c.example && (
         <div className="afr-caps-block">
           <h3>{c.example.title}</h3>
