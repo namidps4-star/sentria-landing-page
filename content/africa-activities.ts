@@ -316,20 +316,23 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
   },
 }
 
-export const ACTIVITY_LIST: { slug: string; name: Record<"en" | "fr", string>; teaser: Record<"en" | "fr", string> }[] = [
+export const ACTIVITY_LIST: { slug: string; name: Record<"en" | "fr", string>; kicker?: Record<"en" | "fr", string>; teaser: Record<"en" | "fr", string> }[] = [
   {
     slug: "pharmacie",
     name: { en: "Pharmacy", fr: "Pharmacie" },
+    kicker: { en: "Pharmacy", fr: "Pharmacie" },
     teaser: { en: "Days of stock and expiring batches.", fr: "Jours de stock et lots qui expirent." },
   },
   {
     slug: "grossiste-pharma",
     name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" },
+    kicker: { en: "Wholesaler", fr: "Grossiste" },
     teaser: { en: "Transfers of unsold stock between your pharmacies.", fr: "Transferts de stock invendu entre vos pharmacies." },
   },
   {
     slug: "exploitation-agricole",
     name: { en: "Farm", fr: "Exploitation agricole" },
+    kicker: { en: "Farm", fr: "Exploitation" },
     teaser: { en: "Days in storage and hours left before spoilage.", fr: "Jours en stockage et heures restantes avant la détérioration." },
   },
 ]

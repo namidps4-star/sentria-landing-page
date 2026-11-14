@@ -1,4 +1,4 @@
-import { CAPABILITIES } from "@/content/africa-activities"
+import { ACTIVITY_LIST, CAPABILITIES } from "@/content/africa-activities"
 import { CapRuler } from "./africa-ruler"
 
 export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
@@ -6,8 +6,10 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   if (!c) return null
   const youImport = lang === "en" ? "You import" : "Vous importez"
   const youSee = lang === "en" ? "What you see" : "Ce que vous voyez"
+  const kicker = ACTIVITY_LIST.find((a) => a.slug === slug)?.kicker?.[lang]
   return (
     <section className={slug === "grossiste-pharma" ? "afr-caps afr-caps--sand" : "afr-caps"} aria-labelledby={`afr-caps-${slug}-${lang}`}>
+      {kicker && <p className="eyebrow">{kicker}</p>}
       <h2 id={`afr-caps-${slug}-${lang}`}>{c.heading}</h2>
       <ul>
         {c.items.map((item, i) => (

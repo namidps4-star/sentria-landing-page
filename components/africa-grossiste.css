@@ -16,6 +16,10 @@
 .afr-caps--sand .afr-caps-alert::before{content:none!important;display:none!important}
 .afr-caps--sand .afr-caps-not{margin:clamp(72px,7vw,104px) 0 0;max-width:60ch;font-size:15px;line-height:1.65;color:rgba(11,12,8,.64);opacity:1}
 
+/* Kicker: the landing template label, top left, one word for the page. */
+.afr-caps--sand .eyebrow{color:rgba(11,12,8,.62);margin-bottom:28px}
+.afr-caps--sand .eyebrow::before{background:#9fcc1b}
+
 /* Ruler: a hairline with ticks; the proof is the position of the ticks. */
 .afr-caps--sand .rl{max-width:640px}
 .afr-caps--sand .rl-track{position:relative;height:112px;margin-top:16px}
