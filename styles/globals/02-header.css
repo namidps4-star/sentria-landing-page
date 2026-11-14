@@ -17,7 +17,7 @@
   gap: clamp(14px, 2.2vw, 34px);
   padding: 8px 8px 8px 20px;
   border-radius: 999px;
-  background: rgba(11, 12, 8, 0.92);
+  background: rgba(11, 12, 8, 0.8);
   border: 1px solid rgba(245, 243, 234, 0.14);
   color: var(--cream);
   transition: background 0.3s, box-shadow 0.3s;
@@ -30,7 +30,7 @@ html.op-run:not(.op-done) .bar {
 .hd[data-scrolled] .bar {
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  background: rgba(11, 12, 8, 0.96);
+  background: rgba(11, 12, 8, 0.86);
   box-shadow: 0 14px 50px rgba(0, 0, 0, 0.35);
 }
 .js .bar {

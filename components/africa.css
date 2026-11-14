@@ -49,9 +49,9 @@
 .afr-caps ul{list-style:none;margin:0;padding:0}
 .afr-caps-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:center;padding:36px 0;border-top:1px solid rgba(245,243,234,.14)}
 .afr-caps h3{margin:0 0 10px;font-size:22px;font-weight:600;letter-spacing:-.01em}
-.afr-caps-copy p{margin:0;font-size:15px;line-height:1.55;opacity:1}
+.afr-caps-copy p{margin:0;font-size:15px;line-height:1.55;opacity:.9}
 .afr-caps-view{min-width:0}
-.afr-caps-tag{display:block;margin-bottom:10px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.afr-caps-tag{display:block;margin-bottom:10px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6}
 .afr-caps-alert{margin:0;display:flex;gap:12px;align-items:flex-start;padding:18px 20px;border-radius:14px;background:rgba(245,243,234,.06);border:1px solid rgba(214,255,63,.25);font-size:17px;line-height:1.45;color:var(--cream,#f5f3ea)}
 .afr-caps-alert::before{content:"";flex:none;width:9px;height:9px;margin-top:7px;border-radius:50%;background:var(--lime,#d6ff3f);animation:afr-pulse 2.4s ease-in-out infinite}
 @keyframes afr-pulse{0%,100%{box-shadow:0 0 0 0 rgba(214,255,63,.5)}60%{box-shadow:0 0 0 7px rgba(214,255,63,0)}}

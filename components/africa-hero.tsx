@@ -117,6 +117,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
             </div>
           </div>
           {panel}
+          <p className="afr-credit">{photo.credit}</p>
           <ul className="afr-stats" aria-label="SentrIA">
             {copy.stats.map(([num, label, desc], i) => (
               <li key={label} data-rv={rise} style={{ "--i": i } as React.CSSProperties}>
@@ -131,7 +132,7 @@ export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, pa
         {extra}
         {activities && <AfricaHubBrowse lang={activities} />}
       </main>
-      <Footer credit={photo.credit} />
+      <Footer />
       <Motion />
     </>
   )
