@@ -1,0 +1,38 @@
+/* Grossiste capabilities, sand direction: airy split rows, shape rulers instead of the example sentence.
+   Scoped to the sand section (.afr-caps--sand) so no other Africa page changes. */
+.afr-caps.afr-caps--sand{--fg:#0b0c08;--mut:rgba(11,12,8,.68);--line:rgba(11,12,8,.16);--acc:#0f2e1f;--low:rgba(11,12,8,.22);background:#ece7d6;color:#0b0c08;padding:clamp(120px,16vh,200px) var(--pad,56px) clamp(120px,15vh,180px);border-top:0}
+.afr-caps--sand>h2{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(44px,5.6vw,88px);line-height:1;letter-spacing:-.035em;max-width:16ch;margin:0 0 clamp(96px,10vw,160px);color:#0b0c08}
+.afr-caps--sand>ul{display:block;list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.afr-caps--sand .afr-caps-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(48px,6vw,120px);align-items:start;padding:clamp(64px,7vw,104px) 0;margin:0;border:0;border-bottom:1px solid var(--line);border-left:0;min-width:0}
+.afr-caps--sand .afr-caps-row:nth-child(even){padding-left:0;border-left:0}
+.afr-caps--sand .afr-caps-copy h3{font-family:var(--f-display),sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,36px);line-height:1.15;letter-spacing:-.02em;margin:0 0 22px;max-width:20ch;color:#0b0c08}
+.afr-caps--sand .afr-caps-copy p{font-size:17px;line-height:1.65;color:rgba(11,12,8,.78);max-width:46ch;margin:0}
+.afr-caps--sand .afr-caps-copy p.afr-caps-imp{margin-top:24px!important;font-size:13px!important;line-height:1.6!important;color:rgba(11,12,8,.56)!important;opacity:1!important;max-width:46ch}
+.afr-caps--sand .afr-caps-imp b{color:rgba(11,12,8,.84);font-weight:600}
+.afr-caps--sand .afr-caps-view{position:relative;min-width:0;padding-top:6px;margin:0}
+.afr-caps--sand .afr-caps-tag{display:block;margin:0 0 22px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(11,12,8,.5);opacity:1}
+/* The sentence stays for screen readers; the ruler carries it on screen. */
+.afr-caps--sand .afr-caps-alert{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;margin:0!important;padding:0!important;border:0!important;background:none!important}
+.afr-caps--sand .afr-caps-alert::before{content:none!important;display:none!important}
+.afr-caps--sand .afr-caps-not{margin:clamp(72px,7vw,104px) 0 0;max-width:60ch;font-size:15px;line-height:1.65;color:rgba(11,12,8,.64);opacity:1}
+
+/* Ruler: a hairline with ticks; the proof is the position of the ticks. */
+.afr-caps--sand .rl{max-width:640px}
+.afr-caps--sand .rl-track{position:relative;height:112px;margin-top:16px}
+.afr-caps--sand .rl-line{position:absolute;left:0;right:0;top:44px;height:2px;background:var(--line)}
+.afr-caps--sand .rl-fill{position:absolute;left:0;top:42px;height:6px;width:75%;background:var(--acc);border-radius:999px}
+.afr-caps--sand .rl-tick{position:absolute;top:36px;width:2px;height:20px;background:#0b0c08;transform:translateX(-1px)}
+.afr-caps--sand .rl-tick.rl-tick-m{top:36px;height:20px;background:var(--acc)}
+.afr-caps--sand .rl-lb{position:absolute;top:-12px;white-space:nowrap;text-align:center}
+.afr-caps--sand .rl-lb b{display:block;font-family:var(--f-display),sans-serif;font-weight:600;font-size:16px;color:#0b0c08}
+.afr-caps--sand .rl-lb span{display:block;font-size:13px;color:var(--mut)}
+.afr-caps--sand .rl-lb.r{transform:translateX(-100%);text-align:right}
+.afr-caps--sand .rl-lb.l{transform:none;text-align:left;margin-left:8px}
+.afr-caps--sand .rl-lb.c{transform:translateX(-50%)}
+.afr-caps--sand .rl-lb.dn{top:62px}
+.afr-caps--sand .rl-move{margin:0;padding-top:16px;border-top:1px solid var(--line);font-family:var(--f-display),sans-serif;font-weight:600;font-size:clamp(18px,1.6vw,24px);letter-spacing:-.01em;color:var(--acc)}
+.afr-caps--sand .rl-move::before{content:"\2192\00a0"}
+@media (max-width:900px){
+  .afr-caps--sand .afr-caps-row{grid-template-columns:1fr;gap:40px}
+  .afr-caps--sand>h2{margin-bottom:72px}
+}

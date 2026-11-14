@@ -1,4 +1,5 @@
 import { CAPABILITIES } from "@/content/africa-activities"
+import { CapRuler } from "./africa-ruler"
 
 export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
   const c = CAPABILITIES[slug]?.[lang]
@@ -6,7 +7,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   const youImport = lang === "en" ? "You import" : "Vous importez"
   const youSee = lang === "en" ? "What you see" : "Ce que vous voyez"
   return (
-    <section className="afr-caps" aria-labelledby={`afr-caps-${slug}-${lang}`}>
+    <section className={slug === "grossiste-pharma" ? "afr-caps afr-caps--sand" : "afr-caps"} aria-labelledby={`afr-caps-${slug}-${lang}`}>
       <h2 id={`afr-caps-${slug}-${lang}`}>{c.heading}</h2>
       <ul>
         {c.items.map((item, i) => (
@@ -20,6 +21,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
             </div>
             <div className="afr-caps-view">
               <span className="afr-caps-tag">{youSee}</span>
+              {slug === "grossiste-pharma" && <CapRuler index={i} lang={lang} />}
               <blockquote className="afr-caps-alert">{item.example}</blockquote>
             </div>
           </li>
