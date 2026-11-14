@@ -222,14 +222,5 @@ export const LEGAL_DOCS: Record<LegalDocId, LegalSection[]> = {
         ],
       ],
     },
-    {
-      title: ["Droit applicable", "Governing law"],
-      body: [
-        [
-          "Le droit applicable et le tribunal compétent restent à définir.",
-          "The governing law and the competent court are still to be defined.",
-        ],
-      ],
-    },
   ],
 }
