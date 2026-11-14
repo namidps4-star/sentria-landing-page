@@ -23,7 +23,7 @@ type Props = {
 export function AfricaExample({ kicker, title, lines, result, first, imports, youImport, lang, scale }: Props) {
   const labels = SCALE_LABELS[lang]
   return (
-    <div className="afr-ex-band">
+    <div className="afr-ex-band" data-rv="rise">
       {kicker && <p className="eyebrow">{kicker}</p>}
       <h3 className="afr-ex-h">{title}</h3>
       <div className="afr-ex-info">

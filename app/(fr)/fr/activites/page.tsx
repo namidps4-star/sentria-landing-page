@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/sections"
 import { ActivityRing } from "@/components/activity-ring"
+import { Motion } from "@/components/motion"
 import "@/components/health-sector.css"
 import { GLOBAL_HUB_CARDS } from "@/content/global-hub-cards"
 
@@ -18,8 +19,8 @@ export default function Page() {
     <>
       <Header />
       <main id="main" className="hs">
-        <h1 className="hs-h">Trouvez votre activité</h1>
-        <p className="hs-lead">Choisissez l'activité qui correspond à votre entreprise et découvrez comment SentrIA la suit.</p>
+        <h1 className="hs-h" data-rv="rise">Trouvez votre activité</h1>
+        <p className="hs-lead" data-rv="rise" style={{ "--i": 1 } as React.CSSProperties}>Choisissez l'activité qui correspond à votre entreprise et découvrez comment SentrIA la suit.</p>
         <ActivityRing
           lang="fr"
           base=""
@@ -27,6 +28,7 @@ export default function Page() {
           text={{ carousel: "carrousel", label: "Activités", prev: "Activité précédente", next: "Activité suivante", more: "Lire la suite →", view: "Voir", open: "Ouvrir", hint: "Faites défiler ou glissez" }}
         />
       </main>
+      <Motion />
       <Footer />
     </>
   )

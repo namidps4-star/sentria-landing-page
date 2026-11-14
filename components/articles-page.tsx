@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { ArticleCard } from "@/components/article-card"
+import { Motion } from "@/components/motion"
 import { useEffect, useState } from "react"
 
 import { useLang } from "@/components/lang"
@@ -123,6 +124,7 @@ export function ArticlesPage() {
           />
         ))}
       </div>
+      <Motion />
     </main>
   )
 }

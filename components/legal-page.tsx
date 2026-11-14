@@ -5,6 +5,7 @@ import { B, LangPick } from "./t"
 import { Mark } from "./ui"
 import { LangSwitch } from "./header"
 import { LegalToc } from "./legal-toc"
+import { Motion } from "./motion"
 
 const pad = (n: number) => String(n).padStart(2, "0")
 
@@ -102,7 +103,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
             <LegalToc entries={entries} />
             <div className="lg-body">
               {sections.map((s, i) => (
-                <section key={s.title[1]} id={`s${i}`} data-legal-section={i} className="lg-card">
+                <section key={s.title[1]} id={`s${i}`} data-legal-section={i} className="lg-card" data-rv="rise">
                   {num(i)}
                   <div>
                     <h2>
@@ -116,7 +117,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
                   </div>
                 </section>
               ))}
-              <section id={`s${sections.length}`} data-legal-section={sections.length} className="lg-card">
+              <section id={`s${sections.length}`} data-legal-section={sections.length} className="lg-card" data-rv="rise">
                 {num(sections.length)}
                 <div>
                   <h2>Contact</h2>
@@ -135,6 +136,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
           </div>
         </div>
       </main>
+      <Motion />
     </>
   )
 }
