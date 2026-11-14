@@ -1,0 +1,18 @@
+/* Pharmacy FAQ (lime 2x2 grid). Scoped to .afr-fg so no other Africa page changes. */
+.afr-fg{position:relative;background:#d6ff3f;color:#0b0c08;padding:clamp(96px,12vh,140px) var(--pad,56px) clamp(96px,12vh,120px);overflow:hidden}
+.afr-fg .eyebrow{color:rgba(11,12,8,.7);margin-bottom:28px}
+.afr-fg .eyebrow::before{background:#0b0c08}
+.afr-fg h2{margin:0;max-width:18ch;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(44px,6.6vw,96px);line-height:1;letter-spacing:-.035em;color:#0b0c08;text-wrap:balance}
+.afr-fg-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(56px,6vw,80px);border-top:2px solid #0b0c08}
+.afr-fg-cell{display:flex;flex-direction:column;padding:48px 48px 64px 0;border-bottom:1px solid rgba(11,12,8,.5)}
+.afr-fg-cell:nth-child(even){padding:48px 0 64px 48px;border-left:1px solid rgba(11,12,8,.5)}
+.afr-fg-art{height:200px;margin-bottom:40px;display:flex;align-items:flex-end}
+.afr-fg-art svg{height:100%;width:auto;max-width:100%;color:#0b0c08;overflow:visible;display:block}
+.afr-fg-art text{font-family:var(--f-body),sans-serif;fill:currentColor}
+.afr-fg-cell h3{margin:0 0 16px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(24px,2.4vw,34px);line-height:1.1;letter-spacing:-.02em;max-width:20ch;color:#0b0c08}
+.afr-fg-cell p{margin:0;font-size:17px;line-height:1.6;max-width:44ch;color:rgba(11,12,8,.9)}
+@media (max-width:720px){
+  .afr-fg-grid{grid-template-columns:1fr}
+  .afr-fg-cell,.afr-fg-cell:nth-child(even){padding:40px 0 48px;border-left:0}
+  .afr-fg-art{height:160px}
+}

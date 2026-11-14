@@ -49,17 +49,28 @@ export function AfricaSteps({ heading, steps, kicker }: { heading: string; steps
       el.classList.add("is-on")
       return
     }
+    // The pull plays only when the reader scrolls down into the block. Scrolling back above it resets the steps to grey.
+    let down = false
+    let lastY = window.scrollY
+    const onScroll = () => {
+      down = window.scrollY > lastY
+      lastY = window.scrollY
+    }
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          el.classList.add("is-on")
-          io.disconnect()
-        }
+        entries.forEach((e) => {
+          if (e.intersectionRatio >= 0.35 && down) el.classList.add("is-on")
+          else if (e.intersectionRatio < 0.35 && e.boundingClientRect.top > 0) el.classList.remove("is-on")
+        })
       },
-      { threshold: 0.35 },
+      { threshold: [0, 0.35] },
     )
     io.observe(el)
-    return () => io.disconnect()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => {
+      io.disconnect()
+      window.removeEventListener("scroll", onScroll)
+    }
   }, [])
 
   return (

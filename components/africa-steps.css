@@ -1,6 +1,7 @@
 /* Pharmacy "Start in three steps": one tall panel per step, numerals cut at the panel edge.
-   Step 1 is lit from the start. On scroll-in, a set of strings pulls step 2 up (it turns grey), then step 3 (it turns lime).
-   Reduced motion: no movement, the end state. */
+   Step 1 is lit from the start. Steps 2 and 3 start grey with their content sunk low. Only when the reader scrolls down into the block,
+   strings draw down, then each step's content pulls up into place while its panel takes its colour (grey, then lime).
+   Scrolling back above the block resets them to grey. Reduced motion: no movement, the end state. */
 @font-face{font-family:"AfricaNumeral";src:url("/fonts/Chillax-Light.woff2") format("woff2");font-weight:300;font-display:swap}
 .afr-steps-block{margin-top:clamp(120px,13vw,190px)}
 .afr-steps-block>h3{font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(30px,3.2vw,46px);line-height:1.05;letter-spacing:-.03em;margin:0 0 clamp(56px,6vw,96px);max-width:20ch;color:#f5f3ea}
@@ -10,11 +11,20 @@
 @property --gt{syntax:"<color>";inherits:true;initial-value:#f5f3ea}
 @property --ga{syntax:"<color>";inherits:true;initial-value:#f5f3ea}
 .as-item{position:relative;height:300px;border-radius:44px;overflow:hidden;background:#15170d;border:1px solid rgba(245,243,234,.1);color:#f5f3ea;--g:#3a3d2f;--gl:#26291c;--gt:#1c1f14;--ga:#3a3d2f;transition:background-color .6s cubic-bezier(.2,.7,.2,1),border-color .6s,transform .6s cubic-bezier(.2,.7,.2,1),--g .6s ease,--gl .6s ease,--gt .6s ease,--ga .6s ease}
-.as-item.as-2{transform:translateY(16px)}
-.as-item.as-3{transform:translateY(16px)}
+/* Idle: the content of steps 2 and 3 sits 120px low and faded inside the grey panel. */
+.as-item>*{transition:translate .9s cubic-bezier(.2,.7,.2,1),opacity .9s ease}
+.as-item.as-2>*,.as-item.as-3>*{translate:0 120px;opacity:.25}
 .as-item.as-1{background:#f5f3ea;border-color:transparent;--g:#0b0c08;--gl:rgba(11,12,8,.28);--gt:rgba(11,12,8,.1);--ga:#0b0c08}
-.is-on .as-item.as-2{background:#969989;border-color:transparent;transform:none;transition-delay:1.2s;--g:#0b0c08;--gl:rgba(11,12,8,.28);--gt:rgba(11,12,8,.1);--ga:#0b0c08}
-.is-on .as-item.as-3{background:#d6ff3f;border-color:transparent;transform:none;transition-delay:2.6s;--g:#0b0c08;--gl:rgba(11,12,8,.28);--gt:rgba(11,12,8,.1);--ga:#0b0c08}
+.is-on .as-item.as-2{background:#969989;border-color:transparent;transition-delay:.3s;--g:#0b0c08;--gl:rgba(11,12,8,.28);--gt:rgba(11,12,8,.1);--ga:#0b0c08}
+.is-on .as-item.as-3{background:#d6ff3f;border-color:transparent;transition-delay:1.7s;--g:#0b0c08;--gl:rgba(11,12,8,.28);--gt:rgba(11,12,8,.1);--ga:#0b0c08}
+.is-on .as-item.as-2>*{translate:0 0;opacity:1;transition-delay:.4s}
+.is-on .as-item.as-2>*:nth-child(2){transition-delay:.48s}
+.is-on .as-item.as-2>*:nth-child(3){transition-delay:.56s}
+.is-on .as-item.as-2>*:nth-child(4){transition-delay:.64s}
+.is-on .as-item.as-3>*{translate:0 0;opacity:1;transition-delay:1.8s}
+.is-on .as-item.as-3>*:nth-child(2){transition-delay:1.88s}
+.is-on .as-item.as-3>*:nth-child(3){transition-delay:1.96s}
+.is-on .as-item.as-3>*:nth-child(4){transition-delay:2.04s}
 .as-num{position:absolute;left:40px;bottom:-150px;font-family:"AfricaNumeral",sans-serif;font-weight:300;font-size:400px;line-height:.8;color:var(--g);pointer-events:none;user-select:none}
 .as-txt{position:absolute;left:540px;top:40px;width:290px}
 .as-txt h4{margin:0 0 16px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:26px;line-height:1.1;text-transform:uppercase;letter-spacing:.01em;color:var(--g)}
@@ -50,8 +60,8 @@
 .as-string span:nth-child(3){left:32%}
 .as-string span:nth-child(4){left:36%}
 .as-string span:nth-child(5){left:40%}
-.is-on .as-string.s2 span{transform:scaleY(1);transition-delay:.6s}
-.is-on .as-string.s3 span{transform:scaleY(1);transition-delay:2s}
+.is-on .as-string.s2 span{transform:scaleY(1);transition-delay:0s}
+.is-on .as-string.s3 span{transform:scaleY(1);transition-delay:1.2s}
 @media (max-width:720px){
   .as-item,.as-item.as-2,.as-item.as-3{height:auto;min-height:0;padding:28px 28px 210px;transform:none}
   .as-num,.as-item.flip .as-num{left:20px;right:auto;bottom:-44px;font-size:200px}
@@ -61,6 +71,7 @@
   .as-item.flip{padding-left:28px}
 }
 @media (prefers-reduced-motion:reduce){
-  .as-item,.as-string span{transition:none!important}
+  .as-item,.as-item>*,.as-string span{transition:none!important}
+  .as-item.as-2>*,.as-item.as-3>*{translate:none!important;opacity:1}
   .is-on .as-item.as-2,.is-on .as-item.as-3{transition-delay:0s!important}
 }
