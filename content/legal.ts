@@ -103,8 +103,8 @@ export const LEGAL_DOCS: Record<LegalDocId, LegalSection[]> = {
       title: ["Durée de conservation", "How long we keep it"],
       body: [
         [
-          "Tant que votre compte est actif. À votre demande, nous supprimons votre compte et vos données. La durée exacte de conservation des sauvegardes reste à confirmer.",
-          "While your account is active. On your request we delete your account and your data. The exact backup retention period is still to be confirmed.",
+          "Tant que votre compte est actif. À votre demande, nous supprimons votre compte et vos données.",
+          "While your account is active. On your request we delete your account and your data.",
         ],
       ],
     },
