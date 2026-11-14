@@ -2,7 +2,7 @@ export const EN_PRODUCT = {
  "cockpit": {
   "eyebrow": "The decision queue",
   "title": "What needs your attention now.",
-  "lead": "Not another wall of KPIs. A ranked queue of decisions, each with its evidence, confidence, impact and recommended action.",
+  "lead": "Not another wall of KPIs. The decision queue is a ranked list of what to act on today. Each item shows its evidence (the data behind it), its confidence (how sure SentrIA is), its impact (what it costs if ignored) and the action we recommend.",
   "features": [
    {
     "icon": "!",

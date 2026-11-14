@@ -16,7 +16,7 @@ export const GENERAL_ACTIVITIES: General[] = [
         lead: "Import your stock file. SentrIA shows how many days each product will last at your current sales, which batches reach their expiry date first, and what to reorder today.",
         start: "For independent pharmacies and multi-branch pharmacy groups.",
         cta: "Book a demo →",
-        cta2: "Read the FEFO guide",
+        cta2: "Read the FEFO guide (first expired, first out)",
         cta2Href: "/articles/fefo-first-expired-first-out",
         photoAlt: "Shelves of medicine bottles in a pharmacy",
         stats: [
@@ -30,7 +30,7 @@ export const GENERAL_ACTIVITIES: General[] = [
         lead: "Importez votre fichier de stock. SentrIA indique combien de jours chaque produit tiendra au rythme actuel des ventes, quels lots arrivent en premier à leur date de péremption, et ce qu'il faut recommander aujourd'hui.",
         start: "Pour les pharmacies indépendantes et les groupes de pharmacies à plusieurs officines.",
         cta: "Demander une démo →",
-        cta2: "Lire le guide FEFO",
+        cta2: "Lire le guide FEFO (premier expiré, premier sorti)",
         cta2Href: "/articles/fefo-premier-expire-premier-sorti",
         photoAlt: "Rayons de flacons de médicaments dans une pharmacie",
         stats: [

@@ -39,7 +39,10 @@ export function ArticlesPage() {
   const shown = live.filter(
     (a) => (sector === "all" || a.sector === sector) && (dept === "all" || a.dept === dept)
   )
-  const departments = sector === "all" ? [] : DEPARTMENTS[sector]
+  // Only sectors and departments that have a live article are offered, so no filter leads to an empty page.
+  const departments = sector === "all" ? [] : DEPARTMENTS[sector].filter((d) => live.some((a) => a.sector === sector && a.dept === d.key))
+  // The hero already shows the latest article, so the grid leaves it out.
+  const grid = shown.filter((a) => a.id !== latest[0]?.id)
 
   function pickSector(next: SectorKey) {
     setSector(next)
@@ -78,7 +81,7 @@ export function ArticlesPage() {
 
       <div className="art-filters" id="articles-list">
         <div className="art-seg" role="group" aria-label="Sector">
-          {SECTORS.map((s) => (
+          {SECTORS.filter((s) => s.key === "all" || live.some((a) => a.sector === s.key)).map((s) => (
             <button key={s.key} type="button" aria-pressed={sector === s.key} onClick={() => pickSector(s.key)}>
               <B en={s.label.en} fr={s.label.fr} />
             </button>
@@ -107,7 +110,7 @@ export function ArticlesPage() {
             <B en="No article in this part yet." fr="Pas encore d'article dans cette partie." />
           </p>
         )}
-        {shown.map((a: Article) => (
+        {grid.map((a: Article) => (
           <ArticleCard
             key={a.id}
             href={`/articles/${pageSlug(a.id)}`}

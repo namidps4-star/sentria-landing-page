@@ -12,7 +12,7 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       lead: "Upload your stock file. SentrIA tells you which medicines will run out before the next delivery arrives, which batches expire first, and what to order today, based on what your suppliers actually deliver, not what they promise.",
       start: "For independent pharmacies and pharmacy branches.",
       cta: "Book a demo →",
-      cta2: "Read the FEFO guide",
+      cta2: "Read the FEFO guide (first expired, first out)",
       cta2Href: "/articles/fefo-first-expired-first-out",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
@@ -26,7 +26,7 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       lead: "Importez votre fichier de stock. SentrIA vous dit quels médicaments vont manquer avant la prochaine livraison, quels lots expirent en premier, et quoi commander aujourd'hui, selon ce que vos fournisseurs livrent vraiment, pas ce qu'ils promettent.",
       start: "Pour les pharmacies indépendantes et les officines à plusieurs succursales.",
       cta: "Demander une démo →",
-      cta2: "Lire le guide FEFO",
+      cta2: "Lire le guide FEFO (premier expiré, premier sorti)",
       cta2Href: "/articles/fefo-premier-expire-premier-sorti",
       photoAlt: PHARMACY_PHOTO_FR,
       stats: [
@@ -166,7 +166,7 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       faqHeading: "What pharmacists ask before they start",
       faq: [
         { q: "What file do I need?", a: "A stock list: product name, quantity on hand, minimum stock, sales over 30 days, expiry date. Column names can differ from ours, you map them once." },
-        { q: "Does it connect to my software?", a: "Not today. You export a spreadsheet and upload it. If your software can export, it works." },
+        { q: "Does it connect to my software?", a: "Sources: a CSV upload works today. ERP, API and IoT connections are planned. Until then, export a spreadsheet and upload it." },
         { q: "Who sees my figures?", a: "Only your pharmacy. Each account's data is kept completely separate." },
         { q: "Do I have to change how I work?", a: "No. Keep your current routine. Check the alert list each morning before the first patient walks in." },
       ],
@@ -220,7 +220,7 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       faqHeading: "Ce que les pharmaciens demandent avant de commencer",
       faq: [
         { q: "Quel fichier faut-il ?", a: "Une liste de stock : nom du produit, quantité en stock, stock minimum, ventes sur 30 jours, date de péremption. Les noms de colonnes peuvent différer, vous les associez une seule fois." },
-        { q: "Est-ce relié à mon logiciel ?", a: "Pas encore. Vous exportez un tableur et l'importez. Si votre logiciel peut exporter, ça fonctionne." },
+        { q: "Est-ce relié à mon logiciel ?", a: "Sources : l'import CSV fonctionne aujourd'hui. Les connexions ERP, API et IoT sont prévues. D'ici là, exportez un tableur et importez-le." },
         { q: "Qui voit mes chiffres ?", a: "Uniquement votre pharmacie. Les données de chaque compte sont strictement séparées." },
         { q: "Dois-je changer ma façon de travailler ?", a: "Non. Gardez votre routine habituelle. Consultez la liste d'alertes chaque matin avant le premier patient." },
       ],

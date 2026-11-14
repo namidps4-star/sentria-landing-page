@@ -76,7 +76,7 @@ export const FR: Record<string, string> = {
  "Measure the outcome": "Mesurer le résultat",
  "The decision queue": "La file de décisions",
  "What needs your attention now.": "Ce qui requiert votre attention maintenant.",
- "Not another wall of KPIs. A ranked queue of decisions, each with its evidence, confidence, impact and recommended action.": "Pas un mur de KPI de plus. Une file classée de décisions, chacune avec sa preuve, sa confiance, son impact et son action recommandée.",
+ "Not another wall of KPIs. The decision queue is a ranked list of what to act on today. Each item shows its evidence (the data behind it), its confidence (how sure SentrIA is), its impact (what it costs if ignored) and the action we recommend.": "Pas un mur de KPI de plus. La file de décisions est une liste classée de ce qu'il faut traiter aujourd'hui. Chaque élément montre sa preuve (les données derrière), sa confiance (à quel point SentrIA est sûr), son impact (ce qu'il coûte s'il est ignoré) et l'action recommandée.",
  "Identify the points that are actually slowing down your operations.": "Identifiez les points qui ralentissent réellement vos opérations.",
  "See the points actually slowing your operations, with the signal and source behind each one.": "Voyez les points qui ralentissent réellement vos opérations, avec le signal et la source derrière chacun.",
  "Focus your teams on the highest-impact situations.": "Concentrez vos équipes sur les situations à plus fort impact.",
