@@ -29,7 +29,7 @@ export function Footer() {
             <B en="Drop us a line, and we'll get in touch!" fr="Écrivez-nous, nous vous répondons vite !" />
           </p>
           <a className="foot-sched" href="#demo">
-            <B en="Schedule a call" fr="Planifier un appel" />
+            <B en="Book a demo" fr="Réserver une démo" />
           </a>
           <a className="foot-brand" href="#top">
             {f.brand}
@@ -73,9 +73,9 @@ export function Footer() {
             <div>
               <h4>{f.brand}</h4>
               <ul>
-                {link("#demo", "Talk to the team")}
+                {link("#demo", "Book a demo")}
                 {link("#tarifs", "Pricing")}
-                {link("#demo", "Book a call")}
+                {link("#demo", "Book a demo")}
               </ul>
             </div>
           </div>

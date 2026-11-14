@@ -33,7 +33,7 @@ export const AFRICA_EN: Copy = {
   stats: [
     ["30", "Days of stock", "Worked out for each product, from the last 30 days of sales."],
     ["FEFO", "Batches that expire first", "The batches closest to their date are flagged, so they leave first."],
-    ["+4d", "What to order today", "The quantity you need, based on each supplier's real delivery time."],
+    ["+4d", "Order earlier", "The quantity you need, based on each supplier's real delivery time."],
   ],
 }
 
@@ -49,7 +49,7 @@ export const AFRIQUE_FR: Copy = {
   stats: [
     ["30", "Jours de stock", "Calculés sur les ventes des 30 derniers jours, produit par produit."],
     ["FEFO", "Lots qui expirent en premier", "Les lots les plus proches de leur date sont signalés en premier."],
-    ["+4j", "À commander aujourd'hui", "La quantité dont vous avez besoin, selon le délai réel de chaque fournisseur."],
+    ["+4j", "Commander plus tôt","La quantité dont vous avez besoin, selon le délai réel de chaque fournisseur."],
   ],
 }
 

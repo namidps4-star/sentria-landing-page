@@ -8,7 +8,7 @@ const PHARMACY_PHOTO_FR = "Deux clients lisent une boîte de médicament devant 
 export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   pharmacie: {
     en: {
-      h1: ["Catch the stock-out", "before the patient", "is at the counter."],
+      h1: ["Catch the stock‑out", "before the patient", "is at the counter."],
       lead: "Upload your stock file. SentrIA tells you which medicines will run out before the next delivery arrives, which batches expire first, and what to order today, based on what your suppliers actually deliver, not what they promise.",
       start: "For independent pharmacies and pharmacy branches.",
       cta: "Book a demo →",
@@ -16,7 +16,7 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/articles/fefo-first-expired-first-out",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
-        ["4d", "Days of stock", "Amoxicillin 500mg, delivery in 7 days. Order today or the shelf goes empty."],
+        ["4d", "Days of stock", "Amoxicillin 500mg: promised delivery in 7 days, real average 11. Order today or the shelf goes empty."],
         ["18d", "Batch expiry risk", "Paracetamol 500mg lot A47, 24 boxes expire in 18 days. Sell first or return."],
         ["+4d", "Order earlier", "COPHAC Pharma delivers in 9 days on average, not the 5 they promise."],
       ],
@@ -30,7 +30,7 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/articles/fefo-premier-expire-premier-sorti",
       photoAlt: PHARMACY_PHOTO_FR,
       stats: [
-        ["4j", "Jours de stock", "Amoxicilline 500mg, livraison dans 7 jours. Commandez aujourd'hui ou le rayon sera vide."],
+        ["4j", "Jours de stock", "Amoxicilline 500mg : livraison promise dans 7 jours, délai réel moyen de 11. Commandez aujourd'hui ou le rayon sera vide."],
         ["18j", "Risque lot", "Paracétamol 500mg lot A47, 24 boîtes expirent dans 18 jours. Écoulez ou retournez."],
         ["+4j", "Commandez plus tôt", "COPHAC Pharma livre en 9 jours en moyenne, pas les 5 jours promis."],
       ],
@@ -434,12 +434,12 @@ export const SECTOR_LIST: Sector[] = [
 // Example alerts shown in the hero of the pharmacy page. Sample numbers, real wording.
 export const ALERT_PREVIEW: Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]> = {
   en: [
-    { level: "critical", text: "Amoxicillin 500mg: 4 days of stock. Delivery in 7 days. Order today." },
+    { level: "critical", text: "Amoxicillin 500mg: 4 days of stock. Promised delivery in 7 days, real average 11. Order today." },
     { level: "warning", text: "Paracetamol 500mg (Lot A47): expires in 18 days, 24 boxes at risk. Sell first or return." },
     { level: "warning", text: "COPHAC Pharma: promises 5 days, delivers in 9 on average. Order 4 days earlier." },
   ],
   fr: [
-    { level: "critical", text: "Amoxicilline 500mg : 4 jours de stock. Livraison dans 7 jours. Commandez aujourd'hui." },
+    { level: "critical", text: "Amoxicilline 500mg : 4 jours de stock. Livraison promise dans 7 jours, délai réel moyen de 11. Commandez aujourd'hui." },
     { level: "warning", text: "Paracétamol 500mg (Lot A47) : expire dans 18 jours, 24 boîtes à risque. Écoulez ou retournez." },
     { level: "warning", text: "COPHAC Pharma : promet 5 jours, livre en 9 en moyenne. Commandez 4 jours plus tôt." },
   ],

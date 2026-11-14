@@ -6,8 +6,8 @@ import { ALERT_PREVIEW } from "@/content/africa-activities"
 import "./africa-alert-panel.css"
 
 const LABEL = {
-  en: { title: "Live alerts", count: (n: number) => `${n} alerts active`, next: "Next alert", list: "Live alerts list" },
-  fr: { title: "Alertes en direct", count: (n: number) => `${n} alertes actives`, next: "Alerte suivante", list: "Liste des alertes en direct" },
+  en: { title: "Example alerts", count: (n: number) => `${n} example alerts`, next: "Next alert", list: "Example alerts list" },
+  fr: { title: "Alertes exemples", count: (n: number) => `${n} alertes exemples`, next: "Alerte suivante", list: "Liste des alertes exemples" },
 } as const
 
 const ROW = 104

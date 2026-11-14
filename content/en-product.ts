@@ -85,7 +85,7 @@ export const EN_PRODUCT = {
      "Dedicated support",
      "Deployment support"
     ],
-    "cta": "Talk to the team →"
+    "cta": "Book a demo →"
    }
   ],
   "note": "Pricing is defined by the scope of the pilot, the data to connect, and the level of integration."

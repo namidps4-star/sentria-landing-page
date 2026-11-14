@@ -7,6 +7,7 @@ export const FR: Record<string, string> = {
  "Africa": "Afrique",
  "Sectors": "Secteurs",
  "Book a demo →": "Réserver une démo →",
+ "Book a demo": "Réserver une démo",
  "Operational decision layer": "Couche de décision opérationnelle",
  "See the risk.": "Voyez le risque.",
  "See the evidence.": "Voyez la preuve.",
