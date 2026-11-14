@@ -2,6 +2,7 @@ import { ACTIVITY_LIST, CAPABILITIES } from "@/content/africa-activities"
 import { CapRuler } from "./africa-ruler"
 import { AfricaSteps } from "./africa-steps"
 import { AfricaExample } from "./africa-example"
+import { AfricaLedger } from "./africa-ledger"
 
 export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
   const c = CAPABILITIES[slug]?.[lang]
@@ -10,29 +11,9 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   const youSee = lang === "en" ? "What you see" : "Ce que vous voyez"
   const kicker = ACTIVITY_LIST.find((a) => a.slug === slug)?.kicker?.[lang]
   const firstSentence = c.items[0]?.does.split(/(?<=\.)\s/)[0] ?? ""
-  return (
-    <section className={slug === "grossiste-pharma" ? "afr-caps afr-caps--sand" : "afr-caps"} aria-labelledby={`afr-caps-${slug}-${lang}`}>
-      {kicker && <p className="eyebrow">{kicker}</p>}
-      <h2 id={`afr-caps-${slug}-${lang}`}>{c.heading}</h2>
-      <ul>
-        {c.items.map((item, i) => (
-          <li key={item.title} className="afr-caps-row" data-rv="rise" style={{ "--i": i } as React.CSSProperties}>
-            <div className="afr-caps-copy">
-              <h3>{item.title}</h3>
-              <p>{item.does}</p>
-              <p className="afr-caps-imp">
-                <b>{youImport}:</b> {item.imports}
-              </p>
-            </div>
-            <div className="afr-caps-view">
-              <span className="afr-caps-tag">{youSee}</span>
-              {slug === "grossiste-pharma" && <CapRuler index={i} lang={lang} />}
-              <blockquote className="afr-caps-alert">{item.example}</blockquote>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <p className="afr-caps-not">{c.notDo}</p>
+  const id = `afr-caps-${slug}-${lang}`
+  const rest = (
+    <>
       {c.steps && <AfricaSteps heading={c.stepsHeading ?? ""} steps={c.steps} kicker={kicker} />}
       {c.example && (
         <AfricaExample
@@ -60,6 +41,43 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
           </dl>
         </div>
       )}
+    </>
+  )
+
+  /* Pharmacy: the list is a cream ledger; the steps, day scale and FAQ stay in the dark section below. */
+  if (slug === "pharmacie") {
+    return (
+      <>
+        <AfricaLedger id={id} kicker={kicker} heading={c.heading} items={c.items} notDo={c.notDo} lang={lang} />
+        <section className="afr-caps afr-caps--rest">{rest}</section>
+      </>
+    )
+  }
+
+  return (
+    <section className={slug === "grossiste-pharma" ? "afr-caps afr-caps--sand" : "afr-caps"} aria-labelledby={id}>
+      {kicker && <p className="eyebrow">{kicker}</p>}
+      <h2 id={id}>{c.heading}</h2>
+      <ul>
+        {c.items.map((item, i) => (
+          <li key={item.title} className="afr-caps-row" data-rv="rise" style={{ "--i": i } as React.CSSProperties}>
+            <div className="afr-caps-copy">
+              <h3>{item.title}</h3>
+              <p>{item.does}</p>
+              <p className="afr-caps-imp">
+                <b>{youImport}:</b> {item.imports}
+              </p>
+            </div>
+            <div className="afr-caps-view">
+              <span className="afr-caps-tag">{youSee}</span>
+              {slug === "grossiste-pharma" && <CapRuler index={i} lang={lang} />}
+              <blockquote className="afr-caps-alert">{item.example}</blockquote>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p className="afr-caps-not">{c.notDo}</p>
+      {rest}
     </section>
   )
 }
