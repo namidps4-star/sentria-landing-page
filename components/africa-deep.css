@@ -1,0 +1,4 @@
+/* Deep green Africa hero (brand-deep #0f2e1f): the photo kept under a flat deep-green veil, cream type, the lime line stays lime.
+   Loaded last so it wins over africa.css, africa-hub.css and africa-sector.css. */
+.afr-hero.afr-hero--deep{background:#0f2e1f}
+.afr-hero.afr-hero--deep::after{background:rgba(15,46,31,.86)}
