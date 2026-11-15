@@ -21,3 +21,6 @@
 @media (max-width:900px){
   .sp-grid{grid-template-columns:1fr}
 }
+/* The activities of a sector, in the ring, under its title. */
+.sp-acts{padding:clamp(72px,9vh,104px) var(--pad,56px) clamp(24px,3vh,40px);border-top:1px solid rgba(11,12,8,.16)}
+.sp-acts h2{margin:0 0 clamp(32px,4vw,56px);font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,52px);line-height:1.05;letter-spacing:-.03em}

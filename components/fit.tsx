@@ -159,13 +159,13 @@ export function QuickFit() {
 
 // Every sector's own page, for anyone outside Africa.
 const GENERAL_PAGE: Partial<Record<FitKey, { href: { en: string; fr: string }; label: { en: string; fr: string } }>> = {
-  industry: { href: { en: "/activities/industry", fr: "/fr/activites/industrie" }, label: { en: "See the industry page →", fr: "Voir la page industrie →" } },
+  industry: { href: { en: "/sectors/industry", fr: "/fr/secteurs/industrie" }, label: { en: "See all industry activities →", fr: "Voir toutes les activités industrie →" } },
   healthcare: { href: { en: "/sectors/healthcare", fr: "/fr/secteurs/sante" }, label: { en: "See all health activities →", fr: "Voir toutes les activités santé →" } },
-  agriculture: { href: { en: "/activities/farm", fr: "/fr/activites/exploitation-agricole" }, label: { en: "See the farm page →", fr: "Voir la page exploitation agricole →" } },
-  transportation: { href: { en: "/activities/transportation", fr: "/fr/activites/transport" }, label: { en: "See the transport page →", fr: "Voir la page transport →" } },
-  logistics: { href: { en: "/activities/logistics", fr: "/fr/activites/logistique" }, label: { en: "See the logistics page →", fr: "Voir la page logistique →" } },
-  energy: { href: { en: "/activities/energy", fr: "/fr/activites/energie" }, label: { en: "See the energy page →", fr: "Voir la page énergie →" } },
-  retail: { href: { en: "/activities/retail", fr: "/fr/activites/commerce" }, label: { en: "See the retail page →", fr: "Voir la page commerce →" } },
+  agriculture: { href: { en: "/sectors/agriculture", fr: "/fr/secteurs/agriculture" }, label: { en: "See all agriculture activities →", fr: "Voir toutes les activités agriculture →" } },
+  transportation: { href: { en: "/sectors/transportation", fr: "/fr/secteurs/transport" }, label: { en: "See all transport activities →", fr: "Voir toutes les activités transport →" } },
+  logistics: { href: { en: "/sectors/logistics", fr: "/fr/secteurs/logistique" }, label: { en: "See all logistics activities →", fr: "Voir toutes les activités logistique →" } },
+  energy: { href: { en: "/sectors/energy", fr: "/fr/secteurs/energie" }, label: { en: "See all energy activities →", fr: "Voir toutes les activités énergie →" } },
+  retail: { href: { en: "/sectors/retail", fr: "/fr/secteurs/commerce" }, label: { en: "See all retail activities →", fr: "Voir toutes les activités commerce →" } },
 }
 
 export function FitSection() {
