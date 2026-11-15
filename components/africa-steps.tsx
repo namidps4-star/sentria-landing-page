@@ -45,31 +45,35 @@ export function AfricaSteps({ heading, steps, kicker }: { heading: string; steps
     const el = ref.current
     if (!el) return
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (reduce || !("IntersectionObserver" in window)) {
+    if (reduce) {
       el.classList.add("is-on")
       return
     }
-    // The pull plays only when the reader scrolls down into the block. Scrolling back above it resets the steps to grey.
-    let down = false
+    // The pull plays when the reader scrolls down and at least 35% of the block is on screen.
+    // Once the block sits fully below the screen (the reader scrolled back up), the steps go grey again.
     let lastY = window.scrollY
-    const onScroll = () => {
-      down = window.scrollY > lastY
-      lastY = window.scrollY
+    let down = false
+    let frame = 0
+    const check = () => {
+      frame = 0
+      const r = el.getBoundingClientRect()
+      const vh = window.innerHeight
+      const shown = Math.min(r.bottom, vh) - Math.max(r.top, 0)
+      if (down && shown >= 0.35 * r.height) el.classList.add("is-on")
+      if (r.top > vh) el.classList.remove("is-on")
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.intersectionRatio >= 0.35 && down) el.classList.add("is-on")
-          else if (e.intersectionRatio < 0.35 && e.boundingClientRect.top > 0) el.classList.remove("is-on")
-        })
-      },
-      { threshold: [0, 0.35] },
-    )
-    io.observe(el)
+    const onScroll = () => {
+      const y = window.scrollY
+      down = y > lastY
+      lastY = y
+      if (!frame) frame = requestAnimationFrame(check)
+    }
     window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
     return () => {
-      io.disconnect()
       window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+      if (frame) cancelAnimationFrame(frame)
     }
   }, [])
 
