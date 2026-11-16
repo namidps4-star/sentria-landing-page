@@ -108,8 +108,8 @@ function Connections({ lang }: { lang: Lang }) {
 const DIAL = { N: 72, CX: 150, CY: 90, RIN: 40, ROUT: 62, LR: 76, DUR: 3 }
 const DIAL_HI = new Set([18, 36, 54, 4, 27, 63])
 
-function Routine({ lang }: { lang: Lang }) {
-  const t = LABELS[lang]
+function Routine({ lang, dial }: { lang: Lang; dial?: [string, string, string] }) {
+  const t = { ...LABELS[lang], day: dial ?? LABELS[lang].day }
   const { N, CX, CY, RIN, ROUT, LR, DUR } = DIAL
   const ticks: React.ReactElement[] = []
   for (let i = 0; i < N; i++) {
@@ -165,7 +165,7 @@ function Routine({ lang }: { lang: Lang }) {
   )
 }
 
-function Drawing({ index, lang }: { index: number; lang: Lang }) {
+function Drawing({ index, lang, words }: { index: number; lang: Lang; words?: [string, string, string] }) {
   const t = LABELS[lang]
   if (index === 0)
     return (
@@ -194,10 +194,11 @@ function Drawing({ index, lang }: { index: number; lang: Lang }) {
         <text fontSize="11" x="130" y="88" textAnchor="middle">{t.sep[2]}</text>
       </svg>
     )
-  return <Routine lang={lang} />
+  return <Routine lang={lang} dial={words} />
 }
 
-export function AfricaFaqGrid({ id, kicker, heading, items, lang }: { id: string; kicker?: string; heading: string; items: Item[]; lang: Lang }) {
+/* The dial's three words default to the pharmacy's; other activities pass their own. */
+export function AfricaFaqGrid({ id, kicker, heading, items, lang, words }: { id: string; kicker?: string; heading: string; items: Item[]; lang: Lang; words?: [string, string, string] }) {
   return (
     <section className="afr-fg" aria-labelledby={id}>
       {kicker && <p className="eyebrow">{kicker}</p>}
@@ -206,7 +207,7 @@ export function AfricaFaqGrid({ id, kicker, heading, items, lang }: { id: string
         {items.map((it, i) => (
           <div key={it.q} className="afr-fg-cell" data-rv="rise" style={{ "--i": i * 5 } as React.CSSProperties}>
             <div className="afr-fg-art">
-              <Drawing index={i} lang={lang} />
+              <Drawing index={i} lang={lang} words={words} />
             </div>
             <h3>{it.q}</h3>
             <p>{it.a}</p>

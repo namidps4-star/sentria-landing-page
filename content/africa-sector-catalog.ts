@@ -106,3 +106,11 @@ function build(sector: HubSector, id: string): ActivityCard {
 export function cardsFor(sector: HubSector): ActivityCard[] {
   return SECTOR_ACTIVITIES[sector].map((id) => build(sector, id))
 }
+
+/* The picture of an activity page: its catalogue card, in the language of the page. */
+export function activityPhoto(id: string, lang: "en" | "fr"): { src: string; credit: string; alt: string } | undefined {
+  const sector = SECTOR_PAGE[id]?.sector
+  if (!sector) return undefined
+  const card = build(sector as HubSector, id)
+  return { src: card.photo, credit: `Photo: ${card.by}, Unsplash`, alt: card.alt[lang] }
+}

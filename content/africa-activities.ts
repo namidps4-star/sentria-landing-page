@@ -1,11 +1,12 @@
 import type { Copy } from "@/components/africa-hero"
+import { MORE_ACTIVITY_COPY, MORE_CAPABILITIES, MORE_SECTOR_ALERTS } from "./africa-activity-pages"
 
 export const AFRICA_ACTIVITIES = ["pharmacie", "grossiste-pharma", "exploitation-agricole"] as const
 
 const PHARMACY_PHOTO_EN = "Two customers reading a medicine box at a pharmacy shelf in Lagos"
 const PHARMACY_PHOTO_FR = "Deux clients lisent une boîte de médicament devant un rayon de pharmacie à Lagos"
 
-export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
+const CORE_ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   pharmacie: {
     en: {
       h1: ["Catch the stock‑out", "before the patient", "is at the counter."],
@@ -105,7 +106,8 @@ export const AFRICA_PHOTOS: Record<string, { src: string; credit: string }> = {
   "exploitation-agricole": { src: "/africa/hq/africa-farm.jpg", credit: "Photo: Yulian Alexeyev, Unsplash" },
 }
 
-export type Capability = { title: string; does: string; example: string; imports: string }
+export type Drawing = { kind: "bars" | "timeline" | "pair" | "compare"; labels: string[] }
+export type Capability = { title: string; does: string; example: string; imports: string; figure: string; drawing: Drawing }
 export type Step = { title: string; text: string }
 export type Example = { title: string; lines: string[]; result: string }
 export type Faq = { q: string; a: string }
@@ -122,7 +124,7 @@ export type Capabilities = {
 
 // What an expert in each activity gets. Examples are the product's own alert
 // wording with sample numbers. "Imports" is the file the product reads.
-export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
+const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
   pharmacie: {
     en: {
       heading: "What SentrIA tells you every morning",
@@ -132,24 +134,32 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           does: "SentrIA divides shelf stock by daily sales. It flags the products that will hit zero before the next order arrives, by name, by days left, so you can order before the patient asks for something you no longer have.",
           example: "Amoxicillin 500mg: 4 days of stock. Delivery in 7 days. Order today.",
           imports: "Medicine name, quantity on hand, minimum stock, daily sales average",
+          figure: "4",
+          drawing: { kind: "bars", labels: ["stock · 4 days","delivery · 7 days"] },
         },
         {
           title: "Which batches expire first, and what that costs you",
           does: "Every batch is checked against its expiry date. SentrIA shows you the ones to sell first, the ones to return, and the value at risk if you do nothing today.",
           example: "Paracetamol 500mg (Lot A47): expires in 18 days, 24 boxes, 96,000 FCFA at risk. Sell first or return.",
           imports: "Expiry date and lot number per product line",
+          figure: "18",
+          drawing: { kind: "timeline", labels: ["18 days","today","30 days"] },
         },
         {
           title: "Expired and undated products caught at reception, not on the shelf",
           does: "Before a box goes on the shelf, SentrIA checks the delivery file for lots already expired or missing a date. You set it aside before it creates a legal problem or a loss.",
           example: "Doxycycline 100mg (Lot B23): received 1 Nov, expired 15 Oct. Do not shelve. Return to supplier.",
           imports: "Delivery file: product name, lot number, expiry date per line",
+          figure: "15 Oct",
+          drawing: { kind: "pair", labels: ["expired 15 Oct","received 1 Nov"] },
         },
         {
           title: "What your supplier actually delivers vs. what they promise",
           does: "SentrIA tracks your past orders: order date, promised date, arrival date. It shows which suppliers run late and by how much, so you order earlier instead of running out while you wait.",
           example: "COPHAC Pharma: promises 5 days, delivers in 9 on average (worst: 14 days across 9 orders). Order 4 days earlier.",
           imports: "Per past order: supplier, order date, promised date, arrival date",
+          figure: "9",
+          drawing: { kind: "compare", labels: ["promised 5","real average 9","worst 14"] },
         },
       ],
       notDo: "SentrIA does not know your wholesaler's live stock today, and it does not forecast demand beyond your past 30 days of sales. It reads what you give it.",
@@ -186,24 +196,32 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           does: "SentrIA divise le stock en rayon par les ventes quotidiennes. Il signale les produits qui atteindront zéro avant l'arrivée de la prochaine commande, par nom, par jours restants, pour commander avant que le patient demande quelque chose que vous n'avez plus.",
           example: "Amoxicilline 500mg : 4 jours de stock. Livraison dans 7 jours. Commandez aujourd'hui.",
           imports: "Nom du médicament, quantité en stock, stock minimum, moyenne des ventes journalières",
+          figure: "4",
+          drawing: { kind: "bars", labels: ["stock · 4 jours","livraison · 7 jours"] },
         },
         {
           title: "Quels lots expirent en premier, et ce que ça vous coûte",
           does: "Chaque lot est comparé à sa date de péremption. SentrIA vous montre ceux à écouler en premier, ceux à retourner, et la valeur à risque si vous ne faites rien aujourd'hui.",
           example: "Paracétamol 500mg (Lot A47) : expire dans 18 jours, 24 boîtes, 96 000 FCFA à risque. Écoulez ou retournez.",
           imports: "Date de péremption et numéro de lot par ligne produit",
+          figure: "18",
+          drawing: { kind: "timeline", labels: ["18 jours","aujourd'hui","30 jours"] },
         },
         {
           title: "Produits périmés ou sans date, détectés à la réception, pas sur le rayon",
           does: "Avant qu'une boîte soit rangée, SentrIA contrôle le fichier de livraison : lot déjà périmé ou date manquante. Vous le mettez de côté avant qu'il ne crée un problème légal ou une perte.",
           example: "Doxycycline 100mg (Lot B23) : reçue le 1er nov, périmée le 15 oct. Ne pas ranger. Retourner au fournisseur.",
           imports: "Fichier de livraison : nom du produit, numéro de lot, date de péremption par ligne",
+          figure: "15 oct",
+          drawing: { kind: "pair", labels: ["périmé le 15 oct","reçu le 1er nov"] },
         },
         {
           title: "Ce que votre fournisseur livre vraiment, pas ce qu'il promet",
           does: "SentrIA suit vos commandes passées : date de commande, date promise, date réelle. Il montre quels fournisseurs livrent en retard et de combien, pour que vous commandiez plus tôt au lieu de manquer de stock en attendant.",
           example: "COPHAC Pharma : promet 5 jours, livre en 9 en moyenne (pire cas : 14 jours sur 9 commandes). Commandez 4 jours plus tôt.",
           imports: "Par commande passée : fournisseur, date de commande, date promise, date d'arrivée",
+          figure: "9",
+          drawing: { kind: "compare", labels: ["promis 5","réel moyen 9","pire 14"] },
         },
       ],
       notDo: "SentrIA ne connaît pas le stock de votre grossiste aujourd'hui, et ne prévoit pas la demande au-delà de vos 30 derniers jours de ventes. Il lit ce que vous lui donnez.",
@@ -242,24 +260,32 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           does: "SentrIA compares each pharmacy's deliveries with its sales. When one is reordering a product that another holds unsold, it names both pharmacies, the product and the exact quantity to transfer, before you send another order.",
           example: "Clinique du Nord: reordered 30 units of Metformin 500mg this month. Pharmacy Centrale: 34 units unsold. Suggested transfer: 30 units.",
           imports: "Pharmacy name, product, quantity delivered in the period, quantity reordered, quantity sold",
+          figure: "30",
+          drawing: { kind: "pair", labels: ["Pharmacy Centrale: 34 unsold","Clinique du Nord: reordered 30"] },
         },
         {
           title: "The transfer worth the most money, first",
           does: "Transfers are ranked by the value at stake, so you handle the one that costs the network most if left unresolved. If you have a unit cost, SentrIA uses it. If not, it ranks by quantity.",
           example: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA. Paracetamol 1g: 8 units, 24,000 FCFA.",
           imports: "Unit cost per product (optional, SentrIA ranks by quantity if not provided)",
+          figure: "180k",
+          drawing: { kind: "compare", labels: ["Metformin 500mg: 180,000","Amoxicillin: 72,000","Paracetamol: 24,000"] },
         },
         {
           title: "Which pharmacy runs out before your next delivery",
           does: "SentrIA estimates each pharmacy's stock from your deliveries minus its sales. It flags the products that reach zero before your next delivery to that pharmacy, so you can send them stock first.",
           example: "Pharmacie du Port: Paracetamol 1g, 2 days left. Your next delivery is in 5 days.",
           imports: "Deliveries and sales per pharmacy and product, date of your next delivery",
+          figure: "2",
+          drawing: { kind: "bars", labels: ["Pharmacie du Port: 2 days","next delivery in 5 days"] },
         },
         {
           title: "Which pharmacy has gone quiet",
           does: "SentrIA measures the gap between each pharmacy's orders. When one goes quiet for longer than its usual gap, it names the pharmacy, so you can call it this week.",
           example: "Pharmacie Nord: no order for 21 days. Its usual gap is 7 days.",
           imports: "Pharmacy name and the date of each order or delivery",
+          figure: "21",
+          drawing: { kind: "timeline", labels: ["21 days, no order","last order","usual gap 7 days"] },
         },
       ],
       notDo: "SentrIA does not move stock, place orders or issue invoices. It proposes transfers, and you decide what happens. It only sees the pharmacies whose data you import.",
@@ -295,24 +321,32 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           does: "SentrIA compare les livraisons de chaque pharmacie avec ses ventes. Quand l'une recommande un produit qu'une autre garde invendu, il nomme les deux pharmacies, le produit et la quantité exacte à transférer, avant que vous envoyiez une nouvelle commande.",
           example: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Transfert proposé : 30 unités.",
           imports: "Nom de la pharmacie, produit, quantité livrée sur la période, quantité recommandée, quantité vendue",
+          figure: "30",
+          drawing: { kind: "pair", labels: ["Pharmacie Centrale : 34 invendues","Clinique du Nord : 30 recommandées"] },
         },
         {
           title: "Le transfert qui vaut le plus d'argent, en premier",
           does: "Les transferts sont classés par valeur en jeu, pour traiter d'abord celui qui coûte le plus au réseau s'il reste sans suite. Si vous avez un coût unitaire, SentrIA l'utilise. Sinon, il classe par quantité.",
           example: "Metformine 500mg : 30 unités, 180 000 FCFA. Amoxicilline 500mg : 12 unités, 72 000 FCFA. Paracétamol 1g : 8 unités, 24 000 FCFA.",
           imports: "Coût unitaire par produit (optionnel, SentrIA classe par quantité si absent)",
+          figure: "180k",
+          drawing: { kind: "compare", labels: ["Metformine 500mg : 180 000","Amoxicilline : 72 000","Paracétamol : 24 000"] },
         },
         {
           title: "Quelle pharmacie sera à zéro avant votre prochaine livraison",
           does: "SentrIA estime le stock de chaque pharmacie à partir de vos livraisons moins ses ventes. Il signale les produits qui tombent à zéro avant votre prochaine livraison à cette pharmacie, pour que vous les envoyiez en premier.",
           example: "Pharmacie du Port : Paracétamol 1g, 2 jours restants. Votre prochaine livraison est dans 5 jours.",
           imports: "Livraisons et ventes par pharmacie et par produit, date de votre prochaine livraison",
+          figure: "2",
+          drawing: { kind: "bars", labels: ["Pharmacie du Port : 2 jours","livraison dans 5 jours"] },
         },
         {
           title: "Quelle pharmacie ne recommande plus",
           does: "SentrIA mesure l'écart entre les commandes de chaque pharmacie. Quand l'une reste silencieuse plus longtemps que son écart habituel, il la nomme, pour que vous l'appeliez cette semaine.",
           example: "Pharmacie Nord : aucune commande depuis 21 jours. Son écart habituel est de 7 jours.",
           imports: "Nom de la pharmacie et date de chaque commande ou livraison",
+          figure: "21",
+          drawing: { kind: "timeline", labels: ["21 jours sans commande","dernière commande","écart habituel 7 jours"] },
         },
       ],
       notDo: "SentrIA ne déplace pas de stock, ne passe pas de commande et n'émet pas de facture. Il propose des transferts, et c'est vous qui décidez. Il ne voit que les pharmacies dont vous importez les données.",
@@ -350,18 +384,24 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           does: "From storage temperature and days stored, SentrIA estimates how much time you have before spoilage begins. It tells you which lot to move first and how urgent it is, in hours, not in vague warnings.",
           example: "Tomatoes Lot 7: 4 days in storage at 32°C. Estimated loss in 12 hours. Arrange delivery now.",
           imports: "Product, days in storage, storage temperature",
+          figure: "12h",
+          drawing: { kind: "timeline", labels: ["12 hours left","now","24 h"] },
         },
         {
           title: "When the storage gets too hot for what is inside",
           does: "Every product has a temperature threshold. When storage rises above it, you get a warning straight away, not when you check the logs the next morning.",
           example: "Cold room 3: reached 31°C. Tomatoes at risk of spoilage. Check temperature and ventilation now.",
           imports: "Storage temperature per lot or per room",
+          figure: "31°",
+          drawing: { kind: "timeline", labels: ["31 °C: alert","now","40 °C"] },
         },
         {
           title: "Lots past their safe window, by name, by days",
           does: "A lot that has stayed in storage longer than it safely can is flagged as critical: the product name, the number of days, and the instruction to deliver it first.",
           example: "Maize Lot 3: 9 days in storage. Critical. Deliver urgently before full loss.",
           imports: "Product and days in storage",
+          figure: "9d",
+          drawing: { kind: "bars", labels: ["Maize lot 3: 9 days","deliver before loss"] },
         },
       ],
       notDo: "SentrIA does not measure temperature itself. You enter it, or import it from your storage logs. The hours left are an estimate, not a guarantee, act sooner if in doubt.",
@@ -374,18 +414,24 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           does: "À partir de la température de stockage et des jours passés en stock, SentrIA estime le temps qu'il vous reste avant que la détérioration commence. Il vous dit quel lot déplacer en premier et l'urgence, en heures, pas en avertissements vagues.",
           example: "Tomates Lot 7 : 4 jours en stockage à 32°C. Perte estimée dans 12 heures. Organisez la livraison maintenant.",
           imports: "Produit, jours en stockage, température de stockage",
+          figure: "12h",
+          drawing: { kind: "timeline", labels: ["12 heures restantes","maintenant","24 h"] },
         },
         {
           title: "Quand le stockage est trop chaud pour ce qu'il contient",
           does: "Chaque produit a un seuil de température. Quand le stockage le dépasse, vous êtes prévenu immédiatement, pas le lendemain matin en consultant les relevés.",
           example: "Chambre froide 3 : a atteint 31°C. Tomates à risque de détérioration. Vérifiez la température et la ventilation maintenant.",
           imports: "Température de stockage par lot ou par chambre",
+          figure: "31 °C",
+          drawing: { kind: "timeline", labels: ["31 °C : alerte","maintenant","40 °C"] },
         },
         {
           title: "Les lots dépassé leur durée sûre, par nom, par nombre de jours",
           does: "Un lot resté en stockage plus longtemps qu'il ne peut le tolérer est signalé comme critique : le nom du produit, le nombre de jours, et l'instruction de le livrer en premier.",
           example: "Maïs Lot 3 : 9 jours en stockage. Critique. Livrez d'urgence avant la perte totale.",
           imports: "Produit et jours en stockage",
+          figure: "9j",
+          drawing: { kind: "bars", labels: ["Maïs lot 3 : 9 jours","livrer avant la perte"] },
         },
       ],
       notDo: "SentrIA ne mesure pas la température lui-même. Vous la saisissez, ou vous l'importez depuis vos relevés. Les heures restantes sont une estimation, pas une garantie, agissez plus tôt en cas de doute.",
@@ -526,7 +572,7 @@ export const ALERT_PREVIEW: Record<"en" | "fr", { level: "critical" | "warning";
 }
 
 /* Live alerts shown on the sector heroes that have them. Pharmacy uses ALERT_PREVIEW. */
-export const SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]>> = {
+const CORE_SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]>> = {
   "grossiste-pharma": {
     en: [
       { level: "warning", text: "Clinique du Nord: reordering 30 units of Metformin 500mg. Pharmacy Centrale: 34 units unsold. Suggested transfer: 30 units." },
@@ -552,3 +598,8 @@ export const SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critica
     ],
   },
 }
+
+/* The full set: the three live pages, and the activity pages that share their template. */
+export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = { ...CORE_ACTIVITY_COPY, ...MORE_ACTIVITY_COPY }
+export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = { ...CORE_CAPABILITIES, ...MORE_CAPABILITIES }
+export const SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]>> = { ...CORE_SECTOR_ALERTS, ...MORE_SECTOR_ALERTS }

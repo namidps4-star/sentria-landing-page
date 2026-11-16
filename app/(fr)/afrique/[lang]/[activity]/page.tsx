@@ -4,14 +4,14 @@ import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { AfricaAlertPanel } from "@/components/africa-alert-panel"
 import { share, headline } from "@/content/share"
-import { ACTIVITY_COPY, AFRICA_ACTIVITIES, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-activities"
+import { ACTIVITY_COPY, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-activities"
+import { activityPhoto } from "@/content/africa-sector-catalog"
 import { SECTOR_PAGE } from "@/content/sector-pages"
-import { SectorActivityPage } from "@/components/sector-activity-page"
 
 type Params = Promise<{ lang: string; activity: string }>
 
 export function generateStaticParams() {
-  return [...AFRICA_ACTIVITIES, ...Object.keys(SECTOR_PAGE)].map((activity) => ({ lang: "fr", activity }))
+  return Object.keys(ACTIVITY_COPY).map((activity) => ({ lang: "fr", activity }))
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -23,10 +23,27 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { ...share(`${headline(copy.fr.h1)} | SentrIA`, copy.fr.lead), robots: { index: false, follow: false } }
 }
 
+/* The picture of an activity page: the live pages have their own; the others use their catalogue card. */
+function picture(activity: string, lang: "en" | "fr") {
+  const own = AFRICA_PHOTOS[activity]
+  if (own) return { src: own.src, credit: own.credit, alt: undefined }
+  return activityPhoto(activity, lang)
+}
+
+/* Every activity page opens with the same hero and carries the same template below it. */
 export default async function Page({ params }: { params: Params }) {
   const { lang, activity } = await params
-  if (lang === "fr" && SECTOR_PAGE[activity]) return <SectorActivityPage id={activity} lang="fr" />
   const copy = ACTIVITY_COPY[activity]
   if (lang !== "fr" || !copy) notFound()
-  return <AfricaHero copy={copy.fr} id={activity} panel={activity === "pharmacie" || SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="fr" alerts={SECTOR_ALERTS[activity]?.fr} /> : undefined} extra={<AfricaCapabilities slug={activity} lang="fr" />} photo={AFRICA_PHOTOS[activity]} compact={activity === "grossiste-pharma"} />
+  const pic = picture(activity, "fr")
+  return (
+    <AfricaHero
+      copy={{ ...copy.fr, photoAlt: pic?.alt ?? copy.fr.photoAlt }}
+      id={activity}
+      panel={SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="fr" alerts={SECTOR_ALERTS[activity].fr} /> : undefined}
+      extra={<AfricaCapabilities slug={activity} lang="fr" />}
+      photo={pic ? { src: pic.src, credit: pic.credit } : undefined}
+      compact
+    />
+  )
 }
