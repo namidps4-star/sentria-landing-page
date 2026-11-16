@@ -15,9 +15,13 @@
 .sp-hero{border-top:1px solid rgba(11,12,8,.16);padding-top:28px}
 .sp-viz svg{display:block;width:100%;height:auto;color:#0b0c08;overflow:visible}
 .sp-viz text{font-family:var(--f-body),sans-serif;font-size:14px;fill:currentColor}
-.sp-hero h3{margin:28px 0 12px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.15;letter-spacing:-.02em}
+.sp-hero h3{margin:14px 0 12px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.15;letter-spacing:-.02em}
 .sp-hero p{margin:0;font-size:16px;line-height:1.55;max-width:34ch}
-.sp-cap{margin-top:12px !important;font-size:11px !important;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+/* The problem line sits above the outcome, quieter; the picture and the one link follow the example. */
+.sp-hero .sp-problem{max-width:none;font-size:14px;line-height:1.45;opacity:.62}
+.sp-viz{margin:28px 0 24px}
+.sp-hero .sp-link{display:inline-block}
+.sp-note{margin:clamp(40px,5vw,56px) 0 0;font-size:14px;line-height:1.4;opacity:.6}
 @media (max-width:900px){
   .sp-grid{grid-template-columns:1fr}
 }

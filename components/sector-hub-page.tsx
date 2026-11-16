@@ -67,22 +67,32 @@ export function SectorHubPage({ sector, lang }: { sector: HubSectorKey; lang: "e
   )
 }
 
-/* The three heroes of a sector, on their own (used under the healthcare page's activities too). */
+/* The one next step under each hero, and the note that the numbers are examples. */
+const HERO_LINK = { en: { label: "Book a demo →", href: "/en#demo" }, fr: { label: "Demander une démo →", href: "/fr#demo" } }
+const HERO_NOTE = { en: "The numbers are examples.", fr: "Les chiffres sont des exemples." }
+
+/* The three heroes of a sector, on their own (used under the healthcare page's activities too).
+   Each hero: the problem today, the outcome, how it works with one example, one picture doing one job, one link. */
 export function SectorHeroes({ hero, lang, head = true }: { hero: HubSector; lang: "en" | "fr"; head?: boolean }) {
   const data = HERO_DATA[hero]
+  const link = HERO_LINK[lang]
   return (
     <section className="sp-heroes" aria-labelledby="sp-head">
       {head && <h2 id="sp-head">{data.head[lang]}</h2>}
       <div className="sp-grid">
         {data.heroes.map((h, i) => (
           <article key={i} className="sp-hero" data-rv="rise" style={{ "--i": i * 4 } as CSSProperties}>
-            <div className="sp-viz" dangerouslySetInnerHTML={{ __html: h.svg[lang] }} />
+            <p className="sp-problem">{h.problem[lang]}</p>
             <h3>{h.title[lang]}</h3>
             <p>{h.ex[lang]}</p>
-            {h.cap && <p className="sp-cap">{h.cap[lang]}</p>}
+            <div className="sp-viz" dangerouslySetInnerHTML={{ __html: h.svg[lang] }} />
+            <a className="sp-link" href={link.href}>
+              {link.label}
+            </a>
           </article>
         ))}
       </div>
+      <p className="sp-note">{HERO_NOTE[lang]}</p>
     </section>
   )
 }
