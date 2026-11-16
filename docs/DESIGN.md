@@ -1,170 +1,141 @@
-# SentrIA design
+# SentrIA landing page design
 
-This file records how the landing site and the app are designed. It is written from the code.
-When the code and this file disagree, check the code first, then correct this file in the same commit.
+Scope: the main landing page (`/en`, `/fr`) and the parts of the site it shares: the header, the footer,
+and the type, colour, button and motion rules. Not covered here: the Africa pages and the app.
 
-Sources: landing `app/globals.css`, `app/revamp.css`, `app/_shell/shell.tsx`, `components/africa-*`,
-`components/sector-*`, `components/fit.tsx`, `components/motion.tsx`; app `app/globals.css`, `app/layout.tsx`
-and the app's CLAUDE.md.
+Sources: `components/home-page.tsx` (section order), `components/hero.tsx`, `components/hero-film.tsx`,
+`components/sections.tsx`, `components/fit.tsx`, `components/compare.tsx`, `components/faq.tsx`,
+`components/demo.tsx`, `components/opening.tsx`, `components/header.tsx`, `components/footer.tsx`,
+`components/motion.tsx`; styles in `app/globals.css` and `app/revamp.css`; copy in `content/en-story.ts`.
 
-## 1. The product in design terms
+When the code and this file disagree, the code wins. Fix this file in the same commit.
 
-- Tagline (footer): the operational decision layer: evidence, confidence, impact and outcome, for every risk.
-- A page shows one working moment of the product. It does not give a tour.
-- Pharmacy is the reference page. Every activity page uses its template (section 2.7).
-- Plain words. Short sentences. The numbers are examples and are labelled as examples.
+## 1. What the page does
 
-## 2. Landing site
+- It sells one idea in plain words: SentrIA turns risk into a ranked decision. Each decision carries evidence, confidence, impact, and an outcome that feeds back.
+- Footer tagline: "The operational decision layer: evidence, confidence, impact and outcome, for every risk."
+- Order of the page: the problem first, then the product on one screen, then how it works, who it fits, the trust points, the questions, and one call to book a demo.
 
-### 2.1 Stack and routes
+## 2. Page order
 
-- Next.js 16 App Router, React 19, TypeScript, pnpm. Dev server: `pnpm dev -p 3100`.
-- English has no prefix: `/`, `/sectors/<sector>`, `/africa/en/<activity>`.
-- French uses a prefix: `/fr`, `/fr/secteurs/<sector>`, `/afrique/fr/<activity>`.
-- Fonts load in `app/_shell/shell.tsx`.
+Measured at 1440 px. Top to bottom.
 
-### 2.2 Colour tokens (`app/globals.css`, `:root`)
+| # | Section | Ground (rendered) | Headline (EN) | Job |
+| --- | --- | --- | --- | --- |
+| 0 | Opening | black tile grid | none | Plays on load: a grid of tiles dissolves diagonally, the wordmark and "Loading" show, then the page appears. |
+| 1 | Header | floating dark pill over the hero | none | Navigation, language switch, Sign in, and the lime "Book a demo →". |
+| 2 | Hero | ink, full-bleed sector photo under a dark layer | "See the risk. / See the evidence. / Decide." | The sector film, the lead, three check lines, and the call to action strip. |
+| 3 | Proof | lime, 101 px high | scrolling words | Evidence, Confidence, Impact, Outcome. Nothing more. |
+| 4 | Product tour | near-white #fbfbfd | "Every risk, ranked. One screen." | A product window with captions. |
+| 5 | Quick pick | sand #ece7d6, 96 px high | "Not sure where you fit in? Pick one:" | Seven sector pills. |
+| 6 | Situations | near-white | "Your data already knows. It just doesn't explain itself." | The problem. |
+| 7 | Shift | ink | "Move from monitoring to deciding." | Monitoring against deciding. |
+| 8 | Compare | white | "Not a dashboard. A decision layer." | Contrast with a dashboard. |
+| 9 | Method | near-white | "An operational loop, not another dashboard." | Observe, understand, prioritise, act. |
+| 10 | Cockpit | ink | "What needs your attention now." | A ranked queue with percentages. |
+| 11 | Pricing | sand | "Plans and prices." | Four plans. Business is highlighted in lime. |
+| 12 | Flow | #121313 | "From your data to a defended decision." | Three numbered steps (see section 11). |
+| 13 | Sectors | near-white | "Where do you fit in?" | A sector list with a board: tagline, description, three signals, two links. |
+| 14 | Data | #10120b | "Use what you already have." | What SentrIA works with from data you already have. |
+| 15 | Reasoning | #000 | "Every risk comes with its reasoning." | The reasoning panels. |
+| 16 | Promise | lime | "Less noise. Better decisions. Measured outcomes." | Four promises, each with an arrow. |
+| 17 | Trust | olive #1b1e10 | "Your data stays under your control." | Access and control. |
+| 18 | FAQ | lime | "The questions we get asked." | Questions that open. |
+| 19 | Demo | light grey #f2f2f0 | "Let's see where SentrIA can save you time, and defend the decision." | Booking card and a dial. |
+| 20 | Final | ink | "The next decision may already be in your data." | One "Book a demo" button. |
+| 21 | Footer | ink, with a lime band | none | Links, contact, copyright, and a very large "SentrIA" wordmark. |
+
+Rendered colours differ from the class names in some places. `.sc-deep` is defined with the lime-deep token, but the Flow and Reasoning sections render dark because a later rule overrides them. The rendered colour is what counts.
+
+## 3. Colour
+
+Tokens in `app/globals.css`, `:root`:
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--ink` | #0b0c08 | page ground, dark sections, ink text |
-| `--ink-2`, `--ink-3`, `--ink-4` | #10120b, #15170d, #1b1e10 | olive grounds |
-| `--paper` | #14150f | dark paper |
-| `--cream` | #f5f3ea | light ground, cream bands, the ledger |
-| `--sand` | #ece7d6 | older sand section; activity pages no longer use it |
-| `--lime` | #d6ff3f | accent, primary button, highlighted dots and figures |
+| `--ink` | #0b0c08 | page ground, dark sections, dark text |
+| `--ink-2`, `--ink-3`, `--ink-4` | #10120b, #15170d, #1b1e10 | dark grounds; `--ink-4` is the olive section |
+| `--paper` | #14150f | text on lime |
+| `--cream` | #f5f3ea | text on dark |
+| `--sand` | #ece7d6 | the sand bands |
+| `--lime` | #d6ff3f | accent, the proof band, the promise and FAQ sections, buttons |
 | `--lime-deep` | #9fcc1b | eyebrow line |
 | `--lime-dim` | #7c9a2a | eyebrow text on dark |
 | `--muted` | #969989 | secondary text |
 | `--muted-l` | #65685c | labels |
-| `--coral` | #ff5a4e | critical alert icon |
-| `--amber` | #ffb84d | warning alert icon |
+| `--coral` | #ff5a4e | critical alert |
+| `--amber` | #ffb84d | warning alert |
 
-Literal colour used in components, not a token: deep green `#0f2e1f` (hero overlay, example band,
-bar fills, dots). Lime-on-cream needs an ink outline or a deep-green fill to read.
+Light sections use their own neutral set in `app/revamp.css` (`.rv-sec`): background #fbfbfd, text #1d1d1f, muted text #6e6e73, rule #d2d2d7.
 
-### 2.3 Typography
+Pattern on the page: the grounds alternate between light, dark and lime, with sand as a breather. Two sections of the same ground rarely sit next to each other.
 
-| Face | Variable or source | Used for |
-| --- | --- | --- |
-| Syne 700 | `--f-display` (`app/fonts/syne-700.woff2`) | headlines h1 to h3 |
-| Poppins 400, 500, 600 | `--f-body` (`app/fonts/poppins-*.woff2`) | body, labels, chips, buttons |
-| Unbounded 600 | `--f-open` | the large wordmark at the foot of the page |
-| Michroma 400 | `--f-brand` | brand wordmark |
-| Chillax Light | `AfricaNumeral` (`public/fonts/Chillax-Light.woff2`) | big figures: ledger figures, step numbers, example numbers |
-| absans 400 | `--f-hero` | loaded in the shell; no use found in the code checked |
+## 4. Type
 
-Sizes checked in the code:
+- Headlines: Syne 700 (`--f-display`). Section headline `.rv-h`: `clamp(34px, 5vw, 68px)`, line height 1.05, letter spacing -0.03em, 17 characters wide, balanced across lines. Plain `.h2`: `clamp(32px, 4.5vw, 74px)`, line height 1.03. Hero headline: `clamp(34px, 6.1vw, 110px)`.
+- Body: Poppins 400, 500, 600 (`--f-body`).
+- Lead under a headline: `.rv-lead`, `clamp(16px, 1.4vw, 19px)`, line height 1.6, muted, 620 px wide at most.
+- Kicker above a headline: `.rv-kicker`, 13px, weight 600, muted, with a short line before it.
+- Footer wordmark: Unbounded 600 (`--f-open`).
+- Michroma 400 (`--f-brand`) is used for some brand elements.
+- Width: `.wrap` is 1360 px at most, with side padding `--pad: clamp(20px, 4vw, 56px)`.
+- Section padding: `clamp(72px, 9vw, 136px)` top and bottom.
 
-- Activity hero headline: `clamp(40px, 4.4vw, 62px)`, line height 1.04. Pharmacy and other sector heroes: `clamp(34px, 5.6vw, 80px)`. Hub heroes are larger.
-- Activity lead: `clamp(15px, 1.15vw, 17px)`.
-- Start line (audience, "For ..."): 12px, uppercase, letter spacing .14em, 60% opacity.
-- Eyebrow: 12px, weight 600, uppercase, letter spacing .15em, a 30px lime-deep line before it.
-- Hero stats: numbers 40px, one-line description 13px.
-- Ledger figure: Chillax Light, `clamp(96px, 10.4vw, 150px)`, line height .8.
-- Body: 16px to 17px, line height 1.55 to 1.65.
+## 5. Buttons
 
-### 2.4 Buttons
+- `.btn`: inline flex, minimum height 46px, padding 0 24px, radius 999px, 15px, weight 600, gap 10px.
+- `.btn-lime`: lime with ink text. On hover it turns #e6ff7a and gains a soft lime shadow (see section 11).
+- `.btn-ink`, `.btn-line`, `.btn-xl` (larger) are the other variants.
+- Hero call to action strip: three equal blocks. Lime "Book a demo →", a cream play button for the product tour, and a sand "See how it works".
+- Header: lime "Book a demo →" pill.
+- A section that asks for action ends in one "Book a demo" button. Other actions are text links.
 
-- Primary: lime pill (`#d6ff3f`, ink text), padding 14px 24px, 15px, radius 999px. One per hero: "Book a demo →" (FR "Demander une démo →").
-- Secondary: outline pill, cream border at 28%, transparent. Used as a link to the sector page: "See all X activities →".
-- Links inside a sector hero: a small underlined text link, not a filled button.
+## 6. Header and footer
 
-### 2.5 Layout
+- Header: a floating dark pill over the hero. It has the logo mark and the word SentrIA, the navigation links, the EN/FR switch, Sign in, and the lime "Book a demo →". The links point to `/#situations`, `/#methode`, `/#cockpit`, `/#tarifs`, `/#fit`, `/#faq`, `/articles` and `/africa`. The English labels are Situations, Method, Decision queue, Pricing, Sectors, FAQ, Articles and Africa.
+- Footer: ink ground. A left column with "Drop us a line and we'll get in touch" and a "Book a demo" link. A large contact address in capitals. Three link columns (Product, Resources, SentrIA), and a copyright line. Below all of it, a lime band carrying the very large "SentrIA" wordmark.
 
-- Side padding: `--pad: clamp(20px, 4vw, 56px)`.
-- Section headers sit top left on hub pages: a small label with a lime dot, then the title and lead left-aligned. No centred headers (CLAUDE.md).
-- Activity hero at 1440 by 900: copy on the left, alert panel on the right, lime stats strip at the bottom. The hero fits one screen (measured 900px tall).
-- Below 960px: the copy stacks, buttons go full width, the alert panel follows the copy.
-- Check: no sideways scroll at 390px (`scrollWidth - innerWidth` at or below 0).
+## 7. Hero
 
-### 2.6 Hero anatomy (`components/africa-hero.tsx`, `AfricaHero`)
+- Ground: ink, with a full-bleed photo of one sector under a dark layer so the headline stays readable.
+- Sector film (`hero-film.tsx`): seven sectors, one photo at a time. Each photo crossfades with a slow push-in. The film changes on a timer. It starts after the intro, pauses while the pointer or the keyboard is on the caption, and stays still under reduced motion.
+- Caption: the sector name in Syne, its one-line tagline, and seven progress dots.
+- Headline, three lines: "See the risk." then "See the evidence." in lime, then "Decide." The letters type in one after another, then wave (`.wvl`, with `--c` for position and `--j` for a small lag).
+- Lead paragraph on the right, 16 to 17 px.
+- Three check lines at the top right, uppercase, each with a lime check: evidence for every risk; confidence and impact shown; decision logged, outcome measured.
+- Bottom strip: three call-to-action blocks (see section 5).
 
-Top to bottom:
+## 8. Motion
 
-1. Photo from Unsplash under a deep-green overlay (`afr-hero--deep`), with a credit line.
-2. Headline: three lines. The middle line is lime.
-3. Lead: one or two plain sentences on what SentrIA does.
-4. Start line: who it is for.
-5. Two buttons: primary "Book a demo →", secondary link to the sector.
-6. Right side, `AfricaAlertPanel`: "Example alerts", three cards. Critical uses a coral icon, warning an amber icon. Sample numbers.
-7. Bottom: lime stats strip, three stats (number, label, one-line example).
-8. Proof band: words that scroll on lime: Confidence, Impact, Outcome, Evidence.
+- Reveal: `data-rv` on sections, cards and headings. Values: `rise` (the default), `left`, `right`, `scale`, `fade`. Duration 0.95 s, ease `cubic-bezier(0.2, 0.7, 0.2, 1)`, stagger `--i` times 90 ms.
+- `components/motion.tsx`: adds `data-in` when an element enters the view. Also `data-par` (parallax), `data-prog` (progress into `--p`), `data-tilt`, `data-spot`, `data-mag` (magnetic button), `data-count`, and `data-step`.
+- Opening intro: CSS only, the tiles dissolve.
+- Proof band: a continuous marquee.
+- Reduced motion (`prefers-reduced-motion`): reveals show at once, and the hero film stays still.
+- Status: an earlier count found about 20 components without reveal. Check before saying "all".
 
-Compact size (`compact` prop, class `afr-hero--compact`) is used on every activity page.
+## 9. Pictures and visuals
 
-### 2.7 Activity page template
+- Hero photos: one per sector, real photographs of that sector's sites. Industry shows factory stacks and cooling towers.
+- Pictures come from Unsplash or another licensed high-quality source. No AI-generated images. No recognisable faces. Each picture must match its sector.
+- Credit each Unsplash photo as "Photo: Name, Unsplash".
+- Drawings in the sections (the product window, the queue, the plans, the dial) are inline SVG or CSS. Each drawing does one job.
 
-Every activity page renders the same sections in the same order. Pharmacy is the reference.
-
-1. Hero (2.6).
-2. Ledger (`components/africa-ledger.tsx`, cream). Kicker, then a heading that says what SentrIA shows. Three or four rows. Each row:
-   - a big figure from the row's example (Chillax Light), on the left;
-   - the title, one sentence on what SentrIA does, and "You import" chips;
-   - on the right, a drawing with the row's own labels, then the example alert sentence.
-   Four drawing kinds: `bars`, `timeline`, `pair`, `compare`. Then one "does not" line.
-3. Dark section (`afr-caps--rest`, ink ground):
-   - `AfricaSteps`: "Start in three steps", three steps with a drawing each.
-   - `AfricaExample`: worked example on a deep-green band. Chips for the example lines, a result line.
-4. FAQ grid (`components/africa-faq-grid.tsx`, lime, two by two). Four cells, each with a drawing (file, connections, separate accounts, dial) and a question with its answer. The dial words: pharmacy "routine / alert list / first patient"; other activities "routine / alert list / first action".
-
-Content:
-
-- `content/africa-activities.ts`: pharmacy, wholesaler, farm, plus the shared maps.
-- `content/africa-activity-pages.ts`: the other 21 activities, and the steps and questions shared by all activities.
-- Routes: `app/(en)/africa/[lang]/[activity]/page.tsx`, `app/(fr)/afrique/[lang]/[activity]/page.tsx`.
-
-Rules for activity rows:
-
-- One row is one thing SentrIA does.
-- The figure is one number from the example.
-- The drawing does one job, with its own labels.
-- Products named in a row are real features. Planned features are labelled as planned.
-
-### 2.8 Sector pages (7 sectors)
-
-- Health: `/sectors/healthcare` (FR `/fr/secteurs/sante`). Own page with the activity ring and the sector heroes.
-- Industry, agriculture, transportation, logistics, energy, retail: general hero, the sector's activity ring (`ActivityRing`), and the sector heroes.
-- Sector heroes (`SectorHeroes`, cream band `.sp-heroes`). Three per sector. Each hero:
-  - a quiet problem line;
-  - the outcome as the headline (h3);
-  - one example line;
-  - one picture (inline SVG) that does one job;
-  - a text link "Book a demo →".
-  A note under the three: "The numbers are examples."
-
-### 2.9 Homepage
-
-- Quick strip (`QuickFit`): seven pills, one per sector. Picking one scrolls to its card.
-- Sector board (`FitSection`, `components/fit.tsx`): sector name, tagline, description, three signals, two links: "Book a demo" and "See all X activities →" (the sector page).
-
-### 2.10 Motion
-
-- Scroll reveal: `data-rv` values `rise` (default), `left`, `right`, `scale`, `fade`. Duration .95s. Ease `cubic-bezier(0.2, 0.7, 0.2, 1)`. Stagger: `--i` times 90ms.
-- `components/motion.tsx`, the `Motion` component: adds `data-in` when an element enters the view (IntersectionObserver). Also `data-par` (parallax), `data-prog` (scroll progress into `--p`), `data-tilt`, `data-spot`, `data-mag`, `data-count`, `data-step`.
-- Steps on the activity page: a scroll-linked pull. Items arrive one after another.
-- Reduced motion: `prefers-reduced-motion` shows everything at once.
-- Status: reveal is on the landing and Africa pages. An earlier count found about 20 components still without reveal. Check before saying "all".
-
-### 2.11 Pictures
-
-- Unsplash only, high quality. Credit line on every photo: "Photo: Name, Unsplash".
-- One picture per activity, never repeated on another page.
-- No AI-generated images, no recognisable faces, no pictures unrelated to the activity.
-
-### 2.12 Copy
+## 10. Copy
 
 - English and French change together. Check both before saying a change is done.
-- No em dashes. No "it's not X, it's Y" contrast. No hype words. Short sentences, plain nouns.
+- Headlines are short sentences, often in threes, with full stops.
 - Example numbers are labelled as examples.
-- Only working features are written as working. CSV works today. ERP, API and IoT are planned, and the connections drawing says so.
-- Chat replies may use the caveman style. UI copy does not.
+- A planned feature is labelled planned. A working feature is written as working.
+- No em dashes. No hype words. No "Introducing" badge. The word "supercharge" is out.
+- New copy avoids the "not X, it's Y" contrast. The homepage already has one: "Not a dashboard. A decision layer." (section 11).
+- Chat replies may use the caveman style. Page copy does not.
 
-### 2.13 Never use
+## 11. Never use, and the open conflicts
 
-From the app's design rules, applied to the landing page too:
+Never use, from the design rules:
 
-- purple-blue gradients, gradient text;
+- purple-blue gradients, and gradient text;
 - an "Introducing" badge;
 - a glowing halo behind an element;
 - frosted-glass panels or icon tiles;
@@ -178,81 +149,24 @@ From the app's design rules, applied to the landing page too:
 - the word "supercharge";
 - em dashes in copy.
 
-Known conflict: `AfricaSteps` shows large numbers 01 to 03 on the steps. This conflicts with the rule above. Decide whether to keep them.
+Open conflicts, to decide:
 
-### 2.14 Checks before saying a page is done
+1. The Flow section (12) shows three numbered circles, 01 to 03. This conflicts with the rule above.
+2. `.btn-lime:hover` adds a lime shadow. Check it against "a glowing halo behind an element".
+3. The compare headline "Not a dashboard. A decision layer." uses the contrast form.
 
-1. `pnpm exec tsc --noEmit -p .`, and `pnpm exec eslint <changed files>`.
-2. Each route returns 200: `/africa/en/<activity>` and `/afrique/fr/<activity>`.
+## 12. Checks before saying a homepage change is done
+
+1. `pnpm exec tsc --noEmit -p .` and `pnpm exec eslint <changed files>`.
+2. `/en` and `/fr` return 200.
 3. Screenshots at 1440 by 900 and at 390 px. Set `data-in` on the `[data-rv]` elements first, because the reveal waits for scroll.
 4. No sideways scroll at 390 px.
-5. Check EN and FR together.
+5. English and French checked together.
 6. Push to `new_feat` only.
 
-### 2.15 Open items
+## 13. Open items (landing page)
 
-Kept here so they are not lost. Update this list when one is closed.
-
-1. The 21 new activity pages: rows, examples and numbers were written by the assistant. Sample numbers. The product side has not checked the claims.
-2. Africa pages: the primary "Book a demo" button points to `#demo`, but Africa pages have no demo section. Only the homepage has one.
-3. The Africa hub page (`/africa`) does not link to the 21 activity pages. Only the sector pages do.
-4. The pharmacy page's "does not" line says "your wholesaler's live stock". That is wrong for pharmacies.
-5. The step numbers 01 to 03 conflict with section 2.13.
-6. Reveal motion is not on about 20 components yet.
-7. Phone check (390 px) of the new activity pages not done.
-8. The compact hero also applies to the pharmacy page. Confirm this is wanted.
-
-## 3. App (sentria-frontend)
-
-### 3.1 Stack
-
-Next.js 16 App Router, React 19, Tailwind v4, Supabase Auth, pnpm. Deployed on Vercel. Backend: the Sentria repo (FastAPI) on Render.
-
-### 3.2 Fonts (`app/layout.tsx`, `next/font/google`)
-
-- Plus Jakarta Sans: `--font-body`, text.
-- Outfit: `--font-display`, headings.
-- Michroma, one weight: `--font-brand-face`, the sidebar wordmark.
-- Geist Mono: `--font-geist-mono`.
-
-### 3.3 Colours (`app/globals.css`, oklch)
-
-Light (`:root`):
-
-- background oklch(0.965 0.002 110); card oklch(1 0 0); canvas #ffffff.
-- foreground oklch(0.18 0.005 110); primary oklch(0.19 0.004 110).
-- muted-foreground oklch(0.52 0.006 110); border oklch(0.91 0.003 110); track oklch(0.3 0.004 110).
-- brand (lime) oklch(0.88 0.205 124), brand-foreground oklch(0.22 0.04 124); brand-deep #0f2e1f.
-- warning oklch(0.54 0.14 58); destructive oklch(0.577 0.245 27.325).
-
-Dark (`.dark`):
-
-- canvas oklch(0.125 0.002 110); card oklch(0.225 0.002 110).
-- primary oklch(0.922 0 0); brand oklch(0.85 0.195 124); deep-card = brand-deep.
-- border white at 10%; muted-foreground oklch(0.708 0 0).
-- destructive oklch(0.704 0.191 22.216); warning oklch(0.8 0.145 78).
-
-### 3.4 Shape and surfaces
-
-- Radius token: 1rem (16px). Smaller and larger radii derive from it.
-- Squircle: `.squircle` sets `corner-shape: squircle`. Add it next to a large `rounded-[...]` on big surfaces. So far only the sidebar (64px) has it. Small controls stay round.
-- Cards: lime, black and grey rounded cards. Pastel tags. No big cards, no faded colours, no hidden controls.
-- Scroll bars are hidden in `globals.css`. The rule for content: show every row, or wrap or paginate. No scroll bars inside cards, lists or bars.
-
-### 3.5 Theme
-
-- Dark mode by the `.dark` class. Use theme tokens, never `dark:` variants.
-- Light, dark and 390 px must all look right.
-
-### 3.6 Conventions
-
-- Every user-facing string in French and English, through `tx(fr, en)` or `localized()`.
-- A mockup of an existing screen starts from a real screenshot of the running app.
-- Each feature gets a Playwright suite in `tests/e2e/`, listed in `run-all.js`, with screenshots in light, dark and 390 px.
-- Do not hand-edit `lib/icons.tsx`, `lib/icon-data.ts` (generated) or the lockfiles.
-
-## 4. Keeping this file true
-
-- Read the code before you change this file.
-- Change this file in the same commit as a design decision.
-- Order of trust: code, then this file, then memory.
+1. Decide the three conflicts in section 11.
+2. Reveal motion is missing on about 20 components.
+3. Check the whole homepage at 390 px. Not done yet.
+4. Check the French homepage section by section. Not done yet.

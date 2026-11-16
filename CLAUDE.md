@@ -1,7 +1,7 @@
 @AGENTS.md
 @docs/DESIGN.md
 
-Read `docs/DESIGN.md` before any design or copy change. It records the tokens, type, hero and activity template, motion, pictures and the open items.
+Read `docs/DESIGN.md` before any design or copy change to the landing page. It records the section order, colour tokens, type, buttons, hero, motion, pictures, copy rules, the never-use list and the open items. It does not cover the Africa pages or the app.
 
 ## Keep EN and FR in step
 - When you change, add or delete something in English, do the same in French (and the reverse). Check both before you say it is done.
