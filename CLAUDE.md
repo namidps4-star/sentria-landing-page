@@ -1,4 +1,7 @@
 @AGENTS.md
+@docs/DESIGN.md
+
+Read `docs/DESIGN.md` before any design or copy change. It records the tokens, type, hero and activity template, motion, pictures and the open items.
 
 ## Keep EN and FR in step
 - When you change, add or delete something in English, do the same in French (and the reverse). Check both before you say it is done.
