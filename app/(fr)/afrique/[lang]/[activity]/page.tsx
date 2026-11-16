@@ -4,7 +4,7 @@ import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { AfricaAlertPanel } from "@/components/africa-alert-panel"
 import { share, headline } from "@/content/share"
-import { ACTIVITY_COPY, AFRICA_ACTIVITIES, SECTOR_ALERTS } from "@/content/africa-activities"
+import { ACTIVITY_COPY, AFRICA_ACTIVITIES, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-activities"
 import { SECTOR_PAGE } from "@/content/sector-pages"
 import { SectorActivityPage } from "@/components/sector-activity-page"
 
@@ -28,5 +28,5 @@ export default async function Page({ params }: { params: Params }) {
   if (lang === "fr" && SECTOR_PAGE[activity]) return <SectorActivityPage id={activity} lang="fr" />
   const copy = ACTIVITY_COPY[activity]
   if (lang !== "fr" || !copy) notFound()
-  return <AfricaHero copy={copy.fr} id={activity} panel={activity === "pharmacie" || SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="fr" alerts={SECTOR_ALERTS[activity]?.fr} /> : undefined} extra={<AfricaCapabilities slug={activity} lang="fr" />} />
+  return <AfricaHero copy={copy.fr} id={activity} panel={activity === "pharmacie" || SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="fr" alerts={SECTOR_ALERTS[activity]?.fr} /> : undefined} extra={<AfricaCapabilities slug={activity} lang="fr" />} photo={AFRICA_PHOTOS[activity]} compact={activity === "grossiste-pharma"} />
 }

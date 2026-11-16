@@ -98,6 +98,13 @@ export const ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   },
 }
 
+/* One picture per activity page, none shared with another page. Both languages use the same picture. */
+export const AFRICA_PHOTOS: Record<string, { src: string; credit: string }> = {
+  pharmacie: { src: "/africa/hq/africa-pharmacie.jpg", credit: "Photo: Yikai Sun, Unsplash" },
+  "grossiste-pharma": { src: "/africa/hq/africa-grossiste.jpg", credit: "Photo: Salah Ait Mokhtar, Unsplash" },
+  "exploitation-agricole": { src: "/africa/hq/africa-farm.jpg", credit: "Photo: Yulian Alexeyev, Unsplash" },
+}
+
 export type Capability = { title: string; does: string; example: string; imports: string }
 export type Step = { title: string; text: string }
 export type Example = { title: string; lines: string[]; result: string }
@@ -242,8 +249,43 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           example: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA. Paracetamol 1g: 8 units, 24,000 FCFA.",
           imports: "Unit cost per product (optional, SentrIA ranks by quantity if not provided)",
         },
+        {
+          title: "Which pharmacy runs out before your next delivery",
+          does: "SentrIA estimates each pharmacy's stock from your deliveries minus its sales. It flags the products that reach zero before your next delivery to that pharmacy, so you can send them stock first.",
+          example: "Pharmacie du Port: Paracetamol 1g, 2 days left. Your next delivery is in 5 days.",
+          imports: "Deliveries and sales per pharmacy and product, date of your next delivery",
+        },
+        {
+          title: "Which pharmacy has gone quiet",
+          does: "SentrIA measures the gap between each pharmacy's orders. When one goes quiet for longer than its usual gap, it names the pharmacy, so you can call it this week.",
+          example: "Pharmacie Nord: no order for 21 days. Its usual gap is 7 days.",
+          imports: "Pharmacy name and the date of each order or delivery",
+        },
       ],
       notDo: "SentrIA does not move stock, place orders or issue invoices. It proposes transfers, and you decide what happens. It only sees the pharmacies whose data you import.",
+      stepsHeading: "Start in three steps",
+      steps: [
+        { title: "Export your network data", text: "One file per pharmacy: deliveries and sales by product and by day. A spreadsheet export is enough." },
+        { title: "Import it once", text: "SentrIA matches the pharmacy and product names, then estimates what each pharmacy holds and what it reorders." },
+        { title: "Approve the morning list", text: "Transfers and reorder warnings come ranked by value. You approve or dismiss each one. SentrIA moves nothing." },
+      ],
+      example: {
+        title: "One morning across the network",
+        lines: [
+          "Pharmacie du Port: Paracetamol 1g, 2 days left",
+          "Clinique du Nord: reordering 30 units of Metformin 500mg",
+          "Pharmacie Centrale: 34 units unsold",
+          "Transfer proposed: 30 units, ranked first",
+        ],
+        result: "One transfer instead of a new order. Stock the network already holds is used first.",
+      },
+      faqHeading: "Questions wholesalers ask",
+      faq: [
+        { q: "Does SentrIA move stock or send orders?", a: "No. It proposes transfers and reorder warnings. You decide, and you place every order yourself." },
+        { q: "What do I need to import?", a: "Per pharmacy: deliveries and sales by product and by day, and your next delivery dates. A spreadsheet export is enough." },
+        { q: "What if only some pharmacies share their data?", a: "SentrIA works with the pharmacies you import, and it does not see the others." },
+        { q: "Do I need unit costs?", a: "No. Without them SentrIA ranks by quantity. With them it ranks by the value at stake." },
+      ],
     },
     fr: {
       heading: "Ce que SentrIA vous montre sur l'ensemble de votre réseau",
@@ -260,8 +302,43 @@ export const CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           example: "Metformine 500mg : 30 unités, 180 000 FCFA. Amoxicilline 500mg : 12 unités, 72 000 FCFA. Paracétamol 1g : 8 unités, 24 000 FCFA.",
           imports: "Coût unitaire par produit (optionnel, SentrIA classe par quantité si absent)",
         },
+        {
+          title: "Quelle pharmacie sera à zéro avant votre prochaine livraison",
+          does: "SentrIA estime le stock de chaque pharmacie à partir de vos livraisons moins ses ventes. Il signale les produits qui tombent à zéro avant votre prochaine livraison à cette pharmacie, pour que vous les envoyiez en premier.",
+          example: "Pharmacie du Port : Paracétamol 1g, 2 jours restants. Votre prochaine livraison est dans 5 jours.",
+          imports: "Livraisons et ventes par pharmacie et par produit, date de votre prochaine livraison",
+        },
+        {
+          title: "Quelle pharmacie ne recommande plus",
+          does: "SentrIA mesure l'écart entre les commandes de chaque pharmacie. Quand l'une reste silencieuse plus longtemps que son écart habituel, il la nomme, pour que vous l'appeliez cette semaine.",
+          example: "Pharmacie Nord : aucune commande depuis 21 jours. Son écart habituel est de 7 jours.",
+          imports: "Nom de la pharmacie et date de chaque commande ou livraison",
+        },
       ],
       notDo: "SentrIA ne déplace pas de stock, ne passe pas de commande et n'émet pas de facture. Il propose des transferts, et c'est vous qui décidez. Il ne voit que les pharmacies dont vous importez les données.",
+      stepsHeading: "Commencez en trois étapes",
+      steps: [
+        { title: "Exportez les données de votre réseau", text: "Un fichier par pharmacie : livraisons et ventes par produit et par jour. Un export de tableur suffit." },
+        { title: "Importez-les une fois", text: "SentrIA associe les noms de pharmacies et de produits, puis estime ce que chaque pharmacie détient et ce qu'elle recommande." },
+        { title: "Validez la liste du matin", text: "Les transferts et les alertes de réapprovisionnement sont classés par valeur. Vous validez ou écartez chacun. SentrIA ne déplace rien." },
+      ],
+      example: {
+        title: "Un matin sur l'ensemble du réseau",
+        lines: [
+          "Pharmacie du Port : Paracétamol 1g, 2 jours restants",
+          "Clinique du Nord : a recommandé 30 unités de Metformine 500mg",
+          "Pharmacie Centrale : 34 unités invendues",
+          "Transfert proposé : 30 unités, classé en premier",
+        ],
+        result: "Un transfert au lieu d'une nouvelle commande. Le stock déjà présent dans le réseau sert en premier.",
+      },
+      faqHeading: "Les questions des grossistes",
+      faq: [
+        { q: "SentrIA déplace-t-il du stock ou envoie-t-il des commandes ?", a: "Non. Il propose des transferts et des alertes de réapprovisionnement. Vous décidez, et vous passez chaque commande vous-même." },
+        { q: "Que dois-je importer ?", a: "Par pharmacie : les livraisons et les ventes par produit et par jour, et vos dates de prochaine livraison. Un export de tableur suffit." },
+        { q: "Et si seules certaines pharmacies partagent leurs données ?", a: "SentrIA travaille avec les pharmacies que vous importez, et ne voit pas les autres." },
+        { q: "Faut-il des coûts unitaires ?", a: "Non. Sans eux, SentrIA classe par quantité. Avec eux, il classe par valeur en jeu." },
+      ],
     },
   },
   "exploitation-agricole": {

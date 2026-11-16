@@ -57,8 +57,8 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
     )
   }
 
-  return (
-    <section className={slug === "grossiste-pharma" ? "afr-caps afr-caps--sand" : "afr-caps"} aria-labelledby={id}>
+  const head = (
+    <>
       {kicker && <p className="eyebrow">{kicker}</p>}
       <h2 id={id}>{c.heading}</h2>
       <ul>
@@ -80,6 +80,26 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         ))}
       </ul>
       <p className="afr-caps-not">{c.notDo}</p>
+    </>
+  )
+
+  /* Wholesaler: the rows on sand, the steps and the example on the dark ground, the questions back on sand.
+     The steps are light type, so they cannot sit on sand. */
+  if (slug === "grossiste-pharma") {
+    return (
+      <>
+        <section className="afr-caps afr-caps--sand" aria-labelledby={id}>
+          {head}
+        </section>
+        <section className="afr-caps afr-caps--rest">{dark}</section>
+        {faqList && <section className="afr-caps afr-caps--sand">{faqList}</section>}
+      </>
+    )
+  }
+
+  return (
+    <section className="afr-caps" aria-labelledby={id}>
+      {head}
       {dark}
       {faqList}
     </section>

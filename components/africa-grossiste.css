@@ -36,6 +36,24 @@
 .afr-caps--sand .rl-lb.dn{top:62px}
 .afr-caps--sand .rl-move{margin:0;padding-top:16px;border-top:1px solid var(--line);font-family:var(--f-display),sans-serif;font-weight:600;font-size:clamp(18px,1.6vw,24px);letter-spacing:-.01em;color:var(--acc)}
 .afr-caps--sand .rl-move::before{content:"\2192\00a0"}
+/* Days-of-cover bars: one per pharmacy, the tick is the next delivery; short bars turn ink. */
+.afr-caps--sand .rl-row{margin:0 0 26px}
+.afr-caps--sand .rl-row-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin:0 0 10px;font-size:14px;color:var(--mut)}
+.afr-caps--sand .rl-row-top b{font-family:var(--f-display),sans-serif;font-weight:600;font-size:16px;color:#0b0c08}
+.afr-caps--sand .rl-bar{position:relative;height:10px;border-radius:999px;background:rgba(11,12,8,.1)}
+.afr-caps--sand .rl-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--acc)}
+.afr-caps--sand .rl-bar i[data-low]{background:#0b0c08}
+.afr-caps--sand .rl-bar em{position:absolute;top:-8px;bottom:-8px;width:2px;background:#0b0c08}
+/* Order gap: one dot per week, filled when the pharmacy ordered. */
+.afr-caps--sand .rl-dots{display:flex;gap:14px;margin:4px 0 18px}
+.afr-caps--sand .rl-dots span{width:18px;height:18px;border-radius:50%;border:2px solid var(--acc)}
+.afr-caps--sand .rl-dots span[data-on]{background:var(--acc)}
+.afr-caps--sand .rl-gapsub{margin:0 0 22px;font-size:14px;line-height:1.5;color:var(--mut)}
+
+/* The wholesaler hero fits one screen: the same copy, a smaller headline than the pharmacy hero. */
+.afr-hero--sector.afr-hero--compact h1{font-size:clamp(40px,4.4vw,62px);line-height:1.04}
+.afr-hero--sector.afr-hero--compact .afr-lead{font-size:clamp(15px,1.15vw,17px)}
+
 @media (max-width:900px){
   .afr-caps--sand .afr-caps-row{grid-template-columns:1fr;gap:40px}
   .afr-caps--sand>h2{margin-bottom:72px}
