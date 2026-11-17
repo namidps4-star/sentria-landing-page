@@ -6,6 +6,7 @@ import "./africa-network-map.css"
    Nord is an orange dot, and Pharmacie du Port is another. Coordinates are in the picture's own 1080 x 1920. */
 const W = 1080
 const H = 1920
+const CROP = [300, 1200] /* the part of the picture that is shown: top and height */
 const FROM = [905, 1132]
 const TO = [835, 403]
 const PORT = [85, 1360]
@@ -44,9 +45,17 @@ export function MapHero({ kicker, title, result, lang }: { kicker?: string; titl
         </ul>
       </div>
       <figure className="afr-mh-map">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/africa-city-map.jpg" alt={t.alt} width={W} height={H} />
-        <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
+        <svg viewBox={`0 ${CROP[0]} ${W} ${CROP[1]}`} role="img" aria-label={t.alt}>
+          <defs>
+            <radialGradient id="afr-mh-fade">
+              <stop offset=".62" stopColor="#fff" />
+              <stop offset="1" stopColor="#000" />
+            </radialGradient>
+            <mask id="afr-mh-mask" maskUnits="userSpaceOnUse" x="0" y={CROP[0]} width={W} height={CROP[1]}>
+              <rect x="0" y={CROP[0]} width={W} height={CROP[1]} fill="url(#afr-mh-fade)" />
+            </mask>
+          </defs>
+          <image href="/africa-city-map.jpg" x="0" y="0" width={W} height={H} mask="url(#afr-mh-mask)" className="pic" />
           <path className="flow" pathLength={1} d={LINE} fill="none" />
           <circle className="runner" r="11" style={{ offsetPath: `path("${LINE}")` }} />
           <Pill x={MID[0] - 34} y={MID[1]} anchor="end" a={t.move[0]} b={t.move[1]} kind="move" />
