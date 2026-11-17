@@ -5,6 +5,7 @@ import { SECTOR_PAGE } from "@/content/sector-pages"
 import { AfricaLedger } from "./africa-ledger"
 import { AfricaSteps } from "./africa-steps"
 import { AfricaExample } from "./africa-example"
+import { AfricaExampleCurve } from "./africa-example-curve"
 import { AfricaFaqGrid } from "./africa-faq-grid"
 import "./africa-variants.css"
 
@@ -32,18 +33,27 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       <section className="afr-caps afr-caps--rest">
         <AfricaSteps heading={stepsHeading} steps={steps} kicker={kicker} />
         {c.example && (
-          <AfricaExample
-            kicker={kicker}
-            title={c.example.title}
-            lines={c.example.lines}
-            result={c.example.result}
-            first={firstSentence}
-            imports={c.items[0].imports}
-            youImport={youImport}
-            lang={lang}
-            scale={pharmacy}
-            style={design.example}
-          />
+          slug === "grossiste-pharma" ? (
+            <AfricaExampleCurve
+              kicker={kicker}
+              title={c.example.title}
+              result={c.example.result}
+              lang={lang}
+            />
+          ) : (
+            <AfricaExample
+              kicker={kicker}
+              title={c.example.title}
+              lines={c.example.lines}
+              result={c.example.result}
+              first={firstSentence}
+              imports={c.items[0].imports}
+              youImport={youImport}
+              lang={lang}
+              scale={pharmacy}
+              style={design.example}
+            />
+          )
         )}
       </section>
       <AfricaFaqGrid
