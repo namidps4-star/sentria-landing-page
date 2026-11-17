@@ -9,13 +9,28 @@ const H = 1920
 const FROM = [905, 1132]
 const TO = [835, 403]
 const PORT = [85, 1360]
+const MID = [919, 794]
 const LINE = `M${FROM[0]} ${FROM[1]} C${FROM[0] + 40} ${FROM[1] - 260},${TO[0] + 90} ${TO[1] + 330},${TO[0]} ${TO[1]}`
+
+/* a label with a dark fill so it reads on top of the streets */
+function Pill({ x, y, anchor, a, b, kind }: { x: number; y: number; anchor: "start" | "end"; a: string; b: string; kind: string }) {
+  const w = Math.max(a.length * 19, b.length * 17) + 44
+  const h = 92
+  const left = anchor === "start" ? x : x - w
+  return (
+    <g className={`pill ${kind}`}>
+      <rect x={left} y={y - h / 2} width={w} height={h} rx="26" />
+      <text x={left + 22} y={y - 6}>{a}</text>
+      <text x={left + 22} y={y + 28} className="v">{b}</text>
+    </g>
+  )
+}
 
 export function MapHero({ kicker, title, result, lang }: { kicker?: string; title: string; result: string; lang: "en" | "fr" }) {
   const t =
     lang === "en"
-      ? { from: ["Pharmacie Centrale", "34 unsold"], to: ["Clinique du Nord", "reordering 30"], port: ["Pharmacie du Port", "2 days left"], alt: "Map of a pharmacy network with three pharmacies marked" }
-      : { from: ["Pharmacie Centrale", "34 invendues"], to: ["Clinique du Nord", "recommande 30"], port: ["Pharmacie du Port", "2 jours restants"], alt: "Carte d'un réseau de pharmacies avec trois pharmacies repérées" }
+      ? { from: ["Pharmacie Centrale", "34 unsold"], to: ["Clinique du Nord", "reordering 30"], port: ["Pharmacie du Port", "2 days left"], move: ["Move 30 units", "instead of a new order"], alt: "Map of a pharmacy network with three pharmacies marked" }
+      : { from: ["Pharmacie Centrale", "34 invendues"], to: ["Clinique du Nord", "recommande 30"], port: ["Pharmacie du Port", "2 jours restants"], move: ["Déplacer 30 unités", "au lieu d'une commande"], alt: "Carte d'un réseau de pharmacies avec trois pharmacies repérées" }
   return (
     <div className="afr-mh" data-rv="rise">
       <div className="afr-mh-copy">
@@ -33,24 +48,22 @@ export function MapHero({ kicker, title, result, lang }: { kicker?: string; titl
         <img src="/africa-city-map.jpg" alt={t.alt} width={W} height={H} />
         <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
           <path className="flow" pathLength={1} d={LINE} fill="none" />
-          <circle className="runner" r="9" style={{ offsetPath: `path("${LINE}")` }} />
+          <circle className="runner" r="11" style={{ offsetPath: `path("${LINE}")` }} />
+          <Pill x={MID[0] - 34} y={MID[1]} anchor="end" a={t.move[0]} b={t.move[1]} kind="move" />
           <g className="pt port">
-            <circle className="ring" cx={PORT[0]} cy={PORT[1]} r="14" />
-            <circle cx={PORT[0]} cy={PORT[1]} r="14" />
-            <text x={PORT[0] + 28} y={PORT[1] - 6}>{t.port[0]}</text>
-            <text x={PORT[0] + 28} y={PORT[1] + 28} className="v">{t.port[1]}</text>
+            <circle className="ring" cx={PORT[0]} cy={PORT[1]} r="20" />
+            <circle cx={PORT[0]} cy={PORT[1]} r="20" />
           </g>
+          <Pill x={PORT[0] + 38} y={PORT[1]} anchor="start" a={t.port[0]} b={t.port[1]} kind="port" />
           <g className="pt from">
-            <circle cx={FROM[0]} cy={FROM[1]} r="14" />
-            <text x={FROM[0] - 28} y={FROM[1] + 56} textAnchor="end">{t.from[0]}</text>
-            <text x={FROM[0] - 28} y={FROM[1] + 90} textAnchor="end" className="v">{t.from[1]}</text>
+            <circle cx={FROM[0]} cy={FROM[1]} r="20" />
           </g>
+          <Pill x={FROM[0] - 38} y={FROM[1] + 70} anchor="end" a={t.from[0]} b={t.from[1]} kind="from" />
           <g className="pt to">
-            <circle className="ring" cx={TO[0]} cy={TO[1]} r="14" />
-            <circle cx={TO[0]} cy={TO[1]} r="14" />
-            <text x={TO[0] - 28} y={TO[1] - 40} textAnchor="end">{t.to[0]}</text>
-            <text x={TO[0] - 28} y={TO[1] - 6} textAnchor="end" className="v">{t.to[1]}</text>
+            <circle className="ring" cx={TO[0]} cy={TO[1]} r="20" />
+            <circle cx={TO[0]} cy={TO[1]} r="20" />
           </g>
+          <Pill x={TO[0] - 38} y={TO[1] - 30} anchor="end" a={t.to[0]} b={t.to[1]} kind="to" />
         </svg>
       </figure>
     </div>
