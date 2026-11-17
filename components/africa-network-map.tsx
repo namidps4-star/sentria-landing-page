@@ -7,8 +7,8 @@ import "./africa-network-map.css"
    coordinates are in the picture's own 1080 x 1920. */
 const W = 1080
 const H = 1920
-const CROP = [330, 1090] /* the part of the picture that is shown: top and height */
-const PW = 430
+const CROP = [150, 1270] /* the part of the picture that is shown: top and height */
+const PW = 400
 const PH = 180
 const FROM = [905, 1132]
 const TO = [835, 403]
@@ -37,24 +37,23 @@ type Panel = { name: string; sub: string; l1: string; v1: string; v1b?: string; 
 
 const TRAFFIC = { en: "data traffic", fr: "données" }
 
-/* One callout, built like a film HUD readout: a thin leader from the pin runs along the panel; the panel has a
-   vertical label strip, a title with a sub-title and an icon box, two boxed readings and a block of unit dots. */
-function Callout({ id, x, y, side, vert, delay, p, lang }: { id: string; x: number; y: number; side: "left" | "right"; vert: "above" | "below"; delay: number; p: Panel; lang: "en" | "fr" }) {
-  const dir = side === "left" ? -1 : 1
-  const px = dir === -1 ? -(100 + PW) : 100
-  const py = vert === "above" ? -PH : 0
-  const far = dir * (100 + PW)
+/* One callout, built like a film HUD readout: a thin vertical stick joins the pin to a corner of the panel; the
+   panel has a vertical label strip, a title with a sub-title and an icon box, a boxed reading and a block of
+   unit dots. "corner" is the panel corner the stick meets: bl and br sit above the pin, tr hangs below it. */
+function Callout({ id, x, y, corner, stick, delay, p, lang }: { id: string; x: number; y: number; corner: "bl" | "br" | "tr"; stick: number; delay: number; p: Panel; lang: "en" | "fr" }) {
+  const up = corner !== "tr"
+  const px = corner === "bl" ? 0 : -PW
+  const py = up ? -stick - PH : stick
+  const sy = up ? -stick : stick
   const cells = Array.from({ length: 36 }, (_, i) => i)
-  /* the panel tilts in perspective: its far end rises, turning on the corner nearest the pin */
-  const ang = dir === -1 ? 3 : -3
-  const ox = dir === -1 ? px + PW : px
-  const oy = vert === "above" ? py + PH : py
-  const tilt = `translate(${ox} ${oy}) skewY(${ang}) translate(${-(dir === -1 ? PW : 0)} ${-(vert === "above" ? PH : 0)})`
+  /* the panel tilts in perspective: its far end rises, turning on the corner the stick meets */
+  const ang = corner === "bl" ? -3 : 3
+  const tilt = `translate(${px} ${py}) translate(${corner === "bl" ? 0 : PW} ${corner === "tr" ? 0 : PH}) skewY(${ang}) translate(${corner === "bl" ? 0 : -PW} ${corner === "tr" ? 0 : -PH})`
   return (
     <g className={`co ${id}`} style={{ "--t": `${delay}s` } as React.CSSProperties}>
       <g transform={`translate(${x} ${y})`}>
-        <line className="lead" x1="0" y1="0" x2={far} y2="0" pathLength={1} />
-        <circle className="endcap" cx={far} cy="0" r="6" />
+        <line className="lead" x1="0" y1="0" x2="0" y2={sy} pathLength={1} />
+        <circle className="endcap" cx="0" cy={sy} r="5" />
         <g className="panel" transform={tilt}>
           <rect className="bg" width={PW} height={PH} />
           <line className="thin" x1="38" y1="0" x2="38" y2={PH} />
@@ -121,9 +120,9 @@ export function MapHero({ kicker, title, result, lang }: { kicker?: string; titl
           </defs>
           <image href="/africa-city-map.jpg" x="0" y="0" width={W} height={H} mask="url(#afr-mh-mask)" className="pic" />
 
-          <Callout id="port" x={PORT[0]} y={PORT[1]} side="right" vert="above" delay={0.4} lang={lang} p={{ name: t.port.name, sub: t.port.sub, l1: t.port.l1, v1: "2", l2: t.port.l2, v2: lang === "en" ? "5 days" : "5 jours", dots: "days", icon: "clock" }} />
-          <Callout id="from" x={FROM[0]} y={FROM[1]} side="left" vert="above" delay={1.1} lang={lang} p={{ name: t.from.name, sub: t.from.sub, l1: t.from.l1, v1: "34", v1b: t.from.then, l2: t.from.l2, v2: lang === "en" ? "30 units" : "30 unités", dots: "from", icon: "cross" }} />
-          <Callout id="to" x={TO[0]} y={TO[1]} side="left" vert="below" delay={1.8} lang={lang} p={{ name: t.to.name, sub: t.to.sub, l1: t.to.l1, v1: "30", l2: t.to.l2, v2: "Metformin", dots: "to", icon: "gear" }} />
+          <Callout id="port" x={PORT[0]} y={PORT[1]} corner="bl" stick={70} delay={0.4} lang={lang} p={{ name: t.port.name, sub: t.port.sub, l1: t.port.l1, v1: "2", l2: t.port.l2, v2: lang === "en" ? "5 days" : "5 jours", dots: "days", icon: "clock" }} />
+          <Callout id="from" x={FROM[0]} y={FROM[1]} corner="tr" stick={60} delay={1.1} lang={lang} p={{ name: t.from.name, sub: t.from.sub, l1: t.from.l1, v1: "34", v1b: t.from.then, l2: t.from.l2, v2: lang === "en" ? "30 units" : "30 unités", dots: "from", icon: "cross" }} />
+          <Callout id="to" x={TO[0]} y={TO[1]} corner="br" stick={30} delay={1.8} lang={lang} p={{ name: t.to.name, sub: t.to.sub, l1: t.to.l1, v1: "30", l2: t.to.l2, v2: "Metformin", dots: "to", icon: "gear" }} />
 
           <path className="flow" pathLength={1} d={LINE} fill="none" />
           <circle className="runner" r="11" style={{ offsetPath: `path("${LINE}")` }} />

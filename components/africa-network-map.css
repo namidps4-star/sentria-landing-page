@@ -1,4 +1,4 @@
-.afr-mh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,760px);gap:48px;align-items:start;padding:clamp(40px,4vw,56px) var(--pad,56px);color:#f5f3ea}
+.afr-mh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,700px);gap:48px;align-items:start;padding:clamp(40px,4vw,56px) var(--pad,56px);color:#f5f3ea}
 .afr-mh-copy{max-width:520px}
 .afr-mh h3{margin:0;font:700 clamp(32px,4vw,54px)/1.05 var(--f-display),sans-serif;letter-spacing:-.03em;max-width:14ch}
 .afr-mh-res{margin:22px 0 0;font-size:18px;line-height:1.55;max-width:38ch;color:#cfcdbf}
@@ -19,11 +19,11 @@
 .afr-mh-map .panel .vert{font:500 15px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.04em}
 .afr-mh-map .panel .gauge{fill:none;stroke:#f5f3ea;stroke-width:1.5}
 .afr-mh-map .panel .gaugefill{fill:#f5f3ea}
-.afr-mh-map .panel .nm{font:700 25px var(--f-body),sans-serif;fill:#f5f3ea;letter-spacing:.01em}
+.afr-mh-map .panel .nm{font:700 22px var(--f-body),sans-serif;fill:#f5f3ea;letter-spacing:.01em}
 .afr-mh-map .panel .sb{font:400 17px var(--f-body),sans-serif;fill:#cfcdbf}
 .afr-mh-map .panel .icon{fill:none;stroke:#f5f3ea;stroke-width:2}
 .afr-mh-map .panel .ico{fill:none;stroke:#f5f3ea;stroke-width:3;stroke-linecap:round}
-.afr-mh-map .panel .lb{font:500 15px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.08em;text-transform:uppercase}
+.afr-mh-map .panel .lb{font:500 14px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.04em;text-transform:uppercase}
 .afr-mh-map .panel .lb .v2{fill:#f5f3ea;font-weight:700}
 .afr-mh-map .panel .box{fill:none;stroke:#f5f3ea;stroke-width:1.8}
 .afr-mh-map .panel .val{font:300 44px "AfricaNumeral",sans-serif;fill:#f5f3ea}
