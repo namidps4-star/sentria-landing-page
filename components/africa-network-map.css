@@ -1,4 +1,4 @@
-.afr-mh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:64px;align-items:center;padding:clamp(56px,6vw,96px) var(--pad,56px);color:#f5f3ea}
+.afr-mh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:64px;align-items:start;padding:clamp(56px,6vw,96px) var(--pad,56px);color:#f5f3ea}
 .afr-mh-copy{max-width:520px}
 .afr-mh h3{margin:0;font:700 clamp(32px,4vw,54px)/1.05 var(--f-display),sans-serif;letter-spacing:-.03em;max-width:14ch}
 .afr-mh-res{margin:22px 0 0;font-size:18px;line-height:1.55;max-width:38ch;color:#cfcdbf}
