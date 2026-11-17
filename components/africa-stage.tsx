@@ -21,10 +21,10 @@ const TEXT = {
       { n: "2", tab: "2 days", unit: "days until a stock-out", text: "Pharmacie du Port has 2 days of paracetamol 1g left. Your next delivery is in 5 days." },
       { n: "21", tab: "21 days", unit: "days without an order", text: "Pharmacie Nord usually orders every 7 days. It has not ordered in 21 days. Call this week." },
     ],
-    cards: { a: ["Centrale", "units unsold", "30 units", "Transfer"], b: ["Nord", "units reordering", "Metformin", "500mg"] },
-    money: [["Paracetamol 1g", "24k", "Last"], ["Amoxicillin 500mg", "72k", "Next"], ["Metformin 500mg", "180k", "First"]],
+    cards: { a: ["Centrale", "Unsold", "30 units", "Transfer", "units"], b: ["Nord", "Reordering", "Metformin", "500mg", "units"] },
+    money: [["Paracetamol 1g", "24k"], ["Amoxicillin 500mg", "72k"], ["Metformin 500mg", "180k"]],
     gap: { shop: "Pharmacie du Port: stock gap", stock: "Stock: 2 days", out: "No stock: 3 days", del: "Next delivery arrives on Day 5", today: "Today", end: "Day 5", act: "Action required" },
-    cal: { shop: "Pharmacie Nord", usual: "Usual gap: 7 days", over: "No order: 14 more days", today: "Today", days: ["M", "T", "W", "T", "F", "S", "S"] },
+    cal: { shop: "Pharmacie Nord", usual: "Usual gap: 7 days", over: "No order: 14 more days", today: "Today", alert: "Alert", normal: "Usual week", days: ["M", "T", "W", "T", "F", "S", "S"] },
   },
   fr: {
     kicker: "Grossiste",
@@ -36,37 +36,61 @@ const TEXT = {
       { n: "2", tab: "2 jours", unit: "jours avant une rupture", text: "La Pharmacie du Port a encore 2 jours de paracétamol 1g. Votre prochaine livraison est dans 5 jours." },
       { n: "21", tab: "21 jours", unit: "jours sans commande", text: "La Pharmacie Nord commande d'habitude tous les 7 jours. Elle n'a rien commandé depuis 21 jours. Appelez cette semaine." },
     ],
-    cards: { a: ["Centrale", "unités invendues", "30 unités", "Transfert"], b: ["Nord", "unités recommandées", "Metformine", "500mg"] },
-    money: [["Paracétamol 1g", "24k", "Dernier"], ["Amoxicilline 500mg", "72k", "Ensuite"], ["Metformine 500mg", "180k", "Premier"]],
+    cards: { a: ["Centrale", "Invendues", "30 unités", "Transfert", "unités"], b: ["Nord", "Recommandées", "Metformine", "500mg", "unités"] },
+    money: [["Paracétamol 1g", "24k"], ["Amoxicilline 500mg", "72k"], ["Metformine 500mg", "180k"]],
     gap: { shop: "Pharmacie du Port : écart de stock", stock: "Stock : 2 jours", out: "Rupture : 3 jours", del: "La prochaine livraison arrive le jour 5", today: "Aujourd'hui", end: "Jour 5", act: "Action requise" },
-    cal: { shop: "Pharmacie Nord", usual: "Écart habituel : 7 jours", over: "Sans commande : 14 jours de plus", today: "Aujourd'hui", days: ["L", "M", "M", "J", "V", "S", "D"] },
+    cal: { shop: "Pharmacie Nord", usual: "Écart habituel : 7 jours", over: "Sans commande : 14 jours de plus", today: "Aujourd'hui", alert: "Alerte", normal: "Semaine habituelle", days: ["L", "M", "M", "J", "V", "S", "D"] },
   },
 }
 
-const DOTS = 120
+const PHARMA = (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="3" y="4" width="18" height="16" rx="3" />
+    <path d="M12 8v8M8 12h8" />
+  </svg>
+)
+const CLINIC = (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 21h18M5 21V7l7-4 7 4v14" />
+    <rect x="9" y="13" width="6" height="8" />
+  </svg>
+)
+
+/* Two tall cards, a dense field of dots that fills from the bottom. The shelf is the same size on both cards:
+   Centrale drops from 64% to 8% (34 units to 4) and Nord rises from 0% to 57% (0 to 30). */
 function Cards({ t }: { t: (typeof TEXT)["en"]["cards"] }) {
-  const card = (kind: "from" | "to", c: string[]) => (
-    <div className={`afr-st-card ${kind}`}>
-      <p className="nm">{c[0]}</p>
-      <div className="row">
-        <div>
-          <p className="big" aria-hidden="true" />
-          <p className="sub">{c[1]}</p>
+  const card = (kind: "from" | "to", c: string[]) => {
+    const ico = (
+      <span className="ico">
+        {kind === "from" ? PHARMA : CLINIC}
+        <em>{c[0]}</em>
+      </span>
+    )
+    const circle = <span className="circle">{kind === "from" ? 1 : 2}</span>
+    return (
+      <div className={`afr-st-card ${kind}`}>
+        <div className="top">
+          {kind === "from" ? circle : ico}
+          {kind === "from" ? ico : circle}
         </div>
-        <p className="side">
-          {c[2]}
-          <span>{c[3]}</span>
-        </p>
+        <div className="row">
+          <div>
+            <p className="big" aria-hidden="true" data-unit={c[4]} />
+            <p className="sub">{c[1]}</p>
+          </div>
+          <p className="side">
+            {c[2]}
+            <span>{c[3]}</span>
+          </p>
+        </div>
+        <div className="field" aria-hidden="true">
+          <div className="dim" />
+          <div className="lit" />
+          <p className="tag" />
+        </div>
       </div>
-      <div className="dots" aria-hidden="true">
-        {Array.from({ length: DOTS }, (_, i) => {
-          const up = DOTS - 1 - i
-          const cls = kind === "from" ? (up >= 34 ? "off" : up < 4 ? "keep" : "go") : up < 30 ? "come" : "off"
-          return <i key={i} className={cls} style={{ "--k": up } as React.CSSProperties} />
-        })}
-      </div>
-    </div>
-  )
+    )
+  }
   return (
     <div className="afr-st-cards">
       {card("from", t.a)}
@@ -75,23 +99,30 @@ function Cards({ t }: { t: (typeof TEXT)["en"]["cards"] }) {
   )
 }
 
+/* A flat start, a rise, a peak. Pills on top, names underneath, the line draws left to right. */
 function Money({ pts }: { pts: string[][] }) {
-  const XY = [[120, 310], [330, 240], [540, 120]]
+  const X = [120, 330, 540]
   return (
     <svg className="afr-st-money" viewBox="0 0 660 430" aria-hidden="true">
-      <text className="ghost" x="0" y="290">180k</text>
-      <path className="line" pathLength={1} d="M120 310 C210 310,235 240,330 240 C430 240,445 120,540 120" fill="none" strokeWidth="5" strokeLinecap="round" />
-      {pts.map(([name, value, rank], i) => {
-        const [x, y] = XY[i]
-        return (
-          <g key={name} className={`pt${i === 2 ? " top" : ""}`} style={{ "--p": i } as React.CSSProperties}>
-            <rect x={x - 96} y={y - 70} width="192" height="42" rx="21" />
-            <text x={x} y={y - 44} className="nm">{name} <tspan className="val">{value}</tspan></text>
-            <circle cx={x} cy={y} r={i === 2 ? 11 : 8} />
-            <text x={x} y="408" className="ax">{rank}</text>
-          </g>
-        )
-      })}
+      <defs>
+        <linearGradient id="afr-st-line" gradientUnits="userSpaceOnUse" x1="70" y1="0" x2="540" y2="0">
+          <stop offset="0" stopColor="#7d8070" />
+          <stop offset=".62" stopColor="#c9cbb8" />
+          <stop offset="1" stopColor="#d6ff3f" />
+        </linearGradient>
+      </defs>
+      <path className="line" pathLength={1} d="M70 300 H125 C205 300,250 252,330 250 C425 248,450 130,540 124" fill="none" stroke="url(#afr-st-line)" strokeWidth="7" strokeLinecap="round" />
+      <g className="node">
+        <circle className="ring" cx="540" cy="124" r="14" />
+        <circle className="core" cx="540" cy="124" r="14" />
+      </g>
+      {pts.map(([name, value], i) => (
+        <g key={name} className={`pt${i === 2 ? " top" : ""}`} style={{ "--p": i } as React.CSSProperties}>
+          <rect x={X[i] - 56} y="40" width="112" height="40" rx="20" />
+          <text x={X[i]} y="66" className="v">{value}</text>
+          <text x={X[i]} y="392" className="ax">{name}</text>
+        </g>
+      ))}
     </svg>
   )
 }
@@ -120,7 +151,13 @@ function Calendar({ t }: { t: (typeof TEXT)["en"]["cal"] }) {
   const cells = Array.from({ length: 28 }, (_, i) => (i < 7 ? "usual" : i < 21 ? "over" : i === 21 ? "today" : "empty"))
   return (
     <div className="afr-st-cal">
-      <p className="shop">{t.shop}</p>
+      <div className="top">
+        <div>
+          <p className="shop">{t.shop}</p>
+          <p className="gap">{t.usual}</p>
+        </div>
+        <p className="alert">{t.alert}</p>
+      </div>
       <div className="head">{t.days.map((d, i) => <span key={i}>{d}</span>)}</div>
       <div className="grid">
         {cells.map((c, i) => (
@@ -128,7 +165,7 @@ function Calendar({ t }: { t: (typeof TEXT)["en"]["cal"] }) {
         ))}
       </div>
       <p className="legend">
-        <span className="usual">{t.usual}</span>
+        <span className="usual">{t.normal}</span>
         <span className="over">{t.over}</span>
         <span className="today">{t.today}</span>
       </p>
@@ -191,7 +228,7 @@ export function AfricaStage({ lang }: { lang: Lang }) {
           </div>
           <p className="afr-st-note">{t.note}</p>
         </div>
-        <div className="afr-st-panel" key={`p${i}`}>
+        <div className="afr-st-panel" key={`p${i}`} data-scene={i}>
           {seen && i === 0 && <Cards t={t.cards} />}
           {seen && i === 1 && <Money pts={t.money} />}
           {seen && i === 2 && <Gap t={t.gap} />}
