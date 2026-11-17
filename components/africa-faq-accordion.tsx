@@ -9,10 +9,12 @@ const TEXT = {
   fr: { sub: "Des réponses courtes, en mots simples. Un doute ? Réservez une démo et posez-nous la question.", cta: "Réserver une démo" },
 }
 
-export function AfricaFaqAccordion({ id, kicker, heading, items, lang }: { id: string; kicker?: string; heading: string; items: Item[]; lang: "en" | "fr" }) {
+export type FaqTone = "lime" | "sand" | "night"
+
+export function AfricaFaqAccordion({ id, kicker, heading, items, lang, tone = "lime" }: { id: string; kicker?: string; heading: string; items: Item[]; lang: "en" | "fr"; tone?: FaqTone }) {
   const t = TEXT[lang]
   return (
-    <section className="afr-fa" aria-labelledby={id} data-rv="rise">
+    <section className="afr-fa" data-tone={tone} aria-labelledby={id} data-rv="rise">
       <div className="afr-fa-in">
         <div className="afr-fa-head">
           {kicker && <p className="eyebrow">{kicker}</p>}

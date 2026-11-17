@@ -1,5 +1,5 @@
 import { ACTIVITY_LIST, CAPABILITIES } from "@/content/africa-activities"
-import { FAQ_WORDS, SHARED } from "@/content/africa-activity-pages"
+import { SHARED } from "@/content/africa-activity-pages"
 import { designFor } from "@/content/africa-designs"
 import { SECTOR_PAGE } from "@/content/sector-pages"
 import { AfricaLedger } from "./africa-ledger"
@@ -7,14 +7,16 @@ import { AfricaStage } from "./africa-stage"
 import { MapHero } from "./africa-network-map"
 import { AfricaSteps } from "./africa-steps"
 import { AfricaExample } from "./africa-example"
-import { AfricaFaqGrid } from "./africa-faq-grid"
-import { AfricaFaqAccordion } from "./africa-faq-accordion"
+import { AfricaFaqAccordion, type FaqTone } from "./africa-faq-accordion"
 import "./africa-variants.css"
 
 /* Every activity page uses the same parts: the ledger of capabilities, the three steps and a worked example,
    then the questions. An activity without its own steps or questions gets the shared ones, so every page has
    the same parts. The look of each part (its mood, example style and questions style) comes from
    content/africa-designs.ts, so each activity page is laid out differently. */
+/* Each activity keeps its own ground for the questions: lime, sand or ink, from its design. */
+const TONES: Record<string, FaqTone> = { grid: "lime", list: "sand", night: "night" }
+
 export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
   const c = CAPABILITIES[slug]?.[lang]
   if (!c) return null
@@ -51,19 +53,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
           />
         )}
       </section>
-      {slug === "grossiste-pharma" ? (
-        <AfricaFaqAccordion id={`${id}-faq`} kicker={kicker} heading={faqHeading} items={faq} lang={lang} />
-      ) : (
-        <AfricaFaqGrid
-          id={`${id}-faq`}
-          kicker={kicker}
-          heading={faqHeading}
-          items={faq}
-          lang={lang}
-          words={pharmacy ? undefined : FAQ_WORDS[lang]}
-          style={design.faq}
-        />
-      )}
+      <AfricaFaqAccordion id={`${id}-faq`} kicker={kicker} heading={faqHeading} items={faq} lang={lang} tone={TONES[design.faq]} />
     </>
   )
 }
