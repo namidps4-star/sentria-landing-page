@@ -7,8 +7,8 @@ import { AfricaStage } from "./africa-stage"
 import { MapHero } from "./africa-network-map"
 import { AfricaSteps } from "./africa-steps"
 import { AfricaExample } from "./africa-example"
-import { AfricaExampleCurve } from "./africa-example-curve"
 import { AfricaFaqGrid } from "./africa-faq-grid"
+import { AfricaFaqAccordion } from "./africa-faq-accordion"
 import "./africa-variants.css"
 
 /* Every activity page uses the same parts: the ledger of capabilities, the three steps and a worked example,
@@ -37,38 +37,33 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         <AfricaSteps heading={stepsHeading} steps={steps} kicker={kicker} />
         {c.example && slug === "grossiste-pharma" && <MapHero kicker={kicker} title={c.example.title} result={c.example.result} lang={lang} />}
         {c.example && slug !== "grossiste-pharma" && (
-          slug === "grossiste-pharma" ? (
-            <AfricaExampleCurve
-              kicker={kicker}
-              title={c.example.title}
-              result={c.example.result}
-              lang={lang}
-            />
-          ) : (
-            <AfricaExample
-              kicker={kicker}
-              title={c.example.title}
-              lines={c.example.lines}
-              result={c.example.result}
-              first={firstSentence}
-              imports={c.items[0].imports}
-              youImport={youImport}
-              lang={lang}
-              scale={pharmacy}
-              style={design.example}
-            />
-          )
+          <AfricaExample
+            kicker={kicker}
+            title={c.example.title}
+            lines={c.example.lines}
+            result={c.example.result}
+            first={firstSentence}
+            imports={c.items[0].imports}
+            youImport={youImport}
+            lang={lang}
+            scale={pharmacy}
+            style={design.example}
+          />
         )}
       </section>
-      <AfricaFaqGrid
-        id={`${id}-faq`}
-        kicker={kicker}
-        heading={faqHeading}
-        items={faq}
-        lang={lang}
-        words={pharmacy ? undefined : FAQ_WORDS[lang]}
-        style={design.faq}
-      />
+      {slug === "grossiste-pharma" ? (
+        <AfricaFaqAccordion id={`${id}-faq`} kicker={kicker} heading={faqHeading} items={faq} lang={lang} />
+      ) : (
+        <AfricaFaqGrid
+          id={`${id}-faq`}
+          kicker={kicker}
+          heading={faqHeading}
+          items={faq}
+          lang={lang}
+          words={pharmacy ? undefined : FAQ_WORDS[lang]}
+          style={design.faq}
+        />
+      )}
     </>
   )
 }
