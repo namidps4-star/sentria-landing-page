@@ -4,6 +4,8 @@ import { designFor } from "@/content/africa-designs"
 import { SECTOR_PAGE } from "@/content/sector-pages"
 import { AfricaLedger } from "./africa-ledger"
 import { AfricaNetwork } from "./africa-network"
+import { AfricaMoney } from "./africa-money"
+import { AfricaMove } from "./africa-move"
 import { AfricaSteps } from "./africa-steps"
 import { AfricaExample } from "./africa-example"
 import { AfricaFaqGrid } from "./africa-faq-grid"
@@ -30,6 +32,8 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   return (
     <>
       {slug === "grossiste-pharma" && <AfricaNetwork lang={lang} />}
+      {slug === "grossiste-pharma" && <AfricaMove lang={lang} />}
+      {slug === "grossiste-pharma" && <AfricaMoney lang={lang} />}
       <AfricaLedger id={id} kicker={kicker} heading={c.heading} items={c.items} notDo={c.notDo} lang={lang} mood={design.mood} />
       <section className="afr-caps afr-caps--rest">
         <AfricaSteps heading={stepsHeading} steps={steps} kicker={kicker} />

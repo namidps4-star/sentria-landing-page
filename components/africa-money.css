@@ -1,0 +1,32 @@
+.afr-mon{background:#10120b;color:#f5f3ea;padding:clamp(56px,6vw,96px) var(--pad,56px);overflow:hidden}
+.afr-mon-in{max-width:1000px;margin:0 auto}
+.afr-mon h2{font:700 clamp(32px,4vw,54px)/1.05 var(--f-display),sans-serif;letter-spacing:-.03em;margin:0;max-width:18ch;color:#f5f3ea}
+.afr-mon-lead{margin:18px 0 0;font-size:18px;line-height:1.55;max-width:46ch;color:#cfcdbf}
+.afr-mon-graph{display:block;width:100%;height:auto;margin-top:36px;overflow:visible;
+  background-image:radial-gradient(#23261a 1px,transparent 1px);background-size:20px 20px}
+.afr-mon-graph .ghost{font-family:"AfricaNumeral",sans-serif;font-weight:300;font-size:260px;fill:#f5f3ea;opacity:.07;letter-spacing:-.04em}
+.afr-mon-graph .line{stroke:#969989;stroke-dasharray:1;stroke-dashoffset:0}
+.afr-mon-graph .pt rect{fill:#10120b;stroke:#3a3d2c}
+.afr-mon-graph .pt circle{fill:#10120b;stroke:#969989;stroke-width:3}
+.afr-mon-graph .nm{font:500 15px var(--f-body),sans-serif;fill:#969989;text-anchor:middle}
+.afr-mon-graph .val{font-weight:600;fill:#f5f3ea}
+.afr-mon-graph .ax{font:500 13px var(--f-body),sans-serif;fill:#6b6e5c;text-anchor:middle}
+.afr-mon-graph .top rect{stroke:#d6ff3f}
+.afr-mon-graph .top circle{fill:#d6ff3f;stroke:#d6ff3f}
+.afr-mon-graph .top .nm,.afr-mon-graph .top .val,.afr-mon-graph .top .ax{fill:#d6ff3f}
+.afr-mon-note{margin:18px 0 0;font-size:12px;color:#969989}
+
+.afr-mon:not([data-in]) .line{stroke-dashoffset:1}
+.afr-mon:not([data-in]) .pt{opacity:0}
+.afr-mon[data-in] .line{animation:afr-mon-draw 1.5s .2s cubic-bezier(.2,.7,.2,1) both}
+.afr-mon[data-in] .pt{animation:afr-mon-pop .5s calc(.3s + var(--p) * .5s) cubic-bezier(.2,.7,.2,1) both}
+.afr-mon[data-in] .top circle{transform-box:fill-box;transform-origin:center;animation:afr-mon-ping .7s 1.4s ease-out 1}
+@keyframes afr-mon-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes afr-mon-pop{from{opacity:0}to{opacity:1}}
+@keyframes afr-mon-ping{0%,100%{transform:scale(1)}50%{transform:scale(1.7)}}
+
+@media (prefers-reduced-motion:reduce){
+  .afr-mon:not([data-in]) .line{stroke-dashoffset:0}
+  .afr-mon:not([data-in]) .pt{opacity:1}
+  .afr-mon[data-in] *{animation:none!important}
+}
