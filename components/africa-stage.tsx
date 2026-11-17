@@ -23,7 +23,7 @@ const TEXT = {
     ],
     cards: { a: ["Centrale", "units unsold", "30 units", "Transfer"], b: ["Nord", "units reordering", "Metformin", "500mg"] },
     money: [["Paracetamol 1g", "24k", "Last"], ["Amoxicillin 500mg", "72k", "Next"], ["Metformin 500mg", "180k", "First"]],
-    gap: { shop: "Pharmacie du Port, paracetamol 1g", stock: "Stock: 2 days", out: "No stock: 3 days", del: "Next delivery", today: "Today", day: "Day" },
+    gap: { shop: "Pharmacie du Port: stock gap", stock: "Stock: 2 days", out: "No stock: 3 days", del: "Next delivery arrives on Day 5", today: "Today", end: "Day 5", act: "Action required" },
     cal: { shop: "Pharmacie Nord", usual: "Usual gap: 7 days", over: "No order: 14 more days", today: "Today", days: ["M", "T", "W", "T", "F", "S", "S"] },
   },
   fr: {
@@ -38,7 +38,7 @@ const TEXT = {
     ],
     cards: { a: ["Centrale", "unités invendues", "30 unités", "Transfert"], b: ["Nord", "unités recommandées", "Metformine", "500mg"] },
     money: [["Paracétamol 1g", "24k", "Dernier"], ["Amoxicilline 500mg", "72k", "Ensuite"], ["Metformine 500mg", "180k", "Premier"]],
-    gap: { shop: "Pharmacie du Port, paracétamol 1g", stock: "Stock : 2 jours", out: "Rupture : 3 jours", del: "Prochaine livraison", today: "Aujourd'hui", day: "Jour" },
+    gap: { shop: "Pharmacie du Port : écart de stock", stock: "Stock : 2 jours", out: "Rupture : 3 jours", del: "La prochaine livraison arrive le jour 5", today: "Aujourd'hui", end: "Jour 5", act: "Action requise" },
     cal: { shop: "Pharmacie Nord", usual: "Écart habituel : 7 jours", over: "Sans commande : 14 jours de plus", today: "Aujourd'hui", days: ["L", "M", "M", "J", "V", "S", "D"] },
   },
 }
@@ -97,27 +97,22 @@ function Money({ pts }: { pts: string[][] }) {
 }
 
 function Gap({ t }: { t: (typeof TEXT)["en"]["gap"] }) {
-  const X = (d: number) => 60 + d * 78 // day 0 to 7
   return (
-    <svg className="afr-st-gap" viewBox="0 0 660 400" aria-hidden="true">
-      <text x="60" y="56" className="shop">{t.shop}</text>
-      <line x1={X(0)} y1="200" x2={X(7)} y2="200" className="axis" />
-      {[0, 1, 2, 3, 4, 5, 6, 7].map((d) => (
-        <g key={d}>
-          <line x1={X(d)} y1="194" x2={X(d)} y2="206" className="tick" />
-          <text x={X(d)} y="262" className="ax">{d === 0 ? t.today : `${t.day} ${d}`}</text>
-        </g>
-      ))}
-      <rect className="stock" x={X(0)} y="170" width={X(2) - X(0)} height="60" rx="30" />
-      <rect className="out" x={X(2)} y="170" width={X(5) - X(2)} height="60" rx="30" />
-      <text x={X(1)} y="156" className="lab ok">{t.stock}</text>
-      <text x={X(3.5)} y="156" className="lab bad">{t.out}</text>
-      <g className="del">
-        <line x1={X(5)} y1="170" x2={X(5)} y2="300" className="stem" />
-        <circle cx={X(5)} cy="300" r="11" />
-        <text x={X(5)} y="336" className="lab ok">{t.del}</text>
-      </g>
-    </svg>
+    <div className="afr-st-gap">
+      <p className="shop">{t.shop}</p>
+      <div className="ends">
+        <span>{t.today}</span>
+        <span>{t.end}</span>
+      </div>
+      <div className="bar">
+        <i className="dot" />
+        <span className="stock">{t.stock}</span>
+        <span className="out">{t.out}</span>
+        <i className="dot" />
+      </div>
+      <p className="cap">{t.del}</p>
+      <p className="act">{t.act}</p>
+    </div>
   )
 }
 
