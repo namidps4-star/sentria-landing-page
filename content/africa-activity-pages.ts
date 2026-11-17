@@ -21,7 +21,7 @@ type Raw = {
 }
 
 /* Shared by every activity page, so the template reads the same everywhere. */
-const SHARED: Record<Lang, { stepsHeading: string; steps: Step[]; faqHeading: string; faq: Faq[] }> = {
+export const SHARED: Record<Lang, { stepsHeading: string; steps: Step[]; faqHeading: string; faq: Faq[] }> = {
   en: {
     stepsHeading: "Start in three steps",
     steps: [

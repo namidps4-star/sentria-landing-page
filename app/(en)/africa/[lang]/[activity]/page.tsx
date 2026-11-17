@@ -5,6 +5,7 @@ import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { AfricaAlertPanel } from "@/components/africa-alert-panel"
 import { ACTIVITY_COPY, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-activities"
 import { activityPhoto } from "@/content/africa-sector-catalog"
+import { designFor } from "@/content/africa-designs"
 import { SECTOR_PAGE } from "@/content/sector-pages"
 
 type Params = Promise<{ lang: string; activity: string }>
@@ -42,6 +43,7 @@ export default async function Page({ params }: { params: Params }) {
       extra={<AfricaCapabilities slug={activity} lang="en" />}
       photo={pic ? { src: pic.src, credit: pic.credit } : undefined}
       compact
+      tone={designFor(activity).tone}
     />
   )
 }

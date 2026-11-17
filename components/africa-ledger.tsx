@@ -1,4 +1,5 @@
 import type { Capabilities, Drawing as DrawingSpec } from "@/content/africa-activities"
+import type { Mood } from "@/content/africa-designs"
 import "./africa-ledger.css"
 
 /* The capabilities of an activity page as a ledger: a figure from each alert, the product's own copy under
@@ -64,10 +65,11 @@ function chipsOf(imports: string) {
     .map((s) => s[0].toUpperCase() + s.slice(1))
 }
 
-export function AfricaLedger({ id, kicker, heading, items, notDo, lang }: { id: string; kicker?: string; heading: string; items: Item[]; notDo: string; lang: Lang }) {
+/* The mood sets the layout of the rows (content/africa-designs.ts). The default is the pharmacy ledger. */
+export function AfricaLedger({ id, kicker, heading, items, notDo, lang, mood = "ledger" }: { id: string; kicker?: string; heading: string; items: Item[]; notDo: string; lang: Lang; mood?: Mood }) {
   const youImport = lang === "en" ? "You import" : "Vous importez"
   return (
-    <section className="afr-led" aria-labelledby={id}>
+    <section className="afr-led" data-mood={mood} aria-labelledby={id}>
       {kicker && <p className="eyebrow">{kicker}</p>}
       <h2 id={id}>{heading}</h2>
       <ul className="afr-led-rows">
@@ -85,7 +87,9 @@ export function AfricaLedger({ id, kicker, heading, items, notDo, lang }: { id: 
               </ul>
             </div>
             <div className="afr-led-vis">
-              <Drawing drawing={item.drawing} />
+              <div className="afr-led-art">
+                <Drawing drawing={item.drawing} />
+              </div>
               <p className="afr-led-alert">{item.example}</p>
             </div>
           </li>

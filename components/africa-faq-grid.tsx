@@ -1,3 +1,4 @@
+import type { FaqStyle } from "@/content/africa-designs"
 import "./africa-faq-grid.css"
 
 /* Pharmacy FAQ as a lime 2x2 grid: each answer has a drawing, the question, and the live answer.
@@ -198,9 +199,9 @@ function Drawing({ index, lang, words }: { index: number; lang: Lang; words?: [s
 }
 
 /* The dial's three words default to the pharmacy's; other activities pass their own. */
-export function AfricaFaqGrid({ id, kicker, heading, items, lang, words }: { id: string; kicker?: string; heading: string; items: Item[]; lang: Lang; words?: [string, string, string] }) {
+export function AfricaFaqGrid({ id, kicker, heading, items, lang, words, style = "grid" }: { id: string; kicker?: string; heading: string; items: Item[]; lang: Lang; words?: [string, string, string]; style?: FaqStyle }) {
   return (
-    <section className="afr-fg" aria-labelledby={id}>
+    <section className={`afr-fg fg-${style}`} aria-labelledby={id}>
       {kicker && <p className="eyebrow">{kicker}</p>}
       <h2 id={id}>{heading}</h2>
       <div className="afr-fg-grid">

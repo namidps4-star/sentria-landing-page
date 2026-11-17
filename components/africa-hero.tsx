@@ -62,14 +62,14 @@ const keepWords = (s: string) => s.replace(/(\S)-(\S)/g, "$1‑$2")
 export type HeroPhoto = { src: string; credit: string }
 const AFRICA_PHOTO: HeroPhoto = { src: "/africa/pharmacy-lagos.jpg", credit: "Photo: Angel Sinigersky, Unsplash" }
 
-export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel, photo = AFRICA_PHOTO, compact = false }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode; photo?: HeroPhoto; compact?: boolean }) {
+export function AfricaHero({ copy = AFRICA_EN, id = "afr", activities, extra, panel, photo = AFRICA_PHOTO, compact = false, tone = "deep" }: { copy?: Copy; id?: string; activities?: "en" | "fr"; extra?: ReactNode; panel?: ReactNode; photo?: HeroPhoto; compact?: boolean; tone?: "deep" | "ink" | "olive" }) {
   const rise = "rise"
   const fade = "fade"
   return (
     <>
       <Header />
       <main id="main" className="afr">
-        <section className={`afr-hero afr-hero--deep${activities ? " afr-hero--hub" : " afr-hero--sector"}${compact ? " afr-hero--compact" : ""}`} aria-labelledby={`${id}-h`}>
+        <section className={`afr-hero afr-hero--deep${activities ? " afr-hero--hub" : " afr-hero--sector"}${compact ? " afr-hero--compact" : ""}`} data-tone={tone} aria-labelledby={`${id}-h`}>
           {activities ? (
             <video
               className="afr-photo"

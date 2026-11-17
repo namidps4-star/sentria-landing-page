@@ -1,3 +1,4 @@
+import type { ExampleStyle } from "@/content/africa-designs"
 import "./africa-example.css"
 
 // The day scale: the three numbers the example's own lines give (4 days in stock, delivery promised in 7, real average 11).
@@ -18,12 +19,13 @@ type Props = {
   youImport: string
   lang: "en" | "fr"
   scale: boolean
+  style?: ExampleStyle
 }
 
-export function AfricaExample({ kicker, title, lines, result, first, imports, youImport, lang, scale }: Props) {
+export function AfricaExample({ kicker, title, lines, result, first, imports, youImport, lang, scale, style = "band" }: Props) {
   const labels = SCALE_LABELS[lang]
   return (
-    <div className="afr-ex-band" data-rv="rise">
+    <div className={`afr-ex-band ex-${style}`} data-rv="rise">
       {kicker && <p className="eyebrow">{kicker}</p>}
       <h3 className="afr-ex-h">{title}</h3>
       <div className="afr-ex-info">
