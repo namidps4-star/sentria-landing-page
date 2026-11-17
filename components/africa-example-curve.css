@@ -1,0 +1,6 @@
+/* Curve chart variant of the example band, used for grossiste-pharma.
+   Reuses .afr-ex-band for outer layout and .afr-ex-h / .afr-ex-res from africa-example.css. */
+.afr-ec-card{background:#050505;border-radius:36px;overflow:hidden;margin:0 0 clamp(40px,4vw,56px)}
+.afr-ec-svg{display:block;width:100%;height:auto}
+/* On narrow screens the dot labels are small but still readable at 320px wide */
+@media (max-width:480px){.afr-ec-card{border-radius:22px}}
