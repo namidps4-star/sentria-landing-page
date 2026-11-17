@@ -1,0 +1,41 @@
+/* Where do you fit in?: the seven sectors as a row of cards in 3D, the picked sector's board under it, on white. */
+.rv-fit.rv-fit-cards{display:block;grid-template-columns:none;gap:0}
+.fc-stage{position:relative;height:540px;margin-inline:calc(var(--pad) * -1);perspective:1700px;perspective-origin:50% 40%;overflow:hidden}
+.fc-card{position:absolute;left:50%;top:40px;width:270px;height:420px;margin-left:-135px;padding:0;border:0;border-radius:30px;overflow:hidden;background:var(--ink);cursor:pointer;
+  box-shadow:0 30px 50px -28px rgba(11,12,8,.45);
+  transform:translateX(calc(var(--p) * 340px - var(--p) * var(--p) * var(--p) * 14px)) translateZ(calc(var(--p) * var(--p) * -16px)) rotateY(calc(var(--p) * -24deg));
+  transition:transform .8s cubic-bezier(.2,.7,.2,1),box-shadow .5s,opacity .5s;z-index:calc(10 - var(--d,0))}
+.fc-card[data-d="0"]{scale:1.22;box-shadow:0 40px 60px -30px rgba(11,12,8,.55),0 0 0 3px var(--lime)}
+.fc-card[data-d="1"]{z-index:9}.fc-card[data-d="2"]{scale:.94;z-index:8}.fc-card[data-d="3"]{scale:.88;z-index:7}
+.fc-card img{object-fit:cover}
+.fc-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,8,0) 50%,rgba(11,12,8,.8) 100%)}
+.fc-card:focus-visible{outline:3px solid var(--rv-ink);outline-offset:4px}
+.fc-name{position:absolute;left:22px;right:22px;bottom:24px;z-index:2;color:#fff;text-align:left;font-family:var(--f-display),sans-serif;font-weight:700;font-size:25px;line-height:1.05;letter-spacing:-.02em}
+.fc-dots{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.fc-dots i{width:7px;height:7px;border-radius:4px;background:#d2d2d7;transition:width .3s,background .3s}
+.fc-dots i[data-on="1"]{width:22px;background:var(--rv-ink)}
+@media (max-width:900px){
+  .fc-stage{height:430px}
+  .fc-card{width:190px;height:300px;margin-left:-95px;top:50px;transform:translateX(calc(var(--p) * 150px)) translateZ(calc(var(--p) * var(--p) * -16px)) rotateY(calc(var(--p) * -24deg))}
+  .fc-card[data-d="3"]{opacity:0;pointer-events:none}
+  .fc-name{font-size:18px;left:16px;bottom:18px}
+}
+@media (prefers-reduced-motion:reduce){.fc-card{transition:none}}
+
+/* the board of the picked sector sits under the row, on the white ground */
+.rv-fit-cards .rv-board-wrap{margin-top:36px;border-radius:0;background:none;color:var(--rv-ink);overflow:visible}
+.rv-fit-cards .rv-board{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:clamp(32px,5vw,72px);align-items:start;padding:0}
+.rv-fit-cards .rv-b-name{grid-column:1;color:var(--rv-mut)}
+.rv-fit-cards .rv-b-tag{grid-column:1}
+.rv-fit-cards .rv-b-desc{grid-column:1;color:var(--rv-mut)}
+.rv-fit-cards .rv-b-sig{grid-column:2;grid-row:1 / span 4;margin-top:0;border-top-color:#d2d2d7}
+.rv-fit-cards .rv-b-sig li{border-bottom-color:#d2d2d7}
+.rv-fit-cards .rv-b-sig span{color:var(--rv-mut)}
+.rv-fit-cards .rv-fit-acts{grid-column:1;display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.rv-fit-cards .rv-board .rv-fit-cta{margin-top:0}
+.rv-fit-cards .rv-board .rv-fit-go{background:#fff;color:var(--rv-ink);border:1px solid #d2d2d7}
+@media (max-width:900px){
+  .rv-fit-cards .rv-board{grid-template-columns:1fr}
+  .rv-fit-cards .rv-b-sig{grid-column:1;grid-row:auto;margin-top:26px}
+}
+.rv-fit-cards .rv-board .rv-fit-acts .rv-fit-go{margin-left:0}

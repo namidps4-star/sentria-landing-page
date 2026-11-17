@@ -60,6 +60,7 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
         const op = Math.min(1, Math.max(0, 1 - (Math.abs(p) - 3) / 0.5))
         card.style.setProperty("--p", p.toFixed(4))
         card.style.setProperty("--op", op.toFixed(3))
+        card.style.setProperty("--z", String(10 - Math.round(Math.abs(p))))
       })
       frame = requestAnimationFrame(tick)
     }

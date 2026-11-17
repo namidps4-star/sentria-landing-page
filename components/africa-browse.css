@@ -39,19 +39,19 @@
    level and tallest, the outer ones turn away and drop lower. */
 @media (min-width:961px){
   .sp{padding-bottom:clamp(170px,22vh,220px)}
-  .sp-grid{display:block;position:relative;height:540px;margin-top:56px;container-type:inline-size}
-  .sp-card{--p:calc(var(--i) - 3);--op:1;--slot:calc(100cqw / 7);position:absolute;left:50%;top:0;width:calc(var(--slot) - 12px);margin-left:calc(var(--slot) / -2 + 6px);translate:calc(var(--p) * var(--slot)) calc(var(--p) * var(--p) * 9px)}
-  .sp-card .sp-photo{height:calc(420px - var(--p) * var(--p) * 8px);transform:perspective(1400px) rotateY(calc(var(--p) * -9deg));opacity:var(--op);transition:scale .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
+  .sp-grid{display:block;position:relative;height:580px;margin-top:56px;container-type:inline-size;overflow:hidden;margin-inline:-56px}
+  .sp-card{--p:calc(var(--i) - 3);--op:1;--z:1;position:absolute;left:50%;top:10px;width:270px;margin-left:-135px;z-index:var(--z);translate:calc(var(--p) * 340px - var(--p) * var(--p) * var(--p) * 14px) 0}
+  .sp-card .sp-photo{height:calc(440px - var(--p) * var(--p) * 18px);transform:perspective(1700px) translateZ(calc(var(--p) * var(--p) * -16px)) rotateY(calc(var(--p) * -24deg)) scale(calc(1.14 - var(--p) * var(--p) * 0.045));opacity:var(--op);box-shadow:0 30px 50px -28px rgba(11,12,8,.45);transition:scale .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
 }
 
 /* Seven narrow cards on desktop: names and counts scale down so no name runs into the next card. */
 @media (min-width:961px){
-  .sp-name{font-size:clamp(13px,1.05vw,15px);white-space:nowrap}
-  .sp-count{font-size:14px}
+  .sp-name{font-size:24px;white-space:nowrap}
+  .sp-count{font-size:15px}
 }
 
 /* Name and count sit on the photo, at the bottom, over a soft dark fade so they read on any picture. */
-.sp-info{position:absolute;left:0;right:0;bottom:0;padding:48px 14px 20px;text-align:left;background:linear-gradient(to top,rgba(11,12,8,.72),rgba(11,12,8,0))}
+.sp-info{position:absolute;left:0;right:0;bottom:0;padding:64px 22px 24px;text-align:left;background:linear-gradient(to top,rgba(11,12,8,.72),rgba(11,12,8,0))}
 
 /* The unfolded carousel: its title, label, back link and ring rise in as the sector opens. */
 @keyframes sp-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
