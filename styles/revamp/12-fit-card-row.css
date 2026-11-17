@@ -1,7 +1,7 @@
 /* Where do you fit in?: the seven sectors as a row of cards in 3D, the picked sector's board under it, on white. */
 .rv-fit.rv-fit-cards{display:block;grid-template-columns:none;gap:0}
-.fc-stage{position:relative;height:540px;margin-inline:calc(var(--pad) * -1);perspective:1700px;perspective-origin:50% 40%;overflow:hidden}
-.fc-card{position:absolute;left:50%;top:40px;width:270px;height:420px;margin-left:-135px;padding:0;border:0;border-radius:30px;overflow:hidden;background:var(--ink);cursor:pointer;
+.fc-stage{position:relative;height:580px;margin-inline:calc(var(--pad) * -1);perspective:1700px;perspective-origin:50% 40%;overflow-x:clip;overflow-y:visible}
+.fc-card{position:absolute;left:50%;top:70px;width:270px;height:420px;margin-left:-135px;padding:0;border:0;border-radius:30px;overflow:hidden;background:var(--ink);cursor:pointer;
   box-shadow:0 30px 50px -28px rgba(11,12,8,.45);
   transform:translateX(calc(var(--p) * 340px - var(--p) * var(--p) * var(--p) * 14px)) translateZ(calc(var(--p) * var(--p) * -16px)) rotateY(calc(var(--p) * -24deg));
   transition:transform .8s cubic-bezier(.2,.7,.2,1),box-shadow .5s,opacity .5s;z-index:calc(10 - var(--d,0))}
@@ -15,8 +15,8 @@
 .fc-dots i{width:7px;height:7px;border-radius:4px;background:#d2d2d7;transition:width .3s,background .3s}
 .fc-dots i[data-on="1"]{width:22px;background:var(--rv-ink)}
 @media (max-width:900px){
-  .fc-stage{height:430px}
-  .fc-card{width:190px;height:300px;margin-left:-95px;top:50px;transform:translateX(calc(var(--p) * 150px)) translateZ(calc(var(--p) * var(--p) * -16px)) rotateY(calc(var(--p) * -24deg))}
+  .fc-stage{height:460px}
+  .fc-card{width:190px;height:300px;margin-left:-95px;top:70px;transform:translateX(calc(var(--p) * 150px)) translateZ(calc(var(--p) * var(--p) * -16px)) rotateY(calc(var(--p) * -24deg))}
   .fc-card[data-d="3"]{opacity:0;pointer-events:none}
   .fc-name{font-size:18px;left:16px;bottom:18px}
 }

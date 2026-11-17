@@ -39,8 +39,8 @@
    level and tallest, the outer ones turn away and drop lower. */
 @media (min-width:961px){
   .sp{padding-bottom:clamp(170px,22vh,220px)}
-  .sp-grid{display:block;position:relative;height:580px;margin-top:56px;container-type:inline-size;overflow:hidden;margin-inline:-56px}
-  .sp-card{--p:calc(var(--i) - 3);--op:1;--z:1;position:absolute;left:50%;top:10px;width:270px;margin-left:-135px;z-index:var(--z);translate:calc(var(--p) * 340px - var(--p) * var(--p) * var(--p) * 14px) 0}
+  .sp-grid{display:block;position:relative;height:620px;margin-top:40px;container-type:inline-size;overflow-x:clip;overflow-y:visible;margin-inline:-56px}
+  .sp-card{--p:calc(var(--i) - 3);--op:1;--z:1;position:absolute;left:50%;top:60px;width:270px;margin-left:-135px;z-index:var(--z);translate:calc(var(--p) * 340px - var(--p) * var(--p) * var(--p) * 14px) 0}
   .sp-card .sp-photo{height:calc(440px - var(--p) * var(--p) * 18px);transform:perspective(1700px) translateZ(calc(var(--p) * var(--p) * -16px)) rotateY(calc(var(--p) * -24deg)) scale(calc(1.14 - var(--p) * var(--p) * 0.045));opacity:var(--op);box-shadow:0 30px 50px -28px rgba(11,12,8,.45);transition:scale .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
 }
 
