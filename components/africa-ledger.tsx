@@ -2,6 +2,7 @@ import type { Capabilities, Drawing as DrawingSpec } from "@/content/africa-acti
 import type { Mood } from "@/content/africa-designs"
 import { TransferCards } from "./africa-transfer"
 import { RankedLine } from "./africa-ranked"
+import { NetworkMap } from "./africa-network-map"
 import "./africa-ledger.css"
 
 /* The capabilities of an activity page as a ledger: a figure from each alert, the product's own copy under
@@ -70,10 +71,11 @@ function chipsOf(imports: string) {
 }
 
 /* The mood sets the layout of the rows (content/africa-designs.ts). The default is the pharmacy ledger. */
-export function AfricaLedger({ id, kicker, heading, items, notDo, lang, mood = "ledger" }: { id: string; kicker?: string; heading: string; items: Item[]; notDo: string; lang: Lang; mood?: Mood }) {
+export function AfricaLedger({ id, kicker, heading, items, notDo, lang, mood = "ledger", map = false }: { id: string; kicker?: string; heading: string; items: Item[]; notDo: string; lang: Lang; mood?: Mood; map?: boolean }) {
   const youImport = lang === "en" ? "You import" : "Vous importez"
   return (
     <section className="afr-led" data-mood={mood} aria-labelledby={id}>
+      {map && <NetworkMap lang={lang} />}
       {kicker && <p className="eyebrow">{kicker}</p>}
       <h2 id={id}>{heading}</h2>
       <ul className="afr-led-rows">
