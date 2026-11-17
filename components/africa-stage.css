@@ -58,10 +58,12 @@
 .afr-st-money .line{stroke-dasharray:1;animation:afr-st-draw 1.8s .3s cubic-bezier(.4,0,.2,1) both}
 .afr-st-money .pt rect{fill:none;stroke:#3a3a3a;stroke-width:1.5}
 .afr-st-money .pt .v{font:300 21px "AfricaNumeral",sans-serif;fill:#6b6b6b;text-anchor:middle}
+.afr-st-money .pt .kd{font:500 13px var(--f-body),sans-serif;letter-spacing:.12em;text-transform:uppercase;fill:#8a8d7a;text-anchor:middle}
+.afr-st-money .pt .dotn{fill:#0b0c08;stroke:#8a8d7a;stroke-width:3}
 .afr-st-money .pt .ax{font:400 17px var(--f-body),sans-serif;fill:#6b6b6b;text-anchor:middle}
 .afr-st-money .pt{animation:afr-st-pop .6s calc(.2s + var(--p) * .6s) both}
 .afr-st-money .top rect{stroke:#d6ff3f}
-.afr-st-money .top .v,.afr-st-money .top .ax{fill:#d6ff3f}
+.afr-st-money .top .v,.afr-st-money .top .ax,.afr-st-money .top .kd{fill:#d6ff3f}
 .afr-st-money .core{fill:#0b0c08;stroke:#d6ff3f;stroke-width:4;animation:afr-st-pop .5s 2s both}
 .afr-st-money .ring{fill:none;stroke:#d6ff3f;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:afr-st-ripple 2.2s 2.1s ease-out infinite}
 @keyframes afr-st-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}

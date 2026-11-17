@@ -22,7 +22,7 @@ const TEXT = {
       { n: "21", tab: "21 days", unit: "days without an order", text: "Pharmacie Nord usually orders every 7 days. It has not ordered in 21 days. Call this week." },
     ],
     cards: { a: ["Centrale", "Unsold", "30 units", "Transfer", "units"], b: ["Nord", "Reordering", "Metformin", "500mg", "units"] },
-    money: [["Paracetamol 1g", "24k"], ["Amoxicillin 500mg", "72k"], ["Metformin 500mg", "180k"]],
+    money: [["Amoxicillin 500mg", "72k", "Mid value"], ["Paracetamol 1g", "24k", "Lowest value"], ["Metformin 500mg", "180k", "Highest value"]],
     gap: { shop: "Pharmacie du Port: stock gap", stock: "Stock: 2 days", out: "No stock: 3 days", del: "Next delivery arrives on Day 5", today: "Today", end: "Day 5", act: "Action required" },
     cal: { shop: "Pharmacie Nord", usual: "Usual gap: 7 days", over: "No order: 14 more days", today: "Today", alert: "Alert", normal: "Usual week", days: ["M", "T", "W", "T", "F", "S", "S"] },
   },
@@ -37,7 +37,7 @@ const TEXT = {
       { n: "21", tab: "21 jours", unit: "jours sans commande", text: "La Pharmacie Nord commande d'habitude tous les 7 jours. Elle n'a rien commandé depuis 21 jours. Appelez cette semaine." },
     ],
     cards: { a: ["Centrale", "Invendues", "30 unités", "Transfert", "unités"], b: ["Nord", "Recommandées", "Metformine", "500mg", "unités"] },
-    money: [["Paracétamol 1g", "24k"], ["Amoxicilline 500mg", "72k"], ["Metformine 500mg", "180k"]],
+    money: [["Amoxicilline 500mg", "72k", "Valeur moyenne"], ["Paracétamol 1g", "24k", "Valeur la plus basse"], ["Metformine 500mg", "180k", "Valeur la plus haute"]],
     gap: { shop: "Pharmacie du Port : écart de stock", stock: "Stock : 2 jours", out: "Rupture : 3 jours", del: "La prochaine livraison arrive le jour 5", today: "Aujourd'hui", end: "Jour 5", act: "Action requise" },
     cal: { shop: "Pharmacie Nord", usual: "Écart habituel : 7 jours", over: "Sans commande : 14 jours de plus", today: "Aujourd'hui", alert: "Alerte", normal: "Semaine habituelle", days: ["L", "M", "M", "J", "V", "S", "D"] },
   },
@@ -111,16 +111,18 @@ function Money({ pts }: { pts: string[][] }) {
           <stop offset="1" stopColor="#d6ff3f" />
         </linearGradient>
       </defs>
-      <path className="line" pathLength={1} d="M70 300 H125 C205 300,250 252,330 250 C425 248,450 130,540 124" fill="none" stroke="url(#afr-st-line)" strokeWidth="7" strokeLinecap="round" />
+      <path className="line" pathLength={1} d="M70 230 H125 C215 230,250 332,330 332 C430 332,450 136,540 124" fill="none" stroke="url(#afr-st-line)" strokeWidth="7" strokeLinecap="round" />
       <g className="node">
         <circle className="ring" cx="540" cy="124" r="14" />
         <circle className="core" cx="540" cy="124" r="14" />
       </g>
-      {pts.map(([name, value], i) => (
+      {pts.map(([name, value, kind], i) => (
         <g key={name} className={`pt${i === 2 ? " top" : ""}`} style={{ "--p": i } as React.CSSProperties}>
           <rect x={X[i] - 56} y="40" width="112" height="40" rx="20" />
           <text x={X[i]} y="66" className="v">{value}</text>
-          <text x={X[i]} y="392" className="ax">{name}</text>
+          {i < 2 && <circle className="dotn" cx={X[i]} cy={i === 0 ? 230 : 332} r="8" />}
+          <text x={X[i]} y="376" className="kd">{kind}</text>
+          <text x={X[i]} y="402" className="ax">{name}</text>
         </g>
       ))}
     </svg>
