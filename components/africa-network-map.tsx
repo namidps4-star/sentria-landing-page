@@ -9,7 +9,7 @@ const W = 1080
 const H = 1920
 const CROP = [330, 1090] /* the part of the picture that is shown: top and height */
 const PW = 430
-const PH = 190
+const PH = 180
 const FROM = [905, 1132]
 const TO = [835, 403]
 const PORT = [85, 1360]
@@ -18,16 +18,16 @@ const LINE = `M${FROM[0]} ${FROM[1]} C${FROM[0] + 40} ${FROM[1] - 260},${TO[0] +
 
 const TEXT = {
   en: {
-    from: { name: "Pharmacie Centrale", sub: "Unsold stock", l1: "Units unsold", l2: "Transfer", then: "4" },
+    from: { name: "Pharmacie Centrale", sub: "34 unsold, 30 to move", l1: "Units unsold", l2: "Transfer", then: "4" },
     to: { name: "Clinique du Nord", sub: "Reordering", l1: "Units reordered", l2: "Product" },
-    port: { name: "Pharmacie du Port", sub: "Stock left", l1: "Days left", l2: "Next delivery" },
+    port: { name: "Pharmacie du Port", sub: "Stock left", l1: "Days left", l2: "Delivery" },
     move: ["Move 30 units", "instead of a new order"],
     alt: "Map of a pharmacy network with three pharmacies pinned",
   },
   fr: {
-    from: { name: "Pharmacie Centrale", sub: "Stock invendu", l1: "Unités invendues", l2: "Transfert", then: "4" },
+    from: { name: "Pharmacie Centrale", sub: "34 invendues, 30 à déplacer", l1: "Unités invendues", l2: "Transfert", then: "4" },
     to: { name: "Clinique du Nord", sub: "Recommande", l1: "Unités recommandées", l2: "Produit" },
-    port: { name: "Pharmacie du Port", sub: "Stock restant", l1: "Jours restants", l2: "Prochaine livraison" },
+    port: { name: "Pharmacie du Port", sub: "Stock restant", l1: "Jours restants", l2: "Livraison" },
     move: ["Déplacer 30 unités", "au lieu d'une commande"],
     alt: "Carte d'un réseau de pharmacies avec trois pharmacies repérées",
   },
@@ -41,12 +41,12 @@ const TRAFFIC = { en: "data traffic", fr: "données" }
    vertical label strip, a title with a sub-title and an icon box, two boxed readings and a block of unit dots. */
 function Callout({ id, x, y, side, vert, delay, p, lang }: { id: string; x: number; y: number; side: "left" | "right"; vert: "above" | "below"; delay: number; p: Panel; lang: "en" | "fr" }) {
   const dir = side === "left" ? -1 : 1
-  const px = dir === -1 ? -(40 + PW) : 40
+  const px = dir === -1 ? -(100 + PW) : 100
   const py = vert === "above" ? -PH : 0
-  const far = dir * (40 + PW)
+  const far = dir * (100 + PW)
   const cells = Array.from({ length: 36 }, (_, i) => i)
   /* the panel tilts in perspective: its far end rises, turning on the corner nearest the pin */
-  const ang = dir === -1 ? 4 : -4
+  const ang = dir === -1 ? 3 : -3
   const ox = dir === -1 ? px + PW : px
   const oy = vert === "above" ? py + PH : py
   const tilt = `translate(${ox} ${oy}) skewY(${ang}) translate(${-(dir === -1 ? PW : 0)} ${-(vert === "above" ? PH : 0)})`
@@ -63,28 +63,28 @@ function Callout({ id, x, y, side, vert, delay, p, lang }: { id: string; x: numb
           <rect className="gaugefill" x="12" y="40" width="12" height="34" />
           <text className="nm" x="54" y="42">{p.name}</text>
           <text className="sb" x="54" y="68">{p.sub}</text>
-          <rect className="icon" x={PW - 118} y="16" width="96" height="56" rx="18" />
-          {p.icon === "cross" && <path className="ico" d={`M${PW - 70} 30v28M${PW - 84} 44h28`} />}
-          {p.icon === "gear" && <path className="ico" d={`M${PW - 70} 32v24M${PW - 82} 44h24M${PW - 80} 34l20 20M${PW - 60} 34l-20 20`} />}
-          {p.icon === "clock" && <path className="ico" d={`M${PW - 70} 32v12l10 8`} />}
-          <line className="thin" x1="38" y1="84" x2={PW} y2="84" />
-          <text className="lb" x="54" y="112">{p.l1}</text>
-          <rect className="box" x="54" y="120" width="96" height="46" />
-          <text className="val n1" x="66" y="156">{p.v1}</text>
-          {p.v1b && <text className="val n2" x="66" y="156">{p.v1b}</text>}
-          <text className="lb" x="54" y={PH - 7}>{p.l2} <tspan className="v2">{p.v2}</tspan></text>
-          <rect className="mesh" x={PW - 190} y="98" width="170" height="80" />
+          <rect className="icon" x={PW - 96} y="14" width="74" height="48" rx="16" />
+          {p.icon === "cross" && <path className="ico" d={`M${PW - 59} 26v24M${PW - 71} 38h24`} />}
+          {p.icon === "gear" && <path className="ico" d={`M${PW - 59} 26v24M${PW - 71} 38h24M${PW - 69} 28l20 20M${PW - 49} 28l-20 20`} />}
+          {p.icon === "clock" && <path className="ico" d={`M${PW - 59} 26v12l9 7`} />}
+          <line className="thin" x1="38" y1="76" x2={PW} y2="76" />
+          <text className="lb" x="54" y="102">{p.l1}</text>
+          <rect className="box" x="54" y="110" width="84" height="44" />
+          <text className="val n1" x="64" y="146">{p.v1}</text>
+          {p.v1b && <text className="val n2" x="64" y="146">{p.v1b}</text>}
+          <text className="lb" x="54" y={PH - 8}>{p.l2} <tspan className="v2">{p.v2}</tspan></text>
+          <rect className="mesh" x={PW - 168} y="92" width="148" height="76" />
           {p.dots !== "days" ? (
-            <g className={`dots ${p.dots}`} transform={`translate(${PW - 182} 106)`}>
+            <g className={`dots ${p.dots}`} transform={`translate(${PW - 162} 98)`}>
               {cells.map((i) => {
                 const r = Math.floor(i / 12)
                 const c = i % 12
                 const lit = p.dots === "from" ? (i < 34 ? (i < 4 ? "keep" : "go") : "off") : i < 30 ? "come" : "off"
-                return <circle key={i} className={lit} cx={c * 13.5 + 6} cy={r * 22 + 8} r="5.2" style={{ "--k": i } as React.CSSProperties} />
+                return <circle key={i} className={lit} cx={c * 11.8 + 7} cy={r * 21 + 9} r="4.6" style={{ "--k": i } as React.CSSProperties} />
               })}
             </g>
           ) : (
-            <g className="dots days" transform={`translate(${PW - 182} 124)`}>
+            <g className="dots days" transform={`translate(${PW - 162} 116)`}>
               {Array.from({ length: 7 }, (_, i) => (
                 <circle key={i} className={i < 2 ? "on" : "off"} cx={i * 22 + 10} cy="10" r="8" />
               ))}
@@ -123,7 +123,7 @@ export function MapHero({ kicker, title, result, lang }: { kicker?: string; titl
 
           <Callout id="port" x={PORT[0]} y={PORT[1]} side="right" vert="above" delay={0.4} lang={lang} p={{ name: t.port.name, sub: t.port.sub, l1: t.port.l1, v1: "2", l2: t.port.l2, v2: lang === "en" ? "5 days" : "5 jours", dots: "days", icon: "clock" }} />
           <Callout id="from" x={FROM[0]} y={FROM[1]} side="left" vert="above" delay={1.1} lang={lang} p={{ name: t.from.name, sub: t.from.sub, l1: t.from.l1, v1: "34", v1b: t.from.then, l2: t.from.l2, v2: lang === "en" ? "30 units" : "30 unités", dots: "from", icon: "cross" }} />
-          <Callout id="to" x={TO[0]} y={TO[1]} side="left" vert="below" delay={1.8} lang={lang} p={{ name: t.to.name, sub: t.to.sub, l1: t.to.l1, v1: "30", l2: t.to.l2, v2: "Metformin 500mg", dots: "to", icon: "gear" }} />
+          <Callout id="to" x={TO[0]} y={TO[1]} side="left" vert="below" delay={1.8} lang={lang} p={{ name: t.to.name, sub: t.to.sub, l1: t.to.l1, v1: "30", l2: t.to.l2, v2: "Metformin", dots: "to", icon: "gear" }} />
 
           <path className="flow" pathLength={1} d={LINE} fill="none" />
           <circle className="runner" r="11" style={{ offsetPath: `path("${LINE}")` }} />
@@ -135,8 +135,8 @@ export function MapHero({ kicker, title, result, lang }: { kicker?: string; titl
 
           {[PORT, FROM, TO].map(([x, y], i) => (
             <g key={i} className={`pin ${i === 0 ? "port" : i === 1 ? "from" : "to"}`}>
-              <circle className="ring" cx={x} cy={y} r="12" />
-              <circle className="core" cx={x} cy={y} r="8" />
+              <circle className="ring" cx={x} cy={y} r="11" />
+              <circle className="core" cx={x} cy={y} r="5" />
             </g>
           ))}
         </svg>

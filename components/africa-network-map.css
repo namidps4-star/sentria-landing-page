@@ -8,23 +8,19 @@
 .afr-mh-map .pic{mix-blend-mode:screen;opacity:.9}
 
 /* pins */
-.afr-mh-map .pin .core{fill:#f5f3ea;stroke:#0b0c08;stroke-width:3}
-.afr-mh-map .pin.to .core{fill:#d6ff3f}
-.afr-mh-map .pin.port .core{fill:#ff5a4e}
-.afr-mh-map .pin .ring{fill:none;stroke:#f5f3ea;stroke-width:2.5;transform-box:fill-box;transform-origin:center}
-.afr-mh-map .pin.to .ring{stroke:#d6ff3f}
-.afr-mh-map .pin.port .ring{stroke:#ff5a4e}
+.afr-mh-map .pin .core{fill:#f5f3ea;stroke:none}
+.afr-mh-map .pin .ring{fill:none;stroke:#f5f3ea;stroke-width:1.5;stroke-opacity:.8;transform-box:fill-box;transform-origin:center}
 
 /* callouts: thin white lines, no fill, like a film HUD */
 .afr-mh-map .lead{stroke:#f5f3ea;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:0}
 .afr-mh-map .endcap{fill:#f5f3ea}
-.afr-mh-map .panel .bg{fill:rgba(11,12,8,.35);stroke:#f5f3ea;stroke-width:2}
+.afr-mh-map .panel .bg{fill:rgba(11,12,8,.62);stroke:#f5f3ea;stroke-width:2}
 .afr-mh-map .panel .thin{stroke:#f5f3ea;stroke-width:1.5;stroke-opacity:.8}
 .afr-mh-map .panel .vert{font:500 15px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.04em}
 .afr-mh-map .panel .gauge{fill:none;stroke:#f5f3ea;stroke-width:1.5}
 .afr-mh-map .panel .gaugefill{fill:#f5f3ea}
-.afr-mh-map .panel .nm{font:700 30px var(--f-body),sans-serif;fill:#f5f3ea;letter-spacing:.01em}
-.afr-mh-map .panel .sb{font:400 19px var(--f-body),sans-serif;fill:#cfcdbf}
+.afr-mh-map .panel .nm{font:700 25px var(--f-body),sans-serif;fill:#f5f3ea;letter-spacing:.01em}
+.afr-mh-map .panel .sb{font:400 17px var(--f-body),sans-serif;fill:#cfcdbf}
 .afr-mh-map .panel .icon{fill:none;stroke:#f5f3ea;stroke-width:2}
 .afr-mh-map .panel .ico{fill:none;stroke:#f5f3ea;stroke-width:3;stroke-linecap:round}
 .afr-mh-map .panel .lb{font:500 15px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.08em;text-transform:uppercase}
