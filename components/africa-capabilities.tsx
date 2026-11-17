@@ -6,6 +6,7 @@ import { AfricaLedger } from "./africa-ledger"
 import { AfricaStage } from "./africa-stage"
 import { MapHero } from "./africa-network-map"
 import { AfricaSteps } from "./africa-steps"
+import { AfricaStepsPanels } from "./africa-steps-panels"
 import { AfricaExample } from "./africa-example"
 import { AfricaFaqAccordion, type FaqTone } from "./africa-faq-accordion"
 import "./africa-variants.css"
@@ -36,7 +37,11 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       {slug === "grossiste-pharma" && <AfricaStage lang={lang} />}
       {slug !== "grossiste-pharma" && <AfricaLedger id={id} kicker={kicker} heading={c.heading} items={c.items} notDo={c.notDo} lang={lang} mood={design.mood} />}
       <section className="afr-caps afr-caps--rest">
-        <AfricaSteps heading={stepsHeading} steps={steps} kicker={kicker} />
+        {slug === "grossiste-pharma" ? (
+          <AfricaStepsPanels heading={stepsHeading} steps={steps} kicker={kicker} lang={lang} />
+        ) : (
+          <AfricaSteps heading={stepsHeading} steps={steps} kicker={kicker} />
+        )}
         {c.example && slug === "grossiste-pharma" && <MapHero kicker={kicker} title={c.example.title} result={c.example.result} lang={lang} />}
         {c.example && slug !== "grossiste-pharma" && (
           <AfricaExample
