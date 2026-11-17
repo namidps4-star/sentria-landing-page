@@ -63,21 +63,16 @@
 @keyframes afr-st-pop{from{opacity:0}to{opacity:1}}
 @keyframes afr-st-ping{0%,100%{transform:scale(1)}50%{transform:scale(1.7)}}
 
-/* scene 3: days of stock against the delivery */
-.afr-st-gap{display:block;height:auto;overflow:visible}
-.afr-st-gap .shop{font:600 15px var(--f-body),sans-serif;fill:#f5f3ea}
-.afr-st-gap .axis,.afr-st-gap .tick{stroke:#3a3d2c;stroke-width:2}
-.afr-st-gap .ax{font:500 12px var(--f-body),sans-serif;fill:#6b6e5c;text-anchor:middle}
-.afr-st-gap .lab{font:600 15px var(--f-body),sans-serif;text-anchor:middle}
-.afr-st-gap .lab.ok{fill:#d6ff3f}
-.afr-st-gap .lab.bad{fill:#ff5a4e}
-.afr-st-gap .stock{fill:#d6ff3f;transform-box:fill-box;transform-origin:left;animation:afr-st-grow 1s .2s cubic-bezier(.2,.7,.2,1) both}
-.afr-st-gap .out{fill:none;stroke:#ff5a4e;stroke-width:2;stroke-dasharray:6 6;transform-box:fill-box;transform-origin:left;animation:afr-st-grow 1.2s 1.2s cubic-bezier(.2,.7,.2,1) both}
-.afr-st-gap .lab{animation:afr-st-pop .5s 1s both}
-.afr-st-gap .lab.bad{animation-delay:2s}
-.afr-st-gap .del{animation:afr-st-pop .6s 2.4s both}
-.afr-st-gap .del .stem{stroke:#d6ff3f;stroke-width:2;stroke-dasharray:4 4}
-.afr-st-gap .del circle{fill:#d6ff3f}
+/* scene 3: stock against the delivery, one bar */
+.afr-st-gap .shop{margin:0 0 36px;font:700 24px var(--f-display),sans-serif}
+.afr-st-gap .ends{display:flex;justify-content:space-between;font-size:13px;color:#a6a99a;margin-bottom:12px}
+.afr-st-gap .bar{display:flex;align-items:center;gap:0;height:76px}
+.afr-st-gap .dot{width:14px;height:14px;border-radius:50%;background:#f5f3ea;flex:none;display:block;animation:afr-st-pop .4s both}
+.afr-st-gap .stock,.afr-st-gap .out{height:100%;display:flex;align-items:center;justify-content:center;border-radius:999px;font-weight:600;font-size:16px;transform-origin:left;white-space:nowrap}
+.afr-st-gap .stock{flex:2;background:#2d3128;color:#f5f3ea;animation:afr-st-grow 1s .2s cubic-bezier(.2,.7,.2,1) both}
+.afr-st-gap .out{flex:3;margin-left:6px;background:#ff5a4e;color:#0b0c08;animation:afr-st-grow 1.2s 1.2s cubic-bezier(.2,.7,.2,1) both}
+.afr-st-gap .cap{margin:22px 0 0;text-align:center;font-size:14px;color:#a6a99a;animation:afr-st-pop .6s 2.2s both}
+.afr-st-gap .act{margin:48px 0 0;display:inline-block;float:right;background:#d6ff3f;color:#0b0c08;font:700 13px var(--f-body),sans-serif;padding:9px 18px;border-radius:999px;animation:afr-st-pop .6s 2.6s both}
 @keyframes afr-st-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
 /* scene 4: 21 days without an order */
