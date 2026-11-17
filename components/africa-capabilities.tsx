@@ -31,7 +31,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   return (
     <>
       {slug === "grossiste-pharma" && <AfricaStage lang={lang} />}
-      <AfricaLedger id={id} kicker={kicker} heading={c.heading} items={c.items} notDo={c.notDo} lang={lang} mood={design.mood} map={slug === "grossiste-pharma"} />
+      <AfricaLedger id={id} kicker={kicker} heading={c.heading} items={c.items} notDo={c.notDo} lang={lang} mood={design.mood} />
       <section className="afr-caps afr-caps--rest">
         <AfricaSteps heading={stepsHeading} steps={steps} kicker={kicker} />
         {c.example && (
