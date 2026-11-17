@@ -106,7 +106,7 @@ export const AFRICA_PHOTOS: Record<string, { src: string; credit: string }> = {
   "exploitation-agricole": { src: "/africa/hq/africa-farm.jpg", credit: "Photo: Yulian Alexeyev, Unsplash" },
 }
 
-export type Drawing = { kind: "bars" | "timeline" | "pair" | "compare"; labels: string[] }
+export type Drawing = { kind: "bars" | "timeline" | "pair" | "compare" | "transfer" | "ranked"; labels: string[] }
 export type Capability = { title: string; does: string; example: string; imports: string; figure: string; drawing: Drawing }
 export type Step = { title: string; text: string }
 export type Example = { title: string; lines: string[]; result: string }
@@ -261,7 +261,7 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           example: "Clinique du Nord: reordered 30 units of Metformin 500mg this month. Pharmacy Centrale: 34 units unsold. Suggested transfer: 30 units.",
           imports: "Pharmacy name, product, quantity delivered in the period, quantity reordered, quantity sold",
           figure: "30",
-          drawing: { kind: "pair", labels: ["Pharmacy Centrale: 34 unsold","Clinique du Nord: reordered 30"] },
+          drawing: { kind: "transfer", labels: ["Centrale","units unsold","30 units","Nord","units reordered"] },
         },
         {
           title: "The transfer worth the most money, first",
@@ -269,7 +269,7 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           example: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA. Paracetamol 1g: 8 units, 24,000 FCFA.",
           imports: "Unit cost per product (optional, SentrIA ranks by quantity if not provided)",
           figure: "180k",
-          drawing: { kind: "compare", labels: ["Metformin 500mg: 180,000","Amoxicillin: 72,000","Paracetamol: 24,000"] },
+          drawing: { kind: "ranked", labels: ["Paracetamol","24k","Amoxicillin","72k","Metformin","180k"] },
         },
         {
           title: "Which pharmacy runs out before your next delivery",
@@ -322,7 +322,7 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           example: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Transfert proposé : 30 unités.",
           imports: "Nom de la pharmacie, produit, quantité livrée sur la période, quantité recommandée, quantité vendue",
           figure: "30",
-          drawing: { kind: "pair", labels: ["Pharmacie Centrale : 34 invendues","Clinique du Nord : 30 recommandées"] },
+          drawing: { kind: "transfer", labels: ["Centrale","unités invendues","30 unités","Nord","unités recommandées"] },
         },
         {
           title: "Le transfert qui vaut le plus d'argent, en premier",
@@ -330,7 +330,7 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           example: "Metformine 500mg : 30 unités, 180 000 FCFA. Amoxicilline 500mg : 12 unités, 72 000 FCFA. Paracétamol 1g : 8 unités, 24 000 FCFA.",
           imports: "Coût unitaire par produit (optionnel, SentrIA classe par quantité si absent)",
           figure: "180k",
-          drawing: { kind: "compare", labels: ["Metformine 500mg : 180 000","Amoxicilline : 72 000","Paracétamol : 24 000"] },
+          drawing: { kind: "ranked", labels: ["Paracétamol","24k","Amoxicilline","72k","Metformine","180k"] },
         },
         {
           title: "Quelle pharmacie sera à zéro avant votre prochaine livraison",

@@ -1,5 +1,7 @@
 import type { Capabilities, Drawing as DrawingSpec } from "@/content/africa-activities"
 import type { Mood } from "@/content/africa-designs"
+import { TransferCards } from "./africa-transfer"
+import { RankedLine } from "./africa-ranked"
 import "./africa-ledger.css"
 
 /* The capabilities of an activity page as a ledger: a figure from each alert, the product's own copy under
@@ -12,6 +14,8 @@ type Item = Capabilities["items"][number]
 /* Four drawings, one per kind of alert. The labels are the row's own words. */
 function Drawing({ drawing }: { drawing: DrawingSpec }) {
   const [a = "", b = "", c = ""] = drawing.labels
+  if (drawing.kind === "ranked") return <RankedLine labels={drawing.labels} />
+  if (drawing.kind === "transfer") return <TransferCards labels={drawing.labels} />
   if (drawing.kind === "bars")
     return (
       <svg viewBox="0 0 400 110" aria-hidden="true">
