@@ -25,6 +25,7 @@
 .afr-mh-map .panel .ico{fill:none;stroke:#f5f3ea;stroke-width:3;stroke-linecap:round}
 .afr-mh-map .panel .lb{font:500 14px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.04em;text-transform:uppercase}
 .afr-mh-map .panel .lb .v2{fill:#f5f3ea;font-weight:700}
+.afr-mh-map .co.from .lb .v2{fill:#d6ff3f;font-size:17px}
 .afr-mh-map .panel .box{fill:none;stroke:#f5f3ea;stroke-width:1.8}
 .afr-mh-map .panel .val{font:300 44px "AfricaNumeral",sans-serif;fill:#f5f3ea}
 .afr-mh-map .panel .mesh{fill:url(#afr-mh-hatch);stroke:#f5f3ea;stroke-width:1.8}
