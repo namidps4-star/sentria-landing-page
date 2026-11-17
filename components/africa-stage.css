@@ -110,3 +110,13 @@
   .afr-st-cards{flex-direction:row}
   .afr-st-card{min-height:420px}
 }
+
+/* the calendar stays small: about 400px wide, centred in its half */
+.afr-st-panel>.afr-st-cal{max-width:400px}
+.afr-st-cal .shop{font-size:20px}
+.afr-st-cal .gap{font-size:16px}
+.afr-st-cal .alert{font-size:18px}
+.afr-st-cal .top{margin-bottom:22px}
+.afr-st-cal .grid{gap:10px 8px}
+.afr-st-cal .head{gap:8px}
+.afr-st-cal .legend{margin-top:20px;font-size:11px}
