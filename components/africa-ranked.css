@@ -1,0 +1,28 @@
+.afr-rk{position:relative;aspect-ratio:2/1.6;background:#0b0c08;border-radius:28px;color:#3a3d2c;overflow:hidden;font-family:var(--f-body),sans-serif;
+  background-image:radial-gradient(#23261a 1px,transparent 1px);background-size:18px 18px}
+.afr-rk>svg{position:absolute;inset:0;width:100%;height:100%;color:#6f7355}
+.afr-rk svg path{stroke-dasharray:1;stroke-dashoffset:0}
+.afr-rk-ghost{position:absolute;left:5%;top:50%;transform:translateY(-50%);font:300 clamp(64px,9vw,110px)/1 var(--f-display),sans-serif;letter-spacing:-.04em;color:#f5f3ea;opacity:.1}
+.afr-rk-pt{position:absolute;transform:translate(-50%,-50%);z-index:2}
+.afr-rk-pt i{width:16px;height:16px;border-radius:50%;background:#0b0c08;border:3px solid #969989;display:block}
+.afr-rk-pt span{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;white-space:nowrap;font-size:10px;color:#969989;background:#0b0c08;border:1px solid #3a3d2c;border-radius:14px;padding:4px 8px}
+.afr-rk-pt em{font-style:normal}
+.afr-rk-pt b{font-weight:600;color:#f5f3ea}
+.afr-rk-pt.top i{border-color:#d6ff3f;background:#d6ff3f}
+.afr-rk-pt.top span{border-color:#d6ff3f;color:#d6ff3f}
+.afr-rk-pt.top b{color:#d6ff3f}
+
+[data-rv]:not([data-in]) .afr-rk svg path{stroke-dashoffset:1}
+[data-rv]:not([data-in]) .afr-rk-pt{opacity:0}
+[data-in] .afr-rk svg path{animation:afr-rk-draw 1.4s .2s cubic-bezier(.2,.7,.2,1) both}
+[data-in] .afr-rk-pt{animation:afr-rk-pop .5s calc(.3s + var(--p) * .45s) cubic-bezier(.2,.7,.2,1) both}
+[data-in] .afr-rk-pt.top i{animation:afr-rk-ping .6s 1.3s ease-out 1}
+@keyframes afr-rk-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes afr-rk-pop{from{opacity:0}to{opacity:1}}
+@keyframes afr-rk-ping{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)}}
+
+@media (prefers-reduced-motion:reduce){
+  [data-rv]:not([data-in]) .afr-rk svg path{stroke-dashoffset:0}
+  [data-rv]:not([data-in]) .afr-rk-pt{opacity:1}
+  [data-in] .afr-rk *{animation:none!important}
+}

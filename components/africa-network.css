@@ -1,0 +1,52 @@
+@property --n30{syntax:"<integer>";inherits:false;initial-value:30}
+
+.afr-net{background:#0b0c08;color:#f5f3ea;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;padding:clamp(56px,6vw,96px) var(--pad,56px);overflow:hidden}
+.afr-net-copy{max-width:560px;justify-self:end;width:100%}
+.afr-net h2{font:700 clamp(34px,4.4vw,60px)/1.04 var(--f-display),sans-serif;letter-spacing:-.03em;margin:0;max-width:14ch;color:#f5f3ea}
+.afr-net-30{margin:36px 0 0;font-family:"AfricaNumeral",sans-serif;font-weight:300;font-size:clamp(120px,14vw,200px);line-height:.85;color:#d6ff3f;counter-reset:n var(--n30)}
+.afr-net-30::after{content:counter(n)}
+.afr-net-sub{margin:20px 0 0;font-size:19px;line-height:1.5;max-width:30ch;color:#cfcdbf}
+.afr-net-tiles{list-style:none;margin:44px 0 0;padding:0;display:flex;gap:0}
+.afr-net-tiles li{padding:0 28px;border-left:1px solid rgba(245,243,234,.2);font-size:13px;color:#969989}
+.afr-net-tiles li:first-child{padding-left:0;border-left:0}
+.afr-net-tiles b{display:block;font:700 30px/1.1 var(--f-display),sans-serif;color:#f5f3ea;margin-bottom:4px}
+.afr-net-note{margin:22px 0 0;font-size:12px;color:#969989}
+
+.afr-net-map{width:100%;max-width:720px;height:auto;color:rgba(245,243,234,.22);overflow:visible}
+.afr-net-map .n circle{fill:#15170d;stroke:rgba(245,243,234,.28);stroke-width:1.5}
+.afr-net-map .n text{fill:#f5f3ea;font:500 14px var(--f-body),sans-serif;text-anchor:middle}
+.afr-net-map .n text.v{fill:#969989;font-size:13px}
+.afr-net-map .to circle{stroke:#d6ff3f;stroke-width:2}
+.afr-net-map .to text.v{fill:#d6ff3f}
+.afr-net-map .from text{font-size:15px}
+.afr-net-map .flow{stroke:#d6ff3f;stroke-dasharray:1;stroke-dashoffset:0}
+.afr-net-map .runner{fill:#d6ff3f;offset-distance:100%}
+
+/* Motion: runs once, when the section gets data-in. Before that the map shows its start state. */
+.afr-net:not([data-in]) .afr-net-30{--n30:0}
+.afr-net:not([data-in]) .flow{stroke-dashoffset:1}
+.afr-net:not([data-in]) .runner{opacity:0;offset-distance:0}
+.afr-net:not([data-in]) .n{opacity:0}
+.afr-net[data-in] .afr-net-30{animation:afr-net-count 1.2s 1.1s cubic-bezier(.2,.7,.2,1) both}
+.afr-net[data-in] .n{animation:afr-net-pop .6s cubic-bezier(.2,.7,.2,1) both}
+.afr-net[data-in] .n:nth-of-type(1){animation-delay:.1s}
+.afr-net[data-in] .from{animation-delay:.2s}
+.afr-net[data-in] .to{animation-delay:.5s}
+.afr-net[data-in] .flow{animation:afr-net-draw 1.2s .8s cubic-bezier(.2,.7,.2,1) both}
+.afr-net[data-in] .runner{animation:afr-net-run 1.2s 1.1s cubic-bezier(.4,0,.2,1) both}
+@keyframes afr-net-count{from{--n30:0}to{--n30:30}}
+@keyframes afr-net-pop{from{opacity:0}to{opacity:1}}
+@keyframes afr-net-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes afr-net-run{0%{offset-distance:0;opacity:1}100%{offset-distance:100%;opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .afr-net:not([data-in]) .afr-net-30{--n30:30}
+  .afr-net:not([data-in]) .flow{stroke-dashoffset:0}
+  .afr-net:not([data-in]) .n,.afr-net:not([data-in]) .runner{opacity:1}
+  .afr-net[data-in] *{animation:none!important}
+}
+@media (max-width:980px){
+  .afr-net{grid-template-columns:1fr;gap:32px}
+  .afr-net-copy{justify-self:start}
+  .afr-net-tiles li{padding:0 16px}
+}
