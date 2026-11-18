@@ -137,7 +137,7 @@
 .afr-gt-header{margin-bottom:48px}
 .afr-gt-kicker{
   font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(255,255,255,.32);margin-bottom:14px;
+  color:rgba(255,255,255,.6);margin-bottom:14px;
   display:flex;align-items:center;gap:10px;
 }
 .afr-gt-kicker::before{
@@ -153,7 +153,7 @@
   letter-spacing:-.03em;
 }
 .afr-gt-headline strong{color:#fff}
-.afr-gt-headline span{color:rgba(255,255,255,.18)}
+.afr-gt-headline span{color:rgba(255,255,255,.6)}
 
 /* Vertical timeline queue */
 .afr-vq{--g:48px;--p:46px;--gap:10px;position:relative;max-width:760px}
