@@ -122,6 +122,18 @@
 .afr-queue-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
 .afr-queue-sec .rv-h{color:#f5f3ea;margin-bottom:32px}
 /* Band colour modifiers — queue section */
+.afr-queue-sec--olive{background:#1b1e10}
+.afr-queue-sec--white{background:#fff}
+.afr-queue-sec--lime{background:#d6ff3f}
+.afr-queue-sec--sand{background:#ece7d6}
+.afr-queue-sec--grey{background:#f2f2f0}
+.afr-queue-sec--cream{background:#f5f3ea}
+/* Light queue bands: flip heading and kicker to dark */
+.afr-queue-sec--white .rv-h,.afr-queue-sec--lime .rv-h,.afr-queue-sec--sand .rv-h,.afr-queue-sec--grey .rv-h,.afr-queue-sec--cream .rv-h{color:#0b0c08}
+.afr-queue-sec--white .afr-gt-kicker,.afr-queue-sec--lime .afr-gt-kicker,.afr-queue-sec--sand .afr-gt-kicker,.afr-queue-sec--grey .afr-gt-kicker,.afr-queue-sec--cream .afr-gt-kicker{color:rgba(0,0,0,.55)}
+.afr-queue-sec--white .afr-gt-kicker::before,.afr-queue-sec--lime .afr-gt-kicker::before,.afr-queue-sec--sand .afr-gt-kicker::before,.afr-queue-sec--grey .afr-gt-kicker::before,.afr-queue-sec--cream .afr-gt-kicker::before{background:#0b0c08}
+.afr-queue-sec--white .afr-gt-headline strong,.afr-queue-sec--lime .afr-gt-headline strong,.afr-queue-sec--sand .afr-gt-headline strong,.afr-queue-sec--grey .afr-gt-headline strong,.afr-queue-sec--cream .afr-gt-headline strong{color:#0b0c08}
+.afr-queue-sec--white .afr-gt-headline span,.afr-queue-sec--lime .afr-gt-headline span,.afr-queue-sec--sand .afr-gt-headline span,.afr-queue-sec--grey .afr-gt-headline span,.afr-queue-sec--cream .afr-gt-headline span{color:rgba(0,0,0,.55)}
 
 /* Queue preview — Gantt glass-capsule */
 .afr-gt{position:relative;width:100%}
@@ -266,12 +278,27 @@
   .afr-dcard__tcol{animation:none!important;opacity:1;transform:none}
   .afr-dcard__sq,.afr-dcard__sq-stat-num{transition:none}
 }
-/* Section — ink background so squircles pop */
+/* Section — band colour modifiers */
 .afr-dcard-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
 .afr-dcard-sec--ink{background:#0b0c08}
-.afr-dcard-sec--white{background:#0b0c08}
-.afr-dcard-sec--lime{background:#0b0c08}
-.afr-dcard-sec--olive{background:#0b0c08}
-.afr-dcard-sec--sand{background:#0b0c08}
-.afr-dcard-sec--grey{background:#0b0c08}
-.afr-dcard-sec--cream{background:#0b0c08}
+.afr-dcard-sec--olive{background:#1b1e10}
+.afr-dcard-sec--white{background:#fff}
+.afr-dcard-sec--sand{background:#ece7d6}
+.afr-dcard-sec--grey{background:#f2f2f0}
+.afr-dcard-sec--cream{background:#f5f3ea}
+.afr-dcard-sec--lime{background:#d6ff3f}
+/* Light band: flip dcard text to dark */
+.afr-dcard-sec--white .afr-dcard__kicker,.afr-dcard-sec--sand .afr-dcard__kicker,.afr-dcard-sec--grey .afr-dcard__kicker,.afr-dcard-sec--cream .afr-dcard__kicker,.afr-dcard-sec--lime .afr-dcard__kicker{color:rgba(0,0,0,.45)}
+.afr-dcard-sec--white .afr-dcard__kicker::before,.afr-dcard-sec--sand .afr-dcard__kicker::before,.afr-dcard-sec--grey .afr-dcard__kicker::before,.afr-dcard-sec--cream .afr-dcard__kicker::before,.afr-dcard-sec--lime .afr-dcard__kicker::before{background:#0b0c08}
+.afr-dcard-sec--white .afr-dcard__tbl,.afr-dcard-sec--sand .afr-dcard__tbl,.afr-dcard-sec--grey .afr-dcard__tbl,.afr-dcard-sec--cream .afr-dcard__tbl,.afr-dcard-sec--lime .afr-dcard__tbl{border-top-color:rgba(0,0,0,.12)}
+.afr-dcard-sec--white .afr-dcard__tcol dd,.afr-dcard-sec--sand .afr-dcard__tcol dd,.afr-dcard-sec--grey .afr-dcard__tcol dd,.afr-dcard-sec--cream .afr-dcard__tcol dd,.afr-dcard-sec--lime .afr-dcard__tcol dd{color:rgba(0,0,0,.72)}
+.afr-dcard-sec--white .afr-dcard__tcol--oc,.afr-dcard-sec--sand .afr-dcard__tcol--oc,.afr-dcard-sec--grey .afr-dcard__tcol--oc,.afr-dcard-sec--cream .afr-dcard__tcol--oc{--ac:rgba(0,0,0,.45)}
+.afr-dcard-sec--white .afr-dcard__tcol--oc dd,.afr-dcard-sec--sand .afr-dcard__tcol--oc dd,.afr-dcard-sec--grey .afr-dcard__tcol--oc dd,.afr-dcard-sec--cream .afr-dcard__tcol--oc dd{color:rgba(0,0,0,.55);font-weight:500}
+.afr-dcard-sec--white .afr-dcard__sq-stat-lbl,.afr-dcard-sec--sand .afr-dcard__sq-stat-lbl,.afr-dcard-sec--grey .afr-dcard__sq-stat-lbl,.afr-dcard-sec--cream .afr-dcard__sq-stat-lbl,.afr-dcard-sec--lime .afr-dcard__sq-stat-lbl{color:rgba(0,0,0,.35)}
+.afr-dcard-sec--white .afr-dcard__sq::after,.afr-dcard-sec--sand .afr-dcard__sq::after,.afr-dcard-sec--grey .afr-dcard__sq::after,.afr-dcard-sec--cream .afr-dcard__sq::after,.afr-dcard-sec--lime .afr-dcard__sq::after{border-color:rgba(0,0,0,.2)}
+/* Lime band: cf (lime text) invisible on lime, stat num also needs flip */
+.afr-dcard-sec--lime .afr-dcard__tcol--cf{--ac:rgba(0,0,0,.7)}
+.afr-dcard-sec--lime .afr-dcard__tcol--oc{--ac:rgba(0,0,0,.45)}
+.afr-dcard-sec--lime .afr-dcard__tcol--oc dd{color:rgba(0,0,0,.55);font-weight:500}
+.afr-dcard-sec--lime .afr-dcard__tcol dd strong{color:#0b0c08}
+.afr-dcard-sec--lime .afr-dcard__sq-stat-num{color:#0b0c08}
