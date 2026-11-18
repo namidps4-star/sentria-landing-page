@@ -1,7 +1,7 @@
 import type { Copy } from "@/components/africa-hero"
 import { MORE_ACTIVITY_COPY, MORE_CAPABILITIES, MORE_SECTOR_ALERTS } from "./africa-activity-pages"
 
-export const AFRICA_ACTIVITIES = ["pharmacie", "grossiste-pharma", "exploitation-agricole"] as const
+export const AFRICA_ACTIVITIES = ["pharmacie", "grossiste-pharma", "exploitation-agricole", "grossiste-distributeur"] as const
 
 const PHARMACY_PHOTO_EN = "Two customers reading a medicine box at a pharmacy shelf in Lagos"
 const PHARMACY_PHOTO_FR = "Deux clients lisent une boîte de médicament devant un rayon de pharmacie à Lagos"
@@ -104,6 +104,7 @@ export const AFRICA_PHOTOS: Record<string, { src: string; credit: string }> = {
   pharmacie: { src: "/africa/hq/africa-pharmacie.jpg", credit: "Photo: Yikai Sun, Unsplash" },
   "grossiste-pharma": { src: "/africa/hq/africa-grossiste.jpg", credit: "Photo: Salah Ait Mokhtar, Unsplash" },
   "exploitation-agricole": { src: "/africa/hq/africa-farm.jpg", credit: "Photo: Yulian Alexeyev, Unsplash" },
+  "grossiste-distributeur": { src: "/africa/hq/hero-wholesaler.jpg", credit: "Photo: Unsplash" },
 }
 
 export type Drawing = { kind: "bars" | "timeline" | "pair" | "compare" | "transfer" | "ranked"; labels: string[] }
@@ -458,6 +459,12 @@ export const ACTIVITY_LIST: { slug: string; name: Record<"en" | "fr", string>; k
     kicker: { en: "Farm", fr: "Exploitation" },
     teaser: { en: "Days in storage and hours left before spoilage.", fr: "Jours en stockage et heures restantes avant la détérioration." },
   },
+  {
+    slug: "grossiste-distributeur",
+    name: { en: "Wholesaler / Distributor", fr: "Grossiste / Distributeur" },
+    kicker: { en: "Distributor", fr: "Distributeur" },
+    teaser: { en: "Customers who stop reordering, spotted before you lose them.", fr: "Clients qui arrêtent de commander, détectés avant de les perdre." },
+  },
 ]
 
 export type SectorActivity = {
@@ -512,7 +519,7 @@ export const SECTOR_LIST: Sector[] = [
       fr: "Vous approvisionnez des dizaines de points de vente. Certains manquent de stock pendant que d'autres en ont trop. SentrIA trouve l'écart avant que vous perdiez la vente.",
     },
     activities: [
-      { slug: "grossiste-distributeur", name: { en: "Wholesaler / Distributor", fr: "Grossiste / Distributeur" }, live: false },
+      { slug: "grossiste-distributeur", name: { en: "Wholesaler / Distributor", fr: "Grossiste / Distributeur" }, live: true },
       { slug: "chaine-magasins", name: { en: "Chain of stores", fr: "Chaîne de magasins" }, live: false },
       { slug: "supermarche-hypermarche", name: { en: "Supermarket / Hypermarket", fr: "Supermarché / Hypermarché" }, live: false },
     ],
