@@ -473,6 +473,21 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
 }
 
 export const SECTOR_PAGE: Record<string, { sector: SectorKey; name: L; desc: L }> = {
+  "clinique-hopital": {
+    "sector": "health",
+    "name": { "en": "Clinic / Hospital", "fr": "Clinique / Hôpital" },
+    "desc": { "en": "Care facility and clinical stock", "fr": "Établissement de soins et stocks cliniques" }
+  },
+  "laboratoire": {
+    "sector": "health",
+    "name": { "en": "Laboratory", "fr": "Laboratoire" },
+    "desc": { "en": "Tests, reagents and samples", "fr": "Analyses, réactifs et échantillons" }
+  },
+  "veterinaire": {
+    "sector": "health",
+    "name": { "en": "Veterinary", "fr": "Vétérinaire" },
+    "desc": { "en": "Veterinary drugs, expiry and stock", "fr": "Médicaments vétérinaires, péremption et stock" }
+  },
   "cooperative-agricole": {
     "sector": "agriculture",
     "name": {

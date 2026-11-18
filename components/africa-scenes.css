@@ -1,0 +1,47 @@
+/* The generic number scenes. They reuse africa-stage.css for the left side, the tabs, the gap bar, the calendar
+   and the line. This file adds the figure prefix, the example line, the cards of dots and the gauge. */
+.afr-sc .afr-st-now .c::before{content:attr(data-p)}
+.afr-sc .afr-st-now .unit{max-width:30ch}
+.afr-sc .afr-st-now{min-height:360px}
+.afr-sc-ex{margin:14px 0 0;max-width:38ch;font-size:14px;line-height:1.5;color:#969989;animation:afr-st-in .5s .45s both}
+.afr-sc-ex b{font-weight:600;color:#d6ff3f;letter-spacing:.12em;text-transform:uppercase;font-size:11px;margin-right:8px}
+.afr-sc .afr-st-panel[data-scene="k-pair"]{background:none}
+
+/* two cards of dots: the first falls to 4 units, the second rises to N */
+.afr-sc-cards{display:flex;gap:14px;justify-content:center}
+.afr-sc-card{--f:var(--f1);--u:var(--u1);--d:1s;width:272px;background:#32363f;border-radius:40px;padding:22px 24px 24px;display:flex;flex-direction:column;color:#f0f0f0}
+.afr-sc-card .top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid #454a55}
+.afr-sc-card.to .top{flex-direction:row-reverse}
+.afr-sc-card .circle{width:84px;height:84px;border-radius:50%;background:#14161a;display:flex;align-items:center;justify-content:center;font:300 52px/1 "AfricaNumeral",sans-serif}
+.afr-sc-card .ico{display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:6px;max-width:110px;text-align:center}
+.afr-sc-card .ico svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.afr-sc-card .ico em{font:500 10px/1.3 var(--f-body),sans-serif;letter-spacing:.14em;font-style:normal;text-transform:uppercase;color:#c9ccd4}
+.afr-sc-card .row{margin:22px 0}
+.afr-sc-card .big{margin:0;font:300 40px/1 "AfricaNumeral",sans-serif;counter-reset:n var(--u)}
+.afr-sc-card .big::before{content:counter(n)}
+.afr-sc-card .sub{margin:6px 0 0;font-size:14px;color:#a0a5b1;font-weight:300;min-height:20px}
+.afr-sc-card .field{position:relative;width:220px;height:330px;margin:0 auto}
+.afr-sc-card .dim,.afr-sc-card .lit{position:absolute;left:0;right:0;bottom:0}
+.afr-sc-card .dim{top:0;background:radial-gradient(circle at 5.5px 5.5px,#4b505b 1.2px,transparent 1.6px) 0 100%/11px 11px}
+.afr-sc-card .lit{height:round(down,calc(var(--f) * 3.3px),11px);background:radial-gradient(circle at 5.5px 5.5px,#d6ff3f 3.3px,transparent 3.7px) 0 100%/11px 11px}
+.afr-sc-card.from{animation:afr-sc-fill 1.6s .5s cubic-bezier(.5,0,.2,1) both}
+.afr-sc-card.to{animation:afr-sc-fill 1.6s .9s cubic-bezier(.5,0,.2,1) both}
+@keyframes afr-sc-fill{from{--f:0;--u:0}}
+
+/* a gauge toward a limit */
+.afr-sc-gauge .read{margin:0 0 40px;font:700 24px var(--f-display),sans-serif;color:#f5f3ea}
+.afr-sc-gauge .track{position:relative;height:56px;border-radius:999px;background:#262a23;overflow:hidden}
+.afr-sc-gauge .track i{position:absolute;top:0;bottom:0;display:block}
+.afr-sc-gauge .fill{left:0;background:#d6ff3f;transform-origin:left;animation:afr-sc-grow 1.2s .3s cubic-bezier(.2,.7,.2,1) both}
+.afr-sc-gauge .over{background:#ff5a4e;transform-origin:left;animation:afr-sc-grow 1s 1.4s cubic-bezier(.2,.7,.2,1) both}
+.afr-sc-gauge .limit{left:80%;width:3px;background:#f5f3ea}
+.afr-sc-gauge .ends{position:relative;display:flex;justify-content:space-between;margin-top:12px;font-size:13px;color:#a6a99a}
+.afr-sc-gauge .ends .lim{position:absolute;left:80%;transform:translateX(-50%);color:#f5f3ea;font-weight:600;white-space:nowrap}
+.afr-sc-gauge .cap{margin:26px 0 0;text-align:center;font-size:14px;color:#a6a99a;animation:afr-st-pop .6s 1.8s both}
+.afr-sc-gauge .act{margin:36px 0 0;display:inline-block;float:right;background:#d6ff3f;color:#0b0c08;font:700 13px var(--f-body),sans-serif;padding:9px 18px;border-radius:999px;animation:afr-st-pop .6s 2.2s both}
+@keyframes afr-sc-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+@media (prefers-reduced-motion:reduce){
+  .afr-sc *{animation:none!important}
+}
+@media (max-width:980px){.afr-sc .afr-st-now{min-height:0}.afr-sc-cards{flex-wrap:wrap}}

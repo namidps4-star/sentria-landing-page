@@ -2,16 +2,15 @@ import { ACTIVITY_LIST, CAPABILITIES } from "@/content/africa-activities"
 import { SHARED } from "@/content/africa-activity-pages"
 import { designFor } from "@/content/africa-designs"
 import { SECTOR_PAGE } from "@/content/sector-pages"
-import { AfricaLedger } from "./africa-ledger"
+import { AfricaScenes } from "./africa-scenes"
 import { AfricaStage } from "./africa-stage"
 import { MapHero } from "./africa-network-map"
-import { AfricaSteps } from "./africa-steps"
 import { AfricaStepsPanels } from "./africa-steps-panels"
 import { AfricaExample } from "./africa-example"
 import { AfricaFaqAccordion, type FaqTone } from "./africa-faq-accordion"
 import "./africa-variants.css"
 
-/* Every activity page uses the same parts: the ledger of capabilities, the three steps and a worked example,
+/* Every activity page uses the same parts: the numbers of the activity, the three steps and a worked example,
    then the questions. An activity without its own steps or questions gets the shared ones, so every page has
    the same parts. The look of each part (its mood, example style and questions style) comes from
    content/africa-designs.ts, so each activity page is laid out differently. */
@@ -35,13 +34,9 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   return (
     <>
       {slug === "grossiste-pharma" && <AfricaStage lang={lang} />}
-      {slug !== "grossiste-pharma" && <AfricaLedger id={id} kicker={kicker} heading={c.heading} items={c.items} notDo={c.notDo} lang={lang} mood={design.mood} />}
+      {slug !== "grossiste-pharma" && <AfricaScenes kicker={kicker} items={c.items} lang={lang} />}
       <section className="afr-caps afr-caps--rest">
-        {slug === "grossiste-pharma" ? (
-          <AfricaStepsPanels heading={stepsHeading} steps={steps} kicker={kicker} lang={lang} />
-        ) : (
-          <AfricaSteps heading={stepsHeading} steps={steps} kicker={kicker} />
-        )}
+        <AfricaStepsPanels heading={stepsHeading} steps={steps} kicker={kicker} lang={lang} />
         {c.example && slug === "grossiste-pharma" && <MapHero kicker={kicker} title={c.example.title} result={c.example.result} lang={lang} />}
         {c.example && slug !== "grossiste-pharma" && (
           <AfricaExample

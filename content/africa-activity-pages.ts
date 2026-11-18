@@ -62,12 +62,12 @@ export const FAQ_WORDS: Record<Lang, [string, string, string]> = {
 
 const CTA: Record<Lang, string> = { en: "Book a demo →", fr: "Demander une démo →" }
 const SECTOR_NAME: Record<Lang, Record<string, string>> = {
-  en: { agriculture: "agriculture", distribution: "distribution", logistics: "logistics", industry: "industry", transportation: "transportation", energy: "energy" },
-  fr: { agriculture: "agriculture", distribution: "distribution", logistics: "logistique", industry: "industrie", transportation: "transport", energy: "énergie" },
+  en: { health: "health", agriculture: "agriculture", distribution: "distribution", logistics: "logistics", industry: "industry", transportation: "transportation", energy: "energy" },
+  fr: { health: "santé", agriculture: "agriculture", distribution: "distribution", logistics: "logistique", industry: "industrie", transportation: "transport", energy: "énergie" },
 }
 const SECTOR_HREF: Record<Lang, Record<string, string>> = {
-  en: { agriculture: "/sectors/agriculture", distribution: "/sectors/retail", logistics: "/sectors/logistics", industry: "/sectors/industry", transportation: "/sectors/transportation", energy: "/sectors/energy" },
-  fr: { agriculture: "/fr/secteurs/agriculture", distribution: "/fr/secteurs/commerce", logistics: "/fr/secteurs/logistique", industry: "/fr/secteurs/industrie", transportation: "/fr/secteurs/transport", energy: "/fr/secteurs/energie" },
+  en: { health: "/sectors/healthcare", agriculture: "/sectors/agriculture", distribution: "/sectors/retail", logistics: "/sectors/logistics", industry: "/sectors/industry", transportation: "/sectors/transportation", energy: "/sectors/energy" },
+  fr: { health: "/fr/secteurs/sante", agriculture: "/fr/secteurs/agriculture", distribution: "/fr/secteurs/commerce", logistics: "/fr/secteurs/logistique", industry: "/fr/secteurs/industrie", transportation: "/fr/secteurs/transport", energy: "/fr/secteurs/energie" },
 }
 
 const RAW: Record<string, Record<Lang, Raw>> = {
@@ -741,6 +741,102 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne coupe ni ne transfère aucune charge et ne modifie pas le réseau. Il montre où la pression monte. Vos opérateurs décident.",
       example: { title: "Un jour de semaine sur le réseau", lines: ["La pression monte à 18 h", "Zone A à 130 % de sa charge prévue", "Trois zones proches de leur limite", "Action proposée : préparer la réserve de la zone A avant 17 h"], result: "La zone A est prête avant le pic." },
+    },
+  },
+  "clinique-hopital": {
+    en: {
+      h1: ["Know which supplies", "will run out", "before the ward does."],
+      lead: "Upload your stock and usage file. SentrIA estimates how many days of each supply you have left, flags the batches that will expire before they are used, and shows which ward uses more than usual.",
+      start: "For clinics and hospitals that manage their own clinical stock.",
+      stats: [["3d", "Days of stock", "Gloves size M: 3 days left. Next delivery in 6 days."], ["30d", "To expiry", "Antibiotic batch B12 expires in 30 days. Use it first."], ["+40%", "Above usual", "Ward 2 used 40% more dressings than usual this week."]],
+      alerts: [["critical", "Gloves size M: 3 days left, next delivery in 6 days. Order now."], ["warning", "Antibiotic batch B12: 30 days to expiry. Use it first."], ["warning", "Ward 2: dressings 40% above usual use this week."]],
+      heading: "What the hospital pharmacy sees every morning",
+      items: [
+        ["Which supply runs out before the next delivery", "SentrIA divides each supply's stock by its average daily use and compares the result with the next delivery date. It lists the supplies that will run out first.", "Gloves size M: 3 days left. Next delivery in 6 days.", "Product, quantity on hand, daily use, next delivery date", "3d", "bars", ["Gloves size M · 3 days", "next delivery in 6 days"]],
+        ["Which batch expires before it is used", "SentrIA reads each batch's expiry date and its usual use. The batches that will not be used in time come first, so you can use them first or return them.", "Antibiotic batch B12: 30 days to expiry, 45 days of stock. Use it first.", "Product, batch number, expiry date, quantity", "30d", "bars", ["Batch B12 · 30 days to expiry", "45 days of stock"]],
+        ["Which ward uses more than usual", "SentrIA compares each ward's use of a supply this week with its usual use. A sharp rise shows up before the stock does.", "Ward 2: dressings 40% above usual use this week.", "Ward, product, quantity used by day", "+40%", "compare", ["stock 90", "usual 100", "this week 140"]],
+      ],
+      notDo: "SentrIA does not order supplies or change prescriptions. It shows what the records say and what needs attention first. You decide.",
+      example: { title: "One morning at the hospital pharmacy", lines: ["Gloves size M: 3 days left, delivery in 6 days", "Antibiotic batch B12: 30 days to expiry", "Ward 2: dressings 40% above usual use", "Action proposed: order gloves today and use batch B12 first"], result: "The order goes out before the ward runs short." },
+    },
+    fr: {
+      h1: ["Sachez quelles fournitures", "vont manquer", "avant le service."],
+      lead: "Envoyez votre fichier de stock et de consommation. SentrIA estime le nombre de jours qu'il vous reste de chaque fourniture, signale les lots qui seront périmés avant d'être utilisés, et montre quel service consomme plus que d'habitude.",
+      start: "Pour les cliniques et hôpitaux qui gèrent leur propre stock clinique.",
+      stats: [["3j", "Jours de stock", "Gants taille M : 3 jours restants. Prochaine livraison dans 6 jours."], ["30j", "Avant péremption", "Lot d'antibiotique B12 périmé dans 30 jours. Utilisez-le en premier."], ["+40 %", "Au-dessus de l'usage", "Le service 2 a utilisé 40 % de pansements en plus cette semaine."]],
+      alerts: [["critical", "Gants taille M : 3 jours restants, prochaine livraison dans 6 jours. Commandez maintenant."], ["warning", "Lot d'antibiotique B12 : 30 jours avant péremption. Utilisez-le en premier."], ["warning", "Service 2 : pansements 40 % au-dessus de l'usage habituel cette semaine."]],
+      heading: "Ce que la pharmacie de l'hôpital voit chaque matin",
+      items: [
+        ["Quelle fourniture manque avant la prochaine livraison", "SentrIA divise le stock de chaque fourniture par sa consommation moyenne par jour et compare le résultat à la date de la prochaine livraison. Il liste les fournitures qui manqueront en premier.", "Gants taille M : 3 jours restants. Prochaine livraison dans 6 jours.", "Produit, quantité en stock, consommation par jour, date de prochaine livraison", "3j", "bars", ["Gants taille M · 3 jours", "prochaine livraison dans 6 jours"]],
+        ["Quel lot périme avant d'être utilisé", "SentrIA lit la date de péremption de chaque lot et son usage habituel. Les lots qui ne seront pas utilisés à temps passent en tête, pour les utiliser en premier ou les retourner.", "Lot d'antibiotique B12 : 30 jours avant péremption, 45 jours de stock. Utilisez-le en premier.", "Produit, numéro de lot, date de péremption, quantité", "30j", "bars", ["Lot B12 · 30 jours avant péremption", "45 jours de stock"]],
+        ["Quel service consomme plus que d'habitude", "SentrIA compare la consommation de chaque service cette semaine à son usage habituel. Une hausse forte se voit avant que le stock ne baisse.", "Service 2 : pansements 40 % au-dessus de l'usage habituel cette semaine.", "Service, produit, quantité utilisée par jour", "+40 %", "compare", ["stock 90", "habituel 100", "cette semaine 140"]],
+      ],
+      notDo: "SentrIA ne commande aucune fourniture et ne modifie aucune prescription. Il montre ce que disent les relevés et ce qui demande votre attention en premier. Vous décidez.",
+      example: { title: "Un matin à la pharmacie de l'hôpital", lines: ["Gants taille M : 3 jours restants, livraison dans 6 jours", "Lot d'antibiotique B12 : 30 jours avant péremption", "Service 2 : pansements 40 % au-dessus de l'usage habituel", "Action proposée : commander les gants aujourd'hui et utiliser le lot B12 en premier"], result: "La commande part avant que le service ne manque." },
+    },
+  },
+  laboratoire: {
+    en: {
+      h1: ["Keep every test supplied", "and every sample", "in time."],
+      lead: "Upload your reagent stock and your test volumes. SentrIA estimates how many tests each reagent still covers, flags the reagent lots that expire first, and warns when a sample has waited too long.",
+      start: "For laboratories that run tests and keep reagents and samples.",
+      stats: [["40", "Tests covered", "Reagent A covers 40 more tests. 60 are booked this week."], ["14d", "To expiry", "Reagent lot R7 expires in 14 days. Use it first."], ["6h", "Sample waiting", "Sample S-218 has waited 6 hours. The limit is 8 hours."]],
+      alerts: [["critical", "Reagent A: 40 tests left, 60 booked this week. Order now."], ["warning", "Reagent lot R7: 14 days to expiry. Use it first."], ["critical", "Sample S-218: 6 hours waiting, limit 8 hours. Process it now."]],
+      heading: "What the lab manager sees every morning",
+      items: [
+        ["Which reagent will not cover the booked tests", "SentrIA divides each reagent's stock by the tests it needs and compares the result with the tests booked. It lists the reagents that will run short first.", "Reagent A covers 40 tests. 60 are booked this week.", "Reagent, quantity on hand, tests per kit, tests booked", "40", "pair", ["Reagent A: 40 tests left", "Booked this week: 60"]],
+        ["Which reagent lot expires first", "SentrIA reads each lot's expiry date and its usual use. The lots that will not be used in time come first.", "Lot R7: 14 days to expiry, 30 days of use. Use it first.", "Reagent, lot number, expiry date, quantity", "14d", "bars", ["Lot R7 · 14 days to expiry", "30 days of use"]],
+        ["Which sample has waited too long", "SentrIA compares the time since collection with the limit for each type of test. It lists the samples that are close to the limit.", "Sample S-218: 6 hours since collection. The limit is 8 hours.", "Sample, type of test, collection time", "6h", "timeline", ["6 hours waiting", "collected", "8 h limit"]],
+      ],
+      notDo: "SentrIA does not run tests or release results. It reads your stock and sample records and shows what needs attention first. The laboratory decides.",
+      example: { title: "One morning in the laboratory", lines: ["Reagent A: 40 tests left, 60 booked", "Lot R7: 14 days to expiry", "Sample S-218: 6 hours waiting, limit 8 hours", "Action proposed: process S-218 now and order reagent A"], result: "The sample is processed in time and the reagent order goes out." },
+    },
+    fr: {
+      h1: ["Gardez chaque test approvisionné", "et chaque échantillon", "dans les temps."],
+      lead: "Envoyez votre stock de réactifs et vos volumes d'analyses. SentrIA estime le nombre de tests que chaque réactif couvre encore, signale les lots de réactifs qui périment en premier, et vous prévient quand un échantillon attend trop longtemps.",
+      start: "Pour les laboratoires qui réalisent des analyses et gardent réactifs et échantillons.",
+      stats: [["40", "Tests couverts", "Le réactif A couvre 40 tests de plus. 60 sont prévus cette semaine."], ["14j", "Avant péremption", "Le lot de réactif R7 périme dans 14 jours. Utilisez-le en premier."], ["6h", "Échantillon en attente", "L'échantillon S-218 attend depuis 6 heures. La limite est de 8 heures."]],
+      alerts: [["critical", "Réactif A : 40 tests restants, 60 prévus cette semaine. Commandez maintenant."], ["warning", "Lot de réactif R7 : 14 jours avant péremption. Utilisez-le en premier."], ["critical", "Échantillon S-218 : 6 heures d'attente, limite 8 heures. Traitez-le maintenant."]],
+      heading: "Ce que le responsable du laboratoire voit chaque matin",
+      items: [
+        ["Quel réactif ne couvrira pas les tests prévus", "SentrIA divise le stock de chaque réactif par les tests qu'il demande et compare le résultat aux tests prévus. Il liste les réactifs qui manqueront en premier.", "Le réactif A couvre 40 tests. 60 sont prévus cette semaine.", "Réactif, quantité en stock, tests par kit, tests prévus", "40", "pair", ["Réactif A : 40 tests restants", "Prévus cette semaine : 60"]],
+        ["Quel lot de réactif périme en premier", "SentrIA lit la date de péremption de chaque lot et son usage habituel. Les lots qui ne seront pas utilisés à temps passent en tête.", "Lot R7 : 14 jours avant péremption, 30 jours d'usage. Utilisez-le en premier.", "Réactif, numéro de lot, date de péremption, quantité", "14j", "bars", ["Lot R7 · 14 jours avant péremption", "30 jours d'usage"]],
+        ["Quel échantillon a attendu trop longtemps", "SentrIA compare le temps écoulé depuis le prélèvement à la limite de chaque type d'analyse. Il liste les échantillons proches de la limite.", "Échantillon S-218 : 6 heures depuis le prélèvement. La limite est de 8 heures.", "Échantillon, type d'analyse, heure de prélèvement", "6h", "timeline", ["6 heures d'attente", "prélevé", "limite 8 h"]],
+      ],
+      notDo: "SentrIA ne réalise aucune analyse et ne libère aucun résultat. Il lit vos relevés de stock et d'échantillons et montre ce qui demande votre attention en premier. Le laboratoire décide.",
+      example: { title: "Un matin au laboratoire", lines: ["Réactif A : 40 tests restants, 60 prévus", "Lot R7 : 14 jours avant péremption", "Échantillon S-218 : 6 heures d'attente, limite 8 heures", "Action proposée : traiter S-218 maintenant et commander le réactif A"], result: "L'échantillon est traité à temps et la commande de réactif part." },
+    },
+  },
+  veterinaire: {
+    en: {
+      h1: ["Keep vaccines cold", "and sell the stock", "before it expires."],
+      lead: "Upload your stock file. SentrIA shows which batches to use first, flags a fridge that goes out of range, and lists the stock that has stopped moving.",
+      start: "For veterinary clinics and animal health pharmacies.",
+      stats: [["8°C", "Cold chain", "Warned above 8 °C and below 2 °C, and when no temperature is recorded."], ["30d", "To expiry", "Batches 30 to 90 days from expiry are flagged to leave first."], ["60d", "No sale", "Dewormer D-40: 60 days without a sale. Usual gap: 14 days."]],
+      alerts: [["critical", "Vaccine fridge 2: 9 °C since 06:00. Check the cold chain now."], ["warning", "Rabies batch V-112: 30 days to expiry. Sell it first."], ["warning", "Dewormer D-40: 60 days without a sale. Usual gap: 14 days."]],
+      heading: "What the clinic sees every morning",
+      items: [
+        ["Which fridge has left its safe range", "SentrIA reads the temperature records of each fridge. It warns above 8 °C, below 2 °C, and when no reading was recorded.", "Vaccine fridge 2: 9 °C since 06:00. Check it now.", "Fridge, temperature reading, time of reading", "9°", "timeline", ["9 °C now", "safe range", "8 °C limit"]],
+        ["Which batch should leave first", "SentrIA reads each batch's expiry date. Batches 30 to 90 days from expiry are flagged to leave first, and those that will not sell in time suggest a return to the supplier.", "Rabies batch V-112: 30 days to expiry. Sell it first.", "Product, batch number, expiry date, quantity", "30d", "bars", ["Batch V-112 · 30 days to expiry", "sell first"]],
+        ["Which stock has stopped moving", "SentrIA lists the products with no sale for longer than their usual gap, with the value left on the shelf.", "Dewormer D-40: 60 days without a sale. Usual gap: 14 days.", "Product, sales by day, quantity on hand", "60d", "timeline", ["60 days, no sale", "last sale", "usual gap 14 days"]],
+      ],
+      notDo: "SentrIA does not control the fridges or dispose of any stock. It reads the records you enter and shows what needs attention first. The clinic decides.",
+      example: { title: "One morning at the veterinary clinic", lines: ["Vaccine fridge 2: 9 °C since 06:00", "Rabies batch V-112: 30 days to expiry", "Dewormer D-40: 60 days without a sale", "Action proposed: check fridge 2 and sell batch V-112 first"], result: "The cold chain is checked before the vaccines are lost." },
+    },
+    fr: {
+      h1: ["Gardez les vaccins au froid", "et vendez le stock", "avant sa péremption."],
+      lead: "Envoyez votre fichier de stock. SentrIA montre quels lots utiliser en premier, signale un réfrigérateur qui sort de sa plage, et liste le stock qui ne tourne plus.",
+      start: "Pour les cliniques vétérinaires et les pharmacies de santé animale.",
+      stats: [["8°C", "Chaîne du froid", "Alerte au-dessus de 8 °C, en dessous de 2 °C, et quand aucune température n'est enregistrée."], ["30j", "Avant péremption", "Les lots à 30 à 90 jours de la péremption sont signalés pour partir en premier."], ["60j", "Sans vente", "Vermifuge D-40 : 60 jours sans vente. Écart habituel : 14 jours."]],
+      alerts: [["critical", "Réfrigérateur à vaccins 2 : 9 °C depuis 6 h. Vérifiez la chaîne du froid maintenant."], ["warning", "Lot de vaccin antirabique V-112 : 30 jours avant péremption. Vendez-le en premier."], ["warning", "Vermifuge D-40 : 60 jours sans vente. Écart habituel : 14 jours."]],
+      heading: "Ce que la clinique voit chaque matin",
+      items: [
+        ["Quel réfrigérateur est sorti de sa plage sûre", "SentrIA lit les relevés de température de chaque réfrigérateur. Il alerte au-dessus de 8 °C, en dessous de 2 °C, et quand aucun relevé n'a été enregistré.", "Réfrigérateur à vaccins 2 : 9 °C depuis 6 h. Vérifiez-le maintenant.", "Réfrigérateur, relevé de température, heure du relevé", "9°", "timeline", ["9 °C maintenant", "plage sûre", "limite 8 °C"]],
+        ["Quel lot doit partir en premier", "SentrIA lit la date de péremption de chaque lot. Les lots à 30 à 90 jours de la péremption sont signalés pour partir en premier, et ceux qui ne se vendront pas à temps suggèrent un retour au fournisseur.", "Lot de vaccin antirabique V-112 : 30 jours avant péremption. Vendez-le en premier.", "Produit, numéro de lot, date de péremption, quantité", "30j", "bars", ["Lot V-112 · 30 jours avant péremption", "à vendre en premier"]],
+        ["Quel stock ne tourne plus", "SentrIA liste les produits sans vente depuis plus longtemps que leur écart habituel, avec la valeur restée en rayon.", "Vermifuge D-40 : 60 jours sans vente. Écart habituel : 14 jours.", "Produit, ventes par jour, quantité en stock", "60j", "timeline", ["60 jours sans vente", "dernière vente", "écart habituel 14 jours"]],
+      ],
+      notDo: "SentrIA ne contrôle pas les réfrigérateurs et ne détruit aucun stock. Il lit les relevés que vous saisissez et montre ce qui demande votre attention en premier. La clinique décide.",
+      example: { title: "Un matin à la clinique vétérinaire", lines: ["Réfrigérateur à vaccins 2 : 9 °C depuis 6 h", "Lot de vaccin antirabique V-112 : 30 jours avant péremption", "Vermifuge D-40 : 60 jours sans vente", "Action proposée : vérifier le réfrigérateur 2 et vendre le lot V-112 en premier"], result: "La chaîne du froid est vérifiée avant que les vaccins ne soient perdus." },
     },
   },
 }

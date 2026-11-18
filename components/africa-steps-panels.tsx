@@ -6,8 +6,8 @@ import "./africa-steps-panels.css"
 type Step = { title: string; text: string }
 
 const LEAD = {
-  en: "From a spreadsheet to a morning list, in three steps.",
-  fr: "D'un tableur à la liste du matin, en trois étapes.",
+  en: "Three steps, from your export to your first decision.",
+  fr: "Trois étapes, de votre export à votre première décision.",
 }
 
 export function AfricaStepsPanels({ heading, steps, kicker, lang }: { heading: string; steps: Step[]; kicker?: string; lang: "en" | "fr" }) {
