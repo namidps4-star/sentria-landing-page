@@ -202,51 +202,72 @@
   .afr-vq-now b{animation:none;opacity:1}
 }
 
-/* Decision card — squircle style */
+/* Decision card — squircle style v2 */
 .afr-dcard{padding:clamp(32px,5vw,56px) clamp(20px,4vw,40px)}
-.afr-dcard__kicker{font-size:12px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em;margin-bottom:clamp(28px,4vw,44px);display:flex;align-items:center;gap:10px}
+.afr-dcard__kicker{font-size:12px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:clamp(32px,5vw,52px);display:flex;align-items:center;gap:10px}
 .afr-dcard__kicker::before{content:'';width:18px;height:1.5px;border-radius:999px;background:#d6ff3f}
-/* Grid of 4 columns */
-.afr-dcard__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,24px)}
-.afr-dcard__col{display:flex;flex-direction:column;align-items:center;gap:14px;
-  opacity:0;transform:translateY(10px)}
-[data-vis="1"] .afr-dcard__col{animation:afr-dc-in .55s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--ri,0) * .12s + .15s)}
+
+/* Squircle row */
+.afr-dcard__sqs{display:flex;align-items:flex-end;gap:clamp(10px,2.2vw,28px);justify-content:center;margin-bottom:clamp(28px,4vw,44px)}
+.afr-dcard__sq-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;transform:scale(.55) translateY(12px)}
+[data-vis="1"] .afr-dcard__sq-wrap{animation:afr-sq-in .65s cubic-bezier(.18,.85,.2,1) forwards;animation-delay:calc(var(--ri,0) * .11s + .1s)}
+@keyframes afr-sq-in{to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* Number / label above squircle */
+.afr-dcard__sq-stat{height:3em;display:flex;align-items:flex-end;justify-content:center}
+.afr-dcard__sq-stat-num{font-family:"AfricaNumeral",sans-serif;font-size:clamp(32px,4.5vw,54px);font-weight:300;color:#d6ff3f;letter-spacing:-.02em;line-height:1}
+.afr-dcard__sq-stat-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);line-height:1;padding-bottom:4px}
+
+/* Squircle base */
+.afr-dcard__sq{border-radius:38%;
+  background:radial-gradient(ellipse at 50% 56%, #0b0c08 14%, rgba(11,12,8,.5) 40%, #d6ff3f 70%, #c4e82a 100%);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),filter .3s ease}
+.afr-dcard__sq::after{content:'';display:block;border-radius:50%;margin:14%;border:1.5px dashed rgba(255,255,255,.3)}
+.afr-dcard__sq-wrap:hover .afr-dcard__sq{transform:scale(1.06);filter:brightness(1.12)}
+
+/* Size variants */
+.afr-dcard__sq-wrap--lg .afr-dcard__sq{width:clamp(130px,18vw,210px);aspect-ratio:1/1}
+.afr-dcard__sq-wrap--md .afr-dcard__sq{width:clamp(100px,13.5vw,165px);aspect-ratio:1/1}
+.afr-dcard__sq-wrap--sm .afr-dcard__sq{width:clamp(82px,11vw,138px);aspect-ratio:1/1}
+
+/* Stat number hover lift */
+.afr-dcard__sq-stat-num{transition:transform .3s ease}
+.afr-dcard__sq-wrap:hover .afr-dcard__sq-stat-num{transform:translateY(-4px)}
+
+/* Values table */
+.afr-dcard__tbl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid rgba(255,255,255,.1);padding-top:20px}
+.afr-dcard__tcol{padding:0 20px 0 0;opacity:0;transform:translateY(8px)}
+[data-vis="1"] .afr-dcard__tcol{animation:afr-dc-in .45s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--ri,0) * .1s + .6s)}
 @keyframes afr-dc-in{to{opacity:1;transform:none}}
-/* Field label above squircle */
-.afr-dcard__field-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45);line-height:1}
-/* Squircle */
-.afr-dcard__sq{position:relative;width:clamp(110px,16vw,180px);aspect-ratio:1/1;
-  border-radius:28%;
-  background:radial-gradient(ellipse at 50% 56%, #0b0c08 16%, rgba(11,12,8,.55) 42%, #d6ff3f 72%, #bfed1a 100%);
-  display:flex;align-items:center;justify-content:center}
-/* Dashed ring inside */
-.afr-dcard__sq::after{content:'';position:absolute;
-  inset:14%;border-radius:50%;
-  border:1.5px dashed rgba(255,255,255,.35);pointer-events:none}
-/* Confidence % number inside the ring */
-.afr-dcard__sq-num{position:relative;z-index:1;
-  font-family:"AfricaNumeral",sans-serif;font-size:clamp(28px,4vw,46px);font-weight:300;
-  color:#d6ff3f;letter-spacing:-.02em;line-height:1}
-.afr-dcard__sq-unit{font-size:.5em;vertical-align:super;margin-left:1px;letter-spacing:0}
-/* Value text below squircle */
-.afr-dcard__val{margin:0;font-size:clamp(11px,1vw,13px);color:rgba(255,255,255,.55);line-height:1.5;text-align:center;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.afr-dcard__val strong{font-weight:600;color:#d6ff3f}
-/* Outcome col gets lime accent on value */
-.afr-dcard__col--oc .afr-dcard__val{color:rgba(214,255,63,.8);font-weight:600}
-@media (max-width:680px){
-  .afr-dcard__grid{grid-template-columns:repeat(2,1fr);gap:clamp(10px,3vw,20px)}
+.afr-dcard__tcol dt{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ac,.5);margin-bottom:6px}
+.afr-dcard__tcol dd{margin:0;font-size:12px;color:rgba(255,255,255,.5);line-height:1.55}
+.afr-dcard__tcol dd strong{font-weight:600;color:#d6ff3f}
+.afr-dcard__tcol--ev{--ac:rgba(255,120,100,.7)}
+.afr-dcard__tcol--cf{--ac:rgba(214,255,63,.7)}
+.afr-dcard__tcol--im{--ac:rgba(100,160,255,.7)}
+.afr-dcard__tcol--oc{--ac:rgba(255,255,255,.5)}
+.afr-dcard__tcol--oc dd{color:rgba(214,255,63,.8);font-weight:600}
+
+@media (max-width:700px){
+  .afr-dcard__sqs{flex-wrap:wrap;gap:clamp(8px,3vw,16px)}
+  .afr-dcard__sq-wrap--lg .afr-dcard__sq{width:clamp(100px,38vw,160px)}
+  .afr-dcard__sq-wrap--md .afr-dcard__sq{width:clamp(80px,30vw,130px)}
+  .afr-dcard__sq-wrap--sm .afr-dcard__sq{width:clamp(68px,26vw,110px)}
+  .afr-dcard__tbl{grid-template-columns:1fr 1fr;gap:16px 0}
+  .afr-dcard__tcol{border-top:1px solid rgba(255,255,255,.08);padding-top:12px;padding-right:12px}
 }
 @media (max-width:380px){
-  .afr-dcard__grid{grid-template-columns:repeat(2,1fr);gap:10px}
-  .afr-dcard__sq{width:clamp(90px,38vw,130px)}
+  .afr-dcard__tbl{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
-  .afr-dcard__col{animation:none!important;opacity:1;transform:none}
+  .afr-dcard__sq-wrap{animation:none!important;opacity:1;transform:none}
+  .afr-dcard__tcol{animation:none!important;opacity:1;transform:none}
+  .afr-dcard__sq,.afr-dcard__sq-stat-num{transition:none}
 }
 /* Section — ink background so squircles pop */
 .afr-dcard-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
-/* Band colour modifiers — all ink so squircles always read */
 .afr-dcard-sec--ink{background:#0b0c08}
 .afr-dcard-sec--white{background:#0b0c08}
 .afr-dcard-sec--lime{background:#0b0c08}

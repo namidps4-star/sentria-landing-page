@@ -43,40 +43,50 @@ export function AfricaDecisionCard({ card, lang }: { card: DecisionCardData; lan
   const conf = parseConf(card.confidence)
 
   const fields = [
-    { label: l0, value: card.evidence, mod: "ev", conf: null },
-    { label: l1, value: card.confidence, mod: "cf", conf: conf },
-    { label: l2, value: card.impact, mod: "im", conf: null },
-    { label: l3, value: card.outcome, mod: "oc", conf: null },
+    { label: l0, value: card.evidence,    mod: "ev", stat: null,                        size: "md" },
+    { label: l1, value: card.confidence,  mod: "cf", stat: conf ? conf.num + conf.unit : null, size: "lg" },
+    { label: l2, value: card.impact,      mod: "im", stat: null,                        size: "md" },
+    { label: l3, value: card.outcome,     mod: "oc", stat: null,                        size: "sm" },
   ] as const
 
   return (
     <div className="afr-dcard" ref={ref} data-vis={vis ? "1" : "0"}>
       <p className="afr-dcard__kicker">{KICKER[lang]}</p>
 
-      <div className="afr-dcard__grid">
+      {/* Squircle row */}
+      <div className="afr-dcard__sqs">
         {fields.map((f, i) => (
           <div
             key={f.mod}
-            className={`afr-dcard__col afr-dcard__col--${f.mod}`}
+            className={`afr-dcard__sq-wrap afr-dcard__sq-wrap--${f.size}`}
             style={{ "--ri": i } as CSSProperties}
           >
-            <span className="afr-dcard__field-label">{f.label}</span>
-            <div className="afr-dcard__sq" aria-hidden="true">
-              {f.conf && (
-                <span className="afr-dcard__sq-num">
-                  {f.conf.num}
-                  <span className="afr-dcard__sq-unit">{f.conf.unit}</span>
-                </span>
-              )}
+            {/* Number / stat above — always visible */}
+            <div className="afr-dcard__sq-stat">
+              {f.stat
+                ? <span className="afr-dcard__sq-stat-num">{f.stat}</span>
+                : <span className="afr-dcard__sq-stat-lbl">{f.label}</span>
+              }
             </div>
-            <p className="afr-dcard__val">
-              {f.conf ? (
-                <><strong>{f.conf.num}{f.conf.unit}</strong>{f.conf.rest ? " " + f.conf.rest : ""}</>
-              ) : f.value}
-            </p>
+            {/* Squircle shape */}
+            <div className={`afr-dcard__sq afr-dcard__sq--${f.mod}`} aria-hidden="true" />
           </div>
         ))}
       </div>
+
+      {/* Values table below */}
+      <dl className="afr-dcard__tbl">
+        {fields.map((f, i) => (
+          <div key={f.mod} className={`afr-dcard__tcol afr-dcard__tcol--${f.mod}`} style={{ "--ri": i } as CSSProperties}>
+            <dt>{f.label}</dt>
+            <dd>
+              {f.mod === "cf" && conf
+                ? <><strong>{conf.num}{conf.unit}</strong>{conf.rest ? " " + conf.rest : ""}</>
+                : f.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </div>
   )
 }
