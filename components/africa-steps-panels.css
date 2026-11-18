@@ -1,0 +1,25 @@
+.afr-sp3{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:56px;align-items:center;padding:clamp(56px,6vw,96px) var(--pad,56px);color:#f5f3ea}
+.afr-sp3-head h3{margin:0;font:700 clamp(38px,3.8vw,54px)/1.04 var(--f-display),sans-serif;letter-spacing:-.03em;max-width:10ch}
+.afr-sp3-lead{margin:22px 0 0;font-size:17px;line-height:1.55;color:#cfcdbf;max-width:30ch}
+.afr-sp3-row{list-style:none;margin:0;padding:0;display:flex;gap:4px;height:600px;background:#0b0c08}
+.afr-sp3-p{position:relative;overflow:hidden;flex:1 1 0;max-width:250px;min-width:0;color:#0b0c08}
+.afr-sp3-p.grey{background:#c9c9c4}
+.afr-sp3-p.white{background:#fff}
+.afr-sp3-p.lime{background:#d6ff3f}
+.afr-sp3-num{position:absolute;font-family:"AfricaNumeral",sans-serif;font-weight:300;font-size:380px;line-height:.74;letter-spacing:-.06em;pointer-events:none;transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.afr-sp3-p[data-n="1"] .afr-sp3-num{left:-18%;bottom:-8%;color:#fff}
+.afr-sp3-p[data-n="2"] .afr-sp3-num{right:-40%;top:-5%;color:#c9c9c4}
+.afr-sp3-p[data-n="3"] .afr-sp3-num{left:-18%;bottom:-8%;color:#0b0c08}
+.afr-sp3-txt{position:absolute;z-index:2;width:calc(100% - 44px)}
+.afr-sp3-p[data-n="1"] .afr-sp3-txt,.afr-sp3-p[data-n="3"] .afr-sp3-txt{left:22px;top:22px}
+.afr-sp3-p[data-n="2"] .afr-sp3-txt{right:22px;bottom:22px;text-align:right}
+.afr-sp3-txt h4{margin:0;font:700 11px/1.3 var(--f-body),sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.afr-sp3-txt p{margin:10px 0 0;font:400 14px/1.45 var(--f-body),sans-serif}
+
+.afr-sp3:not([data-in]) .afr-sp3-p[data-n="1"] .afr-sp3-num,.afr-sp3:not([data-in]) .afr-sp3-p[data-n="3"] .afr-sp3-num{transform:translateY(45%)}
+.afr-sp3:not([data-in]) .afr-sp3-p[data-n="2"] .afr-sp3-num{transform:translateY(-45%)}
+.afr-sp3[data-in] .afr-sp3-p[data-n="2"] .afr-sp3-num{transition-delay:.15s}
+.afr-sp3[data-in] .afr-sp3-p[data-n="3"] .afr-sp3-num{transition-delay:.3s}
+@media (prefers-reduced-motion:reduce){.afr-sp3-num{transition:none!important;transform:none!important}}
+@media (max-width:1100px){.afr-sp3{grid-template-columns:1fr;gap:36px}.afr-sp3-head h3{max-width:none}}
+@media (max-width:700px){.afr-sp3-row{flex-direction:column;height:auto}.afr-sp3-p{max-width:none;height:340px}.afr-sp3-num{font-size:300px}}
