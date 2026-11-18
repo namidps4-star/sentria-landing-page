@@ -40,7 +40,7 @@ function bandFor(slug: string): { queue: BandColor; dcard: BandColor } {
   const i = SLUG_ORDER.indexOf(slug)
   const idx = i < 0 ? 0 : i
   const q = BAND_COLORS[idx % BAND_COLORS.length]
-  const d = BAND_COLORS[(idx + 3) % BAND_COLORS.length]
+  const d = BAND_COLORS[(idx + 2) % BAND_COLORS.length]
   return { queue: q, dcard: d }
 }
 
