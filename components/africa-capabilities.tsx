@@ -20,6 +20,30 @@ import "./africa-variants.css"
 /* Each activity keeps its own ground for the questions: lime, sand or ink, from its design. */
 const TONES: Record<string, FaqTone> = { grid: "lime", list: "sand", night: "night" }
 
+const BAND_COLORS = ["ink", "white", "lime", "olive", "sand", "grey", "cream"] as const
+type BandColor = (typeof BAND_COLORS)[number]
+
+/* 27 activities in page order — each pair (queue, dcard) offset by 3 so adjacent bands contrast */
+const SLUG_ORDER = [
+  "pharmacie", "grossiste-pharma", "exploitation-agricole",
+  "cooperative-agricole", "silo-stockage", "grossiste-distributeur",
+  "supermarche-hypermarche", "chaine-magasins", "epicerie-proximite",
+  "port-conteneurs", "entrepot-manutention", "transport-distribution",
+  "preparation-expedition", "chaine-froid", "plusieurs-activites",
+  "usine-production", "atelier-soustraitance", "usine-agroalimentaire",
+  "transporteur-routier", "flotte-entreprise", "location-vehicules",
+  "centrale-production", "generateurs-secours", "distribution-energetique",
+  "clinique-hopital", "laboratoire", "veterinaire",
+]
+
+function bandFor(slug: string): { queue: BandColor; dcard: BandColor } {
+  const i = SLUG_ORDER.indexOf(slug)
+  const idx = i < 0 ? 0 : i
+  const q = BAND_COLORS[idx % BAND_COLORS.length]
+  const d = BAND_COLORS[(idx + 3) % BAND_COLORS.length]
+  return { queue: q, dcard: d }
+}
+
 export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
   const c = CAPABILITIES[slug]?.[lang]
   if (!c) return null
@@ -30,6 +54,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   const id = `afr-caps-${slug}-${lang}`
   const pharmacy = slug === "pharmacie"
   const alerts = SECTOR_ALERTS[slug]?.[lang] ?? []
+  const bands = bandFor(slug)
   const shared = SHARED[lang]
   const steps = c.steps ?? shared.steps
   const stepsHeading = c.stepsHeading ?? shared.stepsHeading
@@ -59,13 +84,13 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         {c.example && slug !== "grossiste-pharma" && !pharmacy && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
       </section>
       {alerts.length > 0 && (
-        <section className="afr-queue-sec wrap">
+        <section className={`afr-queue-sec afr-queue-sec--${bands.queue} wrap`}>
           <p className="rv-kicker">Decision queue</p>
           <AfricaQueuePreview alerts={alerts} lang={lang} />
         </section>
       )}
       {c.decisionCard && (
-        <section className="afr-dcard-sec wrap">
+        <section className={`afr-dcard-sec afr-dcard-sec--${bands.dcard} wrap`}>
           <AfricaDecisionCard card={c.decisionCard} lang={lang} />
         </section>
       )}
