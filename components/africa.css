@@ -122,6 +122,7 @@
 .afr-queue-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
 .afr-queue-sec .rv-h{color:#f5f3ea;margin-bottom:32px}
 .afr-queue-sec .rv-kicker{color:#7c9a2a}
+.afr-queue-sec .rv-kicker::before{display:none}
 
 /* Queue preview — Gantt glass-capsule */
 .afr-gt{position:relative;width:100%}
