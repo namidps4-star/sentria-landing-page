@@ -11,13 +11,13 @@
 .alp-card{background:#2a2f33;border-radius:20px;padding:12px 14px;color:#f5f3ea}
 
 .alp-head{display:flex;align-items:center;justify-content:space-between}
-.alp-index{width:40px;height:40px;border-radius:50%;background:#0b0c08;color:#f5f3ea;display:grid;place-items:center;font-size:18px;font-weight:300;line-height:1}
+.alp-index{width:40px;height:40px;border-radius:50%;background:#0b0c08;color:#f5f3ea;display:grid;place-items:center;font-family:"AfricaNumeral",sans-serif;font-size:20px;font-weight:300;line-height:1}
 .alp-level{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
 .alp-critical .alp-level{color:#ff7a5c}
 .alp-warning .alp-level{color:#ffd24a}
 
 .alp-big{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(245,243,234,.14)}
-.alp-big b{font-size:28px;font-weight:300;line-height:1}
+.alp-big b{font-family:"AfricaNumeral",sans-serif;font-size:32px;font-weight:300;line-height:1}
 .alp-big span{font-size:12px;opacity:.75;text-align:right}
 
 .alp-detail{margin:8px 0;font-size:12px;line-height:1.4;opacity:.78}

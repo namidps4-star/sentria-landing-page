@@ -162,7 +162,7 @@
 .afr-vq-row{position:relative;display:grid;grid-template-columns:var(--g) var(--p) minmax(0,1fr);gap:var(--gap);margin-bottom:10px;opacity:0;transform:translateY(14px)}
 [data-vis="1"] .afr-vq-row{animation:afr-vq-in .55s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--ri)*.2s + .35s)}
 @keyframes afr-vq-in{to{opacity:1;transform:none}}
-.afr-vq-idx{align-self:end;font-size:26px;font-weight:700;line-height:1;color:#48484d;padding-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
+.afr-vq-idx{align-self:end;font-family:"AfricaNumeral",sans-serif;font-size:34px;font-weight:300;line-height:1;color:#9a9aa2;padding-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
 .afr-vq-idx small{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
 
 .afr-vq-pill{position:relative;z-index:1;border-radius:12px;display:flex;justify-content:center;padding-top:10px;min-height:76px;background:var(--pc);color:var(--pt)}
@@ -192,7 +192,7 @@
 
 @media (max-width:420px){
   .afr-vq{--g:34px;--p:42px;--gap:8px}
-  .afr-vq-idx{font-size:21px}
+  .afr-vq-idx{font-size:24px}
   .afr-vq-card{padding:12px 42px 12px 13px}
   .afr-vq-title{font-size:16px}
 }
