@@ -40,10 +40,22 @@ export function AfricaQueuePreview({ alerts, lang }: { alerts: Alert[]; lang: "e
   const confMap: Record<number, number> = {}
   sorted.forEach(({ i }, rank) => { confMap[i] = rank })
 
-  const todayLabel = lang === "en" ? "TODAY" : "AUJOURD'HUI"
+  const todayLabel  = lang === "en" ? "TODAY"            : "AUJOURD'HUI"
+  const kickerLabel = lang === "en" ? "Decision queue"   : "File de décisions"
+  const headlineA   = lang === "en" ? "Act on the right one." : "Agissez au bon endroit."
+  const headlineB   = lang === "en" ? " Ranked by urgency."   : " Classé par urgence."
 
   return (
-    <div className="afr-gt" aria-label={lang === "en" ? "Decision queue" : "File de décisions"}>
+    <div className="afr-gt" aria-label={kickerLabel}>
+
+      {/* Section header */}
+      <div className="afr-gt-header">
+        <p className="afr-gt-kicker">{kickerLabel}</p>
+        <h2 className="afr-gt-headline">
+          <strong>{headlineA}</strong>
+          <span>{headlineB}</span>
+        </h2>
+      </div>
 
       {/* Timeline ruler */}
       <div className="afr-gt-ruler">

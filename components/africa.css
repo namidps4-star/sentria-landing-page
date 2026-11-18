@@ -121,11 +121,31 @@
 /* Queue preview — node canvas */
 .afr-queue-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
 .afr-queue-sec .rv-h{color:#f5f3ea;margin-bottom:32px}
-.afr-queue-sec .rv-kicker{color:#7c9a2a}
-.afr-queue-sec .rv-kicker::before{display:none}
 
 /* Queue preview — Gantt glass-capsule */
 .afr-gt{position:relative;width:100%}
+
+/* Section header */
+.afr-gt-header{margin-bottom:48px}
+.afr-gt-kicker{
+  font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.32);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.afr-gt-kicker::before{
+  content:'';display:inline-block;
+  width:18px;height:1.5px;border-radius:999px;
+  background:rgba(255,122,92,.7);flex-shrink:0;
+}
+.afr-gt-headline{
+  font-family:var(--f-display,Syne,sans-serif);
+  font-size:clamp(28px,3.6vw,54px);
+  font-weight:700;
+  line-height:1.06;
+  letter-spacing:-.03em;
+}
+.afr-gt-headline strong{color:#fff}
+.afr-gt-headline span{color:rgba(255,255,255,.18)}
 
 /* Ruler */
 .afr-gt-ruler{position:relative;height:52px;margin-bottom:14px;overflow:visible}
