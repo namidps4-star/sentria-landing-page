@@ -36,12 +36,19 @@ const LIVE_PHOTOS: Record<string, Pick<ActivityCard, "photo" | "alt" | "by" | "u
     by: "Saikiran Kesari",
     user: "saikirankesari",
   },
+  "grossiste-distributeur": {
+    photo: "/africa/hq/card-grossiste-distributeur.jpg",
+    alt: { en: "Cardboard boxes stacked in a warehouse", fr: "Cartons empilés dans un entrepôt" },
+    by: "Wonderlane",
+    user: "wonderlane",
+  },
 }
 
 const SECTOR: Record<string, L> = {
   pharmacie: { en: "Health", fr: "Santé" },
   "grossiste-pharma": { en: "Health", fr: "Santé" },
   "exploitation-agricole": { en: "Agriculture", fr: "Agriculture" },
+  "grossiste-distributeur": { en: "Distribution", fr: "Distribution" },
 }
 
 /* The sector copy already on the home page ("Where do you fit in?"), reused in both languages. */

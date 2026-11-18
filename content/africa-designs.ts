@@ -34,6 +34,9 @@ const ORDER = [
   "centrale-production",
   "generateurs-secours",
   "distribution-energetique",
+  "clinique-hopital",
+  "laboratoire",
+  "veterinaire",
 ]
 
 const MOODS: Mood[] = ["ledger", "cards", "bands", "orbit", "column", "mono"]
