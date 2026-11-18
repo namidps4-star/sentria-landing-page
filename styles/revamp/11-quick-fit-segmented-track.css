@@ -213,3 +213,13 @@
 .cmp-table td.cmp-us { padding: 0 18px; }
 .cmp-table td.cmp-us .cmp-val { position: relative; z-index: 1; font: 600 13.5px var(--f-body), sans-serif; color: #0b0c08; }
 .cmp-table td.cmp-us::before { z-index: 0; }
+
+@media (max-width: 480px) {
+  .cmp-table { min-width: 0; font-size: 11px; }
+  .cmp-table th, .cmp-table td { height: 40px; }
+  .cmp-table tbody th { font: 700 11px/1.2 var(--f-display), sans-serif; padding: 0 10px; width: 36%; }
+  .cmp-table thead th { font-size: 10px; padding: 8px 4px; }
+  .cmp-table thead th.cmp-us { width: 38%; }
+  .cmp-table td.cmp-us { padding: 0 10px; }
+  .cmp-table td.cmp-us .cmp-val { font-size: 11px; }
+}
