@@ -4,9 +4,9 @@
 
 /* Hero tone */
 .afr-hero.afr-hero--deep[data-tone="ink"]{background:#0b0c08}
-.afr-hero.afr-hero--deep[data-tone="ink"]::after{background:rgba(11,12,8,.86)}
-.afr-hero.afr-hero--deep[data-tone="olive"]{background:#1b1e10}
-.afr-hero.afr-hero--deep[data-tone="olive"]::after{background:rgba(27,30,16,.86)}
+.afr-hero.afr-hero--deep[data-tone="ink"]::after{background:rgba(11,12,8,.72)}
+.afr-hero.afr-hero--deep[data-tone="olive"]{background:#0b0c08}
+.afr-hero.afr-hero--deep[data-tone="olive"]::after{background:rgba(11,12,8,.72)}
 
 /* Ledger mood: cards. Ink ground, one card per capability, a lime numeral. */
 .afr-led[data-mood="cards"]{background:#0b0c08;color:#f5f3ea}
