@@ -11,7 +11,18 @@ function parseAlert(a: Alert, rank: number) {
   const isAction = /^(Transfer|Arrange|Review|Suggested|Order|Check|Sell|Handle|Deliver)/i.test(last)
   const signal = isAction && parts.length > 1 ? parts.slice(0, -1).join(". ") : a.text.replace(/\.$/, "")
   const action = isAction ? last : null
-  return { signal, action, conf: CONF[rank] ?? 60 }
+  const cut = signal.search(/\s?:\s/)
+  const first = signal.match(/^.+?[.!?](?=\s|$)/)
+  let title = signal
+  let detail = ""
+  if (cut > 0) {
+    title = signal.slice(0, cut)
+    detail = signal.slice(signal.indexOf(":", cut) + 1).trim()
+  } else if (first && first[0].length < signal.length) {
+    title = first[0].replace(/\.$/, "")
+    detail = signal.slice(first[0].length).trim()
+  }
+  return { title, detail, action, conf: CONF[rank] ?? 60 }
 }
 
 const ACTION_LABEL: Record<"en" | "fr", Record<"critical" | "warning", string>> = {
@@ -89,12 +100,12 @@ export function AfricaQueuePreview({ alerts, lang }: { alerts: Alert[]; lang: "e
         <div className="afr-vq-rows">
           <div className="afr-vq-spine" />
           {sorted.map(({ a, i }, rank) => {
-            const { signal, action, conf } = parseAlert(a, rank)
+            const { title, detail, action, conf } = parseAlert(a, rank)
             const actionText = action ?? ACTION_LABEL[lang][a.level]
             return (
               <div
                 key={i}
-                className={`afr-vq-row afr-vq-row--${a.level}`}
+                className={`afr-vq-row afr-vq-row--k${rank % 4}`}
                 style={{ "--ri": rank } as CSSProperties}
               >
                 {rank === 0 && (
@@ -104,11 +115,12 @@ export function AfricaQueuePreview({ alerts, lang }: { alerts: Alert[]; lang: "e
                   {conf}
                   <small>{confLabel}</small>
                 </div>
-                <div className={`afr-vq-pill afr-vq-pill--${a.level}`}>
+                <div className="afr-vq-pill">
                   {a.level === "critical" ? <Warn /> : <Clock />}
                 </div>
                 <div className="afr-vq-card">
-                  <div className="afr-vq-title">{signal}</div>
+                  <div className="afr-vq-title">{title}</div>
+                  {detail && <div className="afr-vq-meta">{detail}</div>}
                   <span className="afr-vq-go">{actionText}</span>
                   <span className="afr-vq-box" aria-hidden="true" />
                 </div>

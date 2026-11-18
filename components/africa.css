@@ -122,13 +122,6 @@
 .afr-queue-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
 .afr-queue-sec .rv-h{color:#f5f3ea;margin-bottom:32px}
 /* Band colour modifiers — queue section */
-.afr-queue-sec--ink{background:#0b0c08}
-.afr-queue-sec--white{background:#fbfbfd}
-.afr-queue-sec--lime{background:#d6ff3f}
-.afr-queue-sec--olive{background:#1b1e10}
-.afr-queue-sec--sand{background:#ece7d6}
-.afr-queue-sec--grey{background:#f2f2f0}
-.afr-queue-sec--cream{background:#f5f3ea}
 
 /* Queue preview — Gantt glass-capsule */
 .afr-gt{position:relative;width:100%}
@@ -137,7 +130,7 @@
 .afr-gt-header{margin-bottom:48px}
 .afr-gt-kicker{
   font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(255,255,255,.32);margin-bottom:14px;
+  color:rgba(255,255,255,.6);margin-bottom:14px;
   display:flex;align-items:center;gap:10px;
 }
 .afr-gt-kicker::before{
@@ -153,7 +146,7 @@
   letter-spacing:-.03em;
 }
 .afr-gt-headline strong{color:#fff}
-.afr-gt-headline span{color:rgba(255,255,255,.18)}
+.afr-gt-headline span{color:rgba(255,255,255,.6)}
 
 /* Vertical timeline queue */
 .afr-vq{--g:48px;--p:46px;--gap:10px;position:relative;max-width:760px}
@@ -169,20 +162,22 @@
 .afr-vq-row{position:relative;display:grid;grid-template-columns:var(--g) var(--p) minmax(0,1fr);gap:var(--gap);margin-bottom:10px;opacity:0;transform:translateY(14px)}
 [data-vis="1"] .afr-vq-row{animation:afr-vq-in .55s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--ri)*.2s + .35s)}
 @keyframes afr-vq-in{to{opacity:1;transform:none}}
-.afr-vq-idx{align-self:end;font-size:26px;font-weight:700;line-height:1;color:#48484d;padding-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
+.afr-vq-idx{align-self:end;font-family:"AfricaNumeral",sans-serif;font-size:34px;font-weight:300;line-height:1;color:#9a9aa2;padding-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
 .afr-vq-idx small{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
 
-.afr-vq-pill{position:relative;z-index:1;border-radius:12px;display:flex;justify-content:center;padding-top:10px;min-height:76px;color:#17171a}
+.afr-vq-pill{position:relative;z-index:1;border-radius:12px;display:flex;justify-content:center;padding-top:10px;min-height:76px;background:var(--pc);color:var(--pt)}
 .afr-vq-pill svg{width:20px;height:20px}
-.afr-vq-pill--critical{background:#ff7a5c}
-.afr-vq-pill--warning{background:#ffb020}
 
 .afr-vq-card{position:relative;background:#2c2c2e;border-radius:12px;padding:14px 48px 14px 16px;min-width:0}
-.afr-vq-title{font-size:16px;font-weight:700;line-height:1.3;color:#f2f2f4;margin-bottom:8px}
+.afr-vq-title{font-size:17px;font-weight:700;line-height:1.25;color:#f2f2f4;margin-bottom:4px}
+.afr-vq-meta{font-size:13px;font-weight:400;line-height:1.45;color:#a1a1a8;margin-bottom:10px}
+.afr-vq-title:last-of-type{margin-bottom:10px}
 .afr-vq-go{display:inline-block;font-size:12px;font-weight:600;color:#d6ff3f}
-.afr-vq-box{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:5px;border:2.5px solid var(--bc)}
-.afr-vq-row--critical{--bc:#ff7a5c}
-.afr-vq-row--warning{--bc:#ffb020}
+.afr-vq-box{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:5px;border:2.5px solid var(--pc)}
+.afr-vq-row--k0{--pc:#ff7a5c;--pt:#17171a}
+.afr-vq-row--k1{--pc:#ffb020;--pt:#17171a}
+.afr-vq-row--k2{--pc:#3d9bff;--pt:#fff}
+.afr-vq-row--k3{--pc:#b36bff;--pt:#fff}
 
 .afr-vq-now{position:absolute;left:0;right:0;top:-9px;height:1px;background:#ff3b4f;z-index:3;transform-origin:left;transform:scaleX(0);pointer-events:none}
 [data-vis="1"] .afr-vq-now{animation:afr-vq-draw .8s cubic-bezier(.2,.7,.2,1) 1.1s forwards}
@@ -197,9 +192,9 @@
 
 @media (max-width:420px){
   .afr-vq{--g:34px;--p:42px;--gap:8px}
-  .afr-vq-idx{font-size:21px}
+  .afr-vq-idx{font-size:24px}
   .afr-vq-card{padding:12px 42px 12px 13px}
-  .afr-vq-title{font-size:15px}
+  .afr-vq-title{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){
   .afr-vq-spine,.afr-vq-row,.afr-vq-cap i,.afr-vq-foot{transition:none;animation:none!important;opacity:1;transform:none}
