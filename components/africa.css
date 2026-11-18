@@ -203,14 +203,36 @@
 }
 
 /* Decision card */
-.afr-dcard{padding:32px 24px;background:#fbfbfd;border-radius:16px;border:1px solid #d2d2d7}
-.afr-dcard__kicker{font-size:12px;font-weight:600;color:#6e6e73;text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px}
-.afr-dcard__grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.afr-dcard__slot{padding:16px;background:#fff;border-radius:10px;border:1px solid #e8e8ed}
-.afr-dcard__label{display:block;font-size:11px;font-weight:600;color:#6e6e73;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.afr-dcard__value{margin:0;font-size:14px;color:#1d1d1f;line-height:1.5}
-.afr-dcard__slot:last-child .afr-dcard__value{color:#0a7a3e;font-weight:600}
-@media (max-width:540px){.afr-dcard__grid{grid-template-columns:1fr}}
+.afr-dcard{padding:32px 24px;background:#1c1c1e;border-radius:16px}
+.afr-dcard__kicker{font-size:12px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.afr-dcard__kicker::before{content:'';width:18px;height:1.5px;border-radius:999px;background:#9fcc1b}
+.afr-dcard__grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:12px;overflow:hidden}
+.afr-dcard__slot{padding:20px 18px 20px;background:#2c2c2e;position:relative;
+  opacity:0;transform:translateY(10px)}
+[data-vis="1"] .afr-dcard__slot{animation:afr-dc-in .5s cubic-bezier(.2,.7,.2,1) forwards}
+[data-vis="1"] .afr-dcard__slot{animation-delay:calc(var(--ri,.0) * .12s + .15s)}
+@keyframes afr-dc-in{to{opacity:1;transform:none}}
+/* per-field top accent line */
+.afr-dcard__slot::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:var(--ac)}
+.afr-dcard__slot--ev{--ac:#ff7a5c}
+.afr-dcard__slot--cf{--ac:#ffb020}
+.afr-dcard__slot--im{--ac:#3d9bff}
+.afr-dcard__slot--oc{--ac:#d6ff3f;background:#222810}
+.afr-dcard__label{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--ac);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.afr-dcard__label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ac);flex-shrink:0}
+/* big numeral (confidence) */
+.afr-dcard__big{font-family:"AfricaNumeral",sans-serif;font-size:52px;font-weight:300;line-height:1;color:#fff;letter-spacing:-.02em;margin-bottom:6px}
+.afr-dcard__big span{font-size:28px;color:var(--ac)}
+.afr-dcard__value{margin:0;font-size:14px;color:#d1d1d6;line-height:1.55}
+.afr-dcard__value--sub{font-size:12px;color:#8e8e93;margin-top:2px}
+.afr-dcard__slot--oc .afr-dcard__value{color:#d6ff3f;font-weight:600;font-size:15px}
+@media (max-width:540px){
+  .afr-dcard__grid{grid-template-columns:1fr}
+  .afr-dcard__big{font-size:42px}
+}
+@media (prefers-reduced-motion:reduce){
+  .afr-dcard__slot{animation:none!important;opacity:1;transform:none}
+}
 .afr-dcard-sec{padding:clamp(56px,7vw,96px) 0;background:#fbfbfd}
 /* Band colour modifiers — decision card section */
 .afr-dcard-sec--ink{background:#0b0c08}
