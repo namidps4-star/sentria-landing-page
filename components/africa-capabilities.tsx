@@ -20,10 +20,10 @@ import "./africa-variants.css"
 /* Each activity keeps its own ground for the questions: lime, sand or ink, from its design. */
 const TONES: Record<string, FaqTone> = { grid: "lime", list: "sand", night: "night" }
 
-const BAND_COLORS = ["ink", "white", "lime", "sand", "grey", "cream"] as const
+const BAND_COLORS = ["ink", "white", "lime", "olive", "sand", "grey", "cream"] as const
 type BandColor = (typeof BAND_COLORS)[number]
 
-/* 27 activities in page order — each pair (queue, dcard) offset by 2 so adjacent bands contrast */
+/* 27 activities in page order — each pair (queue, dcard) offset by 3 so adjacent bands contrast */
 const SLUG_ORDER = [
   "pharmacie", "grossiste-pharma", "exploitation-agricole",
   "cooperative-agricole", "silo-stockage", "grossiste-distributeur",
