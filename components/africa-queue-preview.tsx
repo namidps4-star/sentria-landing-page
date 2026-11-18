@@ -1,10 +1,15 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-
 type Alert = { level: "critical" | "warning"; text: string }
 
 const CONF = [85, 72, 68, 64]
+
+const BAR_POS = [
+  { left: 0,  width: 40 },
+  { left: 10, width: 52 },
+  { left: 0,  width: 72 },
+  { left: 5,  width: 60 },
+]
 
 function parseAlert(a: Alert, confIdx: number) {
   const parts = a.text.split(/\.\s+/)
@@ -20,115 +25,82 @@ const ACTION_LABEL: Record<"en" | "fr", Record<"critical" | "warning", string>> 
   fr: { critical: "Agir →",    warning: "Vérifier →" },
 }
 
+function barDates(pos: { left: number; width: number }, lang: "en" | "fr") {
+  const startDay = Math.round(pos.left / 100 * 30)
+  const endDay   = startDay + Math.round(pos.width / 100 * 30)
+  const todayTxt = lang === "en" ? "Today" : "Aujourd'hui"
+  const start    = startDay === 0 ? todayTxt : `+${startDay}d`
+  return `${start} → +${endDay}d`
+}
+
 export function AfricaQueuePreview({ alerts, lang }: { alerts: Alert[]; lang: "en" | "fr" }) {
-  const wrapRef  = useRef<HTMLDivElement>(null)
-  const svgRef   = useRef<SVGSVGElement>(null)
-
-  useEffect(() => {
-    const wrap = wrapRef.current
-    const svg  = svgRef.current
-    if (!wrap || !svg) return
-
-    const wRect = wrap.getBoundingClientRect()
-    svg.setAttribute("width",  String(wRect.width))
-    svg.setAttribute("height", String(wRect.height))
-
-    // clear previous
-    while (svg.firstChild) svg.removeChild(svg.firstChild)
-
-    function dot(id: string, side: "out" | "in") {
-      const el = wrap!.querySelector(`[data-node="${id}"]`) as HTMLElement | null
-      if (!el) return null
-      const r = el.getBoundingClientRect()
-      return {
-        x: side === "out" ? r.right  - wRect.left : r.left - wRect.left,
-        y: r.top + r.height / 2 - wRect.top,
-      }
-    }
-
-    function curve(x1: number, y1: number, x2: number, y2: number, color: string) {
-      const cx = (x1 + x2) / 2
-      const p = document.createElementNS("http://www.w3.org/2000/svg", "path")
-      p.setAttribute("d", `M${x1},${y1} C${cx},${y1} ${cx},${y2} ${x2},${y2}`)
-      p.setAttribute("fill", "none")
-      p.setAttribute("stroke", color)
-      p.setAttribute("stroke-width", "1.5")
-      p.setAttribute("stroke-opacity", "0.65")
-      p.setAttribute("stroke-linecap", "round")
-      svg!.appendChild(p)
-    }
-
-    alerts.forEach((a, i) => {
-      const color = a.level === "critical" ? "#ff7a5c" : "#ffd24a"
-      const s = dot(`sig-${i}`, "out")
-      const d = dot(`dec-${i}`, "in")
-      const dOut = dot(`dec-${i}`, "out")
-      const act = dot(`act-${i}`, "in")
-      if (s && d)    curve(s.x,    s.y,    d.x,   d.y,   color)
-      if (dOut && act) curve(dOut.x, dOut.y, act.x, act.y, color)
-    })
-  }, [alerts])
-
-  // assign confidence indices sorted: criticals first
-  const sorted = alerts.map((a, i) => ({ a, i }))
+  const sorted = alerts
+    .map((a, i) => ({ a, i }))
     .sort((x, y) => (x.a.level === "critical" ? -1 : 1) - (y.a.level === "critical" ? -1 : 1))
   const confMap: Record<number, number> = {}
   sorted.forEach(({ i }, rank) => { confMap[i] = rank })
 
+  const todayLabel = lang === "en" ? "TODAY" : "AUJOURD'HUI"
+
   return (
-    <div ref={wrapRef} className="afr-nc" aria-label="Decision queue">
-      <svg ref={svgRef} className="afr-nc-svg" aria-hidden="true" />
-      <div className="afr-nc-grid">
-        {alerts.map((a, i) => {
-          const { signal, action, conf } = parseAlert(a, confMap[i])
-          const isCrit = a.level === "critical"
+    <div className="afr-gt" aria-label={lang === "en" ? "Decision queue" : "File de décisions"}>
+
+      {/* Timeline ruler */}
+      <div className="afr-gt-ruler">
+        <div className="afr-gt-ticks">
+          {Array.from({ length: 31 }, (_, d) => (
+            <div
+              key={d}
+              className={`afr-gt-tk${d % 7 === 0 ? " afr-gt-tk--maj" : ""}`}
+              style={{ left: `${(d / 30) * 100}%` }}
+            />
+          ))}
+        </div>
+        <div className="afr-gt-rlabels">
+          <span className="afr-gt-rl" style={{ left: "23.3%" }}>+7d</span>
+          <span className="afr-gt-rl" style={{ left: "46.6%" }}>+14d</span>
+          <span className="afr-gt-rl" style={{ left: "70%" }}>+21d</span>
+          <span className="afr-gt-rl" style={{ left: "100%" }}>+30d</span>
+        </div>
+        <div className="afr-gt-today-pill">{todayLabel}</div>
+      </div>
+
+      {/* Bars */}
+      <div className="afr-gt-bars">
+        {sorted.map(({ a, i }, rank) => {
+          const { signal, action, conf } = parseAlert(a, rank)
           const actionText = action ?? ACTION_LABEL[lang][a.level]
-          const levelLabel = isCrit
-            ? (lang === "en" ? "Critical" : "Critique")
-            : (lang === "en" ? "Warning"  : "Avertissement")
+          const pos = BAR_POS[rank] ?? BAR_POS[BAR_POS.length - 1]
+          const dates = barDates(pos, lang)
           return (
-            <div key={i} className="afr-nc-row">
-              {/* Signal */}
-              <div
-                data-node={`sig-${i}`}
-                className={`afr-nc-node afr-nc-node--sig afr-nc-node--${a.level}`}
-              >
-                <span className="afr-nc-node__label">
-                  {lang === "en" ? "Signal" : "Signal"}
-                </span>
-                <span className="afr-nc-node__text">{signal}</span>
-                <span className={`afr-nc-dot afr-nc-dot--out afr-nc-dot--${a.level}`} />
+            <div
+              key={i}
+              className={`afr-gt-bar afr-gt-bar--${a.level}`}
+              style={{
+                marginLeft: `${pos.left}%`,
+                width: `${pos.width}%`,
+                opacity: rank >= 2 ? 1 - rank * 0.06 : 1,
+              }}
+            >
+              <div className="afr-gt-bar-inner" />
+              <div className="afr-gt-bar-cap-l" />
+              <div className="afr-gt-bar-ring" />
+              <div className="afr-gt-bar-prog" />
+              <div className="afr-gt-bar-body">
+                <span className="afr-gt-bar-name">{signal}</span>
+                <span className="afr-gt-bar-dates">{dates}</span>
               </div>
-
-              {/* Decision */}
-              <div
-                data-node={`dec-${i}`}
-                className={`afr-nc-node afr-nc-node--dec afr-nc-node--${a.level}`}
-              >
-                <span className={`afr-nc-badge afr-nc-badge--${a.level}`}>{levelLabel}</span>
-                <span className={`afr-nc-conf afr-nc-conf--${a.level}`}>{conf}%</span>
-                <span className="afr-nc-node__sub">
-                  {lang === "en" ? "confidence" : "confiance"}
-                </span>
-                <span className={`afr-nc-dot afr-nc-dot--in  afr-nc-dot--${a.level}`} />
-                <span className={`afr-nc-dot afr-nc-dot--out afr-nc-dot--${a.level}`} />
-              </div>
-
-              {/* Action */}
-              <div
-                data-node={`act-${i}`}
-                className={`afr-nc-node afr-nc-node--act afr-nc-node--${a.level}`}
-              >
-                <span className="afr-nc-node__label">
-                  {lang === "en" ? "Action" : "Action"}
-                </span>
-                <span className="afr-nc-action">{actionText}</span>
-                <span className={`afr-nc-dot afr-nc-dot--in afr-nc-dot--${a.level}`} />
+              <div className="afr-gt-bar-right">
+                <span className="afr-gt-bar-conf">{conf}%</span>
+                <span className="afr-gt-bar-action">{actionText}</span>
               </div>
             </div>
           )
         })}
       </div>
+
+      {/* TODAY vertical line */}
+      <div className="afr-gt-today-line" />
     </div>
   )
 }

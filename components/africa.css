@@ -123,48 +123,58 @@
 .afr-queue-sec .rv-h{color:#f5f3ea;margin-bottom:32px}
 .afr-queue-sec .rv-kicker{color:#7c9a2a}
 
-.afr-nc{position:relative;width:100%}
-.afr-nc-svg{position:absolute;inset:0;pointer-events:none;overflow:visible}
-.afr-nc-grid{display:flex;flex-direction:column;gap:20px;position:relative;z-index:1}
+/* Queue preview — Gantt glass-capsule */
+.afr-gt{position:relative;width:100%}
 
-/* One row per alert */
-.afr-nc-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0}
+/* Ruler */
+.afr-gt-ruler{position:relative;height:52px;margin-bottom:14px;overflow:visible}
+.afr-gt-ticks{position:absolute;left:0;right:0;top:24px}
+.afr-gt-tk{position:absolute;bottom:0;width:1px;background:rgba(255,255,255,.1);height:7px}
+.afr-gt-tk--maj{height:14px;background:rgba(255,255,255,.18)}
+.afr-gt-rlabels{position:absolute;left:0;right:0;bottom:0}
+.afr-gt-rl{position:absolute;font-size:10px;font-weight:400;color:rgba(255,255,255,.2);transform:translateX(-50%)}
+.afr-gt-today-pill{position:absolute;top:2px;left:0;transform:translateX(-50%);background:#e8614a;color:#fff;font-size:11px;font-weight:600;letter-spacing:.06em;padding:6px 14px;border-radius:8px;white-space:nowrap;z-index:20;box-shadow:0 3px 14px rgba(232,97,74,.55)}
+.afr-gt-today-line{position:absolute;left:0;top:0;bottom:0;width:1.5px;background:linear-gradient(180deg,rgba(232,97,74,0) 0%,rgba(232,97,74,.55) 60px,rgba(232,97,74,.2) 100%);z-index:10;pointer-events:none}
 
-/* Nodes */
-.afr-nc-node{background:#1c2018;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 16px;position:relative;min-width:0}
-.afr-nc-node--sig{background:#1a1d16}
-.afr-nc-node--dec{background:#1e201a;text-align:center;padding:14px 20px;min-width:120px;justify-self:center}
-.afr-nc-node--act{background:#1a1d16}
-.afr-nc-node--critical{border-color:rgba(255,122,92,.22)}
-.afr-nc-node--warning{border-color:rgba(255,212,74,.18)}
+/* Bars */
+.afr-gt-bars{position:relative;display:flex;flex-direction:column;gap:14px}
 
-.afr-nc-node__label{display:block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,234,.35);margin-bottom:5px}
-.afr-nc-node__text{display:block;font-size:13px;color:rgba(245,243,234,.8);line-height:1.4}
-.afr-nc-node__sub{display:block;font-size:10px;color:rgba(245,243,234,.35);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+/* 3-D glass capsule */
+.afr-gt-bar{position:relative;height:72px;border-radius:999px;display:flex;align-items:center;overflow:visible;min-width:300px;background:#272727;box-shadow:0 22px 54px rgba(0,0,0,.94),0 5px 14px rgba(0,0,0,.88),inset 0 -4px 10px rgba(0,0,0,.65)}
 
-/* Decision node internals */
-.afr-nc-badge{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-bottom:6px}
-.afr-nc-badge--critical{color:#ff7a5c;border:1px solid rgba(255,122,92,.3);background:rgba(255,122,92,.08)}
-.afr-nc-badge--warning{color:#ffd24a;border:1px solid rgba(255,212,74,.25);background:rgba(255,212,74,.07)}
+/* clip container for glass pseudo-elements */
+.afr-gt-bar-inner{position:absolute;inset:0;border-radius:999px;overflow:hidden;pointer-events:none;z-index:1}
+/* big top-oval reflection */
+.afr-gt-bar-inner::before{content:'';position:absolute;left:8%;right:8%;top:3px;height:46%;background:radial-gradient(ellipse 85% 100% at 50% 0%,rgba(255,255,255,.55) 0%,rgba(255,255,255,.24) 50%,rgba(255,255,255,.0) 100%);border-radius:999px}
+/* bottom edge line */
+.afr-gt-bar-inner::after{content:'';position:absolute;left:12%;right:12%;bottom:6px;height:1.5px;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.32) 20%,rgba(255,255,255,.32) 80%,rgba(255,255,255,0) 100%);border-radius:999px}
 
-.afr-nc-conf{display:block;font-size:28px;font-weight:700;line-height:1;letter-spacing:-.03em}
-.afr-nc-conf--critical{color:#ff7a5c}
-.afr-nc-conf--warning{color:#ffd24a}
+/* left-cap curved sheen */
+.afr-gt-bar-cap-l{position:absolute;left:0;top:0;bottom:0;width:80px;border-radius:999px 0 0 999px;background:radial-gradient(ellipse 100% 65% at 18% 50%,rgba(255,255,255,.18) 0%,rgba(255,255,255,.0) 100%);pointer-events:none;z-index:2}
 
-/* Action node */
-.afr-nc-action{display:block;font-size:13px;font-weight:600;color:#d6ff3f;line-height:1.3}
+/* outer ring — bright top edge */
+.afr-gt-bar-ring{position:absolute;inset:0;border-radius:999px;border:1.5px solid rgba(255,255,255,.12);border-top-color:rgba(255,255,255,.38);pointer-events:none;z-index:5}
 
-/* Connector dots */
-.afr-nc-dot{position:absolute;width:9px;height:9px;border-radius:50%;border:2px solid #0b0c08;top:50%;transform:translateY(-50%)}
-.afr-nc-dot--out{right:-5px}
-.afr-nc-dot--in{left:-5px}
-.afr-nc-dot--critical{background:#ff7a5c}
-.afr-nc-dot--warning{background:#ffd24a}
+/* colored urgency nub */
+.afr-gt-bar-prog{position:absolute;top:13px;left:22px;height:3px;width:36px;border-radius:999px;z-index:6}
+.afr-gt-bar--critical .afr-gt-bar-prog{background:linear-gradient(90deg,#ff7a5c,rgba(255,122,92,.1))}
+.afr-gt-bar--warning  .afr-gt-bar-prog{background:linear-gradient(90deg,#ffd24a,rgba(255,212,74,.1))}
 
-@media (max-width:600px){
-  .afr-nc-row{grid-template-columns:1fr}
-  .afr-nc-node--dec{justify-self:start}
-  .afr-nc-dot{display:none}
+/* body text */
+.afr-gt-bar-body{padding:26px 24px 0 24px;flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;position:relative;z-index:6}
+.afr-gt-bar-name{font-size:13px;font-weight:500;line-height:1;color:rgba(255,255,255,.88);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.afr-gt-bar-dates{font-size:11px;font-weight:400;line-height:1;color:rgba(255,255,255,.28)}
+
+/* right side */
+.afr-gt-bar-right{flex-shrink:0;padding:0 30px 0 16px;display:flex;align-items:center;gap:20px;position:relative;z-index:6}
+.afr-gt-bar-conf{font-size:13px;font-weight:600}
+.afr-gt-bar--critical .afr-gt-bar-conf{color:#ff8a6e}
+.afr-gt-bar--warning  .afr-gt-bar-conf{color:#ffd24a}
+.afr-gt-bar-action{font-size:12px;font-weight:500;color:#d6ff3f;white-space:nowrap}
+
+@media (max-width:640px){
+  .afr-gt-bar{margin-left:0!important;width:100%!important;min-width:0}
+  .afr-gt-bar-right{padding-right:16px}
 }
 
 /* Decision card */
