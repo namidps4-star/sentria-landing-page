@@ -154,7 +154,7 @@
 .afr-gt-tk--maj{height:14px;background:rgba(255,255,255,.18)}
 .afr-gt-rlabels{position:absolute;left:0;right:0;bottom:0}
 .afr-gt-rl{position:absolute;font-size:10px;font-weight:400;color:rgba(255,255,255,.2);transform:translateX(-50%)}
-.afr-gt-today-pill{position:absolute;top:2px;left:0;transform:translateX(-50%);background:#e8614a;color:#fff;font-size:11px;font-weight:600;letter-spacing:.06em;padding:6px 14px;border-radius:8px;white-space:nowrap;z-index:20;box-shadow:0 3px 14px rgba(232,97,74,.55)}
+.afr-gt-today-pill{position:absolute;top:0;left:0;transform:translateX(-50%);background:transparent;color:#e8614a;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(232,97,74,.45);padding:4px 11px;border-radius:999px;white-space:nowrap;z-index:20}
 .afr-gt-today-line{position:absolute;left:0;top:0;bottom:0;width:1.5px;background:linear-gradient(180deg,rgba(232,97,74,0) 0%,rgba(232,97,74,.55) 60px,rgba(232,97,74,.2) 100%);z-index:10;pointer-events:none}
 
 /* Bars */
