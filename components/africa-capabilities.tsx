@@ -85,7 +85,6 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       </section>
       {alerts.length > 0 && (
         <section className={`afr-queue-sec afr-queue-sec--${bands.queue} wrap`}>
-          <p className="rv-kicker">Decision queue</p>
           <AfricaQueuePreview alerts={alerts} lang={lang} />
         </section>
       )}
