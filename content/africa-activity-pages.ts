@@ -74,9 +74,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "cooperative-agricole": {
     en: {
       h1: ["Every member's lot", "should be sold", "before it loses value."],
-      lead: "Record each member's lot when it enters storage. SentrIA tracks days stored and temperature, estimates the time left before loss, and names the lots to sell first.",
+      lead: "Record each member's lot when it enters storage. SentrIA tracks days stored and temperature, estimates the time left before loss, and names the lots to sell first. The lots to sell first, by value at stake. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For agricultural cooperatives that store and sell for several growers.",
-      stats: [["9d", "Days stored", "Lot 4, member Diallo: 9 days in storage. Sell this week."], ["18h", "Before loss", "Maize lot 3 at 31 °C: loss in 18 hours. Move it today."], ["40%", "Below promise", "Group B delivered 40% less than the volume promised to the buyer."]],
+      stats: [["9d", "Days left, per lot", "Lot 4, member Diallo: 9 days left before loss. Sell this week."], ["18h", "Before loss", "Maize lot 3 at 31 °C: loss in 18 hours. Move it today."], ["40%", "Below promise", "Group B delivered 40% less than the volume promised to the buyer."]],
       alerts: [["critical", "Lot 4 (member Diallo): 9 days in storage. Sell this week."], ["critical", "Maize lot 3 at 31 °C: loss in 18 hours. Move it today."], ["warning", "Group B: 40% below the volume promised to the buyer."]],
       heading: "What the board sees every week",
       items: [
@@ -89,9 +89,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Le lot de chaque adhérent", "doit être vendu", "avant de perdre sa valeur."],
-      lead: "Enregistrez le lot de chaque adhérent à son entrée en stockage. SentrIA suit les jours passés et la température, estime le temps restant avant la perte, et désigne les lots à vendre en premier.",
+      lead: "Enregistrez le lot de chaque adhérent à son entrée en stockage. SentrIA suit les jours passés et la température, estime le temps restant avant la perte, et désigne les lots à vendre en premier. Les lots à vendre en premier, par valeur en jeu. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les coopératives agricoles qui stockent et vendent pour plusieurs producteurs.",
-      stats: [["9j", "Jours stockés", "Lot 4, adhérent Diallo : 9 jours en stock. Vendez cette semaine."], ["18h", "Avant la perte", "Maïs lot 3 à 31 °C : perte dans 18 heures. Déplacez-le aujourd'hui."], ["40 %", "Sous la promesse", "Groupe B a livré 40 % de moins que le volume promis à l'acheteur."]],
+      stats: [["9j", "Jours restants, par lot", "Lot 4, adhérent Diallo : 9 jours avant la perte. Vendez cette semaine."], ["18h", "Avant la perte", "Maïs lot 3 à 31 °C : perte dans 18 heures. Déplacez-le aujourd'hui."], ["40 %", "Sous la promesse", "Groupe B a livré 40 % de moins que le volume promis à l'acheteur."]],
       alerts: [["critical", "Lot 4 (adhérent Diallo) : 9 jours en stock. Vendez cette semaine."], ["critical", "Maïs lot 3 à 31 °C : perte dans 18 heures. Déplacez-le aujourd'hui."], ["warning", "Groupe B : 40 % sous le volume promis à l'acheteur."]],
       heading: "Ce que le bureau voit chaque semaine",
       items: [
@@ -105,10 +105,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   },
   "silo-stockage": {
     en: {
-      h1: ["Keep the harvest", "sellable", "in the silo."],
-      lead: "SentrIA reads each lot's days stored and the silo's temperature. It estimates the time before the grain loses value and tells you which lot to move first.",
+      h1: ["Sell the grain", "before the silo", "eats the margin."],
+      lead: "SentrIA reads each lot's days stored and the silo's temperature. It estimates the time before the grain loses value and tells you which lot to move first. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For silos that keep a harvest before processing or sale.",
-      stats: [["9d", "Days stored", "Lot 3: 9 days in the silo. Deliver first."], ["32°", "Silo temperature", "Silo B reached 32 °C. Warned before the loss starts."], ["12h", "Before loss", "Lot 7: loss in 12 hours at this temperature."]],
+      stats: [["9d", "Days stored", "Lot 3: 9 days in the silo. Deliver first."], ["32°", "Silo temperature", "Silo B reached 32 °C. Warned before the loss starts."], ["12h", "Days before value drops", "Lot 7: loss in 12 hours at this temperature."]],
       alerts: [["critical", "Lot 3: 9 days in the silo. Deliver first."], ["warning", "Silo B: 32 °C, above the safe range. Check ventilation now."], ["critical", "Lot 7: loss in 12 hours. Arrange delivery now."]],
       heading: "What the silo manager sees every morning",
       items: [
@@ -120,10 +120,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       example: { title: "A hot week in the silo", lines: ["Lot 3: 9 days in the silo", "Silo B: 32 °C, above its safe range", "Lot 7: loss in 12 hours", "Action proposed: move lot 7 to dispatch today"], result: "The lot closest to loss leaves first." },
     },
     fr: {
-      h1: ["Gardez la récolte", "vendable", "dans le silo."],
-      lead: "SentrIA lit les jours passés de chaque lot et la température du silo. Il estime le temps avant que le grain ne perde sa valeur, et dit quel lot déplacer en premier.",
+      h1: ["Vendez le grain", "avant que le silo", "ne mange la marge."],
+      lead: "SentrIA lit les jours passés de chaque lot et la température du silo. Il estime le temps avant que le grain ne perde sa valeur, et dit quel lot déplacer en premier. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les silos qui gardent une récolte avant transformation ou vente.",
-      stats: [["9j", "Jours stockés", "Lot 3 : 9 jours dans le silo. Livrez en premier."], ["32°", "Température du silo", "Silo B à 32 °C. Alerte avant le début de la perte."], ["12h", "Avant la perte", "Lot 7 : perte dans 12 heures à cette température."]],
+      stats: [["9j", "Jours stockés", "Lot 3 : 9 jours dans le silo. Livrez en premier."], ["32°", "Température du silo", "Silo B à 32 °C. Alerte avant le début de la perte."], ["12h", "Jours avant la perte de valeur", "Lot 7 : perte dans 12 heures à cette température."]],
       alerts: [["critical", "Lot 3 : 9 jours dans le silo. Livrez en premier."], ["warning", "Silo B : 32 °C, au-dessus de la plage sûre. Vérifiez la ventilation."], ["critical", "Lot 7 : perte dans 12 heures. Organisez la livraison maintenant."]],
       heading: "Ce que le responsable du silo voit chaque matin",
       items: [
@@ -138,9 +138,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "grossiste-distributeur": {
     en: {
       h1: ["Your customers", "stop reordering", "before you notice."],
-      lead: "SentrIA compares each customer's orders with its usual pattern. When one goes quiet, or buys less than before, it names the customer so you can call first.",
+      lead: "SentrIA compares each customer's orders with its usual pattern. When one goes quiet, or buys less than before, it names the customer so you can call first. And on your side: which SKUs run out before your own next delivery. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For wholesalers and distributors who supply shops and pharmacies.",
-      stats: [["21d", "Without an order", "Customer Nord: no order for 21 days. Usual gap: 7 days."], ["-40%", "Volume change", "Customer Sud buys 40% less than last quarter."], ["2d", "Stock left", "Customer Est: 2 days of stock before your next delivery."]],
+      stats: [["21d", "Without an order", "Customer Nord: no order for 21 days. Usual gap: 7 days."], ["-40%", "Volume change", "Customer Sud buys 40% less than last quarter."], ["2d", "Days of cover", "Customer Est: 2 days of cover before your next delivery."]],
       alerts: [["warning", "Customer Nord: no order for 21 days. Usual gap: 7 days."], ["warning", "Customer Sud: buying 40% less than last quarter."], ["critical", "Customer Est: 2 days of stock before your next delivery."]],
       heading: "What the sales team sees every Monday",
       items: [
@@ -153,9 +153,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Vos clients", "arrêtent de commander", "avant que vous ne le voyiez."],
-      lead: "SentrIA compare les commandes de chaque client à son rythme habituel. Quand l'un se tait, ou achète moins qu'avant, il le nomme pour que vous appeliez en premier.",
+      lead: "SentrIA compare les commandes de chaque client à son rythme habituel. Quand l'un se tait, ou achète moins qu'avant, il le nomme pour que vous appeliez en premier. Et de votre côté : quels produits manquent avant votre prochaine livraison. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les grossistes et distributeurs qui fournissent des commerces et des pharmacies.",
-      stats: [["21j", "Sans commande", "Client Nord : aucune commande depuis 21 jours. Écart habituel : 7 jours."], ["-40 %", "Variation du volume", "Client Sud achète 40 % de moins que le trimestre dernier."], ["2j", "Stock restant", "Client Est : 2 jours de stock avant votre prochaine livraison."]],
+      stats: [["21j", "Sans commande", "Client Nord : aucune commande depuis 21 jours. Écart habituel : 7 jours."], ["-40 %", "Variation du volume", "Client Sud achète 40 % de moins que le trimestre dernier."], ["2j", "Jours de couverture", "Client Est : 2 jours de couverture avant votre prochaine livraison."]],
       alerts: [["warning", "Client Nord : aucune commande depuis 21 jours. Écart habituel : 7 jours."], ["warning", "Client Sud : achète 40 % de moins que le trimestre dernier."], ["critical", "Client Est : 2 jours de stock avant votre prochaine livraison."]],
       heading: "Ce que l'équipe commerciale voit chaque lundi",
       items: [
@@ -170,9 +170,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "supermarche-hypermarche": {
     en: {
       h1: ["Empty shelves", "come from a stock", "you could see coming."],
-      lead: "SentrIA reads deliveries and sales by aisle and product. It flags the shelves that will run empty before the next delivery, and the products that barely sell.",
-      start: "For large stores with many aisles and departments.",
-      stats: [["3d", "Before empty", "Dairy shelf: 3 days of stock. Next delivery in 5 days."], ["45d", "Without a sale", "Product X: 45 days without a sale in store B."], ["+30%", "Above normal", "Saturday demand 30% above the usual curve at 18:00."]],
+      lead: "SentrIA reads deliveries and sales by aisle and product. It flags the shelves that will run empty before the next delivery, and the products that barely sell. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
+      start: "For supermarkets and hypermarkets with many aisles and departments.",
+      stats: [["3d", "Days of stock, per aisle", "Dairy shelf: 3 days of stock. Next delivery in 5 days."], ["45d", "Without a sale", "Product X: 45 days without a sale in store B."], ["+30%", "Above normal", "Saturday demand 30% above the usual curve at 18:00."]],
       alerts: [["critical", "Dairy shelf: 3 days of stock. Next delivery in 5 days."], ["warning", "Product X: 45 days without a sale in store B."], ["warning", "Saturday demand: 30% above the usual curve."]],
       heading: "What the store manager sees before each delivery",
       items: [
@@ -185,9 +185,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Les rayons vides", "viennent d'un stock", "que l'on pouvait prévoir."],
-      lead: "SentrIA lit les livraisons et les ventes par rayon et par produit. Il signale les rayons qui se videront avant la prochaine livraison, et les produits qui ne se vendent presque plus.",
-      start: "Pour les grandes surfaces avec de nombreux rayons et secteurs.",
-      stats: [["3j", "Avant rupture", "Rayon crèmerie : 3 jours de stock. Livraison dans 5 jours."], ["45j", "Sans vente", "Produit X : 45 jours sans vente au magasin B."], ["+30 %", "Au-dessus de la normale", "Demande du samedi 30 % au-dessus de la courbe habituelle à 18 h."]],
+      lead: "SentrIA lit les livraisons et les ventes par rayon et par produit. Il signale les rayons qui se videront avant la prochaine livraison, et les produits qui ne se vendent presque plus. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
+      start: "Pour les supermarchés et hypermarchés avec de nombreux rayons et secteurs.",
+      stats: [["3j", "Jours de stock, par rayon", "Rayon crèmerie : 3 jours de stock. Livraison dans 5 jours."], ["45j", "Sans vente", "Produit X : 45 jours sans vente au magasin B."], ["+30 %", "Au-dessus de la normale", "Demande du samedi 30 % au-dessus de la courbe habituelle à 18 h."]],
       alerts: [["critical", "Rayon crèmerie : 3 jours de stock. Livraison dans 5 jours."], ["warning", "Produit X : 45 jours sans vente au magasin B."], ["warning", "Demande du samedi : 30 % au-dessus de la courbe habituelle."]],
       heading: "Ce que le responsable du magasin voit avant chaque livraison",
       items: [
@@ -202,9 +202,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "chaine-magasins": {
     en: {
       h1: ["Move stock to the shop", "that needs it", "before you reorder."],
-      lead: "SentrIA compares stock across your stores. When one shop holds unsold stock and another is reordering, it proposes the transfer, ranked by the value at stake.",
+      lead: "SentrIA compares stock across your stores. When one shop holds unsold stock and another is reordering, it proposes the transfer, ranked by the value at stake. Which store runs out, which sits on dead stock — before you buy more. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For retail chains with several shops under one owner.",
-      stats: [["40", "Units to move", "Shop A holds 40 unsold. Shop B is reordering."], ["0", "Left in Shop A", "Shop A is out of stock on a fast seller."], ["3", "Transfers ranked", "Biggest value first, so the team starts with the one that matters."]],
+      stats: [["40", "Days of stock, per store", "Shop A holds 40 unsold. Shop B has 0 days of stock left."], ["0", "Left in Shop A", "Shop A is out of stock on a fast seller."], ["3", "Transfers ranked", "Biggest value first, so the team starts with the one that matters."]],
       alerts: [["warning", "Shop A: 40 units unsold. Shop B is reordering 40."], ["critical", "Shop A: 0 left on a fast seller."], ["warning", "Three transfers ranked by value: 40, 25, 10 units."]],
       heading: "What the chain's buyers see every morning",
       items: [
@@ -217,9 +217,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Déplacez le stock", "vers le magasin", "qui en a besoin."],
-      lead: "SentrIA compare le stock de vos magasins. Quand un magasin garde du stock invendu et qu'un autre recommande, il propose le transfert, classé par valeur en jeu.",
+      lead: "SentrIA compare le stock de vos magasins. Quand un magasin garde du stock invendu et qu'un autre recommande, il propose le transfert, classé par valeur en jeu. Quel magasin va manquer, lequel garde du stock mort — avant que vous ne commandiez plus. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les chaînes de magasins qui appartiennent à un même propriétaire.",
-      stats: [["40", "Unités à déplacer", "Magasin A : 40 invendues. Magasin B recommande."], ["0", "Restantes au magasin A", "Magasin A en rupture sur un produit qui se vend bien."], ["3", "Transferts classés", "La plus grosse valeur d'abord, pour commencer par l'essentiel."]],
+      stats: [["40", "Jours de stock, par magasin", "Magasin A : 40 invendues. Magasin B : 0 jour de stock restant."], ["0", "Restantes au magasin A", "Magasin A en rupture sur un produit qui se vend bien."], ["3", "Transferts classés", "La plus grosse valeur d'abord, pour commencer par l'essentiel."]],
       alerts: [["warning", "Magasin A : 40 unités invendues. Magasin B recommande 40."], ["critical", "Magasin A : 0 restant sur un produit qui se vend bien."], ["warning", "Trois transferts classés par valeur : 40, 25, 10 unités."]],
       heading: "Ce que les acheteurs de la chaîne voient chaque matin",
       items: [
@@ -233,10 +233,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   },
   "epicerie-proximite": {
     en: {
-      h1: ["Keep the shelves full", "and the stock moving", "in your local shop."],
-      lead: "SentrIA reads your deliveries and sales. It warns you when a product will run out before the next delivery, and when a product has stopped selling.",
+      h1: ["Catch the empty shelf", "before the customer", "does."],
+      lead: "SentrIA reads your deliveries and sales. It warns you when a product will run out before the next delivery, and when a product has stopped selling. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For small local shops with one or two people on the counter.",
-      stats: [["3d", "Before empty", "Bread and milk: 3 days of stock. Next delivery in 4 days."], ["30d", "Without a sale", "Product Y: 30 days without a sale."], ["5d", "Days late", "Your supplier was late twice this month, by 5 days."]],
+      stats: [["3d", "Days of stock", "Bread and milk: 3 days of stock. Next delivery in 4 days."], ["30d", "Without a sale", "Product Y: 30 days without a sale."], ["5d", "Days late", "Your supplier was late twice this month, by 5 days."]],
       alerts: [["critical", "Bread and milk: 3 days of stock. Next delivery in 4 days."], ["warning", "Product Y: 30 days without a sale."], ["warning", "Supplier Z: late twice this month, by 5 days."]],
       heading: "What the owner checks before the morning rush",
       items: [
@@ -248,10 +248,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       example: { title: "A Monday in the shop", lines: ["Bread and milk: 3 days of stock", "Product Y: 30 days without a sale", "Supplier Z: late twice this month", "Order proposed: bread and milk today"], result: "Bread and milk is ordered before the shelves empty." },
     },
     fr: {
-      h1: ["Gardez les rayons pleins", "et le stock qui tourne", "dans votre épicerie."],
-      lead: "SentrIA lit vos livraisons et vos ventes. Il vous prévient quand un produit va manquer avant la prochaine livraison, et quand un produit ne se vend plus.",
+      h1: ["Anticipez le rayon vide", "avant que le client", "ne le voie."],
+      lead: "SentrIA lit vos livraisons et vos ventes. Il vous prévient quand un produit va manquer avant la prochaine livraison, et quand un produit ne se vend plus. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les petites épiceries de quartier, tenues par une ou deux personnes.",
-      stats: [["3j", "Avant rupture", "Pain et lait : 3 jours de stock. Livraison dans 4 jours."], ["30j", "Sans vente", "Produit Y : 30 jours sans vente."], ["5j", "De retard", "Votre fournisseur est arrivé en retard deux fois ce mois-ci, de 5 jours."]],
+      stats: [["3j", "Jours de stock", "Pain et lait : 3 jours de stock. Livraison dans 4 jours."], ["30j", "Sans vente", "Produit Y : 30 jours sans vente."], ["5j", "De retard", "Votre fournisseur est arrivé en retard deux fois ce mois-ci, de 5 jours."]],
       alerts: [["critical", "Pain et lait : 3 jours de stock. Livraison dans 4 jours."], ["warning", "Produit Y : 30 jours sans vente."], ["warning", "Fournisseur Z : en retard deux fois ce mois-ci, de 5 jours."]],
       heading: "Ce que le gérant vérifie avant le coup de feu du matin",
       items: [
@@ -266,9 +266,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "port-conteneurs": {
     en: {
       h1: ["Find the slow step", "before a container", "waits at the quay."],
-      lead: "SentrIA follows containers from arrival to exit. It shows which step is slow, which containers are waiting, and which clients need to hear about a delay.",
+      lead: "SentrIA follows containers from arrival to exit. It shows which step is slow, which containers are waiting, and which clients need to hear about a delay. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For ports and terminals that handle containers for several clients.",
-      stats: [["9h", "At customs", "Customs waits 9 hours. Every container behind it is late."], ["3", "Waiting containers", "Three containers wait behind customs. Tell the client now."], ["48h", "In the yard", "Container group A: 48 hours in the yard."]],
+      stats: [["9h", "Hours of slack before the window breaks", "Customs waits 9 hours. Every container behind it is late."], ["3", "Waiting containers", "Three containers wait behind customs. Tell the client now."], ["48h", "In the yard", "Container group A: 48 hours in the yard."]],
       alerts: [["critical", "Customs waits 9 hours. Every container behind it is late."], ["warning", "Three containers wait behind customs. Tell the client now."], ["warning", "Container group A: 48 hours in the yard."]],
       heading: "What the terminal manager sees on each shift",
       items: [
@@ -281,9 +281,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Repérez l'étape lente", "avant qu'un conteneur", "n'attende au quai."],
-      lead: "SentrIA suit les conteneurs de l'arrivée à la sortie. Il montre quelle étape est lente, quels conteneurs attendent, et quels clients doivent être prévenus d'un retard.",
+      lead: "SentrIA suit les conteneurs de l'arrivée à la sortie. Il montre quelle étape est lente, quels conteneurs attendent, et quels clients doivent être prévenus d'un retard. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les ports et terminaux qui manipulent des conteneurs pour plusieurs clients.",
-      stats: [["9h", "À la douane", "La douane attend 9 heures. Chaque conteneur derrière est en retard."], ["3", "Conteneurs en attente", "Trois conteneurs attendent derrière la douane. Prévenez le client."], ["48h", "Au parc", "Groupe A : 48 heures au parc à conteneurs."]],
+      stats: [["9h", "Heures de marge avant la rupture", "La douane attend 9 heures. Chaque conteneur derrière est en retard."], ["3", "Conteneurs en attente", "Trois conteneurs attendent derrière la douane. Prévenez le client."], ["48h", "Au parc", "Groupe A : 48 heures au parc à conteneurs."]],
       alerts: [["critical", "La douane attend 9 heures. Chaque conteneur derrière est en retard."], ["warning", "Trois conteneurs attendent derrière la douane. Prévenez le client."], ["warning", "Groupe A : 48 heures au parc."]],
       heading: "Ce que le responsable du terminal voit à chaque poste",
       items: [
@@ -298,9 +298,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "entrepot-manutention": {
     en: {
       h1: ["See where goods", "wait inside", "the warehouse."],
-      lead: "SentrIA follows goods from receipt to dispatch. It shows the step that slows the flow, the orders that will be late for dispatch, and the stock that does not move.",
+      lead: "SentrIA follows goods from receipt to dispatch. It shows the step that slows the flow, the orders that will be late for dispatch, and the stock that does not move. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For warehouses that receive, store and move goods for clients.",
-      stats: [["9h", "Slowest step", "Picking takes 9 hours on the afternoon shift."], ["3", "Late for dispatch", "Three orders will miss the 17:00 truck."], ["40d", "Not moving", "Pallet group C: 40 days in the same location."]],
+      stats: [["9h", "Slowest step", "Picking takes 9 hours on the afternoon shift."], ["3h", "Hours to dispatch deadline", "Three orders have under 3 hours to make the 17:00 truck."], ["40d", "Days since last move", "Pallet group C: 40 days since last move."]],
       alerts: [["critical", "Picking takes 9 hours on the afternoon shift."], ["critical", "Three orders will miss the 17:00 truck."], ["warning", "Pallet group C: 40 days in the same location."]],
       heading: "What the warehouse lead sees before each dispatch",
       items: [
@@ -313,9 +313,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Voyez où les marchandises", "attendent", "dans l'entrepôt."],
-      lead: "SentrIA suit les marchandises de la réception à l'expédition. Il montre l'étape qui ralentit le flux, les commandes qui seront en retard, et le stock qui ne bouge plus.",
+      lead: "SentrIA suit les marchandises de la réception à l'expédition. Il montre l'étape qui ralentit le flux, les commandes qui seront en retard, et le stock qui ne bouge plus. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les entrepôts qui reçoivent, stockent et déplacent des marchandises pour leurs clients.",
-      stats: [["9h", "Étape la plus lente", "La préparation prend 9 heures sur le poste de l'après-midi."], ["3", "En retard à l'expédition", "Trois commandes manqueront le camion de 17 h."], ["40j", "Sans mouvement", "Palettes groupe C : 40 jours au même emplacement."]],
+      stats: [["9h", "Étape la plus lente", "La préparation prend 9 heures sur le poste de l'après-midi."], ["3h", "Heures avant l'heure limite", "Trois commandes ont moins de 3 heures pour le camion de 17 h."], ["40j", "Jours sans mouvement", "Palettes groupe C : 40 jours sans mouvement."]],
       alerts: [["critical", "La préparation prend 9 heures sur le poste de l'après-midi."], ["critical", "Trois commandes manqueront le camion de 17 h."], ["warning", "Palettes groupe C : 40 jours au même emplacement."]],
       heading: "Ce que le responsable d'entrepôt voit avant chaque expédition",
       items: [
@@ -330,9 +330,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "transport-distribution": {
     en: {
       h1: ["One late drop", "should not delay", "the whole route."],
-      lead: "SentrIA follows each delivery against its time window. It shows which drop is late, which later drops it will push back, and which vehicle needs service before it fails.",
+      lead: "SentrIA follows each delivery against its time window. It shows which drop is late, which later drops it will push back, and which vehicle needs service before it fails. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For operators who deliver to several drop points each day.",
-      stats: [["2h", "Late drop", "Truck 4 is 2 hours behind its first drop."], ["3", "Drops at risk", "Three later drops will slip unless the route changes."], ["500km", "To service", "Brake pads on truck 2 are due in 500 km."]],
+      stats: [["2h", "Hours of buffer lost", "Truck 4 is 2 hours behind its first drop."], ["3", "Drops at risk", "Three later drops will slip unless the route changes."], ["7d", "Days until service", "Truck 2 brake pads due in 7 days or 500 km."]],
       alerts: [["warning", "Truck 4: 2 hours behind its first drop."], ["critical", "Three later drops will slip. Reroute now."], ["warning", "Truck 2: brake pads due in 500 km."]],
       heading: "What the dispatcher sees during the morning run",
       items: [
@@ -345,9 +345,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Une livraison en retard", "ne doit pas retarder", "toute la tournée."],
-      lead: "SentrIA suit chaque livraison par rapport à sa plage horaire. Il montre quelle livraison est en retard, celles qu'elle va décaler, et quel véhicule doit être révisé avant la panne.",
+      lead: "SentrIA suit chaque livraison par rapport à sa plage horaire. Il montre quelle livraison est en retard, celles qu'elle va décaler, et quel véhicule doit être révisé avant la panne. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les opérateurs qui livrent plusieurs points chaque jour.",
-      stats: [["2h", "Livraison en retard", "Camion 4 a 2 heures de retard sur sa première livraison."], ["3", "Livraisons à risque", "Trois livraisons suivantes glisseront sans changement de tournée."], ["500 km", "Avant entretien", "Plaquettes du camion 2 à changer dans 500 km."]],
+      stats: [["2h", "Heures de marge perdues", "Camion 4 a 2 heures de retard sur sa première livraison."], ["3", "Livraisons à risque", "Trois livraisons suivantes glisseront sans changement de tournée."], ["7j", "Jours avant entretien", "Plaquettes du camion 2 dans 7 jours ou 500 km."]],
       alerts: [["warning", "Camion 4 : 2 heures de retard sur sa première livraison."], ["critical", "Trois livraisons suivantes glisseront. Réacheminez maintenant."], ["warning", "Camion 2 : plaquettes à changer dans 500 km."]],
       heading: "Ce que le répartiteur voit pendant la tournée du matin",
       items: [
@@ -362,9 +362,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "preparation-expedition": {
     en: {
       h1: ["Ship the orders", "that are due", "first."],
-      lead: "SentrIA follows each order from picking to dispatch. It shows which orders cannot ship today, which have waited longest, and which step holds the rest back.",
+      lead: "SentrIA follows each order from picking to dispatch. It shows which orders cannot ship today, which have waited longest, and which step holds the rest back. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For teams that pick, pack and send orders to customers.",
-      stats: [["6", "Cannot ship today", "Six orders lack one item in the picking list."], ["2d", "Waiting longest", "Order 1182 has waited 2 days in packing."], ["7 min", "Per order", "Packing averages 7 minutes per order on the evening shift."]],
+      stats: [["6", "Cannot ship today", "Six orders lack one item in the picking list."], ["2d", "Hours left to ship on time", "Order 1182 has waited 2 days. The carrier arrives in 4 hours."], ["7 min", "Per order", "Packing averages 7 minutes per order on the evening shift."]],
       alerts: [["critical", "Six orders lack one item. They cannot ship today."], ["warning", "Order 1182: 2 days waiting in packing."], ["warning", "Packing: 7 minutes per order on the evening shift."]],
       heading: "What the dispatch team sees before the carrier arrives",
       items: [
@@ -377,9 +377,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Expédiez d'abord", "les commandes", "qui sont dues."],
-      lead: "SentrIA suit chaque commande de la préparation à l'expédition. Il montre les commandes qui ne partent pas aujourd'hui, celles qui ont le plus attendu, et l'étape qui retient le reste.",
+      lead: "SentrIA suit chaque commande de la préparation à l'expédition. Il montre les commandes qui ne partent pas aujourd'hui, celles qui ont le plus attendu, et l'étape qui retient le reste. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les équipes qui préparent, emballent et envoient des commandes aux clients.",
-      stats: [["6", "Bloquées aujourd'hui", "Six commandes manquent un article sur le bon de préparation."], ["2j", "La plus longue attente", "La commande 1182 attend depuis 2 jours à l'emballage."], ["7 min", "Par commande", "L'emballage prend en moyenne 7 minutes par commande le soir."]],
+      stats: [["6", "Bloquées aujourd'hui", "Six commandes manquent un article sur le bon de préparation."], ["2j", "Heures restantes pour expédier", "La commande 1182 attend 2 jours. Le transporteur arrive dans 4 heures."], ["7 min", "Par commande", "L'emballage prend en moyenne 7 minutes par commande le soir."]],
       alerts: [["critical", "Six commandes manquent un article. Elles ne partent pas aujourd'hui."], ["warning", "Commande 1182 : 2 jours d'attente à l'emballage."], ["warning", "Emballage : 7 minutes par commande le soir."]],
       heading: "Ce que l'équipe expédition voit avant l'arrivée du transporteur",
       items: [
@@ -394,9 +394,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "chaine-froid": {
     en: {
       h1: ["Keep the cold chain", "unbroken", "from dock to door."],
-      lead: "SentrIA follows the temperature of each cold room and each vehicle. It warns you when a load drifts out of range, and how much stock is at risk.",
+      lead: "SentrIA follows the temperature of each cold room and each vehicle. It warns you when a load drifts out of range, and how much stock is at risk. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For operators who keep food or medicine at a set temperature.",
-      stats: [["6h", "Above the limit", "Cold room 2 above its limit for 6 hours."], ["120", "Units at risk", "120 units of frozen fish at risk after the break."], ["+3°", "Drift", "Vehicle 5 has drifted 3 degrees in the last hour."]],
+      stats: [["6h", "Hours before spoilage", "Cold room 2 above its limit for 6 hours."], ["120", "Stock at risk (value)", "120 units of frozen fish at risk. Move before the break spreads."], ["+3°", "Drift", "Vehicle 5 has drifted 3 degrees in the last hour."]],
       alerts: [["critical", "Cold room 2: above its limit for 6 hours. Stock at risk."], ["critical", "Vehicle 5: +3 °C in the last hour."], ["warning", "120 units of frozen fish at risk."]],
       heading: "What the cold-chain lead sees every hour",
       items: [
@@ -409,9 +409,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Gardez la chaîne du froid", "sans rupture", "du quai à la porte."],
-      lead: "SentrIA suit la température de chaque chambre froide et de chaque véhicule. Il vous prévient quand une charge sort de sa plage, et combien de stock est menacé.",
+      lead: "SentrIA suit la température de chaque chambre froide et de chaque véhicule. Il vous prévient quand une charge sort de sa plage, et combien de stock est menacé. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les opérateurs qui gardent des denrées ou des médicaments à température fixée.",
-      stats: [["6h", "Au-dessus de la limite", "Chambre froide 2 au-dessus de sa limite pendant 6 heures."], ["120", "Unités menacées", "120 unités de poisson congelé menacées après la rupture."], ["+3°", "Dérive", "Véhicule 5 a dérivé de 3 degrés en une heure."]],
+      stats: [["6h", "Heures avant la perte", "Chambre froide 2 au-dessus de sa limite pendant 6 heures."], ["120", "Stock menacé (valeur)", "120 unités de poisson congelé menacées. Déplacez avant que la rupture ne s'étende."], ["+3°", "Dérive", "Véhicule 5 a dérivé de 3 degrés en une heure."]],
       alerts: [["critical", "Chambre froide 2 : au-dessus de sa limite depuis 6 heures. Stock menacé."], ["critical", "Véhicule 5 : +3 °C en une heure."], ["warning", "120 unités de poisson congelé menacées."]],
       heading: "Ce que le responsable de la chaîne du froid voit chaque heure",
       items: [
@@ -425,10 +425,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   },
   "plusieurs-activites": {
     en: {
-      h1: ["One view across", "every operation", "you run."],
-      lead: "When you run several operations, SentrIA puts the bottleneck, the late items and the stock at risk side by side, so a problem is seen once, not three times.",
+      h1: ["Every operation's", "worst problem,", "in one ranked queue."],
+      lead: "When you run several operations, SentrIA puts the bottleneck, the late items and the stock at risk side by side, so a problem is seen once, not three times. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For groups that combine warehousing, transport and cold storage.",
-      stats: [["9h", "Biggest bottleneck", "Customs step on the port operation."], ["3", "Late across sites", "Late items across the warehouse and transport sites."], ["24", "Units at risk", "Stock at risk across the cold rooms."]],
+      stats: [["9h", "One queue, ranked by cost", "Customs step on the port operation."], ["3", "Late across sites", "Late items across the warehouse and transport sites."], ["24", "Units at risk", "Stock at risk across the cold rooms."]],
       alerts: [["critical", "Port operation: customs waits 9 hours."], ["warning", "Three late items across two sites."], ["warning", "24 units at risk in cold room 1."]],
       heading: "What the group manager sees on one screen",
       items: [
@@ -440,10 +440,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       example: { title: "One Monday across the group", lines: ["Port: customs waits 9 hours", "Three late items across two sites", "24 units at risk in cold room 1", "Action proposed: review the port step first"], result: "One problem is handled once, not three times." },
     },
     fr: {
-      h1: ["Une seule vue", "sur chaque activité", "que vous gérez."],
-      lead: "Quand vous gérez plusieurs activités, SentrIA met côte à côte le goulot, les retards et le stock menacé. Un problème se voit une fois, et non trois fois.",
+      h1: ["Le pire problème", "de chaque activité,", "dans une file classée."],
+      lead: "Quand vous gérez plusieurs activités, SentrIA met côte à côte le goulot, les retards et le stock menacé. Un problème se voit une fois, et non trois fois. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les groupes qui combinent entrepôt, transport et stockage froid.",
-      stats: [["9h", "Plus gros goulot", "L'étape de la douane dans l'activité portuaire."], ["3", "Retards sur plusieurs sites", "Retards dans l'entrepôt et le transport."], ["24", "Unités menacées", "Stock menacé dans les chambres froides."]],
+      stats: [["9h", "Une file, classée par coût", "L'étape de la douane dans l'activité portuaire."], ["3", "Retards sur plusieurs sites", "Retards dans l'entrepôt et le transport."], ["24", "Unités menacées", "Stock menacé dans les chambres froides."]],
       alerts: [["critical", "Activité portuaire : la douane attend 9 heures."], ["warning", "Trois retards sur deux sites."], ["warning", "24 unités menacées dans la chambre froide 1."]],
       heading: "Ce que le responsable du groupe voit sur un seul écran",
       items: [
@@ -458,9 +458,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "usine-production": {
     en: {
       h1: ["Catch the drop", "before the line", "stops."],
-      lead: "SentrIA watches output, machine vibration and next week's load. It warns you when a line falls under target, when a machine is heading for a stop, and when capacity runs short.",
+      lead: "SentrIA watches output, machine vibration and next week's load. It warns you when a line falls under target, when a machine is heading for a stop, and when capacity runs short. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For factories with production lines and critical machines.",
-      stats: [["3", "Shifts under target", "Output under target for 3 shifts. Alert before the stop."], ["3d", "Before a stop", "Vibration rising for 3 days on press 4."], ["120%", "Of capacity", "Next week needs 120% of capacity. Plan a second shift."]],
+      stats: [["3", "Shifts under target", "Output under target for 3 shifts. Alert before the stop."], ["3d", "Days before a predicted stop", "Vibration rising for 3 days on press 4."], ["120%", "Days of capacity left", "Next week needs 120% of capacity. Only 0 days of buffer left."]],
       alerts: [["warning", "Line 2: output under target for 3 shifts."], ["critical", "Press 4: vibration rising for 3 days."], ["warning", "Next week needs 120% of capacity."]],
       heading: "What the plant manager sees at the start of each shift",
       items: [
@@ -473,9 +473,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Repérez la baisse", "avant que la ligne", "ne s'arrête."],
-      lead: "SentrIA suit la production, les vibrations des machines et la charge de la semaine prochaine. Il vous prévient quand une ligne passe sous l'objectif, quand une machine va s'arrêter, et quand la capacité manque.",
+      lead: "SentrIA suit la production, les vibrations des machines et la charge de la semaine prochaine. Il vous prévient quand une ligne passe sous l'objectif, quand une machine va s'arrêter, et quand la capacité manque. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les usines avec des lignes de fabrication et des machines critiques.",
-      stats: [["3", "Postes sous l'objectif", "Production sous l'objectif depuis 3 postes. Alerte avant l'arrêt."], ["3j", "Avant un arrêt", "Vibrations en hausse depuis 3 jours sur la presse 4."], ["120 %", "De la capacité", "La semaine prochaine demande 120 % de la capacité."]],
+      stats: [["3", "Postes sous l'objectif", "Production sous l'objectif depuis 3 postes. Alerte avant l'arrêt."], ["3j", "Jours avant un arrêt prévu", "Vibrations en hausse depuis 3 jours sur la presse 4."], ["120 %", "Jours de capacité restants", "La semaine prochaine demande 120 % de la capacité. Zéro jour de marge."]],
       alerts: [["warning", "Ligne 2 : production sous l'objectif depuis 3 postes."], ["critical", "Presse 4 : vibrations en hausse depuis 3 jours."], ["warning", "La semaine prochaine demande 120 % de la capacité."]],
       heading: "Ce que le directeur d'usine voit au début de chaque poste",
       items: [
@@ -490,9 +490,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "atelier-soustraitance": {
     en: {
       h1: ["Hit every delivery", "for every client", "in your workshop."],
-      lead: "SentrIA follows each client order through your workshop. It shows which order is running behind, how much machine time is left, and whether you can take the next order.",
+      lead: "SentrIA follows each client order through your workshop. It shows which order is running behind, how much machine time is left, and whether you can take the next order. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For workshops that produce parts for other companies.",
-      stats: [["2d", "Behind for a client", "Order for client Alpha: 2 days behind its date."], ["40%", "Machine time free", "Machine 3 has 40% of its time free next week."], ["120%", "Of capacity", "The next client order needs 120% of your capacity."]],
+      stats: [["2d", "Days to deadline, per order", "Order for client Alpha: 2 days past its deadline."], ["40%", "Hours of machine time left", "Machine 3 has 40% of its time free next week."], ["120%", "Of capacity", "The next client order needs 120% of your capacity."]],
       alerts: [["critical", "Client Alpha: order 2 days behind its date."], ["warning", "Machine 3: 40% of its time free next week."], ["warning", "Next client order: 120% of capacity."]],
       heading: "What the workshop manager sees before each order is released",
       items: [
@@ -505,9 +505,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Tenez chaque délai", "pour chaque client", "dans votre atelier."],
-      lead: "SentrIA suit chaque commande client dans votre atelier. Il montre quelle commande prend du retard, combien de temps machine reste libre, et si vous pouvez accepter la commande suivante.",
+      lead: "SentrIA suit chaque commande client dans votre atelier. Il montre quelle commande prend du retard, combien de temps machine reste libre, et si vous pouvez accepter la commande suivante. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les ateliers qui produisent des pièces pour d'autres entreprises.",
-      stats: [["2j", "Retard pour un client", "Commande du client Alpha : 2 jours de retard sur sa date."], ["40 %", "Temps machine libre", "La machine 3 a 40 % de son temps libre la semaine prochaine."], ["120 %", "De la capacité", "La prochaine commande client demande 120 % de votre capacité."]],
+      stats: [["2j", "Jours avant l'échéance, par commande", "Commande du client Alpha : 2 jours de retard sur sa date."], ["40 %", "Heures de temps machine restantes", "La machine 3 a 40 % de son temps libre la semaine prochaine."], ["120 %", "De la capacité", "La prochaine commande client demande 120 % de votre capacité."]],
       alerts: [["critical", "Client Alpha : commande 2 jours en retard sur sa date."], ["warning", "Machine 3 : 40 % de son temps libre la semaine prochaine."], ["warning", "Prochaine commande client : 120 % de la capacité."]],
       heading: "Ce que le responsable d'atelier voit avant chaque lancement",
       items: [
@@ -521,10 +521,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   },
   "usine-agroalimentaire": {
     en: {
-      h1: ["Hygiene and output", "in the same line", "of sight."],
-      lead: "SentrIA watches the process temperature, the batches waiting for release and the output of each line. It warns you before a batch drifts out of its limits, or a line falls behind.",
+      h1: ["Catch the batch", "before it drifts", "past its limits."],
+      lead: "SentrIA watches the process temperature, the batches waiting for release and the output of each line. It warns you before a batch drifts out of its limits, or a line falls behind. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For food plants that work under strict hygiene and temperature rules.",
-      stats: [["32°", "Process temperature", "Mixing room at 32 °C, above its limit."], ["9d", "Batches waiting", "Batch 27 has waited 9 days for release."], ["3", "Shifts under target", "Line 1 under target for 3 shifts."]],
+      stats: [["32°", "Process temperature", "Mixing room at 32 °C, above its limit."], ["9d", "Days / batches before release deadline", "Batch 27 has waited 9 days for release. Act today."], ["3", "Shifts under target", "Line 1 under target for 3 shifts."]],
       alerts: [["critical", "Mixing room: 32 °C, above its limit."], ["warning", "Batch 27: 9 days waiting for release."], ["warning", "Line 1: under target for 3 shifts."]],
       heading: "What the quality and production leads see every shift",
       items: [
@@ -536,10 +536,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       example: { title: "One shift at the plant", lines: ["Mixing room: 32 °C, above its limit", "Batch 27: 9 days waiting", "Line 1: 3 shifts under target", "Action proposed: check the mixing room and release batch 27 first"], result: "The quality team sees the drift before the batch is lost." },
     },
     fr: {
-      h1: ["Hygiène et production", "sur la même", "ligne de vue."],
-      lead: "SentrIA suit la température du procédé, les lots en attente de libération et la production de chaque ligne. Il vous prévient avant qu'un lot ne sorte de ses limites, ou qu'une ligne ne prenne du retard.",
+      h1: ["Repérez le lot", "avant qu'il ne sorte", "de ses limites."],
+      lead: "SentrIA suit la température du procédé, les lots en attente de libération et la production de chaque ligne. Il vous prévient avant qu'un lot ne sorte de ses limites, ou qu'une ligne ne prenne du retard. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les usines agroalimentaires soumises à des règles strictes d'hygiène et de température.",
-      stats: [["32 °C", "Température du procédé", "Salle de mélange à 32 °C, au-dessus de sa limite."], ["9j", "Lots en attente", "Le lot 27 attend sa libération depuis 9 jours."], ["3", "Postes sous l'objectif", "Ligne 1 sous l'objectif depuis 3 postes."]],
+      stats: [["32 °C", "Température du procédé", "Salle de mélange à 32 °C, au-dessus de sa limite."], ["9j", "Jours / lots avant l'échéance de libération", "Le lot 27 attend sa libération depuis 9 jours. Agissez aujourd'hui."], ["3", "Postes sous l'objectif", "Ligne 1 sous l'objectif depuis 3 postes."]],
       alerts: [["critical", "Salle de mélange : 32 °C, au-dessus de sa limite."], ["warning", "Lot 27 : 9 jours d'attente pour la libération."], ["warning", "Ligne 1 : sous l'objectif depuis 3 postes."]],
       heading: "Ce que les responsables qualité et production voient à chaque poste",
       items: [
@@ -554,9 +554,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "transporteur-routier": {
     en: {
       h1: ["Keep every truck", "on time", "for your clients."],
-      lead: "SentrIA follows each truck against its client time window. It warns you when a load is late, when the delay will reach the next stops, and when a truck needs service.",
+      lead: "SentrIA follows each truck against its client time window. It warns you when a load is late, when the delay will reach the next stops, and when a truck needs service. Late shows up as a drift from the usual window — before the client calls. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For hauliers who carry goods for other companies.",
-      stats: [["2h", "Late for a client", "Truck 7 is 2 hours late for its client slot."], ["3", "Stops behind it", "Three stops after it will slip."], ["500km", "To service", "Truck 3 brake pads due in 500 km."]],
+      stats: [["2h", "Hours of slack (lost)", "Truck 7 is 2 hours late for its client slot."], ["3", "Stops behind it", "Three stops after it will slip."], ["7d", "Days until service", "Truck 3 brake pads due in 7 days or 500 km."]],
       alerts: [["warning", "Truck 7: 2 hours late for a client slot."], ["critical", "Three stops after it will slip. Reroute now."], ["warning", "Truck 3: brake pads due in 500 km."]],
       heading: "What the transport planner sees before the first departure",
       items: [
@@ -569,9 +569,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Gardez chaque camion", "à l'heure", "pour vos clients."],
-      lead: "SentrIA suit chaque camion par rapport à la plage horaire de son client. Il vous prévient quand une livraison est en retard, quand le retard va atteindre les arrêts suivants, et quand un camion doit être révisé.",
+      lead: "SentrIA suit chaque camion par rapport à la plage horaire de son client. Il vous prévient quand une livraison est en retard, quand le retard va atteindre les arrêts suivants, et quand un camion doit être révisé. Un retard se voit comme un écart par rapport à la plage habituelle — avant que le client n'appelle. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les transporteurs qui acheminent des marchandises pour d'autres entreprises.",
-      stats: [["2h", "En retard pour un client", "Camion 7 a 2 heures de retard sur le créneau de son client."], ["3", "Arrêts derrière", "Trois arrêts suivants vont glisser."], ["500 km", "Avant entretien", "Plaquettes du camion 3 à changer dans 500 km."]],
+      stats: [["2h", "Heures de marge (perdues)", "Camion 7 a 2 heures de retard sur le créneau de son client."], ["3", "Arrêts derrière", "Trois arrêts suivants vont glisser."], ["7j", "Jours avant entretien", "Plaquettes du camion 3 dans 7 jours ou 500 km."]],
       alerts: [["warning", "Camion 7 : 2 heures de retard sur le créneau client."], ["critical", "Trois arrêts suivants vont glisser. Réacheminez maintenant."], ["warning", "Camion 3 : plaquettes à changer dans 500 km."]],
       heading: "Ce que le planificateur voit avant le premier départ",
       items: [
@@ -585,10 +585,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   },
   "flotte-entreprise": {
     en: {
-      h1: ["Your own fleet", "runs on schedule", "and in service."],
-      lead: "SentrIA follows the vehicles your company uses every day. It shows which route runs late, and which vehicle is due for service before it breaks down.",
+      h1: ["Your own fleet,", "on time, in service,", "before the breakdown."],
+      lead: "SentrIA follows the vehicles your company uses every day. It shows which route runs late, and which vehicle is due for service before it breaks down. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For companies that run their own vehicles for their own operation.",
-      stats: [["2h", "Late route", "Sales round 4 is 2 hours behind its plan."], ["500km", "To service", "Van 12 is due for service in 500 km."], ["8", "Vehicles tracked", "Eight vehicles checked against the service schedule."]],
+      stats: [["2h", "Late route", "Sales round 4 is 2 hours behind its plan."], ["7d", "Days until service due", "Van 12 is due for service in 7 days or 500 km."], ["8", "Vehicles tracked", "Eight vehicles checked against the service schedule."]],
       alerts: [["warning", "Sales round 4: 2 hours behind its plan."], ["warning", "Van 12: service due in 500 km."], ["warning", "Eight vehicles checked against the schedule."]],
       heading: "What the fleet manager sees each morning",
       items: [
@@ -600,10 +600,10 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       example: { title: "One morning for the fleet", lines: ["Sales round 4: 2 hours behind", "Van 12: service due in 500 km", "Two vehicles due this month", "Action proposed: book the workshop for van 12"], result: "Van 12 is serviced on a planned day." },
     },
     fr: {
-      h1: ["Votre flotte", "roule à l'heure", "et entretenue."],
-      lead: "SentrIA suit les véhicules que votre entreprise utilise chaque jour. Il montre quelle tournée est en retard, et quel véhicule doit être révisé avant la panne.",
+      h1: ["Votre flotte,", "à l'heure, entretenue,", "avant la panne."],
+      lead: "SentrIA suit les véhicules que votre entreprise utilise chaque jour. Il montre quelle tournée est en retard, et quel véhicule doit être révisé avant la panne. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les entreprises qui utilisent leurs propres véhicules pour leur activité.",
-      stats: [["2h", "Tournée en retard", "La tournée commerciale 4 a 2 heures de retard sur son plan."], ["500 km", "Avant entretien", "La camionnette 12 doit être révisée dans 500 km."], ["8", "Véhicules suivis", "Huit véhicules vérifiés par rapport au planning d'entretien."]],
+      stats: [["2h", "Tournée en retard", "La tournée commerciale 4 a 2 heures de retard sur son plan."], ["7j", "Jours avant entretien", "La camionnette 12 doit être révisée dans 7 jours ou 500 km."], ["8", "Véhicules suivis", "Huit véhicules vérifiés par rapport au planning d'entretien."]],
       alerts: [["warning", "Tournée commerciale 4 : 2 heures de retard sur le plan."], ["warning", "Camionnette 12 : révision dans 500 km."], ["warning", "Huit véhicules vérifiés par rapport au planning."]],
       heading: "Ce que le responsable de flotte voit chaque matin",
       items: [
@@ -618,9 +618,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "location-vehicules": {
     en: {
       h1: ["Rented vehicles", "back on time", "and in service."],
-      lead: "SentrIA follows each rented vehicle against its return date and service schedule. It warns you about late pickups and returns, and about vehicles due for service before the next customer.",
+      lead: "SentrIA follows each rented vehicle against its return date and service schedule. It warns you about late pickups and returns, and about vehicles due for service before the next customer. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For rental companies that make a fleet available to customers.",
-      stats: [["500km", "To service", "Car 9 is due for service in 500 km, before its next rental."], ["2h", "Late return", "Car 4 is 2 hours late for its return slot."], ["3", "Rentals at risk", "Three rentals depend on cars due back today."]],
+      stats: [["7d", "Days until return / service", "Car 9 is due for service in 7 days, before its next rental."], ["2h", "Late return", "Car 4 is 2 hours late for its return slot."], ["3", "Rentals at risk", "Three rentals depend on cars due back today."]],
       alerts: [["warning", "Car 4: 2 hours late for its return slot."], ["critical", "Car 9: service due in 500 km, before its next rental."], ["warning", "Three rentals depend on cars due back today."]],
       heading: "What the rental desk sees before each customer",
       items: [
@@ -633,9 +633,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Les véhicules loués", "de retour à l'heure", "et entretenus."],
-      lead: "SentrIA suit chaque véhicule loué par rapport à sa date de retour et à son planning d'entretien. Il vous prévient des retours et prises en retard, et des véhicules à réviser avant le client suivant.",
+      lead: "SentrIA suit chaque véhicule loué par rapport à sa date de retour et à son planning d'entretien. Il vous prévient des retours et prises en retard, et des véhicules à réviser avant le client suivant. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les loueurs qui mettent une flotte à disposition de leurs clients.",
-      stats: [["500 km", "Avant entretien", "La voiture 9 doit être révisée dans 500 km, avant sa prochaine location."], ["2h", "Retour en retard", "La voiture 4 a 2 heures de retard sur son créneau de retour."], ["3", "Locations à risque", "Trois locations dépendent de voitures attendues aujourd'hui."]],
+      stats: [["7j", "Jours avant retour / entretien", "La voiture 9 doit être révisée dans 7 jours, avant sa prochaine location."], ["2h", "Retour en retard", "La voiture 4 a 2 heures de retard sur son créneau de retour."], ["3", "Locations à risque", "Trois locations dépendent de voitures attendues aujourd'hui."]],
       alerts: [["warning", "Voiture 4 : 2 heures de retard sur son créneau de retour."], ["critical", "Voiture 9 : révision dans 500 km, avant sa prochaine location."], ["warning", "Trois locations dépendent de voitures attendues aujourd'hui."]],
       heading: "Ce que le comptoir voit avant chaque client",
       items: [
@@ -650,7 +650,7 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "centrale-production": {
     en: {
       h1: ["See the peak", "before the grid", "feels it."],
-      lead: "SentrIA compares demand with the usual curve and with your available output. It warns you before a peak, and before the margin falls below what the next peak needs.",
+      lead: "SentrIA compares demand with the usual curve and with your available output. It warns you before a peak, and before the margin falls below what the next peak needs. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For power plants that generate for the grid at large scale.",
       stats: [["+30%", "Above the curve", "Demand 30% above the usual curve at 18:00."], ["120%", "Of the margin", "The next peak needs 120% of available output."], ["2d", "Fuel left", "Gas for 2 days at full output. Order today."]],
       alerts: [["warning", "Demand: +30% above the usual curve at 18:00."], ["critical", "The next peak needs 120% of available output."], ["warning", "Fuel: 2 days left at full output."]],
@@ -665,7 +665,7 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Voyez le pic", "avant que le réseau", "ne le subisse."],
-      lead: "SentrIA compare la demande à la courbe habituelle et à la production disponible. Il vous prévient avant un pic, et avant que la marge ne tombe sous ce que le pic suivant demande.",
+      lead: "SentrIA compare la demande à la courbe habituelle et à la production disponible. Il vous prévient avant un pic, et avant que la marge ne tombe sous ce que le pic suivant demande. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les centrales qui produisent pour le réseau à grande échelle.",
       stats: [["+30 %", "Au-dessus de la courbe", "Demande 30 % au-dessus de la courbe habituelle à 18 h."], ["120 %", "De la marge", "Le prochain pic demande 120 % de la production disponible."], ["2j", "Carburant restant", "Gaz pour 2 jours à pleine puissance. Commandez aujourd'hui."]],
       alerts: [["warning", "Demande : +30 % au-dessus de la courbe à 18 h."], ["critical", "Le prochain pic demande 120 % de la production disponible."], ["warning", "Carburant : 2 jours restants à pleine puissance."]],
@@ -682,9 +682,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "generateurs-secours": {
     en: {
       h1: ["Keep the generators", "ready for the", "next outage."],
-      lead: "SentrIA follows the fuel, the service dates and the load on each generator. It warns you before a generator runs dry, or falls due for service, in the middle of an outage.",
-      start: "For sites that depend on standby power and cannot stop.",
-      stats: [["2d", "Fuel left", "Generator 2: 2 days of fuel at full load."], ["250h", "To service", "Generator 1 is due for service in 250 hours."], ["18:00", "Load peak", "Site load rises at 18:00 on weekdays."]],
+      lead: "SentrIA follows the fuel, the service dates and the load on each generator. It warns you before a generator runs dry, or falls due for service, in the middle of an outage. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
+      start: "For backup generator operators and sites that cannot stop.",
+      stats: [["2d", "Days of fuel at full load", "Generator 2: 2 days of fuel at full load. Order today."], ["250h", "To service", "Generator 1 is due for service in 250 hours."], ["18:00", "Load peak", "Site load rises at 18:00 on weekdays."]],
       alerts: [["critical", "Generator 2: 2 days of fuel left. Order today."], ["warning", "Generator 1: service due in 250 hours."], ["warning", "Load rises at 18:00 on weekdays."]],
       heading: "What the site engineer checks each day",
       items: [
@@ -697,9 +697,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Gardez les générateurs", "prêts pour la", "prochaine coupure."],
-      lead: "SentrIA suit le carburant, les dates d'entretien et la charge de chaque générateur. Il vous prévient avant qu'un générateur ne tombe à sec, ou ne doive être révisé, en pleine coupure.",
-      start: "Pour les sites qui dépendent d'une alimentation de secours et ne peuvent pas s'arrêter.",
-      stats: [["2j", "Carburant restant", "Générateur 2 : 2 jours de carburant à pleine charge."], ["250 h", "Avant entretien", "Le générateur 1 doit être révisé dans 250 heures."], ["18 h", "Pic de charge", "La charge du site monte à 18 h les jours ouvrés."]],
+      lead: "SentrIA suit le carburant, les dates d'entretien et la charge de chaque générateur. Il vous prévient avant qu'un générateur ne tombe à sec, ou ne doive être révisé, en pleine coupure. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
+      start: "Pour les opérateurs de générateurs de secours et les sites qui ne peuvent pas s'arrêter.",
+      stats: [["2j", "Jours de carburant à pleine charge", "Générateur 2 : 2 jours de carburant à pleine charge. Commandez aujourd'hui."], ["250 h", "Avant entretien", "Le générateur 1 doit être révisé dans 250 heures."], ["18 h", "Pic de charge", "La charge du site monte à 18 h les jours ouvrés."]],
       alerts: [["critical", "Générateur 2 : 2 jours de carburant restants. Commandez aujourd'hui."], ["warning", "Générateur 1 : révision dans 250 heures."], ["warning", "La charge monte à 18 h les jours ouvrés."]],
       heading: "Ce que l'ingénieur du site vérifie chaque jour",
       items: [
@@ -714,9 +714,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "distribution-energetique": {
     en: {
       h1: ["Watch the grid", "where the pressure", "builds."],
-      lead: "SentrIA follows the load on each zone of your network. It shows when pressure rises, which zone is near its limit, and where a peak is likely to cause an outage.",
+      lead: "SentrIA follows the load on each zone of your network. It shows when pressure rises, which zone is near its limit, and where a peak is likely to cause an outage. Each zone's load is compared to its own normal — the deviation shows before the overload lands. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For distribution operators who run the local grid.",
-      stats: [["18:00", "Pressure rises", "Network pressure rises at 18:00 on weekdays."], ["130%", "Zone A", "Zone A at 130% of its planned load at peak."], ["3", "Zones near limit", "Three zones close to their limit this week."]],
+      stats: [["18:00", "Pressure rises", "Network pressure rises at 18:00 on weekdays."], ["2h", "Hours before overload, per zone", "Zone A at 130% of load — overload in 2 hours without action."], ["3", "Zones near limit", "Three zones close to their limit this week."]],
       alerts: [["warning", "Network pressure: rising at 18:00 on weekdays."], ["critical", "Zone A: 130% of planned load at peak."], ["warning", "Three zones close to their limit this week."]],
       heading: "What the grid operator sees before the evening peak",
       items: [
@@ -729,9 +729,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Surveillez le réseau", "là où la pression", "monte."],
-      lead: "SentrIA suit la charge de chaque zone de votre réseau. Il montre quand la pression monte, quelle zone approche de sa limite, et où un pic risque de causer une coupure.",
+      lead: "SentrIA suit la charge de chaque zone de votre réseau. Il montre quand la pression monte, quelle zone approche de sa limite, et où un pic risque de causer une coupure. La charge de chaque zone est comparée à sa propre normale — l'écart se voit avant la surcharge. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les opérateurs de distribution qui gèrent le réseau local.",
-      stats: [["18 h", "La pression monte", "La pression sur le réseau monte à 18 h les jours ouvrés."], ["130 %", "Zone A", "La zone A atteint 130 % de sa charge prévue au pic."], ["3", "Zones proches de leur limite", "Trois zones proches de leur limite cette semaine."]],
+      stats: [["18 h", "La pression monte", "La pression sur le réseau monte à 18 h les jours ouvrés."], ["2h", "Heures avant surcharge, par zone", "Zone A à 130 % de sa charge — surcharge dans 2 heures sans action."], ["3", "Zones proches de leur limite", "Trois zones proches de leur limite cette semaine."]],
       alerts: [["warning", "Pression sur le réseau : hausse à 18 h les jours ouvrés."], ["critical", "Zone A : 130 % de la charge prévue au pic."], ["warning", "Trois zones proches de leur limite cette semaine."]],
       heading: "Ce que le gestionnaire du réseau voit avant le pic du soir",
       items: [
@@ -746,41 +746,41 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   "clinique-hopital": {
     en: {
       h1: ["Know which supplies", "will run out", "before the ward does."],
-      lead: "Upload your stock and usage file. SentrIA estimates how many days of each supply you have left, flags the batches that will expire before they are used, and shows which ward uses more than usual.",
-      start: "For clinics and hospitals that manage their own clinical stock.",
-      stats: [["3d", "Days of stock", "Gloves size M: 3 days left. Next delivery in 6 days."], ["30d", "To expiry", "Antibiotic batch B12 expires in 30 days. Use it first."], ["+40%", "Above usual", "Ward 2 used 40% more dressings than usual this week."]],
-      alerts: [["critical", "Gloves size M: 3 days left, next delivery in 6 days. Order now."], ["warning", "Antibiotic batch B12: 30 days to expiry. Use it first."], ["warning", "Ward 2: dressings 40% above usual use this week."]],
+      lead: "Upload your stock and usage file. SentrIA estimates how many days of each supply you have left, flags the batches that will expire before they are used, and shows which ward uses more than usual. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
+      start: "For hospitals and clinics that manage their own clinical stock.",
+      stats: [["8d", "Days left, critical supply", "Gloves size M: 8 days left. Next delivery in 10 days."], ["30d", "To expiry", "Antibiotic batch B12 expires in 30 days. Use it first."], ["+40%", "Above usual", "Ward 2 used 40% more dressings than usual this week."]],
+      alerts: [["critical", "Gloves size M: 8 days left, next delivery in 10 days. Order now."], ["warning", "Antibiotic batch B12: 30 days to expiry. Use it first."], ["warning", "Ward 2: dressings 40% above usual use this week."]],
       heading: "What the hospital pharmacy sees every morning",
       items: [
-        ["Which supply runs out before the next delivery", "SentrIA divides each supply's stock by its average daily use and compares the result with the next delivery date. It lists the supplies that will run out first.", "Gloves size M: 3 days left. Next delivery in 6 days.", "Product, quantity on hand, daily use, next delivery date", "3d", "bars", ["Gloves size M · 3 days", "next delivery in 6 days"]],
+        ["Which supply runs out before the next delivery", "SentrIA divides each supply's stock by its average daily use and compares the result with the next delivery date. It lists the supplies that will run out first.", "Gloves size M: 8 days left. Next delivery in 10 days.", "Product, quantity on hand, daily use, next delivery date", "8d", "bars", ["Gloves size M · 8 days", "next delivery in 10 days"]],
         ["Which batch expires before it is used", "SentrIA reads each batch's expiry date and its usual use. The batches that will not be used in time come first, so you can use them first or return them.", "Antibiotic batch B12: 30 days to expiry, 45 days of stock. Use it first.", "Product, batch number, expiry date, quantity", "30d", "bars", ["Batch B12 · 30 days to expiry", "45 days of stock"]],
         ["Which ward uses more than usual", "SentrIA compares each ward's use of a supply this week with its usual use. A sharp rise shows up before the stock does.", "Ward 2: dressings 40% above usual use this week.", "Ward, product, quantity used by day", "+40%", "compare", ["stock 90", "usual 100", "this week 140"]],
       ],
       notDo: "SentrIA does not order supplies or change prescriptions. It shows what the records say and what needs attention first. You decide.",
-      example: { title: "One morning at the hospital pharmacy", lines: ["Gloves size M: 3 days left, delivery in 6 days", "Antibiotic batch B12: 30 days to expiry", "Ward 2: dressings 40% above usual use", "Action proposed: order gloves today and use batch B12 first"], result: "The order goes out before the ward runs short." },
+      example: { title: "One morning at the hospital pharmacy", lines: ["Gloves size M: 8 days left, delivery in 10 days", "Antibiotic batch B12: 30 days to expiry", "Ward 2: dressings 40% above usual use", "Action proposed: order gloves today and use batch B12 first"], result: "The order goes out before the ward runs short." },
     },
     fr: {
       h1: ["Sachez quelles fournitures", "vont manquer", "avant le service."],
-      lead: "Envoyez votre fichier de stock et de consommation. SentrIA estime le nombre de jours qu'il vous reste de chaque fourniture, signale les lots qui seront périmés avant d'être utilisés, et montre quel service consomme plus que d'habitude.",
-      start: "Pour les cliniques et hôpitaux qui gèrent leur propre stock clinique.",
-      stats: [["3j", "Jours de stock", "Gants taille M : 3 jours restants. Prochaine livraison dans 6 jours."], ["30j", "Avant péremption", "Lot d'antibiotique B12 périmé dans 30 jours. Utilisez-le en premier."], ["+40 %", "Au-dessus de l'usage", "Le service 2 a utilisé 40 % de pansements en plus cette semaine."]],
-      alerts: [["critical", "Gants taille M : 3 jours restants, prochaine livraison dans 6 jours. Commandez maintenant."], ["warning", "Lot d'antibiotique B12 : 30 jours avant péremption. Utilisez-le en premier."], ["warning", "Service 2 : pansements 40 % au-dessus de l'usage habituel cette semaine."]],
+      lead: "Envoyez votre fichier de stock et de consommation. SentrIA estime le nombre de jours qu'il vous reste de chaque fourniture, signale les lots qui seront périmés avant d'être utilisés, et montre quel service consomme plus que d'habitude. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
+      start: "Pour les hôpitaux et cliniques qui gèrent leur propre stock clinique.",
+      stats: [["8j", "Jours restants, fourniture critique", "Gants taille M : 8 jours restants. Prochaine livraison dans 10 jours."], ["30j", "Avant péremption", "Lot d'antibiotique B12 périmé dans 30 jours. Utilisez-le en premier."], ["+40 %", "Au-dessus de l'usage", "Le service 2 a utilisé 40 % de pansements en plus cette semaine."]],
+      alerts: [["critical", "Gants taille M : 8 jours restants, prochaine livraison dans 10 jours. Commandez maintenant."], ["warning", "Lot d'antibiotique B12 : 30 jours avant péremption. Utilisez-le en premier."], ["warning", "Service 2 : pansements 40 % au-dessus de l'usage habituel cette semaine."]],
       heading: "Ce que la pharmacie de l'hôpital voit chaque matin",
       items: [
-        ["Quelle fourniture manque avant la prochaine livraison", "SentrIA divise le stock de chaque fourniture par sa consommation moyenne par jour et compare le résultat à la date de la prochaine livraison. Il liste les fournitures qui manqueront en premier.", "Gants taille M : 3 jours restants. Prochaine livraison dans 6 jours.", "Produit, quantité en stock, consommation par jour, date de prochaine livraison", "3j", "bars", ["Gants taille M · 3 jours", "prochaine livraison dans 6 jours"]],
+        ["Quelle fourniture manque avant la prochaine livraison", "SentrIA divise le stock de chaque fourniture par sa consommation moyenne par jour et compare le résultat à la date de la prochaine livraison. Il liste les fournitures qui manqueront en premier.", "Gants taille M : 8 jours restants. Prochaine livraison dans 10 jours.", "Produit, quantité en stock, consommation par jour, date de prochaine livraison", "8j", "bars", ["Gants taille M · 8 jours", "prochaine livraison dans 10 jours"]],
         ["Quel lot périme avant d'être utilisé", "SentrIA lit la date de péremption de chaque lot et son usage habituel. Les lots qui ne seront pas utilisés à temps passent en tête, pour les utiliser en premier ou les retourner.", "Lot d'antibiotique B12 : 30 jours avant péremption, 45 jours de stock. Utilisez-le en premier.", "Produit, numéro de lot, date de péremption, quantité", "30j", "bars", ["Lot B12 · 30 jours avant péremption", "45 jours de stock"]],
         ["Quel service consomme plus que d'habitude", "SentrIA compare la consommation de chaque service cette semaine à son usage habituel. Une hausse forte se voit avant que le stock ne baisse.", "Service 2 : pansements 40 % au-dessus de l'usage habituel cette semaine.", "Service, produit, quantité utilisée par jour", "+40 %", "compare", ["stock 90", "habituel 100", "cette semaine 140"]],
       ],
       notDo: "SentrIA ne commande aucune fourniture et ne modifie aucune prescription. Il montre ce que disent les relevés et ce qui demande votre attention en premier. Vous décidez.",
-      example: { title: "Un matin à la pharmacie de l'hôpital", lines: ["Gants taille M : 3 jours restants, livraison dans 6 jours", "Lot d'antibiotique B12 : 30 jours avant péremption", "Service 2 : pansements 40 % au-dessus de l'usage habituel", "Action proposée : commander les gants aujourd'hui et utiliser le lot B12 en premier"], result: "La commande part avant que le service ne manque." },
+      example: { title: "Un matin à la pharmacie de l'hôpital", lines: ["Gants taille M : 8 jours restants, livraison dans 10 jours", "Lot d'antibiotique B12 : 30 jours avant péremption", "Service 2 : pansements 40 % au-dessus de l'usage habituel", "Action proposée : commander les gants aujourd'hui et utiliser le lot B12 en premier"], result: "La commande part avant que le service ne manque." },
     },
   },
   laboratoire: {
     en: {
       h1: ["Keep every test supplied", "and every sample", "in time."],
-      lead: "Upload your reagent stock and your test volumes. SentrIA estimates how many tests each reagent still covers, flags the reagent lots that expire first, and warns when a sample has waited too long.",
+      lead: "Upload your reagent stock and your test volumes. SentrIA estimates how many tests each reagent still covers, flags the reagent lots that expire first, and warns when a sample has waited too long. How many tests each reagent still covers — your days of stock, counted in tests. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For laboratories that run tests and keep reagents and samples.",
-      stats: [["40", "Tests covered", "Reagent A covers 40 more tests. 60 are booked this week."], ["14d", "To expiry", "Reagent lot R7 expires in 14 days. Use it first."], ["6h", "Sample waiting", "Sample S-218 has waited 6 hours. The limit is 8 hours."]],
+      stats: [["120", "Tests left", "Reagent A: 120 tests left before reorder. 60 booked this week."], ["14d", "To expiry", "Reagent lot R7 expires in 14 days. Use it first."], ["6h", "Sample waiting", "Sample S-218 has waited 6 hours. The limit is 8 hours."]],
       alerts: [["critical", "Reagent A: 40 tests left, 60 booked this week. Order now."], ["warning", "Reagent lot R7: 14 days to expiry. Use it first."], ["critical", "Sample S-218: 6 hours waiting, limit 8 hours. Process it now."]],
       heading: "What the lab manager sees every morning",
       items: [
@@ -793,9 +793,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Gardez chaque test approvisionné", "et chaque échantillon", "dans les temps."],
-      lead: "Envoyez votre stock de réactifs et vos volumes d'analyses. SentrIA estime le nombre de tests que chaque réactif couvre encore, signale les lots de réactifs qui périment en premier, et vous prévient quand un échantillon attend trop longtemps.",
+      lead: "Envoyez votre stock de réactifs et vos volumes d'analyses. SentrIA estime le nombre de tests que chaque réactif couvre encore, signale les lots de réactifs qui périment en premier, et vous prévient quand un échantillon attend trop longtemps. Combien de tests chaque réactif couvre encore — vos jours de stock, comptés en tests. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les laboratoires qui réalisent des analyses et gardent réactifs et échantillons.",
-      stats: [["40", "Tests couverts", "Le réactif A couvre 40 tests de plus. 60 sont prévus cette semaine."], ["14j", "Avant péremption", "Le lot de réactif R7 périme dans 14 jours. Utilisez-le en premier."], ["6h", "Échantillon en attente", "L'échantillon S-218 attend depuis 6 heures. La limite est de 8 heures."]],
+      stats: [["120", "Tests restants", "Réactif A : 120 tests restants avant commande. 60 prévus cette semaine."], ["14j", "Avant péremption", "Le lot de réactif R7 périme dans 14 jours. Utilisez-le en premier."], ["6h", "Échantillon en attente", "L'échantillon S-218 attend depuis 6 heures. La limite est de 8 heures."]],
       alerts: [["critical", "Réactif A : 40 tests restants, 60 prévus cette semaine. Commandez maintenant."], ["warning", "Lot de réactif R7 : 14 jours avant péremption. Utilisez-le en premier."], ["critical", "Échantillon S-218 : 6 heures d'attente, limite 8 heures. Traitez-le maintenant."]],
       heading: "Ce que le responsable du laboratoire voit chaque matin",
       items: [
@@ -810,9 +810,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
   veterinaire: {
     en: {
       h1: ["Keep vaccines cold", "and sell the stock", "before it expires."],
-      lead: "Upload your stock file. SentrIA shows which batches to use first, flags a fridge that goes out of range, and lists the stock that has stopped moving.",
+      lead: "Upload your stock file. SentrIA shows which batches to use first, flags a fridge that goes out of range, and lists the stock that has stopped moving, and which vaccines run out before the next delivery. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For veterinary clinics and animal health pharmacies.",
-      stats: [["8°C", "Cold chain", "Warned above 8 °C and below 2 °C, and when no temperature is recorded."], ["30d", "To expiry", "Batches 30 to 90 days from expiry are flagged to leave first."], ["60d", "No sale", "Dewormer D-40: 60 days without a sale. Usual gap: 14 days."]],
+      stats: [["8°C", "Cold chain", "Warned above 8 °C and below 2 °C, and when no temperature is recorded."], ["30d", "Days to expiry / days of stock", "Batches 30 to 90 days from expiry are flagged to leave first."], ["60d", "No sale", "Dewormer D-40: 60 days without a sale. Usual gap: 14 days."]],
       alerts: [["critical", "Vaccine fridge 2: 9 °C since 06:00. Check the cold chain now."], ["warning", "Rabies batch V-112: 30 days to expiry. Sell it first."], ["warning", "Dewormer D-40: 60 days without a sale. Usual gap: 14 days."]],
       heading: "What the clinic sees every morning",
       items: [
@@ -825,9 +825,9 @@ const RAW: Record<string, Record<Lang, Raw>> = {
     },
     fr: {
       h1: ["Gardez les vaccins au froid", "et vendez le stock", "avant sa péremption."],
-      lead: "Envoyez votre fichier de stock. SentrIA montre quels lots utiliser en premier, signale un réfrigérateur qui sort de sa plage, et liste le stock qui ne tourne plus.",
+      lead: "Envoyez votre fichier de stock. SentrIA montre quels lots utiliser en premier, signale un réfrigérateur qui sort de sa plage, et liste le stock qui ne tourne plus, et quels vaccins manqueront avant la prochaine livraison. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les cliniques vétérinaires et les pharmacies de santé animale.",
-      stats: [["8°C", "Chaîne du froid", "Alerte au-dessus de 8 °C, en dessous de 2 °C, et quand aucune température n'est enregistrée."], ["30j", "Avant péremption", "Les lots à 30 à 90 jours de la péremption sont signalés pour partir en premier."], ["60j", "Sans vente", "Vermifuge D-40 : 60 jours sans vente. Écart habituel : 14 jours."]],
+      stats: [["8°C", "Chaîne du froid", "Alerte au-dessus de 8 °C, en dessous de 2 °C, et quand aucune température n'est enregistrée."], ["30j", "Jours avant péremption / jours de stock", "Les lots à 30 à 90 jours de la péremption sont signalés pour partir en premier."], ["60j", "Sans vente", "Vermifuge D-40 : 60 jours sans vente. Écart habituel : 14 jours."]],
       alerts: [["critical", "Réfrigérateur à vaccins 2 : 9 °C depuis 6 h. Vérifiez la chaîne du froid maintenant."], ["warning", "Lot de vaccin antirabique V-112 : 30 jours avant péremption. Vendez-le en premier."], ["warning", "Vermifuge D-40 : 60 jours sans vente. Écart habituel : 14 jours."]],
       heading: "Ce que la clinique voit chaque matin",
       items: [
