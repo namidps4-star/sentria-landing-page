@@ -1,4 +1,4 @@
-import { ACTIVITY_LIST, CAPABILITIES } from "@/content/africa-activities"
+import { ACTIVITY_LIST, CAPABILITIES, SECTOR_ALERTS } from "@/content/africa-activities"
 import { SHARED } from "@/content/africa-activity-pages"
 import { designFor } from "@/content/africa-designs"
 import { SECTOR_PAGE } from "@/content/sector-pages"
@@ -8,6 +8,8 @@ import { MapHero } from "./africa-network-map"
 import { AfricaStepsPanels } from "./africa-steps-panels"
 import { AfricaMorning } from "./africa-morning"
 import { AfricaFaqAccordion, type FaqTone } from "./africa-faq-accordion"
+import { AfricaQueuePreview } from "./africa-queue-preview"
+import { AfricaDecisionCard } from "./africa-decision-card"
 import "./africa-variants.css"
 
 /* Every activity page uses the same parts: the numbers of the activity, the three steps and a worked example,
@@ -26,6 +28,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   const firstSentence = c.items[0]?.does.split(/(?<=\.)\s/)[0] ?? ""
   const id = `afr-caps-${slug}-${lang}`
   const pharmacy = slug === "pharmacie"
+  const alerts = SECTOR_ALERTS[slug]?.[lang] ?? []
   const shared = SHARED[lang]
   const steps = c.steps ?? shared.steps
   const stepsHeading = c.stepsHeading ?? shared.stepsHeading
@@ -40,6 +43,17 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         {c.example && slug === "grossiste-pharma" && <MapHero kicker={kicker} title={c.example.title} result={c.example.result} lang={lang} />}
         {c.example && slug !== "grossiste-pharma" && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
       </section>
+      {alerts.length > 0 && (
+        <section className="afr-queue-sec wrap">
+          <p className="rv-kicker">Decision queue</p>
+          <AfricaQueuePreview alerts={alerts} lang={lang} />
+        </section>
+      )}
+      {c.decisionCard && (
+        <section className="afr-dcard-sec wrap">
+          <AfricaDecisionCard card={c.decisionCard} lang={lang} />
+        </section>
+      )}
       <AfricaFaqAccordion id={`${id}-faq`} kicker={kicker} heading={faqHeading} items={faq} lang={lang} tone={TONES[design.faq]} />
     </>
   )
