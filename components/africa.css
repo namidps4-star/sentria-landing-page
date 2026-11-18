@@ -202,21 +202,55 @@
   .afr-vq-now b{animation:none;opacity:1}
 }
 
-/* Decision card */
-.afr-dcard{padding:32px 24px;background:#fbfbfd;border-radius:16px;border:1px solid #d2d2d7}
-.afr-dcard__kicker{font-size:12px;font-weight:600;color:#6e6e73;text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px}
-.afr-dcard__grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.afr-dcard__slot{padding:16px;background:#fff;border-radius:10px;border:1px solid #e8e8ed}
-.afr-dcard__label{display:block;font-size:11px;font-weight:600;color:#6e6e73;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.afr-dcard__value{margin:0;font-size:14px;color:#1d1d1f;line-height:1.5}
-.afr-dcard__slot:last-child .afr-dcard__value{color:#0a7a3e;font-weight:600}
-@media (max-width:540px){.afr-dcard__grid{grid-template-columns:1fr}}
-.afr-dcard-sec{padding:clamp(56px,7vw,96px) 0;background:#fbfbfd}
-/* Band colour modifiers — decision card section */
+/* Decision card — squircle style */
+.afr-dcard{padding:clamp(32px,5vw,56px) clamp(20px,4vw,40px)}
+.afr-dcard__kicker{font-size:12px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em;margin-bottom:clamp(28px,4vw,44px);display:flex;align-items:center;gap:10px}
+.afr-dcard__kicker::before{content:'';width:18px;height:1.5px;border-radius:999px;background:#d6ff3f}
+/* Grid of 4 columns */
+.afr-dcard__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,24px)}
+.afr-dcard__col{display:flex;flex-direction:column;align-items:center;gap:14px;
+  opacity:0;transform:translateY(10px)}
+[data-vis="1"] .afr-dcard__col{animation:afr-dc-in .55s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--ri,0) * .12s + .15s)}
+@keyframes afr-dc-in{to{opacity:1;transform:none}}
+/* Field label above squircle */
+.afr-dcard__field-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45);line-height:1}
+/* Squircle */
+.afr-dcard__sq{position:relative;width:clamp(110px,16vw,180px);aspect-ratio:1/1;
+  border-radius:28%;
+  background:radial-gradient(ellipse at 50% 56%, #0b0c08 16%, rgba(11,12,8,.55) 42%, #d6ff3f 72%, #bfed1a 100%);
+  display:flex;align-items:center;justify-content:center}
+/* Dashed ring inside */
+.afr-dcard__sq::after{content:'';position:absolute;
+  inset:14%;border-radius:50%;
+  border:1.5px dashed rgba(255,255,255,.35);pointer-events:none}
+/* Confidence % number inside the ring */
+.afr-dcard__sq-num{position:relative;z-index:1;
+  font-family:"AfricaNumeral",sans-serif;font-size:clamp(28px,4vw,46px);font-weight:300;
+  color:#d6ff3f;letter-spacing:-.02em;line-height:1}
+.afr-dcard__sq-unit{font-size:.5em;vertical-align:super;margin-left:1px;letter-spacing:0}
+/* Value text below squircle */
+.afr-dcard__val{margin:0;font-size:clamp(11px,1vw,13px);color:rgba(255,255,255,.55);line-height:1.5;text-align:center;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.afr-dcard__val strong{font-weight:600;color:#d6ff3f}
+/* Outcome col gets lime accent on value */
+.afr-dcard__col--oc .afr-dcard__val{color:rgba(214,255,63,.8);font-weight:600}
+@media (max-width:680px){
+  .afr-dcard__grid{grid-template-columns:repeat(2,1fr);gap:clamp(10px,3vw,20px)}
+}
+@media (max-width:380px){
+  .afr-dcard__grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .afr-dcard__sq{width:clamp(90px,38vw,130px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .afr-dcard__col{animation:none!important;opacity:1;transform:none}
+}
+/* Section — ink background so squircles pop */
+.afr-dcard-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
+/* Band colour modifiers — all ink so squircles always read */
 .afr-dcard-sec--ink{background:#0b0c08}
-.afr-dcard-sec--white{background:#fbfbfd}
-.afr-dcard-sec--lime{background:#d6ff3f}
-.afr-dcard-sec--olive{background:#1b1e10}
-.afr-dcard-sec--sand{background:#ece7d6}
-.afr-dcard-sec--grey{background:#f2f2f0}
-.afr-dcard-sec--cream{background:#f5f3ea}
+.afr-dcard-sec--white{background:#0b0c08}
+.afr-dcard-sec--lime{background:#0b0c08}
+.afr-dcard-sec--olive{background:#0b0c08}
+.afr-dcard-sec--sand{background:#0b0c08}
+.afr-dcard-sec--grey{background:#0b0c08}
+.afr-dcard-sec--cream{background:#0b0c08}
