@@ -53,7 +53,6 @@ export const DEPARTMENTS: Record<Article["sector"], { key: string; label: Bi }[]
 export const ARTICLES: Article[] = [
   {
     id: "expiry-waste-pharmacy",
-    publishAt: "2026-11-25T06:00:00Z",
     sector: "health",
     dept: "pharmacy",
     tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
