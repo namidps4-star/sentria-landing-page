@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useSyncExternalStore, useState } from "react"
+import Image from "next/image"
 import { C } from "@/content/en"
 import { T } from "./t"
 import { TAGLINES } from "@/content/taglines"
@@ -12,8 +13,6 @@ import { useLang } from "./lang"
 
 export const FIT_KEYS = ["industry", "healthcare", "agriculture", "transportation", "logistics", "energy", "retail"] as const
 export type FitKey = (typeof FIT_KEYS)[number]
-// The cards keep the order they had on the previous page.
-const CARD_KEYS: FitKey[] = ["industry", "healthcare", "logistics", "agriculture", "transportation", "energy", "retail"]
 
 let current: FitKey = "industry"
 const listeners = new Set<() => void>()
@@ -184,30 +183,35 @@ export function FitSection() {
         <p className="rv-lead" data-rv="rise" style={iv(1)}>
           <T s={C.sectors.lead} />
         </p>
-        <div className="rv-fit" data-rv="rise" style={iv(2)}>
-          <div className="rv-fit-list">
-            <div role="group" aria-label={s.title}>
-              {s.tabs.map((t, i) => (
+        <div className="rv-fit rv-fit-cards" data-rv="rise" style={iv(2)}>
+          {/* The seven sectors as a row of cards in 3D. The picked sector turns to face you in the middle. */}
+          <div className="fc-stage" role="group" aria-label={s.title}>
+            {FIT_KEYS.map((k, i) => {
+              const idx = FIT_KEYS.indexOf(active)
+              const p = ((((i - idx + 3) % 7) + 7) % 7) - 3
+              return (
                 <button
-                  key={t}
+                  key={k}
                   type="button"
-                  className="rv-fit-item"
-                  data-fit-card={FIT_KEYS[i]}
-                  aria-pressed={active === FIT_KEYS[i]}
-                  onClick={() => setFit(FIT_KEYS[i])}
-                  onMouseEnter={() => setFit(FIT_KEYS[i])}
+                  className="fc-card"
+                  data-fit-card={k}
+                  data-d={Math.abs(p)}
+                  aria-pressed={active === k}
+                  onClick={() => setFit(k)}
+                  style={{ "--p": p } as React.CSSProperties}
                 >
-                  <T s={t} />
+                  <Image src={SECTORS[i].photo} alt="" fill sizes="340px" quality={80} />
+                  <span className="fc-name">
+                    <T s={s.tabs[i]} />
+                  </span>
                 </button>
-              ))}
-            </div>
-            <div className="rv-fit-ps">
-              {CARD_KEYS.map((k, i) => (
-                <p key={k} className="rv-fit-p" data-on={active === k ? "1" : undefined} aria-hidden={active === k ? undefined : true}>
-                  <T s={s.cards[i].p} />
-                </p>
-              ))}
-            </div>
+              )
+            })}
+          </div>
+          <div className="fc-dots" aria-hidden="true">
+            {FIT_KEYS.map((k) => (
+              <i key={k} data-on={active === k ? "1" : undefined} />
+            ))}
           </div>
 
           {/* In place of a photo: the sector's own signals, set out as a board. */}
