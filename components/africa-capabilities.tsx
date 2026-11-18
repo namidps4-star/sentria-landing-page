@@ -7,6 +7,7 @@ import { AfricaStage } from "./africa-stage"
 import { MapHero } from "./africa-network-map"
 import { AfricaStepsPanels } from "./africa-steps-panels"
 import { AfricaMorning } from "./africa-morning"
+import { AfricaExample } from "./africa-example"
 import { AfricaFaqAccordion, type FaqTone } from "./africa-faq-accordion"
 import "./africa-variants.css"
 
@@ -38,7 +39,21 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       <section className="afr-caps afr-caps--rest">
         <AfricaStepsPanels heading={stepsHeading} steps={steps} kicker={kicker} lang={lang} />
         {c.example && slug === "grossiste-pharma" && <MapHero kicker={kicker} title={c.example.title} result={c.example.result} lang={lang} />}
-        {c.example && slug !== "grossiste-pharma" && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
+        {c.example && pharmacy && (
+          <AfricaExample
+            kicker={kicker}
+            title={c.example.title}
+            lines={c.example.lines}
+            result={c.example.result}
+            first={firstSentence}
+            imports={c.items[0].imports}
+            youImport={youImport}
+            lang={lang}
+            scale
+            style={design.example}
+          />
+        )}
+        {c.example && slug !== "grossiste-pharma" && !pharmacy && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
       </section>
       <AfricaFaqAccordion id={`${id}-faq`} kicker={kicker} heading={faqHeading} items={faq} lang={lang} tone={TONES[design.faq]} />
     </>
