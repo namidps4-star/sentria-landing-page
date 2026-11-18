@@ -122,13 +122,6 @@
 .afr-queue-sec{padding:clamp(56px,7vw,96px) 0;background:#0b0c08}
 .afr-queue-sec .rv-h{color:#f5f3ea;margin-bottom:32px}
 /* Band colour modifiers — queue section */
-.afr-queue-sec--ink{background:#0b0c08}
-.afr-queue-sec--white{background:#fbfbfd}
-.afr-queue-sec--lime{background:#d6ff3f}
-.afr-queue-sec--olive{background:#1b1e10}
-.afr-queue-sec--sand{background:#ece7d6}
-.afr-queue-sec--grey{background:#f2f2f0}
-.afr-queue-sec--cream{background:#f5f3ea}
 
 /* Queue preview — Gantt glass-capsule */
 .afr-gt{position:relative;width:100%}
