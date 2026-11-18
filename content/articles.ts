@@ -1,6 +1,7 @@
 import { PHARMACY_STOCK_COUNT } from "./article-pages/pharmacy-stock-count"
 import { PHARMACY_STOCK_OUTS } from "./article-pages/pharmacy-stock-outs"
 import { FEFO_PAGES } from "./article-pages/fefo"
+import { EXPIRY_WASTE_PAGES } from "./article-pages/expiry-waste"
 
 // Articles page content: the listing (ARTICLES) and the article pages (ARTICLE_PAGES).
 
@@ -50,6 +51,19 @@ export const DEPARTMENTS: Record<Article["sector"], { key: string; label: Bi }[]
 // Listing cards. Each card is one article in both languages; its link goes to the
 // English page. Keep ids in step with ARTICLE_PAGES.
 export const ARTICLES: Article[] = [
+  {
+    id: "expiry-waste-pharmacy",
+    publishAt: "2026-11-25T06:00:00Z",
+    sector: "health",
+    dept: "pharmacy",
+    tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
+    title: {
+      en: "Expiry waste in a pharmacy: causes and fixes",
+      fr: "Les pertes par péremption en pharmacie : causes et solutions",
+    },
+    minutes: 5,
+    image: "/articles/expiry-waste-boxes.jpg",
+  },
   {
     id: "fefo-first-expired-first-out",
     sector: "health",
@@ -113,7 +127,7 @@ export type ArticlePage = {
 }
 
 
-export const ARTICLE_PAGES: ArticlePage[] = [...PHARMACY_STOCK_COUNT, ...PHARMACY_STOCK_OUTS, ...FEFO_PAGES]
+export const ARTICLE_PAGES: ArticlePage[] = [...PHARMACY_STOCK_COUNT, ...PHARMACY_STOCK_OUTS, ...FEFO_PAGES, ...EXPIRY_WASTE_PAGES]
 
 
 /* Text changes that go live on a set date, without a new deploy. Until `from`
