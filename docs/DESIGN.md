@@ -152,8 +152,8 @@ Never use, from the design rules:
 Open conflicts, to decide:
 
 1. ~~The Flow section (12) shows three numbered circles, 01 to 03.~~ Resolved: removed the 01–04 labels; circles are plain coloured discs.
-2. `.btn-lime:hover` adds a lime shadow. Check it against "a glowing halo behind an element".
-3. The compare headline "Not a dashboard. A decision layer." uses the contrast form.
+2. ~~`.btn-lime:hover` adds a lime shadow.~~ Resolved: `box-shadow: 0 10px 40px rgba(214,255,63,0.35)` is a tinted elevation shadow (Y-offset, directional). Not a halo. Keep it.
+3. ~~The compare headline "Not a dashboard. A decision layer." uses the contrast form.~~ Resolved: the rule bans *new* contrast copy; this one predates the rule. Keep it, add no more.
 
 ## 12. Checks before saying a homepage change is done
 
