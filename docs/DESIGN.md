@@ -167,6 +167,6 @@ Open conflicts, to decide:
 ## 13. Open items (landing page)
 
 1. Decide the three conflicts in section 11.
-2. Reveal motion is missing on about 20 components.
+2. ~~Reveal motion is missing on about 20 components.~~ Resolved: audited all homepage components. The only missing `data-rv` was on the `rv-feats` `<li>` items in Cockpit; added. Interactive sub-components (FlowCircles, ReasoningPlates, TrustCluster, DemoDial, ConnectStack, QuickFit) use their own `useInView`/`seen→.in` reveal and need no `data-rv`.
 3. Check the whole homepage at 390 px. Not done yet.
 4. Check the French homepage section by section. Not done yet.

@@ -42,8 +42,8 @@ export function Cockpit() {
           })}
         </ol>
         <ul className="rv-feats">
-          {s.features.map((f) => (
-            <li key={f.h}>
+          {s.features.map((f, i) => (
+            <li key={f.h} data-rv="rise" style={iv(i)}>
               <strong>
                 <T s={f.h} />
               </strong>
