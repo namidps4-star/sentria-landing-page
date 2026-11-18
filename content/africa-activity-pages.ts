@@ -2,7 +2,7 @@
 // a worked example, three steps and four questions. One block per activity, EN and FR.
 // The numbers are examples. Names and lines come from the app's own catalogue (lib/activities.ts).
 import type { Copy } from "@/components/africa-hero"
-import type { Capabilities, Capability, Drawing, Faq, Step } from "./africa-activities"
+import type { Capabilities, Capability, DecisionCardData, Drawing, Faq, Step } from "./africa-activities"
 import { SECTOR_PAGE } from "./sector-pages"
 
 type Lang = "en" | "fr"
@@ -18,6 +18,7 @@ type Raw = {
   items: Row[]
   notDo: string
   example: { title: string; lines: string[]; result: string }
+  decisionCard?: DecisionCardData
 }
 
 /* Shared by every activity page, so the template reads the same everywhere. */
@@ -86,6 +87,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not buy, sell or pay members. It shows what the cooperative holds and what is at risk. The board decides.",
       example: { title: "One week at the cooperative", lines: ["Lot 4 (Diallo): 9 days in storage, sell first", "Maize lot 3 at 31 °C: loss in 18 hours", "Group B: 40% below the promised volume", "Transfer proposed: lot 3 to the buyer on Friday"], result: "Two lots move before the loss starts." },
+      decisionCard: {
+        evidence: "Lot 4 (Diallo): 9 days in storage. Buyer delivery in 7 days. Contract volume: 2.4 t.",
+        confidence: "91% — based on 14 seasons of harvest and delivery records.",
+        impact: "2.4 t at risk of contract penalty = 180,000 XOF.",
+        outcome: "Assign harvest team to Lot 4 today. Decision logged.",
+      },
     },
     fr: {
       h1: ["Le lot de chaque adhérent", "doit être vendu", "avant de perdre sa valeur."],
@@ -101,6 +108,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA n'achète, ne vend et ne paie aucun adhérent. Il montre ce que la coopérative détient et ce qui est menacé. Le bureau décide.",
       example: { title: "Une semaine à la coopérative", lines: ["Lot 4 (Diallo) : 9 jours en stock, à vendre en premier", "Maïs lot 3 à 31 °C : perte dans 18 heures", "Groupe B : 40 % sous le volume promis", "Transfert proposé : lot 3 vers l'acheteur vendredi"], result: "Deux lots partent avant le début de la perte." },
+      decisionCard: {
+        evidence: "Lot 4 (Diallo) : 9 jours en stock. Livraison acheteur dans 7 jours. Volume contractuel : 2,4 t.",
+        confidence: "91 % — basé sur 14 saisons de récolte et de livraison.",
+        impact: "2,4 t à risque de pénalité contractuelle = 180 000 XOF.",
+        outcome: "Affecter l'équipe de récolte au lot 4 aujourd'hui. Décision enregistrée.",
+      },
     },
   },
   "silo-stockage": {
@@ -118,6 +131,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not control the ventilation or the cooling. It reads the readings you record and says what needs attention first.",
       example: { title: "A hot week in the silo", lines: ["Lot 3: 9 days in the silo", "Silo B: 32 °C, above its safe range", "Lot 7: loss in 12 hours", "Action proposed: move lot 7 to dispatch today"], result: "The lot closest to loss leaves first." },
+      decisionCard: {
+        evidence: "Bin 4 moisture: 15.2%. Safe limit: 14%. Measured 3 consecutive days.",
+        confidence: "94% — cross-checked with backup sensor and 3-year baseline.",
+        impact: "12 t at spoilage risk = 420,000 XOF.",
+        outcome: "Run dryer unit 2 for 8 hours. Decision logged.",
+      },
     },
     fr: {
       h1: ["Vendez le grain", "avant que le silo", "ne mange la marge."],
@@ -133,6 +152,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne contrôle ni la ventilation ni le refroidissement. Il lit les relevés que vous enregistrez et dit ce qui demande votre attention en premier.",
       example: { title: "Une semaine chaude au silo", lines: ["Lot 3 : 9 jours dans le silo", "Silo B : 32 °C, au-dessus de sa plage sûre", "Lot 7 : perte dans 12 heures", "Action proposée : déplacer le lot 7 vers l'expédition aujourd'hui"], result: "Le lot le plus proche de la perte part en premier." },
+      decisionCard: {
+        evidence: "Cellule 4 humidité : 15,2 %. Limite sûre : 14 %. Mesuré 3 jours consécutifs.",
+        confidence: "94 % — recoupé avec le capteur secondaire et la base de 3 ans.",
+        impact: "12 t à risque de détérioration = 420 000 XOF.",
+        outcome: "Faire tourner le séchoir 2 pendant 8 heures. Décision enregistrée.",
+      },
     },
   },
   "grossiste-distributeur": {
@@ -150,6 +175,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not invoice, collect or place orders. It shows which customers change their habits. Your team decides what to do.",
       example: { title: "One Monday across the customers", lines: ["Customer Nord: no order for 21 days", "Customer Sud: 40% below its usual volume", "Customer Est: 2 days of stock left", "Call proposed: Customer Nord first, then Customer Est"], result: "Two calls this week, before the customer goes elsewhere." },
+      decisionCard: {
+        evidence: "Rice 25 kg: 2 days of stock. Supplier lead time: 5 days (from 18 months of orders).",
+        confidence: "88% — based on point-of-sale velocity and supplier delivery record.",
+        impact: "3 days of stockout on top SKU = 650,000 XOF lost margin.",
+        outcome: "Send reorder to Supplier A today. Decision logged.",
+      },
     },
     fr: {
       h1: ["Vos clients", "arrêtent de commander", "avant que vous ne le voyiez."],
@@ -165,6 +196,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne facture, n'encaisse et ne passe aucune commande. Il montre quels clients changent leurs habitudes. Votre équipe décide.",
       example: { title: "Un lundi sur l'ensemble des clients", lines: ["Client Nord : aucune commande depuis 21 jours", "Client Sud : 40 % sous son volume habituel", "Client Est : 2 jours de stock restants", "Appel proposé : Client Nord d'abord, puis Client Est"], result: "Deux appels cette semaine, avant que le client ne parte ailleurs." },
+      decisionCard: {
+        evidence: "Riz 25 kg : 2 jours de stock. Délai fournisseur : 5 jours (sur 18 mois de commandes).",
+        confidence: "88 % — basé sur la vitesse de vente et l'historique fournisseur.",
+        impact: "3 jours de rupture sur le premier SKU = 650 000 XOF de marge perdue.",
+        outcome: "Envoyer la commande au Fournisseur A aujourd'hui. Décision enregistrée.",
+      },
     },
   },
   "supermarche-hypermarche": {
@@ -182,6 +219,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not place orders or move stock between stores. It shows where the shelves will run out. Your buyers decide.",
       example: { title: "One Friday in the store", lines: ["Dairy shelf: 3 days of stock", "Product X: 45 days without a sale in store B", "Saturday demand: 30% above the usual curve", "Order proposed: dairy first, before Saturday"], result: "The dairy shelf is restocked before the weekend rush." },
+      decisionCard: {
+        evidence: "Yoghurt lot L221: best-before in 3 days. 48 units on shelf. Reorder arrives in 5 days.",
+        confidence: "89% — based on 6 months of daily sell-through for this SKU.",
+        impact: "48 units unsold = markdown loss of 14,400 XOF.",
+        outcome: "Move lot L221 to front of shelf and reduce price by 15%. Decision logged.",
+      },
     },
     fr: {
       h1: ["Les rayons vides", "viennent d'un stock", "que l'on pouvait prévoir."],
@@ -197,6 +240,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne passe aucune commande et ne déplace pas de stock entre magasins. Il montre où les rayons vont se vider. Vos acheteurs décident.",
       example: { title: "Un vendredi au magasin", lines: ["Rayon crèmerie : 3 jours de stock", "Produit X : 45 jours sans vente au magasin B", "Demande du samedi : 30 % au-dessus de la courbe", "Commande proposée : crèmerie d'abord, avant samedi"], result: "Le rayon crèmerie est réapprovisionné avant le coup de feu du week-end." },
+      decisionCard: {
+        evidence: "Yaourt lot L221 : DLC dans 3 jours. 48 unités en rayon. Réapprovisionnement dans 5 jours.",
+        confidence: "89 % — basé sur 6 mois d'écoulement quotidien de ce SKU.",
+        impact: "48 unités invendues = perte de démarque de 14 400 XOF.",
+        outcome: "Mettre le lot L221 en avant de rayon et baisser le prix de 15 %. Décision enregistrée.",
+      },
     },
   },
   "chaine-magasins": {
@@ -214,6 +263,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not move stock or create transfer documents. It proposes transfers, and your buyers approve them.",
       example: { title: "A Tuesday across the chain", lines: ["Shop A: 40 units unsold", "Shop B: reordering 40 units", "Shop A: 0 left on a fast seller", "Transfer proposed: 40 units, ranked first"], result: "One transfer instead of a new order from the supplier." },
+      decisionCard: {
+        evidence: "Branch Dakar-Centre: pasta SKU, 7 days of stock vs 3-day network average. Reorder not placed.",
+        confidence: "86% — based on network-wide sell-through comparison.",
+        impact: "Potential 4-day stockout at peak week = 95,000 XOF lost sales per branch.",
+        outcome: "Approve intra-network transfer from Dakar-Nord. Decision logged.",
+      },
     },
     fr: {
       h1: ["Déplacez le stock", "vers le magasin", "qui en a besoin."],
@@ -229,6 +284,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne déplace pas de stock et n'établit pas de bons de transfert. Il propose des transferts, et vos acheteurs les valident.",
       example: { title: "Un mardi sur toute la chaîne", lines: ["Magasin A : 40 unités invendues", "Magasin B : recommande 40 unités", "Magasin A : 0 restant sur un produit qui se vend bien", "Transfert proposé : 40 unités, classé en premier"], result: "Un transfert au lieu d'une nouvelle commande au fournisseur." },
+      decisionCard: {
+        evidence: "Agence Dakar-Centre : SKU pâtes, 7 jours de stock vs moyenne réseau 3 jours. Réapprovisionnement non passé.",
+        confidence: "86 % — basé sur la comparaison des ventes sur tout le réseau.",
+        impact: "4 jours de rupture potentielle en semaine de pointe = 95 000 XOF de ventes perdues.",
+        outcome: "Approuver le transfert intra-réseau depuis Dakar-Nord. Décision enregistrée.",
+      },
     },
   },
   "epicerie-proximite": {
@@ -246,6 +307,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not place orders with your supplier. It shows what is running low and who is late. You order.",
       example: { title: "A Monday in the shop", lines: ["Bread and milk: 3 days of stock", "Product Y: 30 days without a sale", "Supplier Z: late twice this month", "Order proposed: bread and milk today"], result: "Bread and milk is ordered before the shelves empty." },
+      decisionCard: {
+        evidence: "Tomato paste: last unit sold. Supplier minimum order: 24 units. 1 day until market day.",
+        confidence: "95% — based on daily sell-through and market-day pattern.",
+        impact: "1 missed market day = 22,000 XOF.",
+        outcome: "Call supplier before 10 am for same-day delivery. Decision logged.",
+      },
     },
     fr: {
       h1: ["Anticipez le rayon vide", "avant que le client", "ne le voie."],
@@ -261,6 +328,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne passe aucune commande chez votre fournisseur. Il vous montre ce qui s'épuise et qui est en retard. C'est vous qui commandez.",
       example: { title: "Un lundi à l'épicerie", lines: ["Pain et lait : 3 jours de stock", "Produit Y : 30 jours sans vente", "Fournisseur Z : en retard deux fois ce mois-ci", "Commande proposée : pain et lait aujourd'hui"], result: "Le pain et le lait sont commandés avant que les rayons ne se vident." },
+      decisionCard: {
+        evidence: "Concentré de tomates : dernière unité vendue. Commande minimum fournisseur : 24 unités. 1 jour avant le marché.",
+        confidence: "95 % — basé sur l'écoulement quotidien et le schéma des jours de marché.",
+        impact: "1 jour de marché manqué = 22 000 XOF.",
+        outcome: "Appeler le fournisseur avant 10 h pour livraison le jour même. Décision enregistrée.",
+      },
     },
   },
   "port-conteneurs": {
@@ -278,6 +351,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not release containers or issue documents. It shows where the time goes. Your teams act.",
       example: { title: "One shift at the quay", lines: ["Customs: 9 hours of waiting", "Three containers held behind it", "Container group A: 48 hours in the yard", "Client message proposed: delay and new time"], result: "The clients hear about the delay before they call." },
+      decisionCard: {
+        evidence: "Container MRKU1234567: 4 days in yard. Free time: 3 days. Demurrage starts today.",
+        confidence: "97% — based on port authority records and vessel schedule.",
+        impact: "3 days demurrage at current rate = 840 USD.",
+        outcome: "Notify consignee and customs broker before noon. Decision logged.",
+      },
     },
     fr: {
       h1: ["Repérez l'étape lente", "avant qu'un conteneur", "n'attende au quai."],
@@ -293,6 +372,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne libère aucun conteneur et n'établit aucun document. Il montre où part le temps. Vos équipes agissent.",
       example: { title: "Un poste au quai", lines: ["Douane : 9 heures d'attente", "Trois conteneurs retenus derrière", "Groupe A : 48 heures au parc", "Message au client proposé : retard et nouvelle heure"], result: "Les clients apprennent le retard avant d'appeler." },
+      decisionCard: {
+        evidence: "Conteneur MRKU1234567 : 4 jours au terminal. Franchise : 3 jours. Surestaries commencent aujourd'hui.",
+        confidence: "97 % — basé sur les registres portuaires et le calendrier des navires.",
+        impact: "3 jours de surestaries au tarif actuel = 840 USD.",
+        outcome: "Notifier le destinataire et le transitaire avant midi. Décision enregistrée.",
+      },
     },
   },
   "entrepot-manutention": {
@@ -310,6 +395,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not move goods or assign tasks to staff. It shows where the time goes and what is late.",
       example: { title: "One afternoon in the warehouse", lines: ["Picking: 9 hours on the afternoon shift", "Three orders will miss the 17:00 truck", "Pallet group C: 40 days in one location", "Action proposed: split picking across two teams"], result: "The team sees the three orders before the truck leaves." },
+      decisionCard: {
+        evidence: "Zone B pick accuracy: 94.2% over 3 days vs 98.5% baseline. 12 mis-picks flagged.",
+        confidence: "91% — based on scanner logs and QA check results.",
+        impact: "Return processing cost on 12 orders = 48,000 XOF plus 2 delayed shipments.",
+        outcome: "Assign QA check to Zone B shift lead today. Decision logged.",
+      },
     },
     fr: {
       h1: ["Voyez où les marchandises", "attendent", "dans l'entrepôt."],
@@ -325,6 +416,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne déplace aucune marchandise et n'affecte aucune tâche au personnel. Il montre où part le temps et ce qui est en retard.",
       example: { title: "Un après-midi à l'entrepôt", lines: ["Préparation : 9 heures sur le poste de l'après-midi", "Trois commandes manqueront le camion de 17 h", "Palettes groupe C : 40 jours au même emplacement", "Action proposée : répartir la préparation sur deux équipes"], result: "L'équipe voit les trois commandes avant le départ du camion." },
+      decisionCard: {
+        evidence: "Zone B précision de picking : 94,2 % sur 3 jours vs base de 98,5 %. 12 erreurs signalées.",
+        confidence: "91 % — basé sur les journaux scanner et les contrôles qualité.",
+        impact: "Coût de traitement des retours sur 12 commandes = 48 000 XOF + 2 expéditions retardées.",
+        outcome: "Affecter un contrôle qualité au chef d'équipe de la Zone B. Décision enregistrée.",
+      },
     },
   },
   "transport-distribution": {
@@ -342,6 +439,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not change routes or book workshops itself. It shows what is late and what is due. The dispatcher decides.",
       example: { title: "The morning run", lines: ["Truck 4: 2 hours behind its first drop", "Three later drops at risk", "Truck 2: brake pads due in 500 km", "Action proposed: move two drops to truck 5"], result: "The later drops keep their time window." },
+      decisionCard: {
+        evidence: "Route Abidjan–Bouaké: vehicle 7 delayed 2.5 hours. 3 deliveries at risk of missing window.",
+        confidence: "88% — based on GPS track and historical traffic on this corridor.",
+        impact: "3 missed delivery windows = penalty clauses totalling 120,000 XOF.",
+        outcome: "Reroute via N3 and notify clients of revised ETA. Decision logged.",
+      },
     },
     fr: {
       h1: ["Une livraison en retard", "ne doit pas retarder", "toute la tournée."],
@@ -357,6 +460,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne modifie pas les tournées et ne réserve pas l'atelier lui-même. Il montre ce qui est en retard et ce qui est dû. Le répartiteur décide.",
       example: { title: "La tournée du matin", lines: ["Camion 4 : 2 heures de retard à sa première livraison", "Trois livraisons suivantes à risque", "Camion 2 : plaquettes à changer dans 500 km", "Action proposée : déplacer deux livraisons vers le camion 5"], result: "Les livraisons suivantes gardent leur plage horaire." },
+      decisionCard: {
+        evidence: "Route Abidjan–Bouaké : véhicule 7 retardé de 2,5 heures. 3 livraisons risquent de manquer la fenêtre.",
+        confidence: "88 % — basé sur le suivi GPS et le trafic historique sur ce corridor.",
+        impact: "3 fenêtres de livraison manquées = pénalités contractuelles de 120 000 XOF.",
+        outcome: "Réacheminer via la N3 et notifier les clients de l'ETA révisée. Décision enregistrée.",
+      },
     },
   },
   "preparation-expedition": {
@@ -374,6 +483,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not pick, pack or send orders. It shows what is blocked and what has waited. Your team acts.",
       example: { title: "One evening dispatch", lines: ["Six orders blocked by a missing item", "Order 1182: 2 days in packing", "Packing: 7 minutes per order", "Action proposed: pick the blocked orders first"], result: "The carrier leaves with the orders that can ship." },
+      decisionCard: {
+        evidence: "Order #4471: 14 units to pack. Cut-off in 2 hours. Current throughput: 6 units/hour.",
+        confidence: "93% — based on current line speed and order manifest.",
+        impact: "Missed carrier slot = 1-day delay and penalty of 35,000 XOF.",
+        outcome: "Assign 2nd operator to packing line now. Decision logged.",
+      },
     },
     fr: {
       h1: ["Expédiez d'abord", "les commandes", "qui sont dues."],
@@ -389,6 +504,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne prépare, n'emballe et n'expédie aucune commande. Il montre ce qui est bloqué et ce qui a attendu. Votre équipe agit.",
       example: { title: "Une expédition du soir", lines: ["Six commandes bloquées par un article manquant", "Commande 1182 : 2 jours à l'emballage", "Emballage : 7 minutes par commande", "Action proposée : préparer d'abord les commandes bloquées"], result: "Le transporteur part avec les commandes prêtes." },
+      decisionCard: {
+        evidence: "Commande #4471 : 14 unités à emballer. Délai limite dans 2 heures. Cadence actuelle : 6 unités/heure.",
+        confidence: "93 % — basé sur la vitesse de ligne et le manifeste de commande.",
+        impact: "Créneau transporteur manqué = 1 jour de retard et pénalité de 35 000 XOF.",
+        outcome: "Affecter un 2e opérateur à la ligne d'emballage maintenant. Décision enregistrée.",
+      },
     },
   },
   "chaine-froid": {
@@ -406,6 +527,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not control the refrigeration or the doors. It reads the temperatures you record and tells you what is at risk.",
       example: { title: "A night on the cold chain", lines: ["Cold room 2: above its limit for 6 hours", "Vehicle 5: +3 °C in the last hour", "120 units of frozen fish at risk", "Action proposed: move 120 units to room 1 now"], result: "The stock at risk is moved before the break spreads." },
+      decisionCard: {
+        evidence: "Reefer unit RF-07: 6.8 °C for 90 minutes. Safe range: 2–4 °C. Lot L440 inside.",
+        confidence: "96% — cross-checked with backup probe.",
+        impact: "240 kg of product at risk. Replacement cost: 480,000 XOF.",
+        outcome: "Isolate RF-07 and transfer lot L440 to RF-02. Decision logged.",
+      },
     },
     fr: {
       h1: ["Gardez la chaîne du froid", "sans rupture", "du quai à la porte."],
@@ -421,6 +548,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne contrôle ni la réfrigération ni les portes. Il lit les températures que vous enregistrez et dit ce qui est menacé.",
       example: { title: "Une nuit sur la chaîne du froid", lines: ["Chambre froide 2 : au-dessus de sa limite depuis 6 heures", "Véhicule 5 : +3 °C en une heure", "120 unités de poisson congelé menacées", "Action proposée : déplacer 120 unités vers la chambre 1 maintenant"], result: "Le stock menacé est déplacé avant que la rupture ne s'étende." },
+      decisionCard: {
+        evidence: "Cellule RF-07 : 6,8 °C depuis 90 minutes. Plage sûre : 2–4 °C. Lot L440 à l'intérieur.",
+        confidence: "96 % — recoupé avec la sonde de secours.",
+        impact: "240 kg de produit à risque. Coût de remplacement : 480 000 XOF.",
+        outcome: "Isoler RF-07 et transférer le lot L440 vers RF-02. Décision enregistrée.",
+      },
     },
   },
   "plusieurs-activites": {
@@ -438,6 +571,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not run your operations or set priorities for you. It puts the facts side by side. The manager decides.",
       example: { title: "One Monday across the group", lines: ["Port: customs waits 9 hours", "Three late items across two sites", "24 units at risk in cold room 1", "Action proposed: review the port step first"], result: "One problem is handled once, not three times." },
+      decisionCard: {
+        evidence: "Across 3 operations: 1 critical (reefer deviation), 2 high (lot expiry + route delay), 1 medium (pick accuracy).",
+        confidence: "Scores range 86–96% depending on data source per alert.",
+        impact: "Combined exposure this week: 1.2 M XOF across operations.",
+        outcome: "Address reefer deviation first. Route delay second. Decision logged.",
+      },
     },
     fr: {
       h1: ["Le pire problème", "de chaque activité,", "dans une file classée."],
@@ -453,6 +592,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne gère pas vos activités et ne fixe pas les priorités à votre place. Il met les faits côte à côte. Le responsable décide.",
       example: { title: "Un lundi sur tout le groupe", lines: ["Port : la douane attend 9 heures", "Trois retards sur deux sites", "24 unités menacées dans la chambre froide 1", "Action proposée : revoir d'abord l'étape du port"], result: "Un problème est traité une fois, et non trois fois." },
+      decisionCard: {
+        evidence: "Sur 3 activités : 1 critique (écart température chambre froide), 2 élevés (expiration lot + retard route), 1 moyen (précision picking).",
+        confidence: "Scores entre 86 et 96 % selon la source de données par alerte.",
+        impact: "Exposition combinée cette semaine : 1,2 M XOF sur toutes les activités.",
+        outcome: "Traiter l'écart chambre froide en premier. Retard de route en second. Décision enregistrée.",
+      },
     },
   },
   "usine-production": {
@@ -470,6 +615,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not stop or start machines and does not change production plans. It shows the trends. Your team decides.",
       example: { title: "One Monday on the line", lines: ["Line 2: 3 shifts under target", "Press 4: vibration rising for 3 days", "Next week: 120% of capacity", "Action proposed: service press 4 before the weekend"], result: "The stop is planned, not forced." },
+      decisionCard: {
+        evidence: "Line 2 OEE: 71% over 8 hours vs 85% target. Root cause: micro-stoppages on sealer unit.",
+        confidence: "89% — based on SCADA event log and shift report.",
+        impact: "14% OEE loss on 1 shift = 320 units short = 192,000 XOF.",
+        outcome: "Schedule sealer maintenance at next planned break. Decision logged.",
+      },
     },
     fr: {
       h1: ["Repérez la baisse", "avant que la ligne", "ne s'arrête."],
@@ -485,6 +636,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA n'arrête ni ne démarre aucune machine et ne modifie pas le plan de production. Il montre les tendances. Votre équipe décide.",
       example: { title: "Un lundi sur la ligne", lines: ["Ligne 2 : 3 postes sous l'objectif", "Presse 4 : vibrations en hausse depuis 3 jours", "Semaine prochaine : 120 % de la capacité", "Action proposée : entretenir la presse 4 avant le week-end"], result: "L'arrêt est planifié, il n'est pas subi." },
+      decisionCard: {
+        evidence: "Ligne 2 TRS : 71 % sur 8 heures vs objectif 85 %. Cause : micro-arrêts sur l'unité de scellage.",
+        confidence: "89 % — basé sur le journal SCADA et le rapport de quart.",
+        impact: "14 % de perte de TRS sur 1 quart = 320 unités manquantes = 192 000 XOF.",
+        outcome: "Planifier la maintenance du scellage au prochain arrêt prévu. Décision enregistrée.",
+      },
     },
   },
   "atelier-soustraitance": {
@@ -502,6 +659,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not accept orders or set prices for your clients. It shows the load and the delays. You decide what to accept.",
       example: { title: "A week in the workshop", lines: ["Client Alpha: 2 days behind", "Machine 3: 40% free next week", "New order: 120% of capacity", "Action proposed: move the Alpha order to machine 3"], result: "The Alpha order goes back on its date." },
+      decisionCard: {
+        evidence: "Order #PRJ-88: 3 of 12 components failed QC. Rework takes 4 hours. Customer deadline: tomorrow 8 am.",
+        confidence: "91% — based on QC log and production schedule.",
+        impact: "Missed deadline = contract penalty of 85,000 XOF.",
+        outcome: "Start rework on the 3 failed components now. Decision logged.",
+      },
     },
     fr: {
       h1: ["Tenez chaque délai", "pour chaque client", "dans votre atelier."],
@@ -517,6 +680,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA n'accepte aucune commande et ne fixe aucun prix pour vos clients. Il montre la charge et les retards. Vous décidez de ce que vous acceptez.",
       example: { title: "Une semaine à l'atelier", lines: ["Client Alpha : 2 jours de retard", "Machine 3 : 40 % libre la semaine prochaine", "Nouvelle commande : 120 % de la capacité", "Action proposée : passer la commande Alpha sur la machine 3"], result: "La commande Alpha retrouve sa date." },
+      decisionCard: {
+        evidence: "Commande #PRJ-88 : 3 des 12 pièces refusées au contrôle qualité. Retouche : 4 heures. Délai client : demain 8 h.",
+        confidence: "91 % — basé sur le journal qualité et le planning de production.",
+        impact: "Délai manqué = pénalité contractuelle de 85 000 XOF.",
+        outcome: "Commencer la retouche des 3 pièces défectueuses maintenant. Décision enregistrée.",
+      },
     },
   },
   "usine-agroalimentaire": {
@@ -534,6 +703,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not release batches or certify hygiene. It shows the readings and the waiting times. Your quality team decides.",
       example: { title: "One shift at the plant", lines: ["Mixing room: 32 °C, above its limit", "Batch 27: 9 days waiting", "Line 1: 3 shifts under target", "Action proposed: check the mixing room and release batch 27 first"], result: "The quality team sees the drift before the batch is lost." },
+      decisionCard: {
+        evidence: "Batch B-2241: pH 4.3 vs 4.0–4.2 target. Measured 3 times in 2 hours. Lot L880 (expiry −4 days).",
+        confidence: "94% — based on inline sensor and QC sample.",
+        impact: "Batch recall cost if released: 1.4 M XOF.",
+        outcome: "Pull batch B-2241 for lab review before packaging. Decision logged.",
+      },
     },
     fr: {
       h1: ["Repérez le lot", "avant qu'il ne sorte", "de ses limites."],
@@ -549,6 +724,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne libère aucun lot et ne certifie aucune hygiène. Il montre les relevés et les délais d'attente. Votre équipe qualité décide.",
       example: { title: "Un poste à l'usine", lines: ["Salle de mélange : 32 °C, au-dessus de sa limite", "Lot 27 : 9 jours d'attente", "Ligne 1 : 3 postes sous l'objectif", "Action proposée : contrôler la salle de mélange et libérer le lot 27 en premier"], result: "L'équipe qualité voit la dérive avant de perdre le lot." },
+      decisionCard: {
+        evidence: "Lot B-2241 : pH 4,3 vs cible 4,0–4,2. Mesuré 3 fois en 2 heures. Lot L880 (expiration −4 jours).",
+        confidence: "94 % — basé sur le capteur en ligne et l'échantillon qualité.",
+        impact: "Coût de rappel si le lot est libéré : 1,4 M XOF.",
+        outcome: "Mettre le lot B-2241 en quarantaine pour révision laboratoire avant emballage. Décision enregistrée.",
+      },
     },
   },
   "transporteur-routier": {
@@ -566,6 +747,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not plan your routes or contact your clients. It shows what is late and what is due. Your planner decides.",
       example: { title: "A morning departure", lines: ["Truck 7: 2 hours late for its slot", "Three stops after it at risk", "Truck 3: brake pads due in 500 km", "Action proposed: send truck 5 to the first stops"], result: "The client slots are kept for the other trucks." },
+      decisionCard: {
+        evidence: "Route KLA–MSA: fuel burn 18% above baseline. Driver hours: 8.5 of 9 allowed. 2 stops remaining.",
+        confidence: "87% — based on GPS fuel log and tachograph.",
+        impact: "2 missed deliveries = 1 day delay + 60,000 XOF exposure.",
+        outcome: "Dispatch relief driver from Kampala depot. Decision logged.",
+      },
     },
     fr: {
       h1: ["Gardez chaque camion", "à l'heure", "pour vos clients."],
@@ -581,6 +768,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne planifie pas vos tournées et ne contacte pas vos clients. Il montre ce qui est en retard et ce qui est dû. Votre planificateur décide.",
       example: { title: "Un départ du matin", lines: ["Camion 7 : 2 heures de retard sur son créneau", "Trois arrêts suivants à risque", "Camion 3 : plaquettes à changer dans 500 km", "Action proposée : envoyer le camion 5 vers les premiers arrêts"], result: "Les créneaux des autres clients sont tenus." },
+      decisionCard: {
+        evidence: "Route KLA–MSA : consommation carburant 18 % au-dessus de la base. Heures conducteur : 8,5 sur 9 autorisées. 2 arrêts restants.",
+        confidence: "87 % — basé sur le journal GPS et le tachygraphe.",
+        impact: "2 livraisons manquées = 1 jour de retard + 60 000 XOF d'exposition.",
+        outcome: "Envoyer un conducteur relais depuis le dépôt de Kampala. Décision enregistrée.",
+      },
     },
   },
   "flotte-entreprise": {
@@ -598,6 +791,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not book the workshop or change the routes. It shows what is late and what is due. The fleet manager decides.",
       example: { title: "One morning for the fleet", lines: ["Sales round 4: 2 hours behind", "Van 12: service due in 500 km", "Two vehicles due this month", "Action proposed: book the workshop for van 12"], result: "Van 12 is serviced on a planned day." },
+      decisionCard: {
+        evidence: "Vehicle TRK-14: 1,200 km overdue for service. Oil pressure reading borderline for 48 hours.",
+        confidence: "93% — based on OBD-II read and service log.",
+        impact: "Unplanned breakdown on a revenue route = 1-day loss of 95,000 XOF.",
+        outcome: "Book TRK-14 for service tomorrow. Remove from long-haul roster today. Decision logged.",
+      },
     },
     fr: {
       h1: ["Votre flotte,", "à l'heure, entretenue,", "avant la panne."],
@@ -613,6 +812,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne réserve pas l'atelier et ne modifie pas les tournées. Il montre ce qui est en retard et ce qui est dû. Le responsable de flotte décide.",
       example: { title: "Un matin pour la flotte", lines: ["Tournée commerciale 4 : 2 heures de retard", "Camionnette 12 : révision dans 500 km", "Deux véhicules dus ce mois-ci", "Action proposée : réserver l'atelier pour la camionnette 12"], result: "La camionnette 12 est révisée à un jour prévu." },
+      decisionCard: {
+        evidence: "Véhicule TRK-14 : 1 200 km au-delà de l'entretien prévu. Pression d'huile en limite depuis 48 heures.",
+        confidence: "93 % — basé sur la lecture OBD-II et le carnet d'entretien.",
+        impact: "Panne imprévue sur une route de revenus = 1 jour de perte de 95 000 XOF.",
+        outcome: "Réserver TRK-14 pour l'entretien demain. Retirer de la liste longue distance aujourd'hui. Décision enregistrée.",
+      },
     },
   },
   "location-vehicules": {
@@ -630,6 +835,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not contact your customers or book the workshop. It shows what is late and what is due. Your team acts.",
       example: { title: "A busy Saturday at the desk", lines: ["Car 4: 2 hours late for its return", "Car 9: service due before its next rental", "Three rentals depend on cars due today", "Action proposed: offer car 6 for the first pickup"], result: "The first customer gets a car on time." },
+      decisionCard: {
+        evidence: "Vehicle REG-ABJ-7721: due back at 14:00. No GPS movement since 11:30. Client unresponsive.",
+        confidence: "88% — based on GPS track and rental contract.",
+        impact: "1 day late return = lost rental revenue 45,000 XOF + potential damage exposure.",
+        outcome: "Call client and log status update. Decision logged.",
+      },
     },
     fr: {
       h1: ["Les véhicules loués", "de retour à l'heure", "et entretenus."],
@@ -645,6 +856,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne contacte pas vos clients et ne réserve pas l'atelier. Il montre ce qui est en retard et ce qui est dû. Votre équipe agit.",
       example: { title: "Un samedi chargé au comptoir", lines: ["Voiture 4 : 2 heures de retard pour son retour", "Voiture 9 : révision avant sa prochaine location", "Trois locations dépendent de voitures attendues", "Action proposée : proposer la voiture 6 pour la première prise en charge"], result: "Le premier client reçoit sa voiture à l'heure." },
+      decisionCard: {
+        evidence: "Véhicule REG-ABJ-7721 : retour prévu à 14 h. Aucun mouvement GPS depuis 11 h 30. Client injoignable.",
+        confidence: "88 % — basé sur le suivi GPS et le contrat de location.",
+        impact: "1 jour de retard = 45 000 XOF de revenus perdus + exposition dommages potentiels.",
+        outcome: "Appeler le client et enregistrer la mise à jour. Décision enregistrée.",
+      },
     },
   },
   "centrale-production": {
@@ -662,6 +879,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not start or stop units and does not trade power. It shows the demand and the margin. Your operators decide.",
       example: { title: "One day in the control room", lines: ["Demand: 30% above the curve at 18:00", "The peak needs 120% of available output", "Gas: 2 days left at full output", "Action proposed: start the reserve unit before 17:00"], result: "The peak is covered before it arrives." },
+      decisionCard: {
+        evidence: "Unit G3: heat rate 2.4% above target for 6 hours. Vibration trending up on bearing 7B.",
+        confidence: "92% — based on SCADA historian and maintenance record.",
+        impact: "2.4% efficiency loss at current load = 180,000 XOF/day in extra fuel.",
+        outcome: "Schedule bearing inspection at next planned outage. Decision logged.",
+      },
     },
     fr: {
       h1: ["Voyez le pic", "avant que le réseau", "ne le subisse."],
@@ -677,6 +900,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne démarre ni n'arrête aucun groupe et ne fait aucun échange d'énergie. Il montre la demande et la marge. Vos opérateurs décident.",
       example: { title: "Une journée en salle de contrôle", lines: ["Demande : 30 % au-dessus de la courbe à 18 h", "Le pic demande 120 % de la production disponible", "Gaz : 2 jours restants à pleine puissance", "Action proposée : démarrer le groupe de réserve avant 17 h"], result: "Le pic est couvert avant d'arriver." },
+      decisionCard: {
+        evidence: "Unité G3 : taux de chaleur 2,4 % au-dessus de la cible depuis 6 heures. Vibration en hausse sur le palier 7B.",
+        confidence: "92 % — basé sur l'historien SCADA et le registre de maintenance.",
+        impact: "Perte d'efficacité de 2,4 % à la charge actuelle = 180 000 XOF/jour en carburant supplémentaire.",
+        outcome: "Planifier l'inspection du palier au prochain arrêt programmé. Décision enregistrée.",
+      },
     },
   },
   "generateurs-secours": {
@@ -694,6 +923,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not start generators or order fuel. It shows what is low, what is due and when the load rises. Your engineers decide.",
       example: { title: "A weekday on the site", lines: ["Generator 2: 2 days of fuel left", "Generator 1: service in 250 hours", "Load rises at 18:00", "Action proposed: order fuel today and test generator 2 before 17:00"], result: "The site is ready before the load rises." },
+      decisionCard: {
+        evidence: "Generator GEN-02: fuel at 18%. Run time at full load: 4.2 hours. Next grid test: Thursday.",
+        confidence: "97% — based on fuel sensor read and consumption log.",
+        impact: "Grid failure before Thursday with GEN-02 at 18% = 4-hour outage exposure.",
+        outcome: "Refuel GEN-02 today. Decision logged.",
+      },
     },
     fr: {
       h1: ["Gardez les générateurs", "prêts pour la", "prochaine coupure."],
@@ -709,6 +944,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne démarre aucun générateur et ne commande aucun carburant. Il montre ce qui est bas, ce qui est dû et quand la charge monte. Vos ingénieurs décident.",
       example: { title: "Un jour de semaine sur le site", lines: ["Générateur 2 : 2 jours de carburant restants", "Générateur 1 : révision dans 250 heures", "La charge monte à 18 h", "Action proposée : commander le carburant aujourd'hui et tester le générateur 2 avant 17 h"], result: "Le site est prêt avant la hausse de charge." },
+      decisionCard: {
+        evidence: "Groupe GEN-02 : carburant à 18 %. Autonomie à pleine charge : 4,2 heures. Prochain test réseau : jeudi.",
+        confidence: "97 % — basé sur le capteur de carburant et le journal de consommation.",
+        impact: "Panne réseau avant jeudi avec GEN-02 à 18 % = 4 heures d'exposition coupure.",
+        outcome: "Faire le plein de GEN-02 aujourd'hui. Décision enregistrée.",
+      },
     },
   },
   "distribution-energetique": {
@@ -726,6 +967,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not switch loads or change the network. It shows where the pressure builds. Your operators decide what to do.",
       example: { title: "One weekday on the network", lines: ["Pressure rises at 18:00", "Zone A at 130% of its planned load", "Three zones near their limit", "Action proposed: prepare the zone A reserve before 17:00"], result: "Zone A is ready before the peak." },
+      decisionCard: {
+        evidence: "Zone 4 transformer: 94% capacity for 3 days. Forecast load: 97% tomorrow peak. Historical failure at 98%+.",
+        confidence: "89% — based on load sensor and 5-year outage record.",
+        impact: "Zone 4 unplanned outage: estimated 420,000 XOF in SLA exposure.",
+        outcome: "Shed non-critical load in Zone 4 before tomorrow peak. Decision logged.",
+      },
     },
     fr: {
       h1: ["Surveillez le réseau", "là où la pression", "monte."],
@@ -741,6 +988,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne coupe ni ne transfère aucune charge et ne modifie pas le réseau. Il montre où la pression monte. Vos opérateurs décident.",
       example: { title: "Un jour de semaine sur le réseau", lines: ["La pression monte à 18 h", "Zone A à 130 % de sa charge prévue", "Trois zones proches de leur limite", "Action proposée : préparer la réserve de la zone A avant 17 h"], result: "La zone A est prête avant le pic." },
+      decisionCard: {
+        evidence: "Transformateur Zone 4 : 94 % de capacité depuis 3 jours. Charge prévue : 97 % demain en pointe. Pannes historiques à 98 %+.",
+        confidence: "89 % — basé sur le capteur de charge et les 5 ans de registres de pannes.",
+        impact: "Panne imprévue Zone 4 : 420 000 XOF d'exposition SLA estimée.",
+        outcome: "Délester la charge non critique en Zone 4 avant la pointe de demain. Décision enregistrée.",
+      },
     },
   },
   "clinique-hopital": {
@@ -758,6 +1011,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not order supplies or change prescriptions. It shows what the records say and what needs attention first. You decide.",
       example: { title: "One morning at the hospital pharmacy", lines: ["Gloves size M: 8 days left, delivery in 10 days", "Antibiotic batch B12: 30 days to expiry", "Ward 2: dressings 40% above usual use", "Action proposed: order gloves today and use batch B12 first"], result: "The order goes out before the ward runs short." },
+      decisionCard: {
+        evidence: "Amoxicillin 500 mg injection: 3 days of stock. Supplier lead time: 7 days (from 12 months of orders).",
+        confidence: "91% — based on dispensing records and supplier delivery history.",
+        impact: "4-day stockout gap = treatment delays on 8–15 patients per day.",
+        outcome: "Activate emergency stock protocol and place expedited order today. Decision logged.",
+      },
     },
     fr: {
       h1: ["Sachez quelles fournitures", "vont manquer", "avant le service."],
@@ -773,6 +1032,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne commande aucune fourniture et ne modifie aucune prescription. Il montre ce que disent les relevés et ce qui demande votre attention en premier. Vous décidez.",
       example: { title: "Un matin à la pharmacie de l'hôpital", lines: ["Gants taille M : 8 jours restants, livraison dans 10 jours", "Lot d'antibiotique B12 : 30 jours avant péremption", "Service 2 : pansements 40 % au-dessus de l'usage habituel", "Action proposée : commander les gants aujourd'hui et utiliser le lot B12 en premier"], result: "La commande part avant que le service ne manque." },
+      decisionCard: {
+        evidence: "Amoxicilline 500 mg injectable : 3 jours de stock. Délai fournisseur : 7 jours (sur 12 mois de commandes).",
+        confidence: "91 % — basé sur les registres de dispensation et l'historique fournisseur.",
+        impact: "Rupture de 4 jours = retards de traitement pour 8 à 15 patients par jour.",
+        outcome: "Activer le protocole de stock d'urgence et passer une commande accélérée aujourd'hui. Décision enregistrée.",
+      },
     },
   },
   laboratoire: {
@@ -790,6 +1055,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not run tests or release results. It reads your stock and sample records and shows what needs attention first. The laboratory decides.",
       example: { title: "One morning in the laboratory", lines: ["Reagent A: 40 tests left, 60 booked", "Lot R7: 14 days to expiry", "Sample S-218: 6 hours waiting, limit 8 hours", "Action proposed: process S-218 now and order reagent A"], result: "The sample is processed in time and the reagent order goes out." },
+      decisionCard: {
+        evidence: "Reagent R-440 (ELISA kit): 6 days to expiry. 14 tests pending. Reorder lead: 10 days.",
+        confidence: "95% — based on inventory log and pending test manifest.",
+        impact: "14 tests blocked if reagent expires = 2-week backlog.",
+        outcome: "Order R-440 today. Flag 14 pending tests for priority scheduling. Decision logged.",
+      },
     },
     fr: {
       h1: ["Gardez chaque test approvisionné", "et chaque échantillon", "dans les temps."],
@@ -805,6 +1076,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne réalise aucune analyse et ne libère aucun résultat. Il lit vos relevés de stock et d'échantillons et montre ce qui demande votre attention en premier. Le laboratoire décide.",
       example: { title: "Un matin au laboratoire", lines: ["Réactif A : 40 tests restants, 60 prévus", "Lot R7 : 14 jours avant péremption", "Échantillon S-218 : 6 heures d'attente, limite 8 heures", "Action proposée : traiter S-218 maintenant et commander le réactif A"], result: "L'échantillon est traité à temps et la commande de réactif part." },
+      decisionCard: {
+        evidence: "Réactif R-440 (kit ELISA) : 6 jours avant expiration. 14 tests en attente. Délai de réapprovisionnement : 10 jours.",
+        confidence: "95 % — basé sur le registre de stock et le manifeste des tests en attente.",
+        impact: "14 tests bloqués si le réactif expire = 2 semaines de retard.",
+        outcome: "Commander R-440 aujourd'hui. Marquer les 14 tests en attente pour planification prioritaire. Décision enregistrée.",
+      },
     },
   },
   veterinaire: {
@@ -822,6 +1099,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA does not control the fridges or dispose of any stock. It reads the records you enter and shows what needs attention first. The clinic decides.",
       example: { title: "One morning at the veterinary clinic", lines: ["Vaccine fridge 2: 9 °C since 06:00", "Rabies batch V-112: 30 days to expiry", "Dewormer D-40: 60 days without a sale", "Action proposed: check fridge 2 and sell batch V-112 first"], result: "The cold chain is checked before the vaccines are lost." },
+      decisionCard: {
+        evidence: "Herd GRP-7: 3 animals with fever above 39.5 °C for 2 days. 2 adjacent animals borderline.",
+        confidence: "88% — based on temperature log and clinical protocol.",
+        impact: "Potential spread to 12-animal group = treatment cost 95,000 XOF.",
+        outcome: "Isolate 3 animals and begin treatment protocol today. Decision logged.",
+      },
     },
     fr: {
       h1: ["Gardez les vaccins au froid", "et vendez le stock", "avant sa péremption."],
@@ -837,6 +1120,12 @@ const RAW: Record<string, Record<Lang, Raw>> = {
       ],
       notDo: "SentrIA ne contrôle pas les réfrigérateurs et ne détruit aucun stock. Il lit les relevés que vous saisissez et montre ce qui demande votre attention en premier. La clinique décide.",
       example: { title: "Un matin à la clinique vétérinaire", lines: ["Réfrigérateur à vaccins 2 : 9 °C depuis 6 h", "Lot de vaccin antirabique V-112 : 30 jours avant péremption", "Vermifuge D-40 : 60 jours sans vente", "Action proposée : vérifier le réfrigérateur 2 et vendre le lot V-112 en premier"], result: "La chaîne du froid est vérifiée avant que les vaccins ne soient perdus." },
+      decisionCard: {
+        evidence: "Troupeau GRP-7 : 3 animaux avec fièvre au-dessus de 39,5 °C depuis 2 jours. 2 animaux adjacents en limite.",
+        confidence: "88 % — basé sur le journal de température et le protocole clinique.",
+        impact: "Propagation potentielle à un groupe de 12 animaux = coût de traitement 95 000 XOF.",
+        outcome: "Isoler 3 animaux et commencer le protocole de traitement aujourd'hui. Décision enregistrée.",
+      },
     },
   },
 }
@@ -870,6 +1159,7 @@ const build = (slug: string, lang: Lang, r: Raw) => {
     example: r.example,
     faqHeading: SHARED[lang].faqHeading,
     faq: SHARED[lang].faq,
+    ...(r.decisionCard ? { decisionCard: r.decisionCard } : {}),
   }
   const alerts = r.alerts.map(([level, text]) => ({ level, text }))
   return { copy, caps, alerts }

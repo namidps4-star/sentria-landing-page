@@ -1,4 +1,6 @@
 import type { Copy } from "@/components/africa-hero"
+import type { DecisionCardData } from "@/components/africa-decision-card"
+export type { DecisionCardData }
 import { MORE_ACTIVITY_COPY, MORE_CAPABILITIES, MORE_SECTOR_ALERTS } from "./africa-activity-pages"
 
 export const AFRICA_ACTIVITIES = ["pharmacie", "grossiste-pharma", "exploitation-agricole", "grossiste-distributeur"] as const
@@ -121,6 +123,7 @@ export type Capabilities = {
   example?: Example
   faq?: Faq[]
   faqHeading?: string
+  decisionCard?: DecisionCardData
 }
 
 // What an expert in each activity gets. Examples are the product's own alert
@@ -188,6 +191,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         { q: "Who sees my figures?", a: "Only your pharmacy. Each account's data is kept completely separate." },
         { q: "Do I have to change how I work?", a: "No. Keep your current routine. Check the alert list each morning before the first patient walks in." },
       ],
+      decisionCard: {
+        evidence: "Amoxicillin 500 mg: 4 days of stock. Reorder lead: 7 days (from 18 months of supplier records). Lot L-224 expires in 3 days.",
+        confidence: "87% — based on 24 months of sales data for this molecule.",
+        impact: "3 days of stockout = 180,000 XOF lost revenue.",
+        outcome: "Order 200 units today. Decision logged.",
+      },
     },
     fr: {
       heading: "Ce que SentrIA vous dit chaque matin",
@@ -250,6 +259,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         { q: "Qui voit mes chiffres ?", a: "Uniquement votre pharmacie. Les données de chaque compte sont strictement séparées." },
         { q: "Dois-je changer ma façon de travailler ?", a: "Non. Gardez votre routine habituelle. Consultez la liste d'alertes chaque matin avant le premier patient." },
       ],
+      decisionCard: {
+        evidence: "Amoxicilline 500 mg : 4 jours de stock. Délai réapprovisionnement : 7 jours (sur 18 mois d'historique fournisseur). Lot L-224 expire dans 3 jours.",
+        confidence: "87 % — basé sur 24 mois de données de vente pour cette molécule.",
+        impact: "3 jours de rupture = 180 000 XOF de revenus perdus.",
+        outcome: "Commander 200 unités aujourd'hui. Décision enregistrée.",
+      },
     },
   },
   "grossiste-pharma": {
@@ -313,6 +328,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         { q: "What if only some pharmacies share their data?", a: "SentrIA works with the pharmacies you import, and it does not see the others." },
         { q: "Do I need unit costs?", a: "No. Without them SentrIA ranks by quantity. With them it ranks by the value at stake." },
       ],
+      decisionCard: {
+        evidence: "Client Pharmacie du Marché: fill rate 83% over 7 days vs 97% target. 4 SKUs below minimum.",
+        confidence: "90% — based on order history and delivery scan log.",
+        impact: "17% fill gap on key client = potential contract review + 420,000 XOF exposure.",
+        outcome: "Prioritise 4 SKUs for today's dispatch. Investigate cold-chain on delivery 1142. Decision logged.",
+      },
     },
     fr: {
       heading: "Ce que SentrIA vous montre sur l'ensemble de votre réseau",
@@ -374,6 +395,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         { q: "Et si seules certaines pharmacies partagent leurs données ?", a: "SentrIA travaille avec les pharmacies que vous importez, et ne voit pas les autres." },
         { q: "Faut-il des coûts unitaires ?", a: "Non. Sans eux, SentrIA classe par quantité. Avec eux, il classe par valeur en jeu." },
       ],
+      decisionCard: {
+        evidence: "Client Pharmacie du Marché : taux de service 83 % sur 7 jours vs cible 97 %. 4 SKU sous le minimum.",
+        confidence: "90 % — basé sur l'historique des commandes et le journal de livraison.",
+        impact: "Déficit de 17 % sur un client clé = révision contrat potentielle + 420 000 XOF d'exposition.",
+        outcome: "Prioriser 4 SKU pour l'expédition d'aujourd'hui. Enquêter sur la chaîne du froid livraison 1142. Décision enregistrée.",
+      },
     },
   },
   "exploitation-agricole": {
@@ -406,6 +433,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         },
       ],
       notDo: "SentrIA does not measure temperature itself. You enter it, or import it from your storage logs. The hours left are an estimate, not a guarantee, act sooner if in doubt.",
+      decisionCard: {
+        evidence: "Fertiliser NPK 20-10-10: 8 days of stock. Application rate: 20 kg/ha/day. Planting window opens in 5 days. Supplier lead: 7 days.",
+        confidence: "86% — based on consumption log and planting calendar.",
+        impact: "2-day gap during planting window = potential 15% yield reduction on 4 ha.",
+        outcome: "Place fertiliser order today and confirm delivery date. Decision logged.",
+      },
     },
     fr: {
       heading: "Ce que SentrIA vous dit avant que la perte commence",
@@ -436,6 +469,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         },
       ],
       notDo: "SentrIA ne mesure pas la température lui-même. Vous la saisissez, ou vous l'importez depuis vos relevés. Les heures restantes sont une estimation, pas une garantie, agissez plus tôt en cas de doute.",
+      decisionCard: {
+        evidence: "Engrais NPK 20-10-10 : 8 jours de stock. Cadence : 20 kg/ha/jour. Fenêtre de plantation dans 5 jours. Délai fournisseur : 7 jours.",
+        confidence: "86 % — basé sur le registre de consommation et le calendrier de plantation.",
+        impact: "Écart de 2 jours pendant la fenêtre de plantation = réduction potentielle de 15 % du rendement sur 4 ha.",
+        outcome: "Passer la commande d'engrais aujourd'hui et confirmer la date de livraison. Décision enregistrée.",
+      },
     },
   },
 }
