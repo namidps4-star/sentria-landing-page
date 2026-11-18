@@ -10,8 +10,8 @@ const CORE_ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   pharmacie: {
     en: {
       h1: ["Catch the stock‑out", "before the patient", "is at the counter."],
-      lead: "Upload your stock file. SentrIA tells you which medicines will run out before the next delivery arrives, which batches expire first, and what to order today, based on what your suppliers actually deliver, not what they promise.",
-      start: "For independent pharmacies and pharmacy branches.",
+      lead: "Upload your stock file. SentrIA tells you which medicines will run out before the next delivery arrives, which batches expire first, and what to order today, based on what your suppliers actually deliver, not what they promise. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
+      start: "For pharmacies that manage clinical stock.",
       cta: "Book a demo →",
       cta2: "Read the FEFO guide (first expired, first out)",
       cta2Href: "/articles/fefo-first-expired-first-out",
@@ -24,8 +24,8 @@ const CORE_ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
     },
     fr: {
       h1: ["Anticipez la rupture", "avant que le patient", "soit au comptoir."],
-      lead: "Importez votre fichier de stock. SentrIA vous dit quels médicaments vont manquer avant la prochaine livraison, quels lots expirent en premier, et quoi commander aujourd'hui, selon ce que vos fournisseurs livrent vraiment, pas ce qu'ils promettent.",
-      start: "Pour les pharmacies indépendantes et les officines à plusieurs succursales.",
+      lead: "Importez votre fichier de stock. SentrIA vous dit quels médicaments vont manquer avant la prochaine livraison, quels lots expirent en premier, et quoi commander aujourd'hui, selon ce que vos fournisseurs livrent vraiment, pas ce qu'ils promettent. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
+      start: "Pour les pharmacies qui gèrent un stock clinique.",
       cta: "Demander une démo →",
       cta2: "Lire le guide FEFO (premier expiré, premier sorti)",
       cta2Href: "/articles/fefo-premier-expire-premier-sorti",
@@ -40,28 +40,28 @@ const CORE_ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   "grossiste-pharma": {
     en: {
       h1: ["One of your pharmacies", "is reordering", "what another one can't sell."],
-      lead: "Upload your pharmacy network data. SentrIA compares what each pharmacy received with what it sold. When one holds unsold stock that another is reordering, it proposes the transfer, by product, by quantity, ranked by the value at stake.",
+      lead: "Upload your pharmacy network data. SentrIA compares what each pharmacy received with what it sold. When one holds unsold stock that another is reordering, it proposes the transfer, by product, by quantity, ranked by the value at stake. Same question as a single pharmacy — who runs out, who sits on dead stock — across your whole network. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For pharmaceutical wholesalers who supply a network of pharmacies.",
       cta: "Book a demo →",
       cta2: "Read how to avoid stock-outs",
       cta2Href: "/articles/pharmacy-stock-outs",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
-        ["30", "Units to transfer", "Clinique du Nord reordered Metformin 500mg. Pharmacy Centrale holds 34 unsold."],
+        ["30", "Units to transfer / days of stock", "Clinique du Nord reordered Metformin 500mg. Pharmacy Centrale holds 34 unsold."],
         ["180k", "FCFA at stake", "Largest transfer opportunity ranked first. Handle the one that matters most."],
         ["0", "Auto moves", "SentrIA proposes. You approve. Nothing is moved or invoiced automatically."],
       ],
     },
     fr: {
       h1: ["Une de vos pharmacies", "recommande", "ce qu'une autre ne vend pas."],
-      lead: "Importez les données de votre réseau. SentrIA compare ce que chaque pharmacie a reçu avec ce qu'elle a vendu. Quand l'une garde un stock invendu qu'une autre recommande, il propose le transfert, par produit, par quantité, classé selon la valeur en jeu.",
+      lead: "Importez les données de votre réseau. SentrIA compare ce que chaque pharmacie a reçu avec ce qu'elle a vendu. Quand l'une garde un stock invendu qu'une autre recommande, il propose le transfert, par produit, par quantité, classé selon la valeur en jeu. Même question qu'une pharmacie seule — qui manque, qui garde du stock mort — sur tout votre réseau. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les grossistes en produits pharmaceutiques qui fournissent un réseau de pharmacies.",
       cta: "Demander une démo →",
       cta2: "Lire comment éviter les ruptures",
       cta2Href: "/articles/ruptures-de-stock-en-pharmacie",
       photoAlt: PHARMACY_PHOTO_FR,
       stats: [
-        ["30", "Unités à transférer", "Clinique du Nord a recommandé la Metformine 500mg. Pharmacie Centrale en a 34 invendues."],
+        ["30", "Unités à transférer / jours de stock", "Clinique du Nord a recommandé la Metformine 500mg. Pharmacie Centrale en a 34 invendues."],
         ["180k", "FCFA en jeu", "La plus grande opportunité classée en premier. Traitez d'abord ce qui compte le plus."],
         ["0", "Mouvements auto", "SentrIA propose. Vous approuvez. Aucun stock ne se déplace automatiquement."],
       ],
@@ -70,28 +70,28 @@ const CORE_ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   "exploitation-agricole": {
     en: {
       h1: ["Every extra hour", "in storage you don't need", "is money spoiling."],
-      lead: "Record each lot when it enters storage. SentrIA tracks days stored and temperature, estimates hours left before spoilage starts, and warns you before the loss, not after.",
+      lead: "Record each lot when it enters storage. SentrIA tracks days stored and temperature, estimates hours left before spoilage starts, and warns you before the loss, not after. Days of stock, turned around: how long before the loss, not after. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For farms that store harvests or inputs before they sell or use them.",
       cta: "Book a demo →",
       cta2: "See the storage features",
       cta2Href: "/en#demo",
       photoAlt: "Two people working in a crop field",
       stats: [
-        ["12h", "Before spoilage", "Tomatoes Lot 7, 4 days at 32°C. Loss starts in 12 hours. Arrange delivery now."],
+        ["12h", "Hours left before loss", "Tomatoes Lot 7, 4 days at 32°C. Loss starts in 12 hours. Arrange delivery now."],
         ["9d", "Days in storage", "Maize Lot 3, critical risk. Deliver urgently before full loss."],
         ["31°", "Cold room alert", "Temperature reached danger level. Check ventilation now."],
       ],
     },
     fr: {
       h1: ["Chaque heure de trop", "en stockage inutile", "c'est de l'argent qui se perd."],
-      lead: "Enregistrez chaque lot à son entrée en stockage. SentrIA suit les jours passés et la température, estime les heures restantes avant la détérioration, et vous prévient avant la perte, pas après.",
+      lead: "Enregistrez chaque lot à son entrée en stockage. SentrIA suit les jours passés et la température, estime les heures restantes avant la détérioration, et vous prévient avant la perte, pas après. Jours de stock, retournés : combien de temps avant la perte, pas après. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les exploitations agricoles qui stockent des récoltes ou des intrants avant de les vendre ou de les utiliser.",
       cta: "Demander une démo →",
       cta2: "Voir les fonctions de stockage",
       cta2Href: "/fr#demo",
       photoAlt: "Deux personnes travaillent dans un champ",
       stats: [
-        ["12h", "Avant détérioration", "Tomates Lot 7, 4 jours à 32°C. Perte dans 12 heures. Livraison maintenant."],
+        ["12h", "Heures restantes avant la perte", "Tomates Lot 7, 4 jours à 32°C. Perte dans 12 heures. Livraison maintenant."],
         ["9j", "Jours en stockage", "Maïs Lot 3, risque critique. Livrez d'urgence avant la perte totale."],
         ["31°", "Alerte chambre froide", "Température atteinte. Vérifiez la température et la ventilation."],
       ],
