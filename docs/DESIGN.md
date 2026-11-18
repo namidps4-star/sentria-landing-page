@@ -151,7 +151,7 @@ Never use, from the design rules:
 
 Open conflicts, to decide:
 
-1. The Flow section (12) shows three numbered circles, 01 to 03. This conflicts with the rule above.
+1. ~~The Flow section (12) shows three numbered circles, 01 to 03.~~ Resolved: removed the 01–04 labels; circles are plain coloured discs.
 2. `.btn-lime:hover` adds a lime shadow. Check it against "a glowing halo behind an element".
 3. The compare headline "Not a dashboard. A decision layer." uses the contrast form.
 
