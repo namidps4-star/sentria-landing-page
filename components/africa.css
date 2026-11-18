@@ -164,17 +164,19 @@
 .afr-vq-idx{align-self:end;font-size:26px;font-weight:700;line-height:1;color:#48484d;padding-bottom:6px;text-align:right;font-variant-numeric:tabular-nums}
 .afr-vq-idx small{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
 
-.afr-vq-pill{position:relative;z-index:1;border-radius:12px;display:flex;justify-content:center;padding-top:10px;min-height:76px;color:#17171a}
+.afr-vq-pill{position:relative;z-index:1;border-radius:12px;display:flex;justify-content:center;padding-top:10px;min-height:76px;background:var(--pc);color:var(--pt)}
 .afr-vq-pill svg{width:20px;height:20px}
-.afr-vq-pill--critical{background:#ff7a5c}
-.afr-vq-pill--warning{background:#ffb020}
 
 .afr-vq-card{position:relative;background:#2c2c2e;border-radius:12px;padding:14px 48px 14px 16px;min-width:0}
-.afr-vq-title{font-size:16px;font-weight:700;line-height:1.3;color:#f2f2f4;margin-bottom:8px}
+.afr-vq-title{font-size:17px;font-weight:700;line-height:1.25;color:#f2f2f4;margin-bottom:4px}
+.afr-vq-meta{font-size:13px;font-weight:400;line-height:1.45;color:#a1a1a8;margin-bottom:10px}
+.afr-vq-title:last-of-type{margin-bottom:10px}
 .afr-vq-go{display:inline-block;font-size:12px;font-weight:600;color:#d6ff3f}
-.afr-vq-box{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:5px;border:2.5px solid var(--bc)}
-.afr-vq-row--critical{--bc:#ff7a5c}
-.afr-vq-row--warning{--bc:#ffb020}
+.afr-vq-box{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:5px;border:2.5px solid var(--pc)}
+.afr-vq-row--k0{--pc:#ff7a5c;--pt:#17171a}
+.afr-vq-row--k1{--pc:#ffb020;--pt:#17171a}
+.afr-vq-row--k2{--pc:#3d9bff;--pt:#fff}
+.afr-vq-row--k3{--pc:#b36bff;--pt:#fff}
 
 .afr-vq-now{position:absolute;left:0;right:0;top:-9px;height:1px;background:#ff3b4f;z-index:3;transform-origin:left;transform:scaleX(0);pointer-events:none}
 [data-vis="1"] .afr-vq-now{animation:afr-vq-draw .8s cubic-bezier(.2,.7,.2,1) 1.1s forwards}
@@ -191,7 +193,7 @@
   .afr-vq{--g:34px;--p:42px;--gap:8px}
   .afr-vq-idx{font-size:21px}
   .afr-vq-card{padding:12px 42px 12px 13px}
-  .afr-vq-title{font-size:15px}
+  .afr-vq-title{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){
   .afr-vq-spine,.afr-vq-row,.afr-vq-cap i,.afr-vq-foot{transition:none;animation:none!important;opacity:1;transform:none}
