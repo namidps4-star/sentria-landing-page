@@ -84,13 +84,17 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         {c.example && slug !== "grossiste-pharma" && !pharmacy && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
       </section>
       {alerts.length > 0 && (
-        <section className={`afr-queue-sec afr-queue-sec--${bands.queue} wrap`}>
-          <AfricaQueuePreview alerts={alerts} lang={lang} />
+        <section className={`afr-queue-sec afr-queue-sec--${bands.queue}`}>
+          <div className="wrap">
+            <AfricaQueuePreview alerts={alerts} lang={lang} />
+          </div>
         </section>
       )}
       {c.decisionCard && (
-        <section className={`afr-dcard-sec afr-dcard-sec--${bands.dcard} wrap`}>
-          <AfricaDecisionCard card={c.decisionCard} lang={lang} />
+        <section className={`afr-dcard-sec afr-dcard-sec--${bands.dcard}`}>
+          <div className="wrap">
+            <AfricaDecisionCard card={c.decisionCard} lang={lang} />
+          </div>
         </section>
       )}
       <AfricaFaqAccordion id={`${id}-faq`} kicker={kicker} heading={faqHeading} items={faq} lang={lang} tone={TONES[design.faq]} />
