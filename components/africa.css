@@ -135,7 +135,7 @@
 .afr-gt-kicker::before{
   content:'';display:inline-block;
   width:18px;height:1.5px;border-radius:999px;
-  background:rgba(255,122,92,.7);flex-shrink:0;
+  background:var(--lime-deep,#9fcc1b);flex-shrink:0;
 }
 .afr-gt-headline{
   font-family:var(--f-display,Syne,sans-serif);
