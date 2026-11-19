@@ -12,7 +12,7 @@ const ERP_FR: Record<string, string> = {
   "Hydraulic seal": "Joint hydraulique",
   "Pallet wrap": "Film étirable",
   "Filter cartridge": "Cartouche filtrante",
-  "Label roll": "Rouleau d’étiquettes",
+  "Label roll": "Étiquettes",
   "Bearing 6204": "Roulement 6204",
   Inbound: "Réception",
   Cold: "Froid",
