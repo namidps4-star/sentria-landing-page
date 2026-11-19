@@ -37,10 +37,10 @@ async function rollGlobeTo(href: string): Promise<void> {
 
   const THREE = await import("three")
   const size = Math.round(Math.min(520, Math.min(window.innerWidth, window.innerHeight) * 0.62))
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.setSize(size, size, false)
-  renderer.setClearColor(0x0b0c08, 1)
+  renderer.setClearColor(0x000000, 0)
   canvas.style.width = `${size}px`
   canvas.style.height = `${size}px`
 
