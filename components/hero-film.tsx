@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { C } from "@/content/en"
 import { TAGLINES } from "@/content/taglines"
+import { useText } from "./lang"
 import { B, T } from "./t"
 import { SECTORS } from "./sectors"
 
@@ -20,7 +21,9 @@ export function HeroFilm() {
   const [active, setActive] = useState(0)
   const [reduced, setReduced] = useState(false)
   const [paused, setPaused] = useState(false)
+  const [held, setHeld] = useState(false)
   const [ready, setReady] = useState(false)
+  const text = useText()
   const box = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -42,13 +45,13 @@ export function HeroFilm() {
   }, [])
 
   useEffect(() => {
-    if (reduced || paused || !ready) return
+    if (reduced || paused || held || !ready) return
     const id = window.setInterval(() => {
       if (document.hidden) return
       setActive((a) => (a + 1) % SECTORS.length)
     }, BEAT_MS)
     return () => window.clearInterval(id)
-  }, [reduced, paused, ready])
+  }, [reduced, paused, held, ready])
 
   const dirTimer = useRef<number | null>(null)
   const dirRef = useRef<-1 | 0 | 1>(0)
@@ -116,6 +119,15 @@ export function HeroFilm() {
             </button>
           ))}
         </div>
+        <button
+          type="button"
+          className="hf-pause"
+          aria-pressed={held}
+          aria-label={held ? text("Play the sector film", "Reprendre le défilement des secteurs") : text("Pause the sector film", "Mettre en pause le défilement des secteurs")}
+          onClick={() => setHeld((h) => !h)}
+        >
+          {held ? <B en="Play" fr="Lecture" /> : <B en="Pause" fr="Pause" />}
+        </button>
       </div>
     </>
   )
