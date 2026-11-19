@@ -30,6 +30,6 @@ export default async function Page({ params }: { params: Params }) {
   const a = generalBySlug("fr", activity)
   if (!a) notFound()
   return (
-    <AfricaHero copy={a.copy.fr} id={a.key} photo={a.photo} extra={<AfricaCapabilities slug={a.key} lang="fr" />} />
+    <AfricaHero video copy={a.copy.fr} id={a.key} photo={a.photo} extra={<AfricaCapabilities slug={a.key} lang="fr" />} />
   )
 }

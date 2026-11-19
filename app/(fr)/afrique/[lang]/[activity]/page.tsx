@@ -40,6 +40,7 @@ export default async function Page({ params }: { params: Params }) {
   const pic = picture(activity, "fr")
   return (
     <AfricaHero
+      video
       copy={{ ...copy.fr, photoAlt: pic?.alt ?? copy.fr.photoAlt }}
       id={activity}
       panel={SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="fr" alerts={SECTOR_ALERTS[activity].fr} /> : undefined}
