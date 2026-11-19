@@ -16,7 +16,7 @@ export function ArticleCard(props: {
 }) {
   const { href, image, tag, minutes, date, title, description } = props
   return (
-    <Link href={href} className="art-card">
+    <Link href={href} className="art-card" data-rv="rise">
       <div className="art-card-img">
         <Image src={image} alt={title.en} fill sizes="(max-width: 900px) 100vw, 330px" />
       </div>

@@ -7,7 +7,7 @@ const DESC = "SentrIA calcule les jours de stock restants de votre pharmacie à 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
-  alternates: { canonical: "/afrique", languages: { en: "/africa", fr: "/afrique" } },
+  alternates: { canonical: "/afrique", languages: { en: "/africa", fr: "/afrique", "x-default": "/africa" } },
   openGraph: {
     type: "website",
     url: "https://sentriahq.dev/afrique",
@@ -20,5 +20,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AfricaHero copy={AFRIQUE_FR} id="afq" />
+  return <AfricaHero copy={AFRIQUE_FR} id="afq" activities="fr" />
 }

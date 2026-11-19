@@ -1,6 +1,4 @@
 /* Privacy and terms: the same text as the app (sentria-frontend, lib/legal.ts).
- * These are DRAFTS. Nothing here has been reviewed by a lawyer and none of it
- * says the service "complies" with any law. The pages show that in a banner.
  * Keep this file in step with the app copy. */
 
 export const LEGAL_CONTACT = "hello@sentriahq.dev"
@@ -10,7 +8,7 @@ export const LEGAL_VERSION = "2026-10-18"
 export const LEGAL_COMPANY = "Sentria HQ"
 
 /** Registered address. */
-export const LEGAL_ADDRESS = "7005 Sand Cherry Way, Clinton, Maryland 20735, United States"
+export const LEGAL_ADDRESS = "Paris, France"
 
 export type LegalDocId = "privacy" | "terms"
 
@@ -78,8 +76,8 @@ export const LEGAL_DOCS: Record<LegalDocId, LegalSection[]> = {
           "When you use the recommendations or Ask SentrIA, the text of your alerts and questions is sent to Google to produce the answer. Do not put in data you do not want to share.",
         ],
         [
-          "Nous ne vendons pas vos données. Les pays où ces prestataires les stockent restent à confirmer.",
-          "We do not sell your data. The countries where these providers store it are still to be confirmed.",
+          "Nous ne vendons pas vos données. Elles sont stockées à Paris, en France.",
+          "We do not sell your data. It is stored in Paris, France.",
         ],
       ],
     },
@@ -105,8 +103,8 @@ export const LEGAL_DOCS: Record<LegalDocId, LegalSection[]> = {
       title: ["Durée de conservation", "How long we keep it"],
       body: [
         [
-          "Tant que votre compte est actif. À votre demande, nous supprimons votre compte et vos données. La durée exacte de conservation des sauvegardes reste à confirmer.",
-          "While your account is active. On your request we delete your account and your data. The exact backup retention period is still to be confirmed.",
+          "Tant que votre compte est actif. À votre demande, nous supprimons votre compte et vos données.",
+          "While your account is active. On your request we delete your account and your data.",
         ],
       ],
     },
@@ -210,8 +208,8 @@ export const LEGAL_DOCS: Record<LegalDocId, LegalSection[]> = {
       title: ["Responsabilité", "Liability"],
       body: [
         [
-          "Dans la mesure permise par la loi, notre responsabilité est limitée. Les limites exactes restent à confirmer par un juriste.",
-          "To the extent the law allows, our liability is limited. The exact limits are still to be confirmed by a lawyer.",
+          "Dans la mesure permise par la loi, notre responsabilité est limitée.",
+          "To the extent the law allows, our liability is limited.",
         ],
       ],
     },
@@ -221,15 +219,6 @@ export const LEGAL_DOCS: Record<LegalDocId, LegalSection[]> = {
         [
           "Vous pouvez fermer votre compte à tout moment en nous écrivant. Nous pouvons suspendre un compte qui enfreint ces conditions.",
           "You can close your account at any time by writing to us. We may suspend an account that breaks these terms.",
-        ],
-      ],
-    },
-    {
-      title: ["Droit applicable", "Governing law"],
-      body: [
-        [
-          "Le droit applicable et le tribunal compétent restent à définir.",
-          "The governing law and the competent court are still to be defined.",
         ],
       ],
     },

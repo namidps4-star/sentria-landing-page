@@ -1,0 +1,280 @@
+/* ------------------------------------------------- reasoning: three plates */
+.sc.reasoning {
+  background: #000;
+  color: #f4f4f0;
+}
+.sc.reasoning .eyebrow {
+  color: #c9cac2;
+}
+.sc.reasoning .eyebrow::before {
+  background: #e8ff1f;
+}
+.sc.reasoning .h2 {
+  color: #f4f4f0;
+}
+.rp {
+  --rp-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --rp-gap: 20px;
+  --rp-y: 62%; /* where the arrow sits on the edge */
+  --rp-aw: 40px; /* how far the arrow sticks out */
+  --rp-ah: 64px; /* half its height */
+  --rp-ring: 12px; /* black margin around it inside the next plate */
+  display: flex;
+  gap: var(--rp-gap);
+  height: clamp(400px, 44vw, 560px);
+  margin-top: clamp(28px, 4vw, 52px);
+}
+.rp-p {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: clamp(18px, 2.2vw, 32px);
+  text-align: left;
+  color: #0b0c08;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  transition: flex 0.9s var(--rp-ease);
+}
+.rp-p[data-on] {
+  flex: 2.6 1 0;
+}
+.rp-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--c);
+  z-index: 0;
+}
+@media (min-width: 861px) {
+  .rp-p2 .rp-bg,
+  .rp-p3 .rp-bg {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%,
+    0.0px calc(var(--rp-y) + 97.2px),
+    0.0px calc(var(--rp-y) + 67.2px),
+    0.3px calc(var(--rp-y) + 64.0px),
+    0.0px calc(var(--rp-y) + 66.2px),
+    0.7px calc(var(--rp-y) + 63.0px),
+    0.3px calc(var(--rp-y) + 64.3px),
+    1.4px calc(var(--rp-y) + 61.1px),
+    1.0px calc(var(--rp-y) + 62.0px),
+    2.4px calc(var(--rp-y) + 58.8px),
+    2.0px calc(var(--rp-y) + 59.6px),
+    3.5px calc(var(--rp-y) + 56.4px),
+    3.2px calc(var(--rp-y) + 57.0px),
+    4.8px calc(var(--rp-y) + 53.8px),
+    4.5px calc(var(--rp-y) + 54.4px),
+    6.3px calc(var(--rp-y) + 51.2px),
+    6.0px calc(var(--rp-y) + 51.7px),
+    7.9px calc(var(--rp-y) + 48.5px),
+    7.6px calc(var(--rp-y) + 48.9px),
+    9.6px calc(var(--rp-y) + 45.7px),
+    9.3px calc(var(--rp-y) + 46.1px),
+    11.4px calc(var(--rp-y) + 42.9px),
+    11.2px calc(var(--rp-y) + 43.2px),
+    13.4px calc(var(--rp-y) + 40.0px),
+    13.1px calc(var(--rp-y) + 40.3px),
+    15.4px calc(var(--rp-y) + 37.1px),
+    15.2px calc(var(--rp-y) + 37.4px),
+    17.5px calc(var(--rp-y) + 34.2px),
+    17.3px calc(var(--rp-y) + 34.5px),
+    19.8px calc(var(--rp-y) + 31.3px),
+    19.6px calc(var(--rp-y) + 31.5px),
+    22.1px calc(var(--rp-y) + 28.3px),
+    21.9px calc(var(--rp-y) + 28.6px),
+    24.5px calc(var(--rp-y) + 25.4px),
+    24.3px calc(var(--rp-y) + 25.6px),
+    27.0px calc(var(--rp-y) + 22.4px),
+    26.8px calc(var(--rp-y) + 22.6px),
+    29.5px calc(var(--rp-y) + 19.4px),
+    29.4px calc(var(--rp-y) + 19.6px),
+    32.2px calc(var(--rp-y) + 16.4px),
+    32.0px calc(var(--rp-y) + 16.5px),
+    34.9px calc(var(--rp-y) + 13.3px),
+    36.4px calc(var(--rp-y) + 11.4px),
+    37.7px calc(var(--rp-y) + 9.4px),
+    38.7px calc(var(--rp-y) + 7.1px),
+    39.4px calc(var(--rp-y) + 4.8px),
+    39.9px calc(var(--rp-y) + 2.4px),
+    40.0px calc(var(--rp-y) - 0.0px),
+    39.9px calc(var(--rp-y) - 2.4px),
+    39.4px calc(var(--rp-y) - 4.8px),
+    38.7px calc(var(--rp-y) - 7.1px),
+    37.7px calc(var(--rp-y) - 9.4px),
+    36.4px calc(var(--rp-y) - 11.4px),
+    34.9px calc(var(--rp-y) - 13.3px),
+    32.0px calc(var(--rp-y) - 16.5px),
+    32.2px calc(var(--rp-y) - 16.4px),
+    29.4px calc(var(--rp-y) - 19.6px),
+    29.5px calc(var(--rp-y) - 19.4px),
+    26.8px calc(var(--rp-y) - 22.6px),
+    27.0px calc(var(--rp-y) - 22.4px),
+    24.3px calc(var(--rp-y) - 25.6px),
+    24.5px calc(var(--rp-y) - 25.4px),
+    21.9px calc(var(--rp-y) - 28.6px),
+    22.1px calc(var(--rp-y) - 28.3px),
+    19.6px calc(var(--rp-y) - 31.5px),
+    19.8px calc(var(--rp-y) - 31.3px),
+    17.3px calc(var(--rp-y) - 34.5px),
+    17.5px calc(var(--rp-y) - 34.2px),
+    15.2px calc(var(--rp-y) - 37.4px),
+    15.4px calc(var(--rp-y) - 37.1px),
+    13.1px calc(var(--rp-y) - 40.3px),
+    13.4px calc(var(--rp-y) - 40.0px),
+    11.2px calc(var(--rp-y) - 43.2px),
+    11.4px calc(var(--rp-y) - 42.9px),
+    9.3px calc(var(--rp-y) - 46.1px),
+    9.6px calc(var(--rp-y) - 45.7px),
+    7.6px calc(var(--rp-y) - 48.9px),
+    7.9px calc(var(--rp-y) - 48.5px),
+    6.0px calc(var(--rp-y) - 51.7px),
+    6.3px calc(var(--rp-y) - 51.2px),
+    4.5px calc(var(--rp-y) - 54.4px),
+    4.8px calc(var(--rp-y) - 53.8px),
+    3.2px calc(var(--rp-y) - 57.0px),
+    3.5px calc(var(--rp-y) - 56.4px),
+    2.0px calc(var(--rp-y) - 59.6px),
+    2.4px calc(var(--rp-y) - 58.8px),
+    1.0px calc(var(--rp-y) - 62.0px),
+    1.4px calc(var(--rp-y) - 61.1px),
+    0.3px calc(var(--rp-y) - 64.3px),
+    0.7px calc(var(--rp-y) - 63.0px),
+    0.0px calc(var(--rp-y) - 66.2px),
+    0.3px calc(var(--rp-y) - 64.0px),
+    0.0px calc(var(--rp-y) - 67.2px),
+    0.0px calc(var(--rp-y) - 97.2px));
+  }
+}
+.rp-bump {
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--rp-y) - var(--rp-ah));
+  right: calc(var(--rp-aw) * -1 + 1px); /* grows out of its own tile */
+  width: var(--rp-aw);
+  height: calc(var(--rp-ah) * 2);
+  background: var(--c);
+  clip-path: polygon(0.0% 0.0%, 1.3% 2.5%, 3.5% 5.0%, 6.4% 7.5%, 9.7% 10.0%, 13.4% 12.5%, 17.5% 15.0%, 21.8% 17.5%, 26.5% 20.0%, 31.4% 22.5%, 36.6% 25.0%, 42.0% 27.5%, 47.7% 30.0%, 53.5% 32.5%, 59.6% 35.0%, 65.9% 37.5%, 72.4% 40.0%, 79.0% 42.5%, 85.8% 45.0%, 92.8% 47.5%, 100.0% 50.0%, 92.8% 52.5%, 85.8% 55.0%, 79.0% 57.5%, 72.4% 60.0%, 65.9% 62.5%, 59.6% 65.0%, 53.5% 67.5%, 47.7% 70.0%, 42.0% 72.5%, 36.6% 75.0%, 31.4% 77.5%, 26.5% 80.0%, 21.8% 82.5%, 17.5% 85.0%, 13.4% 87.5%, 9.7% 90.0%, 6.4% 92.5%, 3.5% 95.0%, 1.3% 97.5%, 0.0% 100.0%);
+  transform-origin: 0 50%;
+  transition: transform 0.8s var(--rp-ease);
+}
+.rp-p1 {
+  --c: #e8ff1f;
+}
+.rp-p2 {
+  --c: #a6a6a4;
+}
+.rp-p3 {
+  --c: #f4f4f0;
+}
+.rp-p[data-on] .rp-bump {
+  transform: none;
+}
+.rp-tag {
+  position: absolute !important;
+  left: clamp(18px, 2.2vw, 32px);
+  bottom: clamp(18px, 2.2vw, 32px);
+  font-family: var(--f-display);
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  transition: opacity 0.4s var(--rp-ease);
+}
+.rp-p[data-on] .rp-tag {
+  opacity: 0;
+}
+.rp-p > :not(.rp-bg):not(.rp-bump) {
+  position: relative;
+  z-index: 2;
+}
+.rp-p b {
+  display: block;
+  font-family: var(--f-display);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  margin-left: -0.03em;
+  font-size: clamp(80px, 12.4vw, 168px);
+}
+.rp-in {
+  position: absolute !important;
+  left: clamp(18px, 2.2vw, 32px);
+  right: clamp(18px, 2.2vw, 32px);
+  bottom: clamp(18px, 2.2vw, 32px);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s var(--rp-ease), transform 0.7s var(--rp-ease);
+}
+.rp-p[data-on] .rp-in {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.25s;
+}
+.rp-in h3 {
+  font-family: var(--f-display);
+  font-size: clamp(24px, 2.8vw, 40px);
+  letter-spacing: -0.03em;
+  color: inherit;
+}
+.rp-in p {
+  margin-top: 10px;
+  max-width: 36ch;
+  font-size: 14px;
+  line-height: 1.55;
+  color: inherit;
+}
+.rp-p:focus-visible {
+  outline: 2px solid #e8ff1f;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .rp:not(.in) .rp-p {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .rp-p {
+    transition: flex 0.9s var(--rp-ease), opacity 0.8s var(--rp-ease), transform 0.9s var(--rp-ease);
+  }
+  .rp.in .rp-p2 {
+    transition-delay: 0.12s, 0.12s, 0.12s;
+  }
+  .rp.in .rp-p3 {
+    transition-delay: 0.24s, 0.24s, 0.24s;
+  }
+}
+@media (max-width: 860px) {
+  .rp {
+    --rp-gap: 8px;
+    flex-direction: column;
+    height: auto;
+  }
+  .rp-p {
+    flex: none;
+    height: 120px;
+    transition: height 0.8s var(--rp-ease);
+  }
+  .rp-p[data-on] {
+    flex: none;
+    height: 410px;
+  }
+  .rp-bump {
+    display: none;
+  }
+  .rp-tag {
+    left: auto;
+    right: 18px;
+    bottom: auto;
+    top: 22px;
+    font-size: 26px;
+  }
+  .rp-p2 .rp-bg,
+  .rp-p3 .rp-bg {
+    clip-path: none;
+  }
+  .rp-p b {
+    font-size: 96px;
+  }
+}
+

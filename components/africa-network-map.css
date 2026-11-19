@@ -1,0 +1,86 @@
+.afr-mh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,700px);gap:48px;align-items:start;padding:clamp(40px,4vw,56px) var(--pad,56px);color:#f5f3ea}
+.afr-mh-copy{max-width:520px}
+.afr-mh h3{margin:0;font:700 clamp(32px,4vw,54px)/1.05 var(--f-display),sans-serif;letter-spacing:-.03em;max-width:14ch}
+.afr-mh-res{margin:22px 0 0;font-size:18px;line-height:1.55;max-width:38ch;color:#cfcdbf}
+
+.afr-mh-map{position:relative;margin:0;line-height:0}
+.afr-mh-map svg{display:block;width:100%;height:auto;overflow:visible}
+.afr-mh-map .pic{mix-blend-mode:screen;opacity:.9}
+
+/* pins */
+.afr-mh-map .pin .core{fill:#f5f3ea;stroke:none}
+.afr-mh-map .pin .ring{fill:none;stroke:#f5f3ea;stroke-width:1.5;stroke-opacity:.8;transform-box:fill-box;transform-origin:center}
+
+/* callouts: thin white lines, no fill, like a film HUD */
+.afr-mh-map .lead{stroke:#f5f3ea;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:0}
+.afr-mh-map .endcap{fill:#f5f3ea}
+.afr-mh-map .panel .bg{fill:rgba(11,12,8,.62);stroke:#f5f3ea;stroke-width:2}
+.afr-mh-map .panel .thin{stroke:#f5f3ea;stroke-width:1.5;stroke-opacity:.8}
+.afr-mh-map .panel .vert{font:500 15px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.04em}
+.afr-mh-map .panel .gauge{fill:none;stroke:#f5f3ea;stroke-width:1.5}
+.afr-mh-map .panel .gaugefill{fill:#f5f3ea}
+.afr-mh-map .panel .nm{font:700 22px var(--f-body),sans-serif;fill:#f5f3ea;letter-spacing:.01em}
+.afr-mh-map .panel .sb{font:400 17px var(--f-body),sans-serif;fill:#cfcdbf}
+.afr-mh-map .panel .icon{fill:none;stroke:#f5f3ea;stroke-width:2}
+.afr-mh-map .panel .ico{fill:none;stroke:#f5f3ea;stroke-width:3;stroke-linecap:round}
+.afr-mh-map .panel .lb{font:500 14px var(--f-body),sans-serif;fill:#cfcdbf;letter-spacing:.04em;text-transform:uppercase}
+.afr-mh-map .panel .lb .v2{fill:#f5f3ea;font-weight:700}
+.afr-mh-map .co.from .lb .v2{fill:#d6ff3f;font-size:17px}
+.afr-mh-map .panel .box{fill:none;stroke:#f5f3ea;stroke-width:1.8}
+.afr-mh-map .panel .val{font:300 44px "AfricaNumeral",sans-serif;fill:#f5f3ea}
+.afr-mh-map .panel .mesh{fill:url(#afr-mh-hatch);stroke:#f5f3ea;stroke-width:1.8}
+.afr-mh-map .co.port .val{fill:#ff5a4e}
+.afr-mh-map .dots circle{fill:#3b4034}
+.afr-mh-map .dots .keep,.afr-mh-map .dots .go,.afr-mh-map .dots .come{fill:#d6ff3f}
+.afr-mh-map .dots.days .on{fill:#ff5a4e}
+.afr-mh-map .dots.days .off{fill:none;stroke:#f5f3ea;stroke-width:2}
+.afr-mh-map .dots .come{fill:#3b4034}
+.afr-mh-map .n2{opacity:0}
+
+.afr-mh-map .flow{stroke:#d6ff3f;stroke-width:8;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.afr-mh-map .runner{fill:#fff;offset-distance:100%}
+.afr-mh-map .move rect{fill:#d6ff3f}
+.afr-mh-map .move text{font:700 34px var(--f-body),sans-serif;fill:#0b0c08}
+.afr-mh-map .move text.v{font-weight:500;font-size:28px}
+
+/* the sequence: nothing shows until the section is in view (data-in), then it plays once */
+.afr-mh:not([data-in]) .pin,.afr-mh:not([data-in]) .co,.afr-mh:not([data-in]) .move,.afr-mh:not([data-in]) .runner{opacity:0}
+.afr-mh:not([data-in]) .flow{stroke-dashoffset:1}
+.afr-mh[data-in] .pin{animation:afr-mh-pin .5s both}
+.afr-mh[data-in] .pin.port{animation-delay:.3s}
+.afr-mh[data-in] .pin.from{animation-delay:1s}
+.afr-mh[data-in] .pin.to{animation-delay:1.7s}
+.afr-mh[data-in] .pin .ring{animation:afr-mh-ping 2.4s var(--d,.3s) ease-out infinite}
+.afr-mh[data-in] .pin.from .ring{--d:1s}
+.afr-mh[data-in] .pin.to .ring{--d:1.7s}
+.afr-mh[data-in] .co .lead{animation:afr-mh-draw .7s calc(var(--t) + .1s) cubic-bezier(.4,0,.2,1) both}
+.afr-mh[data-in] .co .endcap{animation:afr-mh-fade .3s calc(var(--t) + .7s) both}
+.afr-mh[data-in] .co .panel{animation:afr-mh-scan .7s calc(var(--t) + .55s) steps(14,end) both,afr-mh-flick .5s calc(var(--t) + 1.2s) linear both}
+.afr-mh[data-in] .flow{animation:afr-mh-draw 2.2s 2.8s cubic-bezier(.4,0,.2,1) both}
+.afr-mh[data-in] .runner{animation:afr-mh-run 2.2s 2.8s cubic-bezier(.4,0,.2,1) both}
+.afr-mh[data-in] .move{animation:afr-mh-fade .5s 3.6s both}
+/* the units leave Centrale and fill Nord */
+.afr-mh[data-in] .dots.from .go{animation:afr-mh-off .4s calc(5s + var(--k) * 40ms) both}
+.afr-mh[data-in] .dots.to .come{animation:afr-mh-on .4s calc(5.4s + var(--k) * 40ms) both}
+.afr-mh[data-in] .co.from .n1{animation:afr-mh-fade-out .3s 6.3s both}
+.afr-mh[data-in] .co.from .n2{animation:afr-mh-fade .3s 6.3s both}
+@keyframes afr-mh-pin{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:none}}
+@keyframes afr-mh-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.4);opacity:0}}
+@keyframes afr-mh-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes afr-mh-run{0%{offset-distance:0;opacity:1}100%{offset-distance:100%;opacity:1}}
+@keyframes afr-mh-fade{from{opacity:0}to{opacity:1}}
+@keyframes afr-mh-fade-out{from{opacity:1}to{opacity:0}}
+@keyframes afr-mh-scan{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes afr-mh-flick{0%,100%{opacity:1}20%{opacity:.4}40%{opacity:1}60%{opacity:.7}}
+@keyframes afr-mh-off{from{fill:#d6ff3f}to{fill:#3b4034}}
+@keyframes afr-mh-on{from{fill:#3b4034}to{fill:#d6ff3f}}
+@media (prefers-reduced-motion:reduce){
+  .afr-mh[data-in] *{animation:none!important}
+  .afr-mh:not([data-in]) .pin,.afr-mh:not([data-in]) .co,.afr-mh:not([data-in]) .move,.afr-mh:not([data-in]) .runner{opacity:1}
+  .afr-mh:not([data-in]) .flow{stroke-dashoffset:0}
+  .afr-mh-map .dots.from .go{fill:#3b4034}
+  .afr-mh-map .dots.to .come{fill:#d6ff3f}
+  .afr-mh-map .co.from .n1{opacity:0}
+  .afr-mh-map .co.from .n2{opacity:1}
+}
+@media (max-width:960px){.afr-mh{grid-template-columns:1fr;gap:32px}.afr-mh-map{max-width:620px}}

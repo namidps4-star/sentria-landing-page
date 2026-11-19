@@ -1,0 +1,100 @@
+/* -------------------------------------------------- entrance (motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .cs-vline {
+    transition: transform 0.9s var(--cs-ease) 0.05s;
+  }
+  .cs-hl.a {
+    transition: transform 0.9s var(--cs-ease) 0.15s;
+  }
+  .cs-hl.b {
+    transition: transform 0.9s var(--cs-ease) 0.3s;
+  }
+  .cs-num {
+    transition: transform 1s var(--cs-ease) 0.25s;
+  }
+  .cs-ln > span {
+    transition: transform 0.9s var(--cs-ease) calc(0.45s + var(--l, 0) * 0.09s);
+  }
+  .cs-lead,
+  .cs-meta {
+    transition: opacity 0.7s var(--cs-ease) 0.65s, transform 0.7s var(--cs-ease) 0.65s;
+  }
+  .cs-meta {
+    transition-delay: 0.75s;
+  }
+  .cs-step,
+  .cs-lab {
+    transition: opacity 0.6s var(--cs-ease) calc(0.8s + var(--s, 0) * 0.09s), color 0.3s var(--cs-ease), transform 0.4s var(--cs-ease);
+  }
+  .cs-art {
+    transition: opacity 0.9s var(--cs-ease) 0.2s;
+  }
+  .cs-img,
+  .cs-erp-bg {
+    transition: transform 1.6s var(--cs-ease) 0.2s;
+  }
+
+  .js .cs-panel:not(.in) .cs-vline {
+    transform: scaleY(0);
+  }
+  .js .cs-panel:not(.in) .cs-hl {
+    transform: scaleX(0);
+  }
+  .js .cs-panel:not(.in) .cs-num {
+    transform: translateY(calc(-1.9cqw + 13cqw));
+  }
+  .js .cs-panel:not(.in) .cs-ln > span {
+    transform: translateY(112%);
+  }
+  .js .cs-panel:not(.in) .cs-lead,
+  .js .cs-panel:not(.in) .cs-meta {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .js .cs-panel:not(.in) .cs-step,
+  .js .cs-panel:not(.in) .cs-lab {
+    opacity: 0;
+  }
+  .js .cs-panel:not(.in) .cs-art {
+    opacity: 0;
+  }
+  .js .cs-panel:not(.in) .cs-img {
+    transform: scale(1.12);
+  }
+  .js .cs-panel:not(.in) .cs-erp-bg {
+    transform: scale(1.06);
+  }
+  .cs-panel.in .cs-sheen {
+    animation: cs-sheen 1.7s var(--cs-ease) 0.55s 1 both;
+  }
+  .cs-rows .cs-tr {
+    animation: cs-row 0.42s var(--cs-ease) calc(var(--r, 0) * 0.04s) both;
+  }
+  .cs-pop {
+    animation: cs-pop 0.4s var(--cs-ease) both;
+  }
+}
+@keyframes cs-sheen {
+  to {
+    transform: translateX(130%);
+  }
+}
+@keyframes cs-row {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes cs-pop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-art-in,
+  .cs-monitor {
+    transition: none;
+  }
+}
+

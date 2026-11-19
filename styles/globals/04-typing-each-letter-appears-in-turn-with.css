@@ -1,0 +1,183 @@
+/* The headline draws itself: every letter appears at once as a random letter and the real letters settle in one by one
+   (components/hero-scramble.ts reads this animation as its clock). The wave starts once the last letter has settled. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero-h .hl {
+    animation: none; /* the lines no longer rise as blocks */
+  }
+  .hero-h:not(.lens-clone) .wvl {
+    animation: wvl-type 0.001s linear backwards;
+    animation-delay: calc(var(--t0) + 0.25s);
+  }
+}
+@keyframes wvl-type {
+  from {
+    opacity: 0;
+  }
+}
+.hero-lead {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 0.8em;
+  font-size: clamp(14px, 1.15vw, 17.5px);
+  line-height: 1.55;
+  color: rgba(245, 243, 234, 0.92);
+}
+.js [data-h] {
+  animation: h-in 0.7s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
+}
+.js .hl {
+  animation: line-in 0.8s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards;
+}
+@keyframes h-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(45%);
+  }
+}
+.hero-down {
+  position: absolute;
+  right: var(--pad);
+  bottom: 44px;
+  width: 26px;
+  color: var(--lime);
+  animation: bob 2s ease-in-out infinite;
+}
+.js .hero-down {
+  animation: h-in 0.7s var(--ease) calc(var(--t0) + var(--d, 0s)) backwards, bob 2s ease-in-out calc(var(--t0) + 1.2s) infinite;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(12px);
+  }
+}
+.hero-strip {
+  display: grid;
+  grid-template-columns: 50% 13.5% 1fr;
+  height: 112px;
+  position: relative;
+  z-index: 3;
+}
+.hero-strip > a {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  transition: background 0.3s, color 0.3s;
+}
+.hero-strip a > span:not(.sr-only) {
+  position: relative;
+  z-index: 1;
+  padding-inline: var(--pad);
+  transition: transform 0.4s var(--ease);
+}
+.strip-a {
+  background: var(--lime);
+}
+.strip-a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--lime-deep);
+  transform: translateX(-101%);
+  transition: transform 0.5s var(--ease);
+}
+.strip-a:hover::before {
+  transform: none;
+}
+.strip-b {
+  background: var(--cream);
+  justify-content: center;
+}
+.strip-b svg {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.4s var(--ease);
+}
+.strip-b:hover svg {
+  transform: scale(1.25);
+}
+.strip-b:hover {
+  background: var(--lime);
+}
+.strip-c {
+  background: var(--sand);
+}
+.strip-c:hover {
+  background: var(--cream);
+}
+.strip-c:hover > span,
+.strip-a:hover > span {
+  transform: translateX(8px);
+}
+
+/* ------------------------------------------------------------------ proof */
+.proof {
+  background: var(--lime);
+  color: var(--ink);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(20, 21, 15, 0.18);
+}
+.marq {
+  display: flex;
+  overflow: hidden;
+}
+.marq-track {
+  display: flex;
+  flex: none;
+}
+.marq-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex: none;
+}
+/* the strip keeps moving: the list runs across once and starts again (the copy makes the loop seamless) */
+.marq-track {
+  animation: marq 28s linear infinite;
+}
+@keyframes marq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marq-track {
+    animation: none;
+  }
+}
+.marq-group li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 0 22px 34px;
+  white-space: nowrap;
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.5vw, 36px);
+  letter-spacing: -0.02em;
+}
+.marq-group li b {
+  font-family: var(--f-body), sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+}
+.marq-group li i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+  margin-left: 34px;
+}
+

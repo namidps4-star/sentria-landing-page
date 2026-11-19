@@ -1,0 +1,148 @@
+/* Activity page variants. Each activity picks a hero tone, a ledger mood, an example style and a questions style
+   (content/africa-designs.ts). The base styles stay in the component files; these only override them.
+   The default (no attribute, or "ledger", "band", "grid", "deep") is the pharmacy look and needs no rule here. */
+
+/* Hero tone */
+.afr-hero.afr-hero--deep[data-tone="ink"]{background:#0b0c08}
+.afr-hero.afr-hero--deep[data-tone="ink"]::after{background:rgba(11,12,8,.72)}
+.afr-hero.afr-hero--deep[data-tone="olive"]{background:#0b0c08}
+.afr-hero.afr-hero--deep[data-tone="olive"]::after{background:rgba(11,12,8,.72)}
+
+/* Ledger mood: cards. Ink ground, one card per capability, a lime numeral. */
+.afr-led[data-mood="cards"]{background:#0b0c08;color:#f5f3ea}
+.afr-led[data-mood="cards"] .eyebrow{color:rgba(245,243,234,.6)}
+.afr-led[data-mood="cards"] .eyebrow::before{background:#d6ff3f}
+.afr-led[data-mood="cards"] h2{color:#f5f3ea}
+.afr-led[data-mood="cards"] .afr-led-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;border-top:0;margin-top:clamp(56px,6vw,80px)}
+.afr-led[data-mood="cards"] .afr-led-row{display:flex;flex-direction:column;align-items:stretch;gap:24px;padding:34px;border:1px solid rgba(245,243,234,.14);border-radius:32px;background:#15170d}
+.afr-led[data-mood="cards"] .afr-led-num{color:#d6ff3f;font-size:clamp(84px,7vw,120px)}
+.afr-led[data-mood="cards"] .afr-led-txt h3{color:#f5f3ea}
+.afr-led[data-mood="cards"] .afr-led-does{color:rgba(245,243,234,.82)}
+.afr-led[data-mood="cards"] .afr-led-imp{color:rgba(245,243,234,.5)}
+.afr-led[data-mood="cards"] .afr-led-chips li{border-color:rgba(245,243,234,.35);color:rgba(245,243,234,.85)}
+.afr-led[data-mood="cards"] .afr-led-art{background:rgba(245,243,234,.05);border-radius:24px;padding:22px 18px;color:#f5f3ea}
+.afr-led[data-mood="cards"] [fill="#0f2e1f"]{fill:#d6ff3f}
+.afr-led[data-mood="cards"] .afr-led-alert{color:rgba(245,243,234,.8)}
+.afr-led[data-mood="cards"] .afr-led-not{color:rgba(245,243,234,.6)}
+
+/* Ledger mood: bands. Full-width bands, deep green and lime in turn, the numeral on the right. */
+.afr-led[data-mood="bands"] .afr-led-rows{border-top:0;margin-top:clamp(56px,6vw,80px)}
+.afr-led[data-mood="bands"] .afr-led-row{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) auto;gap:clamp(28px,4vw,64px);margin:0 calc(-1 * var(--pad,56px));padding:clamp(56px,6vw,88px) var(--pad,56px);border-bottom:0}
+.afr-led[data-mood="bands"] .afr-led-row:nth-child(odd){background:#0f2e1f;color:#f5f3ea}
+.afr-led[data-mood="bands"] .afr-led-row:nth-child(even){background:#d6ff3f;color:#0b0c08}
+.afr-led[data-mood="bands"] .afr-led-row:nth-child(odd) [fill="#0f2e1f"]{fill:#d6ff3f}
+.afr-led[data-mood="bands"] .afr-led-num{order:3;color:inherit;font-size:clamp(96px,11vw,170px)}
+.afr-led[data-mood="bands"] .afr-led-txt h3,.afr-led[data-mood="bands"] .afr-led-does,.afr-led[data-mood="bands"] .afr-led-alert,.afr-led[data-mood="bands"] .afr-led-art{color:inherit}
+.afr-led[data-mood="bands"] .afr-led-imp{color:inherit;opacity:.7}
+.afr-led[data-mood="bands"] .afr-led-chips li{color:inherit;border-color:currentColor}
+.afr-led[data-mood="bands"] .afr-led-not{display:none}
+
+/* Ledger mood: orbit. Sand ground, each drawing sits in a ring, the numeral and text on the right. */
+.afr-led[data-mood="orbit"]{background:#ece7d6;color:#0b0c08}
+.afr-led[data-mood="orbit"] .afr-led-row{grid-template-columns:380px minmax(0,1fr);gap:clamp(40px,5vw,80px);align-items:center}
+.afr-led[data-mood="orbit"] .afr-led-num{grid-column:2;grid-row:1;font-size:clamp(64px,6vw,96px);line-height:1;margin-bottom:12px}
+.afr-led[data-mood="orbit"] .afr-led-txt{grid-column:2;grid-row:2}
+.afr-led[data-mood="orbit"] .afr-led-vis{grid-column:1;grid-row:1 / span 2;display:flex;flex-direction:column;gap:20px}
+.afr-led[data-mood="orbit"] .afr-led-art{width:380px;height:380px;box-sizing:border-box;padding:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:repeating-radial-gradient(circle at 50% 50%,rgba(11,12,8,.09) 0 1px,transparent 1px 30px)}
+.afr-led[data-mood="orbit"] .afr-led-art svg{width:100%}
+
+/* Ledger mood: column. Ink ground, one narrow column, rows stacked, a large lime numeral. */
+.afr-led[data-mood="column"]{background:#10120b;color:#f5f3ea}
+.afr-led[data-mood="column"] .eyebrow{color:rgba(245,243,234,.6)}
+.afr-led[data-mood="column"] .eyebrow::before{background:#d6ff3f}
+.afr-led[data-mood="column"] h2{color:#f5f3ea}
+.afr-led[data-mood="column"] .afr-led-rows{max-width:760px;border-top:0;margin-top:clamp(56px,6vw,80px)}
+.afr-led[data-mood="column"] .afr-led-row{grid-template-columns:1fr;gap:26px;padding:clamp(56px,6vw,80px) 0;border-bottom:1px solid rgba(245,243,234,.12)}
+.afr-led[data-mood="column"] .afr-led-num{color:#d6ff3f;font-size:clamp(110px,14vw,200px)}
+.afr-led[data-mood="column"] .afr-led-txt h3{color:#f5f3ea}
+.afr-led[data-mood="column"] .afr-led-does{color:rgba(245,243,234,.85)}
+.afr-led[data-mood="column"] .afr-led-imp{color:rgba(245,243,234,.5)}
+.afr-led[data-mood="column"] .afr-led-chips li{border-color:rgba(245,243,234,.35);color:rgba(245,243,234,.85)}
+.afr-led[data-mood="column"] [fill="#0f2e1f"]{fill:#d6ff3f}
+.afr-led[data-mood="column"] .afr-led-alert{color:rgba(245,243,234,.8)}
+.afr-led[data-mood="column"] .afr-led-not{color:rgba(245,243,234,.6)}
+
+/* Ledger mood: mono. Near-white, hairline rules, a small numeral, thin drawings. */
+.afr-led[data-mood="mono"]{background:#fbfbfd;color:#1d1d1f}
+.afr-led[data-mood="mono"] h2{color:#1d1d1f;font-weight:600;letter-spacing:-.03em}
+.afr-led[data-mood="mono"] .afr-led-rows{border-top:1px solid #d2d2d7}
+.afr-led[data-mood="mono"] .afr-led-row{grid-template-columns:220px minmax(0,1fr) minmax(0,340px);padding:48px 0;border-bottom:1px solid #d2d2d7;align-items:center}
+.afr-led[data-mood="mono"] .afr-led-num{font-size:clamp(64px,6.4vw,104px);color:#1d1d1f}
+.afr-led[data-mood="mono"] .afr-led-txt h3{color:#1d1d1f;font-size:clamp(20px,1.8vw,26px)}
+.afr-led[data-mood="mono"] .afr-led-does{color:#6e6e73}
+.afr-led[data-mood="mono"] .afr-led-imp{color:#86868b}
+.afr-led[data-mood="mono"] .afr-led-chips li{border-color:#d2d2d7;color:#6e6e73}
+.afr-led[data-mood="mono"] .afr-led-vis svg *{stroke-width:1.4}
+.afr-led[data-mood="mono"] .afr-led-alert{color:#1d1d1f}
+.afr-led[data-mood="mono"] .afr-led-not{color:#6e6e73}
+
+/* Example style: lime. A lime band with an ink panel for the lines. */
+.afr-ex-band.ex-lime{background:#d6ff3f;color:#0b0c08}
+.afr-ex-band.ex-lime .eyebrow{color:rgba(11,12,8,.7)}
+.afr-ex-band.ex-lime .eyebrow::before{background:#0b0c08}
+.afr-ex-band.ex-lime .afr-ex-h{color:#0b0c08}
+.afr-ex-band.ex-lime .afr-ex-info{color:rgba(11,12,8,.9)}
+.afr-ex-band.ex-lime .afr-ex-imp{color:rgba(11,12,8,.7)!important}
+.afr-ex-band.ex-lime .afr-ex-imp b{color:#0b0c08}
+.afr-ex-band.ex-lime .afr-ex-panel{background:#0b0c08;color:#f5f3ea}
+.afr-ex-band.ex-lime .afr-ex-chips li{border-color:rgba(245,243,234,.3);color:#f5f3ea}
+.afr-ex-band.ex-lime .afr-ex-res{color:#d6ff3f;border-top-color:rgba(245,243,234,.2)}
+
+/* Drawings on the dark ledgers: the ink of the drawing turns cream, so it shows on the ground.
+   The text inside the drawings is larger in the ring, the cards and the column, where the drawing is small. */
+.afr-led[data-mood="cards"] .afr-led-vis svg,
+.afr-led[data-mood="column"] .afr-led-vis svg{color:#f5f3ea}
+.afr-led[data-mood="cards"] .afr-led-vis text,
+.afr-led[data-mood="column"] .afr-led-vis text,
+.afr-led[data-mood="orbit"] .afr-led-vis text{font-size:20px}
+.afr-led[data-mood="bands"] .afr-led-vis svg{color:inherit}
+.afr-led[data-mood="orbit"] .afr-led-vis text{font-size:24px}
+
+/* Example style: timeline. Cream band, the lines as a vertical timeline with lime dots. */
+.afr-ex-band.ex-timeline{background:#f5f3ea;color:#0b0c08}
+.afr-ex-band.ex-timeline .eyebrow{color:rgba(11,12,8,.7)}
+.afr-ex-band.ex-timeline .eyebrow::before{background:#0b0c08}
+.afr-ex-band.ex-timeline .afr-ex-h{color:#0b0c08}
+.afr-ex-band.ex-timeline .afr-ex-info{color:rgba(11,12,8,.85)}
+.afr-ex-band.ex-timeline .afr-ex-imp{color:rgba(11,12,8,.6)!important}
+.afr-ex-band.ex-timeline .afr-ex-imp b{color:#0b0c08}
+.afr-ex-band.ex-timeline .afr-ex-panel{background:transparent;color:#0b0c08;border-radius:0;padding:0;padding-left:clamp(28px,3vw,48px);border-left:2px solid #0b0c08}
+.afr-ex-band.ex-timeline .afr-ex-chips{flex-direction:column;gap:0;margin-bottom:40px}
+.afr-ex-band.ex-timeline .afr-ex-chips li{position:relative;border:0;border-bottom:1px solid rgba(11,12,8,.12);border-radius:0;padding:16px 0;font-size:17px}
+.afr-ex-band.ex-timeline .afr-ex-chips li::before{content:"";position:absolute;left:calc(-1 * clamp(28px,3vw,48px) - 7px);top:50%;width:12px;height:12px;border-radius:50%;background:#d6ff3f;border:2px solid #0b0c08;transform:translateY(-50%)}
+.afr-ex-band.ex-timeline .afr-ex-res{color:#0f2e1f}
+
+/* Example style: outline. Ink band, the panel is an outline in lime, the result in lime. */
+.afr-ex-band.ex-outline{background:#0b0c08;color:#f5f3ea}
+.afr-ex-band.ex-outline .afr-ex-panel{background:transparent;color:#f5f3ea;border:1px solid #d6ff3f}
+.afr-ex-band.ex-outline .afr-ex-chips li{border-color:rgba(245,243,234,.35);color:rgba(245,243,234,.9)}
+.afr-ex-band.ex-outline .afr-ex-res{color:#d6ff3f;border-top-color:rgba(245,243,234,.2);font-size:clamp(26px,2.6vw,40px)}
+
+/* Questions style: list. Cream ground, one question per row, the drawing on the left. */
+.afr-fg.fg-list{background:#f5f3ea;color:#0b0c08}
+.afr-fg.fg-list .eyebrow{color:rgba(11,12,8,.7)}
+.afr-fg.fg-list .eyebrow::before{background:#0b0c08}
+.afr-fg.fg-list .afr-fg-grid{grid-template-columns:1fr;border-top:1px solid #0b0c08}
+.afr-fg.fg-list .afr-fg-cell,.afr-fg.fg-list .afr-fg-cell:nth-child(even){display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:clamp(28px,4vw,64px);padding:clamp(36px,4vw,56px) 0;border-left:0;border-bottom:1px solid rgba(11,12,8,.2)}
+.afr-fg.fg-list .afr-fg-art{grid-column:1;grid-row:1 / span 2;height:150px;margin:0}
+.afr-fg.fg-list .afr-fg-cell h3{grid-column:2;grid-row:1;align-self:end;margin:0 0 12px}
+.afr-fg.fg-list .afr-fg-cell p{grid-column:2;grid-row:2;align-self:start}
+@media (max-width:720px){
+  .afr-fg.fg-list .afr-fg-cell,.afr-fg.fg-list .afr-fg-cell:nth-child(even){grid-template-columns:1fr}
+  .afr-fg.fg-list .afr-fg-art{grid-column:1;grid-row:1;height:140px;margin-bottom:24px}
+  .afr-fg.fg-list .afr-fg-cell h3,.afr-fg.fg-list .afr-fg-cell p{grid-column:1}
+  .afr-fg.fg-list .afr-fg-cell h3{grid-row:2}
+  .afr-fg.fg-list .afr-fg-cell p{grid-row:3}
+}
+
+/* Questions style: night. Ink ground, each drawing on a lime tile. */
+.afr-fg.fg-night{background:#0b0c08;color:#f5f3ea}
+.afr-fg.fg-night .eyebrow{color:rgba(245,243,234,.6)}
+.afr-fg.fg-night .eyebrow::before{background:#d6ff3f}
+.afr-fg.fg-night h2{color:#f5f3ea}
+.afr-fg.fg-night .afr-fg-grid{border-top-color:#d6ff3f}
+.afr-fg.fg-night .afr-fg-cell{border-bottom-color:rgba(245,243,234,.16)}
+.afr-fg.fg-night .afr-fg-cell:nth-child(even){border-left-color:rgba(245,243,234,.16)}
+.afr-fg.fg-night .afr-fg-art{background:#d6ff3f;border-radius:28px;padding:24px 28px;box-sizing:border-box}
+.afr-fg.fg-night .afr-fg-cell h3{color:#f5f3ea}
+.afr-fg.fg-night .afr-fg-cell p{color:rgba(245,243,234,.82)}

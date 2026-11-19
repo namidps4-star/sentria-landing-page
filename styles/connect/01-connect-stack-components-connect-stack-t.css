@@ -1,0 +1,253 @@
+/* ==========================================================================
+   Connect stack (components/connect-stack.tsx): CSV, ERP, IoT and API panels.
+   Fonts: Chillax Light for headings, Liberation Sans for body (both self-hosted).
+   ========================================================================== */
+
+@font-face {
+  font-family: "Chillax";
+  src: url("/fonts/Chillax-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Liberation Sans";
+  src: url("/fonts/LiberationSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Liberation Sans";
+  src: url("/fonts/LiberationSans-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.cs-stack {
+  --cs-ink: #060607;
+  --cs-line: rgba(244, 241, 232, 0.55);
+  --cs-muted: #b9bab2;
+  --cs-dim: #7d7e76;
+  --cs-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  display: grid;
+  gap: 6px;
+  margin-top: clamp(36px, 5vw, 72px);
+}
+
+/* ------------------------------------------------------------- panel */
+.cs-panel {
+  position: relative;
+  background: var(--cs-ink);
+  overflow: hidden;
+  container-type: inline-size;
+  aspect-ratio: 658 / 365;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  font-family: "Liberation Sans", Arial, sans-serif;
+  color: #fff;
+}
+.cs-copy {
+  position: absolute;
+  inset: 0;
+}
+.cs-vline {
+  position: absolute;
+  left: 10%;
+  top: 27%;
+  height: 65%;
+  width: 1px;
+  background: var(--cs-line);
+  transform-origin: 50% 0;
+}
+.cs-hl {
+  position: absolute;
+  height: 1px;
+  background: var(--cs-line);
+  transform-origin: 0 50%;
+}
+.cs-hl.a {
+  left: 5.3%;
+  top: 34%;
+  width: 39.5%;
+}
+.cs-hl.b {
+  left: 5.3%;
+  top: 71%;
+  width: 46%;
+}
+.cs-numwrap {
+  position: absolute;
+  left: 11%;
+  top: calc(34% - 12.6cqw);
+  height: 12.6cqw;
+  width: 30%;
+  overflow: hidden;
+}
+.cs-num {
+  display: block;
+  font: 600 23cqw/1 "Chillax", sans-serif;
+  letter-spacing: -0.05em;
+  color: #fff;
+  transform: translateY(-1.9cqw);
+}
+.cs-h {
+  position: absolute;
+  left: 11.6%;
+  top: 37.4%;
+  width: 38%;
+  font: 300 3.6cqw/1.08 "Chillax", sans-serif;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.cs-ln {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.cs-ln > span {
+  display: block;
+}
+.cs-lead {
+  position: absolute;
+  left: 11.6%;
+  top: 54.5%;
+  width: 37%;
+  font-size: max(11px, 1.22cqw);
+  line-height: 1.5;
+  color: var(--cs-muted);
+}
+.cs-meta {
+  position: absolute;
+  left: 11.6%;
+  top: 66.5%;
+  font-size: max(10px, 1.1cqw);
+  color: var(--cs-dim);
+  white-space: nowrap;
+}
+.cs-meta b {
+  color: #fff;
+  font-weight: 700;
+}
+.cs-steps {
+  position: absolute;
+  left: 11.6%;
+  right: 50%;
+  top: 76.5%;
+  display: grid;
+  grid-template-columns: 8.5% repeat(3, 1fr);
+  align-items: start;
+  list-style: none;
+  font-size: max(10px, 1cqw);
+  color: var(--cs-muted);
+}
+.cs-lab {
+  padding-top: 0.5cqw;
+  color: var(--cs-dim);
+}
+.cs-step {
+  text-align: center;
+  line-height: 1.3;
+  cursor: default;
+  transition: color 0.3s var(--cs-ease), transform 0.4s var(--cs-ease);
+}
+.cs-step svg {
+  display: block;
+  margin: 0 auto 0.9cqw;
+  width: 2.9cqw;
+  min-width: 20px;
+  aspect-ratio: 1;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.72;
+  transition: stroke 0.3s var(--cs-ease), opacity 0.3s var(--cs-ease), filter 0.3s var(--cs-ease);
+}
+.cs-panel[data-step="0"] .cs-step[data-i="0"],
+.cs-panel[data-step="1"] .cs-step[data-i="1"],
+.cs-panel[data-step="2"] .cs-step[data-i="2"] {
+  color: #fff;
+  transform: translateY(-3px);
+}
+.cs-panel[data-step="0"] .cs-step[data-i="0"] svg,
+.cs-panel[data-step="1"] .cs-step[data-i="1"] svg,
+.cs-panel[data-step="2"] .cs-step[data-i="2"] svg {
+  stroke: var(--lime);
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(214, 255, 63, 0.45));
+}
+
+/* ------------------------------------------------------------- art */
+.cs-art {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  overflow: hidden;
+  background: #0b0b0c;
+}
+.cs-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(circle at calc(50% + var(--tx, 0) * 50%) calc(50% + var(--ty, 0) * 50%), rgba(214, 255, 63, 0.1), transparent 42%);
+  opacity: 0;
+  transition: opacity 0.5s var(--cs-ease);
+}
+.cs-art:hover::before {
+  opacity: 1;
+}
+.cs-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(6, 6, 7, 0.55) 0%, rgba(6, 6, 7, 0) 18%);
+}
+.cs-art-in {
+  position: absolute;
+  inset: -7% 0;
+  transform: translate3d(calc(var(--tx, 0) * -10px), calc(var(--py, 0) * 1px + var(--ty, 0) * -8px), 0);
+  transition: transform 0.45s var(--cs-ease);
+}
+.cs-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+.cs-csv .cs-img {
+  object-position: 50% 52%;
+}
+.cs-iot .cs-img {
+  object-position: 70% 46%;
+}
+.cs-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.1) 50%, transparent 62%);
+  transform: translateX(-130%);
+}
+.cs-cred {
+  position: absolute;
+  right: 2.2cqw;
+  bottom: calc(6.1% + 1.6cqw);
+  z-index: 5;
+  font-size: max(9px, 0.95cqw);
+  letter-spacing: 0.02em;
+  color: var(--cs-muted);
+}
+

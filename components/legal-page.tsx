@@ -5,6 +5,7 @@ import { B, LangPick } from "./t"
 import { Mark } from "./ui"
 import { LangSwitch } from "./header"
 import { LegalToc } from "./legal-toc"
+import { Motion } from "./motion"
 
 const pad = (n: number) => String(n).padStart(2, "0")
 
@@ -98,17 +99,11 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
               </a>
             ))}
           </div>
-          <p className="lg-draft">
-            <B
-              en="Draft not reviewed by a lawyer. This text does not say the service follows any particular law. Points still to confirm are marked."
-              fr="Brouillon non relu par un juriste. Ce texte ne dit pas que le service respecte une loi donnée. Les points à confirmer sont indiqués."
-            />
-          </p>
           <div className="lg-grid">
             <LegalToc entries={entries} />
             <div className="lg-body">
               {sections.map((s, i) => (
-                <section key={s.title[1]} id={`s${i}`} data-legal-section={i} className="lg-card">
+                <section key={s.title[1]} id={`s${i}`} data-legal-section={i} className="lg-card" data-rv="rise">
                   {num(i)}
                   <div>
                     <h2>
@@ -122,7 +117,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
                   </div>
                 </section>
               ))}
-              <section id={`s${sections.length}`} data-legal-section={sections.length} className="lg-card">
+              <section id={`s${sections.length}`} data-legal-section={sections.length} className="lg-card" data-rv="rise">
                 {num(sections.length)}
                 <div>
                   <h2>Contact</h2>
@@ -141,6 +136,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
           </div>
         </div>
       </main>
+      <Motion />
     </>
   )
 }

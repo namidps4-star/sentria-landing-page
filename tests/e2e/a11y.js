@@ -47,7 +47,7 @@ const ratio = (a, b) => {
   console.log('== keyboard')
   {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
-    await ctx.addInitScript(() => sessionStorage.setItem('sentria-opened', '1'))
+    await ctx.addInitScript(() => localStorage.setItem('sentria-skip-intro', '1'))
     const page = await ctx.newPage()
     await page.goto(APP_URL, { waitUntil: 'load' })
     await page.waitForTimeout(800)
@@ -84,7 +84,7 @@ const ratio = (a, b) => {
   console.log('== contrast of the main text pairs')
   {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
-    await ctx.addInitScript(() => sessionStorage.setItem('sentria-opened', '1'))
+    await ctx.addInitScript(() => localStorage.setItem('sentria-skip-intro', '1'))
     const page = await ctx.newPage()
     await page.goto(APP_URL, { waitUntil: 'load' })
     await page.waitForTimeout(800)

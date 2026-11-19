@@ -40,7 +40,6 @@ const absans = localFont({
   display: "swap",
 })
 
-const TITLE = "SentrIA: The operational decision layer"
 
 const SITE = "https://sentriahq.dev"
 
@@ -75,15 +74,14 @@ export const metadataEn: Metadata = {
     url: SITE,
     images: ["/opengraph-image.png"],
     siteName: "SentrIA",
-    title: TITLE,
-    description:
-      "Evidence, confidence, impact and recommended action for every operational risk. Your team decides faster and the outcome feeds back.",
+    title: SEO.en.title,
+    description: SEO.en.description,
   },
   twitter: {
     card: "summary_large_image",
     images: ["/twitter-image.png"],
-    title: TITLE,
-    description: "Evidence, confidence, impact and recommended action for every operational risk.",
+    title: SEO.en.title,
+    description: SEO.en.description,
   },
   icons: {
     icon: [
@@ -107,15 +105,14 @@ export const metadataFr: Metadata = {
     images: ["/opengraph-image.png"],
     locale: "fr_FR",
     siteName: "SentrIA",
-    title: TITLE,
-    description:
-      "Evidence, confidence, impact and recommended action for every operational risk. Your team decides faster and the outcome feeds back.",
+    title: SEO.fr.title,
+    description: SEO.fr.description,
   },
   twitter: {
     card: "summary_large_image",
     images: ["/twitter-image.png"],
-    title: TITLE,
-    description: "Evidence, confidence, impact and recommended action for every operational risk.",
+    title: SEO.fr.title,
+    description: SEO.fr.description,
   },
   icons: {
     icon: [
@@ -138,14 +135,15 @@ export const viewport: Viewport = {
 /**
  * Runs before first paint: picks the language, marks that JavaScript is on
  * (so reveal animations may hide things), and decides whether the opening
- * plays. The opening plays once per browser session, only on the home page, and never with reduced
- * motion.
+ * plays. The opening plays on every fresh load of the home page, and never with reduced motion. Setting
+ * localStorage 'sentria-skip-intro' to '1' switches it off (used by the browser tests; nothing in the
+ * site sets it). If storage is blocked the opening is skipped.
  */
 const ARTICLE_LANG = JSON.stringify(
   Object.fromEntries(ARTICLE_PAGES.map((page) => [page.slug, page.lang]))
 )
 
-const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=sessionStorage.getItem('sentria-opened');var p=location.pathname;if(!rm&&!seen&&['/','/en','/fr','/en/','/fr/'].indexOf(p)>-1){d.classList.add('op-run','op-wait');sessionStorage.setItem('sentria-opened','1');setTimeout(function(){d.classList.remove('op-wait')},900)}d.classList.add('js')}catch(e){d.classList.add('js')}})();`
+const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var skip=localStorage.getItem('sentria-skip-intro')==='1';var p=location.pathname;if(!rm&&!skip&&['/','/en','/fr','/en/','/fr/'].indexOf(p)>-1){d.classList.add('op-run','op-wait');setTimeout(function(){d.classList.remove('op-wait')},900)}d.classList.add('js')}catch(e){d.classList.add('js')}})();`
 
 
 /** The page shell for one language section: its own <html lang>, fonts and head. */

@@ -10,6 +10,7 @@ import { ARTICLE_PAGES, ARTICLE_UPDATES, ARTICLES, isLive, type ArticlePage } fr
 import { ArticleCard } from "@/components/article-card"
 import { ARTICLE_MARKS } from "@/content/article-marks"
 import { ArticleFx } from "@/components/article-fx"
+import { Motion } from "@/components/motion"
 
 import "@/components/articles.css"
 
@@ -129,7 +130,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <ArticleFx />
       <main id="main" className="blog" lang={page.lang}>
         <div className="blog-top">
-        <header className="blog-head">
+        <header className="blog-head" data-rv="rise">
           <span className="blog-tag">{ARTICLES.find((x) => x.id === page.pairId)?.tag[page.lang]}</span>
           <h1>{page.title}</h1>
           <div className="blog-meta">
@@ -259,7 +260,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </aside>
         </div>
         {nextCards.length > 0 && (
-          <section className="art-next">
+          <section className="art-next" data-rv="rise">
             <div className="art-next-head">
               <h2>{page.lang === "fr" ? "Lire l'article suivant" : "Read our next article"}</h2>
             </div>
@@ -272,6 +273,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         )}
       </main>
       <Footer />
+      <Motion />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   )

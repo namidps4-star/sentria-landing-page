@@ -7,3 +7,5 @@ next-env.d.ts
 .env*.local
 tests/e2e/shots/
 .claude/skills/ui-ux-pro-max/scripts/__pycache__/
+handoff.md
+HANDOFF.md

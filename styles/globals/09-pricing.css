@@ -1,0 +1,253 @@
+/* ---------------------------------------------------------------- pricing */
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 26px);
+  margin-top: clamp(40px, 5vw, 72px);
+  align-items: stretch;
+}
+.plan {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(20, 21, 15, 0.1);
+  border-radius: 32px;
+  padding: clamp(26px, 2.6vw, 40px);
+}
+.plan > * {
+  position: relative;
+}
+.plans-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.plans-4 .plan {
+  padding: clamp(22px, 2vw, 30px);
+}
+.plans-4 .plan h3 {
+  font-size: clamp(24px, 2vw, 30px);
+}
+.plans-4 .price {
+  position: relative;
+  line-height: 1.05;
+}
+.price-amount {
+  display: block;
+  font-size: clamp(24px, 2.05vw, 30px);
+  white-space: nowrap;
+}
+.plans-4 .plan.featured {
+  --lift: 0px;
+}
+.plans-4 .plan ul {
+  align-content: start;
+}
+.pricing .lead {
+  text-wrap: balance;
+}
+.price-amount.price-quote {
+  font-size: 24px;
+}
+.price-per {
+  display: block;
+  margin-top: 6px;
+  font: 500 13px var(--f-body), system-ui, sans-serif;
+  letter-spacing: 0;
+  opacity: 0.75;
+}
+.plans-4 .price .badge {
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  margin: 0;
+  font-size: 10px;
+  padding: 5px 10px;
+  letter-spacing: 0.1em;
+}
+.price-cur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  font: 600 13px var(--f-body), system-ui, sans-serif;
+}
+.price-cur > span {
+  margin-right: 4px;
+  opacity: 0.75;
+}
+.price-cur button {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 21, 15, 0.28);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.price-cur button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--lime);
+  border-color: var(--ink);
+}
+.price-cur button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.plan.featured {
+  background: var(--lime);
+  border-color: var(--lime);
+  --lift: -10px;
+}
+.badge {
+  align-self: flex-start;
+  margin-bottom: 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--lime);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+.plan h3 {
+  font-family: var(--f-display), sans-serif;
+  font-size: clamp(26px, 2.4vw, 36px);
+  letter-spacing: -0.025em;
+}
+.plan-p {
+  margin-top: 10px;
+  opacity: 0.78;
+  min-height: 3.1em;
+}
+.price {
+  margin: 24px 0;
+  padding-block: 18px;
+  border-block: 1px solid rgba(20, 21, 15, 0.14);
+  font-family: var(--f-display), sans-serif;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+.plan ul {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex: 1;
+}
+.plan li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 15px;
+}
+.plan li .ck {
+  margin-top: 4px;
+  width: 16px;
+  height: 16px;
+  color: var(--lime-dim);
+}
+.plan.featured li .ck {
+  color: var(--paper);
+}
+.note {
+  margin-top: 36px;
+  max-width: 720px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------- flow */
+.flow-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  margin-top: clamp(64px, 7vw, 100px);
+}
+.flow-line {
+  background: rgba(20, 21, 15, 0.2);
+}
+.flow-line i {
+  background: var(--paper);
+  box-shadow: none;
+}
+.flow-step::before {
+  background: var(--lime-deep);
+  border-color: rgba(20, 21, 15, 0.45);
+}
+.flow-step[data-active]::before {
+  background: var(--paper);
+  border-color: var(--paper);
+}
+.flow-step .num {
+  -webkit-text-stroke-color: var(--paper);
+}
+.flow-step[data-active] .num {
+  color: var(--paper);
+}
+.flow-step p {
+  opacity: 0.85;
+}
+.js .flow-step:not([data-active]) {
+  opacity: 0.6;
+}
+.flow-step[data-active] {
+  transform: translateY(-8px);
+}
+
+
+
+
+
+
+/* The whole photo, never cropped, never enlarged, no blurred filler: the frame has the photo's own shape. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------------------------------------------- fit */
+.fit-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}

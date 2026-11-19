@@ -1,0 +1,221 @@
+/* ---------------------------------------------------------------- sections */
+.sc {
+  position: relative;
+  padding-block: clamp(72px, 9vw, 136px);
+}
+.sc-cream {
+  background: var(--cream);
+  color: var(--paper);
+}
+.sc-sand {
+  background: var(--sand);
+  color: var(--paper);
+}
+.sc-dark {
+  background: var(--ink-2);
+  color: var(--cream);
+}
+.sc-olive {
+  background: var(--ink-4);
+  color: var(--cream);
+}
+.sc-ink {
+  background: var(--ink);
+  color: var(--cream);
+}
+.sc-lime {
+  background: var(--lime);
+  color: var(--paper);
+}
+.sc-deep {
+  background: var(--lime-deep);
+  color: var(--paper);
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted-l);
+}
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background: var(--lime-deep);
+}
+.sc-dark .eyebrow,
+.sc-olive .eyebrow,
+.sc-ink .eyebrow {
+  color: var(--lime-dim);
+}
+.sc-dark .eyebrow::before,
+.sc-olive .eyebrow::before {
+  background: var(--lime);
+}
+.sc-lime .eyebrow,
+.sc-deep .eyebrow {
+  color: var(--paper);
+  opacity: 0.7;
+}
+.sc-lime .eyebrow::before,
+.sc-deep .eyebrow::before {
+  background: var(--paper);
+}
+.h2 {
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 4.5vw, 74px);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  max-width: 17ch;
+  text-wrap: balance;
+}
+.lead {
+  margin-top: 26px;
+  max-width: 640px;
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.6;
+  opacity: 0.8;
+}
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 24px);
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: clamp(24px, 2.6vw, 38px);
+}
+.card > * {
+  position: relative;
+}
+.card::before,
+.shift-card::before,
+.plan::before,
+.fit-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(214, 255, 63, 0.42), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.card:hover::before,
+.shift-card:hover::before,
+.plan:hover::before,
+.fit-card:hover::before {
+  opacity: 1;
+}
+.card-light {
+  background: #fff;
+  border: 1px solid rgba(20, 21, 15, 0.1);
+}
+.card-dark {
+  background: rgba(245, 243, 234, 0.045);
+  border: 1px solid rgba(245, 243, 234, 0.12);
+}
+.card h3,
+.step h3,
+.flow-step h3,
+.fit-card h3 {
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2vw, 30px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.card p,
+.step p,
+.flow-step p,
+.fit-card p {
+  margin-top: 14px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  opacity: 0.78;
+}
+.num {
+  display: block;
+  margin-bottom: 26px;
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--lime-deep);
+}
+.sc-dark .num,
+.sc-olive .num {
+  -webkit-text-stroke-color: var(--lime-dim);
+}
+.sc-deep .num {
+  -webkit-text-stroke-color: var(--paper);
+}
+
+/* tilt cards: transform is composed here so reveal, tilt and lift never fight */
+[data-tilt] {
+  transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.4s var(--ease), box-shadow 0.35s, background 0.35s;
+  will-change: transform;
+}
+[data-tilt]:hover {
+  box-shadow: 0 24px 60px rgba(20, 21, 15, 0.16);
+}
+
+/* ------------------------------------------------------------ reveal system */
+.js [data-rv]:not([data-in]) {
+  opacity: 0;
+}
+[data-rv][data-in] {
+  animation: rv-rise 0.95s var(--ease) calc(var(--i, 0) * 90ms) backwards;
+}
+[data-rv="left"][data-in] {
+  animation-name: rv-left;
+}
+[data-rv="right"][data-in] {
+  animation-name: rv-right;
+}
+[data-rv="scale"][data-in] {
+  animation-name: rv-scale;
+}
+[data-rv="fade"][data-in] {
+  animation-name: rv-fade;
+}
+@keyframes rv-rise {
+  from {
+    opacity: 0;
+    transform: translateY(38px);
+  }
+}
+@keyframes rv-left {
+  from {
+    opacity: 0;
+    transform: translateX(-46px);
+  }
+}
+@keyframes rv-right {
+  from {
+    opacity: 0;
+    transform: translateX(46px);
+  }
+}
+@keyframes rv-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+}
+@keyframes rv-fade {
+  from {
+    opacity: 0;
+  }
+}
+

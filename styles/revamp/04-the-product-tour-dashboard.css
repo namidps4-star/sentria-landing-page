@@ -1,0 +1,232 @@
+/* ----------------------------------------------- the product tour (dashboard) */
+.pt {
+  padding-block: 0;
+}
+.js .pt {
+  height: 380vh;
+}
+.pt-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding-top: clamp(88px, 11.5vh, 112px);
+  text-align: center;
+}
+.pt-stage > * {
+  flex-shrink: 0;
+}
+.pt-h {
+  max-width: none;
+  margin-inline: auto;
+  font-size: clamp(28px, 3.4vw, 48px);
+}
+.pt-cap {
+  position: relative;
+  width: min(720px, 92vw);
+  height: 44px;
+  margin-top: 10px;
+  color: var(--rv-mut);
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.4;
+}
+.pt-cap > span {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+.pt-cap > span[data-on] {
+  opacity: 1;
+}
+.pt-wrap {
+  position: relative;
+  width: min(880px, 94vw, calc((100svh - 300px) * 1.43));
+  margin-top: 6px;
+}
+.pt-win {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 50px 100px -30px rgba(11, 12, 8, 0.47), 0 0 0 1px rgba(0, 0, 0, 0.07);
+  transform-origin: 50% 0;
+  will-change: transform;
+  text-align: left;
+}
+.pt-bar {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  height: 30px;
+  padding-inline: 14px;
+  background: #f3f3f5;
+}
+.pt-bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d0d0d4;
+}
+.pt-shot {
+  position: relative;
+}
+.pt-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.pt-spot {
+  position: absolute;
+  border-radius: 14px;
+  pointer-events: none;
+  border: 2px solid #d6ff3f;
+  background: rgba(214, 255, 63, 0.06);
+  /* an outline and a glow, never a dark veil: the rest of the dashboard stays as bright as it is */
+  box-shadow: 0 0 0 1px rgba(11, 12, 8, 0.85), 0 18px 40px -10px rgba(11, 12, 8, 0.35), 0 0 30px 2px rgba(214, 255, 63, 0.55);
+  transition: left 0.6s var(--ease), top 0.6s var(--ease), width 0.6s var(--ease), height 0.6s var(--ease);
+}
+/* the tour rail: the four parts, listed beside the dashboard */
+.pt-body {
+  width: min(1180px, 96vw);
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 48px);
+  align-items: center;
+  margin-top: 6px;
+}
+.pt-body .pt-wrap {
+  width: min(100%, calc((100svh - 300px) * 1.43));
+  margin-top: 0;
+  justify-self: center;
+}
+.pt-rail {
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+.pt-rail button {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 20px;
+  border-radius: 18px;
+  text-align: left;
+  overflow: hidden;
+  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.pt-rail b {
+  font-family: var(--f-display), sans-serif;
+  font-size: 15px;
+  color: #a8a9a0;
+  padding-top: 2px;
+  transition: color 0.3s;
+}
+.pt-rail strong {
+  display: block;
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.2;
+  color: #1d1d1f;
+}
+.pt-rail small {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--rv-mut);
+  transition: max-height 0.5s var(--ease), opacity 0.4s var(--ease), margin 0.4s var(--ease);
+}
+.pt-rail button::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  height: 3px;
+  background: #0b0c08;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.6s var(--ease);
+}
+.pt-rail button[data-on] {
+  background: #fff;
+  box-shadow: 0 14px 34px -14px rgba(11, 12, 8, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+.pt-rail button[data-on] b {
+  color: #0b0c08;
+}
+.pt-rail button[data-on] small {
+  max-height: 80px;
+  opacity: 1;
+  margin-top: 6px;
+}
+.pt-rail button[data-on]::after {
+  transform: none;
+}
+.pt-rail button:not([data-on]):hover {
+  background: rgba(11, 12, 8, 0.04);
+}
+.pt-rail button:focus-visible {
+  outline: 2px solid #0b0c08;
+  outline-offset: 2px;
+}
+@media (min-width: 960px) {
+  .pt-cap > span:not(:first-child) {
+    display: none; /* the rail carries the sentence for each part */
+  }
+}
+@media (max-width: 959px) {
+  .pt-body {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: min(880px, 94vw);
+  }
+  .pt-body .pt-wrap {
+    width: min(100%, calc((100svh - 410px) * 1.43));
+  }
+  .pt-rail {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 8px;
+  }
+  .pt-rail button {
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 12px;
+  }
+  .pt-rail strong {
+    font-size: 13px;
+  }
+  .pt-rail small {
+    display: none;
+  }
+  .pt-cap > span:not(:first-child) {
+    display: block;
+  }
+}
+@media (max-width: 640px) {
+  .pt-cap {
+    height: 62px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .pt {
+    height: auto;
+    padding-block: clamp(72px, 9vw, 136px);
+  }
+  .pt-stage {
+    position: static;
+    height: auto;
+    padding-top: 0;
+  }
+}
+

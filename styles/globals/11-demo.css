@@ -1,0 +1,254 @@
+/* ------------------------------------------------------------------- demo */
+.demo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+}
+.points {
+  display: grid;
+  gap: 14px;
+  margin-top: 36px;
+}
+.points li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(20, 21, 15, 0.08);
+  transition: background 0.3s, transform 0.4s var(--ease);
+}
+.points li:hover {
+  background: #fff;
+  transform: translateX(8px);
+}
+.tick {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--lime);
+  color: var(--ink);
+}
+.tick .ck {
+  width: 16px;
+  height: 16px;
+}
+.cal {
+  background: #fff;
+  border: 1px solid rgba(20, 21, 15, 0.1);
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(20, 21, 15, 0.12);
+}
+.cal-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 28px;
+  border-bottom: 1px solid rgba(20, 21, 15, 0.08);
+}
+.cal-h b {
+  font-family: var(--f-display), sans-serif;
+  font-size: 20px;
+}
+.cal .live {
+  color: var(--paper);
+}
+.calendly-inline-widget {
+  min-width: 320px;
+  /* Calendly pins its cookie banner to the bottom of the browser window, so the box must be at least
+     as tall as the window or the banner falls outside it and its buttons cannot be clicked */
+  height: max(1040px, 100vh);
+}
+@media (max-width: 860px) {
+  .calendly-inline-widget {
+    height: max(1180px, 100vh);
+  }
+}
+
+/* ------------------------------------------------------------------ final */
+.final {
+  padding-block: clamp(90px, 12vw, 190px);
+  overflow: hidden;
+  background: radial-gradient(50% 60% at 85% 100%, rgba(124, 154, 42, 0.28), transparent 70%), var(--ink);
+}
+.final-h {
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(38px, 7vw, 124px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  max-width: 13ch;
+}
+.final-h em {
+  font-style: normal;
+  color: var(--lime);
+}
+.final .lead {
+  margin-bottom: 44px;
+}
+
+/* ----------------------------------------------------------------- footer */
+.foot {
+  background: var(--ink-2);
+  color: var(--cream);
+}
+.foot-top {
+  display: grid;
+  max-width: none; /* full width, like the reference: the address uses the whole right side */
+  padding-inline: clamp(20px, 2.7vw, 54px);
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(28px, 4vw, 60px);
+  padding-block: clamp(56px, 7vw, 104px) clamp(44px, 5vw, 72px);
+}
+.foot-hook {
+  max-width: 18ch;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.foot-sched {
+  display: inline-block;
+  margin-top: 26px;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  transition: color 0.2s, transform 0.3s var(--ease);
+}
+.foot-sched:hover {
+  color: var(--lime);
+  transform: translateX(6px);
+}
+.foot-brand {
+  display: block;
+  margin-top: clamp(40px, 6vw, 88px);
+  font-family: var(--f-brand), sans-serif;
+  font-size: 20px;
+  color: var(--lime);
+}
+.foot-tag {
+  margin-top: 14px;
+  max-width: 30ch;
+  font-size: 14px;
+  opacity: 0.6;
+}
+/* the address sits on one line: the size follows the width of its own column */
+.foot-r {
+  container-type: inline-size;
+}
+.foot-mail {
+  --tx: 0px;
+  --ty: 0px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.1em;
+  white-space: nowrap;
+  font-family: var(--f-display), sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: calc(100cqw / 17.8);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-bottom: 0.34em;
+  border-bottom: 1px solid rgba(245, 243, 234, 0.2);
+  transform: translate3d(var(--tx), var(--ty), 0);
+  transition: transform 0.4s var(--ease), color 0.3s;
+}
+.foot-mail:hover {
+  color: var(--lime);
+}
+.foot-mail svg {
+  flex: none;
+  width: 0.62em;
+  height: 0.62em;
+  margin-top: -0.05em;
+  transition: transform 0.5s var(--ease);
+}
+.foot-mail:hover svg {
+  transform: rotate(45deg) scale(1.1);
+}
+.foot-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: clamp(48px, 6vw, 96px);
+}
+.foot h4 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+.foot li a {
+  display: inline-block;
+  padding: 4px 0;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: transform 0.3s var(--ease), color 0.2s;
+}
+.foot li a:hover {
+  transform: translateX(6px);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.foot-copy {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: clamp(48px, 6vw, 88px);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+.foot-band {
+  position: relative;
+  height: clamp(190px, 20.5vw, 400px);
+  overflow: hidden;
+  background: var(--lime);
+}
+.mega {
+  position: absolute;
+  left: -0.015em;
+  top: -0.075em;
+  display: flex;
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: 29.4vw;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  color: var(--paper);
+  white-space: nowrap;
+}
+.mega span {
+  display: inline-block;
+  transition: transform 0.8s var(--ease);
+  pointer-events: auto;
+}
+.mega[data-in] span {
+  animation: mega-in 1.2s var(--ease) calc(var(--i, 0) * 80ms) backwards;
+}
+@keyframes mega-in {
+  from {
+    transform: translateY(35%);
+    opacity: 0;
+  }
+}
+.mega span:hover {
+  transform: translateY(-5%);
+}
+

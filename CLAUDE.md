@@ -1,16 +1,10 @@
 @AGENTS.md
+@docs/DESIGN.md
 
-## Standing rule: better UI / front-end design requests
+Read `docs/DESIGN.md` before any design or copy change to the landing page. It records the section order, colour tokens, type, buttons, hero, motion, pictures, copy rules, the never-use list and the open items. It does not cover the Africa pages or the app.
 
-Whenever the user asks for a better UI, a better look, or better front-end design, in any session:
+## Keep EN and FR in step
+- When you change, add or delete something in English, do the same in French (and the reverse). Check both before you say it is done.
 
-- Never produce a rough draft. Deliver finished, polished work only.
-- Always screenshot the current state first, then build the improved version and screenshot it too. Show both, before and after.
-- Check the result at phone width (390 px) and desktop width, and confirm no horizontal overflow. Only show the user desktop screenshots; do not send phone views unless they ask.
-- Use only fonts we are allowed to use. No Google Fonts.
-- Before starting UI work, load these skills with the Skill tool and use them when they fit the task:
-  - `impeccable` (taste, critique, audit, polish, layout, typography, motion). Source: `.claude/skills/impeccable/`, Apache 2.0.
-  - `ui-ux-pro-max` (styles, palettes, font pairings, UX rules). Source: `.claude/skills/ui-ux-pro-max/`, MIT.
-  - Any other front-end design skill listed in the session.
-  Do not skip this step.
-- For scroll-driven or "fly through the world" landing pages (scroll-scrubbed video, 3D world, diorama hero, scroll cinematic), always load the `scroll-world` skill first. Its generation runs cost money (Monid, Higgsfield), so state the cost and get a go-ahead before rendering.
+## Hub section layout
+- On the Africa hub, every section header sits top-left: a small label with the lime dot (like the homepage's "The product" and "Sectors" kickers), then the title and lead left-aligned under it. No centred headers on the hub.

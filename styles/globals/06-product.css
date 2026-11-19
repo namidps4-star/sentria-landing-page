@@ -1,0 +1,241 @@
+/* ---------------------------------------------------------------- product */
+.product {
+  padding-block: clamp(64px, 8vw, 120px);
+  overflow: hidden;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+.mock {
+  display: grid;
+  grid-template-columns: 124px minmax(0, 1fr);
+  background: var(--ink-2);
+  color: var(--cream);
+  border-radius: 28px;
+  border: 1px solid rgba(245, 243, 234, 0.1);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(20, 21, 15, 0.22);
+}
+.mock-side {
+  padding: 22px 16px;
+  background: var(--ink-3);
+  border-right: 1px solid rgba(245, 243, 234, 0.08);
+}
+.mock-brand {
+  color: var(--lime);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.mock-side li {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  transition: background 0.25s, color 0.25s;
+}
+.mock-side li.on {
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 600;
+}
+.mock-side li:not(.on):hover {
+  background: rgba(245, 243, 234, 0.07);
+  color: var(--cream);
+}
+.mock-main {
+  padding: 22px;
+  min-width: 0;
+}
+.mock-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.mock-title {
+  font-family: var(--f-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(17px, 1.5vw, 22px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--lime);
+  border: 1px solid rgba(214, 255, 63, 0.4);
+  border-radius: 8px;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.status i,
+.live i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+}
+.mock-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.stat {
+  border-top: 1px solid rgba(245, 243, 234, 0.12);
+  padding: 12px 0 0;
+}
+.stat > span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  min-height: 2.6em;
+}
+.stat b {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.stat-risk b {
+  color: var(--coral);
+}
+.stat-ok b {
+  color: var(--lime);
+}
+.mock-chart {
+  margin-top: 16px;
+  border-top: 1px solid rgba(245, 243, 234, 0.12);
+  padding-top: 14px;
+}
+.mock-chart-h {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+}
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 120px;
+  margin-top: 14px;
+}
+.bar-c {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.bar-f {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  background: #3e4423;
+  transform-origin: 50% 100%;
+  transition: background 0.25s, transform 0.25s;
+}
+.bar-c:last-child .bar-f {
+  background: var(--lime);
+}
+.bar-c:hover .bar-f {
+  background: var(--lime-dim);
+  transform: scaleY(1.04);
+}
+.js .mock:not([data-in]) .bar-f {
+  transform: scaleY(0);
+}
+.mock[data-in] .bar-f {
+  animation: grow 1.1s var(--ease) calc(0.3s + var(--i, 0) * 0.09s) backwards;
+}
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+}
+.product-shot {
+  position: relative;
+  --p: 1;
+}
+.shot-frame {
+  transform: perspective(1600px) translateY(var(--py, 0px)) rotateX(calc((1 - var(--p, 1)) * 16deg)) scale(calc(0.88 + var(--p, 1) * 0.12));
+  transform-origin: 50% 100%;
+  transition: transform 0.15s linear;
+  will-change: transform;
+}
+.shot-frame img {
+  width: 100%;
+  height: auto;
+  animation: floaty 8s ease-in-out infinite;
+}
+@keyframes floaty {
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* --------------------------------------------------------------- quick fit */
+.quickfit {
+  background: var(--sand);
+  color: var(--paper);
+  border-block: 1px solid rgba(20, 21, 15, 0.1);
+}
+.quickfit-in {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-block: 22px;
+  flex-wrap: wrap;
+}
+.quickfit-label {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.pills,
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pill,
+.tab {
+  border: 1.5px solid rgba(20, 21, 15, 0.22);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.3s var(--ease);
+}
+.pill:hover,
+.tab:hover {
+  border-color: var(--paper);
+  transform: translateY(-2px);
+}
+.pill[aria-pressed="true"],
+.tab[aria-pressed="true"] {
+  background: var(--paper);
+  color: var(--lime);
+  border-color: var(--paper);
+}
+.tab {
+  padding: 12px 22px;
+}
+
+/* ------------------------------------------------------------ situations */
+.sc-cream .card-light .num {
+  -webkit-text-stroke-color: var(--lime-deep);
+}
+

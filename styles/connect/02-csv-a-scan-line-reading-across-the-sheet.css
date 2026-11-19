@@ -1,0 +1,138 @@
+/* CSV: a scan line reading across the sheets */
+.cs-scan {
+  position: absolute;
+  left: 25%;
+  top: 31%;
+  width: 56%;
+  height: 34%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.cs-scan::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 26%;
+  top: -30%;
+  background: linear-gradient(180deg, transparent, rgba(214, 255, 63, 0.28), transparent);
+  border-bottom: 1px solid rgba(214, 255, 63, 0.55);
+  animation: cs-scan 3.6s linear infinite;
+  animation-play-state: paused;
+}
+.cs-panel.vis .cs-scan::before {
+  animation-play-state: running;
+}
+@keyframes cs-scan {
+  to {
+    top: 104%;
+  }
+}
+
+/* IoT: signal rings from the chip */
+.cs-pulse {
+  position: absolute;
+  left: 69%;
+  top: 39%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.cs-pulse i {
+  position: absolute;
+  width: 16cqw;
+  height: 16cqw;
+  margin: -8cqw 0 0 -8cqw;
+  border: 1.5px solid rgba(214, 255, 63, 0.65);
+  border-radius: 50%;
+  opacity: 0;
+  animation: cs-ring 3.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  animation-play-state: paused;
+}
+.cs-pulse i:nth-child(2) {
+  animation-delay: 1.2s;
+}
+.cs-pulse i:nth-child(3) {
+  animation-delay: 2.4s;
+}
+.cs-panel.vis .cs-pulse i {
+  animation-play-state: running;
+}
+.cs-iot .cs-art:hover .cs-pulse i {
+  border-color: rgba(214, 255, 63, 0.95);
+}
+@keyframes cs-ring {
+  0% {
+    transform: scale(0.15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* API: the gateway floats over a soft lime underglow */
+.cs-glow {
+  position: absolute;
+  left: 26%;
+  bottom: 17%;
+  width: 52%;
+  height: 9%;
+  background: radial-gradient(closest-side, rgba(214, 255, 63, calc(0.14 + var(--open, 1) * 0.28)), transparent);
+  filter: blur(12px);
+  animation: cs-glow 7s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.cs-gw {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 88%;
+  aspect-ratio: 540 / 750;
+  transform: translate(-50%, -50%);
+}
+.cs-gw-l {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  animation: cs-breathe 6.5s ease-in-out infinite;
+  animation-play-state: paused;
+  transition: transform 0.4s var(--cs-ease);
+}
+.cs-gw-l.lid {
+  --k: -1.6%;
+  transform: translateY(calc((1 - var(--lid, 1)) * 14.7%));
+}
+.cs-gw-l.board {
+  --k: 0%;
+  animation: none;
+}
+.cs-gw-l.base {
+  --k: 1.6%;
+  transform: translateY(calc((1 - var(--base, 1)) * -13.4%));
+}
+.cs-panel.vis .cs-glow,
+.cs-panel.vis .cs-gw-l {
+  animation-play-state: running;
+}
+@keyframes cs-breathe {
+  50% {
+    translate: 0 var(--k, 0%);
+  }
+}
+@keyframes cs-float {
+  50% {
+    translate: 0 -1.6cqw;
+  }
+}
+@keyframes cs-glow {
+  50% {
+    opacity: 0.45;
+    transform: scaleX(0.86);
+  }
+}
+

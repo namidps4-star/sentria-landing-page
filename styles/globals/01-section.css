@@ -1,0 +1,234 @@
+@font-face {
+  font-family: "Chillax";
+  src: url("/fonts/Chillax-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+/* Chillax Regular: the opening wordmark, lighter than Medium */
+@font-face {
+  font-family: "Chillax";
+  src: url("/fonts/Chillax-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+/* ==========================================================================
+   SentrIA landing page
+   Palette comes from the previous page: near-black olive, cream, sand and the
+   lime family (lime, lime-deep, lime-dim). Fonts: Syne (display), Poppins
+   (body), Michroma (the SentrIA wordmark).
+   ========================================================================== */
+
+:root {
+  --ink: #0b0c08;
+  --ink-2: #10120b;
+  --ink-3: #15170d;
+  --ink-4: #1b1e10;
+  --cream: #f5f3ea;
+  --sand: #ece7d6;
+  --paper: #14150f;
+  --lime: #d6ff3f;
+  --lime-deep: #9fcc1b;
+  --lime-dim: #7c9a2a;
+  --coral: #ff5a4e;
+  --amber: #ffb84d;
+  --muted: #969989;
+  --muted-l: #65685c;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.18, 1);
+  --pad: clamp(20px, 4vw, 56px);
+  --t0: 0.15s;
+}
+html.op-run {
+  --t0: 3s;
+}
+/* The opening and the hero entrance wait (paused) until the page is ready, then start together. */
+html.op-wait *,
+html.op-wait *::before,
+html.op-wait *::after {
+  animation-play-state: paused !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scrollbar-gutter: stable; /* unlocking scroll after the opening must not re-flow the page */
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+  -webkit-text-size-adjust: 100%;
+  background: var(--ink);
+}
+html.op-run:not(.op-done) body {
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  font-family: var(--f-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--cream);
+  background: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+.wrap {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding-inline: var(--pad);
+}
+:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.sc-cream :focus-visible,
+.sc-sand :focus-visible,
+.sc-lime :focus-visible,
+.sc-deep :focus-visible,
+.foot :focus-visible {
+  outline-color: var(--paper);
+}
+
+/* language: both languages are in the page, the html lang picks one */
+html[lang="fr"] .en {
+  display: none !important;
+}
+html:not([lang="fr"]) .fr {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip {
+  position: fixed;
+  left: 14px;
+  top: 14px;
+  z-index: 300;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 600;
+}
+.skip:focus {
+  width: auto;
+  height: auto;
+  clip-path: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+}
+.scrollbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 3px;
+  z-index: 150;
+  background: linear-gradient(90deg, var(--lime-dim), var(--lime));
+  transform-origin: 0 0;
+  transform: scaleX(0);
+  display: none; /* the lime progress line read as a stray rule under headings */
+}
+
+/* ---------------------------------------------------------------- buttons */
+.btn {
+  --tx: 0px;
+  --ty: 0px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  transform: translate3d(var(--tx), var(--ty), 0);
+  transition: transform 0.35s var(--ease), background 0.25s, color 0.25s, box-shadow 0.3s;
+}
+.btn-lime {
+  background: var(--lime);
+  color: var(--ink);
+}
+.btn-lime:hover {
+  background: #e6ff7a;
+  box-shadow: 0 10px 40px rgba(214, 255, 63, 0.35);
+}
+.btn-ink {
+  background: var(--ink);
+  color: var(--lime);
+}
+.btn-ink:hover {
+  box-shadow: 0 12px 36px rgba(11, 12, 8, 0.4);
+}
+.btn-line {
+  border: 1.5px solid var(--paper);
+  color: var(--paper);
+}
+.btn-line:hover {
+  background: var(--paper);
+  color: var(--cream);
+}
+.btn-xl {
+  min-height: 64px;
+  padding: 0 40px;
+  font-size: 18px;
+}
+.ar {
+  width: 1em;
+  height: 1em;
+}
+.ck {
+  width: 1em;
+  height: 1em;
+  flex: none;
+}
+

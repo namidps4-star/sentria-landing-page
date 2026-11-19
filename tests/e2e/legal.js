@@ -15,7 +15,6 @@ const { playwright, LAUNCH, APP_URL, pass, results, IGNORED_ERRORS, SHOTS } = re
       await p.waitForTimeout(800)
       pass((await p.locator('h1').count()) === 1, `${tag} /${doc}: one h1`)
       pass((await p.locator('.lg-card').count()) >= 6, `${tag} /${doc}: numbered sections (${await p.locator('.lg-card').count()})`)
-      pass(await p.locator('.lg-draft').isVisible(), `${tag} /${doc}: draft banner shows`)
       pass(await p.evaluate(() => document.body.style.overflow !== 'hidden' && !document.documentElement.classList.contains('op-run')), `${tag} /${doc}: no opening layer, page scrolls`)
       pass(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${tag} /${doc}: no sideways scroll`)
       pass((await p.locator('a[href="mailto:hello@sentriahq.dev"]').count()) === 1, `${tag} /${doc}: contact is hello@sentriahq.dev`)

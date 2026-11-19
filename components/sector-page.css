@@ -1,0 +1,35 @@
+/* Africa activity pages without a page of their own yet: name, line, and the sector's three heroes.
+   Scoped to .sp so no other page changes. */
+.sp{background:#f5f3ea;color:#0b0c08}
+.sp-top{padding:clamp(120px,16vh,180px) var(--pad,56px) clamp(64px,8vh,96px)}
+.sp-eb{display:flex;align-items:center;gap:12px;margin:0 0 28px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.sp-eb::before{content:"";width:28px;height:2px;background:#9fcc1b}
+.sp h1{margin:0;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(44px,6vw,88px);line-height:1;letter-spacing:-.035em;max-width:16ch;text-wrap:balance}
+.sp-lead{margin:24px 0 0;font-size:18px;line-height:1.6;max-width:46ch;opacity:.85}
+.sp-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:36px}
+.sp-btn{display:inline-block;padding:14px 22px;border-radius:999px;background:#0b0c08;color:#f5f3ea;font-weight:600;font-size:15px;text-decoration:none}
+.sp-link{font-size:15px;font-weight:600;color:#0b0c08;text-decoration:none;border-bottom:1px solid #0b0c08;padding-bottom:2px}
+.sp-heroes{padding:clamp(72px,9vh,104px) var(--pad,56px) clamp(96px,12vh,140px);border-top:1px solid rgba(11,12,8,.16);background:#f5f3ea;color:#0b0c08}
+.sp-heroes h2{margin:0;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,52px);line-height:1.05;letter-spacing:-.03em;max-width:24ch}
+.sp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(32px,4vw,56px);margin-top:clamp(48px,6vw,72px)}
+.sp-hero{border-top:1px solid rgba(11,12,8,.16);padding-top:28px}
+.sp-viz svg{display:block;width:100%;height:auto;color:#0b0c08;overflow:visible}
+.sp-viz text{font-family:var(--f-body),sans-serif;font-size:14px;fill:currentColor}
+.sp-hero h3{margin:14px 0 12px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1.15;letter-spacing:-.02em}
+.sp-hero p{margin:0;font-size:16px;line-height:1.55;max-width:34ch}
+/* The problem line sits above the outcome, quieter; the picture and the one link follow the example. */
+.sp-hero .sp-problem{max-width:none;font-size:14px;line-height:1.45;opacity:.62}
+.sp-viz{margin:28px 0 24px}
+.sp-hero .sp-link{display:inline-block}
+.sp-note{margin:clamp(40px,5vw,56px) 0 0;font-size:14px;line-height:1.4;opacity:.6}
+@media (max-width:900px){
+  .sp-grid{grid-template-columns:1fr}
+}
+/* The activities of a sector, in the ring, under its title. */
+.sp-acts{padding:clamp(72px,9vh,104px) var(--pad,56px) clamp(24px,3vh,40px);border-top:1px solid rgba(11,12,8,.16)}
+.sp-acts h2{margin:0 0 clamp(32px,4vw,56px);font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,52px);line-height:1.05;letter-spacing:-.03em}
+/* The intro under the pharmacy-style hero of an activity page: name and line, on the page's dark ground. */
+.sp-intro{color:#f5f3ea;padding-bottom:clamp(40px,5vw,64px)}
+.sp-intro .sp-eb{opacity:.7}
+.sp-intro h2{margin:0 0 16px;font-family:var(--f-display),sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,52px);line-height:1.05;letter-spacing:-.03em}
+.sp-intro .sp-lead{color:rgba(245,243,234,.8)}

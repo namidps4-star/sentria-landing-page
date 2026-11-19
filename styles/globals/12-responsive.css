@@ -1,0 +1,205 @@
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1100px) {
+  
+  .nav-links {
+    display: none;
+  }
+  .burger {
+    display: block;
+  }
+  
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  .cockpit-grid,
+  .faq-grid,
+  .demo-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .faq-grid > div:first-child {
+    position: static;
+  }
+  .steps,
+  .flow-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 56px;
+  }
+  .foot-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 860px) {
+  .grid3,
+  .plans,
+  .plans-4 {
+    grid-template-columns: 1fr;
+  }
+  .shift-grid {
+    grid-template-columns: 1fr;
+  }
+  .shift-arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+  .hero-copy {
+    grid-template-columns: 1fr;
+    row-gap: 22px;
+  }
+  .hero-lead {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0;
+  }
+  .hero-top {
+    flex-direction: column;
+  }
+  .hero-checks {
+    text-align: left;
+  }
+  .hero-checks li {
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+  }
+  .hero-down {
+    display: none;
+  }
+  .hero-in {
+    padding-top: 116px;
+  }
+  .plan.featured {
+    --lift: 0px;
+  }
+  .trow {
+    grid-template-columns: 1fr 0.8fr 1fr;
+  }
+  .why .table::before,
+  .why .table::after {
+    width: 35.72%; /* the SentrIA column of 1fr 0.8fr 1fr */
+  }
+  .why .thead > div {
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+  }
+  .trow > div {
+    padding: 14px 12px;
+    font-size: 13.5px;
+  }
+  .promise-list li {
+    grid-template-columns: 1fr 34px;
+  }
+  .promise-list li span {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .promise-list .ar {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+  }
+}
+@media (max-width: 640px) {
+  .product-shot {
+    overflow: hidden;
+    border-radius: 24px;
+  }
+  .shot-frame img {
+    width: 150%;
+    max-width: none;
+    margin-left: -22%;
+  }
+  .nav-cta,
+  .nav-signin,
+  .nav-actions .lang-switch {
+    display: none;
+  }
+  .bar {
+    padding-right: 6px;
+  }
+  .hero-strip {
+    grid-template-columns: 1fr 56px 1fr;
+    height: 84px;
+  }
+  .hero-strip > a {
+    font-size: 12px;
+  }
+  .hero-strip a > span:not(.sr-only) {
+    padding-inline: 14px;
+  }
+  .mock {
+    grid-template-columns: 1fr;
+  }
+  .mock-side {
+    display: none;
+  }
+  .steps,
+  .flow-steps {
+    grid-template-columns: 1fr;
+  }
+  
+  
+  
+  
+  .foot-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+  .faq-a p {
+    padding-right: 0;
+  }
+}
+
+/* ---------------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .op {
+    display: none;
+  }
+  .js [data-rv]:not([data-in]) {
+    opacity: 1;
+  }
+  .js .step:not([data-active]),
+  .js .flow-step:not([data-active]) {
+    opacity: 1;
+  }
+  .js .queue:not([data-in]) .q-bar i,
+  .js .mock:not([data-in]) .bar-f {
+    transform: none;
+  }
+  .steps-line i,
+  .flow-line i {
+    transform: scaleX(1);
+  }
+  
+  .shot-frame {
+    transform: none;
+  }
+  .marq-track {
+    transform: none;
+  }
+}
+
+.cal-fallback {
+  margin: 40px 28px;
+}
+/* once Calendly's frame is in, the fallback link must go: it was pushing the frame 126px down, so the
+   box clipped the bottom of the widget and its cookie buttons */
+.calendly-inline-widget:has(iframe) .cal-fallback {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .plans-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 860px) {
+  .plans-4 {
+    grid-template-columns: 1fr;
+  }
+}

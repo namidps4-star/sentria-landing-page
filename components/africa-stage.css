@@ -1,0 +1,124 @@
+@property --c{syntax:"<integer>";inherits:false;initial-value:0}
+@property --mv{syntax:"<integer>";inherits:false;initial-value:0}
+
+.afr-st{background:#0b0c08;color:#f5f3ea;padding:clamp(56px,6vw,96px) var(--pad,56px);overflow:hidden}
+.afr-st-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:stretch}
+.afr-st h2{font:700 clamp(30px,3.4vw,48px)/1.06 var(--f-display),sans-serif;letter-spacing:-.03em;margin:0;max-width:16ch;color:#f5f3ea}
+.afr-st-now{margin-top:28px;min-height:330px}
+.afr-st-now .num{margin:0;font-family:"AfricaNumeral",sans-serif;font-weight:300;font-size:clamp(120px,13vw,190px);line-height:.85;color:#d6ff3f;counter-reset:n var(--c);animation:afr-st-count 1.1s .1s cubic-bezier(.2,.7,.2,1) both}
+.afr-st-now .c::after{content:counter(n) attr(data-k)}
+.afr-st-now .unit{margin:14px 0 0;font:700 22px/1.2 var(--f-display),sans-serif;color:#f5f3ea;animation:afr-st-in .5s .15s both}
+.afr-st-now .text{margin:12px 0 0;font-size:17px;line-height:1.55;max-width:38ch;color:#cfcdbf;animation:afr-st-in .5s .3s both}
+.afr-st-tabs{display:flex;gap:10px;margin-top:20px}
+.afr-st-tabs button{flex:1;position:relative;background:none;border:0;border-top:2px solid rgba(245,243,234,.18);padding:12px 0 0;text-align:left;font:600 13px var(--f-body),sans-serif;color:#969989;cursor:pointer}
+.afr-st-tabs button.on{color:#f5f3ea}
+.afr-st-tabs i{position:absolute;left:0;top:-2px;height:2px;width:0;background:#d6ff3f;display:block}
+.afr-st-tabs button.on i{width:100%}
+.afr-st-tabs i.run{width:0;animation:afr-st-fill 8s linear forwards}
+.afr-st-note{margin:18px 0 0;font-size:12px;color:#969989}
+
+.afr-st-panel{background:none;border-radius:0;min-height:560px;padding:28px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.afr-st-panel>*{width:100%}
+
+@keyframes afr-st-count{from{--c:0}}
+@keyframes afr-st-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes afr-st-fill{from{width:0}to{width:100%}}
+
+/* scene 1: two tall cards, a dense dot field that fills from the bottom */
+@property --f{syntax:"<number>";inherits:true;initial-value:0}
+@property --u{syntax:"<integer>";inherits:true;initial-value:0}
+.afr-st-cards{display:flex;gap:14px;justify-content:center}
+.afr-st-card{width:272px;background:#32363f;border-radius:40px;padding:22px 24px 24px;display:flex;flex-direction:column;color:#f0f0f0}
+.afr-st-card .top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid #454a55}
+.afr-st-card .circle{width:84px;height:84px;border-radius:50%;background:#14161a;display:flex;align-items:center;justify-content:center;font:300 52px/1 "AfricaNumeral",sans-serif}
+.afr-st-card .ico{display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:6px}
+.afr-st-card .ico svg{width:38px;height:38px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.afr-st-card .ico em{font:500 10px/1 var(--f-body),sans-serif;letter-spacing:.22em;font-style:normal;text-transform:uppercase;color:#c9ccd4}
+.afr-st-card .row{display:flex;justify-content:space-between;align-items:flex-end;margin:22px 0 22px}
+.afr-st-card .big{margin:0;font:300 38px/1 "AfricaNumeral",sans-serif;counter-reset:n var(--u)}
+.afr-st-card .big{white-space:nowrap}
+.afr-st-card .big::before{content:counter(n)}
+.afr-st-card .big::after{content:" " attr(data-unit);font:400 17px var(--f-body),sans-serif;margin-left:4px}
+.afr-st-card .sub{margin:6px 0 0;font-size:14px;color:#a0a5b1;font-weight:300}
+.afr-st-card .side{margin:0;text-align:right;font-size:17px;font-weight:300;line-height:1.25}
+.afr-st-card .side span{display:block;font-size:14px;color:#a0a5b1}
+.afr-st-card .field{position:relative;width:220px;height:330px;margin:0 auto}
+.afr-st-card .dim,.afr-st-card .lit{position:absolute;left:0;right:0;bottom:0}
+.afr-st-card .dim{top:0;background:radial-gradient(circle at 5.5px 5.5px,#4b505b 1.2px,transparent 1.6px) 0 100%/11px 11px}
+.afr-st-card .lit{height:round(down,calc(var(--f) * 3.3px),11px);background:radial-gradient(circle at 5.5px 5.5px,#d6ff3f 3.3px,transparent 3.7px) 0 100%/11px 11px}
+.afr-st-card .tag{position:absolute;right:0;bottom:calc(round(down,calc(var(--f) * 3.3px),11px) + 6px);margin:0;font:300 26px/1 "AfricaNumeral",sans-serif;color:#d6ff3f;counter-reset:p var(--f)}
+.afr-st-card .tag::after{content:counter(p) "%"}
+.afr-st-card.from{--f:8;--u:4;animation:afr-st-from 2s .7s cubic-bezier(.5,0,.2,1) both}
+.afr-st-card.to{--f:57;--u:30;animation:afr-st-to 2s 1.3s cubic-bezier(.5,0,.2,1) both}
+@keyframes afr-st-from{from{--f:64;--u:34}}
+@keyframes afr-st-to{from{--f:0;--u:0}}
+
+/* scene 2: ranked money line, pills on top and names underneath */
+.afr-st-money{display:block;height:auto;overflow:visible}
+.afr-st-money .line{stroke-dasharray:1;animation:afr-st-draw 1.8s .3s cubic-bezier(.4,0,.2,1) both}
+.afr-st-money .pt rect{fill:none;stroke:#3a3a3a;stroke-width:1.5}
+.afr-st-money .pt .v{font:300 21px "AfricaNumeral",sans-serif;fill:#6b6b6b;text-anchor:middle}
+.afr-st-money .pt .kd{font:500 13px var(--f-body),sans-serif;letter-spacing:.12em;text-transform:uppercase;fill:#8a8d7a;text-anchor:middle}
+.afr-st-money .pt .dotn{fill:#0b0c08;stroke:#8a8d7a;stroke-width:3}
+.afr-st-money .pt .ax{font:400 17px var(--f-body),sans-serif;fill:#6b6b6b;text-anchor:middle}
+.afr-st-money .pt{animation:afr-st-pop .6s calc(.2s + var(--p) * .6s) both}
+.afr-st-money .top rect{stroke:#d6ff3f}
+.afr-st-money .top .v,.afr-st-money .top .ax,.afr-st-money .top .kd{fill:#d6ff3f}
+.afr-st-money .core{fill:#0b0c08;stroke:#d6ff3f;stroke-width:4;animation:afr-st-pop .5s 2s both}
+.afr-st-money .ring{fill:none;stroke:#d6ff3f;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:afr-st-ripple 2.2s 2.1s ease-out infinite}
+@keyframes afr-st-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes afr-st-pop{from{opacity:0}to{opacity:1}}
+@keyframes afr-st-ripple{0%{transform:scale(1);opacity:.8}100%{transform:scale(3.2);opacity:0}}
+
+/* scene 3: stock against the delivery, one bar */
+.afr-st-gap .shop{margin:0 0 36px;font:700 24px var(--f-display),sans-serif}
+.afr-st-gap .ends{display:flex;justify-content:space-between;font-size:13px;color:#a6a99a;margin-bottom:12px}
+.afr-st-gap .bar{display:flex;align-items:center;gap:0;height:76px}
+.afr-st-gap .dot{width:14px;height:14px;border-radius:50%;background:#f5f3ea;flex:none;display:block;animation:afr-st-pop .4s both}
+.afr-st-gap .stock,.afr-st-gap .out{height:100%;display:flex;align-items:center;justify-content:center;border-radius:999px;font-weight:600;font-size:16px;transform-origin:left;white-space:nowrap}
+.afr-st-gap .stock{flex:2;background:#2d3128;color:#f5f3ea;animation:afr-st-grow 1s .2s cubic-bezier(.2,.7,.2,1) both}
+.afr-st-gap .out{flex:3;margin-left:6px;background:#ff5a4e;color:#0b0c08;animation:afr-st-grow 1.2s 1.2s cubic-bezier(.2,.7,.2,1) both}
+.afr-st-gap .cap{margin:22px 0 0;text-align:center;font-size:14px;color:#a6a99a;animation:afr-st-pop .6s 2.2s both}
+.afr-st-gap .act{margin:48px 0 0;display:inline-block;float:right;background:#d6ff3f;color:#0b0c08;font:700 13px var(--f-body),sans-serif;padding:9px 18px;border-radius:999px;animation:afr-st-pop .6s 2.6s both}
+@keyframes afr-st-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* scene 4: the calendar, 21 days without an order */
+.afr-st-panel[data-scene="3"]{color:#f5f3ea}
+.afr-st-cal .top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px}
+.afr-st-cal .shop{margin:0;font:600 24px/1.1 var(--f-body),sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.afr-st-cal .gap{margin:6px 0 0;font:300 20px var(--f-body),sans-serif;color:#969989}
+.afr-st-cal .alert{margin:0;font:500 22px var(--f-body),sans-serif;color:#f26a2a}
+.afr-st-cal .head,.afr-st-cal .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:14px 12px}
+.afr-st-cal .head{text-align:center;font-size:13px;color:#8a8a8a;margin-bottom:6px}
+.afr-st-cal .grid i{aspect-ratio:1;border-radius:50%;display:block;animation:afr-st-dot .35s calc(.1s + var(--k) * 45ms) both}
+.afr-st-cal .grid .usual{background:#d6ff3f}
+.afr-st-cal .grid .over{background:#f5f3ea}
+.afr-st-cal .grid .today{background:#f26a2a}
+.afr-st-cal .grid .empty{border:2px solid #3a3d2c}
+.afr-st-cal .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin:28px 0 0;font:500 12px var(--f-body),sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8a8a8a}
+.afr-st-cal .legend span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:-1px}
+.afr-st-cal .legend .usual:before{background:#d6ff3f}
+.afr-st-cal .legend .over:before{background:#f5f3ea}
+.afr-st-cal .legend .today:before{background:#f26a2a}
+@keyframes afr-st-dot{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .afr-st *{animation:none!important}
+}
+@media (max-width:980px){
+  .afr-st-in{grid-template-columns:1fr;gap:32px}
+  .afr-st-now{min-height:0}
+  .afr-st-panel{min-height:0;padding:16px}
+  .afr-st-cards{flex-direction:row}
+  .afr-st-card{min-height:420px}
+}
+
+/* the calendar stays small: about 400px wide, centred in its half */
+.afr-st-panel>.afr-st-cal{max-width:400px}
+.afr-st-cal .shop{font-size:20px}
+.afr-st-cal .gap{font-size:16px}
+.afr-st-cal .alert{font-size:18px}
+.afr-st-cal .top{margin-bottom:22px}
+.afr-st-cal .grid{gap:10px 8px}
+.afr-st-cal .head{gap:8px}
+.afr-st-cal .legend{margin-top:20px;font-size:11px}

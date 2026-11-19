@@ -1,0 +1,35 @@
+/* Alert cards in the dark style of the reference: a round index, a big figure, a dot bar and a bottom row.
+   Coral for critical, sun yellow for warnings, lime for the title pill.
+   Sized to fit beside the hero copy on desktop (the panel is anchored to the hero's bottom edge). */
+.afr-panel.alp{width:min(400px,30vw);margin:0;padding:12px;background:#0b0c08;border:1px solid rgba(245,243,234,.12);border-radius:28px;box-shadow:0 26px 50px rgba(0,0,0,.35);backdrop-filter:none;color:#f5f3ea}
+
+.alp-top{display:flex;align-items:center;gap:12px;padding:0 2px 10px}
+.alp-pill{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;background:#d6ff3f;color:#0b0c08;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.alp-count{margin-left:auto;font-size:12px;color:rgba(245,243,234,.7);white-space:nowrap}
+
+.alp-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.alp-card{background:#2a2f33;border-radius:20px;padding:12px 14px;color:#f5f3ea}
+
+.alp-head{display:flex;align-items:center;justify-content:space-between}
+.alp-index{width:40px;height:40px;border-radius:50%;background:#0b0c08;color:#f5f3ea;display:grid;place-items:center;font-family:"AfricaNumeral",sans-serif;font-size:20px;font-weight:300;line-height:1}
+.alp-level{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.alp-critical .alp-level{color:#ff7a5c}
+.alp-warning .alp-level{color:#ffd24a}
+
+.alp-big{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(245,243,234,.14)}
+.alp-big b{font-family:"AfricaNumeral",sans-serif;font-size:32px;font-weight:300;line-height:1}
+.alp-big span{font-size:12px;opacity:.75;text-align:right}
+
+.alp-detail{margin:8px 0;font-size:12px;line-height:1.4;opacity:.78}
+
+.alp-dots{display:grid;grid-template-columns:repeat(20,1fr);grid-template-rows:repeat(4,1fr);gap:3px;height:26px}
+.alp-dots i{display:block;width:4px;height:4px;border-radius:50%;background:rgba(245,243,234,.14);justify-self:center;align-self:center}
+.alp-critical .alp-dots i.on{background:#ff7a5c}
+.alp-warning .alp-dots i.on{background:#ffd24a}
+
+.alp-foot{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.alp-foot span:last-child{text-transform:none;letter-spacing:0;text-align:right}
+
+@media (max-width:960px){
+  .afr-panel.alp{width:100%}
+}

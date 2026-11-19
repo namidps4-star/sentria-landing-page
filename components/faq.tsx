@@ -2,12 +2,24 @@
 
 import { useState } from "react"
 import { C } from "@/content/en"
+import { FR } from "@/content/fr"
+import { SITE_PRICES, formatPrice } from "@/content/prices"
+import { useLang } from "./lang"
 import { T } from "./t"
 import { Eyebrow, iv } from "./ui"
+import { useSiteCurrency } from "./site-currency"
 
 export function Faq() {
   const s = C.faq
   const [open, setOpen] = useState<number | null>(null)
+  const lang = useLang()
+  const currency = useSiteCurrency()
+  const answer = (a: string) => {
+    const text = lang === "fr" ? (FR[a] ?? a) : a
+    return text
+      .replace("{pro}", formatPrice(SITE_PRICES[currency][0], currency, lang))
+      .replace("{business}", formatPrice(SITE_PRICES[currency][1], currency, lang))
+  }
   return (
     <section id="faq" className="sc sc-lime faq">
       <div className="wrap faq-grid">
@@ -34,9 +46,7 @@ export function Faq() {
                 </h3>
                 <div id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`} className="faq-a">
                   <div>
-                    <p>
-                      <T s={it.a} />
-                    </p>
+                    <p>{answer(it.a)}</p>
                   </div>
                 </div>
               </div>
