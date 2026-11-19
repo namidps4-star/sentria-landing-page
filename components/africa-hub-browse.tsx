@@ -61,7 +61,7 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
       last = now
       if (!el.hasAttribute("data-stopped")) {
         const d = dir.current
-        const rate = d !== 0 ? d * HOVER_SLOTS_PER_SECOND : hovering.current ? 0 : SLOTS_PER_SECOND
+        const rate = d !== 0 ? -d * HOVER_SLOTS_PER_SECOND : hovering.current ? 0 : SLOTS_PER_SECOND
         offset = (((offset + dt * rate) % 7) + 7) % 7
       }
       cards.forEach((card, i) => {
