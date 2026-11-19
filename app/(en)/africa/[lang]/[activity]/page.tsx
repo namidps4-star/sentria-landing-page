@@ -7,6 +7,7 @@ import { ACTIVITY_COPY, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-ac
 import { activityPhoto } from "@/content/africa-sector-catalog"
 import { designFor } from "@/content/africa-designs"
 import { SECTOR_PAGE } from "@/content/sector-pages"
+import { activityAlternates } from "@/content/africa-urls"
 
 type Params = Promise<{ lang: string; activity: string }>
 
@@ -17,7 +18,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { lang, activity } = await params
   const sp = SECTOR_PAGE[activity]
-  if (lang === "en" && sp) return { title: `${sp.name.en} | SentrIA`, description: sp.desc.en }
+  if (lang === "en" && sp) return { title: `${sp.name.en} | SentrIA`, description: sp.desc.en, alternates: activityAlternates("en", activity) }
   if (lang !== "en" || !ACTIVITY_COPY[activity]) return {}
   return { robots: { index: false, follow: false } }
 }

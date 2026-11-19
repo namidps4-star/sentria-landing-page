@@ -6,7 +6,7 @@
      en: "operational decision software"
      fr: "décision opérationnelle"
    Markets: West Africa (Benin, Côte d'Ivoire, Senegal) and East Africa (Kenya, Uganda).
-   One address serves both languages, so there are no hreflang links yet. */
+   The English and French Africa pages link to each other with hreflang. */
 export const SEO = {
   en: {
     title: "SentrIA | Operational decision software with evidence",
