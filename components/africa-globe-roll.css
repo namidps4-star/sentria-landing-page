@@ -9,27 +9,30 @@
 .globe-roll[data-on] {
   opacity: 1;
 }
-.globe-roll__word {
+.globe-roll__arc {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 74vh;
-  margin: 0;
-  text-align: center;
+  left: 50%;
+  top: 60%;
+  width: min(560px, 92vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+.globe-roll__arc text {
   font-family: var(--f-open), sans-serif;
   font-weight: 600;
-  font-size: clamp(30px, 7.4vw, 120px);
-  line-height: 1;
+  font-size: 50px;
   letter-spacing: 0.04em;
-  color: #f5f3ea;
+  fill: #f5f3ea;
   text-transform: uppercase;
-  white-space: nowrap;
-  pointer-events: none;
 }
 .globe-roll canvas {
   position: absolute;
   left: 50%;
-  top: 38%;
+  top: 60%;
   transform: translate(-50%, -50%);
   display: block;
+  z-index: 1;
 }
