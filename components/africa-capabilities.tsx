@@ -7,7 +7,6 @@ import { AfricaStage } from "./africa-stage"
 import { MapHero } from "./africa-network-map"
 import { AfricaStepsPanels } from "./africa-steps-panels"
 import { AfricaMorning } from "./africa-morning"
-import { AfricaDecisionHero, PHARMACIE_DECISION } from "./africa-decision-hero"
 import { AfricaFaqAccordion, type FaqTone } from "./africa-faq-accordion"
 import { AfricaQueuePreview } from "./africa-queue-preview"
 import { AfricaDecisionCard } from "./africa-decision-card"
@@ -51,7 +50,6 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
   const kicker = ACTIVITY_LIST.find((a) => a.slug === slug)?.kicker?.[lang] ?? SECTOR_PAGE[slug]?.name[lang]
   const firstSentence = c.items[0]?.does.split(/(?<=\.)\s/)[0] ?? ""
   const id = `afr-caps-${slug}-${lang}`
-  const pharmacy = slug === "pharmacie"
   const alerts = SECTOR_ALERTS[slug]?.[lang] ?? []
   const bands = bandFor(slug)
   const shared = SHARED[lang]
@@ -66,12 +64,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
       <section className="afr-caps afr-caps--rest">
         <AfricaStepsPanels heading={stepsHeading} steps={steps} kicker={kicker} lang={lang} />
         {c.example && slug === "grossiste-pharma" && <MapHero kicker={kicker} title={c.example.title} result={c.example.result} lang={lang} />}
-        {c.example && pharmacy && (
-          <div className="wrap afr-decision-wrap">
-            <AfricaDecisionHero data={PHARMACIE_DECISION} />
-          </div>
-        )}
-        {c.example && slug !== "grossiste-pharma" && !pharmacy && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
+        {c.example && slug !== "grossiste-pharma" && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
       </section>
       {alerts.length > 0 && (
         <section className={`afr-queue-sec afr-queue-sec--${bands.queue}`}>
