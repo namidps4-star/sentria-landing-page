@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Blocks a commit that would add credentials or private contact details.
+# Enable once per clone: git config core.hooksPath .githooks
+exec "$(git rev-parse --show-toplevel)/scripts/check_secrets.sh" --staged

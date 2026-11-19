@@ -1,4 +1,5 @@
 @AGENTS.md
+@PROJECT_MAP.md
 @docs/DESIGN.md
 
 Read `docs/DESIGN.md` before any design or copy change to the landing page. It records the section order, colour tokens, type, buttons, hero, motion, pictures, copy rules, the never-use list and the open items. It does not cover the Africa pages or the app.

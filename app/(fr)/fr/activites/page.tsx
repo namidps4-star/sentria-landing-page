@@ -20,7 +20,7 @@ export default function Page() {
       <Header />
       <main id="main" className="hs">
         <h1 className="hs-h" data-rv="rise">Trouvez votre activité</h1>
-        <p className="hs-lead" data-rv="rise" style={{ "--i": 1 } as React.CSSProperties}>Choisissez l'activité qui correspond à votre entreprise et découvrez comment SentrIA la suit.</p>
+        <p className="hs-lead" data-rv="rise" style={{ "--i": 1 } as React.CSSProperties}>Choisissez l&apos;activité qui correspond à votre entreprise et découvrez comment SentrIA la suit.</p>
         <ActivityRing
           lang="fr"
           base=""
