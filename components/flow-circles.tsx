@@ -56,24 +56,26 @@ export function FlowCircles({ steps }: { steps: readonly Step[] }) {
       <div className="fc-row" role="group" aria-label="Implementation steps">
         {steps.map((s, i) => (
           <button
-            key={i}
+            key={s.n}
             type="button"
             className={`fc-c fc-c${i + 1}`}
             data-on={step === i ? "1" : undefined}
             aria-pressed={step === i}
-            aria-label={s.h}
+            aria-label={`${s.n} ${s.h}`}
             onPointerEnter={(e) => pick(i, e)}
             onClick={() => {
               setStep(i)
               setHold(true)
             }}
             onFocus={() => setStep(i)}
-          />
+          >
+            <b>{s.n}</b>
+          </button>
         ))}
       </div>
       <ol className="fc-cols">
         {steps.map((s, i) => (
-          <li key={i} data-on={step === i ? "1" : undefined} onPointerEnter={(e) => pick(i, e)}>
+          <li key={s.n} data-on={step === i ? "1" : undefined} onPointerEnter={(e) => pick(i, e)}>
             <h3>
               <T s={s.h} />
             </h3>
