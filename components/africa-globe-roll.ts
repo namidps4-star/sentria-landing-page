@@ -66,6 +66,7 @@ async function rollGlobeTo(href: string): Promise<void> {
     material.map = texture
     material.needsUpdate = true
     overlay.dataset.on = "1"
+    arc.dataset.go = "1"
     const t0 = performance.now()
     const frame = (now: number) => {
       const t = Math.min(1, (now - t0) / DURATION)
