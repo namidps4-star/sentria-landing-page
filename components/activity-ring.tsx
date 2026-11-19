@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import type { KeyboardEvent } from "react"
 import type { ActivityCard } from "@/content/africa-activity-cards"
+import { enSlug } from "@/content/africa-urls"
 import { RingFilters } from "./activity-ring-filters"
 import { startRing } from "./activity-ring-engine"
 import { newPhys, type Phys } from "./activity-ring-physics"
@@ -67,7 +68,7 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
     if (e.key === "ArrowRight") stepBy.current(1)
   }
 
-  const hrefOf = (c: ActivityCard) => (c.slug ? `${base}/${c.slug}` : (c.href?.[lang] ?? "#"))
+  const hrefOf = (c: ActivityCard) => (c.slug ? `${base}/${lang === "en" ? enSlug(c.slug) : c.slug}` : (c.href?.[lang] ?? "#"))
   const cur = cards[active]
   return (
     <div className="afr-ring" role="group" aria-roledescription={text.carousel} aria-label={text.label} onKeyDown={onKeyDown}>

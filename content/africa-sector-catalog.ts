@@ -1,5 +1,7 @@
 import { ACTIVITY_CARDS, type ActivityCard } from "./africa-activity-cards"
 import { SECTOR_PAGE } from "./sector-pages"
+import { ACTIVITY_COPY } from "./africa-activities"
+import { activityPath } from "./africa-urls"
 
 type L = Record<"en" | "fr", string>
 
@@ -99,7 +101,7 @@ function build(sector: HubSector, id: string): ActivityCard {
   const a = APP[id]
   const p = PHOTO[id]
   // An activity with a page of its own in the Africa section links there; the others have their page now too.
-  const own: L | undefined = SECTOR_PAGE[id] ? { en: `/africa/en/${id}`, fr: `/afrique/fr/${id}` } : undefined
+  const own: L | undefined = SECTOR_PAGE[id] && ACTIVITY_COPY[id] ? { en: activityPath("en", id), fr: activityPath("fr", id) } : undefined
   return { id, href: own ?? OWN_PAGE[id] ?? s.page, name: a.name, line: a.line, photo: p.photo, alt: p.alt, by: p.by, user: p.user }
 }
 
