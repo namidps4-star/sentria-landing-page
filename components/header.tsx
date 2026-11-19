@@ -5,6 +5,7 @@ import { C } from "@/content/en"
 import { T } from "./t"
 import { Mark } from "./ui"
 import { localHref, useLang, useText } from "./lang"
+import { rollGlobeClick } from "./africa-globe-roll"
 
 const APP_URL = "https://app.sentriahq.dev"
 const HREFS = ["/#situations", "/#methode", "/#cockpit", "/#tarifs", "/#fit", "/#faq", "/articles", "/africa"]
@@ -65,7 +66,7 @@ export function Header() {
 
         <div className="nav-links">
           {C.nav.map((n, i) => (
-            <a key={n} href={localHref(HREFS[i], lang)}>
+            <a key={n} href={localHref(HREFS[i], lang)} onClick={HREFS[i] === "/africa" ? (e) => rollGlobeClick(e, localHref(HREFS[i], lang)) : undefined}>
               <T s={n} />
             </a>
           ))}
@@ -97,7 +98,13 @@ export function Header() {
         <ul>
           {C.nav.map((n, i) => (
             <li key={n} style={{ ["--i" as string]: i } as React.CSSProperties}>
-              <a href={localHref(HREFS[i], lang)} onClick={() => setOpen(false)}>
+              <a
+                href={localHref(HREFS[i], lang)}
+                onClick={(e) => {
+                  setOpen(false)
+                  if (HREFS[i] === "/africa") rollGlobeClick(e, localHref(HREFS[i], lang))
+                }}
+              >
                 <T s={n} />
               </a>
             </li>
