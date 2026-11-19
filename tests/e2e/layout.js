@@ -18,8 +18,11 @@ const WIDTHS = [1920, 1440, 1280, 1024, 768, 480, 375]
       const page = await ctx.newPage()
       const errs = []
       page.on('pageerror', (e) => errs.push(e.message))
+      // A network failure to this site's own files is an error; one to a third-party widget is not.
+      const own = new URL(APP_URL).origin
+      page.on('requestfailed', (r) => { if (r.url().startsWith(own)) errs.push('request failed: ' + r.url().slice(0, 120)) })
       page.on('console', (m) => {
-        if (m.type() === 'error' && !IGNORED_ERRORS.test(m.text())) errs.push(m.text().slice(0, 160))
+        if (m.type() === 'error' && !IGNORED_ERRORS.test(m.text()) && !/Failed to load resource: net::ERR_FAILED/.test(m.text())) errs.push(m.text().slice(0, 160))
       })
       await page.goto(APP_URL, { waitUntil: 'load' })
       await page.waitForTimeout(700)
