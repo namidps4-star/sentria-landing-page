@@ -24,12 +24,22 @@ const SECTORS: { id: HubSector; name: { en: string; fr: string }; photo: string 
 // "1 activity", "5 activities"; "1 activité", "5 activités".
 const countLabel = (n: number, lang: Lang) => (lang === "fr" ? `${n} activité${n > 1 ? "s" : ""}` : `${n} ${n === 1 ? "activity" : "activities"}`)
 
-export function AfricaHubBrowse({ lang }: { lang: Lang }) {
+/* `global`: the same menu with links to the global activity pages. `header`: show the sector title above the row.
+   `from`: a sector chosen elsewhere on the page (the quick picks); it opens that sector, and null closes it. */
+export function AfricaHubBrowse({ lang, global = false, header = true, from }: { lang: Lang; global?: boolean; header?: boolean; from?: HubSector | null }) {
   const t = COPY[lang]
   const [sector, setSector] = useState<string | null>(null)
   const acts = useRef<HTMLElement>(null)
   const current = SECTORS.find((s) => s.id === sector)
-  const cards = current ? cardsFor(current.id) : []
+  const cards = current ? cardsFor(current.id, global) : []
+  const mounted = useRef(false)
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true
+      return
+    }
+    setSector(from ?? null)
+  }, [from])
 
   // The arc: the seven cards travel slowly around it. Hovering the left or right third of the row turns it that
   // way; the middle holds still. Keyboard focus stops it. Reduced motion keeps the arc still.
@@ -86,12 +96,16 @@ export function AfricaHubBrowse({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <section className="sp" aria-labelledby={`sp-${lang}`}>
-        <p className="sp-eyebrow" data-rv="fade">{lang === "fr" ? "Secteurs" : "Sectors"}</p>
-        <h2 id={`sp-${lang}`} className="sp-title" data-rv="rise">
-          {lang === "fr" ? "Choisissez votre secteur." : "Pick your sector."}
-        </h2>
-        <p className="sp-lead" data-rv="rise" style={{ "--i": 1 } as CSSProperties}>{lang === "fr" ? "Chaque secteur ouvre ses activités ci-dessous." : "Each sector opens its own activities below."}</p>
+      <section className="sp" aria-labelledby={header ? `sp-${lang}` : undefined}>
+        {header && (
+          <>
+            <p className="sp-eyebrow" data-rv="fade">{lang === "fr" ? "Secteurs" : "Sectors"}</p>
+            <h2 id={`sp-${lang}`} className="sp-title" data-rv="rise">
+              {lang === "fr" ? "Choisissez votre secteur." : "Pick your sector."}
+            </h2>
+            <p className="sp-lead" data-rv="rise" style={{ "--i": 1 } as CSSProperties}>{lang === "fr" ? "Chaque secteur ouvre ses activités ci-dessous." : "Each sector opens its own activities below."}</p>
+          </>
+        )}
         <div
           className="sp-grid"
           ref={row}

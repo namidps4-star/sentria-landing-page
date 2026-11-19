@@ -2,6 +2,7 @@ import { ACTIVITY_CARDS, type ActivityCard } from "./africa-activity-cards"
 import { SECTOR_PAGE } from "./sector-pages"
 import { ACTIVITY_COPY } from "./africa-activities"
 import { activityPath } from "./africa-urls"
+import { GENERAL_ACTIVITIES } from "./general-activities"
 
 type L = Record<"en" | "fr", string>
 
@@ -116,8 +117,15 @@ function build(sector: HubSector, id: string): ActivityCard {
   return { id, href: own ?? OWN_PAGE[id] ?? s.page, sector: SECTOR_LABEL[sector], name: a.name, line: a.line, photo: p.photo, alt: p.alt, by: p.by, user: p.user }
 }
 
-export function cardsFor(sector: HubSector): ActivityCard[] {
-  return SECTOR_ACTIVITIES[sector].map((id) => build(sector, id))
+/* The same card for the global pages: an activity with a global page links there, the others to their sector's page. */
+function globalCard(sector: HubSector, id: string): ActivityCard {
+  const g = GENERAL_ACTIVITIES.find((a) => a.key === id)
+  const href = g ? { en: `/activities/${g.en}`, fr: `/fr/activites/${g.fr}` } : (OWN_PAGE[id] ?? SECTOR[sector].page)
+  return { ...build(sector, id), slug: undefined, href }
+}
+
+export function cardsFor(sector: HubSector, global = false): ActivityCard[] {
+  return SECTOR_ACTIVITIES[sector].map((id) => (global ? globalCard(sector, id) : build(sector, id)))
 }
 
 /* The picture of an activity page: its catalogue card, in the language of the page. */
