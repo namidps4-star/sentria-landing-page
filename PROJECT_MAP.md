@@ -53,6 +53,7 @@ None in this repository. The header's "Sign in" link goes to `https://app.sentri
 
 - Calendly: `components/demo.tsx` loads `assets.calendly.com/assets/external/widget.js` and shows `calendly.com/hello-sentria/30min`.
 - Vercel: the `x-vercel-ip-country` header in `proxy.ts`.
+- Google Preferred Sources: a plain footer link to `https://google.com/preferences/source?q=sentriahq.dev` (`components/footer.tsx`). It is an anchor, not a script, stylesheet or iframe. The embed button needs a script from `news.google.com`, which is not allowed here without approval.
 - Sign-in target: `app.sentriahq.dev` (`components/header.tsx`).
 - Source links: the articles and Africa pages link out to published reports (PubMed, Springer, NHS Wales, WHO and others). Links are checked by hand, not by the build.
 - Photos: static files in `public/`, credited in their captions (Unsplash).
