@@ -50,6 +50,9 @@ export function HeroFilm() {
     return () => window.clearInterval(id)
   }, [reduced, paused, ready])
 
+  const prev = () => setActive((a) => (a - 1 + SECTORS.length) % SECTORS.length)
+  const next = () => setActive((a) => (a + 1) % SECTORS.length)
+
   const s = C.sectors
   const sec = SECTORS[active]
   const tag = TAGLINES[sec.key]
@@ -63,6 +66,8 @@ export function HeroFilm() {
           </div>
         ))}
         <div className="hf-scrim" />
+        <button className="hf-nav hf-nav--prev" aria-label="Previous sector" tabIndex={-1} onClick={prev} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} />
+        <button className="hf-nav hf-nav--next" aria-label="Next sector" tabIndex={-1} onClick={next} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} />
       </div>
 
       <div
