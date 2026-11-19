@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/sections"
-import { ARTICLE_PAGES, ARTICLE_UPDATES, ARTICLES, isLive, type ArticlePage } from "@/content/articles"
+import { ARTICLE_PAGES, ARTICLES, isLive, liveUpdate, type ArticlePage } from "@/content/articles"
 import { ArticleCard } from "@/components/article-card"
 import { ARTICLE_MARKS } from "@/content/article-marks"
 import { ArticleFx } from "@/components/article-fx"
@@ -88,7 +88,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const page = findPage(slug)
   if (!page) notFound()
 
-  const update = ARTICLE_UPDATES.find((u) => u.slug === page.slug && Date.now() >= Date.parse(u.from))
+  const update = liveUpdate(page.slug)
   const intro = update?.intro ?? page.intro
   const sources = update?.sources ?? page.sources ?? []
 
@@ -234,9 +234,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               <a className="blog-cta-link" href={`/${page.lang}#situations`}>
                 {page.lang === "fr" ? "Voir les situations santé" : "See the health situations"}
               </a>
-              <a className="blog-cta-link" href="/#tarifs">
+              <Link className="blog-cta-link" href="/#tarifs">
                 {page.lang === "fr" ? "Tarifs" : "Pricing"}
-              </a>
+              </Link>
             </div>
             <div className="blog-share">
               <p className="blog-share-title">{page.lang === "fr" ? "Partager cet article" : "Share this article"}</p>

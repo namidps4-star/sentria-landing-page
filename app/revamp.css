@@ -661,6 +661,20 @@
 .hf-dot[aria-pressed="true"]::before {
   background: var(--lime);
 }
+.hf-pause {
+  margin-top: 14px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: none;
+  color: var(--cream);
+  font-size: 13px;
+  font-weight: 600;
+}
+.hf-pause:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
 @media (max-width: 860px) {
   /* below the three check lines that sit at the top of the hero on a phone */
   .hf-cap {

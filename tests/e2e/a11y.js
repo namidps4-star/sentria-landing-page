@@ -88,7 +88,7 @@ const ratio = (a, b) => {
     const page = await ctx.newPage()
     await page.goto(APP_URL, { waitUntil: 'load' })
     await page.waitForTimeout(800)
-    const sels = ['.hero-lead', '.hero-checks li', '.rv-sec .rv-lead', '.sc-cream .card p', '.sc-dark .lead', '.rv-col-p', '.sc-lime .promise-list li > span', '.sc-deep .flow-step p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.trow:not(.thead) .c-name']
+    const sels = ['.hero-lead', '.hero-checks li', '.rv-sec .rv-lead', '.datasec p', '.sc-dark .lead', '.rv-col-p', '.sc-lime .promise-list li > span', '.flow p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.cmp-table tbody th']
     // bring each sample into view and let its entrance finish, so a half-faded element is not measured
     for (const s of sels) {
       const el = page.locator(s).filter({ visible: true }).first()
@@ -109,7 +109,7 @@ const ratio = (a, b) => {
         }
         return [11, 12, 8]
       }
-      const sel = ['.hero-lead', '.hero-checks li', '.rv-sec .rv-lead', '.sc-cream .card p', '.sc-dark .lead', '.rv-col-p', '.sc-lime .promise-list li > span', '.sc-deep .flow-step p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.trow:not(.thead) .c-name']
+      const sel = ['.hero-lead', '.hero-checks li', '.rv-sec .rv-lead', '.datasec p', '.sc-dark .lead', '.rv-col-p', '.sc-lime .promise-list li > span', '.flow p', '.plan li', '.faq-a p', '.foot li a', '.quickfit-label', '.cmp-table tbody th']
       return sel.map((s) => {
         const el = [...document.querySelectorAll(s)].find((e) => e.offsetParent !== null)
         if (!el) return { s, missing: true }

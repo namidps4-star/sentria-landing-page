@@ -26,7 +26,8 @@ const pass = (ok, label) => {
 }
 
 // Calls to other sites (Calendly, fonts) are not reachable in every sandbox; they are not the app's errors.
-const IGNORED_ERRORS = /ERR_TUNNEL_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED|calendly|permissions policy violation: payment/i
+// requestStorageAccess, Stripe's fraud script and the reCAPTCHA frame (with its CSP report) come from the Calendly booking widget; the app uses none of them.
+const IGNORED_ERRORS = /ERR_TUNNEL_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED|calendly|permissions policy violation: payment|requestStorageAccess: Permission denied|m\.stripe\.(com|network)|recaptcha\.net/i
 
 module.exports = {
   APP_URL: process.env.E2E_URL || 'http://localhost:3300',

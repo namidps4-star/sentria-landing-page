@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { AfricaAlertPanel } from "@/components/africa-alert-panel"
@@ -7,16 +7,17 @@ import { ACTIVITY_COPY, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-ac
 import { activityPhoto } from "@/content/africa-sector-catalog"
 import { designFor } from "@/content/africa-designs"
 import { SECTOR_PAGE } from "@/content/sector-pages"
-import { activityAlternates } from "@/content/africa-urls"
+import { activityAlternates, activityKeyFromEnSlug, enSlug } from "@/content/africa-urls"
 
 type Params = Promise<{ lang: string; activity: string }>
 
 export function generateStaticParams() {
-  return Object.keys(ACTIVITY_COPY).map((activity) => ({ lang: "en", activity }))
+  return Object.keys(ACTIVITY_COPY).map((activity) => ({ lang: "en", activity: enSlug(activity) }))
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { lang, activity } = await params
+  const { lang, activity: slug } = await params
+  const activity = activityKeyFromEnSlug(slug) ?? ""
   const sp = SECTOR_PAGE[activity]
   if (lang === "en" && sp) return { title: `${sp.name.en} | SentrIA`, description: sp.desc.en, alternates: activityAlternates("en", activity) }
   if (lang !== "en" || !ACTIVITY_COPY[activity]) return {}
@@ -32,9 +33,11 @@ function picture(activity: string, lang: "en" | "fr") {
 
 /* Every activity page opens with the same hero and carries the same template below it. */
 export default async function Page({ params }: { params: Params }) {
-  const { lang, activity } = await params
-  const copy = ACTIVITY_COPY[activity]
-  if (lang !== "en" || !copy) notFound()
+  const { lang, activity: slug } = await params
+  if (lang === "en" && enSlug(slug) !== slug) permanentRedirect(`/africa/en/${enSlug(slug)}`)
+  const activity = activityKeyFromEnSlug(slug)
+  const copy = activity ? ACTIVITY_COPY[activity] : undefined
+  if (lang !== "en" || !activity || !copy) notFound()
   const pic = picture(activity, "en")
   return (
     <AfricaHero

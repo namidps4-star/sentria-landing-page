@@ -163,3 +163,8 @@ export const ARTICLE_UPDATES: ArticleUpdate[] = [
   },
 ]
 
+/** The text update live for an article now, if one has started. */
+export function liveUpdate(slug: string): ArticleUpdate | undefined {
+  return ARTICLE_UPDATES.find((u) => u.slug === slug && Date.now() >= Date.parse(u.from))
+}
+

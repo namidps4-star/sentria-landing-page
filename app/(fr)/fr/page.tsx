@@ -14,8 +14,9 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     title: SEO.fr.title,
     description: SEO.fr.description,
+    images: ["/opengraph-image.png"],
   },
-  twitter: { card: "summary_large_image", title: SEO.fr.title, description: SEO.fr.description },
+  twitter: { card: "summary_large_image", title: SEO.fr.title, description: SEO.fr.description, images: ["/twitter-image.png"] },
 }
 
 export default function Page() {

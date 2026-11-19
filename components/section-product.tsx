@@ -37,7 +37,7 @@ export function Cockpit() {
                   <B en={en} fr={fr} />
                 </span>
                 <span className="rv-r-n">
-                  <B en={pct} fr={frPct} />
+                  <B en={`${pct} confidence`} fr={`${frPct} de confiance`} />
                 </span>
               </li>
             )
@@ -82,7 +82,7 @@ export function Pricing() {
       </p>
       <PricingGrid />
       <p className="note" data-rv="fade">
-        <B en="Entreprise is priced to your scope: sectors, sites, users and integration." fr="Entreprise est chiffrée selon votre périmètre : secteurs, sites, utilisateurs et intégration." />
+        <B en="Enterprise is priced to your scope: sectors, sites, users and integration." fr="Entreprise est chiffrée selon votre périmètre : secteurs, sites, utilisateurs et intégration." />
       </p>
     </Sec>
   )

@@ -7,10 +7,10 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) bad++ }
 ;(async () => {
   const b = await chromium.launch({ executablePath: process.env.CHROMIUM || '/opt/pw-browsers/chromium', args: ['--no-sandbox'] })
   for (const [name, path, vp, hrefRe, reduced] of [
-    ['en', '/africa', { width: 1440, height: 900 }, /\/africa\/en\/pharmacie$/, false],
+    ['en', '/africa', { width: 1440, height: 900 }, /\/africa\/en\/pharmacy$/, false],
     ['fr', '/afrique', { width: 1440, height: 900 }, /\/afrique\/fr\/pharmacie$/, false],
-    ['phone', '/africa', { width: 390, height: 844 }, /\/africa\/en\/pharmacie$/, false],
-    ['reduced', '/africa', { width: 1440, height: 900 }, /\/africa\/en\/pharmacie$/, true],
+    ['phone', '/africa', { width: 390, height: 844 }, /\/africa\/en\/pharmacy$/, false],
+    ['reduced', '/africa', { width: 1440, height: 900 }, /\/africa\/en\/pharmacy$/, true],
   ]) {
     const ctx = await b.newContext({ viewport: vp, reducedMotion: reduced ? 'reduce' : 'no-preference' })
     await ctx.addInitScript(() => localStorage.setItem('sentria-skip-intro', '1'))
@@ -19,8 +19,14 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) bad++ }
     p.on('pageerror', (e) => errs.push(e.message))
     p.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()) })
     await p.goto(base + path, { waitUntil: 'networkidle', timeout: 60000 })
+    // the hub asks for a sector first; the activity ring appears after the first one is chosen
+    await p.evaluate(() => [...document.querySelectorAll('.sp button, .sp a')][0]?.click())
+    await p.waitForSelector('.afr-ring-stage', { timeout: 15000 })
     await p.evaluate(() => document.querySelector('.afr-ring-stage').scrollIntoView({ block: 'center' }))
     await p.waitForTimeout(3200)
+    // the number of activities depends on the sector chosen, so it is read from the page
+    const N = await p.locator('.afr-ring-card').count()
+    const of = (n) => `${String(n).padStart(2, '0')} / ${String(N).padStart(2, '0')}`
     const geo = () => p.evaluate(() => [...document.querySelectorAll('.afr-ring-card')].map((c) => {
       const r = c.getBoundingClientRect()
       const img = c.querySelector('img')
@@ -31,36 +37,36 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) bad++ }
     const click = async (c) => { await p.mouse.move(c.x, c.y, { steps: 8 }); await p.waitForTimeout(500); await p.mouse.down(); await p.mouse.up(); await settle() }
 
     const g = await geo()
-    ok(g.filter((c) => c.vis).length >= (vp.width > 500 ? 5 : 3), `${name}: cards on screen (${g.filter((c) => c.vis).length})`)
+    ok(g.filter((c) => c.vis).length >= (vp.width > 500 ? 3 : 2), `${name}: cards on screen (${g.filter((c) => c.vis).length} of ${N})`)
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), `${name}: no horizontal overflow`)
-    ok((await count()) === '01 / 07', `${name}: starts at 01 / 07 (${await count()})`)
+    ok((await count()) === of(1), `${name}: starts at ${of(1)} (${await count()})`)
     const c0 = g.find((c) => c.d === '0')
     ok(hrefRe.test(c0.href || ''), `${name}: centre card links to its activity page`)
     const side = g.find((c) => c.d === '2')
     ok(c0.w > 0 && side.w > 0 && side.filter.includes('afr-ca') === !reduced, `${name}: outer cards ${reduced ? 'stay sharp (reduced motion)' : 'are blurred with colour fringing'}`)
     ok(!c0.filter || c0.filter === 'none', `${name}: centre card is sharp`)
     const tags = await p.evaluate(() => [...document.querySelectorAll('.afr-ring-card')].map((c) => c.querySelector('.afr-ring-tag')?.textContent.replace(/\s+/g, ' ').trim()))
-    ok(tags.length === 7 && tags.every(Boolean), `${name}: every card names itself (${tags.join(' | ')})`)
-    ok(/(Health|Santé)\s*(Pharmacy|Pharmacie)/.test(tags[0]) && /(Health|Santé)/.test(tags[1]) && /Agriculture/.test(tags[2]), `${name}: activity cards carry their sector above the name`)
-    ok(g.length === 7 && g.every((c) => c.href), `${name}: all seven cards are links`)
+    ok(tags.length === N && tags.every(Boolean), `${name}: every card names itself (${tags.join(' | ')})`)
+    ok(tags.every((t) => /(Health|Santé)/.test(t)), `${name}: every activity card carries its sector above the name`)
+    ok(g.length === N && g.every((c) => c.href), `${name}: all ${N} cards are links`)
     ok(g.every((c) => /\/(activities|fr\/activites|africa\/en|afrique\/fr)\/[a-z-]+$/.test(c.href || '')), `${name}: every card goes to its own page`)
     ok(!(await p.evaluate(() => /coming soon|bientôt/i.test(document.querySelector('.afr-acts').textContent))), `${name}: nothing says coming soon`)
     await click(g.find((c) => c.d === '1'))
-    ok((await count()) === '02 / 07', `${name}: real click on the right neighbour centres it (${await count()})`)
+    ok((await count()) === of(2), `${name}: real click on the right neighbour centres it (${await count()})`)
     await click((await geo()).find((c) => c.d === '-1'))
-    ok((await count()) === '01 / 07', `${name}: real click on the left neighbour centres it (${await count()})`)
+    ok((await count()) === of(1), `${name}: real click on the left neighbour centres it (${await count()})`)
     await p.locator('.afr-ring-arrow').nth(0).click()
     await settle()
-    ok((await count()) === '07 / 07', `${name}: previous wraps from 01 to 07 (${await count()})`)
+    ok((await count()) === of(N), `${name}: previous wraps from ${of(1)} to ${of(N)} (${await count()})`)
     await p.locator('.afr-ring-arrow').nth(1).click()
     await settle()
-    ok((await count()) === '01 / 07', `${name}: next returns to 01`)
+    ok((await count()) === of(1), `${name}: next returns to ${of(1)}`)
 
     const mid = { x: Math.round(vp.width / 2), y: c0.y }
     await p.mouse.move(mid.x, mid.y, { steps: 4 })
     await p.mouse.wheel(500, 0)
     await settle(2400)
-    ok((await count()) !== '01 / 07', `${name}: sideways scroll turns the ring (${await count()})`)
+    ok((await count()) !== of(1), `${name}: sideways scroll turns the ring (${await count()})`)
     const before = await count()
     await p.mouse.move(mid.x + 150, mid.y, { steps: 3 })
     await p.mouse.down()
