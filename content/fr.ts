@@ -203,7 +203,7 @@ export const FR: Record<string, string> = {
  "LIVE AVAILABILITY": "DISPONIBILITÉS EN DIRECT",
  "The next decision may already be in your data.": "La prochaine décision est peut-être déjà dans vos données.",
  "See how SentrIA turns one problem into a decision you can defend, and a result you can measure.": "Découvrez comment SentrIA transforme un problème en décision défendable, et en résultat mesurable.",
- "The operational decision layer: evidence, confidence, impact and outcome, for every risk.": "La couche de décision opérationnelle : preuve, confiance, impact et résultat, pour chaque risque.",
+ "The operational decision layer: evidence, confidence, impact and outcome, for every risk.": "La couche de décision opérationnelle : preuve, confiance, impact et résultat, pour chaque risque.",
  "Product": "Produit",
  "Resources": "Ressources",
  "Talk to the team": "Parler à l'équipe",
