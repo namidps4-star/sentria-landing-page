@@ -53,16 +53,13 @@ export function HeroFilm() {
   const dirTimer = useRef<number | null>(null)
   const dirRef = useRef<-1 | 0 | 1>(0)
 
-  // Document-level mousemove: check if mouse is inside hero-stage, then step by half.
-  // Needs to be at document level because hero-in / hf-cap sit on top of the film.
+  // Document-level mousemove: hero-in and hf-cap sit on top of the film so we
+  // cannot attach to hero-film itself. We check the hero-stage bounding rect and
+  // use 35%/65% edge zones so the midpoint does not flicker between directions.
+  // hf-cap's onMouseLeave must NOT call setPaused(false) or it fights this timer.
   useEffect(() => {
     const step = (d: -1 | 1) => setActive((a) => d < 0 ? (a - 1 + SECTORS.length) % SECTORS.length : (a + 1) % SECTORS.length)
-    const clear = () => {
-      if (dirTimer.current != null) { window.clearInterval(dirTimer.current); dirTimer.current = null }
-      dirRef.current = 0
-      setPaused(false)
-    }
-    const setDir = (d: -1 | 0 | 1) => {
+    const applyDir = (d: -1 | 0 | 1) => {
       if (d === dirRef.current) return
       if (dirTimer.current != null) { window.clearInterval(dirTimer.current); dirTimer.current = null }
       dirRef.current = d
@@ -75,11 +72,12 @@ export function HeroFilm() {
       const hero = document.getElementById("hero-stage")
       if (!hero) return
       const r = hero.getBoundingClientRect()
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) { setDir(0); return }
-      setDir(e.clientX < r.left + r.width / 2 ? -1 : 1)
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) { applyDir(0); return }
+      const frac = (e.clientX - r.left) / r.width
+      applyDir(frac < 0.35 ? -1 : frac > 0.65 ? 1 : 0)
     }
     document.addEventListener("mousemove", onMove, { passive: true })
-    return () => { document.removeEventListener("mousemove", onMove); clear() }
+    return () => { document.removeEventListener("mousemove", onMove); applyDir(0) }
   }, [])
 
   const s = C.sectors
@@ -100,8 +98,6 @@ export function HeroFilm() {
       <div
         className="hf-cap"
         ref={box}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
       >

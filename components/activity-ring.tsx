@@ -78,7 +78,8 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
         onClickCapture={onClickCapture}
         onMouseMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect()
-          setRingDir(e.clientX < r.left + r.width / 2 ? -1 : 1)
+          const frac = (e.clientX - r.left) / r.width
+          setRingDir(frac < 0.35 ? -1 : frac > 0.65 ? 1 : 0)
         }}
         onMouseLeave={() => setRingDir(0)}
       >
