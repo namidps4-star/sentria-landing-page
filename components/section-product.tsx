@@ -37,7 +37,7 @@ export function Cockpit() {
                   <B en={en} fr={fr} />
                 </span>
                 <span className="rv-r-n">
-                  <B en={pct} fr={frPct} />
+                  <B en={`${pct} confidence`} fr={`${frPct} de confiance`} />
                 </span>
               </li>
             )

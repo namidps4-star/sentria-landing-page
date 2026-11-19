@@ -46,7 +46,7 @@ export function Compare() {
                       <T s={r[0]} />
                     </th>
                     <td className={cls} style={{ "--c": 0 } as React.CSSProperties}>
-                      <span className="sr-only">{old === "✓" ? <B en="Yes" fr="Oui" /> : old === "Partially" ? <B en="Partially" fr="Partiellement" /> : <B en="No" fr="Non" />}</span>
+                      <span className="cmp-word">{old === "✓" ? <B en="Yes" fr="Oui" /> : old === "Partially" ? <B en="Partially" fr="Partiellement" /> : <B en="No" fr="Non" />}</span>
                     </td>
                     <td className="cmp-us">
                       <span className="cmp-val">{r[2] === "✓" ? "✓" : <T s={r[2]} />}</span>
@@ -57,6 +57,9 @@ export function Compare() {
             </tbody>
           </table>
         </div>
+        <p className="cmp-legend" data-rv="fade">
+          <B en="Dashboard cells: a full bar means yes, a half bar means partly, an empty cell means no." fr="Cellules du tableau de bord : barre pleine pour oui, demi-barre pour partiellement, case vide pour non." />
+        </p>
       </div>
     </section>
   )

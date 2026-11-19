@@ -210,6 +210,8 @@
 .cmp-table tbody th { width: 34%; }
 .cmp-table thead th.cmp-us { width: 40%; }
 .cmp-table .cmp-part::before { right: 50%; }
+.cmp-table .cmp-word { position: relative; z-index: 1; display: block; width: max-content; margin: 0 auto; padding: 3px 9px; border-radius: 999px; background: #fbfbfd; color: #1d1d1f; font: 600 12px/1.2 var(--f-body), sans-serif; }
+.cmp-legend { margin: 18px 0 0; font-size: 14px; color: #6e6e73; }
 .cmp-table td.cmp-us { padding: 0 18px; }
 .cmp-table td.cmp-us .cmp-val { position: relative; z-index: 1; font: 600 13.5px var(--f-body), sans-serif; color: #0b0c08; }
 .cmp-table td.cmp-us::before { z-index: 0; }

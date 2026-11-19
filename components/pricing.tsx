@@ -26,7 +26,7 @@ const PLANS: Plan[] = [
       { en: "20 questions to the assistant per month", fr: "20 questions à l'assistant par mois" },
       { en: "30 days of history", fr: "30 jours d'historique" },
     ],
-    cta: { en: "Start free", fr: "Commencer gratuitement" },
+    cta: { en: "Book a demo", fr: "Réserver une démo" },
   },
   {
     id: "pro",
