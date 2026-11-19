@@ -2,15 +2,82 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  display: grid;
-  place-items: center;
-  background: #0b0c08;
+  background-color: #05070d;
+  background-image:
+    radial-gradient(2px 2px at 43% 21%, rgba(255, 255, 255, 0.6), transparent 80%),
+    radial-gradient(1.6px 1.6px at 70% 14%, rgba(255, 255, 255, 0.75), transparent 80%),
+    radial-gradient(2px 2px at 6% 13%, rgba(190, 220, 255, 0.6), transparent 80%),
+    radial-gradient(2px 2px at 32% 13%, rgba(255, 255, 255, 0.6), transparent 80%),
+    radial-gradient(1px 1px at 30% 82%, rgba(190, 220, 255, 0.6), transparent 80%),
+    radial-gradient(1.3px 1.3px at 30% 7%, rgba(255, 214, 160, 1), transparent 80%),
+    radial-gradient(1px 1px at 20% 71%, rgba(255, 214, 160, 0.75), transparent 80%),
+    radial-gradient(1.3px 1.3px at 15% 76%, rgba(255, 214, 160, 0.6), transparent 80%),
+    radial-gradient(1px 1px at 72% 93%, rgba(255, 255, 255, 0.75), transparent 80%),
+    radial-gradient(2px 2px at 65% 89%, rgba(255, 214, 160, 1), transparent 80%),
+    radial-gradient(1.6px 1.6px at 76% 60%, rgba(255, 214, 160, 0.75), transparent 80%),
+    radial-gradient(1.3px 1.3px at 25% 91%, rgba(255, 255, 255, 0.9), transparent 80%),
+    radial-gradient(1.6px 1.6px at 69% 65%, rgba(190, 220, 255, 0.9), transparent 80%),
+    radial-gradient(1px 1px at 79% 11%, rgba(190, 220, 255, 0.75), transparent 80%),
+    radial-gradient(1.3px 1.3px at 98% 45%, rgba(190, 220, 255, 1), transparent 80%),
+    radial-gradient(1px 1px at 7% 87%, rgba(255, 214, 160, 0.9), transparent 80%),
+    radial-gradient(2px 2px at 90% 46%, rgba(190, 220, 255, 0.6), transparent 80%),
+    radial-gradient(2px 2px at 13% 36%, rgba(255, 255, 255, 0.6), transparent 80%),
+    radial-gradient(1.6px 1.6px at 95% 91%, rgba(190, 220, 255, 0.9), transparent 80%),
+    radial-gradient(1.6px 1.6px at 93% 51%, rgba(255, 255, 255, 1), transparent 80%),
+    radial-gradient(1px 1px at 47% 23%, rgba(190, 220, 255, 0.6), transparent 80%),
+    radial-gradient(1.3px 1.3px at 29% 38%, rgba(255, 255, 255, 1), transparent 80%),
+    radial-gradient(1px 1px at 52% 65%, rgba(255, 255, 255, 1), transparent 80%),
+    radial-gradient(1.6px 1.6px at 53% 72%, rgba(255, 255, 255, 1), transparent 80%),
+    radial-gradient(2px 2px at 72% 37%, rgba(255, 214, 160, 1), transparent 80%),
+    radial-gradient(1px 1px at 31% 21%, rgba(255, 255, 255, 0.75), transparent 80%),
+    radial-gradient(1.3px 1.3px at 31% 86%, rgba(255, 255, 255, 1), transparent 80%),
+    radial-gradient(1.6px 1.6px at 77% 25%, rgba(255, 214, 160, 0.6), transparent 80%),
+    radial-gradient(1.6px 1.6px at 20% 55%, rgba(255, 214, 160, 0.75), transparent 80%),
+    radial-gradient(1px 1px at 90% 67%, rgba(190, 220, 255, 1), transparent 80%),
+    radial-gradient(2px 2px at 52% 53%, rgba(255, 255, 255, 1), transparent 80%),
+    radial-gradient(1px 1px at 83% 53%, rgba(255, 255, 255, 0.6), transparent 80%);
+  background-size: 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 260px 260px, 340px 340px, 340px 340px, 340px 340px, 340px 340px, 340px 340px, 340px 340px, 340px 340px, 340px 340px, 340px 340px, 340px 340px, 190px 190px, 190px 190px, 190px 190px, 190px 190px, 190px 190px, 190px 190px, 190px 190px, 190px 190px;
   opacity: 0;
   transition: opacity 0.35s ease;
 }
 .globe-roll[data-on] {
   opacity: 1;
 }
+.globe-roll__arc {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: min(560px, 92vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+.globe-roll__arc[data-go] {
+  animation: globe-arc-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s both;
+}
+@keyframes globe-arc-in {
+  from { opacity: 0; transform: translate(-50%, calc(-50% + 18px)) scale(0.94); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .globe-roll__arc { opacity: 1; }
+}
+.globe-roll__arc text {
+  font-family: var(--f-open), sans-serif;
+  font-weight: 600;
+  font-size: 62px;
+  letter-spacing: 0.04em;
+  fill: #f5f3ea;
+  text-transform: uppercase;
+}
 .globe-roll canvas {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
   display: block;
+  z-index: 1;
 }

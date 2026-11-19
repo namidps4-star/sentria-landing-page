@@ -24,16 +24,24 @@ async function rollGlobeTo(href: string): Promise<void> {
   const overlay = document.createElement("div")
   overlay.className = "globe-roll"
   overlay.setAttribute("aria-hidden", "true")
+  const arc = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+  arc.setAttribute("class", "globe-roll__arc")
+  arc.setAttribute("viewBox", "0 0 600 600")
+  arc.setAttribute("aria-hidden", "true")
+  arc.innerHTML =
+    '<defs><path id="globe-roll-arc" d="M 20 300 A 280 280 0 0 1 580 300" /></defs>' +
+    '<text><textPath href="#globe-roll-arc" startOffset="50%" text-anchor="middle">SentrIA Africa</textPath></text>'
   const canvas = document.createElement("canvas")
-  overlay.appendChild(canvas)
+  overlay.append(arc, canvas)
+  arc.dataset.go = "1"
   document.body.appendChild(overlay)
 
   const THREE = await import("three")
   const size = Math.round(Math.min(520, Math.min(window.innerWidth, window.innerHeight) * 0.62))
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.setSize(size, size, false)
-  renderer.setClearColor(0x0b0c08, 1)
+  renderer.setClearColor(0x000000, 0)
   canvas.style.width = `${size}px`
   canvas.style.height = `${size}px`
 
