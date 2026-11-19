@@ -31,12 +31,14 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
   const goTo = useRef<(i: number) => void>(() => {})
   const stepBy = useRef<(d: number) => void>(() => {})
   const ringDirTimer = useRef<number | null>(null)
-  const startRingDir = (d: -1 | 1) => {
+  const ringDirRef = useRef<-1 | 0 | 1>(0)
+  const setRingDir = (d: -1 | 0 | 1) => {
+    if (d === ringDirRef.current) return
+    if (ringDirTimer.current != null) { window.clearInterval(ringDirTimer.current); ringDirTimer.current = null }
+    ringDirRef.current = d
+    if (d === 0) return
     stepBy.current(d)
     ringDirTimer.current = window.setInterval(() => stepBy.current(d), 700)
-  }
-  const stopRingDir = () => {
-    if (ringDirTimer.current != null) { window.clearInterval(ringDirTimer.current); ringDirTimer.current = null }
   }
 
   useEffect(() => {
@@ -70,7 +72,16 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
   return (
     <div className="afr-ring" role="group" aria-roledescription={text.carousel} aria-label={text.label} onKeyDown={onKeyDown}>
       <RingFilters />
-      <div className="afr-ring-stage" ref={stage} onClickCapture={onClickCapture}>
+      <div
+        className="afr-ring-stage"
+        ref={stage}
+        onClickCapture={onClickCapture}
+        onMouseMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect()
+          setRingDir(e.clientX < r.left + r.width / 2 ? -1 : 1)
+        }}
+        onMouseLeave={() => setRingDir(0)}
+      >
         {cards.map((c, i) => {
           let d = (((i - active) % n) + n) % n
           if (d > n / 2) d -= n
@@ -105,8 +116,6 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
             </a>
           )
         })}
-        <button className="afr-ring-nav afr-ring-nav--prev" aria-label={text.prev} tabIndex={-1} onMouseEnter={() => startRingDir(-1)} onMouseLeave={stopRingDir} />
-        <button className="afr-ring-nav afr-ring-nav--next" aria-label={text.next} tabIndex={-1} onMouseEnter={() => startRingDir(1)} onMouseLeave={stopRingDir} />
         <div className="afr-ring-cursor" ref={cursor} aria-hidden="true">
           <span ref={cursorLabel}>{text.view}</span>
         </div>

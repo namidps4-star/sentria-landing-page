@@ -50,19 +50,37 @@ export function HeroFilm() {
     return () => window.clearInterval(id)
   }, [reduced, paused, ready])
 
-  const prev = () => setActive((a) => (a - 1 + SECTORS.length) % SECTORS.length)
-  const next = () => setActive((a) => (a + 1) % SECTORS.length)
-
   const dirTimer = useRef<number | null>(null)
-  const startDir = (dir: -1 | 1) => {
-    setPaused(true)
-    dir < 0 ? prev() : next()
-    dirTimer.current = window.setInterval(() => { dir < 0 ? prev() : next() }, 700)
-  }
-  const stopDir = () => {
-    if (dirTimer.current != null) { window.clearInterval(dirTimer.current); dirTimer.current = null }
-    setPaused(false)
-  }
+  const dirRef = useRef<-1 | 0 | 1>(0)
+
+  // Document-level mousemove: check if mouse is inside hero-stage, then step by half.
+  // Needs to be at document level because hero-in / hf-cap sit on top of the film.
+  useEffect(() => {
+    const step = (d: -1 | 1) => setActive((a) => d < 0 ? (a - 1 + SECTORS.length) % SECTORS.length : (a + 1) % SECTORS.length)
+    const clear = () => {
+      if (dirTimer.current != null) { window.clearInterval(dirTimer.current); dirTimer.current = null }
+      dirRef.current = 0
+      setPaused(false)
+    }
+    const setDir = (d: -1 | 0 | 1) => {
+      if (d === dirRef.current) return
+      if (dirTimer.current != null) { window.clearInterval(dirTimer.current); dirTimer.current = null }
+      dirRef.current = d
+      if (d === 0) { setPaused(false); return }
+      setPaused(true)
+      step(d)
+      dirTimer.current = window.setInterval(() => step(d), 700)
+    }
+    const onMove = (e: MouseEvent) => {
+      const hero = document.getElementById("hero-stage")
+      if (!hero) return
+      const r = hero.getBoundingClientRect()
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) { setDir(0); return }
+      setDir(e.clientX < r.left + r.width / 2 ? -1 : 1)
+    }
+    document.addEventListener("mousemove", onMove, { passive: true })
+    return () => { document.removeEventListener("mousemove", onMove); clear() }
+  }, [])
 
   const s = C.sectors
   const sec = SECTORS[active]
@@ -77,8 +95,6 @@ export function HeroFilm() {
           </div>
         ))}
         <div className="hf-scrim" />
-        <button className="hf-nav hf-nav--prev" aria-label="Previous sector" tabIndex={-1} onMouseEnter={() => startDir(-1)} onMouseLeave={stopDir} />
-        <button className="hf-nav hf-nav--next" aria-label="Next sector" tabIndex={-1} onMouseEnter={() => startDir(1)} onMouseLeave={stopDir} />
       </div>
 
       <div
