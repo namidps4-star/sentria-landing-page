@@ -30,6 +30,14 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
   const didDrag = useRef(false)
   const goTo = useRef<(i: number) => void>(() => {})
   const stepBy = useRef<(d: number) => void>(() => {})
+  const ringDirTimer = useRef<number | null>(null)
+  const startRingDir = (d: -1 | 1) => {
+    stepBy.current(d)
+    ringDirTimer.current = window.setInterval(() => stepBy.current(d), 700)
+  }
+  const stopRingDir = () => {
+    if (ringDirTimer.current != null) { window.clearInterval(ringDirTimer.current); ringDirTimer.current = null }
+  }
 
   useEffect(() => {
     return startRing({ stage, cardEls, veilEls, cursor, cursorLabel, bar, phys, activeRef, hover, didDrag, goTo, stepBy }, cards, text, setActive)
@@ -97,6 +105,8 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
             </a>
           )
         })}
+        <button className="afr-ring-nav afr-ring-nav--prev" aria-label={text.prev} tabIndex={-1} onMouseEnter={() => startRingDir(-1)} onMouseLeave={stopRingDir} />
+        <button className="afr-ring-nav afr-ring-nav--next" aria-label={text.next} tabIndex={-1} onMouseEnter={() => startRingDir(1)} onMouseLeave={stopRingDir} />
         <div className="afr-ring-cursor" ref={cursor} aria-hidden="true">
           <span ref={cursorLabel}>{text.view}</span>
         </div>

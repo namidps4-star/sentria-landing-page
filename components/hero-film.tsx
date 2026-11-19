@@ -53,6 +53,17 @@ export function HeroFilm() {
   const prev = () => setActive((a) => (a - 1 + SECTORS.length) % SECTORS.length)
   const next = () => setActive((a) => (a + 1) % SECTORS.length)
 
+  const dirTimer = useRef<number | null>(null)
+  const startDir = (dir: -1 | 1) => {
+    setPaused(true)
+    dir < 0 ? prev() : next()
+    dirTimer.current = window.setInterval(() => { dir < 0 ? prev() : next() }, 700)
+  }
+  const stopDir = () => {
+    if (dirTimer.current != null) { window.clearInterval(dirTimer.current); dirTimer.current = null }
+    setPaused(false)
+  }
+
   const s = C.sectors
   const sec = SECTORS[active]
   const tag = TAGLINES[sec.key]
@@ -66,8 +77,8 @@ export function HeroFilm() {
           </div>
         ))}
         <div className="hf-scrim" />
-        <button className="hf-nav hf-nav--prev" aria-label="Previous sector" tabIndex={-1} onClick={prev} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} />
-        <button className="hf-nav hf-nav--next" aria-label="Next sector" tabIndex={-1} onClick={next} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} />
+        <button className="hf-nav hf-nav--prev" aria-label="Previous sector" tabIndex={-1} onMouseEnter={() => startDir(-1)} onMouseLeave={stopDir} />
+        <button className="hf-nav hf-nav--next" aria-label="Next sector" tabIndex={-1} onMouseEnter={() => startDir(1)} onMouseLeave={stopDir} />
       </div>
 
       <div
