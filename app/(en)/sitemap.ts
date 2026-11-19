@@ -1,9 +1,16 @@
 import type { MetadataRoute } from "next"
 
 import { ARTICLE_PAGES, isLive } from "@/content/articles"
+import { ACTIVITY_COPY } from "@/content/africa-activities"
+import { activityPath } from "@/content/africa-urls"
 import { GENERAL_ACTIVITIES } from "@/content/general-activities"
+import { SECTOR_PAGE } from "@/content/sector-pages"
 
 const LANGS = { en: "https://sentriahq.dev/en", fr: "https://sentriahq.dev/fr" }
+const SITE = "https://sentriahq.dev"
+
+/* Activity pages that search engines may index: the ones with a sector page. */
+const INDEXED_ACTIVITIES = Object.keys(ACTIVITY_COPY).filter((a) => SECTOR_PAGE[a])
 
 /* Rebuilt at most once an hour, so a new article joins the sitemap on its date. */
 export const revalidate = 3600
@@ -41,6 +48,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ),
       },
     })),
+    ...INDEXED_ACTIVITIES.flatMap((a) => {
+      const languages = { en: `${SITE}${activityPath("en", a)}`, fr: `${SITE}${activityPath("fr", a)}` }
+      const alternates = { languages: { ...languages, "x-default": languages.en } }
+      return [
+        { url: languages.en, changeFrequency: "monthly" as const, priority: 0.7, alternates },
+        { url: languages.fr, changeFrequency: "monthly" as const, priority: 0.7, alternates },
+      ]
+    }),
     { url: "https://sentriahq.dev/privacy", changeFrequency: "yearly", priority: 0.3 },
     { url: "https://sentriahq.dev/terms", changeFrequency: "yearly", priority: 0.3 },
   ]
