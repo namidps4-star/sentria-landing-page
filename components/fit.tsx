@@ -221,7 +221,7 @@ export function FitSection() {
                   onClick={() => setFit(k)}
                   style={{ "--p": p } as React.CSSProperties}
                 >
-                  <Image src={SECTORS[i].photo} alt="" fill sizes="340px" quality={80} />
+                  <Image src={SECTORS[i].photo} alt="" fill loading="eager" sizes="(max-width: 900px) 360px, 620px" quality={90} />
                   <span className="fc-name">
                     <T s={s.tabs[i]} />
                   </span>
