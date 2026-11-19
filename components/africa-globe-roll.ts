@@ -33,6 +33,7 @@ async function rollGlobeTo(href: string): Promise<void> {
     '<text><textPath href="#globe-roll-arc" startOffset="50%" text-anchor="middle">SentrIA Africa</textPath></text>'
   const canvas = document.createElement("canvas")
   overlay.append(arc, canvas)
+  arc.dataset.go = "1"
   document.body.appendChild(overlay)
 
   const THREE = await import("three")
@@ -66,7 +67,6 @@ async function rollGlobeTo(href: string): Promise<void> {
     material.map = texture
     material.needsUpdate = true
     overlay.dataset.on = "1"
-    arc.dataset.go = "1"
     const t0 = performance.now()
     const frame = (now: number) => {
       const t = Math.min(1, (now - t0) / DURATION)
