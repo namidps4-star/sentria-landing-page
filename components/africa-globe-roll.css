@@ -1,0 +1,20 @@
+.globe-roll {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: #0b0c08;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.globe-roll[data-on] {
+  opacity: 1;
+}
+.globe-roll__sphere {
+  width: min(62vmin, 520px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-repeat: repeat-x;
+  box-shadow: inset -40px -30px 80px rgba(0, 0, 0, 0.7), inset 12px 10px 36px rgba(255, 255, 255, 0.05);
+}
