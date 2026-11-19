@@ -7,7 +7,7 @@
   transition:transform .8s cubic-bezier(.2,.7,.2,1),box-shadow .5s,opacity .5s;z-index:calc(10 - var(--d,0))}
 .fc-card[data-d="0"]{scale:1.22;box-shadow:0 40px 60px -30px rgba(11,12,8,.55),0 0 0 3px var(--lime)}
 .fc-card[data-d="1"]{z-index:9}.fc-card[data-d="2"]{scale:.94;z-index:8}.fc-card[data-d="3"]{scale:.88;z-index:7}
-.fc-card img{object-fit:cover}
+.fc-card img{object-fit:cover;backface-visibility:hidden}
 .fc-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,8,0) 50%,rgba(11,12,8,.8) 100%)}
 .fc-card:focus-visible{outline:3px solid var(--rv-ink);outline-offset:4px}
 .fc-name{position:absolute;left:22px;right:22px;bottom:24px;z-index:2;color:#fff;text-align:left;font-family:var(--f-display),sans-serif;font-weight:700;font-size:25px;line-height:1.05;letter-spacing:-.02em}
