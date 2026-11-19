@@ -30,6 +30,16 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
   const didDrag = useRef(false)
   const goTo = useRef<(i: number) => void>(() => {})
   const stepBy = useRef<(d: number) => void>(() => {})
+  const ringDirTimer = useRef<number | null>(null)
+  const ringDirRef = useRef<-1 | 0 | 1>(0)
+  const setRingDir = (d: -1 | 0 | 1) => {
+    if (d === ringDirRef.current) return
+    if (ringDirTimer.current != null) { window.clearInterval(ringDirTimer.current); ringDirTimer.current = null }
+    ringDirRef.current = d
+    if (d === 0) return
+    stepBy.current(d)
+    ringDirTimer.current = window.setInterval(() => stepBy.current(d), 700)
+  }
 
   useEffect(() => {
     return startRing({ stage, cardEls, veilEls, cursor, cursorLabel, bar, phys, activeRef, hover, didDrag, goTo, stepBy }, cards, text, setActive)
@@ -62,7 +72,17 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
   return (
     <div className="afr-ring" role="group" aria-roledescription={text.carousel} aria-label={text.label} onKeyDown={onKeyDown}>
       <RingFilters />
-      <div className="afr-ring-stage" ref={stage} onClickCapture={onClickCapture}>
+      <div
+        className="afr-ring-stage"
+        ref={stage}
+        onClickCapture={onClickCapture}
+        onMouseMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect()
+          const frac = (e.clientX - r.left) / r.width
+          setRingDir(frac < 0.35 ? -1 : frac > 0.65 ? 1 : 0)
+        }}
+        onMouseLeave={() => setRingDir(0)}
+      >
         {cards.map((c, i) => {
           let d = (((i - active) % n) + n) % n
           if (d > n / 2) d -= n

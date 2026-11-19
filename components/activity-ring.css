@@ -130,3 +130,8 @@
 @media (prefers-reduced-motion: reduce) {
   .afr-ring-text { animation: none; }
 }
+
+/* Hover-directional nav zones: left half = prev, right half = next */
+.afr-ring-nav { position: absolute; top: 0; bottom: 0; width: 20%; z-index: 4; background: transparent; border: 0; padding: 0; }
+.afr-ring-nav--prev { left: 0; cursor: w-resize; }
+.afr-ring-nav--next { right: 0; cursor: e-resize; }

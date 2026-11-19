@@ -171,6 +171,27 @@ export function FitSection() {
   const active = useFit()
   const lang = useLang()
   const s = C.fit
+  const stageDir = useRef<-1 | 0 | 1>(0)
+  const stageTimer = useRef<number | null>(null)
+  const stepFit = (d: -1 | 1) => setFit(FIT_KEYS[(FIT_KEYS.indexOf(current) + d + FIT_KEYS.length) % FIT_KEYS.length])
+  const applyStageDir = (d: -1 | 0 | 1) => {
+    if (d === stageDir.current) return
+    if (stageTimer.current != null) window.clearInterval(stageTimer.current)
+    stageTimer.current = null
+    stageDir.current = d
+    if (d === 0) return
+    stepFit(d)
+    stageTimer.current = window.setInterval(() => stepFit(d), 700)
+  }
+  useEffect(() => () => {
+    if (stageTimer.current != null) window.clearInterval(stageTimer.current)
+  }, [])
+  const onStageMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse") return
+    const r = e.currentTarget.getBoundingClientRect()
+    const f = (e.clientX - r.left) / r.width
+    applyStageDir(f < 0.35 ? -1 : f > 0.65 ? 1 : 0)
+  }
   return (
     <section id="fit" className="rv-sec fit">
       <div className="wrap">
@@ -185,7 +206,7 @@ export function FitSection() {
         </p>
         <div className="rv-fit rv-fit-cards" data-rv="rise" style={iv(2)}>
           {/* The seven sectors as a row of cards in 3D. The picked sector turns to face you in the middle. */}
-          <div className="fc-stage" role="group" aria-label={s.title}>
+          <div className="fc-stage" role="group" aria-label={s.title} onPointerMove={onStageMove} onPointerLeave={() => applyStageDir(0)}>
             {FIT_KEYS.map((k, i) => {
               const idx = FIT_KEYS.indexOf(active)
               const p = ((((i - idx + 3) % 7) + 7) % 7) - 3
