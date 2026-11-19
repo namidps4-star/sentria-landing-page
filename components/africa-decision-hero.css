@@ -172,3 +172,21 @@
     margin: 24px 20px 0;
   }
 }
+.afr-decision-wrap {
+  padding-block: clamp(40px, 6vw, 80px);
+}
+.afr-decision-wrap .adh {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.adh-ix {
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .adh-ix {
+    font-size: 17px;
+  }
+  .adh {
+    padding: 20px 18px 24px;
+  }
+}

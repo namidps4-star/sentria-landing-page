@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
-import { AfricaDecisionHero, type DecisionHeroData } from "@/components/africa-decision-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { AfricaAlertPanel } from "@/components/africa-alert-panel"
 import { ACTIVITY_COPY, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-activities"
@@ -31,8 +30,6 @@ function picture(activity: string, lang: "en" | "fr") {
   return activityPhoto(activity, lang)
 }
 
-const PHARMACIE_DECISION: DecisionHeroData = { product: "Amoxicillin 500 mg", boxes: 32, perDay: 8, promised: 7, real: 11, confidence: 87 }
-
 /* Every activity page opens with the same hero and carries the same template below it. */
 export default async function Page({ params }: { params: Params }) {
   const { lang, activity } = await params
@@ -43,7 +40,7 @@ export default async function Page({ params }: { params: Params }) {
     <AfricaHero
       copy={{ ...copy.en, photoAlt: pic?.alt ?? copy.en.photoAlt }}
       id={activity}
-      panel={activity === "pharmacie" ? <AfricaDecisionHero data={PHARMACIE_DECISION} /> : SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="en" alerts={SECTOR_ALERTS[activity].en} /> : undefined}
+      panel={SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="en" alerts={SECTOR_ALERTS[activity].en} /> : undefined}
       extra={<AfricaCapabilities slug={activity} lang="en" />}
       photo={pic ? { src: pic.src, credit: pic.credit } : undefined}
       compact

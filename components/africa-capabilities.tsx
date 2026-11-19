@@ -7,7 +7,7 @@ import { AfricaStage } from "./africa-stage"
 import { MapHero } from "./africa-network-map"
 import { AfricaStepsPanels } from "./africa-steps-panels"
 import { AfricaMorning } from "./africa-morning"
-import { AfricaExample } from "./africa-example"
+import { AfricaDecisionHero, PHARMACIE_DECISION } from "./africa-decision-hero"
 import { AfricaFaqAccordion, type FaqTone } from "./africa-faq-accordion"
 import { AfricaQueuePreview } from "./africa-queue-preview"
 import { AfricaDecisionCard } from "./africa-decision-card"
@@ -67,18 +67,9 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
         <AfricaStepsPanels heading={stepsHeading} steps={steps} kicker={kicker} lang={lang} />
         {c.example && slug === "grossiste-pharma" && <MapHero kicker={kicker} title={c.example.title} result={c.example.result} lang={lang} />}
         {c.example && pharmacy && (
-          <AfricaExample
-            kicker={kicker}
-            title={c.example.title}
-            lines={c.example.lines}
-            result={c.example.result}
-            first={firstSentence}
-            imports={c.items[0].imports}
-            youImport={youImport}
-            lang={lang}
-            scale
-            style={design.example}
-          />
+          <div className="wrap afr-decision-wrap">
+            <AfricaDecisionHero data={PHARMACIE_DECISION} />
+          </div>
         )}
         {c.example && slug !== "grossiste-pharma" && !pharmacy && <AfricaMorning kicker={kicker} title={c.example.title} lines={c.example.lines} result={c.example.result} lang={lang} />}
       </section>

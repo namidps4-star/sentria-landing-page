@@ -44,6 +44,8 @@ function useCountUp(target: number, run: boolean, ms = 900) {
   return value
 }
 
+export const PHARMACIE_DECISION: DecisionHeroData = { product: "Amoxicillin 500 mg", boxes: 32, perDay: 8, promised: 7, real: 11, confidence: 87 }
+
 export function AfricaDecisionHero({ data }: { data: DecisionHeroData }) {
   const root = useRef<HTMLDivElement>(null)
   const [seen, setSeen] = useState(false)
