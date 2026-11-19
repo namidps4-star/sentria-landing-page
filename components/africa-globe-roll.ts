@@ -5,15 +5,16 @@ const EARTH = "/africa/earth-blue-marble.jpg"
 const START_LON = -100 // the globe starts over the Americas
 const AFRICA_LON = 20 // the middle of Africa
 const DURATION = 1400
+const DEG = Math.PI / 180
 
-/* Shows a globe that rolls from the Americas to Africa, then opens the page. Reduced motion skips straight there. */
+/* Shows a lit 3D globe that rolls from the Americas to Africa, then opens the page. Reduced motion skips straight there. */
 export function rollGlobeClick(e: ReactMouseEvent, href: string): void {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
   e.preventDefault()
-  rollGlobeTo(href)
+  void rollGlobeTo(href)
 }
 
-function rollGlobeTo(href: string): void {
+async function rollGlobeTo(href: string): Promise<void> {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     window.location.assign(href)
     return
@@ -23,31 +24,53 @@ function rollGlobeTo(href: string): void {
   const overlay = document.createElement("div")
   overlay.className = "globe-roll"
   overlay.setAttribute("aria-hidden", "true")
-  const sphere = document.createElement("div")
-  sphere.className = "globe-roll__sphere"
-  overlay.appendChild(sphere)
+  const canvas = document.createElement("canvas")
+  overlay.appendChild(canvas)
   document.body.appendChild(overlay)
 
-  // The sphere's diameter D shows half of the world; the texture is 2D wide for the full 360 degrees.
-  const D = sphere.clientWidth
-  const texW = 2 * D
-  sphere.style.backgroundSize = `${texW}px ${D}px`
-  const offsetFor = (lon: number) => D / 2 - ((lon + 180) / 360) * texW
-  const from = offsetFor(START_LON)
-  const to = offsetFor(AFRICA_LON)
+  const THREE = await import("three")
+  const size = Math.round(Math.min(520, Math.min(window.innerWidth, window.innerHeight) * 0.62))
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer.setSize(size, size, false)
+  renderer.setClearColor(0x0b0c08, 1)
+  canvas.style.width = `${size}px`
+  canvas.style.height = `${size}px`
 
-  requestAnimationFrame(() => {
+  const scene = new THREE.Scene()
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100)
+  camera.position.z = 4.2
+
+  const material = new THREE.MeshStandardMaterial({ roughness: 0.9, metalness: 0 })
+  const globe = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 96), material)
+  globe.rotation.x = 0.12
+  scene.add(globe)
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35))
+  const sun = new THREE.DirectionalLight(0xffffff, 2.2)
+  sun.position.set(-3, 1.5, 3)
+  scene.add(sun)
+
+  // Calibrated on the texture: at rotation.y = -(lon + 70) degrees, that longitude faces the camera.
+  const fromAngle = -(START_LON + 70) * DEG
+  const toAngle = -(AFRICA_LON + 70) * DEG
+
+  new THREE.TextureLoader().load(EARTH, (texture) => {
+    texture.colorSpace = THREE.SRGBColorSpace
+    material.map = texture
+    material.needsUpdate = true
     overlay.dataset.on = "1"
+    const t0 = performance.now()
+    const frame = (now: number) => {
+      const t = Math.min(1, (now - t0) / DURATION)
+      const eased = 1 - Math.pow(1 - t, 3)
+      globe.rotation.y = fromAngle + (toAngle - fromAngle) * eased
+      renderer.render(scene, camera)
+      if (t < 1) requestAnimationFrame(frame)
+      else {
+        renderer.dispose()
+        window.location.assign(href)
+      }
+    }
+    requestAnimationFrame(frame)
   })
-
-  const t0 = performance.now()
-  const frame = (now: number) => {
-    const t = Math.min(1, (now - t0) / DURATION)
-    const eased = 1 - Math.pow(1 - t, 3)
-    sphere.style.backgroundPosition = `${from + (to - from) * eased}px 0`
-    if (t < 1) requestAnimationFrame(frame)
-    else window.location.assign(href)
-  }
-  sphere.style.backgroundImage = `url(${EARTH})`
-  requestAnimationFrame(frame)
 }
