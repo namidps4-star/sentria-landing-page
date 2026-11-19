@@ -27,7 +27,7 @@ export function Cockpit() {
         <ol className="rv-rows" data-rv="rise" style={iv(2)}>
           {s.queue.map((q) => {
             const [en, pct] = q.a.split(", ")
-            const fr = (FR[q.a] ?? q.a).split(", ")[0]
+            const [fr, frPct] = (FR[q.a] ?? q.a).split(", ")
             return (
               <li key={q.t} className="rv-row">
                 <span className="rv-r-t">
@@ -36,7 +36,9 @@ export function Cockpit() {
                 <span className="rv-r-a">
                   <B en={en} fr={fr} />
                 </span>
-                <span className="rv-r-n">{pct}</span>
+                <span className="rv-r-n">
+                  <B en={pct} fr={frPct} />
+                </span>
               </li>
             )
           })}
