@@ -50,9 +50,9 @@ async function rollGlobeTo(href: string): Promise<void> {
   sun.position.set(-3, 1.5, 3)
   scene.add(sun)
 
-  // Calibrated on the texture: at rotation.y = -(lon + 70) degrees, that longitude faces the camera.
+  // Calibrated on the texture: a longitude faces the camera at rotation.y = -(lon + 70) degrees; Africa centres best at -(lon + 80).
   const fromAngle = -(START_LON + 70) * DEG
-  const toAngle = -(AFRICA_LON + 70) * DEG
+  const toAngle = -(AFRICA_LON + 80) * DEG
 
   new THREE.TextureLoader().load(EARTH, (texture) => {
     texture.colorSpace = THREE.SRGBColorSpace
