@@ -183,8 +183,8 @@
   z-index: 2;
 }
 .globe-roll__arc text {
-  font-family: var(--f-display), sans-serif;
-  font-weight: 700;
+  font-family: var(--f-open), sans-serif;
+  font-weight: 600;
   font-size: 50px;
   letter-spacing: 0.04em;
   fill: #f5f3ea;
