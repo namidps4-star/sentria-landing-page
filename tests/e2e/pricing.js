@@ -24,13 +24,19 @@ const digits = (t) => Number(String(t).replace(/[^\d]/g, ''))
   }
 
   const b = await playwright().chromium.launch(LAUNCH)
-  // [language, path, width, country cookie, [Pro, Business] expected]. No cookie means USD.
+  // The expected prices come from content/prices.ts, the single source the page reads.
+  const expected = (cur) => {
+    const m = site.match(new RegExp(`${cur}:\\s*\\[\\s*([\\d_]+)\\s*,\\s*([\\d_]+)\\s*\\]`))
+    return [Number(m[1].replace(/_/g, '')), Number(m[2].replace(/_/g, ''))]
+  }
+  // [language, path, width, country cookie, currency]. No cookie means USD.
   const runs = [
-    ['en', '/en', 1440, null, [39, 99]],
-    ['fr', '/fr', 1440, 'BJ', [25000, 65000]],
-    ['en', '/en', 390, 'KE', [4200, 11000]],
+    ['en', '/en', 1440, null, 'USD'],
+    ['fr', '/fr', 1440, 'BJ', 'XOF'],
+    ['en', '/en', 390, 'KE', 'KES'],
   ]
-  for (const [lang, url, width, country, [pro, business]] of runs) {
+  for (const [lang, url, width, country, cur] of runs) {
+    const [pro, business] = expected(cur)
     console.log(`== ${lang} at ${width}px${country ? `, country ${country}` : ', no country'}`)
     const ctx = await b.newContext({ viewport: { width, height: 900 } })
     if (country) await ctx.addCookies([{ name: 'sentria_country', value: country, url: APP_URL }])

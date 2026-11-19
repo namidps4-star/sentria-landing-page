@@ -78,6 +78,7 @@ export function ActivityRing({ lang, base, cards, text }: Props) {
         ref={stage}
         onClickCapture={onClickCapture}
         onMouseMove={(e) => {
+          if ((e.target as HTMLElement).closest(".afr-ring-card")) { setRingDir(0); return }
           const r = e.currentTarget.getBoundingClientRect()
           const frac = (e.clientX - r.left) / r.width
           setRingDir(frac < 0.35 ? -1 : frac > 0.65 ? 1 : 0)

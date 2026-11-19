@@ -31,6 +31,17 @@ const SECTOR: Record<HubSector, { page: L }> = {
   energy: { page: { en: "/activities/energy", fr: "/fr/activites/energie" } },
 }
 
+/* The sector name on each activity card, the same as the hub's sector list. */
+const SECTOR_LABEL: Record<HubSector, L> = {
+  health: { en: "Health", fr: "Santé" },
+  agriculture: { en: "Agriculture", fr: "Agriculture" },
+  distribution: { en: "Distribution", fr: "Distribution" },
+  logistics: { en: "Logistics", fr: "Logistique" },
+  industry: { en: "Industry", fr: "Industrie" },
+  transportation: { en: "Transportation", fr: "Transport" },
+  energy: { en: "Energy", fr: "Énergie" },
+}
+
 /* One picture per activity, and no picture used twice on the site. Photos from Unsplash (credit in `by`). */
 const PHOTO: Record<string, { photo: string; alt: L; by: string; user: string }> = {
   "clinique-hopital": { photo: "/africa/hq/card-clinique.jpg", alt: { en: "Hospital corridor", fr: "Couloir d'hôpital" }, by: "Gonzalo Kenny", user: "gonzakenny" },
@@ -96,13 +107,13 @@ const APP: Record<string, { name: L; line: L }> = {
 
 function build(sector: HubSector, id: string): ActivityCard {
   const existing = ACTIVITY_CARDS.find((c) => c.id === id)
-  if (existing) return existing
+  if (existing) return { ...existing, sector: existing.sector ?? SECTOR_LABEL[sector] }
   const s = SECTOR[sector]
   const a = APP[id]
   const p = PHOTO[id]
   // An activity with a page of its own in the Africa section links there; the others have their page now too.
   const own: L | undefined = SECTOR_PAGE[id] && ACTIVITY_COPY[id] ? { en: activityPath("en", id), fr: activityPath("fr", id) } : undefined
-  return { id, href: own ?? OWN_PAGE[id] ?? s.page, name: a.name, line: a.line, photo: p.photo, alt: p.alt, by: p.by, user: p.user }
+  return { id, href: own ?? OWN_PAGE[id] ?? s.page, sector: SECTOR_LABEL[sector], name: a.name, line: a.line, photo: p.photo, alt: p.alt, by: p.by, user: p.user }
 }
 
 export function cardsFor(sector: HubSector): ActivityCard[] {

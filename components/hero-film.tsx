@@ -22,6 +22,7 @@ export function HeroFilm() {
   const [reduced, setReduced] = useState(false)
   const [paused, setPaused] = useState(false)
   const [held, setHeld] = useState(false)
+  const [onCaption, setOnCaption] = useState(false)
   const [ready, setReady] = useState(false)
   const text = useText()
   const box = useRef<HTMLDivElement>(null)
@@ -45,13 +46,13 @@ export function HeroFilm() {
   }, [])
 
   useEffect(() => {
-    if (reduced || paused || held || !ready) return
+    if (reduced || paused || held || onCaption || !ready) return
     const id = window.setInterval(() => {
       if (document.hidden) return
       setActive((a) => (a + 1) % SECTORS.length)
     }, BEAT_MS)
     return () => window.clearInterval(id)
-  }, [reduced, paused, held, ready])
+  }, [reduced, paused, held, onCaption, ready])
 
   const dirTimer = useRef<number | null>(null)
   const dirRef = useRef<-1 | 0 | 1>(0)
@@ -74,6 +75,7 @@ export function HeroFilm() {
     const onMove = (e: MouseEvent) => {
       const hero = document.getElementById("hero-stage")
       if (!hero) return
+      if ((e.target as Element | null)?.closest?.(".hf-cap")) { applyDir(0); return }
       const r = hero.getBoundingClientRect()
       if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) { applyDir(0); return }
       const frac = (e.clientX - r.left) / r.width
@@ -101,7 +103,9 @@ export function HeroFilm() {
       <div
         className="hf-cap"
         ref={box}
-        onFocus={() => setPaused(true)}
+        onMouseEnter={() => setOnCaption(true)}
+        onMouseLeave={() => setOnCaption(false)}
+        onFocus={(e) => { if (e.target instanceof HTMLElement && e.target.matches(":focus-visible")) setPaused(true) }}
         onBlur={() => setPaused(false)}
       >
         <p className="hf-s" aria-live="off">

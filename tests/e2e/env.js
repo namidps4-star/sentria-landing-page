@@ -26,7 +26,8 @@ const pass = (ok, label) => {
 }
 
 // Calls to other sites (Calendly, fonts) are not reachable in every sandbox; they are not the app's errors.
-const IGNORED_ERRORS = /ERR_TUNNEL_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED|calendly|permissions policy violation: payment/i
+// requestStorageAccess comes from the reCAPTCHA frame inside the Calendly booking widget (a third-party iframe); the app never calls it.
+const IGNORED_ERRORS = /ERR_TUNNEL_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED|calendly|permissions policy violation: payment|requestStorageAccess: Permission denied/i
 
 module.exports = {
   APP_URL: process.env.E2E_URL || 'http://localhost:3300',
