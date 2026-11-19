@@ -9,7 +9,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "next": "16.4.5",
+    "next": "16.4.6",
     "react": "^19",
     "react-dom": "^19",
     "three": "0.187.0"
@@ -20,7 +20,7 @@
     "@types/react-dom": "^19",
     "@types/three": "^0.187.0",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.4.5",
+    "eslint-config-next": "^16.4.6",
     "playwright": "^1.55.0",
     "typescript": "5.7.3"
   }
