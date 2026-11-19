@@ -48,7 +48,7 @@ export const EN_CLOSE = {
    },
    {
     "q": "How much does SentrIA cost?",
-    "a": "Free to start on one site and one user. Pro starts at 49 € a month and Business at 99 € a month, with prices set per currency. Annual billing is 10 months for 12. Entreprise is quoted on scope. Start with one site and one measurable problem."
+    "a": "Free to start on one site and one user. Pro starts at {pro} a month and Business at {business} a month, in your currency. Annual billing is 10 months for 12. Entreprise is quoted on scope. Start with one site and one measurable problem."
    },
    {
     "q": "Can we start with a single use case?",

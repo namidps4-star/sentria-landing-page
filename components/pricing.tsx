@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
-
 import { useLang } from "@/components/lang"
+import { useSiteCurrency } from "@/components/site-currency"
 import { B } from "@/components/t"
 import { Check, iv } from "@/components/ui"
-import { COUNTRY_COOKIE, FALLBACK_CURRENCY, SITE_PRICES, currencyForCountry, formatPrice, type SiteCurrency } from "@/content/prices"
+import { SITE_PRICES, formatPrice } from "@/content/prices"
 
 type Plan = {
   id: "decouverte" | "pro" | "business" | "entreprise"
@@ -71,13 +70,7 @@ const PLANS: Plan[] = [
 
 export function PricingGrid() {
   const lang = useLang()
-  // The visitor's currency comes from their country (cookie set by proxy.ts). Until the page
-  // has read it, USD shows, so the server and the first paint agree.
-  const [currency, setCurrency] = useState<SiteCurrency>(FALLBACK_CURRENCY)
-  useEffect(() => {
-    const entry = document.cookie.split("; ").find((c) => c.startsWith(`${COUNTRY_COOKIE}=`))
-    setCurrency(currencyForCountry(entry?.split("=")[1]))
-  }, [])
+  const currency = useSiteCurrency()
 
   return (
     <>
