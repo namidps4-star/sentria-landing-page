@@ -8,6 +8,24 @@ export type Tab = "overview" | "inventory" | "orders" | "suppliers"
 export type Chip = "hi" | "md" | "lo"
 export const CHIP: Record<Chip, [string, string]> = { hi: ["High", "Élevé"], md: ["Medium", "Moyen"], lo: ["Low", "Faible"] }
 
+const ERP_FR: Record<string, string> = {
+  "Hydraulic seal": "Joint hydraulique",
+  "Pallet wrap": "Film étirable",
+  "Filter cartridge": "Cartouche filtrante",
+  "Label roll": "Rouleau d’étiquettes",
+  "Bearing 6204": "Roulement 6204",
+  Inbound: "Réception",
+  Cold: "Froid",
+  Bulk: "Vrac",
+  Pick: "Préparation",
+  "Spare parts": "Pièces détachées",
+  Today: "Aujourd’hui",
+  Tomorrow: "Demain",
+  Fri: "Ven.",
+}
+const cellFr = (c: string) =>
+  ERP_FR[c] ?? c.replace(/^(\+?\d+)\.(\d+) d$/, "$1,$2 j").replace(/^(\+?\d+) d$/, "$1 j")
+
 export type Table = { title: [string, string]; cols: [string, string][]; rows: (string | Chip)[][] }
 export const TABLES: Record<Tab, Table> = {
   overview: {
@@ -112,7 +130,7 @@ export function ErpScreen({ active }: { active: boolean }) {
           <div className="cs-kpis">
             <div className="cs-kpi">
               <small>{bi("Stock coverage", "Couverture stock")}</small>
-              <strong>{cover}<span> {bi("days", "jours")}</span></strong>
+              <strong>{bi(cover, cover.replace(".", ","))}<span> {bi("days", "jours")}</span></strong>
               <em>{bi("of demand", "de la demande")}</em>
             </div>
             <div className="cs-kpi">
@@ -145,7 +163,7 @@ export function ErpScreen({ active }: { active: boolean }) {
                           <u className={c}>{bi(CHIP[c as Chip][0], CHIP[c as Chip][1])}</u>
                         </span>
                       ) : (
-                        <span key={ci}>{c}</span>
+                        <span key={ci}>{bi(c, cellFr(c))}</span>
                       )
                     )}
                   </div>
