@@ -24,8 +24,11 @@ async function rollGlobeTo(href: string): Promise<void> {
   const overlay = document.createElement("div")
   overlay.className = "globe-roll"
   overlay.setAttribute("aria-hidden", "true")
+  const word = document.createElement("p")
+  word.className = "globe-roll__word"
+  word.textContent = "SentrIA Africa"
   const canvas = document.createElement("canvas")
-  overlay.appendChild(canvas)
+  overlay.append(word, canvas)
   document.body.appendChild(overlay)
 
   const THREE = await import("three")
