@@ -32,8 +32,10 @@ export default async function Page({ params }: { params: Params }) {
   if (!a) notFound()
   return (
     <>
-      <AfricaHero video copy={a.copy.fr} id={a.key} photo={a.photo} extra={<AfricaCapabilities slug={a.key} lang="fr" />} />
-      {a.key === "grossiste-pharma" && <WholesaleFeatures lang="fr" />}
+      <AfricaHero video copy={a.copy.fr} id={a.key} photo={a.photo} extra={<>
+        <AfricaCapabilities slug={a.key} lang="fr" />
+        {a.key === "grossiste-pharma" && <WholesaleFeatures lang="fr" />}
+      </>} />
     </>
   )
 }
