@@ -1,12 +1,30 @@
-import Image from "next/image"
+"use client"
+
+import type { ReactNode } from "react"
 import { WHOLESALE_FEATURES } from "@/content/wholesale-features"
+import { useSiteCurrency } from "./site-currency"
+import { WcStockCard } from "./wc-stock-card"
+import { WcForecastCard } from "./wc-forecast-card"
+import { WcCreditsCard } from "./wc-credits-card"
+import { WcColdChainCard } from "./wc-cold-chain-card"
+import { WcHubsCard } from "./wc-hubs-card"
+import "./wc-cards.css"
 import "./wholesale-features.css"
 
-/* Five hero blocks for the wholesaler page, one per planned feature. Each one says it is planned. */
+/* Five hero blocks for the wholesaler page, one per planned feature. Each says it is planned.
+   The mockup is a live card component; money follows the visitor's currency (USD fallback). */
 export function WholesaleFeatures({ lang }: { lang: "en" | "fr" }) {
+  const currency = useSiteCurrency()
   const planned = lang === "en" ? "Planned" : "Prévu"
   const cta = lang === "en" ? "Book a demo →" : "Demander une démo →"
   const href = lang === "en" ? "/en#demo" : "/fr#demo"
+  const cards: Record<string, ReactNode> = {
+    abc: <WcStockCard lang={lang} currency={currency} />,
+    forecast: <WcForecastCard lang={lang} />,
+    credits: <WcCreditsCard lang={lang} currency={currency} />,
+    sensors: <WcColdChainCard lang={lang} />,
+    hubs: <WcHubsCard lang={lang} currency={currency} />,
+  }
   return (
     <section className="wsf" aria-label={lang === "en" ? "Planned wholesale features" : "Fonctions prévues pour les grossistes"}>
       {WHOLESALE_FEATURES.map((f) => (
@@ -26,8 +44,8 @@ export function WholesaleFeatures({ lang }: { lang: "en" | "fr" }) {
                 {cta}
               </a>
             </div>
-            <figure className="wsf-fig">
-              <Image src={f.image} alt={f.alt[lang]} width={880} height={620} sizes="(max-width: 760px) 100vw, 560px" />
+            <figure className="wsf-fig" aria-label={f.alt[lang]}>
+              {cards[f.key]}
             </figure>
           </div>
         </article>
