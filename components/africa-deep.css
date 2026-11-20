@@ -2,4 +2,3 @@
    Loaded last so it wins over africa.css, africa-hub.css and africa-sector.css. */
 .afr-hero.afr-hero--deep{background:#0b0c08}
 .afr-hero.afr-hero--deep::after{background:rgba(11,12,8,.72)}
-.afr-hero.afr-hero--sector::after{background:rgba(11,12,8,.97)}
