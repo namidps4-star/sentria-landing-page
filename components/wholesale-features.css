@@ -79,3 +79,35 @@
   border-radius: 12px;
   border: 1px solid #d2d2d7;
 }
+
+/* Motion: the text and the card rise in as each block scrolls into view. Browsers without
+   scroll-driven animations show the blocks still. Reduced motion keeps them still. */
+@supports (animation-timeline: view()) {
+  .wsf-text,
+  .wsf-fig {
+    animation: wsf-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 38%;
+  }
+  .wsf-fig {
+    animation-delay: 0.08s;
+  }
+}
+
+@keyframes wsf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wsf-text,
+  .wsf-fig {
+    animation: none !important;
+  }
+}
