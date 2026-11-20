@@ -19,7 +19,7 @@ export const GLOBAL_HUB_CARDS: ActivityCard[] = [
     id: "wholesaler",
     sector: { en: "Healthcare", fr: "Santé" },
     name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" },
-    line: { en: "Transfers of unsold stock between pharmacies.", fr: "Transferts de stock invendu entre pharmacies." },
+    line: { en: "Resupply from your warehouse. Return requests for unsold stock.", fr: "Réapprovisionnement depuis votre entrepôt. Demandes de retour pour stock invendu." },
     href: { en: "/activities/wholesaler", fr: "/fr/activites/grossiste" },
     photo: "/hub-photos/wholesaler.jpg",
     alt: { en: "Boxes stacked high in a warehouse", fr: "Cartons empilés dans un entrepôt" },
