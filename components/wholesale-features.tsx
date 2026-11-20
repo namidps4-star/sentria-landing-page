@@ -11,11 +11,10 @@ import { WcHubsCard } from "./wc-hubs-card"
 import "./wc-cards.css"
 import "./wholesale-features.css"
 
-/* Five hero blocks for the wholesaler page, one per planned feature. Each says it is planned.
+/* Five hero blocks for the wholesaler page, one per feature.
    The mockup is a live card component; money follows the visitor's currency (USD fallback). */
 export function WholesaleFeatures({ lang }: { lang: "en" | "fr" }) {
   const currency = useSiteCurrency()
-  const planned = lang === "en" ? "Planned" : "Prévu"
   const cta = lang === "en" ? "Book a demo →" : "Demander une démo →"
   const href = lang === "en" ? "/en#demo" : "/fr#demo"
   const cards: Record<string, ReactNode> = {
@@ -26,12 +25,11 @@ export function WholesaleFeatures({ lang }: { lang: "en" | "fr" }) {
     hubs: <WcHubsCard lang={lang} currency={currency} />,
   }
   return (
-    <section className="wsf" aria-label={lang === "en" ? "Planned wholesale features" : "Fonctions prévues pour les grossistes"}>
+    <section className="wsf" aria-label={lang === "en" ? "Wholesale features" : "Fonctions pour les grossistes"}>
       {WHOLESALE_FEATURES.map((f) => (
         <article key={f.key} className="wsf-item">
           <div className="wrap wsf-grid">
             <div className="wsf-text">
-              <span className="wsf-tag">{planned}</span>
               <div className="wsf-kicker">{f.kicker[lang]}</div>
               <h2 className="wsf-h">
                 {f.h2[lang][0]}

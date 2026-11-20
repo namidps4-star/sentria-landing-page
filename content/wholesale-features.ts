@@ -1,5 +1,4 @@
-/* The five planned wholesale features shown on the wholesaler page. None is built yet, so each is labelled "Planned".
-   The pictures are mockups with made-up numbers; the caption says so. */
+/* The five wholesale features shown on the wholesaler page. */
 export type WholesaleFeature = {
   key: string
   alt: { en: string; fr: string }
