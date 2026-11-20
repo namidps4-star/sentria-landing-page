@@ -128,6 +128,10 @@
   color: var(--lime);
   transform: translateX(6px);
 }
+.foot-pref {
+  display: block;
+  margin-top: 14px;
+}
 .foot-brand {
   display: block;
   margin-top: clamp(40px, 6vw, 88px);

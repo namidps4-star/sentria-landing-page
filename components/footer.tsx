@@ -31,6 +31,9 @@ export function Footer() {
           <a className="foot-sched" href="#demo">
             <B en="Book a demo" fr="Réserver une démo" />
           </a>
+          <a className="foot-sched foot-pref" href="https://google.com/preferences/source?q=sentriahq.dev" rel="noopener">
+            <B en="Add SentrIA as a preferred source" fr="Ajouter SentrIA comme source préférée" />
+          </a>
           <a className="foot-brand" href="#top">
             {f.brand}
           </a>
