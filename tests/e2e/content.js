@@ -35,8 +35,23 @@ const FEATURES_DROPPED = new Set([
   'Intégrations avancées', 'Support dédié', 'Vues métier personnalisées', 'Accompagnement au déploiement', 'Gouvernance et sécurité',
 ])
 // Decided: a sector sentence the redesign rewrote; half of its words are on the page.
+// Decided: rewritten by the activity and hub redesign on main; their words are on the page.
 const REWRITTEN = new Set([
   'Trucking companies, delivery fleets and vehicle rental operators. Helps you track engine health, fuel and maintenance schedules across the whole fleet.',
+  "Deviation detection",
+  "Maintenance",
+  "Future pressure",
+  "Quality",
+  "Pharmacies, hospital pharmacies, medical wholesalers and cold chain facilities. Helps you track stock levels, expiry dates and temperature before something runs out or spoils.",
+  "Ports, warehouses, distribution centers and freight forwarders. Helps you spot bottlenecks in queues, equipment and container flow before they cause delays.",
+  "Farms, grain cooperatives and cold storage or packing facilities. Helps you watch storage conditions and transport timing before a harvest is lost to delay or spoilage.",
+  "Utility companies, generator fleet operators and industrial energy users. Helps you watch fuel levels, overheating and consumption before an outage happens.",
+  "Wholesalers, distributors, supermarkets, hypermarkets, retail chains and convenience stores. Helps you catch stock shortages, price or margin issues and slow moving inventory before they hurt sales.",
+  "Détection des écarts",
+  "Maintenance",
+  "Pression future",
+  "Qualité",
+  "Entreprises de transport routier, flottes de livraison et loueurs de véhicules. Suivez l'état des moteurs, le carburant et les plannings de maintenance sur toute la flotte.",
 ])
 // Decided: French translations of English words the old French page left untranslated.
 const TRANSLATED_FR = new Set(['Skip to content', 'Privacy', 'Terms', 'Enterprise'])
