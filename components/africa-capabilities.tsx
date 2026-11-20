@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import { ACTIVITY_LIST, CAPABILITIES, SECTOR_ALERTS } from "@/content/africa-activities"
 import { SHARED } from "@/content/africa-activity-pages"
 import { designFor } from "@/content/africa-designs"
@@ -42,7 +43,7 @@ function bandFor(slug: string): { queue: BandColor; dcard: BandColor } {
   return { queue: q, dcard: "ink" }
 }
 
-export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | "fr" }) {
+export function AfricaCapabilities({ slug, lang, beforeFaq }: { slug: string; lang: "en" | "fr"; beforeFaq?: ReactNode }) {
   const c = CAPABILITIES[slug]?.[lang]
   if (!c) return null
   const design = designFor(slug)
@@ -80,6 +81,7 @@ export function AfricaCapabilities({ slug, lang }: { slug: string; lang: "en" | 
           </div>
         </section>
       )}
+      {beforeFaq}
       <AfricaFaqAccordion id={`${id}-faq`} kicker={kicker} heading={faqHeading} items={faq} lang={lang} tone={TONES[design.faq]} />
     </>
   )
