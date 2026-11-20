@@ -312,14 +312,15 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         { title: "Approve the morning list", text: "Transfers and reorder warnings come ranked by value. You approve or dismiss each one. SentrIA moves nothing." },
       ],
       example: {
-        title: "One morning across the network",
+        title: "One real morning: one product saves the day",
         lines: [
-          "Pharmacie du Port: Paracetamol 1g, 2 days left",
-          "Clinique du Nord: reordering 30 units of Metformin 500mg",
-          "Pharmacie Centrale: 34 units unsold",
-          "Transfer proposed: 30 units, ranked first",
+          "Product: Amoxicillin 500mg",
+          "Stock on shelf: 32 boxes",
+          "Sales: 8 boxes per day",
+          "Next delivery promised: in 7 days",
+          "Supplier real average: 11 days",
         ],
-        result: "One transfer instead of a new order. Stock the network already holds is used first.",
+        result: "32 boxes last 4 days. The supplier delivers in 11 on average. SentrIA flags it today. You order now. The patient gets their antibiotic. The numbers are an example.",
       },
       faqHeading: "Questions wholesalers ask",
       faq: [
@@ -379,14 +380,15 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         { title: "Validez la liste du matin", text: "Les transferts et les alertes de réapprovisionnement sont classés par valeur. Vous validez ou écartez chacun. SentrIA ne déplace rien." },
       ],
       example: {
-        title: "Un matin sur l'ensemble du réseau",
+        title: "Un vrai matin : un produit sauve la situation",
         lines: [
-          "Pharmacie du Port : Paracétamol 1g, 2 jours restants",
-          "Clinique du Nord : a recommandé 30 unités de Metformine 500mg",
-          "Pharmacie Centrale : 34 unités invendues",
-          "Transfert proposé : 30 unités, classé en premier",
+          "Produit : Amoxicilline 500mg",
+          "Stock en rayon : 32 boîtes",
+          "Ventes : 8 boîtes par jour",
+          "Prochaine livraison promise : dans 7 jours",
+          "Délai réel moyen du fournisseur : 11 jours",
         ],
-        result: "Un transfert au lieu d'une nouvelle commande. Le stock déjà présent dans le réseau sert en premier.",
+        result: "32 boîtes tiennent 4 jours. Le fournisseur livre en 11 jours en moyenne. SentrIA le signale aujourd'hui. Vous commandez maintenant. Le patient obtient son antibiotique. Les chiffres sont un exemple.",
       },
       faqHeading: "Les questions des grossistes",
       faq: [
