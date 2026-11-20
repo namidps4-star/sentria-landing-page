@@ -18,17 +18,17 @@ const LINE = `M${FROM[0]} ${FROM[1]} C${FROM[0] + 40} ${FROM[1] - 260},${TO[0] +
 
 const TEXT = {
   en: {
-    from: { name: "Central Pharmacy", sub: "34 unsold, 30 to move", l1: "Unsold, now → after", l2: "Transfer", then: "4" },
+    from: { name: "Central Pharmacy", sub: "34 unsold, return for credit", l1: "Unsold, now → after", l2: "Return", then: "4" },
     to: { name: "North Clinic", sub: "Reordering", l1: "Units reordered", l2: "Product" },
     port: { name: "Port Pharmacy", sub: "Stock left", l1: "Days left", l2: "Delivery" },
-    move: ["Move 30 units", "instead of a new order"],
+    move: ["Resupply 30 units", "from your warehouse"],
     alt: "Map of a pharmacy network with three pharmacies pinned",
   },
   fr: {
-    from: { name: "Pharmacie Centrale", sub: "34 invendues, 30 à déplacer", l1: "Invendues, avant → après", l2: "Transfert", then: "4" },
+    from: { name: "Pharmacie Centrale", sub: "34 invendues, retour pour avoir", l1: "Invendues, avant → après", l2: "Retour", then: "4" },
     to: { name: "Clinique du Nord", sub: "Recommande", l1: "Unités recommandées", l2: "Produit" },
     port: { name: "Pharmacie du Port", sub: "Stock restant", l1: "Jours restants", l2: "Livraison" },
-    move: ["Déplacer 30 unités", "au lieu d'une commande"],
+    move: ["Réapprovisionner 30 unités", "depuis votre entrepôt"],
     alt: "Carte d'un réseau de pharmacies avec trois pharmacies repérées",
   },
 }

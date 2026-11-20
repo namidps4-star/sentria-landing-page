@@ -42,29 +42,29 @@ const CORE_ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
   "grossiste-pharma": {
     en: {
       h1: ["One of your pharmacies", "is reordering", "what another one can't sell."],
-      lead: "Upload your pharmacy network data. SentrIA compares what each pharmacy received with what it sold. When one holds unsold stock that another is reordering, it proposes the transfer, by product, by quantity, ranked by the value at stake. Same question as a single pharmacy — who runs out, who sits on dead stock — across your whole network. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
+      lead: "Upload your pharmacy network data. SentrIA compares what each pharmacy received with what it sold. When one holds unsold stock that another is reordering, it proposes a resupply from your warehouse and a return for credit, by product, by quantity, ranked by the value at stake. Same question as a single pharmacy — who runs out, who sits on dead stock — across your whole network. Same engine on every page: compare to normal, flag the one thing about to go wrong, tell you what to do today.",
       start: "For pharmaceutical wholesalers who supply a network of pharmacies.",
       cta: "Book a demo →",
       cta2: "Read how to avoid stock-outs",
       cta2Href: "/articles/pharmacy-stock-outs",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
-        ["30", "Units to transfer / days of stock", "North Clinic reordered Metformin 500mg. Central Pharmacy holds 34 unsold."],
-        ["180k", "FCFA at stake", "Largest transfer opportunity ranked first. Handle the one that matters most."],
+        ["30", "Units to resupply / days of stock", "North Clinic reordered Metformin 500mg. Central Pharmacy holds 34 unsold."],
+        ["180k", "FCFA at stake", "Largest resupply opportunity ranked first. Handle the one that matters most."],
         ["0", "Auto moves", "SentrIA proposes. You approve. Nothing is moved or invoiced automatically."],
       ],
     },
     fr: {
       h1: ["Une de vos pharmacies", "recommande", "ce qu'une autre ne vend pas."],
-      lead: "Importez les données de votre réseau. SentrIA compare ce que chaque pharmacie a reçu avec ce qu'elle a vendu. Quand l'une garde un stock invendu qu'une autre recommande, il propose le transfert, par produit, par quantité, classé selon la valeur en jeu. Même question qu'une pharmacie seule — qui manque, qui garde du stock mort — sur tout votre réseau. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
+      lead: "Importez les données de votre réseau. SentrIA compare ce que chaque pharmacie a reçu avec ce qu'elle a vendu. Quand l'une garde un stock invendu qu'une autre recommande, il propose un réapprovisionnement depuis votre entrepôt et un retour pour avoir, par produit, par quantité, classé selon la valeur en jeu. Même question qu'une pharmacie seule — qui manque, qui garde du stock mort — sur tout votre réseau. Le même moteur sur chaque page : comparer à la normale, signaler la seule chose sur le point de mal tourner, vous dire quoi faire aujourd'hui.",
       start: "Pour les grossistes en produits pharmaceutiques qui fournissent un réseau de pharmacies.",
       cta: "Demander une démo →",
       cta2: "Lire comment éviter les ruptures",
       cta2Href: "/articles/ruptures-de-stock-en-pharmacie",
       photoAlt: PHARMACY_PHOTO_FR,
       stats: [
-        ["30", "Unités à transférer / jours de stock", "Clinique du Nord a recommandé la Metformine 500mg. Pharmacie Centrale en a 34 invendues."],
-        ["180k", "FCFA en jeu", "La plus grande opportunité classée en premier. Traitez d'abord ce qui compte le plus."],
+        ["30", "Unités à réapprovisionner / jours de stock", "Clinique du Nord a recommandé la Metformine 500mg. Pharmacie Centrale en a 34 invendues."],
+        ["180k", "FCFA en jeu", "Le plus gros réapprovisionnement classé en premier. Traitez d'abord ce qui compte le plus."],
         ["0", "Mouvements auto", "SentrIA propose. Vous approuvez. Aucun stock ne se déplace automatiquement."],
       ],
     },
@@ -273,15 +273,15 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Which pharmacy is reordering what another one has sitting unsold",
-          does: "SentrIA compares each pharmacy's deliveries with its sales. When one is reordering a product that another holds unsold, it names both pharmacies, the product and the exact quantity to transfer, before you send another order.",
-          example: "North Clinic: reordered 30 units of Metformin 500mg this month. Central Pharmacy: 34 units unsold. Suggested transfer: 30 units.",
+          does: "SentrIA compares each pharmacy's deliveries with its sales. When one is reordering a product that another holds unsold, it names both pharmacies, the product and the quantity to resupply from your warehouse, and the stock to ask back for a credit.",
+          example: "North Clinic: reordered 30 units of Metformin 500mg this month. Central Pharmacy: 34 units unsold. Supply North Clinic from your warehouse (30 units). Ask Central Pharmacy to return at-risk stock for a credit.",
           imports: "Pharmacy name, product, quantity delivered in the period, quantity reordered, quantity sold",
           figure: "30",
           drawing: { kind: "transfer", labels: ["Central","units unsold","30 units","North","units reordered"] },
         },
         {
-          title: "The transfer worth the most money, first",
-          does: "Transfers are ranked by the value at stake, so you handle the one that costs the network most if left unresolved. If you have a unit cost, SentrIA uses it. If not, it ranks by quantity.",
+          title: "The resupply worth the most money, first",
+          does: "Resupplies are ranked by the value at stake, so you handle the one that costs the network most if left unresolved. If you have a unit cost, SentrIA uses it. If not, it ranks by quantity.",
           example: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA. Paracetamol 1g: 8 units, 24,000 FCFA.",
           imports: "Unit cost per product (optional, SentrIA ranks by quantity if not provided)",
           figure: "180k",
@@ -304,12 +304,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           drawing: { kind: "timeline", labels: ["21 days, no order","last order","usual gap 7 days"] },
         },
       ],
-      notDo: "SentrIA does not move stock, place orders or issue invoices. It proposes transfers, and you decide what happens. It only sees the pharmacies whose data you import.",
+      notDo: "SentrIA does not move stock, place orders or issue invoices. It proposes resupplies and returns, and you decide what happens. It only sees the pharmacies whose data you import.",
       stepsHeading: "Start in three steps",
       steps: [
         { title: "Export your network data", text: "One file per pharmacy: deliveries and sales by product and by day. A spreadsheet export is enough." },
         { title: "Import it once", text: "SentrIA matches the pharmacy and product names, then estimates what each pharmacy holds and what it reorders." },
-        { title: "Approve the morning list", text: "Transfers and reorder warnings come ranked by value. You approve or dismiss each one. SentrIA moves nothing." },
+        { title: "Approve the morning list", text: "Resupplies and reorder warnings come ranked by value. You approve or dismiss each one. SentrIA moves nothing." },
       ],
       example: {
         title: "One morning across the network",
@@ -323,7 +323,7 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       },
       faqHeading: "Questions wholesalers ask",
       faq: [
-        { q: "Does SentrIA move stock or send orders?", a: "No. It proposes transfers and reorder warnings. You decide, and you place every order yourself." },
+        { q: "Does SentrIA move stock or send orders?", a: "No. It proposes resupplies and return requests. You decide, and you place every order yourself." },
         { q: "What do I need to import?", a: "Per pharmacy: deliveries and sales by product and by day, and your next delivery dates. A spreadsheet export is enough." },
         { q: "What if only some pharmacies share their data?", a: "SentrIA works with the pharmacies you import, and it does not see the others." },
         { q: "Do I need unit costs?", a: "No. Without them SentrIA ranks by quantity. With them it ranks by the value at stake." },
@@ -340,15 +340,15 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       items: [
         {
           title: "Quelle pharmacie recommande ce qu'une autre garde invendu",
-          does: "SentrIA compare les livraisons de chaque pharmacie avec ses ventes. Quand l'une recommande un produit qu'une autre garde invendu, il nomme les deux pharmacies, le produit et la quantité exacte à transférer, avant que vous envoyiez une nouvelle commande.",
-          example: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Transfert proposé : 30 unités.",
+          does: "SentrIA compare les livraisons de chaque pharmacie avec ses ventes. Quand l'une recommande un produit qu'une autre garde invendu, il nomme les deux pharmacies, le produit et la quantité à réapprovisionner depuis votre entrepôt, et le stock à demander en retour pour un avoir.",
+          example: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Approvisionnez la Clinique du Nord depuis votre entrepôt (30 unités). Demandez à la Pharmacie Centrale de retourner le stock à risque pour un avoir.",
           imports: "Nom de la pharmacie, produit, quantité livrée sur la période, quantité recommandée, quantité vendue",
           figure: "30",
           drawing: { kind: "transfer", labels: ["Centrale","unités invendues","30 unités","Nord","unités recommandées"] },
         },
         {
-          title: "Le transfert qui vaut le plus d'argent, en premier",
-          does: "Les transferts sont classés par valeur en jeu, pour traiter d'abord celui qui coûte le plus au réseau s'il reste sans suite. Si vous avez un coût unitaire, SentrIA l'utilise. Sinon, il classe par quantité.",
+          title: "Le réapprovisionnement qui vaut le plus d'argent, en premier",
+          does: "Les réapprovisionnements sont classés par valeur en jeu, pour traiter d'abord celui qui coûte le plus au réseau s'il reste sans suite. Si vous avez un coût unitaire, SentrIA l'utilise. Sinon, il classe par quantité.",
           example: "Metformine 500mg : 30 unités, 180 000 FCFA. Amoxicilline 500mg : 12 unités, 72 000 FCFA. Paracétamol 1g : 8 unités, 24 000 FCFA.",
           imports: "Coût unitaire par produit (optionnel, SentrIA classe par quantité si absent)",
           figure: "180k",
@@ -371,12 +371,12 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
           drawing: { kind: "timeline", labels: ["21 jours sans commande","dernière commande","écart habituel 7 jours"] },
         },
       ],
-      notDo: "SentrIA ne déplace pas de stock, ne passe pas de commande et n'émet pas de facture. Il propose des transferts, et c'est vous qui décidez. Il ne voit que les pharmacies dont vous importez les données.",
+      notDo: "SentrIA ne déplace pas de stock, ne passe pas de commande et n'émet pas de facture. Il propose des réapprovisionnements et des retours, et c'est vous qui décidez. Il ne voit que les pharmacies dont vous importez les données.",
       stepsHeading: "Commencez en trois étapes",
       steps: [
         { title: "Exportez les données de votre réseau", text: "Un fichier par pharmacie : livraisons et ventes par produit et par jour. Un export de tableur suffit." },
         { title: "Importez-les une fois", text: "SentrIA associe les noms de pharmacies et de produits, puis estime ce que chaque pharmacie détient et ce qu'elle recommande." },
-        { title: "Validez la liste du matin", text: "Les transferts et les alertes de réapprovisionnement sont classés par valeur. Vous validez ou écartez chacun. SentrIA ne déplace rien." },
+        { title: "Validez la liste du matin", text: "Les réapprovisionnements et les alertes sont classés par valeur. Vous validez ou écartez chacun. SentrIA ne déplace rien." },
       ],
       example: {
         title: "Un matin sur l'ensemble du réseau",
@@ -390,7 +390,7 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
       },
       faqHeading: "Les questions des grossistes",
       faq: [
-        { q: "SentrIA déplace-t-il du stock ou envoie-t-il des commandes ?", a: "Non. Il propose des transferts et des alertes de réapprovisionnement. Vous décidez, et vous passez chaque commande vous-même." },
+        { q: "SentrIA déplace-t-il du stock ou envoie-t-il des commandes ?", a: "Non. Il propose des réapprovisionnements et des demandes de retour. Vous décidez, et vous passez chaque commande vous-même." },
         { q: "Que dois-je importer ?", a: "Par pharmacie : les livraisons et les ventes par produit et par jour, et vos dates de prochaine livraison. Un export de tableur suffit." },
         { q: "Et si seules certaines pharmacies partagent leurs données ?", a: "SentrIA travaille avec les pharmacies que vous importez, et ne voit pas les autres." },
         { q: "Faut-il des coûts unitaires ?", a: "Non. Sans eux, SentrIA classe par quantité. Avec eux, il classe par valeur en jeu." },
@@ -490,7 +490,7 @@ export const ACTIVITY_LIST: { slug: string; name: Record<"en" | "fr", string>; k
     slug: "grossiste-pharma",
     name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" },
     kicker: { en: "Wholesaler", fr: "Grossiste" },
-    teaser: { en: "Transfers of unsold stock between your pharmacies.", fr: "Transferts de stock invendu entre vos pharmacies." },
+    teaser: { en: "Resupply from your warehouse when a pharmacy runs short. Return requests for stock sitting unsold.", fr: "Réapprovisionnement depuis votre entrepôt quand une pharmacie manque. Demandes de retour pour le stock invendu." },
   },
   {
     slug: "exploitation-agricole",
@@ -621,14 +621,14 @@ export const ALERT_PREVIEW: Record<"en" | "fr", { level: "critical" | "warning";
 const CORE_SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]>> = {
   "grossiste-pharma": {
     en: [
-      { level: "warning", text: "North Clinic: reordering 30 units of Metformin 500mg. Central Pharmacy: 34 units unsold. Suggested transfer: 30 units." },
+      { level: "warning", text: "North Clinic: reordering 30 units of Metformin 500mg. Central Pharmacy: 34 units unsold. Supply North Clinic from your warehouse (30 units). Ask Central Pharmacy to return at-risk stock for a credit." },
       { level: "warning", text: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA." },
-      { level: "critical", text: "Amoxicillin 500mg: 12 units, 72,000 FCFA at risk. Transfer before it expires." },
+      { level: "critical", text: "Amoxicillin 500mg: 12 units, 72,000 FCFA at risk. Ask for a return before it expires." },
     ],
     fr: [
-      { level: "warning", text: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Transfert proposé : 30 unités." },
+      { level: "warning", text: "Clinique du Nord : a recommandé 30 unités de Metformine 500mg ce mois-ci. Pharmacie Centrale : 34 unités invendues. Approvisionnez la Clinique du Nord depuis votre entrepôt (30 unités). Demandez à la Pharmacie Centrale de retourner le stock à risque pour un avoir." },
       { level: "warning", text: "Metformine 500mg : 30 unités, 180 000 FCFA. Amoxicilline 500mg : 12 unités, 72 000 FCFA." },
-      { level: "critical", text: "Amoxicilline 500mg : 12 unités, 72 000 FCFA à risque. Transférez avant péremption." },
+      { level: "critical", text: "Amoxicilline 500mg : 12 unités, 72 000 FCFA à risque. Demandez le retour avant péremption." },
     ],
   },
   "exploitation-agricole": {
