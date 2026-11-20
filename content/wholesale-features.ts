@@ -2,7 +2,6 @@
    The pictures are mockups with made-up numbers; the caption says so. */
 export type WholesaleFeature = {
   key: string
-  image: string
   alt: { en: string; fr: string }
   kicker: { en: string; fr: string }
   h2: { en: [string, string]; fr: [string, string] }
@@ -13,7 +12,6 @@ export type WholesaleFeature = {
 export const WHOLESALE_FEATURES: WholesaleFeature[] = [
   {
     key: "abc",
-    image: "/activities/wholesaler/feature-abc.png",
     alt: {
       en: "Mockup of a stock ranking screen: products grouped into classes A, B and C by value",
       fr: "Maquette d'un écran de classement du stock : produits regroupés en classes A, B et C selon la valeur",
@@ -31,7 +29,6 @@ export const WHOLESALE_FEATURES: WholesaleFeature[] = [
   },
   {
     key: "forecast",
-    image: "/activities/wholesaler/feature-forecast.png",
     alt: {
       en: "Mockup of a demand forecast: twelve weeks of sales, a four-week forecast and a suggested order",
       fr: "Maquette d'une prévision de la demande : douze semaines de ventes, une prévision sur quatre semaines et une commande proposée",
@@ -49,7 +46,6 @@ export const WHOLESALE_FEATURES: WholesaleFeature[] = [
   },
   {
     key: "credits",
-    image: "/activities/wholesaler/feature-credits.png",
     alt: {
       en: "Mockup of expiry credits: returned batches, their credit value and the claim deadline",
       fr: "Maquette des avoirs sur péremption : lots retournés, leur valeur d'avoir et la date limite de réclamation",
@@ -67,7 +63,6 @@ export const WHOLESALE_FEATURES: WholesaleFeature[] = [
   },
   {
     key: "sensors",
-    image: "/activities/wholesaler/feature-sensors.png",
     alt: {
       en: "Mockup of pallet temperatures: one pallet above its range, with the time and place of the breach",
       fr: "Maquette des températures par palette : une palette hors plage, avec l'heure et le lieu de la rupture",
@@ -85,7 +80,6 @@ export const WHOLESALE_FEATURES: WholesaleFeature[] = [
   },
   {
     key: "hubs",
-    image: "/activities/wholesaler/feature-hubs.png",
     alt: {
       en: "Mockup of stock-outs by distance: a regional hub with facilities at increasing distances",
       fr: "Maquette des ruptures selon la distance : un dépôt régional avec des établissements à distances croissantes",
