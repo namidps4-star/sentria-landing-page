@@ -49,7 +49,7 @@ const CORE_ACTIVITY_COPY: Record<string, Record<"en" | "fr", Copy>> = {
       cta2Href: "/articles/pharmacy-stock-outs",
       photoAlt: PHARMACY_PHOTO_EN,
       stats: [
-        ["30", "Units to transfer / days of stock", "Clinique du Nord reordered Metformin 500mg. Pharmacy Centrale holds 34 unsold."],
+        ["30", "Units to transfer / days of stock", "North Clinic reordered Metformin 500mg. Central Pharmacy holds 34 unsold."],
         ["180k", "FCFA at stake", "Largest transfer opportunity ranked first. Handle the one that matters most."],
         ["0", "Auto moves", "SentrIA proposes. You approve. Nothing is moved or invoiced automatically."],
       ],
@@ -274,10 +274,10 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         {
           title: "Which pharmacy is reordering what another one has sitting unsold",
           does: "SentrIA compares each pharmacy's deliveries with its sales. When one is reordering a product that another holds unsold, it names both pharmacies, the product and the exact quantity to transfer, before you send another order.",
-          example: "Clinique du Nord: reordered 30 units of Metformin 500mg this month. Pharmacy Centrale: 34 units unsold. Suggested transfer: 30 units.",
+          example: "North Clinic: reordered 30 units of Metformin 500mg this month. Central Pharmacy: 34 units unsold. Suggested transfer: 30 units.",
           imports: "Pharmacy name, product, quantity delivered in the period, quantity reordered, quantity sold",
           figure: "30",
-          drawing: { kind: "transfer", labels: ["Centrale","units unsold","30 units","Nord","units reordered"] },
+          drawing: { kind: "transfer", labels: ["Central","units unsold","30 units","North","units reordered"] },
         },
         {
           title: "The transfer worth the most money, first",
@@ -290,15 +290,15 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         {
           title: "Which pharmacy runs out before your next delivery",
           does: "SentrIA estimates each pharmacy's stock from your deliveries minus its sales. It flags the products that reach zero before your next delivery to that pharmacy, so you can send them stock first.",
-          example: "Pharmacie du Port: Paracetamol 1g, 2 days left. Your next delivery is in 5 days.",
+          example: "Port Pharmacy: Paracetamol 1g, 2 days left. Your next delivery is in 5 days.",
           imports: "Deliveries and sales per pharmacy and product, date of your next delivery",
           figure: "2",
-          drawing: { kind: "bars", labels: ["Pharmacie du Port: 2 days","next delivery in 5 days"] },
+          drawing: { kind: "bars", labels: ["Port Pharmacy: 2 days","next delivery in 5 days"] },
         },
         {
           title: "Which pharmacy has gone quiet",
           does: "SentrIA measures the gap between each pharmacy's orders. When one goes quiet for longer than its usual gap, it names the pharmacy, so you can call it this week.",
-          example: "Pharmacie Nord: no order for 21 days. Its usual gap is 7 days.",
+          example: "North Pharmacy: no order for 21 days. Its usual gap is 7 days.",
           imports: "Pharmacy name and the date of each order or delivery",
           figure: "21",
           drawing: { kind: "timeline", labels: ["21 days, no order","last order","usual gap 7 days"] },
@@ -330,7 +330,7 @@ const CORE_CAPABILITIES: Record<string, Record<"en" | "fr", Capabilities>> = {
         { q: "Do I need unit costs?", a: "No. Without them SentrIA ranks by quantity. With them it ranks by the value at stake." },
       ],
       decisionCard: {
-        evidence: "Client Pharmacie du Marché: fill rate 83% over 7 days vs 97% target. 4 SKUs below minimum.",
+        evidence: "Client Market Pharmacy: fill rate 83% over 7 days vs 97% target. 4 SKUs below minimum.",
         confidence: "90% — based on order history and delivery scan log.",
         impact: "17% fill gap on key client = potential contract review + 420,000 XOF exposure.",
         outcome: "Prioritise 4 SKUs for today's dispatch. Investigate cold-chain on delivery 1142. Decision logged.",
@@ -623,7 +623,7 @@ export const ALERT_PREVIEW: Record<"en" | "fr", { level: "critical" | "warning";
 const CORE_SECTOR_ALERTS: Record<string, Record<"en" | "fr", { level: "critical" | "warning"; text: string }[]>> = {
   "grossiste-pharma": {
     en: [
-      { level: "warning", text: "Clinique du Nord: reordering 30 units of Metformin 500mg. Pharmacy Centrale: 34 units unsold. Suggested transfer: 30 units." },
+      { level: "warning", text: "North Clinic: reordering 30 units of Metformin 500mg. Central Pharmacy: 34 units unsold. Suggested transfer: 30 units." },
       { level: "warning", text: "Metformin 500mg: 30 units, 180,000 FCFA. Amoxicillin 500mg: 12 units, 72,000 FCFA." },
       { level: "critical", text: "Amoxicillin 500mg: 12 units, 72,000 FCFA at risk. Transfer before it expires." },
     ],

@@ -18,9 +18,9 @@ const LINE = `M${FROM[0]} ${FROM[1]} C${FROM[0] + 40} ${FROM[1] - 260},${TO[0] +
 
 const TEXT = {
   en: {
-    from: { name: "Pharmacie Centrale", sub: "34 unsold, 30 to move", l1: "Unsold, now → after", l2: "Transfer", then: "4" },
-    to: { name: "Clinique du Nord", sub: "Reordering", l1: "Units reordered", l2: "Product" },
-    port: { name: "Pharmacie du Port", sub: "Stock left", l1: "Days left", l2: "Delivery" },
+    from: { name: "Central Pharmacy", sub: "34 unsold, 30 to move", l1: "Unsold, now → after", l2: "Transfer", then: "4" },
+    to: { name: "North Clinic", sub: "Reordering", l1: "Units reordered", l2: "Product" },
+    port: { name: "Port Pharmacy", sub: "Stock left", l1: "Days left", l2: "Delivery" },
     move: ["Move 30 units", "instead of a new order"],
     alt: "Map of a pharmacy network with three pharmacies pinned",
   },
