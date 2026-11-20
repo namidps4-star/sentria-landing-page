@@ -17,7 +17,6 @@ export const revalidate = 3600
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: "https://sentriahq.dev/", changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
     { url: LANGS.en, changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
     { url: LANGS.fr, changeFrequency: "monthly", priority: 1, alternates: { languages: LANGS } },
     { url: "https://sentriahq.dev/africa", changeFrequency: "monthly", priority: 0.8, alternates: { languages: { en: "https://sentriahq.dev/africa", fr: "https://sentriahq.dev/afrique" } } },
@@ -28,8 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://sentriahq.dev/fr/terms", changeFrequency: "yearly", priority: 0.3 },
     { url: "https://sentriahq.dev/activities", changeFrequency: "monthly", priority: 0.8, alternates: { languages: { en: "https://sentriahq.dev/activities", fr: "https://sentriahq.dev/fr/activites" } } },
     { url: "https://sentriahq.dev/fr/activites", changeFrequency: "monthly", priority: 0.8, alternates: { languages: { en: "https://sentriahq.dev/activities", fr: "https://sentriahq.dev/fr/activites" } } },
-    { url: "https://sentriahq.dev/sectors/healthcare", changeFrequency: "monthly", priority: 0.7, alternates: { languages: { en: "https://sentriahq.dev/sectors/healthcare", fr: "https://sentriahq.dev/fr/secteurs/sante" } } },
-    { url: "https://sentriahq.dev/fr/secteurs/sante", changeFrequency: "monthly", priority: 0.7, alternates: { languages: { en: "https://sentriahq.dev/sectors/healthcare", fr: "https://sentriahq.dev/fr/secteurs/sante" } } },
     ...GENERAL_ACTIVITIES.flatMap((a) => {
       const alternates = { languages: { en: `https://sentriahq.dev/activities/${a.en}`, fr: `https://sentriahq.dev/fr/activites/${a.fr}` } }
       return [
