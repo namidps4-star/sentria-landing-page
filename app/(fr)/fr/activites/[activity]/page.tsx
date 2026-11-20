@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
+import { WholesaleFeatures } from "@/components/wholesale-features"
 import { GENERAL_ACTIVITIES, generalBySlug } from "@/content/general-activities"
 import { PLACEHOLDER_ACTIVITIES } from "@/content/health-sector"
 import { ActivityPlaceholder } from "@/components/activity-placeholder"
@@ -30,6 +31,9 @@ export default async function Page({ params }: { params: Params }) {
   const a = generalBySlug("fr", activity)
   if (!a) notFound()
   return (
-    <AfricaHero video copy={a.copy.fr} id={a.key} photo={a.photo} extra={<AfricaCapabilities slug={a.key} lang="fr" />} />
+    <>
+      <AfricaHero video copy={a.copy.fr} id={a.key} photo={a.photo} extra={<AfricaCapabilities slug={a.key} lang="fr" />} />
+      {a.key === "grossiste-pharma" && <WholesaleFeatures lang="fr" />}
+    </>
   )
 }
