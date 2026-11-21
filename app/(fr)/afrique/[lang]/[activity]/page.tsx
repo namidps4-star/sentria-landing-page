@@ -2,6 +2,10 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
+import { ActivityFeatureBlock } from "@/components/activity-feature-block"
+import { ACTIVITY_FEATURES } from "@/content/activity-features"
+
+const hasFeature = (slug: string) => ACTIVITY_FEATURES.some((f) => f.slug === slug)
 import { AfricaAlertPanel } from "@/components/africa-alert-panel"
 import { share, headline } from "@/content/share"
 import { ACTIVITY_COPY, AFRICA_PHOTOS, SECTOR_ALERTS } from "@/content/africa-activities"
@@ -44,7 +48,7 @@ export default async function Page({ params }: { params: Params }) {
       copy={{ ...copy.fr, photoAlt: pic?.alt ?? copy.fr.photoAlt }}
       id={activity}
       panel={SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="fr" alerts={SECTOR_ALERTS[activity].fr} /> : undefined}
-      extra={<AfricaCapabilities slug={activity} lang="fr" />}
+      extra={<AfricaCapabilities slug={activity} lang="fr" beforeFaq={hasFeature(activity) ? <ActivityFeatureBlock slug={activity} lang="fr" /> : undefined} />}
       photo={pic ? { src: pic.src, credit: pic.credit } : undefined}
       compact
       tone={designFor(activity).tone}
