@@ -1,6 +1,9 @@
+"use client"
+
 import type { CSSProperties } from "react"
 import { C } from "@/content/en"
 import { FR } from "@/content/fr"
+import { useText } from "./lang"
 import { T, B, LangPick } from "./t"
 import { Check } from "./ui"
 import { HeroFx } from "./hero-fx"
@@ -28,6 +31,8 @@ function Line({ s, tone, n, en0, fr0 }: { s: string; tone?: "lime"; n: number; e
 }
 
 export function Hero() {
+  const tx = useText()
+  const headline = [C.hero.l1, C.hero.l2, C.hero.l3].map((s) => tx(s, FR[s] ?? s)).join(" ")
   const h = C.hero
   // Start index of each line in the typing sequence, per language (a short pause between lines).
   const len = (s: string, fr: boolean) => [...(fr ? FR[s] ?? s : s)].length
@@ -53,10 +58,7 @@ export function Hero() {
           </div>
 
           <div className="hero-copy" id="hero-copy">
-            <h1 id="hero-h" className="hero-h">
-              <span className="sr-only">
-                <T s={h.l1} /> <T s={h.l2} /> <T s={h.l3} />
-              </span>
+            <h1 id="hero-h" className="hero-h" aria-label={headline}>
               <span aria-hidden="true">
                 <Line s={h.l1} n={0} en0={0} fr0={0} />
                 <Line s={h.l2} tone="lime" n={1} en0={en1} fr0={fr1} />

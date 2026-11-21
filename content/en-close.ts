@@ -67,7 +67,7 @@ export const EN_CLOSE = {
    "Define the pilot and its success metric"
   ],
   "widget": "SentrIA Demo: 30 min",
-  "avail": "BOOKING CALENDAR"
+  "avail": "Choose a slot"
  },
  "final": {
   "a": "The next decision may already be",

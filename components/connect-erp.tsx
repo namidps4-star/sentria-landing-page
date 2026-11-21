@@ -138,7 +138,7 @@ export function ErpScreen({ active }: { active: boolean }) {
             <div className="cs-kpi">
               <small>{bi("Open orders", "Commandes ouvertes")}</small>
               <strong>{open}</strong>
-              <em>{bi("86 due today", "86 à livrer aujourd'hui")}</em>
+              <em>{bi("86 due today", "86 à livrer aujourd’hui")}</em>
             </div>
             <div className="cs-kpi">
               <small>{bi("Late suppliers", "Fournisseurs en retard")}</small>

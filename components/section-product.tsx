@@ -82,7 +82,7 @@ export function Pricing() {
       </p>
       <PricingGrid />
       <p className="note" data-rv="fade">
-        <B en="Enterprise is priced to your scope: sectors, sites, users and integration." fr="Tarif sur mesure selon votre périmètre : secteurs, sites, utilisateurs et intégration." />
+        <B en="Enterprise is priced to your scope: sectors, sites, users and integration." fr="Entreprise : tarif sur mesure selon votre périmètre, avec secteurs, sites, utilisateurs et intégration." />
       </p>
     </Sec>
   )

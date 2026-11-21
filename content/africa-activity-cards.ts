@@ -45,8 +45,8 @@ const LIVE_PHOTOS: Record<string, Pick<ActivityCard, "photo" | "alt" | "by" | "u
 }
 
 const SECTOR: Record<string, L> = {
-  pharmacie: { en: "Health", fr: "Santé" },
-  "grossiste-pharma": { en: "Health", fr: "Santé" },
+  pharmacie: { en: "Healthcare", fr: "Santé" },
+  "grossiste-pharma": { en: "Healthcare", fr: "Santé" },
   "exploitation-agricole": { en: "Agriculture", fr: "Agriculture" },
   "grossiste-distributeur": { en: "Retail", fr: "Commerce" },
 }
@@ -91,8 +91,8 @@ const SECTOR_CARDS: ActivityCard[] = [
   {
     id: "transportation",
     href: { en: "/activities/transportation", fr: "/fr/activites/transport" },
-    name: { en: "Transport", fr: "Transport" },
-    line: fit("Transport"),
+    name: { en: "Transportation", fr: "Transport" },
+    line: fit("Transportation"),
     photo: "/africa/hq/row-transportation.jpg",
     alt: { en: "Cars driving on a highway at sunset", fr: "Voitures sur une autoroute au coucher du soleil" },
     by: "Markus McKay",

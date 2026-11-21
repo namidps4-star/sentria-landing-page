@@ -12,14 +12,14 @@ import { useText } from "./lang"
 const STEPS: ({ l: number; t: number; w: number; h: number; en: string; fr: string } | null)[] = [
   null,
   { l: 25.0, t: 14.0, w: 70.9, h: 19.4, en: "Ranked by value at risk", fr: "Classées par valeur à risque" },
-  { l: 25.0, t: 44.0, w: 17.1, h: 15.1, en: "Critical stockouts first", fr: "Les ruptures critiques d'abord" },
+  { l: 25.0, t: 44.0, w: 17.1, h: 15.1, en: "Critical stockouts first", fr: "Les ruptures critiques d’abord" },
   { l: 25.0, t: 61.0, w: 46.5, h: 30.2, en: "Seven days, so you see it coming", fr: "Sept jours, pour voir venir" },
-  { l: 72.8, t: 61.0, w: 23.3, h: 30.2, en: "Where the risk comes from", fr: "D'où vient le risque" },
+  { l: 72.8, t: 61.0, w: 23.3, h: 30.2, en: "Where the risk comes from", fr: "D’où vient le risque" },
 ]
 const CAPS = [
   { en: "Scroll to open the dashboard.", fr: "Faites défiler pour ouvrir le tableau de bord." },
   { en: "What needs you right now, with its evidence.", fr: "Ce qui vous attend maintenant, avec ses preuves." },
-  { en: "The money at risk is the first thing you see.", fr: "L'argent en jeu est la première chose que vous voyez." },
+  { en: "The money at risk is the first thing you see.", fr: "L’argent en jeu est la première chose que vous voyez." },
   { en: "The trend of the last seven days.", fr: "La tendance des sept derniers jours." },
   { en: "The alerts by type.", fr: "Les alertes par type." },
 ]
@@ -209,7 +209,7 @@ export function ProductTour() {
         <p className="sr-only">
           <B
             en="The SentrIA dashboard: alert counts by status and type, the seven day trend and the ranked list of alerts."
-            fr="Le tableau de bord SentrIA : nombre d'alertes par statut et par type, tendance sur sept jours et liste classée des alertes."
+            fr="Le tableau de bord SentrIA : nombre d’alertes par statut et par type, tendance sur sept jours et liste classée des alertes."
           />
         </p>
       </div>

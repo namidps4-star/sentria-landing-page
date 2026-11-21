@@ -86,6 +86,8 @@ async function legacyTexts(browser) {
         const t = n.nodeValue.replace(/[ \s]+/g, ' ').trim()
         if (t) out.push(t)
       }
+      // The hero headline is split into animated letters; its full text is the h1's aria-label (what a reader hears).
+      document.querySelectorAll('h1[aria-label]').forEach((h) => out.push(h.getAttribute('aria-label').trim()))
       return out
     })
   const en = await collect()
@@ -122,7 +124,9 @@ async function newText(browser, lang) {
       }
       return t
     }
-    return vis(document.body)
+    // The hero headline's letters are split and animated; its full text is the h1's aria-label (what a reader hears).
+    const label = Array.from(document.querySelectorAll('h1[aria-label]')).map((h) => h.getAttribute('aria-label')).join(' ')
+    return vis(document.body) + ' ' + label
   })
   await ctx.close()
   return norm(blob)

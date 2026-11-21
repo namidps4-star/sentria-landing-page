@@ -122,9 +122,9 @@ export const EN_PRODUCT = {
   "lead": "We start with one problem in one sector. The same decision layer then extends to other flows.",
   "tabs": [
    "Industry",
-   "Health",
+   "Healthcare",
    "Agriculture",
-   "Transport",
+   "Transportation",
    "Logistics",
    "Energy"
   ]
@@ -134,9 +134,9 @@ export const EN_PRODUCT = {
   "title": "Where do you fit in?",
   "tabs": [
    "Industry",
-   "Health",
+   "Healthcare",
    "Agriculture",
-   "Transport",
+   "Transportation",
    "Logistics",
    "Energy",
    "Retail"
@@ -149,7 +149,7 @@ export const EN_PRODUCT = {
    },
    {
     "n": "02",
-    "h": "Health",
+    "h": "Healthcare",
     "p": "Pharmacies, hospital pharmacies, medical wholesalers and cold chain facilities. Helps you track stock levels, expiry dates and temperature before something runs out or spoils."
    },
    {
@@ -164,7 +164,7 @@ export const EN_PRODUCT = {
    },
    {
     "n": "04",
-    "h": "Transport",
+    "h": "Transportation",
     "p": "Trucking companies, delivery fleets and vehicle rental operators. Helps you track engine health, fuel and maintenance schedules across the whole fleet."
    },
    {

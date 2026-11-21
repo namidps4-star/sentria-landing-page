@@ -75,6 +75,9 @@
   }
   .qf-scroll {
     flex: 1 1 100%;
+    /* the row scrolls sideways on a phone: fade its right edge so the cut-off choice reads as more */
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+    mask-image: linear-gradient(to right, #000 82%, transparent);
   }
   .qf-pill {
     flex: none;

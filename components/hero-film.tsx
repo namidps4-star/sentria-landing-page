@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { C } from "@/content/en"
+import { FR } from "@/content/fr"
 import { TAGLINES } from "@/content/taglines"
 import { useText } from "./lang"
 import { B, T } from "./t"
@@ -114,7 +115,7 @@ export function HeroFilm() {
         <p className="hf-line" aria-live="off">
           <B en={tag.en} fr={tag.fr} />
         </p>
-        <div className="hf-dots" role="group" aria-label={s.title}>
+        <div className="hf-dots" role="group" aria-label={text(s.title, FR[s.title] ?? s.title)}>
           {SECTORS.map((x, i) => (
             <button key={x.key} type="button" className="hf-dot" aria-pressed={i === active} onClick={() => setActive(i)}>
               <span className="sr-only">

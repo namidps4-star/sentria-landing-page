@@ -26,10 +26,7 @@ export function ConnectStack() {
         kind="csv"
         line1="CSV"
         line2={bi("file import", "import de fichiers")}
-        lead={bi(
-          "Bring operational data in as a file. Columns are mapped and checked before anything is loaded.",
-          "Importez vos données opérationnelles sous forme de fichier. Les colonnes sont associées et vérifiées avant tout chargement."
-        )}
+        lead={bi("Bring operational data in as a file. Columns are mapped and checked before anything is loaded.", "Importez vos données opérationnelles sous forme de fichier. Les colonnes sont associées et vérifiées avant tout chargement.")}
         metaValue={bi("Files", "Fichiers")}
         steps={[
           { icon: I.table, label: bi("Map columns", "Associer les colonnes") },
@@ -59,7 +56,7 @@ export function ConnectStack() {
         <div ref={erpRef} className="cs-erp-bg">
           <ErpScreen active={erpSeen} />
         </div>
-        <span className="cs-cred">{bi("Sample data", "Données d'exemple")}</span>
+        <span className="cs-cred">{bi("Sample data", "Données d’exemple")}</span>
       </Panel>
 
       <Panel

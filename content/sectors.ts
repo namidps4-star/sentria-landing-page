@@ -48,7 +48,7 @@ export const SECTOR_DATA = {
  },
  "health": {
   "en": {
-   "title": "Health",
+   "title": "Healthcare",
    "description": "Help teams anticipate capacity constraints, critical resources, and high-risk situations.",
    "signals": [
     [
@@ -140,7 +140,7 @@ export const SECTOR_DATA = {
  },
  "transportation": {
   "en": {
-   "title": "Transport",
+   "title": "Transportation",
    "description": "Identify delay risks, capacity pressure, and flow anomalies before they spread.",
    "signals": [
     [

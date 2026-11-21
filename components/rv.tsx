@@ -1,6 +1,8 @@
 "use client"
 
 import { Fragment, useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react"
+import { FR } from "@/content/fr"
+import { useLang } from "./lang"
 
 type Item = { h: ReactNode; p: ReactNode }
 
@@ -13,6 +15,7 @@ type Item = { h: ReactNode; p: ReactNode }
  */
 export function WordPicker({ items, label, foot }: { items: Item[]; label: string; foot?: ReactNode }) {
   const [on, setOn] = useState(0)
+  const lang = useLang()
   const base = useId()
   const tabs = useRef<(HTMLButtonElement | null)[]>([])
 
@@ -31,7 +34,7 @@ export function WordPicker({ items, label, foot }: { items: Item[]; label: strin
 
   return (
     <div className="rv-picker" data-rv="rise">
-      <div className="rv-words" role="tablist" aria-label={label}>
+      <div className="rv-words" role="tablist" aria-label={lang === "fr" ? FR[label] ?? label : label}>
         {items.map((it, i) => (
           <Fragment key={i}>
             <button

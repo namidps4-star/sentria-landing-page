@@ -10,7 +10,7 @@ export type SectorData = { name: L; head: L; heroes: SectorHero[] }
 export const SECTOR_DATA: Record<SectorKey, SectorData> = {
   "health": {
     "name": {
-      "en": "Health",
+      "en": "Healthcare",
       "fr": "Santé"
     },
     "head": {
@@ -21,7 +21,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
       {
         "problem": {
           "en": "Stock runs out before anyone checks.",
-          "fr": "Le stock s'épuise avant que quelqu'un vérifie."
+          "fr": "Le stock s’épuise avant que quelqu’un vérifie."
         },
         "title": {
           "en": "See the days of stock left",
@@ -29,7 +29,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "ex": {
           "en": "Amoxicillin: 4 days left. Delivery takes 7. Order today.",
-          "fr": "Amoxicilline : 4 jours restants. La livraison prend 7 jours. Commandez aujourd'hui."
+          "fr": "Amoxicilline : 4 jours restants. La livraison prend 7 jours. Commandez aujourd’hui."
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><rect x=\"0\" y=\"34\" width=\"138.1818181818182\" height=\"26\" rx=\"13\" fill=\"#0b0c08\"/><text x=\"0\" y=\"26\" >Stock left</text><text x=\"146.1818181818182\" y=\"54\" style=\"font-weight:600;font-size:18px\">4 days</text><rect x=\"0\" y=\"100\" width=\"241.8181818181818\" height=\"26\" rx=\"13\" fill=\"#0f2e1f\"/><text x=\"0\" y=\"92\" >Delivery</text><text x=\"249.8181818181818\" y=\"120\" style=\"font-weight:600;font-size:18px\">7 days</text></svg>",
@@ -39,11 +39,11 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
       {
         "problem": {
           "en": "Old lots stay on the shelf until they expire.",
-          "fr": "Les vieux lots restent en rayon jusqu'à expirer."
+          "fr": "Les vieux lots restent en rayon jusqu’à expirer."
         },
         "title": {
           "en": "Sell the nearest expiry first",
-          "fr": "Vendez d'abord la date la plus proche"
+          "fr": "Vendez d’abord la date la plus proche"
         },
         "ex": {
           "en": "Paracetamol lot A47: 24 boxes expire in 18 days.",
@@ -51,7 +51,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><line x1=\"0\" y1=\"80\" x2=\"380\" y2=\"80\" stroke=\"#0b0c08\" stroke-width=\"2\" opacity=\".3\"/><rect x=\"228\" y=\"74\" width=\"152\" height=\"12\" rx=\"6\" fill=\"#0f2e1f\"/><circle cx=\"228\" cy=\"80\" r=\"9\" fill=\"#0b0c08\" stroke=\"#0b0c08\" stroke-width=\"2\"/><text x=\"228\" y=\"50\" text-anchor=\"middle\" style=\"font-weight:600;font-size:18px\">18 days</text><text x=\"0\" y=\"124\" >today</text><text x=\"380\" y=\"124\" text-anchor=\"end\">30 days</text></svg>",
-          "fr": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><line x1=\"0\" y1=\"80\" x2=\"380\" y2=\"80\" stroke=\"#0b0c08\" stroke-width=\"2\" opacity=\".3\"/><rect x=\"228\" y=\"74\" width=\"152\" height=\"12\" rx=\"6\" fill=\"#0f2e1f\"/><circle cx=\"228\" cy=\"80\" r=\"9\" fill=\"#0b0c08\" stroke=\"#0b0c08\" stroke-width=\"2\"/><text x=\"228\" y=\"50\" text-anchor=\"middle\" style=\"font-weight:600;font-size:18px\">18 jours</text><text x=\"0\" y=\"124\" >aujourd'hui</text><text x=\"380\" y=\"124\" text-anchor=\"end\">30 jours</text></svg>"
+          "fr": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><line x1=\"0\" y1=\"80\" x2=\"380\" y2=\"80\" stroke=\"#0b0c08\" stroke-width=\"2\" opacity=\".3\"/><rect x=\"228\" y=\"74\" width=\"152\" height=\"12\" rx=\"6\" fill=\"#0f2e1f\"/><circle cx=\"228\" cy=\"80\" r=\"9\" fill=\"#0b0c08\" stroke=\"#0b0c08\" stroke-width=\"2\"/><text x=\"228\" y=\"50\" text-anchor=\"middle\" style=\"font-weight:600;font-size:18px\">18 jours</text><text x=\"0\" y=\"124\" >aujourd’hui</text><text x=\"380\" y=\"124\" text-anchor=\"end\">30 jours</text></svg>"
         }
       },
       {
@@ -123,7 +123,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
       {
         "problem": {
           "en": "Heat builds up in the store without an alert.",
-          "fr": "La chaleur monte dans le stock sans qu'aucune alerte ne parte."
+          "fr": "La chaleur monte dans le stock sans qu’aucune alerte ne parte."
         },
         "title": {
           "en": "Be warned before heat does damage",
@@ -131,7 +131,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "ex": {
           "en": "Tomatoes at 32 °C. The alert goes out before the loss starts.",
-          "fr": "Tomates à 32 °C. L'alerte part avant le début de la perte."
+          "fr": "Tomates à 32 °C. L’alerte part avant le début de la perte."
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><rect x=\"0\" y=\"70\" width=\"380\" height=\"18\" rx=\"9\" fill=\"rgba(11,12,8,.12)\"/><rect x=\"0\" y=\"70\" width=\"304\" height=\"18\" rx=\"9\" fill=\"#0f2e1f\"/><circle cx=\"304\" cy=\"79\" r=\"12\" fill=\"#d6ff3f\" stroke=\"#0b0c08\" stroke-width=\"2\"/><text x=\"304\" y=\"52\" text-anchor=\"middle\" style=\"font-weight:600;font-size:18px\">32 °C</text><text x=\"0\" y=\"120\" >0 °C</text><text x=\"380\" y=\"120\" text-anchor=\"end\">40 °C</text></svg>",
@@ -153,7 +153,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
       {
         "problem": {
           "en": "One shop runs out while another holds stock.",
-          "fr": "Un magasin tombe en rupture pendant qu'un autre garde du stock."
+          "fr": "Un magasin tombe en rupture pendant qu’un autre garde du stock."
         },
         "title": {
           "en": "Move stock to the shop that needs it",
@@ -213,7 +213,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
     },
     "head": {
       "en": "See the bottleneck before it delays a shipment.",
-      "fr": "Repérez le goulot avant qu'il retarde un envoi."
+      "fr": "Repérez le goulot avant qu’il retarde un envoi."
     },
     "heroes": [
       {
@@ -223,7 +223,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "title": {
           "en": "See the slow step on the route",
-          "fr": "Voyez l'étape lente du parcours"
+          "fr": "Voyez l’étape lente du parcours"
         },
         "ex": {
           "en": "Customs waits 9 hours. Every shipment behind it is late.",
@@ -255,7 +255,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
       {
         "problem": {
           "en": "A cold room can drift out of range unnoticed.",
-          "fr": "Une chambre froide peut sortir de sa plage sans qu'on le voie."
+          "fr": "Une chambre froide peut sortir de sa plage sans qu’on le voie."
         },
         "title": {
           "en": "Catch the cold chain break in time",
@@ -279,21 +279,21 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
     },
     "head": {
       "en": "Catch deviations before the line stops.",
-      "fr": "Repérez les écarts avant l'arrêt de la ligne."
+      "fr": "Repérez les écarts avant l’arrêt de la ligne."
     },
     "heroes": [
       {
         "problem": {
           "en": "Output drops for several shifts before anyone reacts.",
-          "fr": "La production baisse pendant plusieurs postes avant que quelqu'un réagisse."
+          "fr": "La production baisse pendant plusieurs postes avant que quelqu’un réagisse."
         },
         "title": {
           "en": "Catch the drop while it is small",
-          "fr": "Repérez la baisse tant qu'elle est petite"
+          "fr": "Repérez la baisse tant qu’elle est petite"
         },
         "ex": {
           "en": "Output under target for 3 shifts. Alert before the stop.",
-          "fr": "Production sous l'objectif depuis 3 postes. Alerte avant l'arrêt."
+          "fr": "Production sous l’objectif depuis 3 postes. Alerte avant l’arrêt."
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><line x1=\"0\" y1=\"60\" x2=\"380\" y2=\"60\" stroke=\"#0b0c08\" stroke-dasharray=\"6 6\" opacity=\".5\"/><text x=\"380\" y=\"52\" text-anchor=\"end\">target</text><polyline points=\"0,40 95,46 190,82 285,96 375,104\" fill=\"none\" stroke=\"#0f2e1f\" stroke-width=\"4\"/><circle cx=\"190\" cy=\"82\" r=\"7\" fill=\"#d6ff3f\" stroke=\"#0b0c08\" stroke-width=\"2\"/><circle cx=\"285\" cy=\"96\" r=\"7\" fill=\"#d6ff3f\" stroke=\"#0b0c08\" stroke-width=\"2\"/></svg>",
@@ -303,15 +303,15 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
       {
         "problem": {
           "en": "Machines stop without warning.",
-          "fr": "Les machines s'arrêtent sans prévenir."
+          "fr": "Les machines s’arrêtent sans prévenir."
         },
         "title": {
           "en": "Know a machine is about to stop",
-          "fr": "Sachez qu'une machine est sur le point de s'arrêter"
+          "fr": "Sachez qu’une machine est sur le point de s’arrêter"
         },
         "ex": {
           "en": "Vibration rising for 3 days before the machine stops.",
-          "fr": "Vibrations en hausse depuis 3 jours avant l'arrêt de la machine."
+          "fr": "Vibrations en hausse depuis 3 jours avant l’arrêt de la machine."
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><polyline points=\"0,130 90,118 180,96 270,70 360,30\" fill=\"none\" stroke=\"#0f2e1f\" stroke-width=\"4\"/><circle cx=\"360\" cy=\"30\" r=\"9\" fill=\"#d6ff3f\" stroke=\"#0b0c08\" stroke-width=\"2\"/><text x=\"0\" y=\"150\" >day 1</text><text x=\"380\" y=\"150\" text-anchor=\"end\">day 3</text></svg>",
@@ -325,7 +325,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "title": {
           "en": "See next week's load before it lands",
-          "fr": "Voyez la charge de la semaine prochaine avant qu'elle arrive"
+          "fr": "Voyez la charge de la semaine prochaine avant qu’elle arrive"
         },
         "ex": {
           "en": "Next week needs 120% of capacity. Plan a second shift.",
@@ -340,12 +340,12 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
   },
   "transportation": {
     "name": {
-      "en": "Transport",
+      "en": "Transportation",
       "fr": "Transport"
     },
     "head": {
       "en": "Spot delays before they spread across the fleet.",
-      "fr": "Repérez les retards avant qu'ils se propagent à toute la flotte."
+      "fr": "Repérez les retards avant qu’ils se propagent à toute la flotte."
     },
     "heroes": [
       {
@@ -377,25 +377,25 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "ex": {
           "en": "Reroute the late truck. The other deliveries stay on time.",
-          "fr": "Réacheminez le camion en retard. Les autres livraisons restent à l'heure."
+          "fr": "Réacheminez le camion en retard. Les autres livraisons restent à l’heure."
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><circle cx=\"60\" cy=\"90\" r=\"16\" fill=\"#d6ff3f\" stroke=\"#0b0c08\" stroke-width=\"2\"/><path d=\"M84 90 L160 90\" stroke=\"#0b0c08\" stroke-width=\"2\" stroke-dasharray=\"4 4\"/><path d=\"M160 90 L210 60 L260 90\" stroke=\"#0f2e1f\" stroke-width=\"3\" fill=\"none\"/><circle cx=\"210\" cy=\"60\" r=\"11\" fill=\"none\" stroke=\"#0f2e1f\" stroke-width=\"2\"/><text x=\"210\" y=\"40\" text-anchor=\"middle\">new route</text><circle cx=\"320\" cy=\"90\" r=\"11\" fill=\"rgba(11,12,8,.3)\"/><text x=\"60\" y=\"130\" text-anchor=\"middle\">late</text><text x=\"320\" y=\"130\" text-anchor=\"middle\">on time</text></svg>",
-          "fr": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><circle cx=\"60\" cy=\"90\" r=\"16\" fill=\"#d6ff3f\" stroke=\"#0b0c08\" stroke-width=\"2\"/><path d=\"M84 90 L160 90\" stroke=\"#0b0c08\" stroke-width=\"2\" stroke-dasharray=\"4 4\"/><path d=\"M160 90 L210 60 L260 90\" stroke=\"#0f2e1f\" stroke-width=\"3\" fill=\"none\"/><circle cx=\"210\" cy=\"60\" r=\"11\" fill=\"none\" stroke=\"#0f2e1f\" stroke-width=\"2\"/><text x=\"210\" y=\"40\" text-anchor=\"middle\">nouvel itinéraire</text><circle cx=\"320\" cy=\"90\" r=\"11\" fill=\"rgba(11,12,8,.3)\"/><text x=\"60\" y=\"130\" text-anchor=\"middle\">en retard</text><text x=\"320\" y=\"130\" text-anchor=\"middle\">à l'heure</text></svg>"
+          "fr": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><circle cx=\"60\" cy=\"90\" r=\"16\" fill=\"#d6ff3f\" stroke=\"#0b0c08\" stroke-width=\"2\"/><path d=\"M84 90 L160 90\" stroke=\"#0b0c08\" stroke-width=\"2\" stroke-dasharray=\"4 4\"/><path d=\"M160 90 L210 60 L260 90\" stroke=\"#0f2e1f\" stroke-width=\"3\" fill=\"none\"/><circle cx=\"210\" cy=\"60\" r=\"11\" fill=\"none\" stroke=\"#0f2e1f\" stroke-width=\"2\"/><text x=\"210\" y=\"40\" text-anchor=\"middle\">nouvel itinéraire</text><circle cx=\"320\" cy=\"90\" r=\"11\" fill=\"rgba(11,12,8,.3)\"/><text x=\"60\" y=\"130\" text-anchor=\"middle\">en retard</text><text x=\"320\" y=\"130\" text-anchor=\"middle\">à l’heure</text></svg>"
         }
       },
       {
         "problem": {
           "en": "Vehicles break down when service slips.",
-          "fr": "Les véhicules tombent en panne quand l'entretien glisse."
+          "fr": "Les véhicules tombent en panne quand l’entretien glisse."
         },
         "title": {
           "en": "Book service before the part wears out",
-          "fr": "Réservez l'entretien avant l'usure de la pièce"
+          "fr": "Réservez l’entretien avant l’usure de la pièce"
         },
         "ex": {
           "en": "Brake pads due in 500 km. Book the workshop today.",
-          "fr": "Plaquettes de frein à changer dans 500 km. Réservez l'atelier aujourd'hui."
+          "fr": "Plaquettes de frein à changer dans 500 km. Réservez l’atelier aujourd’hui."
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><rect x=\"0\" y=\"60\" width=\"380\" height=\"24\" rx=\"12\" fill=\"rgba(11,12,8,.12)\"/><rect x=\"0\" y=\"60\" width=\"190\" height=\"24\" rx=\"12\" fill=\"#0f2e1f\"/><text x=\"190\" y=\"54\" text-anchor=\"middle\" style=\"font-weight:600;font-size:18px\">due in 500 km</text><text x=\"0\" y=\"120\" >0 km</text><text x=\"380\" y=\"120\" text-anchor=\"end\">1,000 km</text></svg>",
@@ -421,7 +421,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "title": {
           "en": "See the peak before it hits",
-          "fr": "Voyez le pic avant qu'il arrive"
+          "fr": "Voyez le pic avant qu’il arrive"
         },
         "ex": {
           "en": "Demand 30% above the usual curve at 18:00. Check the generators.",
@@ -461,7 +461,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
         },
         "ex": {
           "en": "Generator fuel: 2 days left. Order today.",
-          "fr": "Carburant du générateur : 2 jours restants. Commandez aujourd'hui."
+          "fr": "Carburant du générateur : 2 jours restants. Commandez aujourd’hui."
         },
         "svg": {
           "en": "<svg viewBox=\"0 0 380 160\" aria-hidden=\"true\"><rect x=\"0\" y=\"60\" width=\"380\" height=\"30\" rx=\"15\" fill=\"rgba(11,12,8,.12)\"/><rect x=\"0\" y=\"60\" width=\"108.57142857142857\" height=\"30\" rx=\"15\" fill=\"#0f2e1f\"/><text x=\"118.57142857142857\" y=\"52\" style=\"font-weight:600;font-size:18px\">2 days</text><text x=\"0\" y=\"118\" >0</text><text x=\"380\" y=\"118\" text-anchor=\"end\">7 days</text></svg>",
@@ -661,14 +661,14 @@ export const SECTOR_PAGE: Record<string, { sector: SectorKey; name: L; desc: L }
     },
     "desc": {
       "en": "Haulage for third parties",
-      "fr": "Transport pour compte d'autrui"
+      "fr": "Transport pour compte d’autrui"
     }
   },
   "flotte-entreprise": {
     "sector": "transportation",
     "name": {
       "en": "Company fleet",
-      "fr": "Flotte d'entreprise"
+      "fr": "Flotte d’entreprise"
     },
     "desc": {
       "en": "Vehicles used for your own operation",
@@ -694,7 +694,7 @@ export const SECTOR_PAGE: Record<string, { sector: SectorKey; name: L; desc: L }
     },
     "desc": {
       "en": "Large-scale power generation",
-      "fr": "Production d'énergie à grande échelle"
+      "fr": "Production d’énergie à grande échelle"
     }
   },
   "generateurs-secours": {
@@ -716,7 +716,7 @@ export const SECTOR_PAGE: Record<string, { sector: SectorKey; name: L; desc: L }
     },
     "desc": {
       "en": "The grid and how power gets there",
-      "fr": "Réseau et acheminement de l'énergie"
+      "fr": "Réseau et acheminement de l’énergie"
     }
   }
 }

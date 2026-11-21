@@ -25,7 +25,7 @@ export type Article = {
 
 export const SECTORS: { key: "all" | Article["sector"]; label: Bi }[] = [
   { key: "all", label: { en: "All", fr: "Tous" } },
-  { key: "health", label: { en: "Health", fr: "Santé" } },
+  { key: "health", label: { en: "Healthcare", fr: "Santé" } },
   { key: "industry", label: { en: "Industry", fr: "Industrie" } },
   { key: "logistics", label: { en: "Logistics", fr: "Logistique" } },
 ]
@@ -37,7 +37,7 @@ export const DEPARTMENTS: Record<Article["sector"], { key: string; label: Bi }[]
     { key: "cold", label: { en: "Cold chain", fr: "Chaîne du froid" } },
   ],
   industry: [
-    { key: "all", label: { en: "All industry", fr: "Toute l'industrie" } },
+    { key: "all", label: { en: "All industry", fr: "Toute l’industrie" } },
     { key: "production", label: { en: "Production", fr: "Production" } },
     { key: "warehouse", label: { en: "Warehouse", fr: "Entrepôt" } },
   ],
@@ -70,7 +70,7 @@ export const ARTICLES: Article[] = [
     tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
     title: {
       en: "FEFO: how a pharmacy sells the stock that expires first",
-      fr: "FEFO : la pharmacie vend d'abord le stock qui expire en premier",
+      fr: "FEFO : la pharmacie vend d’abord le stock qui expire en premier",
     },
     minutes: 4,
     image: "/articles/fefo-pick-medicine.jpg",
@@ -83,7 +83,7 @@ export const ARTICLES: Article[] = [
     tag: { en: "Health › Pharmacy", fr: "Santé › Pharmacie" },
     title: {
       en: "How to count pharmacy stock faster, and where RFID fits",
-      fr: "Compter le stock d'une pharmacie plus vite, et la place du RFID",
+      fr: "Compter le stock d’une pharmacie plus vite, et la place du RFID",
     },
     minutes: 6,
     image: "/articles/rfid-device.jpg",

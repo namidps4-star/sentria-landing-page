@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react"
 import { T } from "./t"
+import { FR } from "@/content/fr"
 import { useText } from "./lang"
 import { tabNav } from "./tab-keys"
 
@@ -131,7 +132,7 @@ export function TrustCluster({ steps, head }: { steps: readonly Item[]; head: Re
             className={`tc-c tc-c${i + 1}`}
             style={{ "--i": i } as React.CSSProperties}
             data-on={step === i ? "1" : undefined}
-            aria-label={s.h}
+            aria-label={tx(s.h, FR[s.h] ?? s.h)}
             onKeyDown={(e) =>
               tabNav(e, i, steps.length, (k) => {
                 pick(k)

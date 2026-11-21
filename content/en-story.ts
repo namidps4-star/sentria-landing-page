@@ -63,9 +63,9 @@ export const EN_STORY = {
   "label": "Not sure where you fit in? Pick one:",
   "tabs": [
    "Industry",
-   "Health",
+   "Healthcare",
    "Agriculture",
-   "Transport",
+   "Transportation",
    "Logistics",
    "Energy",
    "Retail"

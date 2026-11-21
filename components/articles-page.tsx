@@ -70,7 +70,7 @@ export function ArticlesPage() {
           </p>
           {latest[0] ? (
             <Link className="art-cta" href={`/articles/${pageSlug(latest[0].id)}`}>
-              <B en="Read the article" fr="Lire l'article" />
+              <B en="Read the article" fr="Lire l’article" />
             </Link>
           ) : (
             <a className="art-cta" href="#articles-list">
@@ -108,7 +108,7 @@ export function ArticlesPage() {
       <div className="art-grid">
         {shown.length === 0 && (
           <p className="art-empty">
-            <B en="No article in this part yet." fr="Pas encore d'article dans cette partie." />
+            <B en="No article in this part yet." fr="Pas encore d’article dans cette partie." />
           </p>
         )}
         {grid.map((a: Article) => (
