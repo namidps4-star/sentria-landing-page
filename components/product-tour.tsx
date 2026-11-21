@@ -6,6 +6,8 @@ import { B, LangPick } from "./t"
 import { tabNav } from "./tab-keys"
 import dashEn from "@/assets/dash/dash-crop-en.webp"
 import dashFr from "@/assets/dash/dash-crop-fr.webp"
+import dashEnPhone from "@/assets/dash/dash-crop-en-phone.webp"
+import dashFrPhone from "@/assets/dash/dash-crop-fr-phone.webp"
 import { useText } from "./lang"
 
 /** Parts of the dashboard picture, in % of the picture. Step 0 has no part: the whole screen. */
@@ -40,6 +42,15 @@ export function ProductTour() {
   const [hover, setHover] = useState(0)
   const [pick, setPick] = useState<{ n: number } | null>(null)
   const [ready, setReady] = useState(false)
+  /* On a phone the picture is the dashboard panel alone (no floating cards), so the spotlight is mapped to it. */
+  const [narrow, setNarrow] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 760px)")
+    const sync = () => setNarrow(mq.matches)
+    sync()
+    mq.addEventListener("change", sync)
+    return () => mq.removeEventListener("change", sync)
+  }, [])
   const tilt = useRef({ x: 0, y: 0 })
   const rise = useRef(1)
   const lit = useRef(0)
@@ -97,7 +108,9 @@ export function ProductTour() {
     if (pick) setPick(null)
   }
   const step = hover > 0 ? hover : pick ? pick.n : scrollStep
-  const part = STEPS[step]
+  const deskPart = STEPS[step]
+  /* Phone crop: x from 23.1% to 97.6% of the desktop picture, y from 0 to 82.1% of its height. */
+  const part = deskPart && narrow ? { l: (deskPart.l / 100 - 0.231449) / 0.747349 * 100, t: deskPart.t / 0.820707, w: deskPart.w / 0.747349, h: deskPart.h / 0.820707, en: deskPart.en, fr: deskPart.fr } : deskPart
 
   const move = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse") return
@@ -155,8 +168,18 @@ export function ProductTour() {
             </div>
             <div className="pt-shot" ref={shot}>
               <LangPick
-                en={<Image src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
-                fr={<Image src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
+                en={
+                  <>
+                    <Image className="pt-img-desk" src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
+                    <Image className="pt-img-phone" src={dashEnPhone} alt="" sizes="94vw" quality={90} />
+                  </>
+                }
+                fr={
+                  <>
+                    <Image className="pt-img-desk" src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
+                    <Image className="pt-img-phone" src={dashFrPhone} alt="" sizes="94vw" quality={90} />
+                  </>
+                }
               />
               <div className="pt-light" aria-hidden="true" />
               {part && (

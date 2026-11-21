@@ -745,6 +745,7 @@
 .pt-h {
   max-width: none;
   margin-inline: auto;
+  padding-inline: 20px;
   font-size: clamp(28px, 3.4vw, 48px);
 }
 .pt-cap {

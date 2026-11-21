@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { C } from "@/content/en"
 import { T } from "./t"
 import { Mark } from "./ui"
@@ -28,11 +28,21 @@ export function LangSwitch() {
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  /* On a phone the bar slides away while the page scrolls down and comes back when it scrolls up,
+     so it does not cover the content being read. The open menu always stays. */
+  const [away, setAway] = useState(false)
+  const lastY = useRef(0)
   const txt = useText()
   const lang = useLang()
 
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 30)
+    const on = () => {
+      const y = window.scrollY
+      setScrolled(y > 30)
+      if (y > lastY.current + 8 && y > 160) setAway(true)
+      else if (y < lastY.current - 8) setAway(false)
+      if (Math.abs(y - lastY.current) > 8) lastY.current = y
+    }
     on()
     window.addEventListener("scroll", on, { passive: true })
     return () => window.removeEventListener("scroll", on)
@@ -53,7 +63,7 @@ export function Header() {
   }, [open])
 
   return (
-    <header className="hd" data-scrolled={scrolled ? "1" : undefined}>
+    <header className="hd" data-scrolled={scrolled ? "1" : undefined} data-away={away && !open ? "1" : undefined}>
       <nav className="bar" aria-label={txt("Main", "Principal")}>
         <a className="logo" href={localHref("/#top", lang)} aria-label={txt("SentrIA, back to top", "SentrIA, retour en haut")} onClick={() => setOpen(false)}>
           <span className="logo-mark">
