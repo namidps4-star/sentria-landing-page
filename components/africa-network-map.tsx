@@ -25,10 +25,10 @@ const TEXT = {
     alt: "Map of a pharmacy network with three pharmacies pinned",
   },
   fr: {
-    from: { name: "Pharmacie Centrale", sub: "34 invendues, retour pour avoir", l1: "Invendues, avant → après", l2: "Retour", then: "4" },
-    to: { name: "Clinique du Nord", sub: "Recommande", l1: "Unités recommandées", l2: "Produit" },
+    from: { name: "Pharmacie Centrale", sub: "34 invendues, à retourner", l1: "Invendues, avant → après", l2: "Retour", then: "4" },
+    to: { name: "Clinique du Nord", sub: "Recommande", l1: "Unités commandées", l2: "Produit" },
     port: { name: "Pharmacie du Port", sub: "Stock restant", l1: "Jours restants", l2: "Livraison" },
-    move: ["Réapprovisionner 30 unités", "depuis votre entrepôt"],
+    move: ["Livrer 30 unités", "depuis votre entrepôt"],
     alt: "Carte d'un réseau de pharmacies avec trois pharmacies repérées",
   },
 }
