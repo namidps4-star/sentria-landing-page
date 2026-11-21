@@ -41,6 +41,16 @@
   margin-top: 16px;
 }
 
+.wsf-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 1.5px;
+  background: currentColor;
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
 .wsf-h {
   font-family: var(--f-display), sans-serif;
   font-size: clamp(30px, 4vw, 50px);
