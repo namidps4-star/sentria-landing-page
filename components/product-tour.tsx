@@ -1,10 +1,12 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { B, LangPick } from "./t"
+import { tabNav } from "./tab-keys"
 import dashEn from "@/assets/dash/dash-crop-en.webp"
 import dashFr from "@/assets/dash/dash-crop-fr.webp"
+import { useText } from "./lang"
 
 /** Parts of the dashboard picture, in % of the picture. Step 0 has no part: the whole screen. */
 const STEPS: ({ l: number; t: number; w: number; h: number; en: string; fr: string } | null)[] = [
@@ -29,6 +31,8 @@ const clamp = (n: number) => Math.min(1, Math.max(0, n))
  * the part under the pointer; touch and keyboard use the numbered buttons. Reduced motion: flat, no pinning.
  */
 export function ProductTour() {
+  const base = useId()
+  const tx = useText()
   const root = useRef<HTMLElement>(null)
   const win = useRef<HTMLDivElement>(null)
   const shot = useRef<HTMLDivElement>(null)
@@ -132,7 +136,7 @@ export function ProductTour() {
           <B en="The product" fr="Le produit" />
         </p>
         <h2 className="rv-h pt-h" data-rv="rise">
-          <LangPick en="Every risk, ranked. One screen." fr="Chaque risque, classé. Un seul écran." />
+          <LangPick en="Risks, ranked. One screen." fr="Risques classés. Un seul écran." />
         </h2>
         <div className="pt-cap" aria-live="polite">
           {CAPS.map((c, i) => (
@@ -143,7 +147,7 @@ export function ProductTour() {
         </div>
         <div className="pt-body">
         <div className="pt-wrap">
-          <div className="pt-win" ref={win} onPointerMove={move} onPointerLeave={leave}>
+          <div className="pt-win" id={`${base}-panel`} role="tabpanel" aria-labelledby={`${base}-t${Math.max(0, step - 1)}`} ref={win} onPointerMove={move} onPointerLeave={leave}>
             <div className="pt-bar" aria-hidden="true">
               <i />
               <i />
@@ -167,13 +171,23 @@ export function ProductTour() {
             </div>
           </div>
         </div>
-        <ol className="pt-rail" aria-label="Dashboard parts" data-ready={ready ? "1" : undefined} data-manual={hover > 0 || pick ? "1" : undefined}>
+        <ol role="tablist" className="pt-rail" aria-label={tx("Dashboard parts", "Parties du tableau de bord")} data-ready={ready ? "1" : undefined} data-manual={hover > 0 || pick ? "1" : undefined}>
           {STEPS.slice(1).map((p, i) => (
-            <li key={i} style={{ ["--k" as string]: i } as React.CSSProperties}>
+            <li key={i} role="presentation" style={{ ["--k" as string]: i } as React.CSSProperties}>
               <button
                 type="button"
+                role="tab"
+                id={`${base}-t${i}`}
+                aria-controls={`${base}-panel`}
+                aria-selected={step === i + 1}
+                tabIndex={step === i + 1 ? 0 : -1}
                 data-on={step === i + 1 ? "1" : undefined}
-                aria-pressed={step === i + 1}
+                onKeyDown={(e) =>
+                  tabNav(e, i, STEPS.length - 1, (k) => {
+                    setPick({ n: k + 1 })
+                    document.getElementById(`${base}-t${k}`)?.focus()
+                  })
+                }
                 onClick={() => setPick({ n: i + 1 })}
                 onPointerEnter={(e) => e.pointerType === "mouse" && setHover(i + 1)}
                 onPointerLeave={(e) => e.pointerType === "mouse" && setHover(0)}

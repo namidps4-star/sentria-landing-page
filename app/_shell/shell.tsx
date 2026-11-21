@@ -143,7 +143,7 @@ const ARTICLE_LANG = JSON.stringify(
   Object.fromEntries(ARTICLE_PAGES.map((page) => [page.slug, page.lang]))
 )
 
-const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var skip=localStorage.getItem('sentria-skip-intro')==='1';var p=location.pathname;if(!rm&&!skip&&['/','/en','/fr','/en/','/fr/'].indexOf(p)>-1){d.classList.add('op-run','op-wait');setTimeout(function(){d.classList.remove('op-wait')},900)}d.classList.add('js')}catch(e){d.classList.add('js')}})();`
+const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var skip=localStorage.getItem('sentria-skip-intro')==='1';var seen=sessionStorage.getItem('sentria-intro-seen')==='1';var p=location.pathname;if(!rm&&!skip&&!seen&&['/','/en','/fr','/en/','/fr/'].indexOf(p)>-1){d.classList.add('op-run','op-wait');try{sessionStorage.setItem('sentria-intro-seen','1')}catch(e){}setTimeout(function(){d.classList.remove('op-wait')},900)}d.classList.add('js')}catch(e){d.classList.add('js')}})();`
 
 
 /** The page shell for one language section: its own <html lang>, fonts and head. */

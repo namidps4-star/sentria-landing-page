@@ -92,7 +92,7 @@ export const EN_PRODUCT = {
  },
  "flow": {
   "eyebrow": "Implementation",
-  "title": "From your data to a defended decision.",
+  "title": "From your data to a decision you can explain.",
   "steps": [
    {
     "n": "01",
@@ -122,9 +122,9 @@ export const EN_PRODUCT = {
   "lead": "We start with one problem in one sector. The same decision layer then extends to other flows.",
   "tabs": [
    "Industry",
-   "Healthcare",
+   "Health",
    "Agriculture",
-   "Transportation",
+   "Transport",
    "Logistics",
    "Energy"
   ]
@@ -134,9 +134,9 @@ export const EN_PRODUCT = {
   "title": "Where do you fit in?",
   "tabs": [
    "Industry",
-   "Healthcare",
+   "Health",
    "Agriculture",
-   "Transportation",
+   "Transport",
    "Logistics",
    "Energy",
    "Retail"
@@ -149,7 +149,7 @@ export const EN_PRODUCT = {
    },
    {
     "n": "02",
-    "h": "Healthcare",
+    "h": "Health",
     "p": "Pharmacies, hospital pharmacies, medical wholesalers and cold chain facilities. Helps you track stock levels, expiry dates and temperature before something runs out or spoils."
    },
    {
@@ -164,7 +164,7 @@ export const EN_PRODUCT = {
    },
    {
     "n": "04",
-    "h": "Transportation",
+    "h": "Transport",
     "p": "Trucking companies, delivery fleets and vehicle rental operators. Helps you track engine health, fuel and maintenance schedules across the whole fleet."
    },
    {
@@ -182,7 +182,7 @@ export const EN_PRODUCT = {
  "data": {
   "eyebrow": "Data",
   "title": "Use what you already have.",
-  "lead": "SentrIA doesn't replace your infrastructure. It sits on top and turns what you already have into decisions you can defend.",
+  "lead": "SentrIA doesn't replace your infrastructure. It sits on top and turns what you already have into decisions you can explain.",
   "items": [
    {
     "k": "DATA / 01",
@@ -203,7 +203,7 @@ export const EN_PRODUCT = {
  },
  "reasoning": {
   "eyebrow": "Reliability",
-  "title": "Every risk comes with its reasoning.",
+  "title": "Each risk comes with its reasoning.",
   "items": [
    {
     "n": "01",

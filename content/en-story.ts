@@ -8,7 +8,7 @@ export const EN_STORY = {
   "cta1": "Book a demo →",
   "cta2": "See how it works",
   "checks": [
-   "Evidence for every risk",
+   "Evidence for each risk",
    "Confidence and impact shown",
    "Decision logged, outcome measured"
   ],
@@ -63,9 +63,9 @@ export const EN_STORY = {
   "label": "Not sure where you fit in? Pick one:",
   "tabs": [
    "Industry",
-   "Healthcare",
+   "Health",
    "Agriculture",
-   "Transportation",
+   "Transport",
    "Logistics",
    "Energy",
    "Retail"
@@ -74,7 +74,7 @@ export const EN_STORY = {
  "situations": {
   "eyebrow": "The problem",
   "title": "Your data already knows. It just doesn't explain itself.",
-  "lead": "The problem isn't a lack of data. It's that nothing connects a signal to a decision you can defend.",
+  "lead": "The problem isn't a lack of data. It's that nothing connects a signal to a decision you can justify.",
   "items": [
    {
     "n": "01",

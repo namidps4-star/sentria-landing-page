@@ -4,7 +4,7 @@ import { GENERAL_ACTIVITIES } from "./general-activities"
 
 /* The Healthcare sector's activities, for its ring. Every card links to a live activity page and quotes that
    page's own one-line description. None of these is a placeholder any more. */
-const SECTOR = { en: "Healthcare", fr: "Santé" }
+const SECTOR = { en: "Health", fr: "Santé" }
 
 const live = (key: string, c: Omit<ActivityCard, "sector" | "line">): ActivityCard => {
   const page = GENERAL_ACTIVITIES.find((a) => a.key === key)
@@ -13,7 +13,7 @@ const live = (key: string, c: Omit<ActivityCard, "sector" | "line">): ActivityCa
 }
 
 export const HEALTH_HUB_CARDS: ActivityCard[] = [
-  ...GLOBAL_HUB_CARDS.filter((c) => c.sector?.en === "Healthcare"),
+  ...GLOBAL_HUB_CARDS.filter((c) => c.sector?.en === "Health"),
   live("clinique-hopital", {
     id: "clinic",
     name: { en: "Clinic / Hospital", fr: "Clinique / Hôpital" },

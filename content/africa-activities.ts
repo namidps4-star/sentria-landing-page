@@ -591,7 +591,7 @@ export const SECTOR_LIST: Sector[] = [
   },
   {
     key: "transportation",
-    name: { en: "Transportation", fr: "Transport" },
+    name: { en: "Transport", fr: "Transport" },
     direct: {
       en: "You run a fleet of vehicles. A truck off the road costs you every hour. SentrIA tracks parts, maintenance windows and what needs ordering today.",
       fr: "Vous gérez une flotte de véhicules. Un camion immobilisé vous coûte chaque heure. SentrIA suit les pièces, les fenêtres de maintenance et ce qu'il faut commander aujourd'hui.",

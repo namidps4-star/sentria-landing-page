@@ -2,11 +2,13 @@
 
 import { LangPick } from "./t"
 import { useEffect, useState } from "react"
+import { useText } from "./lang"
 
 const pad = (n: number) => String(n).padStart(2, "0")
 
 /** The contents list. The entry of the section at the top of the page follows the reader. */
 export function LegalToc({ entries }: { entries: { en: string; fr: string }[] }) {
+  const tx = useText()
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export function LegalToc({ entries }: { entries: { en: string; fr: string }[] })
   }, [])
 
   return (
-    <nav className="lg-toc" aria-label="Contents">
+    <nav className="lg-toc" aria-label={tx("Contents", "Sommaire")}>
       {entries.map((e, i) => (
         <a key={e.en} href={`#s${i}`} aria-current={current === i ? "true" : undefined}>
           <span className="lg-n" aria-hidden="true">

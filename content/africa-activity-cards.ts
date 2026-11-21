@@ -48,7 +48,7 @@ const SECTOR: Record<string, L> = {
   pharmacie: { en: "Health", fr: "Santé" },
   "grossiste-pharma": { en: "Health", fr: "Santé" },
   "exploitation-agricole": { en: "Agriculture", fr: "Agriculture" },
-  "grossiste-distributeur": { en: "Distribution", fr: "Distribution" },
+  "grossiste-distributeur": { en: "Retail", fr: "Commerce" },
 }
 
 /* The sector copy already on the home page ("Where do you fit in?"), reused in both languages. */
@@ -91,8 +91,8 @@ const SECTOR_CARDS: ActivityCard[] = [
   {
     id: "transportation",
     href: { en: "/activities/transportation", fr: "/fr/activites/transport" },
-    name: { en: "Transportation", fr: "Transport" },
-    line: fit("Transportation"),
+    name: { en: "Transport", fr: "Transport" },
+    line: fit("Transport"),
     photo: "/africa/hq/row-transportation.jpg",
     alt: { en: "Cars driving on a highway at sunset", fr: "Voitures sur une autoroute au coucher du soleil" },
     by: "Markus McKay",

@@ -81,7 +81,7 @@ export function ArticlesPage() {
       </section>
 
       <div className="art-filters" id="articles-list">
-        <div className="art-seg" role="group" aria-label="Sector">
+        <div className="art-seg" role="group" aria-label={lang === "fr" ? "Secteur" : "Sector"}>
           {SECTORS.filter((s) => s.key === "all" || live.some((a) => a.sector === s.key)).map((s) => (
             <button key={s.key} type="button" aria-pressed={sector === s.key} onClick={() => pickSector(s.key)}>
               <B en={s.label.en} fr={s.label.fr} />
@@ -89,7 +89,7 @@ export function ArticlesPage() {
           ))}
         </div>
         {departments.length > 0 && (
-          <div className="art-seg sub" role="group" aria-label="Department">
+          <div className="art-seg sub" role="group" aria-label={lang === "fr" ? "Service" : "Department"}>
             {departments.map((d) => (
               <button key={d.key} type="button" aria-pressed={dept === d.key} onClick={() => setDept(d.key)}>
                 <B en={d.label.en} fr={d.label.fr} />

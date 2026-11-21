@@ -36,7 +36,7 @@ const HERO_FR: Copy = {
 }
 
 export const HEALTH_SECTOR = {
-  en: { title: "Healthcare", lead: LEAD_EN, slug: "healthcare", home: "/en", choose: "Choose your activity", demo: "Book a demo →", placeholderTitle: "Page in preparation.", hero: HERO_EN },
+  en: { title: "Health", lead: LEAD_EN, slug: "healthcare", home: "/en", choose: "Choose your activity", demo: "Book a demo →", placeholderTitle: "Page in preparation.", hero: HERO_EN },
   fr: { title: "Santé", lead: FR[LEAD_EN], slug: "sante", home: "/fr", choose: "Choisissez votre activité", demo: "Demander une démo →", placeholderTitle: "Page en préparation.", hero: HERO_FR },
 }
 

@@ -14,10 +14,10 @@ type Lang = "en" | "fr"
 const SECTORS: { id: HubSector; name: { en: string; fr: string }; photo: string }[] = [
   { id: "health", name: { en: "Health", fr: "Santé" }, photo: "/africa/hq/row-health.jpg" },
   { id: "agriculture", name: { en: "Agriculture", fr: "Agriculture" }, photo: "/africa/hq/row-agriculture.jpg" },
-  { id: "distribution", name: { en: "Distribution", fr: "Distribution" }, photo: "/africa/hq/row-distribution.jpg" },
+  { id: "distribution", name: { en: "Retail", fr: "Commerce" }, photo: "/africa/hq/row-distribution.jpg" },
   { id: "logistics", name: { en: "Logistics", fr: "Logistique" }, photo: "/africa/hq/row-logistics.jpg" },
   { id: "industry", name: { en: "Industry", fr: "Industrie" }, photo: "/africa/hq/row-industry.jpg" },
-  { id: "transportation", name: { en: "Transportation", fr: "Transport" }, photo: "/africa/hq/row-transportation.jpg" },
+  { id: "transportation", name: { en: "Transport", fr: "Transport" }, photo: "/africa/hq/row-transportation.jpg" },
   { id: "energy", name: { en: "Energy", fr: "Énergie" }, photo: "/africa/hq/row-energy.jpg" },
 ]
 

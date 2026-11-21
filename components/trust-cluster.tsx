@@ -1,7 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState, type ReactNode } from "react"
+import { useEffect, useId, useRef, useState, type ReactNode } from "react"
 import { T } from "./t"
+import { useText } from "./lang"
+import { tabNav } from "./tab-keys"
 
 type Item = { n: string; h: string }
 const ICONS = [
@@ -30,11 +32,13 @@ const ICONS = [
  * Reduced motion: no autoplay, no entrance, the ring stays full.
  */
 export function TrustCluster({ steps, head }: { steps: readonly Item[]; head: ReactNode }) {
+  const tx = useText()
   const root = useRef<HTMLDivElement>(null)
   const [step, setStep] = useState(0)
   const [seen, setSeen] = useState(false)
   const [vis, setVis] = useState(false)
   const [hold, setHold] = useState(false)
+  const base = useId()
   const [still, setStill] = useState(false)
 
   useEffect(() => {
@@ -83,14 +87,14 @@ export function TrustCluster({ steps, head }: { steps: readonly Item[]; head: Re
       </svg>
       <div className="tc-left">
         {head}
-        <p className="tc-line" key={step} aria-live="polite">
+        <p className="tc-line" key={step} id={`${base}-panel`} role="tabpanel" aria-labelledby={`${base}-t${step}`} aria-live="polite">
           <T s={steps[step].h} />
         </p>
       </div>
       <div
         className="tc-cl"
-        role="group"
-        aria-label="Data control"
+        role="tablist"
+        aria-label={tx("Data control", "Contrôle des données")}
         onPointerMove={(e) => {
           if (e.pointerType !== "mouse") return
           const el = e.currentTarget
@@ -119,11 +123,21 @@ export function TrustCluster({ steps, head }: { steps: readonly Item[]; head: Re
           <button
             key={s.n}
             type="button"
+            role="tab"
+            id={`${base}-t${i}`}
+            aria-controls={`${base}-panel`}
+            aria-selected={step === i}
+            tabIndex={step === i ? 0 : -1}
             className={`tc-c tc-c${i + 1}`}
             style={{ "--i": i } as React.CSSProperties}
             data-on={step === i ? "1" : undefined}
-            aria-pressed={step === i}
             aria-label={s.h}
+            onKeyDown={(e) =>
+              tabNav(e, i, steps.length, (k) => {
+                pick(k)
+                document.getElementById(`${base}-t${k}`)?.focus()
+              })
+            }
             onPointerEnter={(e) => e.pointerType === "mouse" && pick(i)}
             onClick={() => pick(i)}
             onFocus={() => setStep(i)}

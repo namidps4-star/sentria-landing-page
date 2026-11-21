@@ -23,7 +23,7 @@
   position: relative;
   display: flex;
   min-width: max-content;
-  padding: 5px;
+  padding: 5px 12px;
 }
 .qf-pill {
   position: relative;

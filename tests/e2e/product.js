@@ -21,8 +21,8 @@ const { playwright, LAUNCH, APP_URL, pass, results, IGNORED_ERRORS, SHOTS } = re
     const state = () =>
       p.evaluate(() => ({
         spot: !!document.querySelector('.pt-spot'),
-        tip: document.querySelector('.pt-rail button[aria-pressed="true"] strong')?.textContent || '',
-        on: [...document.querySelectorAll('.pt-rail button')].findIndex((d) => d.getAttribute('aria-pressed') === 'true') + 1,
+        tip: document.querySelector('.pt-rail button[aria-selected="true"] strong')?.textContent || '',
+        on: [...document.querySelectorAll('.pt-rail button')].findIndex((d) => d.getAttribute('aria-selected') === 'true') + 1,
         tr: document.querySelector('.pt-win').style.transform,
       }))
     await at(0)
@@ -73,7 +73,7 @@ const { playwright, LAUNCH, APP_URL, pass, results, IGNORED_ERRORS, SHOTS } = re
     await p.goto(`${APP_URL}/fr`, { waitUntil: 'load' })
     await p.waitForTimeout(600)
     const frHead = await p.evaluate(() => document.querySelector('.pt-h')?.textContent || '')
-    pass(/Chaque risque/.test(frHead), `${tag}: French headline shows`)
+    pass(/Risques classés/.test(frHead), `${tag}: French headline shows`)
     pass(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${tag}: no sideways scroll`)
     pass(errs.length === 0, `${tag}: no page errors${errs.length ? ': ' + errs.join(' | ') : ''}`)
     await ctx.close()

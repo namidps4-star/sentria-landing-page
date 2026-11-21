@@ -36,10 +36,10 @@ const SECTOR: Record<HubSector, { page: L }> = {
 const SECTOR_LABEL: Record<HubSector, L> = {
   health: { en: "Health", fr: "Santé" },
   agriculture: { en: "Agriculture", fr: "Agriculture" },
-  distribution: { en: "Distribution", fr: "Distribution" },
+  distribution: { en: "Retail", fr: "Commerce" },
   logistics: { en: "Logistics", fr: "Logistique" },
   industry: { en: "Industry", fr: "Industrie" },
-  transportation: { en: "Transportation", fr: "Transport" },
+  transportation: { en: "Transport", fr: "Transport" },
   energy: { en: "Energy", fr: "Énergie" },
 }
 

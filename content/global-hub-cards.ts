@@ -6,7 +6,7 @@ const card = (c: ActivityCard) => c
 export const GLOBAL_HUB_CARDS: ActivityCard[] = [
   card({
     id: "pharmacy",
-    sector: { en: "Healthcare", fr: "Santé" },
+    sector: { en: "Health", fr: "Santé" },
     name: { en: "Pharmacy", fr: "Pharmacie" },
     line: { en: "Days of stock and expiring batches.", fr: "Jours de stock et lots qui expirent." },
     href: { en: "/activities/pharmacy", fr: "/fr/activites/pharmacie" },
@@ -17,7 +17,7 @@ export const GLOBAL_HUB_CARDS: ActivityCard[] = [
   }),
   card({
     id: "wholesaler",
-    sector: { en: "Healthcare", fr: "Santé" },
+    sector: { en: "Health", fr: "Santé" },
     name: { en: "Pharmaceutical wholesaler", fr: "Grossiste pharma" },
     line: { en: "Resupply from your warehouse. Return requests for unsold stock.", fr: "Réapprovisionnement depuis votre entrepôt. Demandes de retour pour stock invendu." },
     href: { en: "/activities/wholesaler", fr: "/fr/activites/grossiste" },
@@ -72,8 +72,8 @@ export const GLOBAL_HUB_CARDS: ActivityCard[] = [
   }),
   card({
     id: "transportation",
-    sector: { en: "Transportation", fr: "Transport" },
-    name: { en: "Transportation", fr: "Transport" },
+    sector: { en: "Transport", fr: "Transport" },
+    name: { en: "Transport", fr: "Transport" },
     line: { en: "Identify delay risks, capacity pressure, and flow anomalies before they spread.", fr: "Identifiez les risques de retard, la pression sur la capacité et les anomalies de flux avant qu'ils ne se propagent." },
     href: { en: "/activities/transportation", fr: "/fr/activites/transport" },
     photo: "/hub-photos/transport.jpg",

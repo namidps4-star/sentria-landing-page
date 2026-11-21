@@ -142,8 +142,8 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
   },
   "distribution": {
     "name": {
-      "en": "Distribution",
-      "fr": "Distribution"
+      "en": "Retail",
+      "fr": "Commerce"
     },
     "head": {
       "en": "Move unsold stock to where it sells.",
@@ -340,7 +340,7 @@ export const SECTOR_DATA: Record<SectorKey, SectorData> = {
   },
   "transportation": {
     "name": {
-      "en": "Transportation",
+      "en": "Transport",
       "fr": "Transport"
     },
     "head": {

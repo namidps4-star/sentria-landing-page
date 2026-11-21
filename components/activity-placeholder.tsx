@@ -16,7 +16,7 @@ export function ActivityPlaceholder({ name, lang }: { name: string; lang: "en" |
           {t.placeholderTitle} {en ? "Book a demo and we will walk you through this activity." : "Réservez une démo et nous vous présenterons cette activité."}
         </p>
         <a className="hs-back" href={en ? "/sectors/healthcare" : "/fr/secteurs/sante"}>
-          {en ? "← Back to Healthcare" : "← Retour à la santé"}
+          {en ? "← Back to Health" : "← Retour à la santé"}
         </a>
         <br />
         <a className="hs-btn" href={en ? "/en#demo" : "/fr#demo"}>

@@ -8,7 +8,7 @@ import { localHref, useLang, useText } from "./lang"
 import { rollGlobeClick } from "./africa-globe-roll"
 
 const APP_URL = "https://app.sentriahq.dev"
-const HREFS = ["/#situations", "/#methode", "/#cockpit", "/#tarifs", "/#fit", "/#faq", "/articles", "/africa"]
+const HREFS = ["/#tarifs", "/#fit", "/articles", "/africa"]
 
 export function LangSwitch() {
   const lang = useLang()

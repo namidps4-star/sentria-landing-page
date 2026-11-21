@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react"
 import { C } from "@/content/en"
+import { FR } from "@/content/fr"
 import { T } from "./t"
+import { useText, useLang } from "./lang"
 import { Eyebrow, iv } from "./ui"
 
 const CALENDLY_SRC = "https://assets.calendly.com/assets/external/widget.js"
@@ -16,6 +18,9 @@ const CALENDLY_SRC = "https://assets.calendly.com/assets/external/widget.js"
  */
 function DemoDial({ points }: { points: readonly string[] }) {
   const root = useRef<HTMLDivElement>(null)
+  const tx = useText()
+  const lang = useLang()
+  const pointText = (p: string) => (lang === "fr" ? FR[p] ?? p : p)
   const SLOTS = points.length * 3
   const SPREAD = 360 / SLOTS
   const [n, setN] = useState(0) // unbounded, so the rotation always continues the same way
@@ -74,7 +79,7 @@ function DemoDial({ points }: { points: readonly string[] }) {
         <circle className="dd-base" cx="50" cy="50" r="49.5" />
         <circle className="dd-run" cx="50" cy="50" r="49.5" pathLength="1" key={n} />
       </svg>
-      <div className="dd-wheel" role="group" aria-label="Demo agenda">
+      <div className="dd-wheel" role="group" aria-label={tx("Demo agenda", "Programme de la démo")}>
         {Array.from({ length: SLOTS }, (_, k) => {
           const slotNow = ((n % SLOTS) + SLOTS) % SLOTS
           let dist = Math.abs(k - slotNow)
@@ -87,7 +92,7 @@ function DemoDial({ points }: { points: readonly string[] }) {
               data-on={dist === 0 ? "1" : undefined}
               style={{ "--a": `${k * SPREAD}deg`, "--dist": dist, "--vis": dist >= 3 ? 0 : 1 } as React.CSSProperties}
               aria-pressed={dist === 0}
-              aria-label={`0${(k % points.length) + 1} ${points[k % points.length]}`}
+              aria-label={k < points.length ? `0${k + 1} ${pointText(points[k])}` : `0${(k % points.length) + 1}`}
               tabIndex={k < points.length ? 0 : -1}
               aria-hidden={k >= points.length ? true : undefined}
               onPointerEnter={(e) => e.pointerType === "mouse" && pick(k)}
@@ -95,7 +100,7 @@ function DemoDial({ points }: { points: readonly string[] }) {
               onFocus={() => pick(k)}
             >
               <i className="dd-dot" />
-              <b>0{(k % points.length) + 1}</b>
+              {k < points.length ? <b>0{k + 1}</b> : <b data-n={`0${(k % points.length) + 1}`} aria-hidden="true" />}
             </button>
           )
         })}

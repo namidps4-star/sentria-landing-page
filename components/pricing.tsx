@@ -39,7 +39,7 @@ const PLANS: Plan[] = [
       { en: "SMS alerts", fr: "Alertes par SMS" },
       { en: "Treatment tracking", fr: "Suivi des traitements" },
     ],
-    cta: { en: "Choose Pro", fr: "Choisir Pro" },
+    cta: { en: "Book a demo to start", fr: "Réserver une démo pour commencer" },
   },
   {
     id: "business",
@@ -52,7 +52,7 @@ const PLANS: Plan[] = [
       { en: "SMS alerts", fr: "Alertes par SMS" },
       { en: "Treatment tracking", fr: "Suivi des traitements" },
     ],
-    cta: { en: "Choose Business", fr: "Choisir Business" },
+    cta: { en: "Book a demo to start", fr: "Réserver une démo pour commencer" },
     featured: true,
   },
   {
@@ -107,7 +107,7 @@ export function PricingGrid() {
                       <B en="Free" fr="Gratuit" />
                     </span>
                     <span className="price-per">
-                      <B en="Business trial for 14 days" fr="Essai Business de 14 jours" />
+                      <B en="One site to start" fr="Un site pour commencer" />
                     </span>
                   </>
                 ) : (
@@ -116,7 +116,7 @@ export function PricingGrid() {
                       <B en="Contact us" fr="Nous contacter" />
                     </span>
                     <span className="price-per">
-                      <B en="Priced to your scope" fr="Selon votre périmètre" />
+                      <B en="Tailored to your needs" fr="Sur mesure" />
                     </span>
                   </>
                 )}
