@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { WholesaleFeatures } from "@/components/wholesale-features"
+import { PharmacyFeatures } from "@/components/pharmacy-features"
 import { GENERAL_ACTIVITIES, generalBySlug } from "@/content/general-activities"
 import { PLACEHOLDER_ACTIVITIES } from "@/content/health-sector"
 import { ActivityPlaceholder } from "@/components/activity-placeholder"
@@ -30,7 +31,7 @@ export default async function Page({ params }: { params: Params }) {
   if (!a) notFound()
   return (
     <>
-      <AfricaHero video copy={a.copy.en} id={a.key} photo={a.photo} extra={<AfricaCapabilities slug={a.key} lang="en" beforeFaq={a.key === "grossiste-pharma" ? <WholesaleFeatures lang="en" /> : undefined} />} />
+      <AfricaHero video copy={a.copy.en} id={a.key} photo={a.photo} extra={<AfricaCapabilities slug={a.key} lang="en" beforeFaq={a.key === "grossiste-pharma" ? <WholesaleFeatures lang="en" /> : a.key === "pharmacie" ? <PharmacyFeatures lang="en" /> : undefined} />} />
     </>
   )
 }
