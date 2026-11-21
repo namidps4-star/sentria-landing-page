@@ -1,0 +1,39 @@
+# Runs scripts/verify.sh, the same checks as a local run, on every pull request and on pushes to the working branches.
+name: verify
+
+on:
+  pull_request:
+  push:
+    branches: [new_feat, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies from the lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Install the browser used by the browser suites
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run every check
+        run: scripts/verify.sh
