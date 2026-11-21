@@ -55,7 +55,7 @@
   text-align: left;
   transition: color 0.35s var(--ease);
 }
-.rv-word[aria-pressed="true"] {
+.rv-word[aria-selected="true"] {
   color: var(--rv-ink);
 }
 .rv-cols {
@@ -71,7 +71,7 @@
   border-top: 3px solid var(--rv-soft);
   transition: border-color 0.35s var(--ease);
 }
-.rv-col[aria-pressed="true"] {
+.rv-col[data-on="1"] {
   border-top-color: var(--rv-ink);
 }
 .rv-col-h {
@@ -82,7 +82,7 @@
   color: #86868b;
   transition: color 0.35s var(--ease);
 }
-.rv-col[aria-pressed="true"] .rv-col-h {
+.rv-col[data-on="1"] .rv-col-h {
   color: var(--rv-ink);
 }
 .rv-col-p {

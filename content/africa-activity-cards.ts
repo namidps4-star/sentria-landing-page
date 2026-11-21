@@ -45,10 +45,10 @@ const LIVE_PHOTOS: Record<string, Pick<ActivityCard, "photo" | "alt" | "by" | "u
 }
 
 const SECTOR: Record<string, L> = {
-  pharmacie: { en: "Health", fr: "Santé" },
-  "grossiste-pharma": { en: "Health", fr: "Santé" },
+  pharmacie: { en: "Healthcare", fr: "Santé" },
+  "grossiste-pharma": { en: "Healthcare", fr: "Santé" },
   "exploitation-agricole": { en: "Agriculture", fr: "Agriculture" },
-  "grossiste-distributeur": { en: "Distribution", fr: "Distribution" },
+  "grossiste-distributeur": { en: "Retail", fr: "Commerce" },
 }
 
 /* The sector copy already on the home page ("Where do you fit in?"), reused in both languages. */

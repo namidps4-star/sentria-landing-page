@@ -3,6 +3,7 @@
 import { useState } from "react"
 import type { CSSProperties } from "react"
 import { bi, useCountUp } from "./connect-shared"
+import { useText } from "./lang"
 
 export type Tab = "overview" | "inventory" | "orders" | "suppliers"
 export type Chip = "hi" | "md" | "lo"
@@ -19,7 +20,7 @@ const ERP_FR: Record<string, string> = {
   Bulk: "Vrac",
   Pick: "Préparation",
   "Spare parts": "Pièces détachées",
-  Today: "Aujourd’hui",
+  Today: "Aujourd'hui",
   Tomorrow: "Demain",
   Fri: "Ven.",
 }
@@ -74,7 +75,7 @@ export const TABLES: Record<Tab, Table> = {
   },
 }
 export const TAB_LABEL: Record<Tab, [string, string]> = {
-  overview: ["Overview", "Vue d’ensemble"],
+  overview: ["Overview", "Vue d'ensemble"],
   inventory: ["Inventory", "Stocks"],
   orders: ["Orders", "Commandes"],
   suppliers: ["Suppliers", "Fournisseurs"],
@@ -86,6 +87,7 @@ export const QUEUE: { id: string; title: [string, string]; sub: [string, string]
 ]
 
 export function ErpScreen({ active }: { active: boolean }) {
+  const tx = useText()
   const [tab, setTab] = useState<Tab>("overview")
   const [done, setDone] = useState<Record<string, boolean>>({})
   const approved = Object.values(done).filter(Boolean).length
@@ -97,10 +99,10 @@ export function ErpScreen({ active }: { active: boolean }) {
   const tabs = Object.keys(TABLES) as Tab[]
 
   return (
-    <div className="cs-monitor" role="group" aria-label="Sample ERP operations screen">
+    <div className="cs-monitor" role="group" aria-label={tx("Sample ERP operations screen", "Exemple d'écran des opérations ERP")}>
       <div className="cs-chrome" aria-hidden="true">
         <i /> <i /> <i />
-        <span className="cs-url">operations.sentria.app</span>
+        <span className="cs-url">Sample data, not connected</span>
       </div>
       <div className="cs-app">
         <nav className="cs-rail" aria-hidden="true">

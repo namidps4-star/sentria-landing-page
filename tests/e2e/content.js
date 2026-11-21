@@ -37,6 +37,11 @@ const FEATURES_DROPPED = new Set([
 // Decided: a sector sentence the redesign rewrote; half of its words are on the page.
 // Decided: rewritten by the activity and hub redesign on main; their words are on the page.
 const REWRITTEN = new Set([
+  // Renamed on purpose: one sector list (Health, Transport, Retail / Commerce) and the booking calendar label.
+  'Healthcare',
+  'Transportation',
+  'LIVE AVAILABILITY',
+  'DISPONIBILITÉS EN DIRECT',
   'Trucking companies, delivery fleets and vehicle rental operators. Helps you track engine health, fuel and maintenance schedules across the whole fleet.',
   "Deviation detection",
   "Maintenance",
@@ -54,7 +59,7 @@ const REWRITTEN = new Set([
   "Entreprises de transport routier, flottes de livraison et loueurs de véhicules. Suivez l'état des moteurs, le carburant et les plannings de maintenance sur toute la flotte.",
 ])
 // Decided: French translations of English words the old French page left untranslated.
-const TRANSLATED_FR = new Set(['Skip to content', 'Privacy', 'Terms', 'Enterprise'])
+const TRANSLATED_FR = new Set(['Skip to content', 'Privacy', 'Terms', 'Enterprise', 'Operations'])
 const wordsPresent = (text, blob) => {
   const words = (s) => s.toLowerCase().match(/[a-zà-ÿ0-9]+/g) || []
   const onPage = new Set(words(blob))
@@ -81,6 +86,8 @@ async function legacyTexts(browser) {
         const t = n.nodeValue.replace(/[ \s]+/g, ' ').trim()
         if (t) out.push(t)
       }
+      // The hero headline is split into animated letters; its full text is the h1's aria-label (what a reader hears).
+      document.querySelectorAll('h1[aria-label]').forEach((h) => out.push(h.getAttribute('aria-label').trim()))
       return out
     })
   const en = await collect()
@@ -117,7 +124,9 @@ async function newText(browser, lang) {
       }
       return t
     }
-    return vis(document.body)
+    // The hero headline's letters are split and animated; its full text is the h1's aria-label (what a reader hears).
+    const label = Array.from(document.querySelectorAll('h1[aria-label]')).map((h) => h.getAttribute('aria-label')).join(' ')
+    return vis(document.body) + ' ' + label
   })
   await ctx.close()
   return norm(blob)

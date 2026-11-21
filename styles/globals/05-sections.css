@@ -40,7 +40,7 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted-l);
+  color: #4a4e42;
 }
 .eyebrow::before {
   content: "";

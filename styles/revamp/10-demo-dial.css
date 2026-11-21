@@ -247,3 +247,8 @@
   margin-top: clamp(56px, 8vh, 88px);
 }
 
+
+/* The repeated slots show their number through CSS, so the sentence is in the page once. */
+.dd-it b[data-n]:empty::before {
+  content: attr(data-n);
+}

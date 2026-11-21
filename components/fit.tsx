@@ -7,6 +7,7 @@ import type { HubSector } from "@/content/africa-sector-catalog"
 import { AfricaHubBrowse } from "./africa-hub-browse"
 import { iv } from "./ui"
 import { useLang } from "./lang"
+import { FR } from "@/content/fr"
 
 export const FIT_KEYS = ["industry", "healthcare", "agriculture", "transportation", "logistics", "energy", "retail"] as const
 export type FitKey = (typeof FIT_KEYS)[number]
@@ -37,6 +38,7 @@ function useFit() {
  */
 export function QuickFit() {
   const active = useFit()
+  const lang = useLang()
   const q = C.quickfit
   const track = useRef<HTMLDivElement>(null)
   const [thumb, setThumb] = useState<{ x: number; w: number } | null>(null)
@@ -115,7 +117,7 @@ export function QuickFit() {
           <div
             className="qf-track"
             role="group"
-            aria-label={q.label}
+            aria-label={lang === "fr" ? FR[q.label] ?? q.label : q.label}
             onPointerMove={hover}
             onPointerLeave={(e) => {
               delete e.currentTarget.dataset.hint

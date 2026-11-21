@@ -92,7 +92,7 @@ export const EN_PRODUCT = {
  },
  "flow": {
   "eyebrow": "Implementation",
-  "title": "From your data to a defended decision.",
+  "title": "From your data to a decision you can explain.",
   "steps": [
    {
     "n": "01",
@@ -182,7 +182,7 @@ export const EN_PRODUCT = {
  "data": {
   "eyebrow": "Data",
   "title": "Use what you already have.",
-  "lead": "SentrIA doesn't replace your infrastructure. It sits on top and turns what you already have into decisions you can defend.",
+  "lead": "SentrIA doesn't replace your infrastructure. It sits on top and turns what you already have into decisions you can explain.",
   "items": [
    {
     "k": "DATA / 01",
@@ -203,7 +203,7 @@ export const EN_PRODUCT = {
  },
  "reasoning": {
   "eyebrow": "Reliability",
-  "title": "Every risk comes with its reasoning.",
+  "title": "Each risk comes with its reasoning.",
   "items": [
    {
     "n": "01",

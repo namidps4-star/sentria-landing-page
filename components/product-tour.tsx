@@ -1,23 +1,27 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { B, LangPick } from "./t"
+import { tabNav } from "./tab-keys"
 import dashEn from "@/assets/dash/dash-crop-en.webp"
 import dashFr from "@/assets/dash/dash-crop-fr.webp"
+import dashEnPhone from "@/assets/dash/dash-crop-en-phone.webp"
+import dashFrPhone from "@/assets/dash/dash-crop-fr-phone.webp"
+import { useText } from "./lang"
 
 /** Parts of the dashboard picture, in % of the picture. Step 0 has no part: the whole screen. */
 const STEPS: ({ l: number; t: number; w: number; h: number; en: string; fr: string } | null)[] = [
   null,
   { l: 25.0, t: 14.0, w: 70.9, h: 19.4, en: "Ranked by value at risk", fr: "Classées par valeur à risque" },
-  { l: 25.0, t: 44.0, w: 17.1, h: 15.1, en: "Critical stockouts first", fr: "Les ruptures critiques d'abord" },
+  { l: 25.0, t: 44.0, w: 17.1, h: 15.1, en: "Critical stockouts first", fr: "Les ruptures critiques d’abord" },
   { l: 25.0, t: 61.0, w: 46.5, h: 30.2, en: "Seven days, so you see it coming", fr: "Sept jours, pour voir venir" },
-  { l: 72.8, t: 61.0, w: 23.3, h: 30.2, en: "Where the risk comes from", fr: "D'où vient le risque" },
+  { l: 72.8, t: 61.0, w: 23.3, h: 30.2, en: "Where the risk comes from", fr: "D’où vient le risque" },
 ]
 const CAPS = [
   { en: "Scroll to open the dashboard.", fr: "Faites défiler pour ouvrir le tableau de bord." },
   { en: "What needs you right now, with its evidence.", fr: "Ce qui vous attend maintenant, avec ses preuves." },
-  { en: "The money at risk is the first thing you see.", fr: "L'argent en jeu est la première chose que vous voyez." },
+  { en: "The money at risk is the first thing you see.", fr: "L’argent en jeu est la première chose que vous voyez." },
   { en: "The trend of the last seven days.", fr: "La tendance des sept derniers jours." },
   { en: "The alerts by type.", fr: "Les alertes par type." },
 ]
@@ -29,6 +33,8 @@ const clamp = (n: number) => Math.min(1, Math.max(0, n))
  * the part under the pointer; touch and keyboard use the numbered buttons. Reduced motion: flat, no pinning.
  */
 export function ProductTour() {
+  const base = useId()
+  const tx = useText()
   const root = useRef<HTMLElement>(null)
   const win = useRef<HTMLDivElement>(null)
   const shot = useRef<HTMLDivElement>(null)
@@ -36,6 +42,15 @@ export function ProductTour() {
   const [hover, setHover] = useState(0)
   const [pick, setPick] = useState<{ n: number } | null>(null)
   const [ready, setReady] = useState(false)
+  /* On a phone the picture is the dashboard panel alone (no floating cards), so the spotlight is mapped to it. */
+  const [narrow, setNarrow] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 760px)")
+    const sync = () => setNarrow(mq.matches)
+    sync()
+    mq.addEventListener("change", sync)
+    return () => mq.removeEventListener("change", sync)
+  }, [])
   const tilt = useRef({ x: 0, y: 0 })
   const rise = useRef(1)
   const lit = useRef(0)
@@ -93,7 +108,9 @@ export function ProductTour() {
     if (pick) setPick(null)
   }
   const step = hover > 0 ? hover : pick ? pick.n : scrollStep
-  const part = STEPS[step]
+  const deskPart = STEPS[step]
+  /* Phone crop: x from 23.1% to 97.6% of the desktop picture, y from 0 to 82.1% of its height. */
+  const part = deskPart && narrow ? { l: (deskPart.l / 100 - 0.231449) / 0.747349 * 100, t: deskPart.t / 0.820707, w: deskPart.w / 0.747349, h: deskPart.h / 0.820707, en: deskPart.en, fr: deskPart.fr } : deskPart
 
   const move = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse") return
@@ -132,7 +149,7 @@ export function ProductTour() {
           <B en="The product" fr="Le produit" />
         </p>
         <h2 className="rv-h pt-h" data-rv="rise">
-          <LangPick en="Every risk, ranked. One screen." fr="Chaque risque, classé. Un seul écran." />
+          <LangPick en="Risks, ranked. One screen." fr="Risques classés. Un seul écran." />
         </h2>
         <div className="pt-cap" aria-live="polite">
           {CAPS.map((c, i) => (
@@ -143,7 +160,7 @@ export function ProductTour() {
         </div>
         <div className="pt-body">
         <div className="pt-wrap">
-          <div className="pt-win" ref={win} onPointerMove={move} onPointerLeave={leave}>
+          <div className="pt-win" id={`${base}-panel`} role="tabpanel" aria-labelledby={`${base}-t${Math.max(0, step - 1)}`} ref={win} onPointerMove={move} onPointerLeave={leave}>
             <div className="pt-bar" aria-hidden="true">
               <i />
               <i />
@@ -151,8 +168,18 @@ export function ProductTour() {
             </div>
             <div className="pt-shot" ref={shot}>
               <LangPick
-                en={<Image src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
-                fr={<Image src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />}
+                en={
+                  <>
+                    <Image className="pt-img-desk" src={dashEn} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
+                    <Image className="pt-img-phone" src={dashEnPhone} alt="" sizes="94vw" quality={90} />
+                  </>
+                }
+                fr={
+                  <>
+                    <Image className="pt-img-desk" src={dashFr} alt="" sizes="(min-width: 960px) 880px, 94vw" quality={90} />
+                    <Image className="pt-img-phone" src={dashFrPhone} alt="" sizes="94vw" quality={90} />
+                  </>
+                }
               />
               <div className="pt-light" aria-hidden="true" />
               {part && (
@@ -167,13 +194,23 @@ export function ProductTour() {
             </div>
           </div>
         </div>
-        <ol className="pt-rail" aria-label="Dashboard parts" data-ready={ready ? "1" : undefined} data-manual={hover > 0 || pick ? "1" : undefined}>
+        <ol role="tablist" className="pt-rail" aria-label={tx("Dashboard parts", "Parties du tableau de bord")} data-ready={ready ? "1" : undefined} data-manual={hover > 0 || pick ? "1" : undefined}>
           {STEPS.slice(1).map((p, i) => (
-            <li key={i} style={{ ["--k" as string]: i } as React.CSSProperties}>
+            <li key={i} role="presentation" style={{ ["--k" as string]: i } as React.CSSProperties}>
               <button
                 type="button"
+                role="tab"
+                id={`${base}-t${i}`}
+                aria-controls={`${base}-panel`}
+                aria-selected={step === i + 1}
+                tabIndex={step === i + 1 ? 0 : -1}
                 data-on={step === i + 1 ? "1" : undefined}
-                aria-pressed={step === i + 1}
+                onKeyDown={(e) =>
+                  tabNav(e, i, STEPS.length - 1, (k) => {
+                    setPick({ n: k + 1 })
+                    document.getElementById(`${base}-t${k}`)?.focus()
+                  })
+                }
                 onClick={() => setPick({ n: i + 1 })}
                 onPointerEnter={(e) => e.pointerType === "mouse" && setHover(i + 1)}
                 onPointerLeave={(e) => e.pointerType === "mouse" && setHover(0)}
@@ -195,7 +232,7 @@ export function ProductTour() {
         <p className="sr-only">
           <B
             en="The SentrIA dashboard: alert counts by status and type, the seven day trend and the ranked list of alerts."
-            fr="Le tableau de bord SentrIA : nombre d'alertes par statut et par type, tendance sur sept jours et liste classée des alertes."
+            fr="Le tableau de bord SentrIA : nombre d’alertes par statut et par type, tendance sur sept jours et liste classée des alertes."
           />
         </p>
       </div>

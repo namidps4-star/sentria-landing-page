@@ -34,9 +34,9 @@ const SECTOR: Record<HubSector, { page: L }> = {
 
 /* The sector name on each activity card, the same as the hub's sector list. */
 const SECTOR_LABEL: Record<HubSector, L> = {
-  health: { en: "Health", fr: "Santé" },
+  health: { en: "Healthcare", fr: "Santé" },
   agriculture: { en: "Agriculture", fr: "Agriculture" },
-  distribution: { en: "Distribution", fr: "Distribution" },
+  distribution: { en: "Retail", fr: "Commerce" },
   logistics: { en: "Logistics", fr: "Logistique" },
   industry: { en: "Industry", fr: "Industrie" },
   transportation: { en: "Transportation", fr: "Transport" },
@@ -45,7 +45,7 @@ const SECTOR_LABEL: Record<HubSector, L> = {
 
 /* One picture per activity, and no picture used twice on the site. Photos from Unsplash (credit in `by`). */
 const PHOTO: Record<string, { photo: string; alt: L; by: string; user: string }> = {
-  "clinique-hopital": { photo: "/africa/hq/card-clinique.jpg", alt: { en: "Hospital corridor", fr: "Couloir d'hôpital" }, by: "Gonzalo Kenny", user: "gonzakenny" },
+  "clinique-hopital": { photo: "/africa/hq/card-clinique.jpg", alt: { en: "Hospital corridor", fr: "Couloir d’hôpital" }, by: "Gonzalo Kenny", user: "gonzakenny" },
   laboratoire: { photo: "/africa/hq/card-laboratoire.jpg", alt: { en: "Microscope in a laboratory", fr: "Microscope en laboratoire" }, by: "Logan Gutierrez", user: "photosoflogan" },
   veterinaire: { photo: "/africa/hq/card-veterinaire.jpg", alt: { en: "Vet giving an injection to a dog", fr: "Vétérinaire qui pique un chien" }, by: "Alexander Mass", user: "alexandermassph" },
   "cooperative-agricole": { photo: "/africa/hq/card-cooperative.jpg", alt: { en: "Metal grain silos under a clear sky", fr: "Silos à grain métalliques sous un ciel clair" }, by: "Alex Quezada", user: "alex_quezada" },
@@ -59,13 +59,13 @@ const PHOTO: Record<string, { photo: string; alt: L; by: string; user: string }>
   "transport-distribution": { photo: "/africa/hq/card-transport-distribution.jpg", alt: { en: "Van driving down a street at night", fr: "Camionnette dans une rue la nuit" }, by: "Michal Lauko", user: "jingspiral" },
   "preparation-expedition": { photo: "/africa/hq/card-preparation.jpg", alt: { en: "Pallets of boxes in a warehouse", fr: "Palettes de cartons dans un entrepôt" }, by: "Ali Mkumbwa", user: "mkumbwajr" },
   "chaine-froid": { photo: "/africa/hq/card-chaine-froid.jpg", alt: { en: "Frozen fish stacked in cold storage", fr: "Poisson congelé en chambre froide" }, by: "Bastian Ragas", user: "baslightyearrr" },
-  "plusieurs-activites": { photo: "/africa/hq/card-plusieurs.jpg", alt: { en: "Aerial view of a warehouse with solar panels and trucks", fr: "Vue aérienne d'un entrepôt avec panneaux solaires et camions" }, by: "Bernd Dittrich", user: "hdbernd" },
+  "plusieurs-activites": { photo: "/africa/hq/card-plusieurs.jpg", alt: { en: "Aerial view of a warehouse with solar panels and trucks", fr: "Vue aérienne d’un entrepôt avec panneaux solaires et camions" }, by: "Bernd Dittrich", user: "hdbernd" },
   "usine-production": { photo: "/africa/hq/card-usine-production.jpg", alt: { en: "Machines on a factory production line", fr: "Machines sur une chaîne de production" }, by: "Homa Appliances", user: "homaappliances" },
   "atelier-soustraitance": { photo: "/africa/hq/card-atelier.jpg", alt: { en: "Machine cutting metal with sparks", fr: "Machine qui découpe du métal, étincelles" }, by: "Cemrecan Yurtman", user: "cmrcn_" },
   "usine-agroalimentaire": { photo: "/africa/hq/card-usine-agroalimentaire.jpg", alt: { en: "Factory floor with production machines", fr: "Atelier de production avec machines" }, by: "Arno Senoner", user: "arnosenoner" },
-  "transporteur-routier": { photo: "/africa/hq/card-transporteur.jpg", alt: { en: "Freight truck on a bridge at dawn", fr: "Camion de fret sur un pont à l'aube" }, by: "Taylor", user: "xoutcastx" },
+  "transporteur-routier": { photo: "/africa/hq/card-transporteur.jpg", alt: { en: "Freight truck on a bridge at dawn", fr: "Camion de fret sur un pont à l’aube" }, by: "Taylor", user: "xoutcastx" },
   "flotte-entreprise": { photo: "/africa/hq/card-flotte.jpg", alt: { en: "Parking lot full of cars", fr: "Parking plein de voitures" }, by: "Laryssa Ares", user: "laryssaares" },
-  "location-vehicules": { photo: "/africa/hq/card-location.jpg", alt: { en: "Aerial view of a parking lot", fr: "Vue aérienne d'un parking" }, by: "Ryan Searle", user: "ryansearle" },
+  "location-vehicules": { photo: "/africa/hq/card-location.jpg", alt: { en: "Aerial view of a parking lot", fr: "Vue aérienne d’un parking" }, by: "Ryan Searle", user: "ryansearle" },
   "centrale-production": { photo: "/africa/hq/card-centrale.jpg", alt: { en: "Cooling towers behind grass", fr: "Tours de refroidissement derrière des herbes" }, by: "Kris Tian", user: "kris_tian" },
   "generateurs-secours": { photo: "/africa/hq/card-generateurs.jpg", alt: { en: "Factory with machinery", fr: "Usine avec machines" }, by: "Abhijeet Gaikwad", user: "abhijeetgaikwad10" },
   "distribution-energetique": { photo: "/africa/hq/card-distribution-energetique.jpg", alt: { en: "Electrical transformer station", fr: "Poste de transformation électrique" }, by: "Gez Xavier Mansfield", user: "gezxaviermansfield" },
@@ -98,11 +98,11 @@ const APP: Record<string, { name: L; line: L }> = {
   "preparation-expedition": { name: { en: "Picking & dispatch", fr: "Préparation & expédition" }, line: { en: "Processing and sending orders", fr: "Traitement et envoi des commandes" } },
   "chaine-froid": { name: { en: "Cold chain", fr: "Chaîne du froid" }, line: { en: "Temperature-controlled logistics", fr: "Logistique sous température dirigée" } },
   "plusieurs-activites": { name: { en: "Several activities", fr: "Plusieurs activités" }, line: { en: "A combination of these operations", fr: "Une combinaison de ces opérations" } },
-  "centrale-production": { name: { en: "Power plant", fr: "Centrale de production" }, line: { en: "Large-scale power generation", fr: "Production d'énergie à grande échelle" } },
+  "centrale-production": { name: { en: "Power plant", fr: "Centrale de production" }, line: { en: "Large-scale power generation", fr: "Production d’énergie à grande échelle" } },
   "generateurs-secours": { name: { en: "Backup generators", fr: "Générateurs de secours" }, line: { en: "Standby power and continuity", fr: "Alimentation de secours et continuité" } },
-  "distribution-energetique": { name: { en: "Power distribution", fr: "Distribution énergétique" }, line: { en: "The grid and how power gets there", fr: "Réseau et acheminement de l'énergie" } },
-  "transporteur-routier": { name: { en: "Road haulier", fr: "Transporteur routier" }, line: { en: "Haulage for third parties", fr: "Transport pour compte d'autrui" } },
-  "flotte-entreprise": { name: { en: "Company fleet", fr: "Flotte d'entreprise" }, line: { en: "Vehicles used for your own operation", fr: "Véhicules utilisés pour votre propre activité" } },
+  "distribution-energetique": { name: { en: "Power distribution", fr: "Distribution énergétique" }, line: { en: "The grid and how power gets there", fr: "Réseau et acheminement de l’énergie" } },
+  "transporteur-routier": { name: { en: "Road haulier", fr: "Transporteur routier" }, line: { en: "Haulage for third parties", fr: "Transport pour compte d’autrui" } },
+  "flotte-entreprise": { name: { en: "Company fleet", fr: "Flotte d’entreprise" }, line: { en: "Vehicles used for your own operation", fr: "Véhicules utilisés pour votre propre activité" } },
   "location-vehicules": { name: { en: "Vehicle rental", fr: "Location de véhicules" }, line: { en: "A fleet made available to customers", fr: "Parc mis à disposition de clients" } },
 }
 

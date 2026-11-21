@@ -44,7 +44,7 @@ export const EN_CLOSE = {
    },
    {
     "q": "Who is SentrIA for?",
-    "a": "Teams that manage complex operations and need to defend their decisions from multiple data sources."
+    "a": "Teams that manage complex operations and need to justify their decisions from multiple data sources."
    },
    {
     "q": "How much does SentrIA cost?",
@@ -58,7 +58,7 @@ export const EN_CLOSE = {
  },
  "demo": {
   "eyebrow": "Demo",
-  "title": "Let's see where SentrIA can save you time, and defend the decision.",
+  "title": "Let's see where SentrIA can save you time and back up each decision.",
   "lead": "Book a 30-minute conversation. We start from one real operational problem in your business, not a generic presentation.",
   "points": [
    "Pick one measurable operational problem",
@@ -67,12 +67,12 @@ export const EN_CLOSE = {
    "Define the pilot and its success metric"
   ],
   "widget": "SentrIA Demo: 30 min",
-  "avail": "LIVE AVAILABILITY"
+  "avail": "Choose a slot"
  },
  "final": {
   "a": "The next decision may already be",
   "b": "in your data.",
-  "lead": "See how SentrIA turns one problem into a decision you can defend, and a result you can measure.",
+  "lead": "See how SentrIA turns one problem into a decision you can stand behind, and a result you can measure.",
   "cta": "Book a demo →"
  },
  "footer": {
@@ -84,12 +84,8 @@ export const EN_CLOSE = {
   "line": "The operational decision layer."
  },
  "nav": [
-  "Situations",
-  "Method",
-  "Decision queue",
   "Pricing",
   "Sectors",
-  "FAQ",
   "Articles",
   "Africa"
  ]

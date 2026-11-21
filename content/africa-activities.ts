@@ -524,7 +524,7 @@ export type Sector = {
 export const SECTOR_LIST: Sector[] = [
   {
     key: "health",
-    name: { en: "Health", fr: "Santé" },
+    name: { en: "Healthcare", fr: "Santé" },
     direct: {
       en: "You run a pharmacy, clinic or lab. Your stock expires. Your deliveries run late. SentrIA tells you before it costs you.",
       fr: "Vous gérez une pharmacie, une clinique ou un laboratoire. Vos stocks périment. Vos livraisons arrivent en retard. SentrIA vous prévient avant que ça vous coûte.",
@@ -555,7 +555,7 @@ export const SECTOR_LIST: Sector[] = [
     name: { en: "Retail & Distribution", fr: "Commerce & Distribution" },
     direct: {
       en: "You supply dozens of points of sale. Some are running dry while others hold unsold stock. SentrIA finds the mismatch before you lose the sale.",
-      fr: "Vous approvisionnez des dizaines de points de vente. Certains manquent de stock pendant que d'autres en ont trop. SentrIA trouve l'écart avant que vous perdiez la vente.",
+      fr: "Vous approvisionnez des dizaines de points de vente. Certains manquent de stock pendant que d’autres en ont trop. SentrIA trouve l’écart avant que vous perdiez la vente.",
     },
     activities: [
       { slug: "grossiste-distributeur", name: { en: "Wholesaler / Distributor", fr: "Grossiste / Distributeur" }, live: true },
@@ -582,7 +582,7 @@ export const SECTOR_LIST: Sector[] = [
     name: { en: "Energy", fr: "Énergie" },
     direct: {
       en: "You produce or distribute energy. Equipment downtime and stock gaps stop output. SentrIA monitors what you have and what you need.",
-      fr: "Vous produisez ou distribuez de l'énergie. Les pannes et les ruptures de stock arrêtent la production. SentrIA surveille ce que vous avez et ce qu'il vous faut.",
+      fr: "Vous produisez ou distribuez de l’énergie. Les pannes et les ruptures de stock arrêtent la production. SentrIA surveille ce que vous avez et ce qu’il vous faut.",
     },
     activities: [
       { slug: "centrale-production", name: { en: "Production plant", fr: "Centrale de production" }, live: false },
@@ -594,7 +594,7 @@ export const SECTOR_LIST: Sector[] = [
     name: { en: "Transportation", fr: "Transport" },
     direct: {
       en: "You run a fleet of vehicles. A truck off the road costs you every hour. SentrIA tracks parts, maintenance windows and what needs ordering today.",
-      fr: "Vous gérez une flotte de véhicules. Un camion immobilisé vous coûte chaque heure. SentrIA suit les pièces, les fenêtres de maintenance et ce qu'il faut commander aujourd'hui.",
+      fr: "Vous gérez une flotte de véhicules. Un camion immobilisé vous coûte chaque heure. SentrIA suit les pièces, les fenêtres de maintenance et ce qu’il faut commander aujourd’hui.",
     },
     activities: [
       { slug: "transporteur-routier", name: { en: "Road freight", fr: "Transporteur routier" }, live: false },

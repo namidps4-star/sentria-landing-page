@@ -1,6 +1,9 @@
+"use client"
+
 import type { CSSProperties } from "react"
 import { C } from "@/content/en"
 import { FR } from "@/content/fr"
+import { useText } from "./lang"
 import { T, B, LangPick } from "./t"
 import { Check } from "./ui"
 import { HeroFx } from "./hero-fx"
@@ -28,6 +31,8 @@ function Line({ s, tone, n, en0, fr0 }: { s: string; tone?: "lime"; n: number; e
 }
 
 export function Hero() {
+  const tx = useText()
+  const headline = [C.hero.l1, C.hero.l2, C.hero.l3].map((s) => tx(s, FR[s] ?? s)).join(" ")
   const h = C.hero
   // Start index of each line in the typing sequence, per language (a short pause between lines).
   const len = (s: string, fr: boolean) => [...(fr ? FR[s] ?? s : s)].length
@@ -53,13 +58,12 @@ export function Hero() {
           </div>
 
           <div className="hero-copy" id="hero-copy">
-            <h1 id="hero-h" className="hero-h">
-              <span className="sr-only">
-                <T s={h.l1} /> <T s={h.l2} /> <T s={h.l3} />
+            <h1 id="hero-h" className="hero-h" aria-label={headline}>
+              <span aria-hidden="true">
+                <Line s={h.l1} n={0} en0={0} fr0={0} />
+                <Line s={h.l2} tone="lime" n={1} en0={en1} fr0={fr1} />
+                <Line s={h.l3} n={2} en0={en2} fr0={fr2} />
               </span>
-              <Line s={h.l1} n={0} en0={0} fr0={0} />
-              <Line s={h.l2} tone="lime" n={1} en0={en1} fr0={fr1} />
-              <Line s={h.l3} n={2} en0={en2} fr0={fr2} />
             </h1>
             <p className="hero-lead" data-h="" style={d(5)}>
               <T s={h.lead} />
@@ -67,10 +71,13 @@ export function Hero() {
           </div>
         </div>
 
-        <a className="hero-down" href="#product" data-h="" style={d(7)} aria-label="Scroll to the product">
+        <a className="hero-down" href="#product" data-h="" style={d(7)}>
           <svg viewBox="0 0 24 64" fill="none" aria-hidden="true">
             <path d="M12 2v58M3 50l9 10 9-10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
+          <span className="sr-only">
+            <B en="Scroll to the product" fr="Aller au produit" />
+          </span>
         </a>
         <HeroFx />
       </div>
@@ -82,10 +89,7 @@ export function Hero() {
           </span>
         </a>
         <a className="strip-b" href="#fit">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
-          </svg>
-          <span className="sr-only">
+          <span>
             <B en="See the sectors" fr="Voir les secteurs" />
           </span>
         </a>

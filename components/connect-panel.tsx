@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react"
 import type { CSSProperties, ReactNode } from "react"
 import { bi, reduced, useInView, Ico, Step } from "./connect-shared"
+import { useText } from "./lang"
 
 export function Panel({
   id,
@@ -25,6 +26,7 @@ export function Panel({
   kind: "csv" | "erp" | "iot" | "api"
   children: ReactNode
 }) {
+  const tx = useText()
   const { ref, seen, vis } = useInView<HTMLElement>()
   const [step, setStep] = useState(0)
   const [hold, setHold] = useState(false)
@@ -96,7 +98,7 @@ export function Panel({
         <h3 id={`${id}-h`} className="cs-h">
           <span className="cs-ln">
             <span>{line1}</span>
-          </span>
+          </span>{" "}
           <span className="cs-ln" style={{ ["--l" as string]: 1 } as CSSProperties}>
             <span>{line2}</span>
           </span>
@@ -107,7 +109,7 @@ export function Panel({
         </p>
         <ul
           className="cs-steps"
-          aria-label={"Flow"}
+          aria-label={tx("Flow", "Flux")}
           onMouseLeave={() => setHold(false)}
           onBlur={() => setHold(false)}
         >

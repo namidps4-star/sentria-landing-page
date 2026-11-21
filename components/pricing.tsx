@@ -23,10 +23,10 @@ const PLANS: Plan[] = [
     blurb: { en: "To see it work on one site.", fr: "Pour le voir fonctionner sur un site." },
     items: [
       { en: "1 site, 1 user", fr: "1 site, 1 utilisateur" },
-      { en: "20 questions to the assistant per month", fr: "20 questions à l'assistant par mois" },
-      { en: "30 days of history", fr: "30 jours d'historique" },
+      { en: "20 questions to the assistant per month", fr: "20 questions à l’assistant par mois" },
+      { en: "30 days of history", fr: "30 jours d’historique" },
     ],
-    cta: { en: "Book a demo", fr: "Réserver une démo" },
+    cta: { en: "Book a demo to start", fr: "Réserver une démo pour commencer" },
   },
   {
     id: "pro",
@@ -35,11 +35,11 @@ const PLANS: Plan[] = [
     items: [
       { en: "1 site, 3 users", fr: "1 site, 3 utilisateurs" },
       { en: "Unlimited questions", fr: "Questions illimitées" },
-      { en: "1 year of history", fr: "1 an d'historique" },
+      { en: "1 year of history", fr: "1 an d’historique" },
       { en: "SMS alerts", fr: "Alertes par SMS" },
       { en: "Treatment tracking", fr: "Suivi des traitements" },
     ],
-    cta: { en: "Choose Pro", fr: "Choisir Pro" },
+    cta: { en: "Book a demo", fr: "Réserver une démo" },
   },
   {
     id: "business",
@@ -48,11 +48,11 @@ const PLANS: Plan[] = [
     items: [
       { en: "3 sites, 10 users", fr: "3 sites, 10 utilisateurs" },
       { en: "Linked departments", fr: "Départements reliés" },
-      { en: "2 years of history", fr: "2 ans d'historique" },
+      { en: "2 years of history", fr: "2 ans d’historique" },
       { en: "SMS alerts", fr: "Alertes par SMS" },
       { en: "Treatment tracking", fr: "Suivi des traitements" },
     ],
-    cta: { en: "Choose Business", fr: "Choisir Business" },
+    cta: { en: "Book a demo", fr: "Réserver une démo" },
     featured: true,
   },
   {
@@ -95,6 +95,11 @@ export function PricingGrid() {
                     <span className="price-per">
                       <B en="per month" fr="par mois" />
                     </span>
+                    {p.id === "business" ? (
+                      <span className="price-per">
+                        <B en="Business trial for 14 days" fr="Essai Business de 14 jours" />
+                      </span>
+                    ) : null}
                     {p.featured ? (
                       <span className="badge">
                         <B en="Recommended" fr="Recommandé" />
@@ -107,7 +112,7 @@ export function PricingGrid() {
                       <B en="Free" fr="Gratuit" />
                     </span>
                     <span className="price-per">
-                      <B en="Business trial for 14 days" fr="Essai Business de 14 jours" />
+                      <B en="One site to start" fr="Un site pour commencer" />
                     </span>
                   </>
                 ) : (
@@ -116,7 +121,7 @@ export function PricingGrid() {
                       <B en="Contact us" fr="Nous contacter" />
                     </span>
                     <span className="price-per">
-                      <B en="Priced to your scope" fr="Selon votre périmètre" />
+                      <B en="Tailored to your needs" fr="Sur mesure" />
                     </span>
                   </>
                 )}

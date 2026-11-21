@@ -4,6 +4,7 @@ import { Panel } from "./connect-panel"
 import { ErpScreen } from "./connect-erp"
 import { T } from "./t"
 import { bi, useInView, I } from "./connect-shared"
+import { useText } from "./lang"
 
 /* ------------------------------------------------------------------------
    Connect stack: four vertical panels (CSV, ERP, IoT, API) that replace the
@@ -15,6 +16,7 @@ import { bi, useInView, I } from "./connect-shared"
    ------------------------------------------------------------------------ */
 
 export function ConnectStack() {
+  const tx = useText()
   const { ref: erpRef, seen: erpSeen } = useInView<HTMLDivElement>()
   return (
     <div className="cs-stack">
@@ -24,10 +26,7 @@ export function ConnectStack() {
         kind="csv"
         line1="CSV"
         line2={bi("file import", "import de fichiers")}
-        lead={bi(
-          "Bring operational data in as a file. Columns are mapped and checked before anything is loaded.",
-          "Importez vos données opérationnelles sous forme de fichier. Les colonnes sont associées et vérifiées avant tout chargement."
-        )}
+        lead={bi("Bring operational data in as a file. Columns are mapped and checked before anything is loaded.", "Importez vos données opérationnelles sous forme de fichier. Les colonnes sont associées et vérifiées avant tout chargement.")}
         metaValue={bi("Files", "Fichiers")}
         steps={[
           { icon: I.table, label: bi("Map columns", "Associer les colonnes") },
@@ -96,7 +95,7 @@ export function ConnectStack() {
         ]}
       >
         <span className="cs-glow" aria-hidden="true" />
-        <div className="cs-gw" role="img" aria-label="Wireframe of a gateway device opening: lid, circuit board and base">
+        <div className="cs-gw" role="img" aria-label={tx("Wireframe of a gateway device opening: lid, circuit board and base", "Schéma d'une passerelle qui s'ouvre : couvercle, carte électronique et socle")}>
           {/* eslint-disable @next/next/no-img-element */}
           <img className="cs-gw-l base" src="/connect/gw-base.webp" width={540} height={750} loading="lazy" decoding="async" alt="" />
           <img className="cs-gw-l board" src="/connect/gw-board.webp" width={540} height={750} loading="lazy" decoding="async" alt="" />

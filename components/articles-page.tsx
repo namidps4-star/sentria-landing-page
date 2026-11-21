@@ -70,7 +70,7 @@ export function ArticlesPage() {
           </p>
           {latest[0] ? (
             <Link className="art-cta" href={`/articles/${pageSlug(latest[0].id)}`}>
-              <B en="Read the article" fr="Lire l'article" />
+              <B en="Read the article" fr="Lire l’article" />
             </Link>
           ) : (
             <a className="art-cta" href="#articles-list">
@@ -81,7 +81,7 @@ export function ArticlesPage() {
       </section>
 
       <div className="art-filters" id="articles-list">
-        <div className="art-seg" role="group" aria-label="Sector">
+        <div className="art-seg" role="group" aria-label={lang === "fr" ? "Secteur" : "Sector"}>
           {SECTORS.filter((s) => s.key === "all" || live.some((a) => a.sector === s.key)).map((s) => (
             <button key={s.key} type="button" aria-pressed={sector === s.key} onClick={() => pickSector(s.key)}>
               <B en={s.label.en} fr={s.label.fr} />
@@ -89,7 +89,7 @@ export function ArticlesPage() {
           ))}
         </div>
         {departments.length > 0 && (
-          <div className="art-seg sub" role="group" aria-label="Department">
+          <div className="art-seg sub" role="group" aria-label={lang === "fr" ? "Service" : "Department"}>
             {departments.map((d) => (
               <button key={d.key} type="button" aria-pressed={dept === d.key} onClick={() => setDept(d.key)}>
                 <B en={d.label.en} fr={d.label.fr} />
@@ -108,7 +108,7 @@ export function ArticlesPage() {
       <div className="art-grid">
         {shown.length === 0 && (
           <p className="art-empty">
-            <B en="No article in this part yet." fr="Pas encore d'article dans cette partie." />
+            <B en="No article in this part yet." fr="Pas encore d’article dans cette partie." />
           </p>
         )}
         {grid.map((a: Article) => (

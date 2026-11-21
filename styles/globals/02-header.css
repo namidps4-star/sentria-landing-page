@@ -233,3 +233,12 @@ html.op-run:not(.op-done) .bar {
   }
 }
 
+/* Phone: the bar slides away while the page scrolls down (see Header). */
+@media (max-width: 760px) {
+  .hd {
+    transition: transform 0.3s var(--ease, ease);
+  }
+  .hd[data-away="1"] {
+    transform: translateY(-160%);
+  }
+}

@@ -66,7 +66,7 @@ export function LegalPage({ doc }: { doc: LegalDocId }) {
   return (
     <>
       <header className="hd">
-        <nav className="bar" aria-label="Main">
+        <nav className="bar">
           <Link className="logo" href="/" aria-label="SentrIA">
             <span className="logo-mark">
               <Mark />

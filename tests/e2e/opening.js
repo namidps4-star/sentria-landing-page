@@ -51,11 +51,10 @@ const path = require('path')
   const h1 = await page.locator('#hero-h').boundingBox()
   pass(!!h1 && h1.width > 300, 'the headline is on screen')
 
-  console.log('== reload: it plays again')
+  console.log('== reload in the same session: it does not play again')
   await page.reload({ waitUntil: 'commit' })
   await page.waitForTimeout(1500)
-  pass(await page.evaluate(() => getComputedStyle(document.querySelector('.op')).visibility === 'visible' && /op-run/.test(document.documentElement.className)), 'a fresh load plays it again')
-  await page.waitForFunction(() => getComputedStyle(document.querySelector('.op')).visibility === 'hidden', null, { timeout: 7000 }).catch(() => {})
+  pass(await page.evaluate(() => !/op-run/.test(document.documentElement.className)), 'a reload in the same session skips it')
 
   console.log('== the off switch (used by the other suites)')
   {

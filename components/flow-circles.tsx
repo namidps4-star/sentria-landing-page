@@ -1,7 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { T } from "./t"
+import { useText } from "./lang"
+import { tabNav } from "./tab-keys"
+import { FR } from "@/content/fr"
 
 type Step = { n: string; h: string; p: string }
 
@@ -12,11 +15,13 @@ type Step = { n: string; h: string; p: string }
  * no autoplay, no entrance.
  */
 export function FlowCircles({ steps }: { steps: readonly Step[] }) {
+  const tx = useText()
   const root = useRef<HTMLDivElement>(null)
   const [step, setStep] = useState(0)
   const [seen, setSeen] = useState(false)
   const [vis, setVis] = useState(false)
   const [hold, setHold] = useState(false)
+  const base = useId()
   const [still, setStill] = useState(false)
 
   useEffect(() => {
@@ -53,15 +58,25 @@ export function FlowCircles({ steps }: { steps: readonly Step[] }) {
 
   return (
     <div ref={root} className={`fc${seen ? " in" : ""}`} data-step={step + 1} onPointerLeave={() => setHold(false)}>
-      <div className="fc-row" role="group" aria-label="Implementation steps">
+      <div className="fc-row" role="tablist" aria-label={tx("Implementation steps", "Étapes de mise en œuvre")}>
         {steps.map((s, i) => (
           <button
             key={s.n}
             type="button"
+            role="tab"
+            id={`${base}-t${i}`}
+            aria-controls={`${base}-p${i}`}
+            aria-selected={step === i}
+            tabIndex={step === i ? 0 : -1}
             className={`fc-c fc-c${i + 1}`}
             data-on={step === i ? "1" : undefined}
-            aria-pressed={step === i}
-            aria-label={`${s.n} ${s.h}`}
+            onKeyDown={(e) =>
+              tabNav(e, i, steps.length, (k) => {
+                pick(k)
+                document.getElementById(`${base}-t${k}`)?.focus()
+              })
+            }
+            aria-label={`${s.n} ${tx(s.h, FR[s.h] ?? s.h)}`}
             onPointerEnter={(e) => pick(i, e)}
             onClick={() => {
               setStep(i)
@@ -75,7 +90,7 @@ export function FlowCircles({ steps }: { steps: readonly Step[] }) {
       </div>
       <ol className="fc-cols">
         {steps.map((s, i) => (
-          <li key={s.n} data-on={step === i ? "1" : undefined} onPointerEnter={(e) => pick(i, e)}>
+          <li key={s.n} id={`${base}-p${i}`} role="tabpanel" aria-labelledby={`${base}-t${i}`} data-on={step === i ? "1" : undefined} onPointerEnter={(e) => pick(i, e)}>
             <h3>
               <T s={s.h} />
             </h3>
