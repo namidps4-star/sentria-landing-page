@@ -1,6 +1,6 @@
 "use client"
 
-import type { ReactNode } from "react"
+import { useEffect, type ReactNode } from "react"
 import { WHOLESALE_FEATURES } from "@/content/wholesale-features"
 import { useSiteCurrency } from "./site-currency"
 import { WcStockCard } from "./wc-stock-card"
@@ -15,6 +15,23 @@ import "./wholesale-features.css"
    The mockup is a live card component; money follows the visitor's currency (USD fallback). */
 export function WholesaleFeatures({ lang }: { lang: "en" | "fr" }) {
   const currency = useSiteCurrency()
+
+  /* A card's motion starts when the card comes into view, not when the page loads. */
+  useEffect(() => {
+    const figs = document.querySelectorAll<HTMLElement>(".wsf-fig")
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.setAttribute("data-in", "")
+            io.unobserve(e.target)
+          }
+        }),
+      { threshold: 0.2 },
+    )
+    figs.forEach((f) => io.observe(f))
+    return () => io.disconnect()
+  }, [])
   const cta = lang === "en" ? "Book a demo →" : "Demander une démo →"
   const href = lang === "en" ? "/en#demo" : "/fr#demo"
   const cards: Record<string, ReactNode> = {

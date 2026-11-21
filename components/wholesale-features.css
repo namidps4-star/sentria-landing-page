@@ -121,3 +121,8 @@
     animation: none !important;
   }
 }
+
+/* The cards' own motion waits until the card is in view (see WholesaleFeatures). Only when scripts run. */
+.js .wsf-fig:not([data-in]) .wc-card * {
+  animation-play-state: paused !important;
+}
