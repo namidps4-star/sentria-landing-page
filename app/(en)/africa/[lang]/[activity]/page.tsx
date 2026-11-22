@@ -3,6 +3,7 @@ import { notFound, permanentRedirect } from "next/navigation"
 import { AfricaHero } from "@/components/africa-hero"
 import { AfricaCapabilities } from "@/components/africa-capabilities"
 import { ActivityFeatureBlock } from "@/components/activity-feature-block"
+import { WholesaleFeatures } from "@/components/wholesale-features"
 import { ACTIVITY_FEATURES } from "@/content/activity-features"
 
 const hasFeature = (slug: string) => ACTIVITY_FEATURES.some((f) => f.slug === slug)
@@ -49,7 +50,7 @@ export default async function Page({ params }: { params: Params }) {
       copy={{ ...copy.en, photoAlt: pic?.alt ?? copy.en.photoAlt }}
       id={activity}
       panel={SECTOR_ALERTS[activity] ? <AfricaAlertPanel lang="en" alerts={SECTOR_ALERTS[activity].en} /> : undefined}
-      extra={<AfricaCapabilities slug={activity} lang="en" beforeFaq={hasFeature(activity) ? <ActivityFeatureBlock slug={activity} lang="en" /> : undefined} />}
+      extra={<AfricaCapabilities slug={activity} lang="en" beforeFaq={activity === "grossiste-pharma" ? <WholesaleFeatures lang="en" /> : hasFeature(activity) ? <ActivityFeatureBlock slug={activity} lang="en" /> : undefined} />}
       photo={pic ? { src: pic.src, credit: pic.credit } : undefined}
       compact
       tone={designFor(activity).tone}
