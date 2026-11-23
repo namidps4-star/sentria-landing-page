@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import localFont from "next/font/local"
 import "./globals.css"
 import "../styles/globals/01-section.css"
@@ -21,6 +22,11 @@ const poppins = localFont({
   variable: "--f-body",
   display: "swap",
 })
+const unbounded = localFont({
+  src: [{ path: "./fonts/unbounded-600.woff2", weight: "600", style: "normal" }],
+  variable: "--f-open",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Page not found | SentrIA",
@@ -34,39 +40,47 @@ const LINKS = [
   { en: "Africa", fr: "Afrique", href: "/africa" },
 ]
 
-/* Shown for any address that does not exist. The same look as the home page; both languages on the page. */
+/* Shown for any address that does not exist: a large 404 on a dark card, with a lime oval in the middle that
+   says so in English and French and offers the two home pages. */
 export default function NotFound() {
   return (
-    <html lang="en" className={`${syne.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${syne.variable} ${poppins.variable} ${unbounded.variable}`}>
       <body className="nf-body">
-        <header className="nf-top">
-          <a className="nf-brand" href="/en" aria-label="SentrIA, home">
-            <Mark />
-            <SentriaWordmark />
-          </a>
-          <nav className="nf-lang" aria-label="Language">
-            <a href="/en">EN</a>
-            <span aria-hidden="true">/</span>
-            <a href="/fr">FR</a>
-          </nav>
-        </header>
+        <div className="nf-page">
+          <header className="nf-top">
+            <nav className="nf-side" aria-label="Main">
+              <a href="/en">+ Home</a>
+              <a href="/en#tarifs">+ Pricing</a>
+            </nav>
+            <a className="nf-brand" href="/en" aria-label="SentrIA, home">
+              <Mark />
+              <SentriaWordmark />
+            </a>
+            <nav className="nf-side nf-side-right" aria-label="Language and pages">
+              <Link href="/articles">+ Articles</Link>
+              <span className="nf-langs">
+                <a href="/en">EN</a>
+                <span aria-hidden="true">/</span>
+                <a href="/fr">FR</a>
+              </span>
+            </nav>
+          </header>
 
-        <main className="nf-main wrap">
-          <p className="nf-code" aria-hidden="true">404</p>
-          <p className="nf-kicker">Page not found</p>
-          <h1 className="nf-h">This page does not exist.</h1>
-          <p className="nf-fr">Cette page n’existe pas.</p>
-          <p className="nf-lead">
-            The address may be old or mistyped. Start again from the home page, or go to one of these.
-          </p>
-          <p className="nf-lead nf-lead-fr">
-            L’adresse est peut-être ancienne ou mal saisie. Repartez de l’accueil, ou allez à l’une de ces pages.
-          </p>
+          <main className="nf-card">
+            <p className="nf-digits" aria-hidden="true">404</p>
 
-          <div className="nf-actions">
-            <a className="btn btn-lime" href="/en">Home (English)</a>
-            <a className="btn btn-line" href="/fr">Accueil (français)</a>
-          </div>
+            <div className="nf-oval">
+              <p className="nf-sorry">Sorry,</p>
+              <p className="nf-msg">This page does not exist.</p>
+              <p className="nf-msg-fr">Cette page n’existe pas.</p>
+              <div className="nf-pills">
+                <a className="nf-pill nf-pill-ink" href="/en">Home</a>
+                <a className="nf-pill nf-pill-soft" href="/fr">Accueil</a>
+              </div>
+            </div>
+
+            <h1 className="nf-sr">Page not found. Cette page n’existe pas.</h1>
+          </main>
 
           <ul className="nf-links">
             {LINKS.map((l) => (
@@ -77,12 +91,12 @@ export default function NotFound() {
               </li>
             ))}
           </ul>
-        </main>
 
-        <footer className="nf-foot wrap">
-          <span>© 2026 SentrIA</span>
-          <span>The operational decision layer.</span>
-        </footer>
+          <footer className="nf-foot">
+            <span>© 2026 SentrIA</span>
+            <span>The operational decision layer.</span>
+          </footer>
+        </div>
       </body>
     </html>
   )
