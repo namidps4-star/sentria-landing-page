@@ -89,8 +89,10 @@
   white-space: nowrap;
   pointer-events: none;
   /* tall figures, as in the reference: stretched from the bottom edge */
-  transform: scaleY(1.7);
+  --sy: 1.7;
+  transform: scaleY(var(--sy));
   transform-origin: 50% 100%;
+  animation: nf-rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 /* The oval in the middle, over the zero */
@@ -110,6 +112,7 @@
   gap: 8px;
   text-align: center;
   padding: 24px;
+  animation: nf-pop 0.7s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 .nf-sorry {
   margin: 0;
@@ -157,6 +160,99 @@
 .nf-pill-soft {
   background: #cfe84a;
   color: #0b0c08;
+}
+.nf-pill {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.nf-pill:hover {
+  transform: translateY(-2px);
+}
+.nf-pill-ink:hover {
+  background: #23261b;
+}
+.nf-pill-soft:hover {
+  background: #e4f56e;
+}
+.nf-sorry,
+.nf-msg,
+.nf-msg-fr,
+.nf-pills {
+  animation: nf-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.nf-sorry {
+  animation-delay: 0.4s;
+}
+.nf-msg {
+  animation-delay: 0.5s;
+}
+.nf-msg-fr {
+  animation-delay: 0.58s;
+}
+.nf-pills {
+  animation-delay: 0.66s;
+}
+.nf-links,
+.nf-foot,
+.nf-top {
+  animation: nf-fade 0.6s 0.7s ease both;
+}
+.nf-top {
+  animation-delay: 0.05s;
+}
+
+@keyframes nf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(35%) scaleY(var(--sy));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(var(--sy));
+  }
+}
+@keyframes nf-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes nf-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes nf-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nf-digits,
+  .nf-oval,
+  .nf-sorry,
+  .nf-msg,
+  .nf-msg-fr,
+  .nf-pills,
+  .nf-links,
+  .nf-foot,
+  .nf-top {
+    animation: none;
+  }
+  .nf-pill {
+    transition: none;
+  }
 }
 
 .nf-sr {
@@ -210,7 +306,7 @@ a:focus-visible {
   }
   .nf-digits {
     font-size: 30vw;
-    transform: scaleY(2.5);
+    --sy: 2.5;
     bottom: 0;
   }
   .nf-oval {
