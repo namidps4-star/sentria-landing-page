@@ -57,7 +57,7 @@ export const FR: Record<string, string> = {
  "Prioritize": "Prioriser",
  "Risks are ranked by operational impact and urgency, not by how loud they are.": "Les risques sont classés par impact opérationnel et urgence, pas par leur niveau de bruit.",
  "Act": "Agir",
- "Recommendations come from your data and from standard mitigation methods adapted to the situation, not from guesswork. Each one links to the signals that triggered it. The human decides; the outcome feeds back.": "Les recommandations proviennent de vos données et de méthodes de remédiation standard adaptées à la situation, jamais de conjecture. Chacune renvoie aux signaux qui l’ont déclenchée. L’humain décide ; le résultat revient nourrir le système.",
+ "Recommendations come from rules written by hand. Each one links to the signals that triggered it. The human decides; the outcome feeds back.": "Les recommandations viennent de règles écrites à la main. Chacune renvoie aux signaux qui l’ont déclenchée. L’humain décide ; le résultat revient nourrir le système.",
  "Why SentrIA": "Pourquoi SentrIA",
  "Not a dashboard. A decision layer.": "Pas un dashboard. Une couche de décision.",
  "Capability": "Capacité",
